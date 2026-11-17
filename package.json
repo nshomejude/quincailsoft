@@ -1,1 +1,9 @@
-{"name":"quincaisoft-integration","version":"4.0.0","private":true,"scripts":{"dev":"python3 server/server.py --demo","test":"python3 -m unittest discover -s tests -v"}}
+{
+  "name": "quincaisoft-integration",
+  "version": "5.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "python3 server/server.py --demo --data-dir runtime/v5",
+    "test": "python3 -m unittest discover -s tests -v"
+  }
+}

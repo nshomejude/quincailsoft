@@ -48,12 +48,21 @@ class Security(unittest.TestCase):
  def test_password_change_revokes_sessions(self):
   a=self.login('inventory');self.assertEqual(self.request('/api/password',{'current':'Demo-Quincai-2026!','password':'Different-Demo-2026!'},a)[0],200);self.assertEqual(self.request('/api/state',auth=a)[0],401)
   self.request('/api/login',{'email':'inventory@demo.quincai.local','password':'Different-Demo-2026!'})
+ def test_pos_save_atomic_and_idempotent(self):
+  a=self.login('cashier');body={'data':{'customer':'customer-1','business_date':'2026-11-17','channel':'Counter','fulfillment':'Immediate','discount':'0'},'lines':[{'product':'product-1','quantity':'2','unit_price':'4850'}],'operation_id':str(uuid.uuid4())}
+  first=self.request('/api/sales/draft',body,a);self.assertEqual(first[0],200,first);self.assertEqual(self.request('/api/sales/draft',body,a)[:2],first[:2]);self.assertEqual(len(first[1]['record']['lines']),1)
+  with server.connect() as c:before=len(server.all_records(c,'sale'))
+  body['operation_id']=str(uuid.uuid4());body['lines'].append({'product':'missing','quantity':'1','unit_price':'5'})
+  self.assertEqual(self.request('/api/sales/draft',body,a)[0],404)
+  with server.connect() as c:self.assertEqual(len(server.all_records(c,'sale')),before)
+ def test_mobile_money_provider_configuration_visible(self):
+  a=self.login('owner');status,b,_=self.request('/api/mobile-money/config',auth=a);self.assertEqual(status,200,b);self.assertEqual({p['id'] for p in b['providers']},{'mtn','orange'})
  def test_logout_revokes(self):
   a=self.login('owner');self.assertEqual(self.request('/api/logout',{},a)[0],200);self.assertEqual(self.request('/api/state',auth=a)[0],401)
  def test_oversell_rolls_back(self):
   a=self.login('owner');r=self.draft(a);_,b,_=self.cmd(a,r,'add-line',{'product':'product-1','quantity':'999999','unit_price':'4850'});self.assertEqual(self.cmd(a,b['record'],'complete')[0],422)
  def test_unimplemented_post_fails_closed(self):
   a=self.login('owner')
-  with server.connect() as c:r=server.all_records(c,'receipt')[0]
-  status,_,_=self.request('/api/command',{'entity':'receipt','id':r['id'],'version':r['version'],'command':'complete','reason':'test','operation_id':str(uuid.uuid4())},a);self.assertIn(status,(409,501))
+  with server.connect() as c:r=server.all_records(c,'integration')[0]
+  status,_,_=self.request('/api/command',{'entity':'integration','id':r['id'],'version':r['version'],'command':'complete','reason':'test','operation_id':str(uuid.uuid4())},a);self.assertIn(status,(409,501))
 if __name__=='__main__':unittest.main()

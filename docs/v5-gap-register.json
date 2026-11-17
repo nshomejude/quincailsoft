@@ -1,0 +1,1537 @@
+{
+  "version": "5.0",
+  "date": "2026-11-17",
+  "status": "PARTIAL_LOCAL_INTEGRATION_TESTED",
+  "scope": "Independent review of local integration build; no declaration that every page/module/workflow is finished",
+  "source_baseline": "v4, GitHub commit 6664fe76164407be04bdac6fb484b12e05248506",
+  "source_contract": "docs/Architecture.md",
+  "full_module_count": 45,
+  "modules": [
+    {
+      "module_id": "M01",
+      "name": "Tenant & provisioning",
+      "required_responsibilities": "Tenant lifecycle, plan region, isolation tier, data ownership, migrations",
+      "required_outputs": "Create/verify/suspend/restore tenant; `TenantProvisioned`",
+      "implementation_state": "NOT_STARTED",
+      "remaining_work": "Tenant rows/screens are fixtures; real provisioning, tenant binding, isolation and lifecycle services are absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M02",
+      "name": "Organization & branches",
+      "required_responsibilities": "Legal entity, business registration, branches, locations, store hours, business dates",
+      "required_outputs": "Company/branch CRUD, active policy checks, `BranchCreated`",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Typed company/branch records exist; company-aware authorization, hierarchy constraints, timezone/business-date handling remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M03",
+      "name": "Identity & staff",
+      "required_responsibilities": "Invitations, staff, memberships, MFA, session/device revocation",
+      "required_outputs": "OIDC integration, invites, session validation, `MembershipChanged`",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Local passwords/sessions and staff access edits exist; OIDC, invitations, MFA, step-up and recovery are absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M04",
+      "name": "RBAC / ABAC policy",
+      "required_responsibilities": "Roles, permission bundles, branch scoping, maker-checker, separation of duties",
+      "required_outputs": "Effective capabilities API, authorization decisions, audit",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Fixed local roles and branch/customer filters exist; dynamic policy, ABAC, company isolation and complete command authorization matrix remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M05",
+      "name": "Subscriptions & billing",
+      "required_responsibilities": "Plan, features, seats, branch allowances, invoices to merchant, payment collection",
+      "required_outputs": "Billing portal/webhooks, grace/suspension, `EntitlementChanged`",
+      "implementation_state": "NOT_STARTED",
+      "remaining_work": "Subscription forms are not merchant billing, metering, entitlement enforcement or provider-backed collection.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M06",
+      "name": "Catalog / PIM",
+      "required_responsibilities": "SKU, product variants, brand, category, barcodes, media, lifecycle",
+      "required_outputs": "Products, variants, search, imports, `ProductChanged`",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Product/category typed CRUD exists; variant/media lifecycle, production search and complete import validation remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M07",
+      "name": "Units & measurement",
+      "required_responsibilities": "Base UoM, conversion ratios, pack definitions, tare, precision",
+      "required_outputs": "Conversion tests and preview, UoM APIs",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Unit/pack fields exist; exact rational conversions, tare, precision and effective historical UoM contracts lack full tests.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M08",
+      "name": "Pricing & promotions",
+      "required_responsibilities": "Retail/wholesale tiers, effective dates, customer/branch prices, discounts",
+      "required_outputs": "Price quote API, price approval, `PricePublished`",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Price fields and cashier override protection exist; full tier/promotional/effective-date quote engine is absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M09",
+      "name": "Inventory authority",
+      "required_responsibilities": "Custody, ownership/valuation positions, immutable movements, central reservations, exclusive offline stock grants",
+      "required_outputs": "Sole inventory writer; physical/owned/available balances and \u00a732/\u00a733 contracts",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Agent implements transactional stock helper; full immutable ownership/custody/reservation/valuation authority and production concurrency remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M10",
+      "name": "Stock count & replenishment",
+      "required_responsibilities": "Cycle count, blind counts, approval, reorder points, transfer suggestions",
+      "required_outputs": "Count sessions, discrepancies, reorder reports",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Agent implements count adjustments; blind count sessions, replenishment and complete approval/variance rules remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M11",
+      "name": "Warehousing & transfers",
+      "required_responsibilities": "Bins, receiving, dispatch, in-transit, cross-branch transfer acknowledgements",
+      "required_outputs": "Transfer commands, scans, delivery and loss records",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Agent implements dispatch/receipt/transit workflows; full scan, loss, partial transfer and company boundaries need evidence.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M12",
+      "name": "Supplier master",
+      "required_responsibilities": "Supplier identity, purchasing terms, contact, documents, tax data",
+      "required_outputs": "Supplier APIs, statement, duplicate screening",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Supplier forms exist; document bytes, duplicate screening and production supplier lifecycle remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M13",
+      "name": "Procurement",
+      "required_responsibilities": "Requisitions, RFQ, purchase orders, approvals, partial receipt, returns",
+      "required_outputs": "PO/GRN APIs, `GoodsReceived`, landed costs",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Agent implements receipt posting; full requisition/RFQ, toleranced three-way matching, landed-cost adjustments and AP reconciliation remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M14",
+      "name": "Supplier accounts",
+      "required_responsibilities": "Payables, credit notes, deposits, payment allocation, ageing",
+      "required_outputs": "AP ledger, statements, `SupplierPaymentConfirmed`",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Agent implements supplier allocation/journal paths; complete AP ageing, credit notes and provider payout workflows remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M15",
+      "name": "Customer master",
+      "required_responsibilities": "Customer identity, optional business KYC, consent, terms, contacts",
+      "required_outputs": "Directory, merge with audit, branch visibility",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Customer CRUD/scoping exists; consent, merge audit and complete identity/terms controls remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M16",
+      "name": "Customer credit/deposits",
+      "required_responsibilities": "AR ledger, credit limits, deposit liability, invoice allocations, refunds",
+      "required_outputs": "Statements, allocations, overdue reports",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Agent implements protected deposit allocation/refund and credit effects; complete credit policy and reconciliation scenario coverage remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M17",
+      "name": "POS & sales",
+      "required_responsibilities": "Cart/held sale, price and tax snapshot, receipt, sale approval, stock issue",
+      "required_outputs": "Sale POST API, `SalePosted`, sales register",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "POS drafts, lines and local sale posting exist; full price/tax/rounding/recognition/atomic issuance and production ledger guarantees remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M18",
+      "name": "Payments and settlement",
+      "required_responsibilities": "Tender types, provider adapters, settlement events, refunds, chargebacks",
+      "required_outputs": "Payment intent, webhooks, reconciliation",
+      "implementation_state": "BLOCKED",
+      "remaining_work": "MTN implementation and mocked contract tests in progress; no live credentials/approval. Orange merchant API contract and credentials are unavailable. No live payment certification.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M19",
+      "name": "Cash management",
+      "required_responsibilities": "Cash registers, shifts, movements, count, closing and differences",
+      "required_outputs": "Till APIs, daily close, `CashShiftClosed`",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Agent implements cash entries/closure; full gross tender/change, open-shift enforcement and reconciliation coverage remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M20",
+      "name": "Expenses",
+      "required_responsibilities": "Expense categories, payees, receipts, approvals, posted cash/bank impact",
+      "required_outputs": "Expense API, voucher, expense analysis",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Expense records exist; complete approval and cash/bank journal effects need implementation and evidence.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M21",
+      "name": "Quotations & offers",
+      "required_responsibilities": "Draft/issued quotes, expiry, revisions, approval, customer acceptance",
+      "required_outputs": "Quote APIs, document and POS staging",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Quotation records/documents exist; agent may implement conversion; expiry, revisions and independently tested issued quote rules remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M22",
+      "name": "Returns & credit notes",
+      "required_responsibilities": "Original sale eligibility, inspection, restocking, credits, customer refund",
+      "required_outputs": "Return API, credit note, refund voucher",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Agents coordinate financial credit and restock; warranties, exchanges, original component eligibility and real provider refunds remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M23",
+      "name": "Fulfillment & delivery",
+      "required_responsibilities": "Pickup, packing, shipping, drivers, proof of delivery, partial fulfillment",
+      "required_outputs": "Handover API, delivery note, `OrderDelivered`",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Agent implements custody pickup/handover; shipping/driver/POD attachment and full partial recognition scenarios remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M24",
+      "name": "Document & print engine",
+      "required_responsibilities": "Atomic document issuance, number series, immutable economic snapshots, template versions and print attempts",
+      "required_outputs": "issueSnapshot in source transaction; rendering/download/print after commit (\u00a738)",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "26 document views and server snapshots exist; atomic economic issuance/numbering, tamper-evident retention, bilingual print and device certification are absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M25",
+      "name": "Fiscal configuration & operational journal",
+      "required_responsibilities": "Balanced control journal, company account mappings, periods, tax rules, finance export and fiscal adapter policy",
+      "required_outputs": "postBatch, reversal, control reconciliation, tax preview and accountant exports (\u00a737)",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Agent implements balanced local journals/period gates; SYSCOHADA mappings, comprehensive reversal/valuation/tax/fiscal integration and accountant signoff remain absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M26",
+      "name": "Operational reporting",
+      "required_responsibilities": "Sales KPIs, margin estimates, stock, AR/AP, expenses, cash, audit",
+      "required_outputs": "Bounded aggregate views, exports, report jobs",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "76 report views render; several are source-row approximations. Exact metric contracts, scoped pagination/jobs, totals and reconciliation coverage remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M27",
+      "name": "Commerce storefront",
+      "required_responsibilities": "Storefront products, prices, checkout, customer cart and delivery choices",
+      "required_outputs": "SEO catalogue, cart/order/payment API",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Storefront screens use shared shell/fixtures; actual public tenant storefront, SSR/SEO, cart privacy and delivery/pricing pipeline are absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M28",
+      "name": "Orders & reservation orchestration",
+      "required_responsibilities": "Multi-channel orders and reservation workflow; M09 alone owns reservation quantities/tables",
+      "required_outputs": "Order API; invoke inventory reserve/release/consume; order expiry and compensation coordination",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Order forms exist; inventory-owned timed reservations, expiry compensation and verified payment-to-fulfillment choreography remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M29",
+      "name": "Offline mobile/sync",
+      "required_responsibilities": "Device grant, local outbox, batch push, deltas, conflicts, high-watermarks",
+      "required_outputs": "`/sync/*`, sync logs, quota allocation",
+      "implementation_state": "NOT_STARTED",
+      "remaining_work": "No native durable outbox/inbox, commit-safe feed/snapshot, signed device epochs, exclusive grant protocol or outage/chaos evidence.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M30",
+      "name": "Windows bridge & standalone companion",
+      "required_responsibilities": "WPF adapter, source mappings, encrypted companion snapshots/drafts and native reconciliation",
+      "required_outputs": "Reuse M29 sync protocol; no alternate cloud sync engine or direct DB copying (\u00a735/\u00a738)",
+      "implementation_state": "BLOCKED",
+      "remaining_work": "Actual Windows source and native build/test environment unavailable; no certified WPF bridge or standalone companion implementation.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M31",
+      "name": "Notifications & alerts",
+      "required_responsibilities": "Event-driven email/SMS/push/WhatsApp templates, preferences, delivery receipts",
+      "required_outputs": "Notification queue, receipts, user opt-outs",
+      "implementation_state": "BLOCKED",
+      "remaining_work": "No configured email/SMS/push/WhatsApp provider, queue, templates/preferences/delivery receipt implementation.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M32",
+      "name": "Integrations & webhooks",
+      "required_responsibilities": "Provider configuration, secrets, signed webhooks, retries, sandbox/test mode",
+      "required_outputs": "Connectors and integration health",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Mobile-money agent adds provider boundary; comprehensive secret rotation, signed webhook framework, retry workers and health probes absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M33",
+      "name": "Import / export / migration",
+      "required_responsibilities": "CSV/XLSX templates, dry-run diff, duplicate handling, mapping, job audit",
+      "required_outputs": "Import jobs, scoped exports, failure manifest",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Operations agent adds CSV dry-run/commit; XLSX, historical mapping, scoped export jobs and full migration rollback evidence absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M34",
+      "name": "Audit & compliance",
+      "required_responsibilities": "Immutable event trail, retention policy, access logs, legal hold, export",
+      "required_outputs": "Audits, access review, retention execution",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Local audit table exists; immutable append-only controls, retention/legal hold, operational access log coverage and deletion execution absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M35",
+      "name": "Platform administration",
+      "required_responsibilities": "Tenant support, service health, billing support, capacity, feature rollout",
+      "required_outputs": "Separate admin API/control plane, break-glass",
+      "implementation_state": "NOT_STARTED",
+      "remaining_work": "Platform-admin role/screens exist but no separate control plane, provisioning, feature rollout, billing support or break-glass workflow.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M36",
+      "name": "Industry capabilities",
+      "required_responsibilities": "Per-vertical attributes, templates, sector rules and optional module packages",
+      "required_outputs": "Feature and schema configuration, not tenant code forks",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Industry fields/screens exist; no full signed enablement/migrations, second-industry and regulatory test evidence.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M37",
+      "name": "Device and print management",
+      "required_responsibilities": "Registered printers/scanners, locale/templates, device status and troubleshooting",
+      "required_outputs": "Printer profile and capability checks",
+      "implementation_state": "BLOCKED",
+      "remaining_work": "Printer/scanner profiles exist; actual discovery, drivers, signing/certificates and thermal/A4 hardware certification unavailable.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M38",
+      "name": "Data lifecycle & backup",
+      "required_responsibilities": "Tenant export, deletion workflows, PITR runbooks, restore verification",
+      "required_outputs": "Export/restore evidence and retention jobs",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Operations agent adds validated local backup/restore; tenant-selective PITR, offsite encryption, retention/hold replay and disaster recovery evidence absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M39",
+      "name": "Search and indexing",
+      "required_responsibilities": "Product/customer/supplier search, autocomplete, bounded reindexing",
+      "required_outputs": "PostgreSQL full text initially; external index only if needed",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "In-memory/browser substring filters exist; bounded production search/indexing, scope-safe suggestions and reindex jobs absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M40",
+      "name": "Support & diagnostics",
+      "required_responsibilities": "Ticket, diagnostic bundle, consented remote support session, incident linking",
+      "required_outputs": "Support UI and auditable access grant",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Support/incident forms exist; consented timed access grants, diagnostics redaction, operational incident playbooks and evidence absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M09",
+      "name": "Inventory authority",
+      "required_responsibilities": "Item/location balances, immutable movement journal, reservations, quarantine",
+      "required_outputs": "Stock commands, availability, adjustments, `StockChanged`",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Agent implements transactional stock helper; full immutable ownership/custody/reservation/valuation authority and production concurrency remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M24",
+      "name": "Document & print engine",
+      "required_responsibilities": "Immutable snapshots, receipts, invoices, notes, template versions, print attempts",
+      "required_outputs": "Render / download / print audit / reprint",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "26 document views and server snapshots exist; atomic economic issuance/numbering, tamper-evident retention, bilingual print and device certification are absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M25",
+      "name": "Fiscal & accounting configuration",
+      "required_responsibilities": "Tax rates, invoice-series policy, configurable fiscal adapters, posting mappings",
+      "required_outputs": "Tax policy preview, finance exports, audit snapshots",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Agent implements balanced local journals/period gates; SYSCOHADA mappings, comprehensive reversal/valuation/tax/fiscal integration and accountant signoff remain absent.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M28",
+      "name": "Orders & reservations",
+      "required_responsibilities": "Multi-channel order state, stock holds, expiry, capture and cancellations",
+      "required_outputs": "Order API, reservation events and expiry",
+      "implementation_state": "IN_PROGRESS",
+      "remaining_work": "Order forms exist; inventory-owned timed reservations, expiry compensation and verified payment-to-fulfillment choreography remain incomplete.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    },
+    {
+      "module_id": "M30",
+      "name": "Windows bridge",
+      "required_responsibilities": "WPF operation mappings, site registration, local idempotency, reconciliation",
+      "required_outputs": "Versioned desktop sync contract; no direct DB copying",
+      "implementation_state": "BLOCKED",
+      "remaining_work": "Actual Windows source and native build/test environment unavailable; no certified WPF bridge or standalone companion implementation.",
+      "source_section": "4, 22.1",
+      "completion_certified": false,
+      "evidence": []
+    }
+  ],
+  "baseline_blocked_action_count": 97,
+  "baseline_blocked_actions": [
+    {
+      "screen": "S03",
+      "action_index": 1,
+      "label": "acknowledge",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S23",
+      "action_index": 1,
+      "label": "snooze alert",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S38",
+      "action_index": 3,
+      "label": "issue",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S54",
+      "action_index": 0,
+      "label": "Zoom",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S54",
+      "action_index": 4,
+      "label": "mark copy",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S55",
+      "action_index": 2,
+      "label": "disable",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S56",
+      "action_index": 2,
+      "label": "revoke",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S60",
+      "action_index": 0,
+      "label": "Discover",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S61",
+      "action_index": 0,
+      "label": "Backup now",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S61",
+      "action_index": 3,
+      "label": "choose external drive",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S62",
+      "action_index": 2,
+      "label": "safety backup",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S62",
+      "action_index": 3,
+      "label": "restore",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S63",
+      "action_index": 4,
+      "label": "commit",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S65",
+      "action_index": 1,
+      "label": "integrity check",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S66",
+      "action_index": 1,
+      "label": "system check",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S68",
+      "action_index": 1,
+      "label": "generate recovery",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S69",
+      "action_index": 3,
+      "label": "commit opening ledger",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S70",
+      "action_index": 1,
+      "label": "run backup",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S70",
+      "action_index": 2,
+      "label": "restore test",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S71",
+      "action_index": 0,
+      "label": "Sign in",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S71",
+      "action_index": 1,
+      "label": "reveal password",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S72",
+      "action_index": 0,
+      "label": "Unlock",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S72",
+      "action_index": 1,
+      "label": "switch user",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S72",
+      "action_index": 2,
+      "label": "close session",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S73",
+      "action_index": 0,
+      "label": "Change password",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S73",
+      "action_index": 1,
+      "label": "recover owner",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S73",
+      "action_index": 2,
+      "label": "revoke sessions",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S76",
+      "action_index": 2,
+      "label": "refund where authorized",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S77",
+      "action_index": 2,
+      "label": "refund",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S79",
+      "action_index": 2,
+      "label": "restore",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S80",
+      "action_index": 2,
+      "label": "mark recovered",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S85",
+      "action_index": 3,
+      "label": "return for correction",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "S88",
+      "action_index": 2,
+      "label": "silence",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N01",
+      "action_index": 0,
+      "label": "Verify",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N01",
+      "action_index": 2,
+      "label": "provision via M01/M03",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N02",
+      "action_index": 1,
+      "label": "pay/query status",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N06",
+      "action_index": 0,
+      "label": "Reserve",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N06",
+      "action_index": 2,
+      "label": "dispatch",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N07",
+      "action_index": 1,
+      "label": "resend",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N07",
+      "action_index": 2,
+      "label": "revoke",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N07",
+      "action_index": 3,
+      "label": "switch active membership",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N08",
+      "action_index": 0,
+      "label": "Enroll factor",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N08",
+      "action_index": 1,
+      "label": "revoke session/device",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N08",
+      "action_index": 2,
+      "label": "recover with step-up",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N09",
+      "action_index": 1,
+      "label": "test",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N09",
+      "action_index": 2,
+      "label": "rotate",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N09",
+      "action_index": 3,
+      "label": "enable after evidence",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N12",
+      "action_index": 0,
+      "label": "Resume provisioning",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N12",
+      "action_index": 1,
+      "label": "suspend permitted paths",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N12",
+      "action_index": 2,
+      "label": "schedule migration",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N13",
+      "action_index": 1,
+      "label": "grant",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N13",
+      "action_index": 2,
+      "label": "revoke",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N14",
+      "action_index": 3,
+      "label": "activate cutover",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N15",
+      "action_index": 1,
+      "label": "retry same ID",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N16",
+      "action_index": 0,
+      "label": "Grant disjoint quota",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N16",
+      "action_index": 2,
+      "label": "freeze",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N16",
+      "action_index": 4,
+      "label": "recall with proof",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N18",
+      "action_index": 2,
+      "label": "locally commit permitted sale",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N19",
+      "action_index": 2,
+      "label": "sync",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N19",
+      "action_index": 3,
+      "label": "dispatch/receive only under authorized authority",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N20",
+      "action_index": 0,
+      "label": "Retry",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N20",
+      "action_index": 2,
+      "label": "resnapshot",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N21",
+      "action_index": 4,
+      "label": "sync",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N25",
+      "action_index": 2,
+      "label": "remove",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N26",
+      "action_index": 0,
+      "label": "Reserve",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N26",
+      "action_index": 2,
+      "label": "query payment",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N26",
+      "action_index": 3,
+      "label": "retry safely",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N27",
+      "action_index": 0,
+      "label": "Verify access",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N28",
+      "action_index": 0,
+      "label": "Verify DNS",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N28",
+      "action_index": 2,
+      "label": "publish",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N28",
+      "action_index": 3,
+      "label": "disable",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N29",
+      "action_index": 2,
+      "label": "hold/release",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N34",
+      "action_index": 0,
+      "label": "Run checks",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N36",
+      "action_index": 3,
+      "label": "revert to prior public version",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N37",
+      "action_index": 0,
+      "label": "Verify identity",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N38",
+      "action_index": 3,
+      "label": "dispatch",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N39",
+      "action_index": 2,
+      "label": "issue grant",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "N39",
+      "action_index": 3,
+      "label": "expire unused challenge",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X03",
+      "action_index": 0,
+      "label": "Issue",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X11",
+      "action_index": 2,
+      "label": "release",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X12",
+      "action_index": 1,
+      "label": "freeze exposure",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X13",
+      "action_index": 1,
+      "label": "revoke",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X13",
+      "action_index": 2,
+      "label": "recover",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X13",
+      "action_index": 4,
+      "label": "retire",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X14",
+      "action_index": 2,
+      "label": "dispatch",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X15",
+      "action_index": 3,
+      "label": "publish management consolidation",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X16",
+      "action_index": 2,
+      "label": "confirm cut",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X21",
+      "action_index": 1,
+      "label": "block",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X21",
+      "action_index": 2,
+      "label": "notify authorized recipients",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X21",
+      "action_index": 3,
+      "label": "recover",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X21",
+      "action_index": 4,
+      "label": "dispose",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X22",
+      "action_index": 0,
+      "label": "Rehearse",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X22",
+      "action_index": 2,
+      "label": "freeze",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X22",
+      "action_index": 3,
+      "label": "restore/migrate",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X22",
+      "action_index": 5,
+      "label": "reopen",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X23",
+      "action_index": 0,
+      "label": "Activate offline",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    },
+    {
+      "screen": "X23",
+      "action_index": 4,
+      "label": "recover host",
+      "baseline_state": "BLOCKED",
+      "current_state": "IN_PROGRESS",
+      "evidence": [],
+      "note": "Baseline v4 blocked action. Presence of a new binding is not end-to-end verification; root must reconcile command and UI evidence."
+    }
+  ],
+  "audit_findings": [
+    {
+      "id": "SEC-001",
+      "title": "Snapshot metadata scope",
+      "source": "server/server.py: /api/state",
+      "required_outcome": "Owner-generated labels/product units must be filtered for current reader; nested data must not reuse creator permissions.",
+      "state": "Fixed in current source; negative API test PASS"
+    },
+    {
+      "id": "SEC-002",
+      "title": "Approval payload mutation",
+      "source": "server/server.py: command and /api/record",
+      "required_outcome": "Approved/In review records and lines cannot be modified without a controlled revision invalidating approval.",
+      "state": "Fixed in current source; both approved-field and approved-line negative API tests PASS"
+    },
+    {
+      "id": "SEC-003",
+      "title": "Generic business status transitions",
+      "source": "server/server.py: command.transitions",
+      "required_outcome": "Business commands require per-entity behavior and invariants; unsupported commands fail without status mutation.",
+      "state": "Restricted in current source; unsupported role publish negative API test PASS; full per-entity matrix still needs review"
+    },
+    {
+      "id": "SEC-004",
+      "title": "Derived balance edits",
+      "source": "v3/contracts.json: deposit/custody/quota/cash",
+      "required_outcome": "Protect allocated/collected/consumed/expected amounts from generic edits, including imports; freeze economically active rows.",
+      "state": "Domain agents and root implementing"
+    },
+    {
+      "id": "SEC-005",
+      "title": "Tenant/company authority",
+      "source": "server/policy.py; server/server.py",
+      "required_outcome": "Do not accept hardcoded demo tenant/company as multi-tenant isolation; bind identity to memberships and enforce all query/write/document paths.",
+      "state": "Not implemented"
+    },
+    {
+      "id": "FIN-001",
+      "title": "Money wire and rounding contract",
+      "source": "server/server.py:number; v3/model.js; v3/ui.js:cash",
+      "required_outcome": "Architecture requires integral XAF and exact string/rational contracts; decimal acceptance and Number formatting need explicit validation/rounding tests.",
+      "state": "Incomplete"
+    },
+    {
+      "id": "OPS-001",
+      "title": "Canonical replay and transactional events",
+      "source": "server/server.py:commands",
+      "required_outcome": "Current user+operation_id cache is not canonical cross-device/company operation identity; durable transactional outbox/inbox and reconstruction absent.",
+      "state": "Not implemented"
+    },
+    {
+      "id": "OPS-002",
+      "title": "Static file allowlist",
+      "source": "server/server.py:Handler.do_GET",
+      "required_outcome": "Normalize/decode paths before authorization; serve only known public roots so encoded paths cannot expose future sensitive static extensions.",
+      "state": "Requires regression test / hardened allowlist"
+    },
+    {
+      "id": "SEC-006",
+      "title": "Integration state is not activation",
+      "source": "v3/contracts.json:integration; v4 UI",
+      "required_outcome": "Enabled/Active fields must not imply provider, identity, DNS, device or entitlement activation without verified service evidence.",
+      "state": "Must remain explicit"
+    },
+    {
+      "id": "REL-001",
+      "title": "Production implementation baseline",
+      "source": "docs/Architecture.md:0.3,2.3,45",
+      "required_outcome": "Java/Spring/PostgreSQL runtime, locked supported BOM, production API/migrations/RLS and deployment pipeline absent; Python harness cannot certify architecture compliance.",
+      "state": "Not implemented"
+    },
+    {
+      "id": "FIN-002",
+      "title": "Provider settlement must use unified finance engine",
+      "source": "server/mobile_money.py:query",
+      "required_outcome": "Verified successful provider response must run the same open-period, allocation/credit/deposit and balanced-journal settlement helper as other payments. If funds are verified but accounting cannot post, retain review-required state and never charge again.",
+      "state": "Reported to mobile-money and root agents; integration pending",
+      "status": "LOCAL_INTEGRATION_TESTED_LIVE_UNVERIFIED",
+      "resolution": "MTN reconciliation invokes finance allocation and posting under SAVEPOINT; closed-period evidence retained for review. Simulated-provider tests pass."
+    }
+  ],
+  "boundary_tests": {
+    "path": "tests/test_boundary_audit.py",
+    "test_count": 4,
+    "latest_observed": "4 passed in isolated HTTP API test run after root fixes",
+    "result": "PASS"
+  },
+  "external_blockers": [
+    "MTN merchant credentials and approved environment",
+    "Orange merchant-specific API contract, credentials and provider approval",
+    "Prior Windows source/native environment/hardware",
+    "Email/SMS/push services and OIDC/MFA configuration",
+    "Fiscal/legal/accountant review and real merchant pilot evidence"
+  ],
+  "release_status": "BLOCKED",
+  "phase_status": "No P01\u2013P14 phase certified by this register; predecessor gates, cumulative evidence and independent reviews remain mandatory",
+  "root_reconciliation_required": true,
+  "parallel_delivery_evidence": [
+    {
+      "owner": "inventory",
+      "source": "server/inventory_workflows.py",
+      "status_document": "docs/inventory-status.md",
+      "tests": "tests/test_inventory_workflows.py",
+      "agent_reported_test_count": 12,
+      "agent_reported_result": "PASS",
+      "scope": "Transactional local receipts, count, adjustment, same-branch transfers, custody collection, fulfillment, bounded sellable physical returns, zero-loss repack and quarantine disposal",
+      "limits": "Crossbranch authority, reservations, full lineage/lot/serial, cut outputs, loss recipes, finance integration and offline incomplete"
+    },
+    {
+      "owner": "finance",
+      "source": "server/finance_workflows.py",
+      "status_document": "docs/finance-status.md",
+      "tests": "tests/test_finance_workflows.py",
+      "agent_reported_test_count": 13,
+      "agent_reported_result": "PASS",
+      "scope": "Local deposit receive/allocate/refund, settlement, supplier advance/invoice match, cash open/close, journals/periods, quote issue/convert, expenses, bank match",
+      "limits": "Only zero-tax Immediate sale recognition; custody/delivery/tax, return credits/provider refunds and statutory certification incomplete"
+    },
+    {
+      "owner": "operations",
+      "source": "server/operations.py",
+      "status_document": "docs/operations-status.md",
+      "tests": "tests/test_operations.py",
+      "agent_reported_test_count": 14,
+      "agent_reported_result": "PASS",
+      "scope": "8 local API paths: backup create/list/verify/guarded restore, import preview/commit, integrity, sessions revoke",
+      "limits": "Record-only restore blocked after auxiliary finance/provider evidence; CSV master records only; no whole-system/PITR recovery"
+    },
+    {
+      "owner": "ui_wiring",
+      "source": "v4/workflows.js",
+      "status_document": "docs/ui-wiring-status.md",
+      "state": "IN_PROGRESS",
+      "limits": "Requires final browser verification and action-to-handler traceability"
+    },
+    {
+      "owner": "mobile_money",
+      "source": "server/mobile_money.py",
+      "status_document": "docs/mobile-money.md",
+      "state": "IN_PROGRESS",
+      "limits": "No live merchant activation; Orange contract/credentials blocked; finance settlement helper alignment under audit"
+    }
+  ],
+  "combined_test_evidence": {
+    "automated_tests": 76,
+    "result": "PASS",
+    "file": "docs/v5-test-results.txt",
+    "browser_pass": [
+      "owner sign-in",
+      "POS atomic draft save",
+      "command review dialog",
+      "mobile-money status"
+    ],
+    "browser_blocked": "Complete Sale browser submission rejected by automatic approval review; no browser posting success claimed"
+  }
+}

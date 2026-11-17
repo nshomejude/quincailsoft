@@ -7,6 +7,9 @@ from http.cookies import SimpleCookie
 from urllib.parse import urlparse
 from decimal import Decimal,InvalidOperation
 from policy import ROLES,allow,scoped,public_policy
+import sys
+# Keep one module instance when launched as a script; workflow plugins import server.
+sys.modules.setdefault("server",sys.modules[__name__])
 ROOT=Path(__file__).resolve().parents[1]
 CONTRACT=json.loads((ROOT/'v3/contracts.json').read_text())
 SCHEMAS=CONTRACT['schemas']
@@ -62,11 +65,20 @@ def safe_record(user,e,r):
   r['lines']=[{k:v for k,v in l.items() if k!='unit_cost'} for l in r.get('lines',[])]
  return r
 def validate(c,user,e,data,old):
+ if not isinstance(data,dict):raise APIError(422,'Record data must be an object.')
+ from finance_workflows import validate_record
+ validate_record(c,user,e,data,old)
+ for key in ({'quota':['consumed_quantity'],'cash':['expected_amount']}.get(e,[])):
+  if key in data and number(data[key])!=number((old or {}).get(key,0)):raise APIError(422,key+' is derived and cannot be edited.')
  if e not in SCHEMAS:raise APIError(404,'Unknown entity.')
  out={}
  for f in SCHEMAS[e]['fields']:
   key=f['key'];v=data.get(key,old.get(key,'') if old else '')
   if f['type']=='password':continue
+  if f['type']=='checkbox' and not isinstance(v,bool):
+   if v=='':v=False
+   else:raise APIError(422,f['label']+' must be true or false.')
+  if f['type']!='checkbox' and not isinstance(v,(str,int,float)):raise APIError(422,'Invalid field value: '+f['label'])
   if f['required'] and (v is None or v==''):raise APIError(422,f['label']+' is required.')
   if f['type'] in ('money','decimal','number') and v!='':
    if number(v)<0:raise APIError(422,f['label']+' cannot be negative.')
@@ -88,19 +100,26 @@ def command(c,user,body):
  reason=str(body.get('reason','')).strip()
  if not reason:raise APIError(422,'A reason is required.')
  payload=body.get('payload') or {}
+ if not isinstance(payload,dict):raise APIError(422,'Command payload must be an object.')
+ if user['role']=='customer' and verb not in ('submit','cancel'):raise APIError(403,'Customers can only submit or cancel their own draft request.')
+ if verb=='approve' and r.get('submitted_by')==user['id']:raise APIError(403,'A different person must approve this request.')
+ from inventory_workflows import handle as inventory_command
+ from finance_workflows import handle as finance_command
+ for handler in (inventory_command,finance_command):
+  handled=handler(c,user,body)
+  if handled is not None:return handled
  original=r['status']
  if verb in ('grant','refund','confirm-cut','reopen','dispose') and not ROLES[user['role']]['approve']:raise APIError(403,'Approval authority is required for this command.')
- if verb=='approve' and r.get('submitted_by')==user['id']:raise APIError(403,'A different person must approve this request.')
  final={'Completed','Posted','Closed','Cancelled','Refunded'}
  transitions={'submit':(['Draft','Rejected'],'In review'),'approve':(['In review','Pending'],'Approved'),'reject':(['In review','Pending'],'Rejected'),'hold':(['Draft'],'Held'),'resume':(['Held'],'Draft'),'cancel':(['Draft','In review','Pending'],'Cancelled'),'archive':(['Draft','Active','Inactive'],'Archived'),'activate':(['Draft','Inactive'],'Active'),'issue':(['Draft','Approved'],'Issued'),'acknowledge':(['Draft','Active','Pending'],'Acknowledged'),'snooze':(['Draft','Active','Pending','Acknowledged'],'Snoozed'),'silence':(['Draft','Active'],'Silenced'),'return':(['In review'],'Draft'),'freeze':(['Draft','Active','In review','Pending'],'Frozen'),'reopen':(['Frozen','Closed'],'Draft'),'retire':(['Draft','Active','Frozen'],'Retired'),'revoke':(['Draft','Active','Invited','Approved'],'Revoked'),'disable':(['Draft','Active','Published'],'Inactive'),'reserve':(['Draft','Approved'],'Reserved'),'dispatch':(['Approved','Reserved'],'Dispatched'),'release':(['Reserved','Held','Frozen'],'Draft'),'publish':(['Approved','Issued'],'Published'),'block':(['Draft','Active'],'Quarantine'),'recover':(['Quarantine','Recalled'],'Recovered'),'dispose':(['Quarantine','Recovered'],'Disposed'),'complete':(['Draft','Approved','Open','Pending'],'Completed')}
  if verb=='add-line':
-  if r['status'] in final:raise APIError(409,'Finalized lines are read-only.')
+  if r['status'] not in ('Draft','Rejected'):raise APIError(409,'Only draft or rejected lines can be edited.')
   p=get(c,'product',payload.get('product'));check(user,'product','read',p);q=number(payload.get('quantity'));price=number(payload.get('unit_price') or p['selling_price'])
   if q<=0 or price<0:raise APIError(422,'Invalid line quantity or price.')
   if user['role']=='cashier' and price!=number(p['selling_price']):raise APIError(403,'Price override requires a manager.')
   r.setdefault('lines',[]).append({'id':secrets.token_hex(8),'product':p['id'],'description':p['name'],'quantity':ds(q),'unit_price':ds(price),'unit_cost':p.get('purchase_cost','0'),'tax_rate':p.get('tax_rate','0')})
  elif verb=='remove-line':
-  if r['status'] in final:raise APIError(409,'Finalized lines are read-only.')
+  if r['status'] not in ('Draft','Rejected'):raise APIError(409,'Only draft or rejected lines can be edited.')
   r['lines']=[l for l in r.get('lines',[]) if l['id']!=payload.get('line')]
  elif verb=='refund' and e=='deposit':
   available=number(r['amount'])-number(r.get('allocated_amount',0))-number(r.get('refunded_amount',0));amount=number(payload.get('amount'))
@@ -108,9 +127,12 @@ def command(c,user,body):
   r['refunded_amount']=ds(number(r.get('refunded_amount',0))+amount)
   if amount==available:r['status']='Refunded'
  elif verb=='grant' and e=='quota':
+  if r['status'] not in ('Draft','Approved'):raise APIError(409,'Only a draft or approved quota can be granted.')
+  if number(r.get('consumed_quantity',0))!=0:raise APIError(422,'Consumed quota must start at zero.')
   qty=number(r.get('granted_quantity'));p=get(c,'product',r['product']);check(user,'product','read',p)
   others=sum((number(x.get('granted_quantity',0))-number(x.get('consumed_quantity',0)) for x in all_records(c,'quota') if x['id']!=r['id'] and x.get('product')==p['id'] and x['status']=='Active'),Decimal(0))
-  if qty<=0 or qty+others>number(p.get('stock',0)):raise APIError(422,'Allocation exceeds unallocated stock.')
+  from inventory_workflows import availability
+  if qty<=0 or qty>availability(c,p):raise APIError(422,'Allocation exceeds unallocated stock.')
   r['status']='Active'
  elif verb=='confirm-cut' and e=='cut':
   length=number(r['parent_length']);used=(number(r['output_length'])+number(r['kerf']))*number(r['output_count'])
@@ -118,12 +140,22 @@ def command(c,user,body):
   if r['status'] not in ('Draft','Approved'):raise APIError(409,'Cut job already processed.')
   r['waste']=ds(length-used);r['status']='Completed'
  elif verb in transitions:
+  safe_review={'submit','approve','reject','return'}
+  safe_drafts={'hold','resume','cancel'}
+  config_entities={'category','unit','price','template','printer','industry','content'}
+  safe_config=verb in ('archive','activate','disable') and e in config_entities
+  safe_alert=verb in ('acknowledge','snooze','silence') and e in ('policy','incident')
+  if verb not in safe_review|safe_drafts|{'complete'} and not safe_config and not safe_alert:raise APIError(501,'A dedicated domain handler is required for this operation; nothing changed.')
   allowed,new=transitions[verb]
+  if verb=='submit' and e=='count' and r.get('count_captured'):allowed=[*allowed,'Counting']
   if original not in allowed:raise APIError(409,'Cannot '+verb+' from '+original+'.')
   if verb=='complete':
    if e not in ('sale','payment','quote','journal'):raise APIError(501,'This domain posting adapter is not implemented. The record has not been posted.')
    if e in ('sale','purchase','receipt','quote') and not r.get('lines'):raise APIError(422,'At least one line is required.')
    if e=='sale':
+    from finance_workflows import open_period,post_sale
+    open_period(c,r)
+    post_sale(c,user,r)
     for l in r['lines']:
      p=get(c,'product',l['product']);q=number(l['quantity'])
      quota=sum((number(x.get('granted_quantity',0))-number(x.get('consumed_quantity',0)) for x in all_records(c,'quota') if x.get('product')==p['id'] and x['status']=='Active'),Decimal(0))
@@ -131,7 +163,9 @@ def command(c,user,body):
      if number(p.get('stock',0))-quota-custody<q:raise APIError(422,'Insufficient unallocated stock.')
      if r.get('fulfillment')=='Customer custody':
       cid=secrets.token_hex(8);store(c,'custody',{'id':cid,'reference':'CUST-'+cid,'version':1,'status':'Pending','tenant_id':'demo','branch_id':r['branch_id'],'sale':r['id'],'customer':r.get('customer'),'product':p['id'],'owned_quantity':ds(q),'collected_quantity':'0','warehouse':'warehouse-1','business_date':r['business_date']})
-     else:p['stock']=ds(number(p.get('stock',0))-q);p['version']+=1;store(c,'product',p)
+     else:
+      from inventory_workflows import change_stock
+      change_stock(c,user,p['id'],-q,warehouse_id=r.get('warehouse'),source=r['reference'])
     r['total']=ds(total(r))
    if e=='payment':
     amount=number(r.get('amount'));allocated=number(r.get('allocation_amount') or amount)
@@ -153,7 +187,9 @@ class Handler(SimpleHTTPRequestHandler):
   if cookie:self.send_header('Set-Cookie',cookie)
   self.end_headers();self.wfile.write(raw)
  def body(self):
-  n=int(self.headers.get('Content-Length','0'))
+  try:n=int(self.headers.get('Content-Length','0'))
+  except ValueError:raise APIError(400,'Invalid content length.')
+  if n<0:raise APIError(400,'Invalid content length.')
   if n>2000000:raise APIError(413,'Request too large.')
   try:return json.loads(self.rfile.read(n) or b'{}')
   except ValueError:raise APIError(400,'Invalid JSON.')
@@ -178,11 +214,19 @@ class Handler(SimpleHTTPRequestHandler):
   if not allowed:return self.send_error(404)
   super().do_GET()
  def do_POST(self):self.api('POST',urlparse(self.path).path)
+ def do_PUT(self):self.api('PUT',urlparse(self.path).path)
  def api(self,method,path):
   try:
    with LOCK,connect() as c:
-    b=self.body() if method=='POST' else {}
-    if method=='GET' and path not in ('/api/meta','/api/session','/api/state','/api/users'):raise APIError(405,'Use POST for this operation.')
+    b=self.body() if method in ('POST','PUT') else {}
+    if not isinstance(b,dict):raise APIError(400,'Request body must be a JSON object.')
+    if path.startswith('/api/mobile-money/callback/') and method in ('POST','PUT'):
+     parts=path.split('/')
+     if len(parts)!=6:raise APIError(404,'Invalid callback path.')
+     from mobile_money import callback
+     return self.send_json(202,callback(c,parts[4],parts[5],b))
+    if method=='PUT':raise APIError(405,'PUT is supported only for provider callbacks.')
+    if method=='GET' and path not in ('/api/meta','/api/session','/api/state','/api/users','/api/mobile-money/config','/api/mobile-money/intents','/api/backup/list','/api/system/integrity'):raise APIError(405,'Use POST for this operation.')
     if path=='/api/meta':return self.send_json(200,{'demo':DEMO,'roles':{k:v['label'] for k,v in ROLES.items()}})
     if path=='/api/login' and method=='POST':
      email=str(b.get('email','')).strip().lower();key=self.client_address[0]+':'+email
@@ -199,14 +243,24 @@ class Handler(SimpleHTTPRequestHandler):
      secure='; Secure' if os.environ.get('QUINCAI_HTTPS')=='1' else ''
      return self.send_json(200,{'user':{k:u[k] for k in ['id','email','role','branch_id','customer_id']},'policy':public_policy(u['role']),'csrf':csrf},'quincai_session='+token+'; HttpOnly; SameSite=Strict; Path=/; Max-Age=28800'+secure)
     user,session=self.auth(c,method=='POST')
+    from operations import handle_api as operations_api
+    from mobile_money import handle_api as money_api
+    for endpoint in (operations_api,money_api):
+     handled=endpoint(c,user,path,b)
+     if handled is not None:
+      c.commit();return self.send_json(200,handled)
     if path=='/api/session':return self.send_json(200,{'user':{k:user[k] for k in ['id','email','role','branch_id','customer_id']},'policy':public_policy(user['role']),'csrf':session['csrf']})
     if path=='/api/state':
      entities={e:[safe_record(user,e,r) for r in all_records(c,e) if scoped(user,r,e)] if allow(user,e) else [] for e in SCHEMAS}
      audits=[json.loads(r[0]) for r in c.execute('SELECT data FROM audit ORDER BY seq DESC LIMIT 200') if scoped(user,json.loads(r[0]),'audit')] if allow(user,'audit') else []
+     if allow(user,'audit'):entities['audit']=[{**a,'reference':'AUD-'+a['id'][:8],'status':'Recorded','version':1,'business_date':a['date'][:10]} for a in audits]
      snaps=[json.loads(r[0]) for r in c.execute('SELECT data FROM snapshots')] 
      snaps=[s for s in snaps if allow(user,s['source_entity']) and scoped(user,s['record'],s['source_entity'])]
      for snap in snaps:
       snap['record']=safe_record(user,snap['source_entity'],snap['record'])
+      authorized_ids={e+':'+r['id'] for e,rs in entities.items() for r in rs}
+      snap['labels']={k:v for k,v in snap.get('labels',{}).items() if k in authorized_ids}
+      snap['product_units']={k:v for k,v in snap.get('product_units',{}).items() if 'product:'+k in authorized_ids}
       snap['related_records']=[{**x,'record':safe_record(user,x['entity'],x['record'])} for x in snap['related_records'] if allow(user,x['entity']) and scoped(user,x['record'],x['entity'])]
      return self.send_json(200,{'version':3,'entities':entities,'audit':audits,'snapshots':snaps,'basket':[],'preferences':{'branch':user['branch_id'],'locale':'en'}})
     if path=='/api/users':
@@ -232,15 +286,37 @@ class Handler(SimpleHTTPRequestHandler):
      if len(new)<12:raise APIError(422,'Use at least 12 characters.')
      salt=secrets.token_hex(16);c.execute('UPDATE users SET salt=?,hash=?,auth_version=auth_version+1 WHERE id=?',(salt,password_hash(new,salt),user['id']));c.execute('DELETE FROM sessions WHERE user_id=?',(user['id'],));event(c,user,'identity',user['id'],'Password changed');c.commit();return self.send_json(200,{'ok':True,'reauthenticate':True})
     if path=='/api/record':
-     e=b.get('entity');check(user,e,'write');id=b.get('id');old=get(c,e,id) if id else None
+     e=b.get('entity');check(user,e,'write');
+     if e in ('audit','role','staff','identity','custody'):raise APIError(403,'Use the dedicated identity or audit service; these records are not editable drafts.')
+     id=b.get('id');old=get(c,e,id) if id else None
      if old:
       check(user,e,'write',old)
       if old['version']!=b.get('version'):raise APIError(409,'Record version changed.')
-      if old['status'] in ('Completed','Posted','Closed','Cancelled'):raise APIError(409,'Finalized record is read-only.')
+      if old['status'] not in ('Draft','Rejected') and e not in ('product','customer','supplier','company','branch','category','unit','price','template','printer','industry','content'):raise APIError(409,'Finalized record is read-only.')
      fields=validate(c,user,e,b.get('data',{}),old);id=id or secrets.token_hex(10)
      r={**(old or {}),**fields,'id':id,'reference':old['reference'] if old else e[:4].upper()+'-'+id[:8],'version':old['version']+1 if old else 1,'status':old['status'] if old else 'Draft','branch_id':old['branch_id'] if old else user['branch_id'],'company_id':'company-1','tenant_id':'demo','business_date':fields.get('business_date') or (old or {}).get('business_date') or '2026-11-17','lines':(old or {}).get('lines',[]),'created_by':(old or {}).get('created_by',user['id'])}
      if user['role']=='customer' and r.get('customer')!=user['customer_id']:raise APIError(403,'You can only create requests for your own customer account.')
      store(c,e,r);event(c,user,e,id,'Draft saved');c.commit();return self.send_json(200,{'record':safe_record(user,e,r)})
+    if path=='/api/sales/draft':
+     check(user,'sale','write')
+     operation=b.get('operation_id')
+     if not isinstance(operation,str) or not operation or len(operation)>100:raise APIError(422,'Operation ID required.')
+     digest=hashlib.sha256(json.dumps({'path':path,'body':b},sort_keys=True).encode()).hexdigest()
+     prior=c.execute('SELECT * FROM commands WHERE user_id=? AND operation_id=?',(user['id'],operation)).fetchone()
+     if prior:
+      if prior['request_hash']!=digest:raise APIError(409,'Operation ID reused with different data.')
+      return self.send_json(200,json.loads(prior['result']))
+     lines=b.get('lines')
+     if not isinstance(lines,list) or not 1<=len(lines)<=500:raise APIError(422,'Provide 1 to 500 sale lines.')
+     fields=validate(c,user,'sale',b.get('data',{}),None);id=secrets.token_hex(10)
+     r={**fields,'id':id,'reference':'SALE-'+id[:8],'version':1,'status':'Draft','branch_id':user['branch_id'],'company_id':'company-1','tenant_id':'demo','lines':[],'created_by':user['id']}
+     store(c,'sale',r)
+     for line in lines:
+      if not isinstance(line,dict):raise APIError(422,'Invalid sale line.')
+      result=command(c,user,{'entity':'sale','id':id,'version':r['version'],'command':'add-line','payload':line,'reason':'POS basket save'})
+      r=get(c,'sale',id)
+     result={'record':safe_record(user,'sale',r)}
+     c.execute('INSERT INTO commands VALUES(?,?,?,?)',(user['id'],operation,digest,json.dumps(result)));event(c,user,'sale',id,'POS draft saved');c.commit();return self.send_json(200,result)
     if path=='/api/command':
      operation=b.get('operation_id')
      if not operation or len(operation)>100:raise APIError(422,'Operation ID required.')
@@ -281,6 +357,8 @@ class Handler(SimpleHTTPRequestHandler):
   except Exception as err:
    print(type(err).__name__,str(err),flush=True);self.send_json(500,{'error':'Request failed; no transaction committed.'})
 if __name__=='__main__':
- parser=argparse.ArgumentParser();parser.add_argument('--host',default='127.0.0.1');parser.add_argument('--strictPort',action='store_true');parser.add_argument('--port',type=int,default=int(os.getenv('PORT','5173')));parser.add_argument('--demo',action='store_true');args=parser.parse_args();DEMO=args.demo;initialize()
+ parser=argparse.ArgumentParser();parser.add_argument('--host',default='127.0.0.1');parser.add_argument('--data-dir');parser.add_argument('--strictPort',action='store_true');parser.add_argument('--port',type=int,default=int(os.getenv('PORT','5173')));parser.add_argument('--demo',action='store_true');args=parser.parse_args();DEMO=args.demo
+ if args.data_dir:DBPATH=Path(args.data_dir)/'quincai.sqlite3'
+ initialize()
  print('QuincaiSoft local integration server on port',args.port,flush=True)
  ThreadingHTTPServer((args.host,args.port),Handler).serve_forever()

@@ -76,7 +76,7 @@ document.addEventListener('click',async ev=>{
  if(a==='add-basket'){let p=get('product',b.dataset.id),line=DB.basket.find(x=>x.product===p.id);line?line.quantity=sum([line.quantity,'1']):DB.basket.push({id:uid('LINE'),product:p.id,description:p.name,quantity:'1',unit_price:p.selling_price,unit_cost:p.purchase_cost,tax_rate:p.tax_rate||'0'});persist();renderBasket()}
  if(a==='basket-plus'||a==='basket-minus'){let i=+b.dataset.index,l=DB.basket[i];l.quantity=sum([l.quantity,a==='basket-plus'?'1':'-1']);if(dec(l.quantity)<=0n)DB.basket.splice(i,1);persist();renderBasket()}
  if(a==='clear-basket'){DB.basket=[];persist();renderBasket()}
- if(a==='save-basket'){if(!DB.basket.length)throw Error('Add at least one product.');const outcome=await saveRecord('sale',{customer:$('#pos-customer').value,business_date:'2026-11-17',channel:'Counter',fulfillment:'Immediate',discount:'0'},null,0);if(outcome.errors)throw Error('Select a customer.');for(const line of [...DB.basket])await serverCommand('sale',outcome.record.id,'add-line',line);DB.basket=[];go('S06',{record:outcome.record.id,mode:'detail'})}
+ if(a==='save-basket'){await saveBasket()}
  if(a==='remove-line'){await serverCommand(current.entity,current.record,'remove-line',{line:b.dataset.line});render()}
  if(a==='snapshot'){const result=await api('/api/snapshot',{doc:b.dataset.doc,record:b.dataset.record});await refreshState();go('S54',{doc:b.dataset.doc,record:b.dataset.record,snapshot:result.snapshot.id})}
 
