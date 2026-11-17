@@ -1,4 +1,4 @@
-# QuincaiSoft — unified workflow integration build v5
+# QuincaiSoft — unified workflow integration build v5.1
 
 Six parallel implementation/review agents contributed inventory, finance, mobile money, dedicated UI dialogs, operations and an independent gap audit. This is still a local integration build, **not a finished production platform**. The Java 25/Spring Boot production architecture remains outstanding; the bundled Python/SQLite service proves bounded workflows.
 
@@ -21,14 +21,24 @@ Open http://127.0.0.1:5173. Choose a demonstration account on the sign-in page. 
 - Guarded server-created backup restore, safety backup, typed master-data CSV preview/commit, integrity checks and session revocation. Restore refuses data sets with finance/provider auxiliary evidence until coordinated recovery is implemented.
 - Approved-record and approved-line immutability; snapshot-label permission filtering; unsupported generic business transitions rejected.
 
+## Added in v5.1
+
+- Approved zero-loss cutting with explicit output product, immutable product lineage, exact length and cost conservation, warehouse scope and product-version checks. Kerf, scrap and lot lineage remain blocked.
+- Bounded customer return credit from immutable original zero-tax sale valuation, proportional discount allocation, receivable/customer-credit split, duplicate prevention and period controls. Physical returns are held from resale until credited. Changed-cost and unsupported valuation cases fail closed; cash/provider refunds remain separate and unimplemented.
+- Product-row inputs for stock counts and partial transfer receipts, cut and return-credit detail controls, and credit-status display.
+- Current-role and branch checks on replayed responses, nested cost redaction, and shared resolved-path restrictions for static GET/HEAD requests.
+
+These changes extend the local harness. The action register still contains 53 integration-required bindings; its unchanged count does not measure the added detail controls or certify completion.
+
 ## Verification
 
-76 automated API/domain/security tests pass. The original shared-renderer checks cover 152 screens, 1,140 field placements, 76 report views and 26 document families. These numbers do not establish production completeness. Current action bindings are separately recorded in docs/v5-action-bindings.json.
+95 automated API/domain/security tests pass (see docs/v5.1-test-results.txt). The original shared-renderer checks cover 152 screens, 1,140 field placements, 76 report views and 26 document families. These numbers do not establish production completeness. Current action bindings are separately recorded in docs/v5-action-bindings.json.
 
 ```sh
 python3 -m unittest discover -s tests -v
 node v3/validate.cjs
 node tests/validate_workflow_bindings.cjs
+node tests/test_workflow_forms.cjs
 ```
 
 Browser checks verified owner login, POS item selection and atomic draft save, command review dialog, and mobile-money status view. The browser Complete Sale submission was blocked by automatic approval review, so browser end-to-end posting was not verified. Isolated API/domain tests are separate evidence.

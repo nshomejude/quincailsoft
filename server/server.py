@@ -61,9 +61,16 @@ def total(r):return sum((number(l['quantity'])*number(l['unit_price']) for l in 
 def safe_record(user,e,r):
  r=dict(r)
  if user['role'] in ('cashier','customer'):
-  for k in ['purchase_cost','unit_cost','original_cost','revised_cost']:r.pop(k,None)
+  for k in ['purchase_cost','unit_cost','original_cost','revised_cost','return_valuation','credit_cost','recognized_cost','physical_return_evidence']:r.pop(k,None)
   r['lines']=[{k:v for k,v in l.items() if k!='unit_cost'} for l in r.get('lines',[])]
  return r
+def replay_result(c,user,e,raw):
+ result=json.loads(raw)
+ if result.get('record'):
+  record=result['record'];check(user,e,'read',get(c,e,record['id']))
+  check(user,e,'read',record)
+  result['record']=safe_record(user,e,record)
+ return result
 def validate(c,user,e,data,old):
  if not isinstance(data,dict):raise APIError(422,'Record data must be an object.')
  from finance_workflows import validate_record
@@ -208,11 +215,28 @@ class Handler(SimpleHTTPRequestHandler):
  def do_GET(self):
   path=urlparse(self.path).path
   if path.startswith('/api/'):return self.api('GET',path)
-  # Never serve runtime databases, backend source, fixtures or test files.
-  if path.startswith(('/server/','/runtime/','/tests/','/.')):return self.send_error(404)
-  allowed=path=='/' or path.endswith(('.html','.js','.css','.png','.jpg','.svg','.ico'))
-  if not allowed:return self.send_error(404)
   super().do_GET()
+ def do_HEAD(self):
+  if urlparse(self.path).path.startswith('/api/'):
+   return self.send_error(405,'HEAD is not supported for API routes.')
+  super().do_HEAD()
+ def send_head(self):
+  # Validate the same resolved target for GET and HEAD, including encoded paths.
+  target=Path(self.translate_path(self.path)).resolve()
+  try:relative=target.relative_to(ROOT.resolve())
+  except ValueError:return self.send_error(404)
+  if any(part.startswith('.') or part in ('server','runtime','tests','node_modules') for part in relative.parts):
+   return self.send_error(404)
+  if target.is_dir():
+   if target!=ROOT.resolve():return self.send_error(404)
+   for index in ('index.html','index.htm'):
+    candidate=target/index
+    if candidate.exists():
+     if candidate.is_symlink():return self.send_error(404)
+     break
+  elif target.suffix not in ('.html','.js','.css','.png','.jpg','.svg','.ico'):
+   return self.send_error(404)
+  return super().send_head()
  def do_POST(self):self.api('POST',urlparse(self.path).path)
  def do_PUT(self):self.api('PUT',urlparse(self.path).path)
  def api(self,method,path):
@@ -305,7 +329,7 @@ class Handler(SimpleHTTPRequestHandler):
      prior=c.execute('SELECT * FROM commands WHERE user_id=? AND operation_id=?',(user['id'],operation)).fetchone()
      if prior:
       if prior['request_hash']!=digest:raise APIError(409,'Operation ID reused with different data.')
-      return self.send_json(200,json.loads(prior['result']))
+      return self.send_json(200,replay_result(c,user,'sale',prior['result']))
      lines=b.get('lines')
      if not isinstance(lines,list) or not 1<=len(lines)<=500:raise APIError(422,'Provide 1 to 500 sale lines.')
      fields=validate(c,user,'sale',b.get('data',{}),None);id=secrets.token_hex(10)
@@ -319,13 +343,13 @@ class Handler(SimpleHTTPRequestHandler):
      c.execute('INSERT INTO commands VALUES(?,?,?,?)',(user['id'],operation,digest,json.dumps(result)));event(c,user,'sale',id,'POS draft saved');c.commit();return self.send_json(200,result)
     if path=='/api/command':
      operation=b.get('operation_id')
-     if not operation or len(operation)>100:raise APIError(422,'Operation ID required.')
+     if not isinstance(operation,str) or not operation or len(operation)>100:raise APIError(422,'Operation ID required.')
      check(user,b.get('entity'),'approve' if b.get('command')=='approve' else 'write',get(c,b.get('entity'),b.get('id')))
      digest=hashlib.sha256(json.dumps(b,sort_keys=True).encode()).hexdigest()
      previous=c.execute('SELECT * FROM commands WHERE user_id=? AND operation_id=?',(user['id'],operation)).fetchone()
      if previous:
       if previous['request_hash']!=digest:raise APIError(409,'Operation ID reused with different data.')
-      return self.send_json(200,json.loads(previous['result']))
+      return self.send_json(200,replay_result(c,user,b.get('entity'),previous['result']))
      result=command(c,user,b);c.execute('INSERT INTO commands VALUES(?,?,?,?)',(user['id'],operation,digest,json.dumps(result)));c.commit();return self.send_json(200,result)
     if path=='/api/backup':
      if user['role']!='owner':raise APIError(403,'Owner permission required.')

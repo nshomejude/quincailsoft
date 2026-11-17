@@ -54,3 +54,9 @@ For a future VERIFIED entry, attach: canonical requirement/action IDs; command a
 Inventory reports 12 passing focused tests; finance 13; operations 14. Their detailed scope and limitations are preserved in their respective status documents. These counts are component-agent reports, not a summed full-suite certification. The independent boundary audit executed 4 passing API tests after integration fixes.
 
 One additional integration risk was reported: provider-confirmed payment success must call the unified finance settlement logic for open periods, allocations/credits/deposits and journal entries. Directly marking the payment Completed is not enough. The payment and finance agents are aligning that boundary; root must retain a review-required state if financial posting cannot safely complete.
+
+## v5.1 reconciliation
+
+The next local iteration adds bounded zero-loss cutting and inspected sellable-return credits, with explicit UI controls. Cost evidence, held returned stock, duplicate credit prevention and pending-return period-close guards are tested. Supplier credits, changed-cost reconciliation, customer-credit spending, cash/provider refunds, tax and loss-bearing cuts remain incomplete. See the updated inventory/finance status files.
+
+Static requests now share resolved-path GET/HEAD checks including index/symlink handling. Cached command responses are checked against current scope and cost permissions. Nine boundary tests cover these cases; the full current suite is recorded in `v5.1-test-results.txt`. UI quantity/command payload checks are reproducible with `node tests/test_workflow_forms.cjs`. No additional real-provider or browser posting certification is claimed.

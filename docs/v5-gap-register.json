@@ -1,5 +1,5 @@
 {
-  "version": "5.0",
+  "version": "5.1.0",
   "date": "2026-11-17",
   "status": "PARTIAL_LOCAL_INTEGRATION_TESTED",
   "scope": "Independent review of local integration build; no declaration that every page/module/workflow is finished",
@@ -1523,15 +1523,16 @@
     }
   ],
   "combined_test_evidence": {
-    "automated_tests": 76,
+    "count": 95,
     "result": "PASS",
-    "file": "docs/v5-test-results.txt",
-    "browser_pass": [
-      "owner sign-in",
-      "POS atomic draft save",
-      "command review dialog",
-      "mobile-money status"
-    ],
-    "browser_blocked": "Complete Sale browser submission rejected by automatic approval review; no browser posting success claimed"
+    "file": "docs/v5.1-test-results.txt",
+    "scope": "Isolated local API/domain/security fixtures; no live provider or full browser workflow certification"
+  },
+  "v5_1_delivery": {
+    "cut": "Bounded zero-loss piece transformation; no scrap/kerf/lot certification",
+    "return_credit": "Original zero-tax sale valuation with guarded physical evidence; cash/provider refund not implemented",
+    "ui": "Product-row quantity inputs and cut/credit detail controls",
+    "security": "Current-role replay redaction and static-path guards",
+    "workflow_forms_test": "tests/test_workflow_forms.cjs"
   }
 }

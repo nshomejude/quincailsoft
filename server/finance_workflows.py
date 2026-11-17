@@ -5,7 +5,7 @@ not a claim of SYSCOHADA mapping or fiscal certification.
 """
 import json,secrets
 from datetime import date
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 
 def api():
  import server
@@ -52,6 +52,8 @@ def posting(c,user,e,r,operation,lines):
   if not l.get('account') or d<0 or cr<0 or (d>0 and cr>0):fail('Each journal line must have one nonnegative debit or credit.')
  pid='FIN-'+secrets.token_hex(10);normalized=[{'account':l['account'],'debit':api().ds(l.get('debit',0)),'credit':api().ds(l.get('credit',0))} for l in lines]
  doc={'id':pid,'source_entity':e,'source_id':r['id'],'operation':operation,'period':period['id'],'lines':normalized,'business_date':r.get('business_date',r.get('invoice_date')),'branch_id':r['branch_id'],'company_id':r.get('company_id','company-1')}
+ if e=='sale' and operation=='recognize':doc['return_valuation']=r['return_valuation']
+ if e=='return' and operation=='credit':doc['original_sale']=r['original_sale'];doc['credited_quantities']=r['credited_quantities']
  c.execute('INSERT INTO finance_postings VALUES(?,?,?,?,?)',(pid,e,r['id'],operation,json.dumps(doc)))
  # Operational journal schema is line-oriented, so persist each accounting line separately.
  for idx,l in enumerate(normalized):
@@ -85,8 +87,13 @@ def settlement_account(c,user,e,r,payload,amount,direction):
 
 def outstanding(c,sale):
  paid=sum((api().number(x.get('allocation_amount') or x.get('amount')) for x in api().all_records(c,'payment') if x.get('sale')==sale['id'] and x['status']=='Completed' and x.get('direction','in')=='in'),Decimal(0))
- credits=sum((api().number(x.get('credit_amount',0)) for x in api().all_records(c,'return') if x.get('original_sale')==sale['id'] and x['status'] in ('Completed','Posted')),Decimal(0))
- return api().total(sale)-paid-credits
+ setup(c)
+ credits=Decimal(0)
+ for row in c.execute("SELECT data FROM finance_postings WHERE source_entity='return' AND operation='credit'"):
+  doc=json.loads(row['data'])
+  if doc.get('original_sale')==sale['id']:
+   credits+=sum((api().number(l['credit']) for l in doc['lines'] if l['account']=='ACCOUNTS_RECEIVABLE'),Decimal(0))
+ return max(Decimal(0),api().total(sale)-paid-credits)
 
 def invoice_outstanding(c,invoice):
  paid=sum((api().number(x.get('allocation_amount') or x.get('amount')) for x in api().all_records(c,'payment') if x.get('supplier_invoice')==invoice['id'] and x['status']=='Completed'),Decimal(0))
@@ -99,6 +106,9 @@ def finish(c,user,e,r,verb,reason,status=None):
 
 def validate_record(c,user,e,data,old):
  """Called before draft save; derived balances must not be user editable."""
+ if e=='return':
+  for k in ('credit_amount','credit_posting_id','customer_credit_amount','credit_cost','credited_quantities','credit_business_date','physical_return_evidence'):
+   if k in data and data[k]!=(old or {}).get(k):fail(k+' is derived by the return credit workflow.')
  if e in ('deposit','advance'):
   for k in ('allocated_amount','refunded_amount'):
    if k in data and api().number(data[k])!=api().number((old or {}).get(k,0)):fail(k+' is derived from confirmed allocations, not an editable balance.')
@@ -106,11 +116,12 @@ def validate_record(c,user,e,data,old):
 
 def handle(c,user,body):
  e=body.get('entity');verb=body.get('command');p=body.get('payload') or {};reason=body.get('reason','')
- supported={'deposit':{'complete','allocate','refund'},'payment':{'complete'},'advance':{'complete','allocate'},'supplier_invoice':{'complete','match'},'cash':{'open','complete','close'},'journal':{'complete','post','reverse'},'period':{'complete','close','reopen'},'quote':{'issue','convert'},'expense':{'complete'},'bank':{'complete','match'}}
+ supported={'return':{'credit'},'deposit':{'complete','allocate','refund'},'payment':{'complete'},'advance':{'complete','allocate'},'supplier_invoice':{'complete','match'},'cash':{'open','complete','close'},'journal':{'complete','post','reverse'},'period':{'complete','close','reopen'},'quote':{'issue','convert'},'expense':{'complete'},'bank':{'complete','match'}}
  if verb not in supported.get(e,set()):return None
  setup(c);r=api().get(c,e,body['id']);api().check(user,e,'write',r)
  if body.get('version')!=r['version']:fail('Record changed. Refresh before retrying.',409)
  if not str(reason).strip():fail('A reason is required.')
+ if e=='return':return credit_return(c,user,r,p,reason)
  if e=='quote':
   if verb=='issue':
    require_state(r,{'Draft','Approved'})
@@ -213,6 +224,7 @@ def handle(c,user,body):
   if verb=='reopen':
    require_state(r,{'Closed'});r['reopened_by']=user['id'];return finish(c,user,e,r,verb,reason,'Open')
   require_state(r,{'Open'})
+  if any(x.get('company_id')==r.get('company',r.get('company_id')) and r['start_date']<=x.get('business_date','')<=r['end_date'] and x['status']=='Completed' and not x.get('credit_posting_id') for x in api().all_records(c,'return')):fail('Post pending physical return credits before closing this period.',409)
   for typ in ('journal','sale','payment','deposit','expense','supplier_invoice'):
    if any(x.get('company_id')==r.get('company',r.get('company_id')) and r['start_date']<=x.get('business_date','')<=r['end_date'] and x['status'] in ('Draft','In review','Pending','Approved') for x in api().all_records(c,typ)):fail('Resolve pending '+typ+' records before closing this period.',409)
   if any(x.get('company_id')==r.get('company',r.get('company_id')) and r['start_date']<=x.get('business_date','')<=r['end_date'] and x['status']=='Open' for x in api().all_records(c,'cash')):fail('Close all cash sessions before closing this period.',409)
@@ -240,6 +252,7 @@ rather than producing an apparently balanced but economically wrong journal.
  if any(api().number(l.get('unit_cost',0))<=0 for l in r.get('lines',[])):fail('Every stock sale line requires a positive immutable cost snapshot.')
  lines=two_sides('ACCOUNTS_RECEIVABLE','SALES_REVENUE',revenue)
  if cost>0:lines+=two_sides('COST_OF_GOODS_SOLD','MERCHANT_INVENTORY',cost)
+ r['return_valuation']=return_valuation(r,revenue,cost)
  r['posting_id']=posting(c,user,'sale',r,'recognize',lines);r['recognized_revenue']=api().ds(revenue);r['recognized_cost']=api().ds(cost)
  return r['posting_id']
 
@@ -250,3 +263,74 @@ def post_verified_provider_payment(c,user,r):
  amount=positive(r['amount'])
  r['posting_id']=posting(c,user,'payment',r,'provider-confirm',two_sides('PROVIDER_CLEARING','ACCOUNTS_RECEIVABLE',amount))
  return r['posting_id']
+
+
+def money(v):
+ return v.quantize(Decimal('0.01'),rounding=ROUND_HALF_UP)
+
+def return_valuation(sale,revenue,cost):
+ """Freeze per-product zero-tax valuation; allocate header discount proportionally."""
+ if revenue!=money(revenue) or cost!=money(cost):fail('Return-capable recognition requires amounts representable at two decimal places.')
+ gross=sum((positive(l['quantity'])*positive(l['unit_price']) for l in sale['lines']),Decimal(0))
+ if revenue>gross:fail('Negative sale discounts are not supported.')
+ groups={}
+ for l in sale['lines']:
+  q=positive(l['quantity']);g=groups.setdefault(l['product'],{'quantity':Decimal(0),'gross':Decimal(0),'cost':Decimal(0)})
+  g['quantity']+=q;g['gross']+=q*positive(l['unit_price']);g['cost']+=q*positive(l['unit_cost'])
+ out={};allocated=Decimal(0);cost_allocated=Decimal(0);keys=sorted(groups)
+ for index,pid in enumerate(keys):
+  g=groups[pid];last=index==len(keys)-1
+  net=revenue-allocated if last else money(revenue*g['gross']/gross)
+  pcost=cost-cost_allocated if last else money(g['cost'])
+  if net<0 or pcost<0:fail('Sale valuation cannot be allocated safely.')
+  out[pid]={'quantity':api().ds(g['quantity']),'net':api().ds(net),'cost':api().ds(pcost)};allocated+=net;cost_allocated+=pcost
+ return out
+
+def credit_return(c,user,r,p,reason):
+ approval(user);require_state(r,{'Completed'})
+ if r.get('condition')!='Sellable':fail('Only inspected sellable physical returns can be credited by this workflow.',409)
+ if r.get('credit_posting_id'):fail('This return has already been credited.',409)
+ sale=scoped_get(c,user,'sale',r.get('original_sale'),r);require_state(sale,{'Completed'})
+ if r.get('customer')!=sale.get('customer'):fail('Return customer must match the sale.')
+ if sale.get('fulfillment')!='Immediate' or any(api().number(l.get('tax_rate',0)) for l in sale.get('lines',[])):fail('Return recognition supports immediate zero-tax sales only.',409)
+ snapshot=sale.get('return_valuation')
+ source=c.execute("SELECT data FROM finance_postings WHERE source_entity='sale' AND source_id=? AND operation='recognize'",(sale['id'],)).fetchone()
+ if not source or not snapshot:fail('Original sale lacks a verified immutable return valuation snapshot.',409)
+ original=json.loads(source['data'])
+ if original.get('return_valuation')!=snapshot:fail('Original sale valuation differs from its immutable posting.',409)
+ if original['id']!=sale.get('posting_id'):fail('Original sale posting does not match its valuation.',409)
+ qty={}
+ for l in r.get('lines',[]):qty[l['product']]=qty.get(l['product'],Decimal(0))+positive(l['quantity'])
+ if not qty:fail('A return requires physical item quantities.')
+ prior={}
+ for row in c.execute("SELECT data FROM finance_postings WHERE source_entity='return' AND operation='credit'"):
+  other=json.loads(row['data'])
+  if other.get('original_sale')==sale['id']:
+   for pid,q in other.get('credited_quantities',{}).items():prior[pid]=prior.get(pid,Decimal(0))+api().number(q)
+ amount=Decimal(0);cost=Decimal(0)
+ for pid,q in qty.items():
+  if pid not in snapshot:fail('Returned item is absent from the original sale valuation.')
+  v=snapshot[pid];sold=positive(v['quantity']);before=prior.get(pid,Decimal(0));after=before+q
+  if after>sold:fail('Credited quantity exceeds the original sale.')
+  # Cumulative rounding makes partial credits sum exactly to the original value.
+  amount+=money(api().number(v['net'])*after/sold)-money(api().number(v['net'])*before/sold)
+  part_cost=money(api().number(v['cost'])*after/sold)-money(api().number(v['cost'])*before/sold)
+  evidence=r.get('physical_return_evidence',{}).get(pid)
+  if not evidence or api().number(evidence.get('quantity'))!=q:fail('Physical return lacks matching stock receipt evidence.',409)
+  product=scoped_get(c,user,'product',pid,r)
+  if api().number(evidence.get('unit_cost'))*q!=part_cost or api().number(product.get('purchase_cost'))!=api().number(evidence.get('unit_cost')):fail('Return cost differs from current stock valuation; cost reconciliation is required before credit.',409)
+  cost+=part_cost
+ if amount<=0 or cost<=0:fail('Credit is below supported monetary precision.')
+ unpaid=min(amount,max(Decimal(0),outstanding(c,sale)));liability=amount-unpaid
+ lines=[{'account':'SALES_RETURNS','debit':amount,'credit':'0'}]
+ if unpaid:lines.append({'account':'ACCOUNTS_RECEIVABLE','debit':'0','credit':unpaid})
+ if liability:lines.append({'account':'CUSTOMER_CREDITS','debit':'0','credit':liability})
+ lines+=two_sides('MERCHANT_INVENTORY','COST_OF_GOODS_SOLD',cost)
+ credit_date=p.get('business_date')
+ try:date.fromisoformat(credit_date)
+ except (ValueError,TypeError):fail('Choose a valid credit business date.')
+ if credit_date<r.get('business_date','') or credit_date<sale.get('business_date',''):fail('Credit date cannot precede the sale or physical return.')
+ posting_record={**r,'business_date':credit_date,'credited_quantities':{k:api().ds(v) for k,v in qty.items()}}
+ r['credit_posting_id']=posting(c,user,'return',posting_record,'credit',lines)
+ r.update(credit_amount=api().ds(amount),credit_cost=api().ds(cost),customer_credit_amount=api().ds(liability),credited_quantities={k:api().ds(v) for k,v in qty.items()},credit_business_date=credit_date,financial_settlement_status='Credit posted; customer balance available' if liability else 'Credit posted against receivable')
+ return finish(c,user,'return',r,'credit',reason)

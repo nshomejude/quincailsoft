@@ -10,7 +10,9 @@ class FinanceWorkflows(unittest.TestCase):
  def tearDown(self):
   self.c.rollback();self.c.close();server.DBPATH=self.old_path;server.DEMO=self.old_demo;self.temp.cleanup()
  def add(self,e,**fields):
-  id=uuid.uuid4().hex;r={'id':id,'reference':e+'-'+id[:8],'version':1,'status':'Draft','business_date':'2026-11-17','branch_id':'branch-1','company_id':'company-1','tenant_id':'demo','lines':[],**fields};server.store(self.c,e,r);return r
+  id=uuid.uuid4().hex;r={'id':id,'reference':e+'-'+id[:8],'version':1,'status':'Draft','business_date':'2026-11-17','branch_id':'branch-1','company_id':'company-1','tenant_id':'demo','lines':[],**fields};
+  if e=='return' and r['status']=='Completed':r['physical_return_evidence']={l['product']:{'quantity':l['quantity'],'unit_cost':'70'} for l in r['lines']}
+  server.store(self.c,e,r);return r
  def run_cmd(self,e,r,command,payload=None,user=None):
   return f.handle(self.c,user or self.owner,{'entity':e,'id':r['id'],'version':r['version'],'command':command,'reason':'Acceptance test','payload':payload or {}})['record']
  def assert_error(self,fn,status):
@@ -57,4 +59,47 @@ class FinanceWorkflows(unittest.TestCase):
   with self.assertRaises(server.APIError):
    with self.c:self.run_cmd('deposit',d,'complete',{'cash_session':'cash-1'})
   self.assertEqual(self.c.execute('SELECT count(*) FROM finance_cash_entries').fetchone()[0],0);self.assertEqual(server.get(self.c,'deposit',d['id'])['status'],'Draft')
+ def return_fixture(self,quantity='1',discount='10'):
+  product=server.get(self.c,'product','product-1');product['purchase_cost']='70';server.store(self.c,'product',product)
+  sale=self.add('sale',customer='customer-1',fulfillment='Immediate',discount=discount,lines=[{'product':'product-1','quantity':'3','unit_price':'100','unit_cost':'70','tax_rate':'0'}]);f.post_sale(self.c,self.owner,sale);sale['status']='Completed';server.store(self.c,'sale',sale)
+  ret=self.add('return',original_sale=sale['id'],customer='customer-1',condition='Sellable',status='Completed',lines=[{'product':'product-1','quantity':quantity,'unit_price':'99999'}])
+  return sale,ret
+ def test_return_credit_cumulative_discount_and_cost_conservation(self):
+  sale,ret=self.return_fixture();total=0;cost=0
+  for i in range(3):
+   if i:ret=self.add('return',original_sale=sale['id'],customer='customer-1',condition='Sellable',status='Completed',lines=[{'product':'product-1','quantity':'1'}])
+   ret=self.run_cmd('return',ret,'credit',{'business_date':'2026-11-17'});total+=server.number(ret['credit_amount']);cost+=server.number(ret['credit_cost'])
+  self.assertEqual(total,290);self.assertEqual(cost,210);self.assertEqual(f.outstanding(self.c,sale),0)
+  extra=self.add('return',original_sale=sale['id'],customer='customer-1',condition='Sellable',status='Completed',lines=[{'product':'product-1','quantity':'1'}]);self.assert_error(lambda:self.run_cmd('return',extra,'credit',{'business_date':'2026-11-17'}),422)
+ def test_return_paid_credit_creates_liability_without_cash_refund(self):
+  sale,ret=self.return_fixture('3');self.add('payment',sale=sale['id'],status='Completed',amount='290',direction='in')
+  ret=self.run_cmd('return',ret,'credit',{'business_date':'2026-11-17'});self.assertEqual(server.number(ret['customer_credit_amount']),290);self.assertEqual(f.outstanding(self.c,sale),0)
+  self.assertEqual(self.c.execute('SELECT count(*) FROM finance_cash_entries').fetchone()[0],0)
+  self.assert_error(lambda:self.run_cmd('return',ret,'credit',{'business_date':'2026-11-17'}),409)
+ def test_return_rejects_missing_valuation_and_mismatched_customer(self):
+  sale,ret=self.return_fixture();ret['customer']='other';server.store(self.c,'return',ret);self.assert_error(lambda:self.run_cmd('return',ret,'credit',{'business_date':'2026-11-17'}),422)
+  ret['customer']='customer-1';server.store(self.c,'return',ret);sale.pop('return_valuation');server.store(self.c,'sale',sale);self.assert_error(lambda:self.run_cmd('return',ret,'credit',{'business_date':'2026-11-17'}),409)
+ def test_return_draft_and_closed_period_fail(self):
+  sale,ret=self.return_fixture();ret['status']='Approved';server.store(self.c,'return',ret);self.assert_error(lambda:self.run_cmd('return',ret,'credit',{'business_date':'2026-11-17'}),409)
+  ret['status']='Completed';server.store(self.c,'return',ret);period=server.get(self.c,'period','period-1');period['status']='Closed';server.store(self.c,'period',period);self.assert_error(lambda:self.run_cmd('return',ret,'credit',{'business_date':'2026-11-17'}),409)
+ def test_return_derived_credit_cannot_be_injected(self):
+  sale,ret=self.return_fixture();self.assert_error(lambda:f.validate_record(self.c,self.owner,'return',{'credit_amount':'99'},None),422)
+  ret['credit_amount']='9999';server.store(self.c,'return',ret);self.assertEqual(f.outstanding(self.c,sale),290)
+ def test_return_valuation_tampering_and_approval_rejected(self):
+  sale,ret=self.return_fixture();cashier=dict(self.c.execute("SELECT * FROM users WHERE id='cashier'").fetchone());self.assert_error(lambda:self.run_cmd('return',ret,'credit',{'business_date':'2026-11-17'},cashier),403)
+  sale['return_valuation']['product-1']['cost']='9999';server.store(self.c,'sale',sale);self.assert_error(lambda:self.run_cmd('return',ret,'credit',{'business_date':'2026-11-17'}),409)
+ def test_return_cost_mismatch_and_missing_evidence_block_credit(self):
+  sale,ret=self.return_fixture();product=server.get(self.c,'product','product-1');product['purchase_cost']='75';server.store(self.c,'product',product);self.assert_error(lambda:self.run_cmd('return',ret,'credit',{'business_date':'2026-11-17'}),409)
+  product['purchase_cost']='70';server.store(self.c,'product',product);ret.pop('physical_return_evidence');server.store(self.c,'return',ret);self.assert_error(lambda:self.run_cmd('return',ret,'credit',{'business_date':'2026-11-17'}),409)
+ def test_period_close_blocks_uncredited_physical_returns(self):
+  sale,ret=self.return_fixture();period=server.get(self.c,'period','period-1')
+  with self.assertRaisesRegex(server.APIError,'physical return credits'):self.run_cmd('period',period,'close')
+ def test_physical_return_then_credit_releases_stock_hold(self):
+  import inventory_workflows as inv
+  sale,ret=self.return_fixture();ret['status']='Approved';ret.pop('physical_return_evidence');server.store(self.c,'return',ret)
+  product=server.get(self.c,'product','product-1');before=inv.availability(self.c,product)
+  result=server.command(self.c,self.owner,{'entity':'return','id':ret['id'],'version':ret['version'],'command':'complete','reason':'Receive physical return','payload':{'warehouse':'warehouse-1'}})
+  ret=result['record'];product=server.get(self.c,'product','product-1');self.assertEqual(inv.availability(self.c,product),before)
+  result=server.command(self.c,self.owner,{'entity':'return','id':ret['id'],'version':ret['version'],'command':'credit','reason':'Credit inspected return','payload':{'business_date':'2026-11-17'}})
+  self.assertIn('credit_posting_id',result['record']);self.assertEqual(inv.availability(self.c,server.get(self.c,'product','product-1')),before+1)
 if __name__=='__main__':unittest.main()

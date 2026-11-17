@@ -6,6 +6,8 @@ Active additions: `v4/workflows.js` and `v4/workflows.css`, loaded after `v4/she
 
 - Every mutating workflow dialog asks for an exact record; it no longer silently mutates the first register row. Displays reference, status, version and available line-product IDs.
 - Reason, record version and permissions accompany each command. The same user/path/payload combination retains its operation ID in memory across retries; server idempotency remains authoritative. Errors leave the dialog open. Only successful server responses produce completion messages.
+- Record-specific product quantity rows for count capture and transfer receipt, refreshed when the selected record changes. Counts require every snapshot quantity; partial transfer receipts omit blank/zero rows and display remaining quantities.
+- Approved zero-loss cut dialog selects output product, warehouse and evidence, and submits current parent/output product versions. Customer return credit dialog requires approval authority and business date, with explicit separation from cash/provider refunds.
 - Goods receipt posting; inventory movement/count posting; count snapshot and physical-count capture; transfer dispatch and partial receipt; custody pickup and fulfillment handover; approved returns and repack; recall quarantine/recovery/disposal.
 - Deposit posting/allocation/refund; customer/supplier payment posting with cash-session and invoice references; supplier advances and allocation; invoice matching; cash open/close with counted balance and variance reason; journal posting/reversal; period closure/reopen; quotation issue/conversion.
 - Domain command toolbar appears on authorized record details/registers. The server still decides role, state, branch and accounting eligibility.
@@ -23,9 +25,9 @@ All business operations use `POST /api/command`; fields are declared in `command
 
 Orange Money live activation is not implied by its provider option. External enrollment, MFA, owner recovery, DNS/certificates, device authority/cutover, certified offline synchronization, physical printer discovery and notification delivery remain dependent on their real services.
 
-Cut completion is blocked because output-product lineage and scrap classification are missing from the canonical schema. Offline device revoke/retire and quota freeze remain explicit unavailability notices, because a metadata status change alone cannot safely revoke authority or release reserved exposure.
+Cut completion supports only the dedicated zero-loss piece-to-piece workflow; scrap, kerf losses and lot-level traceability remain unsupported. Offline device revoke/retire and quota freeze remain explicit unavailability notices, because a metadata status change alone cannot safely revoke authority or release reserved exposure.
 
-Journal and partial receipt/count dialogs currently accept validated JSON arrays/maps for accounting lines/product quantities. They are functional integration operator forms, not the final polished retail editing experience. A browser-only retry after closing/reloading the app does not preserve the in-memory operation key; workflows requiring durable offline recovery still need their authoritative operation registry UI.
+Journal entry dialogs still accept validated JSON arrays for accounting lines. Count and partial transfer receipts now use labelled product rows. Journal editing remains an integration operator form rather than the final retail editing experience. A browser-only retry after closing/reloading the app does not preserve the in-memory operation key; workflows requiring durable offline recovery still need their authoritative operation registry UI.
 
 Existing navigation-only bindings not replaced here retain their original limitations. This addition does not certify all 656 named actions complete.
 
@@ -33,4 +35,5 @@ Existing navigation-only bindings not replaced here retain their original limita
 
 - `node --check v4/workflows.js`: pass.
 - VM interaction checks: exact action binding, deposit allocation form fields, command endpoint/payload, operation ID, and unconfigured-provider dialog: pass.
+- Additional VM checks pass for dynamic count rows, selection reset, zero counts, transfer remaining preview and exact command payload/version/operation ID.
 - Parent integration agent owns combined API, browser and repository validation. No full browser matrix or production-provider payment test is claimed by this module.

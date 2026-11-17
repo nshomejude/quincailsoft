@@ -2,7 +2,7 @@ import unittest,tempfile,sys,copy
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'server'))
 import server as s
-from inventory_workflows import handle,change_stock
+from inventory_workflows import handle,change_stock,availability
 class InventoryCommands(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.old=s.DBPATH;s.DBPATH=Path(self.tmp.name)/'test.db';s.DEMO=True;s.initialize()
@@ -50,6 +50,8 @@ class InventoryCommands(unittest.TestCase):
  def test_returns_quantity_and_finality(self):
   self.update('custody','custody-1',status='Collected',collected_quantity='10')
   self.update('return','return-1',status='Approved',lines=[{'product':'product-1','quantity':'3'}]);self.cmd('return','return-1','complete',{'warehouse':'warehouse-1'});self.assertEqual(self.record('product','product-1')['stock'],'243')
+  evidence=self.record('return','return-1')['physical_return_evidence']['product-1'];self.assertEqual(evidence['unit_cost'],'4000');self.assertEqual(evidence['quantity'],'3')
+  with s.connect() as c:self.assertLessEqual(availability(c,s.get(c,'product','product-1')),240)
   with self.assertRaises(s.APIError):self.cmd('return','return-1','complete',{'warehouse':'warehouse-1'})
  def test_recall_removes_available_then_disposes(self):
   self.update('lot','lot-1',quantity='10');self.update('recall','recall-1',affected_quantity='5')
@@ -68,5 +70,43 @@ class InventoryCommands(unittest.TestCase):
    self.assertEqual(err.exception.status,409)
  def test_cut_fails_without_output_lineage(self):
   with self.assertRaises(s.APIError) as x:self.cmd('cut','cut-1','confirm-cut')
-  self.assertEqual(x.exception.status,501)
+  self.assertEqual(x.exception.status,409)
+ def cut_setup(self):
+  self.update('cut','cut-1',status='Approved',parent_product='product-2',parent_length='6',output_length='2',output_count='3',kerf='0',waste='0')
+  self.update('product','product-3',stock='0',stock_positions={'warehouse-1':'0'},purchase_cost='0',base_unit='piece',track_stock=True)
+  return {'output_product':'product-3','warehouse':'warehouse-1','parent_version':self.record('product','product-2')['version'],'output_version':self.record('product','product-3')['version'],'evidence_reference':'MEASUREMENT-1'}
+ def test_cut_conserves_stock_length_cost_and_lineage(self):
+  payload=self.cut_setup();self.cmd('cut','cut-1','confirm-cut',payload)
+  self.assertEqual(self.record('product','product-2')['stock'],'85');out=self.record('product','product-3');self.assertEqual(out['stock'],'3');self.assertEqual(out['purchase_cost'],'1700.000000')
+  job=self.record('cut','cut-1');self.assertEqual(job['product_lineage']['input']['quantity'],'1');self.assertEqual(job['product_lineage']['output']['product'],'product-3');self.assertEqual(job['transferred_cost'],'5100')
+  with self.assertRaises(s.APIError):self.cmd('cut','cut-1','complete',payload)
+  self.assertEqual(self.record('product','product-3')['stock'],'3')
+ def test_cut_rejects_nonconservation_fractional_count_and_loss(self):
+  payload=self.cut_setup()
+  for fields in ({'output_length':'1'},{'output_length':'2','output_count':'2.5'},{'output_count':'3','kerf':'0.1'},{'kerf':'0','waste':'1'}):
+   self.update('cut','cut-1',**fields)
+   with self.assertRaises(s.APIError):self.cmd('cut','cut-1','confirm-cut',payload)
+  self.assertEqual(self.record('product','product-2')['stock'],'86');self.assertEqual(self.record('product','product-3')['stock'],'0')
+ def test_cut_rejects_stale_balance_and_wrong_identity(self):
+  payload=self.cut_setup()
+  for bad in ({'parent_version':999},{'output_product':'product-2'},{'evidence_reference':' '},{'output_version':999}):
+   with self.assertRaises(s.APIError):self.cmd('cut','cut-1','complete',{**payload,**bad})
+  self.update('product','product-3',branch_id='branch-2')
+  with self.assertRaises(s.APIError):self.cmd('cut','cut-1','complete',payload)
+  self.assertEqual(self.record('product','product-2')['stock'],'86')
+ def test_cut_requires_approval_authority_and_open_period(self):
+  payload=self.cut_setup()
+  with s.connect() as c:
+   user=dict(c.execute("select * from users where id='inventory'").fetchone());r=s.get(c,'cut','cut-1')
+   with self.assertRaises(s.APIError) as err:handle(c,user,{'entity':'cut','id':'cut-1','version':r['version'],'command':'complete','payload':payload,'reason':'Test'})
+   self.assertEqual(err.exception.status,403)
+   for period in s.all_records(c,'period'):period['status']='Closed';s.store(c,'period',period)
+  with self.assertRaises(s.APIError):self.cmd('cut','cut-1','complete',payload)
+  self.assertEqual(self.record('product','product-2')['stock'],'86')
+ def test_cut_rejects_valuation_rounding_and_unavailable_stock(self):
+  payload=self.cut_setup();self.update('product','product-3',stock='4',stock_positions={'warehouse-1':'4'},purchase_cost='1')
+  with self.assertRaises(s.APIError):self.cmd('cut','cut-1','complete',payload)
+  self.update('product','product-3',stock='0',stock_positions={'warehouse-1':'0'});self.update('product','product-2',stock='0',stock_positions={'warehouse-1':'0'})
+  with self.assertRaises(s.APIError):self.cmd('cut','cut-1','complete',payload)
+  self.assertEqual(self.record('product','product-3')['stock'],'0')
 if __name__=='__main__':unittest.main()

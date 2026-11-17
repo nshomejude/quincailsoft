@@ -52,3 +52,51 @@ class BoundaryAudit(unittest.TestCase):
    r=server.all_records(c,'role')[0];r['status']='Approved';r['id']='generic-publish-test';server.store(c,'role',r)
   status,data,_=self.request('/api/command',{'entity':'role','id':r['id'],'version':r['version'],'command':'publish','reason':'No role publishing workflow exists','operation_id':str(uuid.uuid4())},owner)
   self.assertIn(status,(403,409,422,501),data)
+
+ def test_static_get_and_head_share_resolved_path_guards(self):
+  for method in ('GET','HEAD'):
+   for path in ('/server/server.py','/server/export_seed.cjs','/%73erver/export_seed.cjs','/runtime/','/v3/','/v3/contracts.json'):
+    conn=http.client.HTTPConnection('127.0.0.1',self.port)
+    conn.request(method,path);response=conn.getresponse();response.read();conn.close()
+    self.assertEqual(response.status,404,(method,path))
+   conn=http.client.HTTPConnection('127.0.0.1',self.port)
+   conn.request(method,'/v4/workflows.js');response=conn.getresponse();response.read();conn.close()
+   self.assertEqual(response.status,200)
+ def test_static_symlink_cannot_escape_app_root(self):
+  target=Path(self.temp.name)/'private.js';target.write_text('private fixture')
+  link=server.ROOT/'boundary-fixture.js'
+  try:
+   link.symlink_to(target)
+   conn=http.client.HTTPConnection('127.0.0.1',self.port)
+   conn.request('GET','/boundary-fixture.js');response=conn.getresponse();response.read();conn.close()
+   self.assertEqual(response.status,404)
+  finally:link.unlink(missing_ok=True)
+
+ def test_financial_cost_snapshots_are_redacted_for_retail_roles(self):
+  record={'id':'synthetic','return_valuation':{'p':{'cost':'100'}},'credit_cost':'100','recognized_cost':'100','credit_amount':'120','lines':[{'unit_cost':'100','quantity':'1'}]}
+  for role in ('cashier','customer'):
+   safe=server.safe_record({'role':role},'return',record)
+   self.assertNotIn('return_valuation',safe);self.assertNotIn('credit_cost',safe);self.assertNotIn('recognized_cost',safe)
+   self.assertNotIn('unit_cost',safe['lines'][0]);self.assertEqual(safe['credit_amount'],'120')
+  self.assertIn('return_valuation',record)
+
+ def test_cached_command_replay_rechecks_costs_and_scope(self):
+  with server.connect() as c:
+   r=server.get(c,'sale','sale-1');r['lines']=[{'unit_cost':'100','quantity':'1'}]
+   raw=json.dumps({'record':r})
+   cashier={'role':'cashier','branch_id':r['branch_id']}
+   result=server.replay_result(c,cashier,'sale',raw)
+   self.assertNotIn('unit_cost',result['record']['lines'][0])
+   cashier['branch_id']='different-branch'
+   with self.assertRaises(server.APIError):server.replay_result(c,cashier,'sale',raw)
+
+ def test_directory_index_symlink_is_not_served(self):
+  previous=server.ROOT;public=Path(self.temp.name)/'public';public.mkdir(exist_ok=True)
+  secret=Path(self.temp.name)/'secret.html';secret.write_text('private fixture')
+  (public/'index.html').symlink_to(secret)
+  try:
+   server.ROOT=public
+   for method in ('GET','HEAD'):
+    conn=http.client.HTTPConnection('127.0.0.1',self.port);conn.request(method,'/')
+    response=conn.getresponse();response.read();conn.close();self.assertEqual(response.status,404)
+  finally:server.ROOT=previous

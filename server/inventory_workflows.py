@@ -23,6 +23,9 @@ def availability(c,p):
   for x in s.all_records(c,e):
    if x.get('product')==p['id'] and (x.get('status') in {'Active','Frozen'} if e=='quota' else x.get('status') not in FINAL|{'Revoked','Inactive','Expired'}):
     held+=max(Decimal(0),s.number(x.get(a))-s.number(x.get(b)))
+ for r in s.all_records(c,'return'):
+  if r.get('status')=='Completed' and not r.get('credit_posting_id'):
+   held+=sum((s.number(l.get('quantity')) for l in r.get('lines',[]) if l.get('product')==p['id']),Decimal(0))
  return s.number(p.get('stock'))-held-s.number(p.get('quarantined_stock'))
 
 def _positions(c,p):
@@ -171,7 +174,8 @@ def handle(c,user,body):
    if q+prior.get(pid,0)>eligible.get(pid,0):raise s.APIError(422,'Return exceeds eligible source quantity.')
    if e=='return':
     if r.get('condition')!='Sellable':raise s.APIError(501,'Damaged/quarantine returns require lot-level inspection workflow.')
-    change_stock(c,user,pid,q,payload.get('warehouse'),r['reference'])
+    before=_related(c,user,'product',pid);updated=change_stock(c,user,pid,q,payload.get('warehouse'),r['reference'])
+    r.setdefault('physical_return_evidence',{})[pid]={'quantity':s.ds(q),'unit_cost':s.ds(before.get('purchase_cost')),'stock_before':s.ds(before.get('stock')),'stock_after':s.ds(updated.get('stock')),'warehouse':payload.get('warehouse') or next(iter(updated['stock_positions'])),'product_version':updated['version']}
    else:
     if r.get('disposition')!='Return to supplier':raise s.APIError(501,'Supplier quarantine requires lot-level inspection workflow.')
     change_stock(c,user,pid,-q,source['warehouse'],r['reference'])
@@ -188,7 +192,28 @@ def handle(c,user,body):
   updated['purchase_cost']=s.ds(((prior_cost+cost)/s.number(updated['stock'])).quantize(Decimal('0.000001'),rounding=ROUND_HALF_EVEN));s.store(c,'product',updated)
   r['status']='Completed';r['transferred_cost']=format(cost,'f');r['cost_method']='Weighted average; six-decimal output unit cost'
  elif e=='cut':
-  raise s.APIError(501,'Cut posting requires output product/lot lineage and cost allocation; the current schema cannot safely post it.')
+  _state(r,{'Approved'})
+  if not payload.get('output_product') or not payload.get('warehouse') or not str(payload.get('evidence_reference','')).strip():raise s.APIError(422,'Output product, warehouse and measurement evidence are required.')
+  if r.get('unit') not in ('metre','millimetre'):raise s.APIError(422,'Use a single supported length unit for the complete cut job.')
+  parent_length=_positive(r.get('parent_length'));output_length=_positive(r.get('output_length'));count=_positive(r.get('output_count'))
+  if count!=count.to_integral_value():raise s.APIError(422,'Output count must be a whole number of pieces.')
+  if s.number(r.get('kerf'))!=0 or s.number(r.get('waste'))!=0:raise s.APIError(501,'Loss-bearing cuts require an approved waste and costing recipe.')
+  if output_length*count!=parent_length:raise s.APIError(422,'Zero-loss cut outputs must exactly conserve parent length; remainder requires its own recipe.')
+  src=_related(c,user,'product',r['parent_product']);dst=_related(c,user,'product',payload['output_product']);warehouse=_related(c,user,'warehouse',payload['warehouse'])
+  if src['id']==dst['id']:raise s.APIError(422,'Cut output must use a distinct product identity.')
+  if any(x.get('company_id')!=r.get('company_id') or x.get('branch_id')!=r.get('branch_id') for x in (src,dst,warehouse)):raise s.APIError(422,'Cut job, products and warehouse must belong to the same branch and company.')
+  if any(x.get('status')!='Active' or x.get('base_unit')!='piece' or x.get('track_stock') is not True for x in (src,dst)):raise s.APIError(422,'Zero-loss cutting requires active, stock-tracked products measured in pieces.')
+  if payload.get('parent_version')!=src['version'] or payload.get('output_version')!=dst['version']:raise s.APIError(409,'Product balances changed. Refresh before confirming the cut.')
+  cost=_positive(src.get('purchase_cost'));old_stock=s.number(dst.get('stock'));old_cost=s.number(dst.get('purchase_cost'))
+  if old_stock<0 or old_cost<0:raise s.APIError(422,'Reconcile output stock and valuation before cutting.')
+  new_cost=((old_stock*old_cost+cost)/(old_stock+count)).quantize(Decimal('0.000001'),rounding=ROUND_HALF_EVEN)
+  # Preserve valuation exactly in this bounded implementation; do not conceal rounding loss.
+  if new_cost*(old_stock+count)!=old_stock*old_cost+cost:raise s.APIError(422,'Output valuation cannot conserve cost at six-decimal precision; use a supported costing recipe.')
+  change_stock(c,user,src['id'],-1,warehouse['id'],r['reference']);updated=change_stock(c,user,dst['id'],count,warehouse['id'],r['reference'])
+  updated['purchase_cost']=s.ds(new_cost);s.store(c,'product',updated)
+  r.update(status='Completed',output_product=dst['id'],warehouse=warehouse['id'],transferred_cost=s.ds(cost),evidence_reference=str(payload['evidence_reference']).strip(),cost_method='Exact zero-loss piece transformation')
+  r['product_lineage']={'input':{'product':src['id'],'quantity':'1','length':s.ds(parent_length),'unit_cost':s.ds(cost),'version':src['version']},'output':{'product':dst['id'],'quantity':s.ds(count),'length':s.ds(output_length),'version':dst['version']},'length_unit':r['unit'],'warehouse':warehouse['id'],'actor':user['id']}
+
  elif e=='recall':
   lot=_related(c,user,'lot',r['lot']);p=_related(c,user,'product',lot['product']);q=_positive(r['affected_quantity'])
   if q>s.number(lot['quantity']):raise s.APIError(422,'Recall exceeds identified lot quantity.')
