@@ -1,0 +1,7 @@
+# M09 Java migration slice
+
+Java 25/Spring Boot 4 JPA writer, integer milli-base-unit quantities and integral XAF total valuation. StockService is the only implemented stock writer. Source workflows call it inside ScopedTransactions; warehouse pessimistic locks serialize initialization and duplicate lookup, balance locks and optimistic versions prevent lost updates. A movement is appended in the same transaction. PostgreSQL RLS/composite foreign keys remain mandatory even with explicit scoped predicates.
+
+This slice implements merchant-owned serviceable warehouse issue/receipt only. Available quantity subtracts central reserved and exclusive device-allocated amounts. No custody, damaged stock, reservations/grant issuance, transfers, counts, cuts or purchasing receipt authorization is migrated. There is deliberately no unrestricted HTTP stock adjustment endpoint. Valuation supports only exact integral-FCFA WAC slices; other rounding cases reject pending explicit configured policy. Movement replay identity is per operation/product/warehouse and validates quantity/value/reason; source orchestration owns company-wide command idempotency and audit/outbox.
+
+JUnit tests prove arithmetic and local aggregate invariants. These alone do not prove database concurrency, tenant isolation or full stock/finance reconciliation; PostgreSQL migration and transaction integration tests are required before release.

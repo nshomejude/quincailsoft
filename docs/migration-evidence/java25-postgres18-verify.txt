@@ -1,0 +1,371 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/tmp/quincai-toolchain/apache-maven-3.9.11/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] backend                                                            [pom]
+[INFO] shared-kernel                                                      [jar]
+[INFO] db-migrations                                                      [jar]
+[INFO] catalog                                                            [jar]
+[INFO] inventory                                                          [jar]
+[INFO] finance                                                            [jar]
+[INFO] customer-accounts                                                  [jar]
+[INFO] sales                                                              [jar]
+[INFO] api-server                                                         [jar]
+[INFO] architecture-tests                                                 [jar]
+[INFO] 
+[INFO] ----------------------< com.quincaisoft:backend >-----------------------
+[INFO] Building backend 0.1.0-SNAPSHOT                                   [1/10]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (java25) @ backend ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] 
+[INFO] -------------------< com.quincaisoft:shared-kernel >--------------------
+[INFO] Building shared-kernel 0.1.0-SNAPSHOT                             [2/10]
+[INFO]   from shared-kernel/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (java25) @ shared-kernel ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ shared-kernel ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/shared-kernel/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/shared-kernel/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ shared-kernel ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ shared-kernel ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/shared-kernel/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ shared-kernel ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ shared-kernel ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.quincaisoft.shared.ValueObjectsTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.067 s -- in com.quincaisoft.shared.ValueObjectsTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ shared-kernel ---
+[INFO] 
+[INFO] -------------------< com.quincaisoft:db-migrations >--------------------
+[INFO] Building db-migrations 0.1.0-SNAPSHOT                             [3/10]
+[INFO]   from db-migrations/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (java25) @ db-migrations ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ db-migrations ---
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ db-migrations ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ db-migrations ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/db-migrations/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ db-migrations ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ db-migrations ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ db-migrations ---
+[INFO] Building jar: /workspace/scratch/ce037b7504c9/app_v4/backend/db-migrations/target/db-migrations-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ----------------------< com.quincaisoft:catalog >-----------------------
+[INFO] Building catalog 0.1.0-SNAPSHOT                                   [4/10]
+[INFO]   from business-modules/catalog/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (java25) @ catalog ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ catalog ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/catalog/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/catalog/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ catalog ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ catalog ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/catalog/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ catalog ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ catalog ---
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ catalog ---
+[INFO] 
+[INFO] ---------------------< com.quincaisoft:inventory >----------------------
+[INFO] Building inventory 0.1.0-SNAPSHOT                                 [5/10]
+[INFO]   from business-modules/inventory/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (java25) @ inventory ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ inventory ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/inventory/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/inventory/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ inventory ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ inventory ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/inventory/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ inventory ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ inventory ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.quincaisoft.inventory.StockBalanceTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.081 s -- in com.quincaisoft.inventory.StockBalanceTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ inventory ---
+[INFO] 
+[INFO] ----------------------< com.quincaisoft:finance >-----------------------
+[INFO] Building finance 0.1.0-SNAPSHOT                                   [6/10]
+[INFO]   from business-modules/finance/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (java25) @ finance ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ finance ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/finance/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/finance/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ finance ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ finance ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/finance/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ finance ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ finance ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.quincaisoft.finance.FinanceRulesTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.081 s -- in com.quincaisoft.finance.FinanceRulesTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ finance ---
+[INFO] Building jar: /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/finance/target/finance-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -----------------< com.quincaisoft:customer-accounts >------------------
+[INFO] Building customer-accounts 0.1.0-SNAPSHOT                         [7/10]
+[INFO]   from business-modules/customer-accounts/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (java25) @ customer-accounts ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ customer-accounts ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/customer-accounts/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/customer-accounts/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ customer-accounts ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ customer-accounts ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/customer-accounts/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ customer-accounts ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ customer-accounts ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ customer-accounts ---
+[INFO] 
+[INFO] -----------------------< com.quincaisoft:sales >------------------------
+[INFO] Building sales 0.1.0-SNAPSHOT                                     [8/10]
+[INFO]   from business-modules/sales/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (java25) @ sales ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ sales ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/sales/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/sales/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ sales ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 7 source files with javac [debug parameters release 25] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ sales ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/sales/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ sales ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ sales ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.quincaisoft.sales.SaleRulesTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.092 s -- in com.quincaisoft.sales.SaleRulesTest
+[INFO] Running com.quincaisoft.sales.PostgresSaleIntegrationTest
+00:14:13.475 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+00:14:13.517 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+00:14:13.959 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+00:14:14.063 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55432/sale_test_c6a6c40bdb9743acb613e780ef3241a4]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.7
+	Default catalog/schema: sale_test_c6a6c40bdb9743acb613e780ef3241a4/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:14:14.385 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
+00:14:15.108 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:14:15.165 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:14:16.158 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.204 s -- in com.quincaisoft.sales.PostgresSaleIntegrationTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ sales ---
+[INFO] Building jar: /workspace/scratch/ce037b7504c9/app_v4/backend/business-modules/sales/target/sales-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ---------------------< com.quincaisoft:api-server >---------------------
+[INFO] Building api-server 0.1.0-SNAPSHOT                                [9/10]
+[INFO]   from api-server/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (java25) @ api-server ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ api-server ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ api-server ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 9 source files with javac [debug parameters release 25] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ api-server ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/api-server/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ api-server ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ api-server ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.quincaisoft.security.SecurityBoundaryTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.402 s -- in com.quincaisoft.security.SecurityBoundaryTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ api-server ---
+[INFO] Building jar: /workspace/scratch/ce037b7504c9/app_v4/backend/api-server/target/api-server-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.0.9:repackage (repackage) @ api-server ---
+[INFO] Attaching repackaged archive /workspace/scratch/ce037b7504c9/app_v4/backend/api-server/target/api-server-0.1.0-SNAPSHOT-exec.jar with classifier exec
+[INFO] 
+[INFO] -----------------< com.quincaisoft:architecture-tests >-----------------
+[INFO] Building architecture-tests 0.1.0-SNAPSHOT                       [10/10]
+[INFO]   from architecture-tests/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (java25) @ architecture-tests ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ architecture-tests ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/architecture-tests/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/architecture-tests/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ architecture-tests ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ architecture-tests ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/app_v4/backend/architecture-tests/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ architecture-tests ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ architecture-tests ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.quincaisoft.ModuleBoundaryTest
+00:14:19.316 [main] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 25.0.5
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.576 s -- in com.quincaisoft.ModuleBoundaryTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ architecture-tests ---
+[WARNING] JAR will be empty - no content was marked for inclusion!
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for backend 0.1.0-SNAPSHOT:
+[INFO] 
+[INFO] backend ............................................ SUCCESS [  0.354 s]
+[INFO] shared-kernel ...................................... SUCCESS [  1.512 s]
+[INFO] db-migrations ...................................... SUCCESS [  0.075 s]
+[INFO] catalog ............................................ SUCCESS [  0.180 s]
+[INFO] inventory .......................................... SUCCESS [  0.955 s]
+[INFO] finance ............................................ SUCCESS [  0.717 s]
+[INFO] customer-accounts .................................. SUCCESS [  0.036 s]
+[INFO] sales .............................................. SUCCESS [  5.395 s]
+[INFO] api-server ......................................... SUCCESS [  1.955 s]
+[INFO] architecture-tests ................................. SUCCESS [  3.317 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.806 s
+[INFO] Finished at: 2026-11-18T00:14:21+01:00
+[INFO] ------------------------------------------------------------------------

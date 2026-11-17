@@ -1,0 +1,18 @@
+#!/bin/sh
+# Minimal pinned Maven distribution launcher. Requires curl, unzip and sha512sum.
+set -eu
+basedir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
+config="$basedir/.mvn/wrapper/maven-wrapper.properties"
+url=$(sed -n 's/^distributionUrl=//p' "$config")
+checksum=$(sed -n 's/^distributionSha512Sum=//p' "$config")
+cache="${MAVEN_USER_HOME:-$HOME/.m2}/wrapper/dists/quincai-maven-3.9.11"
+if [ ! -x "$cache/apache-maven-3.9.11/bin/mvn" ]; then
+ mkdir -p "$cache"
+ stage=$(mktemp -d "$cache/stage.XXXXXX")
+ trap 'rm -rf "$stage"' EXIT HUP INT TERM
+ curl --fail --location --proto '=https' --tlsv1.2 "$url" --output "$stage/maven.zip"
+ printf '%s  %s\n' "$checksum" "$stage/maven.zip" | sha512sum --check --status
+ unzip -q "$stage/maven.zip" -d "$stage"
+ mv "$stage/apache-maven-3.9.11" "$cache/"
+fi
+exec "$cache/apache-maven-3.9.11/bin/mvn" -f "$basedir/pom.xml" "$@"

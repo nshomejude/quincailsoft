@@ -1,9 +1,14 @@
 {
-  "name": "quincaisoft-integration",
-  "version": "5.1.0",
+  "name": "quincaisoft",
+  "version": "0.2.0",
   "private": true,
+  "packageManager": "pnpm@11.25.0",
   "scripts": {
-    "dev": "python3 server/server.py --demo --data-dir runtime/v5",
-    "test": "python3 -m unittest discover -s tests -v"
+    "dev": "pnpm --filter @quincaisoft/web-admin dev",
+    "build:web": "pnpm --filter @quincaisoft/web-admin build",
+    "check:web": "pnpm --filter @quincaisoft/web-admin typecheck",
+    "test:backend": "cd backend && ./mvnw verify",
+    "legacy:demo": "python3 server/server.py --demo --data-dir runtime/v5",
+    "legacy:test": "python3 -m unittest discover -s tests -v"
   }
 }

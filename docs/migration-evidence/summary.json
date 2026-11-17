@@ -1,0 +1,17 @@
+{
+  "backend": {
+    "tests": 26,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "java": "25.0.5",
+  "postgresql": "18.7",
+  "postgres_schema_assertions": 19,
+  "web_build": "PASS",
+  "web_typecheck": "PASS",
+  "web_precision_tests": 2,
+  "openapi_structural_check": "PASS",
+  "full_migration": "INCOMPLETE",
+  "live_oidc_and_providers": "NOT_VERIFIED"
+}

@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: quincaisoft
+  datasource:
+    url: ${QUINCAI_DATABASE_URL}
+    username: ${QUINCAI_DATABASE_USER}
+    password: ${QUINCAI_DATABASE_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: ${QUINCAI_MIGRATIONS_ENABLED:false}
+    url: ${QUINCAI_MIGRATION_URL:${QUINCAI_DATABASE_URL}}
+    user: ${QUINCAI_MIGRATION_USER:}
+    password: ${QUINCAI_MIGRATION_PASSWORD:}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${QUINCAI_OIDC_ISSUER}
+quincai:
+  security:
+    audience: ${QUINCAI_OIDC_AUDIENCE}
+server:
+  error:
+    include-message: never
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
