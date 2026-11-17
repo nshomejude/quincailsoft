@@ -1,0 +1,81 @@
+{
+  "authority": "ARCHITECTURE.md",
+  "requested_agents": 10,
+  "parallel_worker_limit": 6,
+  "architecture": "Java25/SpringBoot4/Modulith/JPA/PostgreSQL18; Next16; Expo; .NET10 WPF",
+  "assignments": [
+    {
+      "number": 1,
+      "name": "sales_documents_returns",
+      "status": "MIGRATION_SLICE_DELIVERED",
+      "completion": "FULL_CANONICAL_SCOPE_INCOMPLETE",
+      "evidence": "m01.md"
+    },
+    {
+      "number": 2,
+      "name": "procurement",
+      "status": "MIGRATION_SLICE_DELIVERED",
+      "completion": "FULL_CANONICAL_SCOPE_INCOMPLETE",
+      "evidence": "m02.md"
+    },
+    {
+      "number": 3,
+      "name": "payments_finance",
+      "status": "MIGRATION_SLICE_DELIVERED",
+      "completion": "FULL_CANONICAL_SCOPE_INCOMPLETE",
+      "evidence": "m03.md"
+    },
+    {
+      "number": 4,
+      "name": "inventory_catalog",
+      "status": "MIGRATION_SLICE_DELIVERED",
+      "completion": "FULL_CANONICAL_SCOPE_INCOMPLETE",
+      "evidence": "m04.md"
+    },
+    {
+      "number": 5,
+      "name": "web_migration",
+      "status": "MIGRATION_SLICE_DELIVERED",
+      "completion": "FULL_CANONICAL_SCOPE_INCOMPLETE",
+      "evidence": "m05.md"
+    },
+    {
+      "number": 6,
+      "name": "identity_operations",
+      "status": "MIGRATION_SLICE_DELIVERED",
+      "completion": "FULL_CANONICAL_SCOPE_INCOMPLETE",
+      "evidence": "m06.md"
+    },
+    {
+      "number": 7,
+      "name": "mobile_offline",
+      "status": "MIGRATION_SLICE_DELIVERED",
+      "completion": "FULL_CANONICAL_SCOPE_INCOMPLETE",
+      "evidence": "m07.md"
+    },
+    {
+      "number": 8,
+      "name": "desktop_sync",
+      "status": "MIGRATION_SLICE_DELIVERED",
+      "completion": "FULL_CANONICAL_SCOPE_INCOMPLETE",
+      "evidence": "m08.md"
+    },
+    {
+      "number": 9,
+      "name": "platform_storefront",
+      "status": "MIGRATION_SLICE_DELIVERED",
+      "completion": "FULL_CANONICAL_SCOPE_INCOMPLETE",
+      "evidence": "m09.md"
+    },
+    {
+      "number": 10,
+      "name": "reports_contracts_acceptance",
+      "status": "MIGRATION_SLICE_DELIVERED",
+      "completion": "FULL_CANONICAL_SCOPE_INCOMPLETE",
+      "evidence": "m10.md"
+    }
+  ],
+  "dispatched_agents": 10,
+  "checkpoint_date": "2026-11-18",
+  "verification": "../migration-evidence/summary.json"
+}

@@ -1,5 +1,6 @@
 package com.quincaisoft.sales.application;
 import com.quincaisoft.sales.api.SalesService;
+import com.quincaisoft.documents.api.DocumentService;
 import com.quincaisoft.shared.*;
 import com.quincaisoft.sales.infrastructure.*;
 import com.quincaisoft.sales.domain.SaleRules;
@@ -13,8 +14,9 @@ import org.springframework.stereotype.Service;
 import java.util.*;import java.time.*;import java.nio.charset.StandardCharsets;import java.security.*;import java.util.function.Supplier;
 @Service
 public class DefaultSalesService implements SalesService {
- private final JsonMapper json;private final EntityManager em;private final ScopedTransactions tx;private final StockService stock;private final CatalogService catalog;private final FinanceService finance;private final CustomerService customers;
- public DefaultSalesService(EntityManager em,ScopedTransactions tx,StockService stock,CatalogService catalog,FinanceService finance,CustomerService customers,JsonMapper json){this.json=json;this.em=em;this.tx=tx;this.stock=stock;this.catalog=catalog;this.finance=finance;this.customers=customers;}
+ private final DocumentService documents;private final JsonMapper json;private final EntityManager em;private final ScopedTransactions tx;private final StockService stock;private final CatalogService catalog;private final FinanceService finance;private final CustomerService customers;
+ public DefaultSalesService(EntityManager em,ScopedTransactions tx,StockService stock,CatalogService catalog,FinanceService finance,CustomerService customers,JsonMapper json,DocumentService documents){this.documents=documents;this.json=json;this.em=em;this.tx=tx;this.stock=stock;this.catalog=catalog;this.finance=finance;this.customers=customers;}
+ public Valuation valuation(UUID id){return tx.execute(()->{var r=find(id,true);if(!"POSTED".equals(r.status))throw new IllegalStateException("Only posted sales have return valuation");return new Valuation(r.id,r.customerId,r.warehouseId,r.businessDate,lines(r).stream().map(l->new ValuationLine(l.productId,l.quantityMilli,l.lineTotalXaf,l.costXaf)).toList());});}
  public List<Sale> list(){return tx.execute(()->{var s=TenantContext.current();return em.createQuery("select s from SaleEntity s where s.tenantId=:t and s.companyId=:c and s.branchId=:b order by s.createdAt desc,s.id",SaleEntity.class).setParameter("t",s.tenantId()).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setMaxResults(100).getResultList().stream().map(this::view).toList();});}
  public Sale get(UUID id){return tx.execute(()->view(find(id,false)));}
  private SaleEntity find(UUID id,boolean lock){var s=TenantContext.current();var row=em.find(SaleEntity.class,new SaleEntity.Key(s.tenantId(),s.companyId(),id),lock?LockModeType.PESSIMISTIC_WRITE:LockModeType.NONE);if(row==null||!row.branchId.equals(s.branchId()))throw new NoSuchElementException("Sale not found");return row;}
@@ -39,6 +41,7 @@ public class DefaultSalesService implements SalesService {
    finance.recognizeSale(r.id,request.operationId(),r.businessDate,r.totalXaf,cost);
    // Flush line valuations while parent is DRAFT; immutable-posted trigger seals them afterwards.
    em.flush();r.costXaf=cost;r.status="POSTED";r.version=Math.incrementExact(r.version);em.flush();
+   documents.issue(new DocumentService.Issue(r.id,request.operationId(),"INVOICE",r.businessDate,r.customerId,Long.toString(r.totalXaf),items.stream().map(l->{var product=catalog.get(l.productId);return new DocumentService.Item(l.productId,product.sku(),product.name(),product.baseUnit(),Long.toString(l.quantityMilli),Long.toString(l.unitPriceXaf),Long.toString(l.lineTotalXaf));}).toList()));
    outbox(r,request.operationId());return r;
   }));
  }

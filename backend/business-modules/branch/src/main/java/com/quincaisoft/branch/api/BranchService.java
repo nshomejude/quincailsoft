@@ -1,0 +1,1 @@
+package com.quincaisoft.branch.api;import java.util.*;public interface BranchService{record Item(UUID id,String name,String timezone){}List<Item> list();}

@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "QuincaiSoft",
+    "slug": "quincaisoft-mobile",
+    "scheme": "quincaisoft",
+    "version": "0.1.0",
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-sqlite",
+        {
+          "useSQLCipher": true
+        }
+      ]
+    ],
+    "ios": {
+      "bundleIdentifier": "com.opesware.quincaisoft"
+    },
+    "android": {
+      "package": "com.opesware.quincaisoft"
+    },
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

@@ -1,0 +1,71 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @quincaisoft/web-admin@0.1.0 build
+> next build
+
+▲ Next.js 16.4.6 (Turbopack)
+✓ Running next.config.ts took 27ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 873ms
+  Running TypeScript ...
+  Finished TypeScript in 2.8s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/6) ...
+  Generating static pages using 8 workers (1/6) 
+  Generating static pages using 8 workers (2/6) 
+  Generating static pages using 8 workers (4/6) 
+✓ Generating static pages using 8 workers (6/6) in 96ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /api/business/[...path]
+├ ƒ /audit
+├ ƒ /auth/callback
+├ ƒ /auth/login
+├ ƒ /auth/logout
+├ ƒ /catalog
+├ ƒ /catalog/[id]
+├ ƒ /catalog/new
+├ ƒ /documents
+├ ƒ /documents/[id]
+├ ƒ /documents/[id]/print
+├ ƒ /documents/settings
+├ ƒ /finance
+├ ƒ /finance/cash
+├ ƒ /finance/deposits
+├ ƒ /finance/deposits/[id]
+├ ƒ /finance/expenses
+├ ƒ /finance/expenses/[id]
+├ ƒ /finance/mobile-money
+├ ƒ /finance/payments/new
+├ ƒ /finance/periods
+├ ƒ /identity
+├ ƒ /inventory
+├ ƒ /inventory/jobs
+├ ƒ /inventory/jobs/[id]
+├ ƒ /inventory/transfers
+├ ƒ /inventory/transfers/[id]
+├ ƒ /locale
+├ ƒ /purchases
+├ ƒ /purchases/[id]
+├ ƒ /purchases/invoices
+├ ƒ /purchases/new
+├ ƒ /quotations
+├ ƒ /quotations/[id]
+├ ƒ /quotations/new
+├ ƒ /reports
+├ ƒ /reports/[code]/export
+├ ƒ /returns
+├ ƒ /returns/[id]
+├ ƒ /sales
+├ ƒ /sales/[id]
+├ ƒ /sales/new
+├ ƒ /suppliers
+└ ƒ /suppliers/[id]
+
+
+ƒ  (Dynamic)  server-rendered on demand
+

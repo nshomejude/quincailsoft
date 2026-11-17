@@ -1,5 +1,7 @@
 # Migration to the prescribed QuincaiSoft architecture
 
+> Historical first-checkpoint register. The binding architecture table and non-substitution rules below still apply. The initial implementation status and blocker lists are superseded by [the ten-agent register](migration/ten-agent-register.json), the individual `migration/m01.md`–`m10.md` reports, [item coverage](migration/canonical-migration-coverage.json) and [current verification evidence](migration-evidence/summary.json). Do not interpret this checkpoint's “not migrated” rows as the current implementation state.
+
 Authority: [ARCHITECTURE.md](../ARCHITECTURE.md), version 2.0, 17 November 2026. Sections 31–46 take precedence over abbreviated earlier examples (§31.1). This register records migration work, not a new architecture decision or a production-completion claim.
 
 ## Architecture that remains binding

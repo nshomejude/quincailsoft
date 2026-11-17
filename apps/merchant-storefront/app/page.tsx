@@ -1,0 +1,1 @@
+export default function Home(){return <main><h1>Your merchant’s catalogue</h1><p>Open the store link shared by your merchant to browse published products and prices.</p><div className="card"><p>No private merchant directory or business inventory is exposed here.</p></div></main>}

@@ -1,0 +1,2 @@
+package com.quincaisoft.platformcontrol.infrastructure;import jakarta.persistence.*;import java.util.*;import java.time.*;
+@Entity @Table(name="platform_onboarding_request") public class OnboardingRequest{@Id public UUID id;@Column(name="display_name")public String displayName;@Column(name="requested_by")public UUID requestedBy;@Column(name="approved_by")public UUID approvedBy;public String status;public String reason;@Version public long version;@Column(name="created_at")public Instant createdAt;@Column(name="approval_operation")public UUID approvalOperation;}

@@ -1,0 +1,2 @@
+package com.quincaisoft.platformcontrol.api;import java.util.*;import java.time.*;
+public interface PlatformService{record Request(UUID operationId,String displayName,String reason){}record Review(UUID operationId,long version){}record Item(UUID id,String displayName,UUID requestedBy,UUID approvedBy,String status,String reason,String version,Instant createdAt){}List<Item> list();Item request(Request input);Item approve(UUID id,Review review);}

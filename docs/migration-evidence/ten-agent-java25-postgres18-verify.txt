@@ -1,0 +1,59 @@
+Executed: Java25 Maven verify with QUINCAI_PG_TEST_URL pointing to isolated PostgreSQL18.7 on loopback; full real-DB tests enabled.
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.074 s -- in com.quincaisoft.shared.ValueObjectsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.450 s -- in com.quincaisoft.commerce.PostgresCommerceIntegrationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.655 s -- in com.quincaisoft.documents.PostgresDocumentSettingsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.382 s -- in com.quincaisoft.documents.DocumentSettingsHttpTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.057 s -- in com.quincaisoft.finance.FinanceRulesTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.537 s -- in com.quincaisoft.inventory.PostgresInventoryWorkflowTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in com.quincaisoft.inventory.StockBalanceTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.069 s -- in com.quincaisoft.sales.SaleRulesTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.175 s -- in com.quincaisoft.sales.PostgresSaleIntegrationTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.053 s -- in com.quincaisoft.tenders.TenderRulesTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.451 s -- in com.quincaisoft.tenders.TenderPostgresTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.698 s -- in com.quincaisoft.returns.PostgresReturnIntegrationTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.298 s -- in com.quincaisoft.integrations.MtnAdapterTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.382 s -- in com.quincaisoft.integrations.ProviderPostgresTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.970 s -- in com.quincaisoft.expenses.ExpensePeriodPostgresTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.064 s -- in com.quincaisoft.purchasing.PurchaseRulesTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.775 s -- in com.quincaisoft.purchasing.PostgresPurchasingIntegrationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.417 s -- in com.quincaisoft.reporting.ReportingPostgresTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.quincaisoft.reporting.ReportRulesTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.519 s -- in com.quincaisoft.sync.PostgresSyncTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.230 s -- in com.quincaisoft.sync.DeviceProofTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.449 s -- in com.quincaisoft.platformcontrol.PostgresPlatformIntegrationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.629 s -- in com.quincaisoft.workers.IdentityWorkerPostgresTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.024 s -- in com.quincaisoft.security.FullApplicationPostgresTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 s -- in com.quincaisoft.security.SecurityBoundaryTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.071 s -- in com.quincaisoft.ModuleBoundaryTest
+[INFO] backend ............................................ SUCCESS [  0.201 s]
+[INFO] shared-kernel ...................................... SUCCESS [  1.365 s]
+[INFO] db-migrations ...................................... SUCCESS [  0.020 s]
+[INFO] audit .............................................. SUCCESS [  0.174 s]
+[INFO] branch ............................................. SUCCESS [  0.033 s]
+[INFO] catalog ............................................ SUCCESS [  0.027 s]
+[INFO] subscriptions ...................................... SUCCESS [  0.046 s]
+[INFO] identity ........................................... SUCCESS [  0.038 s]
+[INFO] commerce ........................................... SUCCESS [  4.254 s]
+[INFO] company ............................................ SUCCESS [  0.031 s]
+[INFO] customer-accounts .................................. SUCCESS [  0.034 s]
+[INFO] documents .......................................... SUCCESS [  3.719 s]
+[INFO] finance ............................................ SUCCESS [  0.760 s]
+[INFO] inventory .......................................... SUCCESS [  4.212 s]
+[INFO] sales .............................................. SUCCESS [  3.971 s]
+[INFO] tenders ............................................ SUCCESS [  4.314 s]
+[INFO] quotations ......................................... SUCCESS [  0.019 s]
+[INFO] returns ............................................ SUCCESS [  4.248 s]
+[INFO] integrations ....................................... SUCCESS [  4.340 s]
+[INFO] expenses ........................................... SUCCESS [  5.559 s]
+[INFO] suppliers .......................................... SUCCESS [  0.039 s]
+[INFO] purchasing ......................................... SUCCESS [  4.555 s]
+[INFO] reporting .......................................... SUCCESS [  2.076 s]
+[INFO] sync ............................................... SUCCESS [  4.433 s]
+[INFO] platform-control ................................... SUCCESS [  3.190 s]
+[INFO] workers ............................................ SUCCESS [  3.503 s]
+[INFO] api-server ......................................... SUCCESS [ 10.341 s]
+[INFO] architecture-tests ................................. SUCCESS [  3.848 s]
+[INFO] BUILD SUCCESS
+[INFO] Total time:  01:09 min
+[INFO] Finished at: 2026-11-18T00:52:39+01:00
+Total tests/failures/errors/skips: [60, 0, 0, 0]

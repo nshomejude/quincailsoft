@@ -1,15 +1,9 @@
-# Java migration API contract
+# Source-backed OpenAPI 3.1 contract
 
-`openapi.json` is OpenAPI 3.1 for the implemented migration slice, with `/api/v1` as its server base. It is not the full canonical endpoint register from architecture §7.1.
+Run `node packages/api-contracts/generate-source-contract.mjs`, then `node packages/api-contracts/validate.mjs` from the repository root. The generator reads real annotated Java controllers and record definitions. Full API paths include `/api/v1`, public-store routes use `/api/public`, and `/admin` paths belong to the isolated platform deployment. Do not route platform tokens through the merchant API.
 
-The `/me` endpoint and `/session` compatibility alias share a handler.
+`endpoint-inventory.json` preserves each source controller/method, declared type, authorization expression and effective command headers. `X-Request-ID` inheritance from the actual `RequestIdentityFilter` is included. Missing Idempotency-Key declarations are reported for review; replay behavior must be checked separately. Java dynamic Object responses are deliberately unresolved. Validation constraints are only included where reviewed; Java record declarations alone do not establish required/nullability/business validation. This is a source-shape contract, not proof of complete workflows or a substitute for runtime schema/consumer tests.
 
-Source adapters: backend api-server SessionController; catalog CatalogController; sales SalesController. Business scope is JWT-derived and checked against current database membership. No caller-selected tenant/company header grants access.
+`generate-coverage.mjs` enumerates every entry in `v3/contracts.json` into `docs/migration/canonical-migration-coverage.json`. Related source evidence is conservative and never treated as complete acceptance. Original UI field provenance remains explicit. Regenerate after source changes.
 
-Amounts and stock quantities are decimal strings to preserve exact long values across JavaScript/.NET clients. Sales versions currently use JSON integer and catalog versions use strings; uniform version wire representation remains a compatibility task before public API approval. Collection reads are currently bounded first pages without cursor continuation; full §7.4 pagination remains pending.
-
-Run `node packages/api-contracts/validate.mjs` from repository root for local reference, header and exact-wire-value checks. This is a structural check, not a substitute for a full OpenAPI validator, generated client build, response-schema integration tests or contract compatibility diff.
-
-No generated TypeScript SDK is claimed yet. The initial Next.js API adapter is hand-written and must be replaced or checked against generated clients before the API release gate closes. MFA/PKCE live-provider authentication, rate limits, error-envelope uniformity, immutable replay responses, operation-status lookup and every omitted endpoint family remain subject to the migration acceptance register.
-
-Sales authorization accepts the configured permission authority or its OAuth `SCOPE_` equivalent as implemented by the sales adapter; verify this against the selected IdP before claiming login-to-command end-to-end completion. The web OIDC scope list must not be mistaken for a provisioned permission grant.
+Reporting supports five bounded query codes: posted-sales, stock, receivables, cash and provider-intents. Read-only jOOQ queries consume versioned security-invoker projections and use explicit tenant/company/branch predicates within scoped transactions. Values are exact strings. Totals cover the entire filtered result on nonempty pages; empty pages have `{}` totals. Export is one page, up to 1,000 rows, with `X-Report-Has-More`; it is not an all-record export job. Provider amounts are never summed across environment/currency/status. These five queries do not certify the 76 canonical analytical reports.

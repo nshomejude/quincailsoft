@@ -1,0 +1,1 @@
+import 'server-only';import {cookies} from 'next/headers';import en from '../../../packages/localization/en.json';import fr from '../../../packages/localization/fr.json';export async function locale(){return (await cookies()).get('quincai_locale')?.value==='fr'?'fr':'en'}export const messages={en,fr};

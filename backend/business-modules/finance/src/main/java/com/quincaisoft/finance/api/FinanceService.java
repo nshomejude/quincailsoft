@@ -9,5 +9,11 @@ public interface FinanceService {
   long debit=0,credit=0;for(var e:entries){debit=Math.addExact(debit,e.debit());credit=Math.addExact(credit,e.credit());}
   if(debit==0||debit!=credit)throw new IllegalArgumentException("Unbalanced journal");
  }
+ record CreditSplit(long appliedToReceivable,long customerCredit) {}
+ UUID post(UUID sourceId,UUID operationId,LocalDate date,String sourceType,List<Entry> entries);
+ void requireOpenPeriod(LocalDate date);
+ long outstandingSale(UUID saleId);
+ void applyReceipt(UUID saleId,long amount);
+ CreditSplit applyCredit(UUID saleId,long amount);
  void recognizeSale(UUID saleId,UUID operationId,LocalDate date,long revenue,long cost);
 }

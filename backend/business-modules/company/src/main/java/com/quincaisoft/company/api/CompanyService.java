@@ -1,0 +1,1 @@
+package com.quincaisoft.company.api;import java.util.*;public interface CompanyService{record Item(UUID id,String name){}List<Item> list();void requireSingleBranchCompany();}

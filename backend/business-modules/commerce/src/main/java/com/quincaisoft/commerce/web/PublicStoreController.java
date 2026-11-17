@@ -1,0 +1,2 @@
+package com.quincaisoft.commerce.web;import com.quincaisoft.commerce.api.CommerceService;import org.springframework.web.bind.annotation.*;
+@RestController public class PublicStoreController{private final CommerceService service;public PublicStoreController(CommerceService service){this.service=service;}@GetMapping("/api/public/stores/{slug}")public CommerceService.PublicStore store(@PathVariable String slug){return service.publicStore(slug);}}

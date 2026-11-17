@@ -1,0 +1,25 @@
+PASS Recovery canonical RSA signature verifies
+PASS Exact XAF above JavaScript safe integer and milli quantities
+PASS Reject fractional XAF
+PASS Reject unrepresentable milli quantity
+PASS Reject 64-bit overflow
+PASS Rollback domain posting rolls back outbox evidence
+PASS Exact retry retains submission identity
+PASS Same operation cannot replace completed evidence
+PASS Origin alias cannot be re-uploaded as a fresh operation
+PASS SQLite trigger prevents evidence mutation
+PASS Payload protected at rest
+PASS Process reopen preserves original epoch sequence signature and completed fact
+PASS Different branch cannot drain original evidence
+PASS Protected RSA device key roundtrip
+PASS Standalone startup needs no token or cloud request
+PASS Explicit owner/native/cutover gates enforced
+PASS Enrollment cannot authorize offline selling without signed exclusive grants
+PASS Network uncertainty retains evidence for retry
+PASS Uncertain retry preserves ID and records attempt
+PASS Durable matched review receipt ends automatic retries without ledger posting
+PASS Wire retains original UUID epoch and distinct stable submission ID
+PASS Java route and idempotency/request headers match
+PASS Wrong source receipt cannot acknowledge evidence
+PASS Reviewed completed evidence is retained permanently
+24 checks passed

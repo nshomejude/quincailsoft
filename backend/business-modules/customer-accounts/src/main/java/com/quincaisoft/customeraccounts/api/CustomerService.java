@@ -1,3 +1,3 @@
 package com.quincaisoft.customeraccounts.api;
-import java.util.UUID;
-public interface CustomerService {void requireEligible(UUID id);}
+import java.util.*;
+public interface CustomerService {record Customer(UUID id,String name,boolean active){} void requireEligible(UUID id); List<Customer> list();}

@@ -4,6 +4,10 @@ __pycache__/
 node_modules/
 .next/
 **/target/
+**/bin/
+**/obj/
+.expo/
+dist/
 *.tsbuildinfo
 .env
 .env.local

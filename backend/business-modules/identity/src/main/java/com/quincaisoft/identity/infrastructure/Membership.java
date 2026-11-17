@@ -1,0 +1,3 @@
+package com.quincaisoft.identity.infrastructure;
+import jakarta.persistence.*;import org.hibernate.annotations.DynamicUpdate;import java.util.*;
+@Entity @DynamicUpdate @Table(name="tenant_memberships") @IdClass(Membership.Key.class) public class Membership {public record Key(UUID tenantId,UUID actorId,UUID companyId,UUID branchId) implements java.io.Serializable{} @Id @Column(name="tenant_id")public UUID tenantId;@Id @Column(name="actor_id")public UUID actorId;@Id @Column(name="company_id")public UUID companyId;@Id @Column(name="branch_id")public UUID branchId;public boolean active;@Column(name="role_code")public String roleCode;@Column(name="authorization_epoch")public long authorizationEpoch;}

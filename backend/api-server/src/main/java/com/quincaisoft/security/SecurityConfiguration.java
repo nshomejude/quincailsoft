@@ -24,7 +24,7 @@ public class SecurityConfiguration {
   var converter=new JwtAuthenticationConverter();
   converter.setJwtGrantedAuthoritiesConverter(jwt->{var authorities=new ArrayList<>(scopes.convert(jwt));var permissions=jwt.getClaimAsStringList("permissions");if(permissions!=null)permissions.forEach(p->authorities.add(new SimpleGrantedAuthority(p)));return authorities;});
   return http.csrf(c->c.disable()).sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-   .authorizeHttpRequests(a->a.requestMatchers("/actuator/health").permitAll().anyRequest().authenticated())
+   .authorizeHttpRequests(a->a.requestMatchers("/admin/**").denyAll().requestMatchers(org.springframework.http.HttpMethod.GET,"/api/public/stores/**").permitAll().requestMatchers("/actuator/health").permitAll().anyRequest().authenticated())
    .exceptionHandling(e->e.accessDeniedHandler((request,response,error)->ApiErrors.write(request,response,403,"ACCESS_DENIED","Access denied")))
    .oauth2ResourceServer(o->o.jwt(j->j.jwtAuthenticationConverter(converter)).authenticationEntryPoint((request,response,error)->ApiErrors.write(request,response,401,"UNAUTHENTICATED","Valid bearer token required")))
    .addFilterBefore(new RequestIdentityFilter(),BearerTokenAuthenticationFilter.class)

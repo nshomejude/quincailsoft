@@ -1,17 +1,51 @@
 {
+  "date": "2026-11-18",
+  "timezone": "Africa/Douala",
+  "agents_dispatched": 10,
+  "max_parallel_workers": 6,
   "backend": {
-    "tests": 26,
+    "tests": 60,
     "failures": 0,
     "errors": 0,
     "skipped": 0
   },
+  "reactor_modules": 28,
   "java": "25.0.5",
   "postgresql": "18.7",
   "postgres_schema_assertions": 19,
-  "web_build": "PASS",
-  "web_typecheck": "PASS",
-  "web_precision_tests": 2,
-  "openapi_structural_check": "PASS",
+  "web_admin": {
+    "build": "PASS",
+    "typecheck": "PASS",
+    "tests": 5
+  },
+  "platform_admin_build": "PASS (agent M09 executed)",
+  "merchant_storefront_build": "PASS (agent M09 executed)",
+  "mobile": {
+    "typecheck": "PASS",
+    "sqlite_tests": 7,
+    "android_javascript_export": "PASS",
+    "native_android_ios_builds": "NOT_VERIFIED",
+    "authorized_offline_economic_posting": "DISABLED"
+  },
+  "desktop_adapter": {
+    "dotnet": "10.0.404",
+    "checks": 24,
+    "windows_runtime": "NOT_VERIFIED",
+    "wpf_host_integration": "PENDING",
+    "inherited_r02_audit": "BLOCKED_ON_VULNERABLE_DEPENDENCIES"
+  },
+  "workspace_frozen_install": "PASS",
+  "workspace_peer_check": "PASS_NO_ISSUES",
+  "api_contract": {
+    "operations": 108,
+    "record_schemas": 88,
+    "structural_check": "PASS",
+    "generated_sdk_typecheck": "PASS",
+    "runtime_consumer_acceptance": "INCOMPLETE"
+  },
   "full_migration": "INCOMPLETE",
-  "live_oidc_and_providers": "NOT_VERIFIED"
+  "live_oidc_browser_and_providers": "NOT_VERIFIED",
+  "mtn": "JAVA_DURABLE_INTENT_ADAPTER_WITH_SIMULATED_TRANSPORT_TESTS",
+  "orange": "UNAVAILABLE_PENDING_CONTRACT_IMPLEMENTATION",
+  "main_branch_release": "NOT_APPROVED_OR_MERGED"
 }

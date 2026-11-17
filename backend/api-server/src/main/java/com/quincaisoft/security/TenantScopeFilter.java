@@ -12,7 +12,7 @@ public final class TenantScopeFilter extends OncePerRequestFilter {
   var authentication=SecurityContextHolder.getContext().getAuthentication();
   if(!(authentication instanceof JwtAuthenticationToken token)){chain.doFilter(request,response);return;}
   TenantScope scope;long epoch;
-  try {var jwt=token.getToken();scope=new TenantScope(UUID.fromString(jwt.getClaimAsString("tenant_id")),UUID.fromString(jwt.getClaimAsString("company_id")),UUID.fromString(jwt.getClaimAsString("branch_id")),UUID.fromString(jwt.getSubject()));epoch=Long.parseLong(String.valueOf(jwt.getClaim("authorization_epoch")));if(epoch<0)throw new IllegalArgumentException();}
+  try {var jwt=token.getToken();scope=new TenantScope(UUID.fromString(jwt.getClaimAsString("tenant_id")),UUID.fromString(jwt.getClaimAsString("company_id")),UUID.fromString(jwt.getClaimAsString("branch_id")),UUID.fromString(jwt.getSubject()));Object epochClaim=jwt.getClaim("authorization_epoch");epoch=Long.parseLong(String.valueOf(epochClaim));if(epoch<0)throw new IllegalArgumentException();}
   catch(RuntimeException error){ApiErrors.write(request,response,403,"INVALID_SCOPE","Valid tenant, company, branch, subject and authorization epoch required");return;}
   try{TenantContext.call(scope,epoch,()->{chain.doFilter(request,response);return null;});}
   catch(IOException|ServletException error){throw error;}

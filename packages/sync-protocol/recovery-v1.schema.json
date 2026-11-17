@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quincaisoft.com/contracts/sync/recovery-v1.schema.json",
+  "title": "Quincai recovery evidence v1",
+  "description": "Signed completed evidence for owner quarantine. Never grants economic posting authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "operationId",
+    "sourceOperationId",
+    "deviceId",
+    "deviceEpoch",
+    "sequence",
+    "classification",
+    "payloadJson",
+    "signatureBase64",
+    "reason"
+  ],
+  "properties": {
+    "operationId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "sourceOperationId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "deviceId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "deviceEpoch": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "classification": {
+      "enum": [
+        "COMPLETED_AUTHORIZED",
+        "COMPLETED_EXCEPTION"
+      ]
+    },
+    "payloadJson": {
+      "type": "string",
+      "maxLength": 250000,
+      "contentMediaType": "application/json"
+    },
+    "signatureBase64": {
+      "type": "string",
+      "maxLength": 2048
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 2000
+    }
+  }
+}
