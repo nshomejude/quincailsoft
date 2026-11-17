@@ -1,0 +1,11 @@
+# Local runtime and private configuration
+runtime/
+__pycache__/
+*.py[cod]
+*.sqlite*
+.env
+.env.*
+!.env.example
+node_modules/
+.openai/
+.DS_Store
