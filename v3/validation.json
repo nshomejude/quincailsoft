@@ -1,0 +1,25 @@
+{
+  "screens": 152,
+  "field_placements": 1140,
+  "actions": 656,
+  "action_kinds": {
+    "navigate": 231,
+    "detail": 39,
+    "filter": 36,
+    "export": 39,
+    "integration_required": 97,
+    "create": 37,
+    "edit": 52,
+    "transition": 81,
+    "document": 19,
+    "print": 11,
+    "duplicate": 5,
+    "policy": 8,
+    "refresh": 1
+  },
+  "reports": 76,
+  "documents": 26,
+  "render": "PASS",
+  "browser_tests": "PENDING",
+  "production_backend": "NOT_IMPLEMENTED"
+}

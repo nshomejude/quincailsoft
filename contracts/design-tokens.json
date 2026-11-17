@@ -1,0 +1,33 @@
+{
+  "brand": "#1290E5",
+  "navy": "#051A53",
+  "primary": "#086CB4",
+  "canvas": "#F3F8FC",
+  "surface": "#FFFFFF",
+  "text": "#14283F",
+  "muted": "#52657A",
+  "border": "#D6E2ED",
+  "selection": "#E6F4FF",
+  "success": "#166534",
+  "warning": "#854D0E",
+  "danger": "#B42318",
+  "spacing": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48
+  ],
+  "radius": {
+    "control": 8,
+    "card": 12
+  },
+  "font": "Inter, Segoe UI, system-ui, sans-serif",
+  "icon": {
+    "family": "Lucide",
+    "size": 20,
+    "stroke": 1.75
+  }
+}

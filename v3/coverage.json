@@ -1,0 +1,6951 @@
+{
+  "checks": [
+    {
+      "screen": "S01",
+      "kind": "dashboard",
+      "fields": 0,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S02",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S03",
+      "kind": "list",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S04",
+      "kind": "pos",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S05",
+      "kind": "list",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S06",
+      "kind": "detail",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S07",
+      "kind": "list",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S08",
+      "kind": "form",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S09",
+      "kind": "list",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S10",
+      "kind": "list",
+      "fields": 16,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S11",
+      "kind": "detail",
+      "fields": 16,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S12",
+      "kind": "form",
+      "fields": 16,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S13",
+      "kind": "list",
+      "fields": 5,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S14",
+      "kind": "list",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S15",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S16",
+      "kind": "list",
+      "fields": 16,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S17",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S18",
+      "kind": "detail",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S19",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S20",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S21",
+      "kind": "list",
+      "fields": 5,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S22",
+      "kind": "detail",
+      "fields": 5,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S23",
+      "kind": "list",
+      "fields": 16,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S24",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S25",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S26",
+      "kind": "detail",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S27",
+      "kind": "form",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S28",
+      "kind": "list",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S29",
+      "kind": "list",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S30",
+      "kind": "detail",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S31",
+      "kind": "form",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S32",
+      "kind": "list",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S33",
+      "kind": "detail",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S34",
+      "kind": "list",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S35",
+      "kind": "form",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S36",
+      "kind": "reports",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S37",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S38",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S39",
+      "kind": "detail",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S40",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S41",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S42",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S43",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S44",
+      "kind": "detail",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S45",
+      "kind": "reports",
+      "fields": 0,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S46",
+      "kind": "reports",
+      "fields": 0,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S47",
+      "kind": "reports",
+      "fields": 0,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S48",
+      "kind": "reports",
+      "fields": 0,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S49",
+      "kind": "reports",
+      "fields": 0,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S50",
+      "kind": "reports",
+      "fields": 0,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S51",
+      "kind": "reports",
+      "fields": 0,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S52",
+      "kind": "reports",
+      "fields": 0,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S53",
+      "kind": "documents",
+      "fields": 0,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S54",
+      "kind": "document",
+      "fields": 0,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S55",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S56",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S57",
+      "kind": "form",
+      "fields": 11,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S58",
+      "kind": "form",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S59",
+      "kind": "form",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S60",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S61",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S62",
+      "kind": "form",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S63",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S64",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S65",
+      "kind": "form",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S66",
+      "kind": "form",
+      "fields": 11,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S67",
+      "kind": "form",
+      "fields": 11,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S68",
+      "kind": "identity",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S69",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S70",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S71",
+      "kind": "identity",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S72",
+      "kind": "identity",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S73",
+      "kind": "identity",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S74",
+      "kind": "list",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S75",
+      "kind": "detail",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S76",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S77",
+      "kind": "detail",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S78",
+      "kind": "form",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S79",
+      "kind": "form",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S80",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S81",
+      "kind": "form",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S82",
+      "kind": "form",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S83",
+      "kind": "form",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S84",
+      "kind": "form",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S85",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S86",
+      "kind": "list",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S87",
+      "kind": "form",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "S88",
+      "kind": "form",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N01",
+      "kind": "identity",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N02",
+      "kind": "list",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N03",
+      "kind": "detail",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N04",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N05",
+      "kind": "list",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N06",
+      "kind": "form",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N07",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N08",
+      "kind": "list",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N09",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N10",
+      "kind": "form",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N11",
+      "kind": "detail",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N12",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N13",
+      "kind": "list",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N14",
+      "kind": "list",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N15",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N16",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N17",
+      "kind": "form",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N18",
+      "kind": "pos",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N19",
+      "kind": "list",
+      "fields": 5,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N20",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N21",
+      "kind": "list",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N22",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N23",
+      "kind": "commerce",
+      "fields": 16,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N24",
+      "kind": "commerce",
+      "fields": 16,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N25",
+      "kind": "commerce",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N26",
+      "kind": "commerce",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N27",
+      "kind": "detail",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N28",
+      "kind": "form",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N29",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N30",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N31",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N32",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N33",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N34",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N35",
+      "kind": "list",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N36",
+      "kind": "form",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N37",
+      "kind": "list",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N38",
+      "kind": "list",
+      "fields": 10,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N39",
+      "kind": "form",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "N40",
+      "kind": "reports",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X01",
+      "kind": "form",
+      "fields": 11,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X02",
+      "kind": "list",
+      "fields": 5,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X03",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X04",
+      "kind": "form",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X05",
+      "kind": "form",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X06",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X07",
+      "kind": "form",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X08",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X09",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X10",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X11",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X12",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X13",
+      "kind": "list",
+      "fields": 9,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X14",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X15",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X16",
+      "kind": "form",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X17",
+      "kind": "form",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X18",
+      "kind": "list",
+      "fields": 8,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X19",
+      "kind": "form",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X20",
+      "kind": "form",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X21",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X22",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X23",
+      "kind": "list",
+      "fields": 7,
+      "render": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "screen": "X24",
+      "kind": "list",
+      "fields": 6,
+      "render": "PASS",
+      "detail": "PASS"
+    }
+  ],
+  "coverage": [
+    {
+      "screen": "S01",
+      "index": 0,
+      "label": "Open POS",
+      "kind": "navigate",
+      "target": "S04",
+      "params": {
+        "mode": "pos"
+      }
+    },
+    {
+      "screen": "S01",
+      "index": 1,
+      "label": "change period",
+      "kind": "navigate",
+      "target": "S45",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S01",
+      "index": 2,
+      "label": "inspect KPI",
+      "kind": "detail"
+    },
+    {
+      "screen": "S01",
+      "index": 3,
+      "label": "view alert",
+      "kind": "navigate",
+      "target": "S03",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S02",
+      "index": 0,
+      "label": "Filter date",
+      "kind": "filter"
+    },
+    {
+      "screen": "S02",
+      "index": 1,
+      "label": "filter user",
+      "kind": "filter"
+    },
+    {
+      "screen": "S02",
+      "index": 2,
+      "label": "open entity",
+      "kind": "detail"
+    },
+    {
+      "screen": "S02",
+      "index": 3,
+      "label": "export authorized activity",
+      "kind": "export"
+    },
+    {
+      "screen": "S03",
+      "index": 0,
+      "label": "Filter alerts",
+      "kind": "filter"
+    },
+    {
+      "screen": "S03",
+      "index": 1,
+      "label": "acknowledge",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S03",
+      "index": 2,
+      "label": "open affected record",
+      "kind": "detail"
+    },
+    {
+      "screen": "S04",
+      "index": 0,
+      "label": "Scan",
+      "kind": "navigate",
+      "target": "S04",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S04",
+      "index": 1,
+      "label": "add item",
+      "kind": "create"
+    },
+    {
+      "screen": "S04",
+      "index": 2,
+      "label": "change unit",
+      "kind": "navigate",
+      "target": "S14",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S04",
+      "index": 3,
+      "label": "edit qty",
+      "kind": "edit"
+    },
+    {
+      "screen": "S04",
+      "index": 4,
+      "label": "override price",
+      "kind": "navigate",
+      "target": "S15",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S04",
+      "index": 5,
+      "label": "choose customer",
+      "kind": "navigate",
+      "target": "S32",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S04",
+      "index": 6,
+      "label": "hold",
+      "kind": "transition",
+      "command": "hold"
+    },
+    {
+      "screen": "S04",
+      "index": 7,
+      "label": "resume",
+      "kind": "transition",
+      "command": "resume"
+    },
+    {
+      "screen": "S04",
+      "index": 8,
+      "label": "tender",
+      "kind": "navigate",
+      "target": "S35",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S04",
+      "index": 9,
+      "label": "confirm",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S04",
+      "index": 10,
+      "label": "cancel draft",
+      "kind": "transition",
+      "command": "cancel"
+    },
+    {
+      "screen": "S05",
+      "index": 0,
+      "label": "Search",
+      "kind": "filter"
+    },
+    {
+      "screen": "S05",
+      "index": 1,
+      "label": "filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S05",
+      "index": 2,
+      "label": "open sale",
+      "kind": "detail"
+    },
+    {
+      "screen": "S05",
+      "index": 3,
+      "label": "reprint",
+      "kind": "document",
+      "doc": "DOC01"
+    },
+    {
+      "screen": "S05",
+      "index": 4,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S05",
+      "index": 5,
+      "label": "new sale",
+      "kind": "create"
+    },
+    {
+      "screen": "S06",
+      "index": 0,
+      "label": "Reprint",
+      "kind": "document",
+      "doc": "DOC01"
+    },
+    {
+      "screen": "S06",
+      "index": 1,
+      "label": "take payment",
+      "kind": "navigate",
+      "target": "S35",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S06",
+      "index": 2,
+      "label": "initiate return",
+      "kind": "navigate",
+      "target": "S08",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S06",
+      "index": 3,
+      "label": "view pickup",
+      "kind": "navigate",
+      "target": "S75",
+      "params": {
+        "mode": "list"
+      }
+    },
+    {
+      "screen": "S06",
+      "index": 4,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S07",
+      "index": 0,
+      "label": "Resume",
+      "kind": "transition",
+      "command": "resume"
+    },
+    {
+      "screen": "S07",
+      "index": 1,
+      "label": "discard with confirmation",
+      "kind": "transition",
+      "command": "cancel"
+    },
+    {
+      "screen": "S07",
+      "index": 2,
+      "label": "filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S08",
+      "index": 0,
+      "label": "Initiate return",
+      "kind": "navigate",
+      "target": "S08",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S08",
+      "index": 1,
+      "label": "inspect sale",
+      "kind": "detail"
+    },
+    {
+      "screen": "S08",
+      "index": 2,
+      "label": "approve",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "S08",
+      "index": 3,
+      "label": "refund",
+      "kind": "navigate",
+      "target": "S08",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S08",
+      "index": 4,
+      "label": "print credit note",
+      "kind": "document",
+      "doc": "DOC10"
+    },
+    {
+      "screen": "S09",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S09",
+      "index": 1,
+      "label": "inspect allocation",
+      "kind": "detail"
+    },
+    {
+      "screen": "S09",
+      "index": 2,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S09",
+      "index": 3,
+      "label": "propose correction",
+      "kind": "navigate",
+      "target": "S78",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S10",
+      "index": 0,
+      "label": "Search",
+      "kind": "filter"
+    },
+    {
+      "screen": "S10",
+      "index": 1,
+      "label": "filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S10",
+      "index": 2,
+      "label": "add product",
+      "kind": "create"
+    },
+    {
+      "screen": "S10",
+      "index": 3,
+      "label": "bulk import",
+      "kind": "navigate",
+      "target": "S63",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S10",
+      "index": 4,
+      "label": "open details",
+      "kind": "detail"
+    },
+    {
+      "screen": "S10",
+      "index": 5,
+      "label": "deactivate",
+      "kind": "transition",
+      "command": "archive"
+    },
+    {
+      "screen": "S11",
+      "index": 0,
+      "label": "Edit",
+      "kind": "edit"
+    },
+    {
+      "screen": "S11",
+      "index": 1,
+      "label": "change price",
+      "kind": "navigate",
+      "target": "S15",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S11",
+      "index": 2,
+      "label": "open stock card",
+      "kind": "navigate",
+      "target": "S18",
+      "params": {
+        "mode": "list"
+      }
+    },
+    {
+      "screen": "S11",
+      "index": 3,
+      "label": "print label",
+      "kind": "navigate",
+      "target": "S16",
+      "params": {
+        "mode": "list"
+      }
+    },
+    {
+      "screen": "S12",
+      "index": 0,
+      "label": "Validate",
+      "kind": "edit"
+    },
+    {
+      "screen": "S12",
+      "index": 1,
+      "label": "save",
+      "kind": "edit"
+    },
+    {
+      "screen": "S12",
+      "index": 2,
+      "label": "cancel",
+      "kind": "transition",
+      "command": "cancel"
+    },
+    {
+      "screen": "S12",
+      "index": 3,
+      "label": "add unit",
+      "kind": "create"
+    },
+    {
+      "screen": "S12",
+      "index": 4,
+      "label": "preview margins",
+      "kind": "navigate",
+      "target": "S47",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S13",
+      "index": 0,
+      "label": "Add category",
+      "kind": "create"
+    },
+    {
+      "screen": "S13",
+      "index": 1,
+      "label": "edit category",
+      "kind": "edit"
+    },
+    {
+      "screen": "S13",
+      "index": 2,
+      "label": "add brand",
+      "kind": "create"
+    },
+    {
+      "screen": "S13",
+      "index": 3,
+      "label": "deactivate",
+      "kind": "transition",
+      "command": "archive"
+    },
+    {
+      "screen": "S14",
+      "index": 0,
+      "label": "Add unit",
+      "kind": "create"
+    },
+    {
+      "screen": "S14",
+      "index": 1,
+      "label": "set conversion",
+      "kind": "edit"
+    },
+    {
+      "screen": "S14",
+      "index": 2,
+      "label": "test example",
+      "kind": "navigate",
+      "target": "S14",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S14",
+      "index": 3,
+      "label": "deactivate",
+      "kind": "transition",
+      "command": "archive"
+    },
+    {
+      "screen": "S15",
+      "index": 0,
+      "label": "Update price",
+      "kind": "edit"
+    },
+    {
+      "screen": "S15",
+      "index": 1,
+      "label": "batch price change",
+      "kind": "navigate",
+      "target": "S15",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S15",
+      "index": 2,
+      "label": "preview gross margin",
+      "kind": "navigate",
+      "target": "S47",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S15",
+      "index": 3,
+      "label": "history",
+      "kind": "detail",
+      "tab": "History"
+    },
+    {
+      "screen": "S16",
+      "index": 0,
+      "label": "Choose items",
+      "kind": "filter"
+    },
+    {
+      "screen": "S16",
+      "index": 1,
+      "label": "set count",
+      "kind": "edit"
+    },
+    {
+      "screen": "S16",
+      "index": 2,
+      "label": "preview",
+      "kind": "navigate",
+      "target": "S54",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S16",
+      "index": 3,
+      "label": "print",
+      "kind": "print"
+    },
+    {
+      "screen": "S17",
+      "index": 0,
+      "label": "Adjust",
+      "kind": "navigate",
+      "target": "S20",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S17",
+      "index": 1,
+      "label": "count",
+      "kind": "navigate",
+      "target": "S21",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S17",
+      "index": 2,
+      "label": "filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S17",
+      "index": 3,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S18",
+      "index": 0,
+      "label": "Filter period",
+      "kind": "filter"
+    },
+    {
+      "screen": "S18",
+      "index": 1,
+      "label": "inspect movement",
+      "kind": "detail"
+    },
+    {
+      "screen": "S18",
+      "index": 2,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S19",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S19",
+      "index": 1,
+      "label": "inspect source",
+      "kind": "detail"
+    },
+    {
+      "screen": "S19",
+      "index": 2,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S20",
+      "index": 0,
+      "label": "Prepare",
+      "kind": "create"
+    },
+    {
+      "screen": "S20",
+      "index": 1,
+      "label": "validate",
+      "kind": "edit"
+    },
+    {
+      "screen": "S20",
+      "index": 2,
+      "label": "request approval",
+      "kind": "transition",
+      "command": "submit"
+    },
+    {
+      "screen": "S20",
+      "index": 3,
+      "label": "post",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S20",
+      "index": 4,
+      "label": "cancel",
+      "kind": "transition",
+      "command": "cancel"
+    },
+    {
+      "screen": "S21",
+      "index": 0,
+      "label": "Start count",
+      "kind": "navigate",
+      "target": "S21",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S21",
+      "index": 1,
+      "label": "resume",
+      "kind": "transition",
+      "command": "resume"
+    },
+    {
+      "screen": "S21",
+      "index": 2,
+      "label": "open",
+      "kind": "detail"
+    },
+    {
+      "screen": "S21",
+      "index": 3,
+      "label": "close",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S22",
+      "index": 0,
+      "label": "Record count",
+      "kind": "create"
+    },
+    {
+      "screen": "S22",
+      "index": 1,
+      "label": "reconcile",
+      "kind": "navigate",
+      "target": "S22",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S22",
+      "index": 2,
+      "label": "request approval",
+      "kind": "transition",
+      "command": "submit"
+    },
+    {
+      "screen": "S22",
+      "index": 3,
+      "label": "post adjustment",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S23",
+      "index": 0,
+      "label": "Create PO",
+      "kind": "navigate",
+      "target": "S25",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S23",
+      "index": 1,
+      "label": "snooze alert",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S23",
+      "index": 2,
+      "label": "filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S24",
+      "index": 0,
+      "label": "New PO",
+      "kind": "navigate",
+      "target": "S25",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S24",
+      "index": 1,
+      "label": "approve",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "S24",
+      "index": 2,
+      "label": "filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S24",
+      "index": 3,
+      "label": "open",
+      "kind": "detail"
+    },
+    {
+      "screen": "S25",
+      "index": 0,
+      "label": "Add item",
+      "kind": "create"
+    },
+    {
+      "screen": "S25",
+      "index": 1,
+      "label": "edit qty",
+      "kind": "edit"
+    },
+    {
+      "screen": "S25",
+      "index": 2,
+      "label": "save draft",
+      "kind": "edit"
+    },
+    {
+      "screen": "S25",
+      "index": 3,
+      "label": "submit approval",
+      "kind": "transition",
+      "command": "submit"
+    },
+    {
+      "screen": "S25",
+      "index": 4,
+      "label": "print",
+      "kind": "document",
+      "doc": "DOC05"
+    },
+    {
+      "screen": "S26",
+      "index": 0,
+      "label": "Receive goods",
+      "kind": "navigate",
+      "target": "S27",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S26",
+      "index": 1,
+      "label": "attach invoice",
+      "kind": "navigate",
+      "target": "X04",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S26",
+      "index": 2,
+      "label": "view payments",
+      "kind": "navigate",
+      "target": "S09",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S26",
+      "index": 3,
+      "label": "return item",
+      "kind": "navigate",
+      "target": "S28",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S27",
+      "index": 0,
+      "label": "Scan",
+      "kind": "navigate",
+      "target": "S27",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S27",
+      "index": 1,
+      "label": "mark exception",
+      "kind": "navigate",
+      "target": "S27",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S27",
+      "index": 2,
+      "label": "validate",
+      "kind": "edit"
+    },
+    {
+      "screen": "S27",
+      "index": 3,
+      "label": "post receipt",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S27",
+      "index": 4,
+      "label": "print GRN",
+      "kind": "document",
+      "doc": "DOC06"
+    },
+    {
+      "screen": "S28",
+      "index": 0,
+      "label": "New return",
+      "kind": "create"
+    },
+    {
+      "screen": "S28",
+      "index": 1,
+      "label": "approve",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "S28",
+      "index": 2,
+      "label": "post",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S28",
+      "index": 3,
+      "label": "print",
+      "kind": "document",
+      "doc": "DOC07"
+    },
+    {
+      "screen": "S29",
+      "index": 0,
+      "label": "Create",
+      "kind": "create"
+    },
+    {
+      "screen": "S29",
+      "index": 1,
+      "label": "edit",
+      "kind": "edit"
+    },
+    {
+      "screen": "S29",
+      "index": 2,
+      "label": "search",
+      "kind": "filter"
+    },
+    {
+      "screen": "S29",
+      "index": 3,
+      "label": "deactivate",
+      "kind": "transition",
+      "command": "archive"
+    },
+    {
+      "screen": "S30",
+      "index": 0,
+      "label": "New PO",
+      "kind": "navigate",
+      "target": "S25",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S30",
+      "index": 1,
+      "label": "pay",
+      "kind": "navigate",
+      "target": "S31",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S30",
+      "index": 2,
+      "label": "view statement",
+      "kind": "document",
+      "doc": "DOC08"
+    },
+    {
+      "screen": "S30",
+      "index": 3,
+      "label": "edit contact",
+      "kind": "edit"
+    },
+    {
+      "screen": "S31",
+      "index": 0,
+      "label": "Select invoice",
+      "kind": "navigate",
+      "target": "X04",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S31",
+      "index": 1,
+      "label": "allocate",
+      "kind": "navigate",
+      "target": "S31",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S31",
+      "index": 2,
+      "label": "validate",
+      "kind": "edit"
+    },
+    {
+      "screen": "S31",
+      "index": 3,
+      "label": "post payment",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S31",
+      "index": 4,
+      "label": "print",
+      "kind": "document",
+      "doc": "DOC09"
+    },
+    {
+      "screen": "S32",
+      "index": 0,
+      "label": "Add",
+      "kind": "create"
+    },
+    {
+      "screen": "S32",
+      "index": 1,
+      "label": "edit",
+      "kind": "edit"
+    },
+    {
+      "screen": "S32",
+      "index": 2,
+      "label": "search",
+      "kind": "filter"
+    },
+    {
+      "screen": "S32",
+      "index": 3,
+      "label": "import",
+      "kind": "navigate",
+      "target": "S63",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S32",
+      "index": 4,
+      "label": "open profile",
+      "kind": "detail"
+    },
+    {
+      "screen": "S33",
+      "index": 0,
+      "label": "Edit",
+      "kind": "edit"
+    },
+    {
+      "screen": "S33",
+      "index": 1,
+      "label": "receive payment",
+      "kind": "navigate",
+      "target": "S35",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S33",
+      "index": 2,
+      "label": "record deposit",
+      "kind": "navigate",
+      "target": "S76",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S33",
+      "index": 3,
+      "label": "print statement",
+      "kind": "document",
+      "doc": "DOC08"
+    },
+    {
+      "screen": "S34",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S34",
+      "index": 1,
+      "label": "inspect",
+      "kind": "detail"
+    },
+    {
+      "screen": "S34",
+      "index": 2,
+      "label": "receive payment",
+      "kind": "navigate",
+      "target": "S35",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S34",
+      "index": 3,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S35",
+      "index": 0,
+      "label": "Allocate",
+      "kind": "navigate",
+      "target": "S35",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S35",
+      "index": 1,
+      "label": "post",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S35",
+      "index": 2,
+      "label": "print receipt",
+      "kind": "document",
+      "doc": "DOC09"
+    },
+    {
+      "screen": "S35",
+      "index": 3,
+      "label": "cancel",
+      "kind": "transition",
+      "command": "cancel"
+    },
+    {
+      "screen": "S36",
+      "index": 0,
+      "label": "Set date range",
+      "kind": "filter"
+    },
+    {
+      "screen": "S36",
+      "index": 1,
+      "label": "preview",
+      "kind": "navigate",
+      "target": "S54",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S36",
+      "index": 2,
+      "label": "export PDF",
+      "kind": "export"
+    },
+    {
+      "screen": "S36",
+      "index": 3,
+      "label": "print",
+      "kind": "document",
+      "doc": "DOC08"
+    },
+    {
+      "screen": "S37",
+      "index": 0,
+      "label": "New",
+      "kind": "create"
+    },
+    {
+      "screen": "S37",
+      "index": 1,
+      "label": "duplicate",
+      "kind": "duplicate"
+    },
+    {
+      "screen": "S37",
+      "index": 2,
+      "label": "filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S37",
+      "index": 3,
+      "label": "convert accepted quote",
+      "kind": "navigate",
+      "target": "S39",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S38",
+      "index": 0,
+      "label": "Add line",
+      "kind": "create"
+    },
+    {
+      "screen": "S38",
+      "index": 1,
+      "label": "save",
+      "kind": "edit"
+    },
+    {
+      "screen": "S38",
+      "index": 2,
+      "label": "preview",
+      "kind": "navigate",
+      "target": "S54",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S38",
+      "index": 3,
+      "label": "issue",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S38",
+      "index": 4,
+      "label": "print",
+      "kind": "document",
+      "doc": "DOC03"
+    },
+    {
+      "screen": "S39",
+      "index": 0,
+      "label": "Accept",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "S39",
+      "index": 1,
+      "label": "reject",
+      "kind": "transition",
+      "command": "reject"
+    },
+    {
+      "screen": "S39",
+      "index": 2,
+      "label": "clone",
+      "kind": "duplicate"
+    },
+    {
+      "screen": "S39",
+      "index": 3,
+      "label": "convert to sale",
+      "kind": "navigate",
+      "target": "S04",
+      "params": {
+        "mode": "pos"
+      }
+    },
+    {
+      "screen": "S39",
+      "index": 4,
+      "label": "print",
+      "kind": "document",
+      "doc": "DOC03"
+    },
+    {
+      "screen": "S40",
+      "index": 0,
+      "label": "Open session",
+      "kind": "navigate",
+      "target": "S40",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S40",
+      "index": 1,
+      "label": "inspect",
+      "kind": "detail"
+    },
+    {
+      "screen": "S40",
+      "index": 2,
+      "label": "close",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S40",
+      "index": 3,
+      "label": "cash in/out",
+      "kind": "navigate",
+      "target": "S41",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S41",
+      "index": 0,
+      "label": "Record cash in",
+      "kind": "create"
+    },
+    {
+      "screen": "S41",
+      "index": 1,
+      "label": "record cash out",
+      "kind": "create"
+    },
+    {
+      "screen": "S41",
+      "index": 2,
+      "label": "inspect",
+      "kind": "detail"
+    },
+    {
+      "screen": "S41",
+      "index": 3,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S42",
+      "index": 0,
+      "label": "Count",
+      "kind": "navigate",
+      "target": "S42",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S42",
+      "index": 1,
+      "label": "recount",
+      "kind": "navigate",
+      "target": "S42",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S42",
+      "index": 2,
+      "label": "explain difference",
+      "kind": "navigate",
+      "target": "S42",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S42",
+      "index": 3,
+      "label": "approve",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "S42",
+      "index": 4,
+      "label": "close",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S42",
+      "index": 5,
+      "label": "print",
+      "kind": "document",
+      "doc": "DOC15"
+    },
+    {
+      "screen": "S43",
+      "index": 0,
+      "label": "New expense",
+      "kind": "navigate",
+      "target": "S84",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S43",
+      "index": 1,
+      "label": "filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S43",
+      "index": 2,
+      "label": "open",
+      "kind": "detail"
+    },
+    {
+      "screen": "S43",
+      "index": 3,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S43",
+      "index": 4,
+      "label": "approve where allowed",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "S44",
+      "index": 0,
+      "label": "Edit draft",
+      "kind": "edit"
+    },
+    {
+      "screen": "S44",
+      "index": 1,
+      "label": "submit",
+      "kind": "transition",
+      "command": "submit"
+    },
+    {
+      "screen": "S44",
+      "index": 2,
+      "label": "approve",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "S44",
+      "index": 3,
+      "label": "reject",
+      "kind": "transition",
+      "command": "reject"
+    },
+    {
+      "screen": "S44",
+      "index": 4,
+      "label": "reverse posted",
+      "kind": "navigate",
+      "target": "X08",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S44",
+      "index": 5,
+      "label": "print voucher",
+      "kind": "document",
+      "doc": "DOC14"
+    },
+    {
+      "screen": "S45",
+      "index": 0,
+      "label": "Open report",
+      "kind": "navigate",
+      "target": "S45",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S45",
+      "index": 1,
+      "label": "save filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S45",
+      "index": 2,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S45",
+      "index": 3,
+      "label": "print",
+      "kind": "print"
+    },
+    {
+      "screen": "S46",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S46",
+      "index": 1,
+      "label": "drill down",
+      "kind": "detail"
+    },
+    {
+      "screen": "S46",
+      "index": 2,
+      "label": "export PDF/CSV",
+      "kind": "export"
+    },
+    {
+      "screen": "S47",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S47",
+      "index": 1,
+      "label": "inspect SKU",
+      "kind": "detail"
+    },
+    {
+      "screen": "S47",
+      "index": 2,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S48",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S48",
+      "index": 1,
+      "label": "open stock card",
+      "kind": "navigate",
+      "target": "S18",
+      "params": {
+        "mode": "list"
+      }
+    },
+    {
+      "screen": "S48",
+      "index": 2,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S49",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S49",
+      "index": 1,
+      "label": "view ledger",
+      "kind": "detail"
+    },
+    {
+      "screen": "S49",
+      "index": 2,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S50",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S50",
+      "index": 1,
+      "label": "open invoice",
+      "kind": "navigate",
+      "target": "X04",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S50",
+      "index": 2,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S51",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S51",
+      "index": 1,
+      "label": "open close record",
+      "kind": "navigate",
+      "target": "S42",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S51",
+      "index": 2,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S52",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S52",
+      "index": 1,
+      "label": "drill down",
+      "kind": "detail"
+    },
+    {
+      "screen": "S52",
+      "index": 2,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S53",
+      "index": 0,
+      "label": "Search",
+      "kind": "filter"
+    },
+    {
+      "screen": "S53",
+      "index": 1,
+      "label": "preview",
+      "kind": "navigate",
+      "target": "S54",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S53",
+      "index": 2,
+      "label": "reprint copy",
+      "kind": "print"
+    },
+    {
+      "screen": "S53",
+      "index": 3,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S54",
+      "index": 0,
+      "label": "Zoom",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S54",
+      "index": 1,
+      "label": "switch template",
+      "kind": "navigate",
+      "target": "S53",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S54",
+      "index": 2,
+      "label": "print",
+      "kind": "print"
+    },
+    {
+      "screen": "S54",
+      "index": 3,
+      "label": "PDF",
+      "kind": "print"
+    },
+    {
+      "screen": "S54",
+      "index": 4,
+      "label": "mark copy",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S55",
+      "index": 0,
+      "label": "Add user",
+      "kind": "create"
+    },
+    {
+      "screen": "S55",
+      "index": 1,
+      "label": "reset password",
+      "kind": "edit"
+    },
+    {
+      "screen": "S55",
+      "index": 2,
+      "label": "disable",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S55",
+      "index": 3,
+      "label": "assign role",
+      "kind": "navigate",
+      "target": "S56",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S56",
+      "index": 0,
+      "label": "Create role",
+      "kind": "create"
+    },
+    {
+      "screen": "S56",
+      "index": 1,
+      "label": "assign",
+      "kind": "navigate",
+      "target": "S56",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S56",
+      "index": 2,
+      "label": "revoke",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S56",
+      "index": 3,
+      "label": "compare",
+      "kind": "navigate",
+      "target": "S56",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S56",
+      "index": 4,
+      "label": "audit",
+      "kind": "detail",
+      "tab": "History"
+    },
+    {
+      "screen": "S57",
+      "index": 0,
+      "label": "Edit business",
+      "kind": "edit"
+    },
+    {
+      "screen": "S57",
+      "index": 1,
+      "label": "upload logo",
+      "kind": "navigate",
+      "target": "S57",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S57",
+      "index": 2,
+      "label": "validate",
+      "kind": "edit"
+    },
+    {
+      "screen": "S57",
+      "index": 3,
+      "label": "save",
+      "kind": "edit"
+    },
+    {
+      "screen": "S57",
+      "index": 4,
+      "label": "view audit",
+      "kind": "detail",
+      "tab": "History"
+    },
+    {
+      "screen": "S58",
+      "index": 0,
+      "label": "Validate tax policy",
+      "kind": "edit"
+    },
+    {
+      "screen": "S58",
+      "index": 1,
+      "label": "apply change",
+      "kind": "navigate",
+      "target": "S58",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S58",
+      "index": 2,
+      "label": "print sample",
+      "kind": "print"
+    },
+    {
+      "screen": "S58",
+      "index": 3,
+      "label": "audit",
+      "kind": "detail",
+      "tab": "History"
+    },
+    {
+      "screen": "S59",
+      "index": 0,
+      "label": "Select",
+      "kind": "navigate",
+      "target": "S59",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S59",
+      "index": 1,
+      "label": "preview",
+      "kind": "navigate",
+      "target": "S53",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S59",
+      "index": 2,
+      "label": "configure",
+      "kind": "edit"
+    },
+    {
+      "screen": "S59",
+      "index": 3,
+      "label": "print test",
+      "kind": "print"
+    },
+    {
+      "screen": "S60",
+      "index": 0,
+      "label": "Discover",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S60",
+      "index": 1,
+      "label": "select",
+      "kind": "navigate",
+      "target": "S60",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S60",
+      "index": 2,
+      "label": "test print",
+      "kind": "print"
+    },
+    {
+      "screen": "S60",
+      "index": 3,
+      "label": "calibrate",
+      "kind": "navigate",
+      "target": "S60",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S60",
+      "index": 4,
+      "label": "save",
+      "kind": "edit"
+    },
+    {
+      "screen": "S61",
+      "index": 0,
+      "label": "Backup now",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S61",
+      "index": 1,
+      "label": "test archive",
+      "kind": "transition",
+      "command": "archive"
+    },
+    {
+      "screen": "S61",
+      "index": 2,
+      "label": "schedule",
+      "kind": "navigate",
+      "target": "S61",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S61",
+      "index": 3,
+      "label": "choose external drive",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S62",
+      "index": 0,
+      "label": "Select",
+      "kind": "navigate",
+      "target": "S62",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S62",
+      "index": 1,
+      "label": "verify",
+      "kind": "navigate",
+      "target": "S62",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S62",
+      "index": 2,
+      "label": "safety backup",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S62",
+      "index": 3,
+      "label": "restore",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S62",
+      "index": 4,
+      "label": "inspect",
+      "kind": "detail"
+    },
+    {
+      "screen": "S63",
+      "index": 0,
+      "label": "Choose file",
+      "kind": "navigate",
+      "target": "S63",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S63",
+      "index": 1,
+      "label": "map fields",
+      "kind": "navigate",
+      "target": "S63",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S63",
+      "index": 2,
+      "label": "validate",
+      "kind": "edit"
+    },
+    {
+      "screen": "S63",
+      "index": 3,
+      "label": "preview",
+      "kind": "navigate",
+      "target": "S63",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S63",
+      "index": 4,
+      "label": "commit",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S63",
+      "index": 5,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S64",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S64",
+      "index": 1,
+      "label": "inspect",
+      "kind": "detail"
+    },
+    {
+      "screen": "S64",
+      "index": 2,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S65",
+      "index": 0,
+      "label": "Copy diagnostics",
+      "kind": "export"
+    },
+    {
+      "screen": "S65",
+      "index": 1,
+      "label": "integrity check",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S65",
+      "index": 2,
+      "label": "open logs",
+      "kind": "navigate",
+      "target": "S64",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S66",
+      "index": 0,
+      "label": "Choose language",
+      "kind": "navigate",
+      "target": "S67",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S66",
+      "index": 1,
+      "label": "system check",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S66",
+      "index": 2,
+      "label": "begin",
+      "kind": "navigate",
+      "target": "S67",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S67",
+      "index": 0,
+      "label": "Next",
+      "kind": "edit"
+    },
+    {
+      "screen": "S67",
+      "index": 1,
+      "label": "back",
+      "kind": "edit"
+    },
+    {
+      "screen": "S67",
+      "index": 2,
+      "label": "validate",
+      "kind": "edit"
+    },
+    {
+      "screen": "S67",
+      "index": 3,
+      "label": "save draft",
+      "kind": "edit"
+    },
+    {
+      "screen": "S68",
+      "index": 0,
+      "label": "Create owner",
+      "kind": "create"
+    },
+    {
+      "screen": "S68",
+      "index": 1,
+      "label": "generate recovery",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S68",
+      "index": 2,
+      "label": "confirm",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S68",
+      "index": 3,
+      "label": "next",
+      "kind": "edit"
+    },
+    {
+      "screen": "S69",
+      "index": 0,
+      "label": "Upload CSV",
+      "kind": "navigate",
+      "target": "S69",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S69",
+      "index": 1,
+      "label": "preview",
+      "kind": "navigate",
+      "target": "S69",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S69",
+      "index": 2,
+      "label": "validate",
+      "kind": "edit"
+    },
+    {
+      "screen": "S69",
+      "index": 3,
+      "label": "commit opening ledger",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S70",
+      "index": 0,
+      "label": "Print test",
+      "kind": "print"
+    },
+    {
+      "screen": "S70",
+      "index": 1,
+      "label": "run backup",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S70",
+      "index": 2,
+      "label": "restore test",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S70",
+      "index": 3,
+      "label": "finish setup",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S71",
+      "index": 0,
+      "label": "Sign in",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S71",
+      "index": 1,
+      "label": "reveal password",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S71",
+      "index": 2,
+      "label": "change locale",
+      "kind": "navigate",
+      "target": "S57",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S71",
+      "index": 3,
+      "label": "open recovery",
+      "kind": "navigate",
+      "target": "S73",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S72",
+      "index": 0,
+      "label": "Unlock",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S72",
+      "index": 1,
+      "label": "switch user",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S72",
+      "index": 2,
+      "label": "close session",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S73",
+      "index": 0,
+      "label": "Change password",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S73",
+      "index": 1,
+      "label": "recover owner",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S73",
+      "index": 2,
+      "label": "revoke sessions",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S74",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "S74",
+      "index": 1,
+      "label": "create dispatch",
+      "kind": "create"
+    },
+    {
+      "screen": "S74",
+      "index": 2,
+      "label": "print pick ticket",
+      "kind": "document",
+      "doc": "DOC12"
+    },
+    {
+      "screen": "S75",
+      "index": 0,
+      "label": "Pick",
+      "kind": "navigate",
+      "target": "S75",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S75",
+      "index": 1,
+      "label": "confirm partial delivery",
+      "kind": "navigate",
+      "target": "S75",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S75",
+      "index": 2,
+      "label": "close",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S75",
+      "index": 3,
+      "label": "print delivery note",
+      "kind": "document",
+      "doc": "DOC12"
+    },
+    {
+      "screen": "S76",
+      "index": 0,
+      "label": "Record deposit",
+      "kind": "navigate",
+      "target": "S76",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "S76",
+      "index": 1,
+      "label": "apply",
+      "kind": "navigate",
+      "target": "S77",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S76",
+      "index": 2,
+      "label": "refund where authorized",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S77",
+      "index": 0,
+      "label": "Allocate",
+      "kind": "navigate",
+      "target": "S77",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S77",
+      "index": 1,
+      "label": "reverse allocation",
+      "kind": "navigate",
+      "target": "S78",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S77",
+      "index": 2,
+      "label": "refund",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S77",
+      "index": 3,
+      "label": "print",
+      "kind": "print"
+    },
+    {
+      "screen": "S78",
+      "index": 0,
+      "label": "Request correction",
+      "kind": "navigate",
+      "target": "S78",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S78",
+      "index": 1,
+      "label": "approve",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "S78",
+      "index": 2,
+      "label": "reverse",
+      "kind": "navigate",
+      "target": "S78",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S78",
+      "index": 3,
+      "label": "reallocate",
+      "kind": "navigate",
+      "target": "S78",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S79",
+      "index": 0,
+      "label": "Select",
+      "kind": "navigate",
+      "target": "S79",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S79",
+      "index": 1,
+      "label": "verify",
+      "kind": "navigate",
+      "target": "S79",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S79",
+      "index": 2,
+      "label": "restore",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S79",
+      "index": 3,
+      "label": "export diagnostics",
+      "kind": "export"
+    },
+    {
+      "screen": "S80",
+      "index": 0,
+      "label": "Check operation outcome",
+      "kind": "navigate",
+      "target": "N15",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S80",
+      "index": 1,
+      "label": "reprint",
+      "kind": "print"
+    },
+    {
+      "screen": "S80",
+      "index": 2,
+      "label": "mark recovered",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S81",
+      "index": 0,
+      "label": "Search setting",
+      "kind": "filter"
+    },
+    {
+      "screen": "S81",
+      "index": 1,
+      "label": "open group",
+      "kind": "navigate",
+      "target": "S81",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S81",
+      "index": 2,
+      "label": "export configuration snapshot",
+      "kind": "export"
+    },
+    {
+      "screen": "S82",
+      "index": 0,
+      "label": "Open period",
+      "kind": "navigate",
+      "target": "S82",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S82",
+      "index": 1,
+      "label": "close period",
+      "kind": "navigate",
+      "target": "S82",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S82",
+      "index": 2,
+      "label": "inspect approvals",
+      "kind": "detail"
+    },
+    {
+      "screen": "S82",
+      "index": 3,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S83",
+      "index": 0,
+      "label": "Enable tender",
+      "kind": "navigate",
+      "target": "S83",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S83",
+      "index": 1,
+      "label": "edit policy",
+      "kind": "edit"
+    },
+    {
+      "screen": "S83",
+      "index": 2,
+      "label": "test sales scenario",
+      "kind": "navigate",
+      "target": "S04",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S83",
+      "index": 3,
+      "label": "save",
+      "kind": "edit"
+    },
+    {
+      "screen": "S84",
+      "index": 0,
+      "label": "Save draft",
+      "kind": "edit"
+    },
+    {
+      "screen": "S84",
+      "index": 1,
+      "label": "attach",
+      "kind": "navigate",
+      "target": "S84",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S84",
+      "index": 2,
+      "label": "submit approval",
+      "kind": "transition",
+      "command": "submit"
+    },
+    {
+      "screen": "S84",
+      "index": 3,
+      "label": "post if authorized",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "S84",
+      "index": 4,
+      "label": "cancel",
+      "kind": "transition",
+      "command": "cancel"
+    },
+    {
+      "screen": "S85",
+      "index": 0,
+      "label": "Inspect",
+      "kind": "detail"
+    },
+    {
+      "screen": "S85",
+      "index": 1,
+      "label": "approve",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "S85",
+      "index": 2,
+      "label": "reject with reason",
+      "kind": "transition",
+      "command": "reject"
+    },
+    {
+      "screen": "S85",
+      "index": 3,
+      "label": "return for correction",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S86",
+      "index": 0,
+      "label": "Add category",
+      "kind": "create"
+    },
+    {
+      "screen": "S86",
+      "index": 1,
+      "label": "add payee",
+      "kind": "create"
+    },
+    {
+      "screen": "S86",
+      "index": 2,
+      "label": "archive",
+      "kind": "transition",
+      "command": "archive"
+    },
+    {
+      "screen": "S86",
+      "index": 3,
+      "label": "set threshold",
+      "kind": "edit"
+    },
+    {
+      "screen": "S86",
+      "index": 4,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "S87",
+      "index": 0,
+      "label": "Edit policy",
+      "kind": "edit"
+    },
+    {
+      "screen": "S87",
+      "index": 1,
+      "label": "request approval",
+      "kind": "transition",
+      "command": "submit"
+    },
+    {
+      "screen": "S87",
+      "index": 2,
+      "label": "save",
+      "kind": "edit"
+    },
+    {
+      "screen": "S87",
+      "index": 3,
+      "label": "test permission",
+      "kind": "navigate",
+      "target": "S56",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S88",
+      "index": 0,
+      "label": "Set alert",
+      "kind": "edit"
+    },
+    {
+      "screen": "S88",
+      "index": 1,
+      "label": "test alert",
+      "kind": "navigate",
+      "target": "S03",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "S88",
+      "index": 2,
+      "label": "silence",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "S88",
+      "index": 3,
+      "label": "save",
+      "kind": "edit"
+    },
+    {
+      "screen": "N01",
+      "index": 0,
+      "label": "Verify",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N01",
+      "index": 1,
+      "label": "resume",
+      "kind": "transition",
+      "command": "resume"
+    },
+    {
+      "screen": "N01",
+      "index": 2,
+      "label": "provision via M01/M03",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N01",
+      "index": 3,
+      "label": "explain failure without duplicate tenant",
+      "kind": "duplicate"
+    },
+    {
+      "screen": "N02",
+      "index": 0,
+      "label": "Open invoice",
+      "kind": "navigate",
+      "target": "S54",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N02",
+      "index": 1,
+      "label": "pay/query status",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N02",
+      "index": 2,
+      "label": "download",
+      "kind": "export"
+    },
+    {
+      "screen": "N02",
+      "index": 3,
+      "label": "dispute through M05",
+      "kind": "navigate",
+      "target": "N11",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N03",
+      "index": 0,
+      "label": "Compare",
+      "kind": "navigate",
+      "target": "N03",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N03",
+      "index": 1,
+      "label": "preview proration",
+      "kind": "navigate",
+      "target": "N03",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N03",
+      "index": 2,
+      "label": "request/change plan",
+      "kind": "navigate",
+      "target": "N03",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N03",
+      "index": 3,
+      "label": "show service impact",
+      "kind": "navigate",
+      "target": "N03",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N04",
+      "index": 0,
+      "label": "Create/update branch",
+      "kind": "create"
+    },
+    {
+      "screen": "N04",
+      "index": 1,
+      "label": "assign company",
+      "kind": "navigate",
+      "target": "N04",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N04",
+      "index": 2,
+      "label": "archive only after outstanding-work validation",
+      "kind": "transition",
+      "command": "archive"
+    },
+    {
+      "screen": "N05",
+      "index": 0,
+      "label": "Create",
+      "kind": "create"
+    },
+    {
+      "screen": "N05",
+      "index": 1,
+      "label": "edit",
+      "kind": "edit"
+    },
+    {
+      "screen": "N05",
+      "index": 2,
+      "label": "relocate stock via movement",
+      "kind": "navigate",
+      "target": "S20",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N05",
+      "index": 3,
+      "label": "prevent deletion with balances",
+      "kind": "policy",
+      "reason": "prevent deletion with balances is a policy constraint, not a mutating UI command."
+    },
+    {
+      "screen": "N06",
+      "index": 0,
+      "label": "Reserve",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N06",
+      "index": 1,
+      "label": "approve",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "N06",
+      "index": 2,
+      "label": "dispatch",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N06",
+      "index": 3,
+      "label": "receive partial",
+      "kind": "navigate",
+      "target": "N06",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N06",
+      "index": 4,
+      "label": "report loss",
+      "kind": "navigate",
+      "target": "N06",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N06",
+      "index": 5,
+      "label": "return through M11/M09",
+      "kind": "navigate",
+      "target": "S28",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N07",
+      "index": 0,
+      "label": "Invite",
+      "kind": "navigate",
+      "target": "N07",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N07",
+      "index": 1,
+      "label": "resend",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N07",
+      "index": 2,
+      "label": "revoke",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N07",
+      "index": 3,
+      "label": "switch active membership",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N07",
+      "index": 4,
+      "label": "audit",
+      "kind": "detail",
+      "tab": "History"
+    },
+    {
+      "screen": "N08",
+      "index": 0,
+      "label": "Enroll factor",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N08",
+      "index": 1,
+      "label": "revoke session/device",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N08",
+      "index": 2,
+      "label": "recover with step-up",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N08",
+      "index": 3,
+      "label": "no secret display",
+      "kind": "policy",
+      "reason": "no secret display is a policy constraint, not a mutating UI command."
+    },
+    {
+      "screen": "N09",
+      "index": 0,
+      "label": "Configure",
+      "kind": "edit"
+    },
+    {
+      "screen": "N09",
+      "index": 1,
+      "label": "test",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N09",
+      "index": 2,
+      "label": "rotate",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N09",
+      "index": 3,
+      "label": "enable after evidence",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N09",
+      "index": 4,
+      "label": "never return stored secret",
+      "kind": "policy",
+      "reason": "never return stored secret is a policy constraint, not a mutating UI command."
+    },
+    {
+      "screen": "N10",
+      "index": 0,
+      "label": "Import",
+      "kind": "navigate",
+      "target": "S63",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N10",
+      "index": 1,
+      "label": "suggest match",
+      "kind": "navigate",
+      "target": "N10",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N10",
+      "index": 2,
+      "label": "approve match",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "N10",
+      "index": 3,
+      "label": "dispute",
+      "kind": "navigate",
+      "target": "X10",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N10",
+      "index": 4,
+      "label": "post approved adjustment",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "N11",
+      "index": 0,
+      "label": "Inspect scoped billing",
+      "kind": "detail"
+    },
+    {
+      "screen": "N11",
+      "index": 1,
+      "label": "approved correction",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "N11",
+      "index": 2,
+      "label": "never merchant till access",
+      "kind": "policy",
+      "reason": "never merchant till access is a policy constraint, not a mutating UI command."
+    },
+    {
+      "screen": "N12",
+      "index": 0,
+      "label": "Resume provisioning",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N12",
+      "index": 1,
+      "label": "suspend permitted paths",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N12",
+      "index": 2,
+      "label": "schedule migration",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N12",
+      "index": 3,
+      "label": "audited support link",
+      "kind": "navigate",
+      "target": "N13",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N13",
+      "index": 0,
+      "label": "Request",
+      "kind": "navigate",
+      "target": "N13",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N13",
+      "index": 1,
+      "label": "grant",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N13",
+      "index": 2,
+      "label": "revoke",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N13",
+      "index": 3,
+      "label": "review sessions",
+      "kind": "navigate",
+      "target": "N08",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N13",
+      "index": 4,
+      "label": "independent break-glass review",
+      "kind": "navigate",
+      "target": "N13",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N14",
+      "index": 0,
+      "label": "Pair",
+      "kind": "navigate",
+      "target": "N14",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N14",
+      "index": 1,
+      "label": "validate",
+      "kind": "edit"
+    },
+    {
+      "screen": "N14",
+      "index": 2,
+      "label": "dry-run",
+      "kind": "navigate",
+      "target": "N14",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N14",
+      "index": 3,
+      "label": "activate cutover",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N14",
+      "index": 4,
+      "label": "disconnect through reconciliation",
+      "kind": "navigate",
+      "target": "N15",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N15",
+      "index": 0,
+      "label": "Inspect",
+      "kind": "detail"
+    },
+    {
+      "screen": "N15",
+      "index": 1,
+      "label": "retry same ID",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N15",
+      "index": 2,
+      "label": "assign investigator",
+      "kind": "navigate",
+      "target": "N15",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N15",
+      "index": 3,
+      "label": "resolve via compensation",
+      "kind": "navigate",
+      "target": "X12",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N15",
+      "index": 4,
+      "label": "no delete-to-clear",
+      "kind": "policy",
+      "reason": "no delete-to-clear is a policy constraint, not a mutating UI command."
+    },
+    {
+      "screen": "N16",
+      "index": 0,
+      "label": "Grant disjoint quota",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N16",
+      "index": 1,
+      "label": "request return",
+      "kind": "navigate",
+      "target": "N16",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N16",
+      "index": 2,
+      "label": "freeze",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N16",
+      "index": 3,
+      "label": "reconcile",
+      "kind": "navigate",
+      "target": "N16",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N16",
+      "index": 4,
+      "label": "recall with proof",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N17",
+      "index": 0,
+      "label": "Navigate authorized tasks",
+      "kind": "navigate",
+      "target": "N17",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N17",
+      "index": 1,
+      "label": "switch scope",
+      "kind": "navigate",
+      "target": "N04",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N17",
+      "index": 2,
+      "label": "refresh",
+      "kind": "refresh"
+    },
+    {
+      "screen": "N17",
+      "index": 3,
+      "label": "show companion-mode limits",
+      "kind": "navigate",
+      "target": "X24",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N18",
+      "index": 0,
+      "label": "Quote",
+      "kind": "navigate",
+      "target": "S38",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N18",
+      "index": 1,
+      "label": "validate",
+      "kind": "edit"
+    },
+    {
+      "screen": "N18",
+      "index": 2,
+      "label": "locally commit permitted sale",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N18",
+      "index": 3,
+      "label": "print/share",
+      "kind": "document",
+      "doc": "DOC01"
+    },
+    {
+      "screen": "N18",
+      "index": 4,
+      "label": "sync status",
+      "kind": "navigate",
+      "target": "N20",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N19",
+      "index": 0,
+      "label": "Capture draft count",
+      "kind": "create"
+    },
+    {
+      "screen": "N19",
+      "index": 1,
+      "label": "scan",
+      "kind": "navigate",
+      "target": "N19",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N19",
+      "index": 2,
+      "label": "sync",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N19",
+      "index": 3,
+      "label": "dispatch/receive only under authorized authority",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N20",
+      "index": 0,
+      "label": "Retry",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N20",
+      "index": 1,
+      "label": "export protected recovery bundle",
+      "kind": "export"
+    },
+    {
+      "screen": "N20",
+      "index": 2,
+      "label": "resnapshot",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N20",
+      "index": 3,
+      "label": "view remedial instructions",
+      "kind": "navigate",
+      "target": "N20",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N21",
+      "index": 0,
+      "label": "Pick",
+      "kind": "navigate",
+      "target": "N21",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N21",
+      "index": 1,
+      "label": "partial handover",
+      "kind": "navigate",
+      "target": "N21",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N21",
+      "index": 2,
+      "label": "capture signature/photo",
+      "kind": "create"
+    },
+    {
+      "screen": "N21",
+      "index": 3,
+      "label": "record failure",
+      "kind": "create"
+    },
+    {
+      "screen": "N21",
+      "index": 4,
+      "label": "sync",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N22",
+      "index": 0,
+      "label": "Approve/reject online",
+      "kind": "transition",
+      "command": "reject"
+    },
+    {
+      "screen": "N22",
+      "index": 1,
+      "label": "require separation and step-up",
+      "kind": "policy",
+      "reason": "require separation and step-up is a policy constraint, not a mutating UI command."
+    },
+    {
+      "screen": "N22",
+      "index": 2,
+      "label": "drill down",
+      "kind": "detail"
+    },
+    {
+      "screen": "N23",
+      "index": 0,
+      "label": "Search/filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "N23",
+      "index": 1,
+      "label": "open product",
+      "kind": "navigate",
+      "target": "N24",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N23",
+      "index": 2,
+      "label": "choose fulfillment branch",
+      "kind": "navigate",
+      "target": "N04",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N23",
+      "index": 3,
+      "label": "no private cost exposure",
+      "kind": "policy",
+      "reason": "no private cost exposure is a policy constraint, not a mutating UI command."
+    },
+    {
+      "screen": "N24",
+      "index": 0,
+      "label": "Select variant/qty",
+      "kind": "navigate",
+      "target": "N25",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N24",
+      "index": 1,
+      "label": "request quote/add cart",
+      "kind": "navigate",
+      "target": "N25",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N24",
+      "index": 2,
+      "label": "see delivery constraints",
+      "kind": "navigate",
+      "target": "N27",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N25",
+      "index": 0,
+      "label": "Update quantities",
+      "kind": "edit"
+    },
+    {
+      "screen": "N25",
+      "index": 1,
+      "label": "requote",
+      "kind": "navigate",
+      "target": "N25",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N25",
+      "index": 2,
+      "label": "remove",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N25",
+      "index": 3,
+      "label": "choose delivery",
+      "kind": "navigate",
+      "target": "N26",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N25",
+      "index": 4,
+      "label": "do not reserve indefinitely",
+      "kind": "policy",
+      "reason": "do not reserve indefinitely is a policy constraint, not a mutating UI command."
+    },
+    {
+      "screen": "N26",
+      "index": 0,
+      "label": "Reserve",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N26",
+      "index": 1,
+      "label": "checkout",
+      "kind": "navigate",
+      "target": "N26",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N26",
+      "index": 2,
+      "label": "query payment",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N26",
+      "index": 3,
+      "label": "retry safely",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N26",
+      "index": 4,
+      "label": "show expired reservation resolution",
+      "kind": "navigate",
+      "target": "N27",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N27",
+      "index": 0,
+      "label": "Verify access",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N27",
+      "index": 1,
+      "label": "track",
+      "kind": "navigate",
+      "target": "N27",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N27",
+      "index": 2,
+      "label": "cancel eligible balance",
+      "kind": "transition",
+      "command": "cancel"
+    },
+    {
+      "screen": "N27",
+      "index": 3,
+      "label": "request return",
+      "kind": "navigate",
+      "target": "S08",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N27",
+      "index": 4,
+      "label": "contact support",
+      "kind": "navigate",
+      "target": "N13",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N28",
+      "index": 0,
+      "label": "Verify DNS",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N28",
+      "index": 1,
+      "label": "preview",
+      "kind": "navigate",
+      "target": "N23",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N28",
+      "index": 2,
+      "label": "publish",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N28",
+      "index": 3,
+      "label": "disable",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N28",
+      "index": 4,
+      "label": "manage certificate status",
+      "kind": "navigate",
+      "target": "N28",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N29",
+      "index": 0,
+      "label": "Inspect",
+      "kind": "detail"
+    },
+    {
+      "screen": "N29",
+      "index": 1,
+      "label": "allocate",
+      "kind": "navigate",
+      "target": "N29",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N29",
+      "index": 2,
+      "label": "hold/release",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N29",
+      "index": 3,
+      "label": "cancel",
+      "kind": "transition",
+      "command": "cancel"
+    },
+    {
+      "screen": "N29",
+      "index": 4,
+      "label": "route to fulfillment",
+      "kind": "navigate",
+      "target": "N38",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N30",
+      "index": 0,
+      "label": "Preview enablement",
+      "kind": "navigate",
+      "target": "N30",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N30",
+      "index": 1,
+      "label": "validate stock constraints",
+      "kind": "edit"
+    },
+    {
+      "screen": "N30",
+      "index": 2,
+      "label": "enable",
+      "kind": "navigate",
+      "target": "N30",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N30",
+      "index": 3,
+      "label": "controlled disable",
+      "kind": "navigate",
+      "target": "N30",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N31",
+      "index": 0,
+      "label": "Receive",
+      "kind": "navigate",
+      "target": "N31",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N31",
+      "index": 1,
+      "label": "assign",
+      "kind": "navigate",
+      "target": "N31",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N31",
+      "index": 2,
+      "label": "quarantine",
+      "kind": "navigate",
+      "target": "X21",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N31",
+      "index": 3,
+      "label": "trace",
+      "kind": "navigate",
+      "target": "N31",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N31",
+      "index": 4,
+      "label": "recall",
+      "kind": "navigate",
+      "target": "X21",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N31",
+      "index": 5,
+      "label": "refuse duplicate serial custody",
+      "kind": "duplicate"
+    },
+    {
+      "screen": "N32",
+      "index": 0,
+      "label": "Request export",
+      "kind": "export"
+    },
+    {
+      "screen": "N32",
+      "index": 1,
+      "label": "download authenticated manifest",
+      "kind": "export"
+    },
+    {
+      "screen": "N32",
+      "index": 2,
+      "label": "request termination",
+      "kind": "navigate",
+      "target": "N32",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N32",
+      "index": 3,
+      "label": "inspect holds",
+      "kind": "detail"
+    },
+    {
+      "screen": "N33",
+      "index": 0,
+      "label": "Verify requester",
+      "kind": "navigate",
+      "target": "N33",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N33",
+      "index": 1,
+      "label": "assign",
+      "kind": "navigate",
+      "target": "N33",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N33",
+      "index": 2,
+      "label": "export/rectify/restrict",
+      "kind": "export"
+    },
+    {
+      "screen": "N33",
+      "index": 3,
+      "label": "approve lawful erasure",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "N33",
+      "index": 4,
+      "label": "record outcome",
+      "kind": "create"
+    },
+    {
+      "screen": "N34",
+      "index": 0,
+      "label": "Run checks",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N34",
+      "index": 1,
+      "label": "export redacted bundle",
+      "kind": "export"
+    },
+    {
+      "screen": "N34",
+      "index": 2,
+      "label": "link support",
+      "kind": "navigate",
+      "target": "N13",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N34",
+      "index": 3,
+      "label": "show incident status",
+      "kind": "navigate",
+      "target": "N34",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N35",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "N35",
+      "index": 1,
+      "label": "inspect meter calculation",
+      "kind": "detail"
+    },
+    {
+      "screen": "N35",
+      "index": 2,
+      "label": "request capacity",
+      "kind": "navigate",
+      "target": "N03",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N35",
+      "index": 3,
+      "label": "dispute charge",
+      "kind": "navigate",
+      "target": "N11",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N36",
+      "index": 0,
+      "label": "Edit draft",
+      "kind": "edit"
+    },
+    {
+      "screen": "N36",
+      "index": 1,
+      "label": "preview",
+      "kind": "navigate",
+      "target": "N23",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N36",
+      "index": 2,
+      "label": "approve/publish",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "N36",
+      "index": 3,
+      "label": "revert to prior public version",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N37",
+      "index": 0,
+      "label": "Verify identity",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N37",
+      "index": 1,
+      "label": "see only own orders",
+      "kind": "navigate",
+      "target": "N27",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N37",
+      "index": 2,
+      "label": "update profile",
+      "kind": "edit"
+    },
+    {
+      "screen": "N37",
+      "index": 3,
+      "label": "request return/export",
+      "kind": "export"
+    },
+    {
+      "screen": "N38",
+      "index": 0,
+      "label": "Assign picker",
+      "kind": "navigate",
+      "target": "N38",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N38",
+      "index": 1,
+      "label": "scan",
+      "kind": "navigate",
+      "target": "N38",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N38",
+      "index": 2,
+      "label": "split fulfillment",
+      "kind": "navigate",
+      "target": "N38",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N38",
+      "index": 3,
+      "label": "dispatch",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N38",
+      "index": 4,
+      "label": "handover",
+      "kind": "navigate",
+      "target": "N38",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N38",
+      "index": 5,
+      "label": "track remaining goods",
+      "kind": "navigate",
+      "target": "X11",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N39",
+      "index": 0,
+      "label": "Confirm challenge",
+      "kind": "navigate",
+      "target": "N39",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N39",
+      "index": 1,
+      "label": "approve scope",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "N39",
+      "index": 2,
+      "label": "issue grant",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N39",
+      "index": 3,
+      "label": "expire unused challenge",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "N40",
+      "index": 0,
+      "label": "Compare",
+      "kind": "navigate",
+      "target": "X15",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N40",
+      "index": 1,
+      "label": "drill down",
+      "kind": "detail"
+    },
+    {
+      "screen": "N40",
+      "index": 2,
+      "label": "flag stale/unmatched",
+      "kind": "navigate",
+      "target": "X15",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "N40",
+      "index": 3,
+      "label": "export scoped consolidation",
+      "kind": "export"
+    },
+    {
+      "screen": "X01",
+      "index": 0,
+      "label": "Create company",
+      "kind": "create"
+    },
+    {
+      "screen": "X01",
+      "index": 1,
+      "label": "validate mappings",
+      "kind": "edit"
+    },
+    {
+      "screen": "X01",
+      "index": 2,
+      "label": "close/reopen with approval",
+      "kind": "navigate",
+      "target": "S82",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X02",
+      "index": 0,
+      "label": "Draft",
+      "kind": "create"
+    },
+    {
+      "screen": "X02",
+      "index": 1,
+      "label": "submit",
+      "kind": "transition",
+      "command": "submit"
+    },
+    {
+      "screen": "X02",
+      "index": 2,
+      "label": "approve/reject",
+      "kind": "transition",
+      "command": "reject"
+    },
+    {
+      "screen": "X02",
+      "index": 3,
+      "label": "convert to RFQ/PO",
+      "kind": "navigate",
+      "target": "S25",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "X03",
+      "index": 0,
+      "label": "Issue",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X03",
+      "index": 1,
+      "label": "record offer",
+      "kind": "create"
+    },
+    {
+      "screen": "X03",
+      "index": 2,
+      "label": "compare",
+      "kind": "navigate",
+      "target": "X03",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X03",
+      "index": 3,
+      "label": "approve award",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "X03",
+      "index": 4,
+      "label": "create PO",
+      "kind": "navigate",
+      "target": "S25",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "X04",
+      "index": 0,
+      "label": "Capture",
+      "kind": "create"
+    },
+    {
+      "screen": "X04",
+      "index": 1,
+      "label": "duplicate check",
+      "kind": "duplicate"
+    },
+    {
+      "screen": "X04",
+      "index": 2,
+      "label": "three-way match",
+      "kind": "navigate",
+      "target": "X04",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X04",
+      "index": 3,
+      "label": "exception approval",
+      "kind": "navigate",
+      "target": "X04",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X04",
+      "index": 4,
+      "label": "post",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "X05",
+      "index": 0,
+      "label": "Draft",
+      "kind": "create"
+    },
+    {
+      "screen": "X05",
+      "index": 1,
+      "label": "preview quantity/value allocation",
+      "kind": "navigate",
+      "target": "S45",
+      "params": {
+        "report": "R068"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X05",
+      "index": 2,
+      "label": "approve",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "X05",
+      "index": 3,
+      "label": "post adjustment",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "X06",
+      "index": 0,
+      "label": "Preview",
+      "kind": "navigate",
+      "target": "S45",
+      "params": {
+        "report": "R069"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X06",
+      "index": 1,
+      "label": "approve",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "X06",
+      "index": 2,
+      "label": "post",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "X06",
+      "index": 3,
+      "label": "inspect reversal and value bridge",
+      "kind": "detail"
+    },
+    {
+      "screen": "X07",
+      "index": 0,
+      "label": "Record advance",
+      "kind": "create"
+    },
+    {
+      "screen": "X07",
+      "index": 1,
+      "label": "allocate",
+      "kind": "navigate",
+      "target": "X07",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X07",
+      "index": 2,
+      "label": "inspect return",
+      "kind": "navigate",
+      "target": "S08",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "X07",
+      "index": 3,
+      "label": "post supplier credit/refund",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "X08",
+      "index": 0,
+      "label": "Filter",
+      "kind": "filter"
+    },
+    {
+      "screen": "X08",
+      "index": 1,
+      "label": "inspect",
+      "kind": "detail"
+    },
+    {
+      "screen": "X08",
+      "index": 2,
+      "label": "reconcile",
+      "kind": "navigate",
+      "target": "X08",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X08",
+      "index": 3,
+      "label": "propose approved reversal",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "X08",
+      "index": 4,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "X09",
+      "index": 0,
+      "label": "Import dry-run",
+      "kind": "navigate",
+      "target": "S63",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X09",
+      "index": 1,
+      "label": "match",
+      "kind": "navigate",
+      "target": "X09",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X09",
+      "index": 2,
+      "label": "split match",
+      "kind": "navigate",
+      "target": "X09",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X09",
+      "index": 3,
+      "label": "approve fee/variance",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "X09",
+      "index": 4,
+      "label": "close",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "X10",
+      "index": 0,
+      "label": "Open",
+      "kind": "detail"
+    },
+    {
+      "screen": "X10",
+      "index": 1,
+      "label": "upload evidence",
+      "kind": "navigate",
+      "target": "X10",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X10",
+      "index": 2,
+      "label": "assign",
+      "kind": "navigate",
+      "target": "X10",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X10",
+      "index": 3,
+      "label": "resolve",
+      "kind": "navigate",
+      "target": "X10",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X10",
+      "index": 4,
+      "label": "post approved recovery/loss",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "X11",
+      "index": 0,
+      "label": "Reserve space",
+      "kind": "navigate",
+      "target": "X11",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X11",
+      "index": 1,
+      "label": "pick partial",
+      "kind": "navigate",
+      "target": "S75",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X11",
+      "index": 2,
+      "label": "release",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X11",
+      "index": 3,
+      "label": "investigate loss",
+      "kind": "navigate",
+      "target": "X11",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X11",
+      "index": 4,
+      "label": "print custody note",
+      "kind": "document",
+      "doc": "DOC18"
+    },
+    {
+      "screen": "X12",
+      "index": 0,
+      "label": "Intake",
+      "kind": "navigate",
+      "target": "X12",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X12",
+      "index": 1,
+      "label": "freeze exposure",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X12",
+      "index": 2,
+      "label": "investigate",
+      "kind": "navigate",
+      "target": "X12",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X12",
+      "index": 3,
+      "label": "approve suspense/resolution",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "X12",
+      "index": 4,
+      "label": "reconcile",
+      "kind": "navigate",
+      "target": "X12",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X13",
+      "index": 0,
+      "label": "Export",
+      "kind": "export"
+    },
+    {
+      "screen": "X13",
+      "index": 1,
+      "label": "revoke",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X13",
+      "index": 2,
+      "label": "recover",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X13",
+      "index": 3,
+      "label": "reconcile",
+      "kind": "navigate",
+      "target": "X13",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X13",
+      "index": 4,
+      "label": "retire",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X13",
+      "index": 5,
+      "label": "enroll replacement",
+      "kind": "navigate",
+      "target": "N39",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X14",
+      "index": 0,
+      "label": "Create paired documents",
+      "kind": "create"
+    },
+    {
+      "screen": "X14",
+      "index": 1,
+      "label": "approve",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "X14",
+      "index": 2,
+      "label": "dispatch",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X14",
+      "index": 3,
+      "label": "accept",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "X14",
+      "index": 4,
+      "label": "reconcile",
+      "kind": "navigate",
+      "target": "X14",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X15",
+      "index": 0,
+      "label": "Match",
+      "kind": "navigate",
+      "target": "X15",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X15",
+      "index": 1,
+      "label": "propose elimination",
+      "kind": "navigate",
+      "target": "X15",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X15",
+      "index": 2,
+      "label": "approve",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "X15",
+      "index": 3,
+      "label": "publish management consolidation",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X16",
+      "index": 0,
+      "label": "Estimate",
+      "kind": "navigate",
+      "target": "S45",
+      "params": {
+        "report": "R074"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X16",
+      "index": 1,
+      "label": "reserve parent",
+      "kind": "navigate",
+      "target": "X16",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X16",
+      "index": 2,
+      "label": "confirm cut",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X16",
+      "index": 3,
+      "label": "post outputs/scrap",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "X16",
+      "index": 4,
+      "label": "print labels",
+      "kind": "navigate",
+      "target": "S16",
+      "params": {
+        "mode": "list"
+      }
+    },
+    {
+      "screen": "X17",
+      "index": 0,
+      "label": "Preview",
+      "kind": "navigate",
+      "target": "X17",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X17",
+      "index": 1,
+      "label": "assemble/disassemble",
+      "kind": "navigate",
+      "target": "X17",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X17",
+      "index": 2,
+      "label": "approve losses",
+      "kind": "transition",
+      "command": "approve"
+    },
+    {
+      "screen": "X17",
+      "index": 3,
+      "label": "post movement",
+      "kind": "transition",
+      "command": "complete"
+    },
+    {
+      "screen": "X18",
+      "index": 0,
+      "label": "Open project",
+      "kind": "navigate",
+      "target": "X18",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X18",
+      "index": 1,
+      "label": "assign prices",
+      "kind": "navigate",
+      "target": "S15",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X18",
+      "index": 2,
+      "label": "quote",
+      "kind": "navigate",
+      "target": "S38",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X18",
+      "index": 3,
+      "label": "authorize order",
+      "kind": "navigate",
+      "target": "N29",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X18",
+      "index": 4,
+      "label": "track balance",
+      "kind": "navigate",
+      "target": "S45",
+      "params": {
+        "report": "R073"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X19",
+      "index": 0,
+      "label": "Configure",
+      "kind": "edit"
+    },
+    {
+      "screen": "X19",
+      "index": 1,
+      "label": "quote",
+      "kind": "navigate",
+      "target": "S38",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X19",
+      "index": 2,
+      "label": "fulfill service",
+      "kind": "navigate",
+      "target": "X19",
+      "params": {
+        "mode": "edit"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X19",
+      "index": 3,
+      "label": "invoice",
+      "kind": "navigate",
+      "target": "S54",
+      "params": {},
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X19",
+      "index": 4,
+      "label": "credit without stock",
+      "kind": "navigate",
+      "target": "S08",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X20",
+      "index": 0,
+      "label": "Inspect return",
+      "kind": "navigate",
+      "target": "S08",
+      "params": {
+        "mode": "create"
+      }
+    },
+    {
+      "screen": "X20",
+      "index": 1,
+      "label": "issue credit",
+      "kind": "navigate",
+      "target": "S08",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X20",
+      "index": 2,
+      "label": "stage replacement",
+      "kind": "navigate",
+      "target": "S04",
+      "params": {
+        "mode": "pos"
+      }
+    },
+    {
+      "screen": "X20",
+      "index": 3,
+      "label": "settle difference",
+      "kind": "navigate",
+      "target": "S35",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X21",
+      "index": 0,
+      "label": "Trace",
+      "kind": "navigate",
+      "target": "N31",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X21",
+      "index": 1,
+      "label": "block",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X21",
+      "index": 2,
+      "label": "notify authorized recipients",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X21",
+      "index": 3,
+      "label": "recover",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X21",
+      "index": 4,
+      "label": "dispose",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X22",
+      "index": 0,
+      "label": "Rehearse",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X22",
+      "index": 1,
+      "label": "preview",
+      "kind": "navigate",
+      "target": "X22",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X22",
+      "index": 2,
+      "label": "freeze",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X22",
+      "index": 3,
+      "label": "restore/migrate",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X22",
+      "index": 4,
+      "label": "reconcile",
+      "kind": "navigate",
+      "target": "S45",
+      "params": {
+        "report": "R076"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X22",
+      "index": 5,
+      "label": "reopen",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X23",
+      "index": 0,
+      "label": "Activate offline",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X23",
+      "index": 1,
+      "label": "verify installation",
+      "kind": "navigate",
+      "target": "X23",
+      "params": {
+        "mode": "detail"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X23",
+      "index": 2,
+      "label": "export",
+      "kind": "export"
+    },
+    {
+      "screen": "X23",
+      "index": 3,
+      "label": "renew support",
+      "kind": "create"
+    },
+    {
+      "screen": "X23",
+      "index": 4,
+      "label": "recover host",
+      "kind": "integration_required",
+      "reason": "This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI."
+    },
+    {
+      "screen": "X24",
+      "index": 0,
+      "label": "Pair",
+      "kind": "navigate",
+      "target": "X24",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X24",
+      "index": 1,
+      "label": "export scoped snapshot",
+      "kind": "export"
+    },
+    {
+      "screen": "X24",
+      "index": 2,
+      "label": "import draft",
+      "kind": "navigate",
+      "target": "X24",
+      "params": {
+        "mode": "create"
+      },
+      "semantics": "Opens the relevant local form or detail. Does not imply the server operation ran."
+    },
+    {
+      "screen": "X24",
+      "index": 3,
+      "label": "validate",
+      "kind": "edit"
+    },
+    {
+      "screen": "X24",
+      "index": 4,
+      "label": "approve on PC",
+      "kind": "transition",
+      "command": "approve"
+    }
+  ],
+  "reportChecks": [
+    {
+      "id": "R001",
+      "name": "Today/week/month sales",
+      "rows": 1,
+      "formula": "Gross = Σ(quantity × unit price); net = gross − header discount. Demo tax is zero.",
+      "result": "PASS"
+    },
+    {
+      "id": "R002",
+      "name": "Tender collections",
+      "rows": 1,
+      "formula": "Sum of source amounts grouped by tender; source link opens a contributing record.",
+      "result": "PASS"
+    },
+    {
+      "id": "R003",
+      "name": "Returns",
+      "rows": 0,
+      "formula": "Completed return amounts; draft returns are excluded.",
+      "result": "PASS"
+    },
+    {
+      "id": "R004",
+      "name": "Estimated gross profit/margin",
+      "rows": 1,
+      "formula": "Estimated gross profit = net sales − line cost snapshots; excludes operating expenses.",
+      "result": "PASS"
+    },
+    {
+      "id": "R005",
+      "name": "Activity",
+      "rows": 1,
+      "formula": "Local audit events only; this is not a server security or fiscal sequence audit.",
+      "result": "PASS"
+    },
+    {
+      "id": "R006",
+      "name": "Issues and branch comparison",
+      "rows": 1,
+      "formula": "Sum of source amounts grouped by branch_id; source link opens a contributing record.",
+      "result": "PASS"
+    },
+    {
+      "id": "R007",
+      "name": "Gross/net",
+      "rows": 1,
+      "formula": "Gross = Σ(quantity × unit price); net = gross − header discount. Demo tax is zero.",
+      "result": "PASS"
+    },
+    {
+      "id": "R008",
+      "name": "Discounts",
+      "rows": 1,
+      "formula": "Header discount on completed sales.",
+      "result": "PASS"
+    },
+    {
+      "id": "R009",
+      "name": "Tax breakdown",
+      "rows": 1,
+      "formula": "Tax = quantity × unit price × line tax rate / 100; demo exclusive-tax calculation.",
+      "result": "PASS"
+    },
+    {
+      "id": "R010",
+      "name": "By SKU",
+      "rows": 1,
+      "formula": "Units and revenue from completed sales line items; category uses current product classification.",
+      "result": "PASS"
+    },
+    {
+      "id": "R011",
+      "name": "Category",
+      "rows": 1,
+      "formula": "Units and revenue from completed sales line items; category uses current product classification.",
+      "result": "PASS"
+    },
+    {
+      "id": "R012",
+      "name": "Cashier",
+      "rows": 1,
+      "formula": "Sum of source amounts grouped by cashier; source link opens a contributing record.",
+      "result": "PASS"
+    },
+    {
+      "id": "R013",
+      "name": "Branch",
+      "rows": 1,
+      "formula": "Sum of source amounts grouped by branch_id; source link opens a contributing record.",
+      "result": "PASS"
+    },
+    {
+      "id": "R014",
+      "name": "Day",
+      "rows": 1,
+      "formula": "Sum of source amounts grouped by business_date; source link opens a contributing record.",
+      "result": "PASS"
+    },
+    {
+      "id": "R015",
+      "name": "Price tier",
+      "rows": 1,
+      "formula": "Sum of source amounts grouped by price_tier; source link opens a contributing record.",
+      "result": "PASS"
+    },
+    {
+      "id": "R016",
+      "name": "Sales channel",
+      "rows": 1,
+      "formula": "Sum of source amounts grouped by channel; source link opens a contributing record.",
+      "result": "PASS"
+    },
+    {
+      "id": "R017",
+      "name": "Returns",
+      "rows": 0,
+      "formula": "Completed return amounts; draft returns are excluded.",
+      "result": "PASS"
+    },
+    {
+      "id": "R018",
+      "name": "Opening/closing",
+      "rows": 5,
+      "formula": "Current product snapshot; opening stock is the seeded local baseline.",
+      "result": "PASS"
+    },
+    {
+      "id": "R019",
+      "name": "Available/reserved/in-transit/damaged",
+      "rows": 5,
+      "formula": "Merchant-owned = physical − remaining customer custody; demo reservations are zero.",
+      "result": "PASS"
+    },
+    {
+      "id": "R020",
+      "name": "Stock card",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R021",
+      "name": "Ageing",
+      "rows": 5,
+      "formula": "Days since last completed sale in the selected dataset. Inventory lot age is not derived from this metric.",
+      "result": "PASS"
+    },
+    {
+      "id": "R022",
+      "name": "Dead stock",
+      "rows": 5,
+      "formula": "Days since last completed sale in the selected dataset. Inventory lot age is not derived from this metric.",
+      "result": "PASS"
+    },
+    {
+      "id": "R023",
+      "name": "Below reorder",
+      "rows": 1,
+      "formula": "Current product snapshot; opening stock is the seeded local baseline.",
+      "result": "PASS"
+    },
+    {
+      "id": "R024",
+      "name": "Count variances",
+      "rows": 1,
+      "formula": "Variance = counted quantity − expected quantity.",
+      "result": "PASS"
+    },
+    {
+      "id": "R025",
+      "name": "Multi-warehouse valuation",
+      "rows": 5,
+      "formula": "Current local quantity × product cost; production weighted-average valuation is not implemented.",
+      "result": "PASS"
+    },
+    {
+      "id": "R026",
+      "name": "PO lead time",
+      "rows": 1,
+      "formula": "Received quantities include completed goods receipts only. Lead-time and supplier score calculations require production event timestamps.",
+      "result": "PASS"
+    },
+    {
+      "id": "R027",
+      "name": "Partial receipts",
+      "rows": 1,
+      "formula": "Received quantities include completed goods receipts only. Lead-time and supplier score calculations require production event timestamps.",
+      "result": "PASS"
+    },
+    {
+      "id": "R028",
+      "name": "Supplier costs and discrepancies",
+      "rows": 1,
+      "formula": "Received quantities include completed goods receipts only. Lead-time and supplier score calculations require production event timestamps.",
+      "result": "PASS"
+    },
+    {
+      "id": "R029",
+      "name": "Supplier performance",
+      "rows": 1,
+      "formula": "Received quantities include completed goods receipts only. Lead-time and supplier score calculations require production event timestamps.",
+      "result": "PASS"
+    },
+    {
+      "id": "R030",
+      "name": "AR ageing invoice-by-invoice",
+      "rows": 1,
+      "formula": "Open balance = completed sale net total − completed allocated payments; deposits are not silently treated as payments.",
+      "result": "PASS"
+    },
+    {
+      "id": "R031",
+      "name": "Collections",
+      "rows": 1,
+      "formula": "Sum of source amounts grouped by tender; source link opens a contributing record.",
+      "result": "PASS"
+    },
+    {
+      "id": "R032",
+      "name": "Deposit liability",
+      "rows": 1,
+      "formula": "Remaining liability = deposit − allocated amount.",
+      "result": "PASS"
+    },
+    {
+      "id": "R033",
+      "name": "Credit exposure and limit exceptions",
+      "rows": 1,
+      "formula": "Open balance = completed sale net total − completed allocated payments; deposits are not silently treated as payments.",
+      "result": "PASS"
+    },
+    {
+      "id": "R034",
+      "name": "AP ageing",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R035",
+      "name": "Advances",
+      "rows": 1,
+      "formula": "Unallocated supplier advance = amount − allocated amount.",
+      "result": "PASS"
+    },
+    {
+      "id": "R036",
+      "name": "Payment history and supplier credit notes",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R037",
+      "name": "Expected/counted cash",
+      "rows": 1,
+      "formula": "Cash variance = counted − expected. Local expected balance is an editable draft field.",
+      "result": "PASS"
+    },
+    {
+      "id": "R038",
+      "name": "Shift variance",
+      "rows": 1,
+      "formula": "Cash variance = counted − expected. Local expected balance is an editable draft field.",
+      "result": "PASS"
+    },
+    {
+      "id": "R039",
+      "name": "Expenses by category",
+      "rows": 0,
+      "formula": "Sum of source amounts grouped by category; source link opens a contributing record.",
+      "result": "PASS"
+    },
+    {
+      "id": "R040",
+      "name": "Refunds",
+      "rows": 0,
+      "formula": "Completed return amounts; draft returns are excluded.",
+      "result": "PASS"
+    },
+    {
+      "id": "R041",
+      "name": "Provider settlement",
+      "rows": 1,
+      "formula": "Difference = recorded net − (gross − fees).",
+      "result": "PASS"
+    },
+    {
+      "id": "R042",
+      "name": "Outstanding unknown payment status",
+      "rows": 0,
+      "formula": "Non-finalized payment records; no provider status is inferred.",
+      "result": "PASS"
+    },
+    {
+      "id": "R043",
+      "name": "Cart conversion",
+      "rows": 1,
+      "formula": "Order completion ratio only. True cart conversion requires visitor/cart analytics not present in this local demo.",
+      "result": "PASS"
+    },
+    {
+      "id": "R044",
+      "name": "Order fulfillment",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R045",
+      "name": "Delivery performance",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R046",
+      "name": "Refund rate",
+      "rows": 1,
+      "formula": "Count of completed return records divided by completed sales; not a monetary refund-rate metric.",
+      "result": "PASS"
+    },
+    {
+      "id": "R047",
+      "name": "Checkout errors",
+      "rows": 1,
+      "formula": "Units and revenue from completed sales line items; category uses current product classification.",
+      "result": "PASS"
+    },
+    {
+      "id": "R048",
+      "name": "Storefront SKU performance",
+      "rows": 1,
+      "formula": "Units and revenue from completed sales line items; category uses current product classification.",
+      "result": "PASS"
+    },
+    {
+      "id": "R049",
+      "name": "Device sync lag",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R050",
+      "name": "Rejected operations",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R051",
+      "name": "Stock quota depletion",
+      "rows": 1,
+      "formula": "Remaining device allowance = grant − consumed quantity.",
+      "result": "PASS"
+    },
+    {
+      "id": "R052",
+      "name": "Failed print jobs",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R053",
+      "name": "Backup age",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R054",
+      "name": "Provider incidents",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R055",
+      "name": "Support tickets",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R056",
+      "name": "Access histories",
+      "rows": 0,
+      "formula": "Local audit events only; this is not a server security or fiscal sequence audit.",
+      "result": "PASS"
+    },
+    {
+      "id": "R057",
+      "name": "Role changes",
+      "rows": 0,
+      "formula": "Local audit events only; this is not a server security or fiscal sequence audit.",
+      "result": "PASS"
+    },
+    {
+      "id": "R058",
+      "name": "Approvals",
+      "rows": 0,
+      "formula": "Local audit events only; this is not a server security or fiscal sequence audit.",
+      "result": "PASS"
+    },
+    {
+      "id": "R059",
+      "name": "Fiscal number sequence gaps",
+      "rows": 0,
+      "formula": "Local audit events only; this is not a server security or fiscal sequence audit.",
+      "result": "PASS"
+    },
+    {
+      "id": "R060",
+      "name": "Exports",
+      "rows": 0,
+      "formula": "Local audit events only; this is not a server security or fiscal sequence audit.",
+      "result": "PASS"
+    },
+    {
+      "id": "R061",
+      "name": "Retention actions",
+      "rows": 0,
+      "formula": "Local audit events only; this is not a server security or fiscal sequence audit.",
+      "result": "PASS"
+    },
+    {
+      "id": "R062",
+      "name": "Support access and migration audits",
+      "rows": 0,
+      "formula": "Local audit events only; this is not a server security or fiscal sequence audit.",
+      "result": "PASS"
+    },
+    {
+      "id": "R063",
+      "name": "Physical-versus-owned stock bridge",
+      "rows": 1,
+      "formula": "Remaining customer custody = owned − collected; source records retain pickup dates.",
+      "result": "PASS"
+    },
+    {
+      "id": "R064",
+      "name": "Customer custody aging",
+      "rows": 1,
+      "formula": "Remaining customer custody = owned − collected; source records retain pickup dates.",
+      "result": "PASS"
+    },
+    {
+      "id": "R065",
+      "name": "Offline exposure and exception aging",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R066",
+      "name": "GRNI aging",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R067",
+      "name": "Receipt-to-invoice variance",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R068",
+      "name": "Landed-cost adjustment bridge",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R069",
+      "name": "Inventory value rollforward",
+      "rows": 1,
+      "formula": "Remaining value adjustment = (revised cost − original cost) × remaining quantity.",
+      "result": "PASS"
+    },
+    {
+      "id": "R070",
+      "name": "Operational trial balance",
+      "rows": 1,
+      "formula": "Net = debit − credit; local journal rows only, not a certified accounting trial balance.",
+      "result": "PASS"
+    },
+    {
+      "id": "R071",
+      "name": "Bank/provider clearing aging",
+      "rows": 1,
+      "formula": "Unmatched = bank amount − matched amount.",
+      "result": "PASS"
+    },
+    {
+      "id": "R072",
+      "name": "Intercompany unmatched balances",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R073",
+      "name": "Project exposure",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R074",
+      "name": "Cutting yield/waste",
+      "rows": 1,
+      "formula": "Remainder = parent length − (output length + kerf) × output count; all values must share a unit.",
+      "result": "PASS"
+    },
+    {
+      "id": "R075",
+      "name": "Recall reach",
+      "rows": 1,
+      "formula": "Source records filtered by branch and business date; values are not fabricated.",
+      "result": "PASS"
+    },
+    {
+      "id": "R076",
+      "name": "Recovery reconciliation",
+      "rows": 1,
+      "formula": "Difference = recovered records − expected records.",
+      "result": "PASS"
+    }
+  ],
+  "docChecks": [
+    {
+      "id": "DOC01",
+      "title": "Sales receipt",
+      "layout": "receipt",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC02",
+      "title": "Sales invoice / commercial invoice",
+      "layout": "commercial",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC03",
+      "title": "Quotation",
+      "layout": "commercial",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC04",
+      "title": "Proforma invoice",
+      "layout": "commercial",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC05",
+      "title": "Purchase order",
+      "layout": "commercial",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC06",
+      "title": "Goods received note",
+      "layout": "quantity",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC07",
+      "title": "Supplier return note",
+      "layout": "quantity",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC08",
+      "title": "Customer account statement",
+      "layout": "statement",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC09",
+      "title": "Customer payment/deposit receipt",
+      "layout": "payment",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC10",
+      "title": "Credit note",
+      "layout": "commercial",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC11",
+      "title": "Refund voucher",
+      "layout": "payment",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC12",
+      "title": "Delivery/handover note",
+      "layout": "quantity",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC13",
+      "title": "Stock count/adjustment sheet",
+      "layout": "count",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC14",
+      "title": "Expense voucher",
+      "layout": "payment",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC15",
+      "title": "End-of-day closing report",
+      "layout": "cash",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC16",
+      "title": "Transfer dispatch/receiving note",
+      "layout": "quantity",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC17",
+      "title": "Subscription invoice/receipt",
+      "layout": "payment",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC18",
+      "title": "Customer custody/pickup balance note",
+      "layout": "custody",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC19",
+      "title": "Supplier invoice-match exception approval",
+      "layout": "approval",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC20",
+      "title": "Landed-cost/valuation adjustment voucher",
+      "layout": "allocation",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC21",
+      "title": "Operational journal/reversal voucher",
+      "layout": "journal",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC22",
+      "title": "Intercompany reconciliation statement",
+      "layout": "statement",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC23",
+      "title": "Offline exception resolution",
+      "layout": "approval",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC24",
+      "title": "Cut/repack production label",
+      "layout": "label",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC25",
+      "title": "Recall notice",
+      "layout": "notice",
+      "result": "PASS"
+    },
+    {
+      "id": "DOC26",
+      "title": "Deployment/restore acceptance report",
+      "layout": "acceptance",
+      "result": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,1141 @@
+Screen,Title,Entity,Field,Type,Required,Origin
+S02,Activity timeline,audit,Event type,text,False,UI_IMPLEMENTATION_FIELD
+S02,Activity timeline,audit,Source reference,text,False,UI_IMPLEMENTATION_FIELD
+S02,Activity timeline,audit,Actor,text,False,UI_IMPLEMENTATION_FIELD
+S02,Activity timeline,audit,Business date,date,False,UI_IMPLEMENTATION_FIELD
+S02,Activity timeline,audit,Operation ID,text,False,UI_IMPLEMENTATION_FIELD
+S02,Activity timeline,audit,Before,textarea,False,UI_IMPLEMENTATION_FIELD
+S02,Activity timeline,audit,After,textarea,False,UI_IMPLEMENTATION_FIELD
+S02,Activity timeline,audit,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S03,Operational alerts,policy,Name,text,True,UI_IMPLEMENTATION_FIELD
+S03,Operational alerts,policy,Scope,select,False,UI_IMPLEMENTATION_FIELD
+S03,Operational alerts,policy,Company,relation,False,UI_IMPLEMENTATION_FIELD
+S03,Operational alerts,policy,Branch,relation,False,UI_IMPLEMENTATION_FIELD
+S03,Operational alerts,policy,Effective from,date,False,UI_IMPLEMENTATION_FIELD
+S03,Operational alerts,policy,Enabled,checkbox,False,UI_IMPLEMENTATION_FIELD
+S03,Operational alerts,policy,Threshold,money,False,UI_IMPLEMENTATION_FIELD
+S03,Operational alerts,policy,Policy value,textarea,False,UI_IMPLEMENTATION_FIELD
+S03,Operational alerts,policy,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S04,New sale / POS,sale,Customer,relation,False,UI_IMPLEMENTATION_FIELD
+S04,New sale / POS,sale,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S04,New sale / POS,sale,Channel,select,False,UI_IMPLEMENTATION_FIELD
+S04,New sale / POS,sale,Fulfillment,select,False,UI_IMPLEMENTATION_FIELD
+S04,New sale / POS,sale,Discount,money,False,UI_IMPLEMENTATION_FIELD
+S04,New sale / POS,sale,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S05,Sales register,sale,Customer,relation,False,UI_IMPLEMENTATION_FIELD
+S05,Sales register,sale,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S05,Sales register,sale,Channel,select,False,UI_IMPLEMENTATION_FIELD
+S05,Sales register,sale,Fulfillment,select,False,UI_IMPLEMENTATION_FIELD
+S05,Sales register,sale,Discount,money,False,UI_IMPLEMENTATION_FIELD
+S05,Sales register,sale,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S06,Sale detail,sale,Customer,relation,False,UI_IMPLEMENTATION_FIELD
+S06,Sale detail,sale,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S06,Sale detail,sale,Channel,select,False,UI_IMPLEMENTATION_FIELD
+S06,Sale detail,sale,Fulfillment,select,False,UI_IMPLEMENTATION_FIELD
+S06,Sale detail,sale,Discount,money,False,UI_IMPLEMENTATION_FIELD
+S06,Sale detail,sale,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S07,Held sales,sale,Customer,relation,False,UI_IMPLEMENTATION_FIELD
+S07,Held sales,sale,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S07,Held sales,sale,Channel,select,False,UI_IMPLEMENTATION_FIELD
+S07,Held sales,sale,Fulfillment,select,False,UI_IMPLEMENTATION_FIELD
+S07,Held sales,sale,Discount,money,False,UI_IMPLEMENTATION_FIELD
+S07,Held sales,sale,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S08,Returns & refunds,return,Original sale,relation,True,UI_IMPLEMENTATION_FIELD
+S08,Returns & refunds,return,Customer,relation,False,UI_IMPLEMENTATION_FIELD
+S08,Returns & refunds,return,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S08,Returns & refunds,return,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S08,Returns & refunds,return,Condition,select,False,UI_IMPLEMENTATION_FIELD
+S08,Returns & refunds,return,Refund method,select,False,UI_IMPLEMENTATION_FIELD
+S09,Payment history,payment,Customer,relation,False,UI_IMPLEMENTATION_FIELD
+S09,Payment history,payment,Supplier,relation,False,UI_IMPLEMENTATION_FIELD
+S09,Payment history,payment,Sale,relation,False,UI_IMPLEMENTATION_FIELD
+S09,Payment history,payment,Purchase order,relation,False,UI_IMPLEMENTATION_FIELD
+S09,Payment history,payment,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S09,Payment history,payment,Amount,money,True,UI_IMPLEMENTATION_FIELD
+S09,Payment history,payment,Tender,select,True,UI_IMPLEMENTATION_FIELD
+S09,Payment history,payment,External reference,text,False,UI_IMPLEMENTATION_FIELD
+S09,Payment history,payment,Allocation amount,money,False,UI_IMPLEMENTATION_FIELD
+S09,Payment history,payment,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,SKU,text,True,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Name,text,True,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Category,relation,False,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Brand,text,False,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Barcode,text,False,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Base unit,select,True,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Pack size,decimal,False,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Selling price,money,True,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Purchase cost,money,False,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Reorder level,decimal,False,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Tax rate,decimal,False,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Track stock,checkbox,False,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Track serial,checkbox,False,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Track expiry,checkbox,False,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Description,textarea,False,UI_IMPLEMENTATION_FIELD
+S10,Product catalogue,product,Status,select,False,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,SKU,text,True,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Name,text,True,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Category,relation,False,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Brand,text,False,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Barcode,text,False,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Base unit,select,True,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Pack size,decimal,False,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Selling price,money,True,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Purchase cost,money,False,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Reorder level,decimal,False,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Tax rate,decimal,False,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Track stock,checkbox,False,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Track serial,checkbox,False,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Track expiry,checkbox,False,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Description,textarea,False,UI_IMPLEMENTATION_FIELD
+S11,Product detail,product,Status,select,False,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,SKU,text,True,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Name,text,True,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Category,relation,False,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Brand,text,False,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Barcode,text,False,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Base unit,select,True,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Pack size,decimal,False,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Selling price,money,True,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Purchase cost,money,False,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Reorder level,decimal,False,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Tax rate,decimal,False,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Track stock,checkbox,False,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Track serial,checkbox,False,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Track expiry,checkbox,False,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Description,textarea,False,UI_IMPLEMENTATION_FIELD
+S12,Product editor,product,Status,select,False,UI_IMPLEMENTATION_FIELD
+S13,Product categories,category,Name,text,True,UI_IMPLEMENTATION_FIELD
+S13,Product categories,category,Parent category,relation,False,UI_IMPLEMENTATION_FIELD
+S13,Product categories,category,Brand,text,False,UI_IMPLEMENTATION_FIELD
+S13,Product categories,category,Description,textarea,False,UI_IMPLEMENTATION_FIELD
+S13,Product categories,category,Status,select,False,UI_IMPLEMENTATION_FIELD
+S14,Units & conversions,unit,Name,text,True,UI_IMPLEMENTATION_FIELD
+S14,Units & conversions,unit,Symbol,text,True,UI_IMPLEMENTATION_FIELD
+S14,Units & conversions,unit,Base unit,text,True,UI_IMPLEMENTATION_FIELD
+S14,Units & conversions,unit,Conversion factor,decimal,True,UI_IMPLEMENTATION_FIELD
+S14,Units & conversions,unit,Rounding precision,number,False,UI_IMPLEMENTATION_FIELD
+S14,Units & conversions,unit,Status,select,False,UI_IMPLEMENTATION_FIELD
+S15,Price management,price,Product,relation,True,UI_IMPLEMENTATION_FIELD
+S15,Price management,price,Price tier,select,True,UI_IMPLEMENTATION_FIELD
+S15,Price management,price,Price,money,True,UI_IMPLEMENTATION_FIELD
+S15,Price management,price,Minimum quantity,decimal,False,UI_IMPLEMENTATION_FIELD
+S15,Price management,price,Effective from,date,False,UI_IMPLEMENTATION_FIELD
+S15,Price management,price,Effective to,date,False,UI_IMPLEMENTATION_FIELD
+S15,Price management,price,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,SKU,text,True,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Name,text,True,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Category,relation,False,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Brand,text,False,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Barcode,text,False,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Base unit,select,True,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Pack size,decimal,False,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Selling price,money,True,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Purchase cost,money,False,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Reorder level,decimal,False,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Tax rate,decimal,False,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Track stock,checkbox,False,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Track serial,checkbox,False,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Track expiry,checkbox,False,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Description,textarea,False,UI_IMPLEMENTATION_FIELD
+S16,Barcode labels,product,Status,select,False,UI_IMPLEMENTATION_FIELD
+S17,Stock overview,movement,Product,relation,True,UI_IMPLEMENTATION_FIELD
+S17,Stock overview,movement,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+S17,Stock overview,movement,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S17,Stock overview,movement,Quantity,decimal,True,UI_IMPLEMENTATION_FIELD
+S17,Stock overview,movement,Direction,select,False,UI_IMPLEMENTATION_FIELD
+S17,Stock overview,movement,Source reference,text,False,UI_IMPLEMENTATION_FIELD
+S17,Stock overview,movement,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S18,Stock card / detail,movement,Product,relation,True,UI_IMPLEMENTATION_FIELD
+S18,Stock card / detail,movement,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+S18,Stock card / detail,movement,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S18,Stock card / detail,movement,Quantity,decimal,True,UI_IMPLEMENTATION_FIELD
+S18,Stock card / detail,movement,Direction,select,False,UI_IMPLEMENTATION_FIELD
+S18,Stock card / detail,movement,Source reference,text,False,UI_IMPLEMENTATION_FIELD
+S18,Stock card / detail,movement,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S19,Stock movements,movement,Product,relation,True,UI_IMPLEMENTATION_FIELD
+S19,Stock movements,movement,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+S19,Stock movements,movement,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S19,Stock movements,movement,Quantity,decimal,True,UI_IMPLEMENTATION_FIELD
+S19,Stock movements,movement,Direction,select,False,UI_IMPLEMENTATION_FIELD
+S19,Stock movements,movement,Source reference,text,False,UI_IMPLEMENTATION_FIELD
+S19,Stock movements,movement,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S20,Stock adjustment,movement,Product,relation,True,UI_IMPLEMENTATION_FIELD
+S20,Stock adjustment,movement,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+S20,Stock adjustment,movement,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S20,Stock adjustment,movement,Quantity,decimal,True,UI_IMPLEMENTATION_FIELD
+S20,Stock adjustment,movement,Direction,select,False,UI_IMPLEMENTATION_FIELD
+S20,Stock adjustment,movement,Source reference,text,False,UI_IMPLEMENTATION_FIELD
+S20,Stock adjustment,movement,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S21,Stock counts,count,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+S21,Stock counts,count,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S21,Stock counts,count,Assigned operator,relation,False,UI_IMPLEMENTATION_FIELD
+S21,Stock counts,count,Freeze strategy,select,False,UI_IMPLEMENTATION_FIELD
+S21,Stock counts,count,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S22,Stock count detail,count,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+S22,Stock count detail,count,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S22,Stock count detail,count,Assigned operator,relation,False,UI_IMPLEMENTATION_FIELD
+S22,Stock count detail,count,Freeze strategy,select,False,UI_IMPLEMENTATION_FIELD
+S22,Stock count detail,count,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,SKU,text,True,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Name,text,True,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Category,relation,False,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Brand,text,False,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Barcode,text,False,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Base unit,select,True,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Pack size,decimal,False,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Selling price,money,True,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Purchase cost,money,False,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Reorder level,decimal,False,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Tax rate,decimal,False,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Track stock,checkbox,False,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Track serial,checkbox,False,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Track expiry,checkbox,False,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Description,textarea,False,UI_IMPLEMENTATION_FIELD
+S23,Reorder alerts,product,Status,select,False,UI_IMPLEMENTATION_FIELD
+S24,Purchase orders,purchase,Supplier,relation,True,UI_IMPLEMENTATION_FIELD
+S24,Purchase orders,purchase,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S24,Purchase orders,purchase,Expected delivery,date,False,UI_IMPLEMENTATION_FIELD
+S24,Purchase orders,purchase,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+S24,Purchase orders,purchase,Currency,select,False,UI_IMPLEMENTATION_FIELD
+S24,Purchase orders,purchase,Supplier reference,text,False,UI_IMPLEMENTATION_FIELD
+S24,Purchase orders,purchase,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S25,Create purchase order,purchase,Supplier,relation,True,UI_IMPLEMENTATION_FIELD
+S25,Create purchase order,purchase,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S25,Create purchase order,purchase,Expected delivery,date,False,UI_IMPLEMENTATION_FIELD
+S25,Create purchase order,purchase,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+S25,Create purchase order,purchase,Currency,select,False,UI_IMPLEMENTATION_FIELD
+S25,Create purchase order,purchase,Supplier reference,text,False,UI_IMPLEMENTATION_FIELD
+S25,Create purchase order,purchase,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S26,Purchase detail,purchase,Supplier,relation,True,UI_IMPLEMENTATION_FIELD
+S26,Purchase detail,purchase,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S26,Purchase detail,purchase,Expected delivery,date,False,UI_IMPLEMENTATION_FIELD
+S26,Purchase detail,purchase,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+S26,Purchase detail,purchase,Currency,select,False,UI_IMPLEMENTATION_FIELD
+S26,Purchase detail,purchase,Supplier reference,text,False,UI_IMPLEMENTATION_FIELD
+S26,Purchase detail,purchase,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S27,Receive goods,receipt,Purchase order,relation,True,UI_IMPLEMENTATION_FIELD
+S27,Receive goods,receipt,Supplier,relation,True,UI_IMPLEMENTATION_FIELD
+S27,Receive goods,receipt,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+S27,Receive goods,receipt,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S27,Receive goods,receipt,Supplier delivery reference,text,False,UI_IMPLEMENTATION_FIELD
+S27,Receive goods,receipt,Exception reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S28,Supplier returns,supplier_return,Goods receipt,relation,True,UI_IMPLEMENTATION_FIELD
+S28,Supplier returns,supplier_return,Supplier,relation,True,UI_IMPLEMENTATION_FIELD
+S28,Supplier returns,supplier_return,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S28,Supplier returns,supplier_return,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S28,Supplier returns,supplier_return,Disposition,select,False,UI_IMPLEMENTATION_FIELD
+S28,Supplier returns,supplier_return,Amount,money,False,UI_IMPLEMENTATION_FIELD
+S29,Supplier directory,supplier,Name,text,True,UI_IMPLEMENTATION_FIELD
+S29,Supplier directory,supplier,Contact person,text,False,UI_IMPLEMENTATION_FIELD
+S29,Supplier directory,supplier,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+S29,Supplier directory,supplier,Email,email,False,UI_IMPLEMENTATION_FIELD
+S29,Supplier directory,supplier,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+S29,Supplier directory,supplier,Tax reference,text,False,UI_IMPLEMENTATION_FIELD
+S29,Supplier directory,supplier,Payment terms days,number,False,UI_IMPLEMENTATION_FIELD
+S29,Supplier directory,supplier,Bank reference,text,False,UI_IMPLEMENTATION_FIELD
+S29,Supplier directory,supplier,Status,select,False,UI_IMPLEMENTATION_FIELD
+S30,Supplier detail,supplier,Name,text,True,UI_IMPLEMENTATION_FIELD
+S30,Supplier detail,supplier,Contact person,text,False,UI_IMPLEMENTATION_FIELD
+S30,Supplier detail,supplier,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+S30,Supplier detail,supplier,Email,email,False,UI_IMPLEMENTATION_FIELD
+S30,Supplier detail,supplier,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+S30,Supplier detail,supplier,Tax reference,text,False,UI_IMPLEMENTATION_FIELD
+S30,Supplier detail,supplier,Payment terms days,number,False,UI_IMPLEMENTATION_FIELD
+S30,Supplier detail,supplier,Bank reference,text,False,UI_IMPLEMENTATION_FIELD
+S30,Supplier detail,supplier,Status,select,False,UI_IMPLEMENTATION_FIELD
+S31,Pay suppliers,payment,Customer,relation,False,UI_IMPLEMENTATION_FIELD
+S31,Pay suppliers,payment,Supplier,relation,False,UI_IMPLEMENTATION_FIELD
+S31,Pay suppliers,payment,Sale,relation,False,UI_IMPLEMENTATION_FIELD
+S31,Pay suppliers,payment,Purchase order,relation,False,UI_IMPLEMENTATION_FIELD
+S31,Pay suppliers,payment,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S31,Pay suppliers,payment,Amount,money,True,UI_IMPLEMENTATION_FIELD
+S31,Pay suppliers,payment,Tender,select,True,UI_IMPLEMENTATION_FIELD
+S31,Pay suppliers,payment,External reference,text,False,UI_IMPLEMENTATION_FIELD
+S31,Pay suppliers,payment,Allocation amount,money,False,UI_IMPLEMENTATION_FIELD
+S31,Pay suppliers,payment,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S32,Customer directory,customer,Name,text,True,UI_IMPLEMENTATION_FIELD
+S32,Customer directory,customer,Type,select,False,UI_IMPLEMENTATION_FIELD
+S32,Customer directory,customer,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+S32,Customer directory,customer,Email,email,False,UI_IMPLEMENTATION_FIELD
+S32,Customer directory,customer,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+S32,Customer directory,customer,Tax reference,text,False,UI_IMPLEMENTATION_FIELD
+S32,Customer directory,customer,Credit limit,money,False,UI_IMPLEMENTATION_FIELD
+S32,Customer directory,customer,Payment terms days,number,False,UI_IMPLEMENTATION_FIELD
+S32,Customer directory,customer,Consent,checkbox,False,UI_IMPLEMENTATION_FIELD
+S32,Customer directory,customer,Status,select,False,UI_IMPLEMENTATION_FIELD
+S33,Customer profile,customer,Name,text,True,UI_IMPLEMENTATION_FIELD
+S33,Customer profile,customer,Type,select,False,UI_IMPLEMENTATION_FIELD
+S33,Customer profile,customer,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+S33,Customer profile,customer,Email,email,False,UI_IMPLEMENTATION_FIELD
+S33,Customer profile,customer,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+S33,Customer profile,customer,Tax reference,text,False,UI_IMPLEMENTATION_FIELD
+S33,Customer profile,customer,Credit limit,money,False,UI_IMPLEMENTATION_FIELD
+S33,Customer profile,customer,Payment terms days,number,False,UI_IMPLEMENTATION_FIELD
+S33,Customer profile,customer,Consent,checkbox,False,UI_IMPLEMENTATION_FIELD
+S33,Customer profile,customer,Status,select,False,UI_IMPLEMENTATION_FIELD
+S34,Customer credit ledger,customer,Name,text,True,UI_IMPLEMENTATION_FIELD
+S34,Customer credit ledger,customer,Type,select,False,UI_IMPLEMENTATION_FIELD
+S34,Customer credit ledger,customer,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+S34,Customer credit ledger,customer,Email,email,False,UI_IMPLEMENTATION_FIELD
+S34,Customer credit ledger,customer,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+S34,Customer credit ledger,customer,Tax reference,text,False,UI_IMPLEMENTATION_FIELD
+S34,Customer credit ledger,customer,Credit limit,money,False,UI_IMPLEMENTATION_FIELD
+S34,Customer credit ledger,customer,Payment terms days,number,False,UI_IMPLEMENTATION_FIELD
+S34,Customer credit ledger,customer,Consent,checkbox,False,UI_IMPLEMENTATION_FIELD
+S34,Customer credit ledger,customer,Status,select,False,UI_IMPLEMENTATION_FIELD
+S35,Receive customer payment,payment,Customer,relation,False,UI_IMPLEMENTATION_FIELD
+S35,Receive customer payment,payment,Supplier,relation,False,UI_IMPLEMENTATION_FIELD
+S35,Receive customer payment,payment,Sale,relation,False,UI_IMPLEMENTATION_FIELD
+S35,Receive customer payment,payment,Purchase order,relation,False,UI_IMPLEMENTATION_FIELD
+S35,Receive customer payment,payment,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S35,Receive customer payment,payment,Amount,money,True,UI_IMPLEMENTATION_FIELD
+S35,Receive customer payment,payment,Tender,select,True,UI_IMPLEMENTATION_FIELD
+S35,Receive customer payment,payment,External reference,text,False,UI_IMPLEMENTATION_FIELD
+S35,Receive customer payment,payment,Allocation amount,money,False,UI_IMPLEMENTATION_FIELD
+S35,Receive customer payment,payment,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S36,Customer statements,customer,Name,text,True,UI_IMPLEMENTATION_FIELD
+S36,Customer statements,customer,Type,select,False,UI_IMPLEMENTATION_FIELD
+S36,Customer statements,customer,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+S36,Customer statements,customer,Email,email,False,UI_IMPLEMENTATION_FIELD
+S36,Customer statements,customer,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+S36,Customer statements,customer,Tax reference,text,False,UI_IMPLEMENTATION_FIELD
+S36,Customer statements,customer,Credit limit,money,False,UI_IMPLEMENTATION_FIELD
+S36,Customer statements,customer,Payment terms days,number,False,UI_IMPLEMENTATION_FIELD
+S36,Customer statements,customer,Consent,checkbox,False,UI_IMPLEMENTATION_FIELD
+S36,Customer statements,customer,Status,select,False,UI_IMPLEMENTATION_FIELD
+S37,Quotation register,quote,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+S37,Quotation register,quote,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S37,Quotation register,quote,Valid until,date,True,UI_IMPLEMENTATION_FIELD
+S37,Quotation register,quote,Delivery charge,money,False,UI_IMPLEMENTATION_FIELD
+S37,Quotation register,quote,Discount,money,False,UI_IMPLEMENTATION_FIELD
+S37,Quotation register,quote,Terms,textarea,False,UI_IMPLEMENTATION_FIELD
+S37,Quotation register,quote,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S38,New quotation,quote,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+S38,New quotation,quote,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S38,New quotation,quote,Valid until,date,True,UI_IMPLEMENTATION_FIELD
+S38,New quotation,quote,Delivery charge,money,False,UI_IMPLEMENTATION_FIELD
+S38,New quotation,quote,Discount,money,False,UI_IMPLEMENTATION_FIELD
+S38,New quotation,quote,Terms,textarea,False,UI_IMPLEMENTATION_FIELD
+S38,New quotation,quote,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S39,Quotation detail,quote,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+S39,Quotation detail,quote,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S39,Quotation detail,quote,Valid until,date,True,UI_IMPLEMENTATION_FIELD
+S39,Quotation detail,quote,Delivery charge,money,False,UI_IMPLEMENTATION_FIELD
+S39,Quotation detail,quote,Discount,money,False,UI_IMPLEMENTATION_FIELD
+S39,Quotation detail,quote,Terms,textarea,False,UI_IMPLEMENTATION_FIELD
+S39,Quotation detail,quote,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S40,Cash register,cash,Register,text,True,UI_IMPLEMENTATION_FIELD
+S40,Cash register,cash,Operator,relation,False,UI_IMPLEMENTATION_FIELD
+S40,Cash register,cash,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S40,Cash register,cash,Opening amount,money,True,UI_IMPLEMENTATION_FIELD
+S40,Cash register,cash,Expected amount,money,False,UI_IMPLEMENTATION_FIELD
+S40,Cash register,cash,Counted amount,money,False,UI_IMPLEMENTATION_FIELD
+S40,Cash register,cash,Variance reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S41,Cash movements,cash,Register,text,True,UI_IMPLEMENTATION_FIELD
+S41,Cash movements,cash,Operator,relation,False,UI_IMPLEMENTATION_FIELD
+S41,Cash movements,cash,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S41,Cash movements,cash,Opening amount,money,True,UI_IMPLEMENTATION_FIELD
+S41,Cash movements,cash,Expected amount,money,False,UI_IMPLEMENTATION_FIELD
+S41,Cash movements,cash,Counted amount,money,False,UI_IMPLEMENTATION_FIELD
+S41,Cash movements,cash,Variance reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S42,Close cash session,cash,Register,text,True,UI_IMPLEMENTATION_FIELD
+S42,Close cash session,cash,Operator,relation,False,UI_IMPLEMENTATION_FIELD
+S42,Close cash session,cash,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S42,Close cash session,cash,Opening amount,money,True,UI_IMPLEMENTATION_FIELD
+S42,Close cash session,cash,Expected amount,money,False,UI_IMPLEMENTATION_FIELD
+S42,Close cash session,cash,Counted amount,money,False,UI_IMPLEMENTATION_FIELD
+S42,Close cash session,cash,Variance reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S43,Expenses,expense,Category,text,True,UI_IMPLEMENTATION_FIELD
+S43,Expenses,expense,Payee,text,True,UI_IMPLEMENTATION_FIELD
+S43,Expenses,expense,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S43,Expenses,expense,Amount,money,True,UI_IMPLEMENTATION_FIELD
+S43,Expenses,expense,Tender,select,False,UI_IMPLEMENTATION_FIELD
+S43,Expenses,expense,Description,textarea,True,UI_IMPLEMENTATION_FIELD
+S43,Expenses,expense,Evidence,file,False,UI_IMPLEMENTATION_FIELD
+S43,Expenses,expense,Approval reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S44,Expense detail,expense,Category,text,True,UI_IMPLEMENTATION_FIELD
+S44,Expense detail,expense,Payee,text,True,UI_IMPLEMENTATION_FIELD
+S44,Expense detail,expense,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S44,Expense detail,expense,Amount,money,True,UI_IMPLEMENTATION_FIELD
+S44,Expense detail,expense,Tender,select,False,UI_IMPLEMENTATION_FIELD
+S44,Expense detail,expense,Description,textarea,True,UI_IMPLEMENTATION_FIELD
+S44,Expense detail,expense,Evidence,file,False,UI_IMPLEMENTATION_FIELD
+S44,Expense detail,expense,Approval reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S55,Staff & accounts,staff,Name,text,True,UI_IMPLEMENTATION_FIELD
+S55,Staff & accounts,staff,Email,email,True,UI_IMPLEMENTATION_FIELD
+S55,Staff & accounts,staff,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+S55,Staff & accounts,staff,Role,relation,False,UI_IMPLEMENTATION_FIELD
+S55,Staff & accounts,staff,Branch,relation,False,UI_IMPLEMENTATION_FIELD
+S55,Staff & accounts,staff,Company,relation,False,UI_IMPLEMENTATION_FIELD
+S55,Staff & accounts,staff,Invitation expires,date,False,UI_IMPLEMENTATION_FIELD
+S55,Staff & accounts,staff,Status,select,False,UI_IMPLEMENTATION_FIELD
+S56,Roles & permissions,role,Name,text,True,UI_IMPLEMENTATION_FIELD
+S56,Roles & permissions,role,Description,textarea,False,UI_IMPLEMENTATION_FIELD
+S56,Roles & permissions,role,Read records,checkbox,False,UI_IMPLEMENTATION_FIELD
+S56,Roles & permissions,role,Create drafts,checkbox,False,UI_IMPLEMENTATION_FIELD
+S56,Roles & permissions,role,Approve,checkbox,False,UI_IMPLEMENTATION_FIELD
+S56,Roles & permissions,role,Export,checkbox,False,UI_IMPLEMENTATION_FIELD
+S56,Roles & permissions,role,Manage configuration,checkbox,False,UI_IMPLEMENTATION_FIELD
+S56,Roles & permissions,role,Branch,relation,False,UI_IMPLEMENTATION_FIELD
+S57,Business profile,company,Legal name,text,True,UI_IMPLEMENTATION_FIELD
+S57,Business profile,company,Trading name,text,False,UI_IMPLEMENTATION_FIELD
+S57,Business profile,company,Registration number,text,False,UI_IMPLEMENTATION_FIELD
+S57,Business profile,company,Tax reference,text,False,UI_IMPLEMENTATION_FIELD
+S57,Business profile,company,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+S57,Business profile,company,Email,email,False,UI_IMPLEMENTATION_FIELD
+S57,Business profile,company,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+S57,Business profile,company,Timezone,select,False,UI_IMPLEMENTATION_FIELD
+S57,Business profile,company,Currency,select,False,UI_IMPLEMENTATION_FIELD
+S57,Business profile,company,Locale,select,False,UI_IMPLEMENTATION_FIELD
+S57,Business profile,company,Logo,file,False,UI_IMPLEMENTATION_FIELD
+S58,Taxes & numbering,tax,Tax name,text,True,UI_IMPLEMENTATION_FIELD
+S58,Taxes & numbering,tax,Tax rate,decimal,True,UI_IMPLEMENTATION_FIELD
+S58,Taxes & numbering,tax,Price includes tax,checkbox,False,UI_IMPLEMENTATION_FIELD
+S58,Taxes & numbering,tax,Company,relation,True,UI_IMPLEMENTATION_FIELD
+S58,Taxes & numbering,tax,Document type,select,False,UI_IMPLEMENTATION_FIELD
+S58,Taxes & numbering,tax,Number prefix,text,True,UI_IMPLEMENTATION_FIELD
+S58,Taxes & numbering,tax,Next sequence,number,False,UI_IMPLEMENTATION_FIELD
+S58,Taxes & numbering,tax,Effective from,date,False,UI_IMPLEMENTATION_FIELD
+S58,Taxes & numbering,tax,Policy reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S59,Document templates,template,Name,text,True,UI_IMPLEMENTATION_FIELD
+S59,Document templates,template,Document family,text,True,UI_IMPLEMENTATION_FIELD
+S59,Document templates,template,Version,text,True,UI_IMPLEMENTATION_FIELD
+S59,Document templates,template,Locale,select,False,UI_IMPLEMENTATION_FIELD
+S59,Document templates,template,Paper,select,False,UI_IMPLEMENTATION_FIELD
+S59,Document templates,template,Footer,textarea,False,UI_IMPLEMENTATION_FIELD
+S59,Document templates,template,Show logo,checkbox,False,UI_IMPLEMENTATION_FIELD
+S59,Document templates,template,Copy marker,checkbox,False,UI_IMPLEMENTATION_FIELD
+S60,Printer setup,printer,Name,text,True,UI_IMPLEMENTATION_FIELD
+S60,Printer setup,printer,Printer profile,select,False,UI_IMPLEMENTATION_FIELD
+S60,Printer setup,printer,Connection,select,False,UI_IMPLEMENTATION_FIELD
+S60,Printer setup,printer,Destination,text,False,UI_IMPLEMENTATION_FIELD
+S60,Printer setup,printer,Margins mm,decimal,False,UI_IMPLEMENTATION_FIELD
+S60,Printer setup,printer,Copies,number,False,UI_IMPLEMENTATION_FIELD
+S60,Printer setup,printer,Default printer,checkbox,False,UI_IMPLEMENTATION_FIELD
+S61,Backup centre,backup,Name,text,True,UI_IMPLEMENTATION_FIELD
+S61,Backup centre,backup,Backup reference,text,False,UI_IMPLEMENTATION_FIELD
+S61,Backup centre,backup,Recovery point,date,False,UI_IMPLEMENTATION_FIELD
+S61,Backup centre,backup,Destination,text,False,UI_IMPLEMENTATION_FIELD
+S61,Backup centre,backup,Retention days,number,False,UI_IMPLEMENTATION_FIELD
+S61,Backup centre,backup,Checksum,text,False,UI_IMPLEMENTATION_FIELD
+S61,Backup centre,backup,Manifest,file,False,UI_IMPLEMENTATION_FIELD
+S61,Backup centre,backup,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S62,Restore preview,backup,Name,text,True,UI_IMPLEMENTATION_FIELD
+S62,Restore preview,backup,Backup reference,text,False,UI_IMPLEMENTATION_FIELD
+S62,Restore preview,backup,Recovery point,date,False,UI_IMPLEMENTATION_FIELD
+S62,Restore preview,backup,Destination,text,False,UI_IMPLEMENTATION_FIELD
+S62,Restore preview,backup,Retention days,number,False,UI_IMPLEMENTATION_FIELD
+S62,Restore preview,backup,Checksum,text,False,UI_IMPLEMENTATION_FIELD
+S62,Restore preview,backup,Manifest,file,False,UI_IMPLEMENTATION_FIELD
+S62,Restore preview,backup,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S63,Import & export,import,Name,text,True,UI_IMPLEMENTATION_FIELD
+S63,Import & export,import,Dataset,select,False,UI_IMPLEMENTATION_FIELD
+S63,Import & export,import,Input file,file,False,UI_IMPLEMENTATION_FIELD
+S63,Import & export,import,Encoding,select,False,UI_IMPLEMENTATION_FIELD
+S63,Import & export,import,Delimiter,select,False,UI_IMPLEMENTATION_FIELD
+S63,Import & export,import,Mapping,textarea,False,UI_IMPLEMENTATION_FIELD
+S63,Import & export,import,Validation notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S64,Audit log,audit,Event type,text,False,UI_IMPLEMENTATION_FIELD
+S64,Audit log,audit,Source reference,text,False,UI_IMPLEMENTATION_FIELD
+S64,Audit log,audit,Actor,text,False,UI_IMPLEMENTATION_FIELD
+S64,Audit log,audit,Business date,date,False,UI_IMPLEMENTATION_FIELD
+S64,Audit log,audit,Operation ID,text,False,UI_IMPLEMENTATION_FIELD
+S64,Audit log,audit,Before,textarea,False,UI_IMPLEMENTATION_FIELD
+S64,Audit log,audit,After,textarea,False,UI_IMPLEMENTATION_FIELD
+S64,Audit log,audit,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S65,About & diagnostics,incident,Title,text,True,UI_IMPLEMENTATION_FIELD
+S65,About & diagnostics,incident,Severity,select,False,UI_IMPLEMENTATION_FIELD
+S65,About & diagnostics,incident,Client version,text,False,UI_IMPLEMENTATION_FIELD
+S65,About & diagnostics,incident,Server version,text,False,UI_IMPLEMENTATION_FIELD
+S65,About & diagnostics,incident,Source reference,text,False,UI_IMPLEMENTATION_FIELD
+S65,About & diagnostics,incident,Redacted diagnostics,textarea,False,UI_IMPLEMENTATION_FIELD
+S65,About & diagnostics,incident,Assigned to,relation,False,UI_IMPLEMENTATION_FIELD
+S65,About & diagnostics,incident,Resolution,textarea,False,UI_IMPLEMENTATION_FIELD
+S66,Welcome & Prerequisites,company,Legal name,text,True,UI_IMPLEMENTATION_FIELD
+S66,Welcome & Prerequisites,company,Trading name,text,False,UI_IMPLEMENTATION_FIELD
+S66,Welcome & Prerequisites,company,Registration number,text,False,UI_IMPLEMENTATION_FIELD
+S66,Welcome & Prerequisites,company,Tax reference,text,False,UI_IMPLEMENTATION_FIELD
+S66,Welcome & Prerequisites,company,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+S66,Welcome & Prerequisites,company,Email,email,False,UI_IMPLEMENTATION_FIELD
+S66,Welcome & Prerequisites,company,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+S66,Welcome & Prerequisites,company,Timezone,select,False,UI_IMPLEMENTATION_FIELD
+S66,Welcome & Prerequisites,company,Currency,select,False,UI_IMPLEMENTATION_FIELD
+S66,Welcome & Prerequisites,company,Locale,select,False,UI_IMPLEMENTATION_FIELD
+S66,Welcome & Prerequisites,company,Logo,file,False,UI_IMPLEMENTATION_FIELD
+S67,Store Business Profile Setup,company,Legal name,text,True,UI_IMPLEMENTATION_FIELD
+S67,Store Business Profile Setup,company,Trading name,text,False,UI_IMPLEMENTATION_FIELD
+S67,Store Business Profile Setup,company,Registration number,text,False,UI_IMPLEMENTATION_FIELD
+S67,Store Business Profile Setup,company,Tax reference,text,False,UI_IMPLEMENTATION_FIELD
+S67,Store Business Profile Setup,company,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+S67,Store Business Profile Setup,company,Email,email,False,UI_IMPLEMENTATION_FIELD
+S67,Store Business Profile Setup,company,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+S67,Store Business Profile Setup,company,Timezone,select,False,UI_IMPLEMENTATION_FIELD
+S67,Store Business Profile Setup,company,Currency,select,False,UI_IMPLEMENTATION_FIELD
+S67,Store Business Profile Setup,company,Locale,select,False,UI_IMPLEMENTATION_FIELD
+S67,Store Business Profile Setup,company,Logo,file,False,UI_IMPLEMENTATION_FIELD
+S68,Create Owner Account,identity,Email,email,True,UI_IMPLEMENTATION_FIELD
+S68,Create Owner Account,identity,Password,password,True,UI_IMPLEMENTATION_FIELD
+S68,Create Owner Account,identity,Confirm password,password,False,UI_IMPLEMENTATION_FIELD
+S68,Create Owner Account,identity,Verification code,text,False,UI_IMPLEMENTATION_FIELD
+S68,Create Owner Account,identity,Recovery method,select,False,UI_IMPLEMENTATION_FIELD
+S68,Create Owner Account,identity,Locale,select,False,UI_IMPLEMENTATION_FIELD
+S69,Opening Data Import Wizard,import,Name,text,True,UI_IMPLEMENTATION_FIELD
+S69,Opening Data Import Wizard,import,Dataset,select,False,UI_IMPLEMENTATION_FIELD
+S69,Opening Data Import Wizard,import,Input file,file,False,UI_IMPLEMENTATION_FIELD
+S69,Opening Data Import Wizard,import,Encoding,select,False,UI_IMPLEMENTATION_FIELD
+S69,Opening Data Import Wizard,import,Delimiter,select,False,UI_IMPLEMENTATION_FIELD
+S69,Opening Data Import Wizard,import,Mapping,textarea,False,UI_IMPLEMENTATION_FIELD
+S69,Opening Data Import Wizard,import,Validation notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S70,Printer & Backup Setup,printer,Name,text,True,UI_IMPLEMENTATION_FIELD
+S70,Printer & Backup Setup,printer,Printer profile,select,False,UI_IMPLEMENTATION_FIELD
+S70,Printer & Backup Setup,printer,Connection,select,False,UI_IMPLEMENTATION_FIELD
+S70,Printer & Backup Setup,printer,Destination,text,False,UI_IMPLEMENTATION_FIELD
+S70,Printer & Backup Setup,printer,Margins mm,decimal,False,UI_IMPLEMENTATION_FIELD
+S70,Printer & Backup Setup,printer,Copies,number,False,UI_IMPLEMENTATION_FIELD
+S70,Printer & Backup Setup,printer,Default printer,checkbox,False,UI_IMPLEMENTATION_FIELD
+S71,Sign In,identity,Email,email,True,UI_IMPLEMENTATION_FIELD
+S71,Sign In,identity,Password,password,True,UI_IMPLEMENTATION_FIELD
+S71,Sign In,identity,Confirm password,password,False,UI_IMPLEMENTATION_FIELD
+S71,Sign In,identity,Verification code,text,False,UI_IMPLEMENTATION_FIELD
+S71,Sign In,identity,Recovery method,select,False,UI_IMPLEMENTATION_FIELD
+S71,Sign In,identity,Locale,select,False,UI_IMPLEMENTATION_FIELD
+S72,Locked Session / Reauthentication,identity,Email,email,True,UI_IMPLEMENTATION_FIELD
+S72,Locked Session / Reauthentication,identity,Password,password,True,UI_IMPLEMENTATION_FIELD
+S72,Locked Session / Reauthentication,identity,Confirm password,password,False,UI_IMPLEMENTATION_FIELD
+S72,Locked Session / Reauthentication,identity,Verification code,text,False,UI_IMPLEMENTATION_FIELD
+S72,Locked Session / Reauthentication,identity,Recovery method,select,False,UI_IMPLEMENTATION_FIELD
+S72,Locked Session / Reauthentication,identity,Locale,select,False,UI_IMPLEMENTATION_FIELD
+S73,Change Password / Owner Recovery,identity,Email,email,True,UI_IMPLEMENTATION_FIELD
+S73,Change Password / Owner Recovery,identity,Password,password,True,UI_IMPLEMENTATION_FIELD
+S73,Change Password / Owner Recovery,identity,Confirm password,password,False,UI_IMPLEMENTATION_FIELD
+S73,Change Password / Owner Recovery,identity,Verification code,text,False,UI_IMPLEMENTATION_FIELD
+S73,Change Password / Owner Recovery,identity,Recovery method,select,False,UI_IMPLEMENTATION_FIELD
+S73,Change Password / Owner Recovery,identity,Locale,select,False,UI_IMPLEMENTATION_FIELD
+S74,Pickup & Delivery Queue,fulfillment,Sale,relation,True,UI_IMPLEMENTATION_FIELD
+S74,Pickup & Delivery Queue,fulfillment,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+S74,Pickup & Delivery Queue,fulfillment,Warehouse,relation,False,UI_IMPLEMENTATION_FIELD
+S74,Pickup & Delivery Queue,fulfillment,Method,select,False,UI_IMPLEMENTATION_FIELD
+S74,Pickup & Delivery Queue,fulfillment,Scheduled date,date,False,UI_IMPLEMENTATION_FIELD
+S74,Pickup & Delivery Queue,fulfillment,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+S74,Pickup & Delivery Queue,fulfillment,Recipient name,text,False,UI_IMPLEMENTATION_FIELD
+S74,Pickup & Delivery Queue,fulfillment,Recipient phone,tel,False,UI_IMPLEMENTATION_FIELD
+S74,Pickup & Delivery Queue,fulfillment,Proof reference,text,False,UI_IMPLEMENTATION_FIELD
+S74,Pickup & Delivery Queue,fulfillment,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S75,Pickup / Delivery Detail,fulfillment,Sale,relation,True,UI_IMPLEMENTATION_FIELD
+S75,Pickup / Delivery Detail,fulfillment,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+S75,Pickup / Delivery Detail,fulfillment,Warehouse,relation,False,UI_IMPLEMENTATION_FIELD
+S75,Pickup / Delivery Detail,fulfillment,Method,select,False,UI_IMPLEMENTATION_FIELD
+S75,Pickup / Delivery Detail,fulfillment,Scheduled date,date,False,UI_IMPLEMENTATION_FIELD
+S75,Pickup / Delivery Detail,fulfillment,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+S75,Pickup / Delivery Detail,fulfillment,Recipient name,text,False,UI_IMPLEMENTATION_FIELD
+S75,Pickup / Delivery Detail,fulfillment,Recipient phone,tel,False,UI_IMPLEMENTATION_FIELD
+S75,Pickup / Delivery Detail,fulfillment,Proof reference,text,False,UI_IMPLEMENTATION_FIELD
+S75,Pickup / Delivery Detail,fulfillment,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S76,Customer Deposits Register,deposit,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+S76,Customer Deposits Register,deposit,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S76,Customer Deposits Register,deposit,Amount,money,True,UI_IMPLEMENTATION_FIELD
+S76,Customer Deposits Register,deposit,Allocated amount,money,False,UI_IMPLEMENTATION_FIELD
+S76,Customer Deposits Register,deposit,Tender,select,False,UI_IMPLEMENTATION_FIELD
+S76,Customer Deposits Register,deposit,Reference,text,False,UI_IMPLEMENTATION_FIELD
+S76,Customer Deposits Register,deposit,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S77,Customer Deposit & Allocation Detail,deposit,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+S77,Customer Deposit & Allocation Detail,deposit,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S77,Customer Deposit & Allocation Detail,deposit,Amount,money,True,UI_IMPLEMENTATION_FIELD
+S77,Customer Deposit & Allocation Detail,deposit,Allocated amount,money,False,UI_IMPLEMENTATION_FIELD
+S77,Customer Deposit & Allocation Detail,deposit,Tender,select,False,UI_IMPLEMENTATION_FIELD
+S77,Customer Deposit & Allocation Detail,deposit,Reference,text,False,UI_IMPLEMENTATION_FIELD
+S77,Customer Deposit & Allocation Detail,deposit,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+S78,Payment Allocation Correction,payment,Customer,relation,False,UI_IMPLEMENTATION_FIELD
+S78,Payment Allocation Correction,payment,Supplier,relation,False,UI_IMPLEMENTATION_FIELD
+S78,Payment Allocation Correction,payment,Sale,relation,False,UI_IMPLEMENTATION_FIELD
+S78,Payment Allocation Correction,payment,Purchase order,relation,False,UI_IMPLEMENTATION_FIELD
+S78,Payment Allocation Correction,payment,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S78,Payment Allocation Correction,payment,Amount,money,True,UI_IMPLEMENTATION_FIELD
+S78,Payment Allocation Correction,payment,Tender,select,True,UI_IMPLEMENTATION_FIELD
+S78,Payment Allocation Correction,payment,External reference,text,False,UI_IMPLEMENTATION_FIELD
+S78,Payment Allocation Correction,payment,Allocation amount,money,False,UI_IMPLEMENTATION_FIELD
+S78,Payment Allocation Correction,payment,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S79,Emergency Restore & Integrity Checks,backup,Name,text,True,UI_IMPLEMENTATION_FIELD
+S79,Emergency Restore & Integrity Checks,backup,Backup reference,text,False,UI_IMPLEMENTATION_FIELD
+S79,Emergency Restore & Integrity Checks,backup,Recovery point,date,False,UI_IMPLEMENTATION_FIELD
+S79,Emergency Restore & Integrity Checks,backup,Destination,text,False,UI_IMPLEMENTATION_FIELD
+S79,Emergency Restore & Integrity Checks,backup,Retention days,number,False,UI_IMPLEMENTATION_FIELD
+S79,Emergency Restore & Integrity Checks,backup,Checksum,text,False,UI_IMPLEMENTATION_FIELD
+S79,Emergency Restore & Integrity Checks,backup,Manifest,file,False,UI_IMPLEMENTATION_FIELD
+S79,Emergency Restore & Integrity Checks,backup,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S80,Failed Print & Posting Recovery Queue,incident,Title,text,True,UI_IMPLEMENTATION_FIELD
+S80,Failed Print & Posting Recovery Queue,incident,Severity,select,False,UI_IMPLEMENTATION_FIELD
+S80,Failed Print & Posting Recovery Queue,incident,Client version,text,False,UI_IMPLEMENTATION_FIELD
+S80,Failed Print & Posting Recovery Queue,incident,Server version,text,False,UI_IMPLEMENTATION_FIELD
+S80,Failed Print & Posting Recovery Queue,incident,Source reference,text,False,UI_IMPLEMENTATION_FIELD
+S80,Failed Print & Posting Recovery Queue,incident,Redacted diagnostics,textarea,False,UI_IMPLEMENTATION_FIELD
+S80,Failed Print & Posting Recovery Queue,incident,Assigned to,relation,False,UI_IMPLEMENTATION_FIELD
+S80,Failed Print & Posting Recovery Queue,incident,Resolution,textarea,False,UI_IMPLEMENTATION_FIELD
+S81,Configuration hub,policy,Name,text,True,UI_IMPLEMENTATION_FIELD
+S81,Configuration hub,policy,Scope,select,False,UI_IMPLEMENTATION_FIELD
+S81,Configuration hub,policy,Company,relation,False,UI_IMPLEMENTATION_FIELD
+S81,Configuration hub,policy,Branch,relation,False,UI_IMPLEMENTATION_FIELD
+S81,Configuration hub,policy,Effective from,date,False,UI_IMPLEMENTATION_FIELD
+S81,Configuration hub,policy,Enabled,checkbox,False,UI_IMPLEMENTATION_FIELD
+S81,Configuration hub,policy,Threshold,money,False,UI_IMPLEMENTATION_FIELD
+S81,Configuration hub,policy,Policy value,textarea,False,UI_IMPLEMENTATION_FIELD
+S81,Configuration hub,policy,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S82,Financial period & daily close policy,period,Name,text,True,UI_IMPLEMENTATION_FIELD
+S82,Financial period & daily close policy,period,Company,relation,True,UI_IMPLEMENTATION_FIELD
+S82,Financial period & daily close policy,period,Start date,date,True,UI_IMPLEMENTATION_FIELD
+S82,Financial period & daily close policy,period,End date,date,True,UI_IMPLEMENTATION_FIELD
+S82,Financial period & daily close policy,period,Opening balance,money,False,UI_IMPLEMENTATION_FIELD
+S82,Financial period & daily close policy,period,Close reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S83,Sales and payment policies,policy,Name,text,True,UI_IMPLEMENTATION_FIELD
+S83,Sales and payment policies,policy,Scope,select,False,UI_IMPLEMENTATION_FIELD
+S83,Sales and payment policies,policy,Company,relation,False,UI_IMPLEMENTATION_FIELD
+S83,Sales and payment policies,policy,Branch,relation,False,UI_IMPLEMENTATION_FIELD
+S83,Sales and payment policies,policy,Effective from,date,False,UI_IMPLEMENTATION_FIELD
+S83,Sales and payment policies,policy,Enabled,checkbox,False,UI_IMPLEMENTATION_FIELD
+S83,Sales and payment policies,policy,Threshold,money,False,UI_IMPLEMENTATION_FIELD
+S83,Sales and payment policies,policy,Policy value,textarea,False,UI_IMPLEMENTATION_FIELD
+S83,Sales and payment policies,policy,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S84,New / Edit Expense,expense,Category,text,True,UI_IMPLEMENTATION_FIELD
+S84,New / Edit Expense,expense,Payee,text,True,UI_IMPLEMENTATION_FIELD
+S84,New / Edit Expense,expense,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S84,New / Edit Expense,expense,Amount,money,True,UI_IMPLEMENTATION_FIELD
+S84,New / Edit Expense,expense,Tender,select,False,UI_IMPLEMENTATION_FIELD
+S84,New / Edit Expense,expense,Description,textarea,True,UI_IMPLEMENTATION_FIELD
+S84,New / Edit Expense,expense,Evidence,file,False,UI_IMPLEMENTATION_FIELD
+S84,New / Edit Expense,expense,Approval reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S85,Expense approval queue,expense,Category,text,True,UI_IMPLEMENTATION_FIELD
+S85,Expense approval queue,expense,Payee,text,True,UI_IMPLEMENTATION_FIELD
+S85,Expense approval queue,expense,Business date,date,True,UI_IMPLEMENTATION_FIELD
+S85,Expense approval queue,expense,Amount,money,True,UI_IMPLEMENTATION_FIELD
+S85,Expense approval queue,expense,Tender,select,False,UI_IMPLEMENTATION_FIELD
+S85,Expense approval queue,expense,Description,textarea,True,UI_IMPLEMENTATION_FIELD
+S85,Expense approval queue,expense,Evidence,file,False,UI_IMPLEMENTATION_FIELD
+S85,Expense approval queue,expense,Approval reason,textarea,False,UI_IMPLEMENTATION_FIELD
+S86,Expense categories & payees,policy,Name,text,True,UI_IMPLEMENTATION_FIELD
+S86,Expense categories & payees,policy,Scope,select,False,UI_IMPLEMENTATION_FIELD
+S86,Expense categories & payees,policy,Company,relation,False,UI_IMPLEMENTATION_FIELD
+S86,Expense categories & payees,policy,Branch,relation,False,UI_IMPLEMENTATION_FIELD
+S86,Expense categories & payees,policy,Effective from,date,False,UI_IMPLEMENTATION_FIELD
+S86,Expense categories & payees,policy,Enabled,checkbox,False,UI_IMPLEMENTATION_FIELD
+S86,Expense categories & payees,policy,Threshold,money,False,UI_IMPLEMENTATION_FIELD
+S86,Expense categories & payees,policy,Policy value,textarea,False,UI_IMPLEMENTATION_FIELD
+S86,Expense categories & payees,policy,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S87,Security & data retention configuration,policy,Name,text,True,UI_IMPLEMENTATION_FIELD
+S87,Security & data retention configuration,policy,Scope,select,False,UI_IMPLEMENTATION_FIELD
+S87,Security & data retention configuration,policy,Company,relation,False,UI_IMPLEMENTATION_FIELD
+S87,Security & data retention configuration,policy,Branch,relation,False,UI_IMPLEMENTATION_FIELD
+S87,Security & data retention configuration,policy,Effective from,date,False,UI_IMPLEMENTATION_FIELD
+S87,Security & data retention configuration,policy,Enabled,checkbox,False,UI_IMPLEMENTATION_FIELD
+S87,Security & data retention configuration,policy,Threshold,money,False,UI_IMPLEMENTATION_FIELD
+S87,Security & data retention configuration,policy,Policy value,textarea,False,UI_IMPLEMENTATION_FIELD
+S87,Security & data retention configuration,policy,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+S88,Alerts & operational notification settings,policy,Name,text,True,UI_IMPLEMENTATION_FIELD
+S88,Alerts & operational notification settings,policy,Scope,select,False,UI_IMPLEMENTATION_FIELD
+S88,Alerts & operational notification settings,policy,Company,relation,False,UI_IMPLEMENTATION_FIELD
+S88,Alerts & operational notification settings,policy,Branch,relation,False,UI_IMPLEMENTATION_FIELD
+S88,Alerts & operational notification settings,policy,Effective from,date,False,UI_IMPLEMENTATION_FIELD
+S88,Alerts & operational notification settings,policy,Enabled,checkbox,False,UI_IMPLEMENTATION_FIELD
+S88,Alerts & operational notification settings,policy,Threshold,money,False,UI_IMPLEMENTATION_FIELD
+S88,Alerts & operational notification settings,policy,Policy value,textarea,False,UI_IMPLEMENTATION_FIELD
+S88,Alerts & operational notification settings,policy,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+N01,Tenant signup and identity verification,identity,Email,email,True,UI_IMPLEMENTATION_FIELD
+N01,Tenant signup and identity verification,identity,Password,password,True,UI_IMPLEMENTATION_FIELD
+N01,Tenant signup and identity verification,identity,Confirm password,password,False,UI_IMPLEMENTATION_FIELD
+N01,Tenant signup and identity verification,identity,Verification code,text,False,UI_IMPLEMENTATION_FIELD
+N01,Tenant signup and identity verification,identity,Recovery method,select,False,UI_IMPLEMENTATION_FIELD
+N01,Tenant signup and identity verification,identity,Locale,select,False,UI_IMPLEMENTATION_FIELD
+N02,SaaS subscription and invoicing,subscription,Tenant,text,True,UI_IMPLEMENTATION_FIELD
+N02,SaaS subscription and invoicing,subscription,Plan,select,False,UI_IMPLEMENTATION_FIELD
+N02,SaaS subscription and invoicing,subscription,Billing cycle,select,False,UI_IMPLEMENTATION_FIELD
+N02,SaaS subscription and invoicing,subscription,Effective date,date,False,UI_IMPLEMENTATION_FIELD
+N02,SaaS subscription and invoicing,subscription,Amount,money,False,UI_IMPLEMENTATION_FIELD
+N02,SaaS subscription and invoicing,subscription,Seats,number,False,UI_IMPLEMENTATION_FIELD
+N02,SaaS subscription and invoicing,subscription,Branches,number,False,UI_IMPLEMENTATION_FIELD
+N02,SaaS subscription and invoicing,subscription,Invoice reference,text,False,UI_IMPLEMENTATION_FIELD
+N02,SaaS subscription and invoicing,subscription,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N03,Subscription plan / entitlement review,subscription,Tenant,text,True,UI_IMPLEMENTATION_FIELD
+N03,Subscription plan / entitlement review,subscription,Plan,select,False,UI_IMPLEMENTATION_FIELD
+N03,Subscription plan / entitlement review,subscription,Billing cycle,select,False,UI_IMPLEMENTATION_FIELD
+N03,Subscription plan / entitlement review,subscription,Effective date,date,False,UI_IMPLEMENTATION_FIELD
+N03,Subscription plan / entitlement review,subscription,Amount,money,False,UI_IMPLEMENTATION_FIELD
+N03,Subscription plan / entitlement review,subscription,Seats,number,False,UI_IMPLEMENTATION_FIELD
+N03,Subscription plan / entitlement review,subscription,Branches,number,False,UI_IMPLEMENTATION_FIELD
+N03,Subscription plan / entitlement review,subscription,Invoice reference,text,False,UI_IMPLEMENTATION_FIELD
+N03,Subscription plan / entitlement review,subscription,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N04,Multi-branch directory and configuration,branch,Name,text,True,UI_IMPLEMENTATION_FIELD
+N04,Multi-branch directory and configuration,branch,Company,relation,True,UI_IMPLEMENTATION_FIELD
+N04,Multi-branch directory and configuration,branch,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+N04,Multi-branch directory and configuration,branch,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+N04,Multi-branch directory and configuration,branch,Timezone,select,False,UI_IMPLEMENTATION_FIELD
+N04,Multi-branch directory and configuration,branch,Business day cut off,time,False,UI_IMPLEMENTATION_FIELD
+N04,Multi-branch directory and configuration,branch,Status,select,False,UI_IMPLEMENTATION_FIELD
+N05,Warehouses and bin management,warehouse,Name,text,True,UI_IMPLEMENTATION_FIELD
+N05,Warehouses and bin management,warehouse,Branch,relation,True,UI_IMPLEMENTATION_FIELD
+N05,Warehouses and bin management,warehouse,Company,relation,True,UI_IMPLEMENTATION_FIELD
+N05,Warehouses and bin management,warehouse,Bin code,text,False,UI_IMPLEMENTATION_FIELD
+N05,Warehouses and bin management,warehouse,Storage condition,select,False,UI_IMPLEMENTATION_FIELD
+N05,Warehouses and bin management,warehouse,Status,select,False,UI_IMPLEMENTATION_FIELD
+N06,Stock transfer dispatch and receiving,transfer,Origin warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+N06,Stock transfer dispatch and receiving,transfer,Destination warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+N06,Stock transfer dispatch and receiving,transfer,Business date,date,True,UI_IMPLEMENTATION_FIELD
+N06,Stock transfer dispatch and receiving,transfer,Expected arrival,date,False,UI_IMPLEMENTATION_FIELD
+N06,Stock transfer dispatch and receiving,transfer,Carrier,text,False,UI_IMPLEMENTATION_FIELD
+N06,Stock transfer dispatch and receiving,transfer,Discrepancy reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N07,Staff invitations and membership switch,staff,Name,text,True,UI_IMPLEMENTATION_FIELD
+N07,Staff invitations and membership switch,staff,Email,email,True,UI_IMPLEMENTATION_FIELD
+N07,Staff invitations and membership switch,staff,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+N07,Staff invitations and membership switch,staff,Role,relation,False,UI_IMPLEMENTATION_FIELD
+N07,Staff invitations and membership switch,staff,Branch,relation,False,UI_IMPLEMENTATION_FIELD
+N07,Staff invitations and membership switch,staff,Company,relation,False,UI_IMPLEMENTATION_FIELD
+N07,Staff invitations and membership switch,staff,Invitation expires,date,False,UI_IMPLEMENTATION_FIELD
+N07,Staff invitations and membership switch,staff,Status,select,False,UI_IMPLEMENTATION_FIELD
+N08,MFA and registered devices,device,Name,text,True,UI_IMPLEMENTATION_FIELD
+N08,MFA and registered devices,device,Branch,relation,True,UI_IMPLEMENTATION_FIELD
+N08,MFA and registered devices,device,Platform,select,False,UI_IMPLEMENTATION_FIELD
+N08,MFA and registered devices,device,Fingerprint,text,False,UI_IMPLEMENTATION_FIELD
+N08,MFA and registered devices,device,Epoch,number,False,UI_IMPLEMENTATION_FIELD
+N08,MFA and registered devices,device,Last acknowledged sequence,number,False,UI_IMPLEMENTATION_FIELD
+N08,MFA and registered devices,device,Pairing challenge,text,False,UI_IMPLEMENTATION_FIELD
+N08,MFA and registered devices,device,Expires,date,False,UI_IMPLEMENTATION_FIELD
+N08,MFA and registered devices,device,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N09,Integration and payment-provider settings,integration,Name,text,True,UI_IMPLEMENTATION_FIELD
+N09,Integration and payment-provider settings,integration,Provider,select,False,UI_IMPLEMENTATION_FIELD
+N09,Integration and payment-provider settings,integration,Merchant account,text,False,UI_IMPLEMENTATION_FIELD
+N09,Integration and payment-provider settings,integration,Environment,select,False,UI_IMPLEMENTATION_FIELD
+N09,Integration and payment-provider settings,integration,Secret reference,text,False,UI_IMPLEMENTATION_FIELD
+N09,Integration and payment-provider settings,integration,Callback URL,url,False,UI_IMPLEMENTATION_FIELD
+N09,Integration and payment-provider settings,integration,Enabled,checkbox,False,UI_IMPLEMENTATION_FIELD
+N10,Provider settlement reconciliation,settlement,Provider,text,True,UI_IMPLEMENTATION_FIELD
+N10,Provider settlement reconciliation,settlement,Provider reference,text,True,UI_IMPLEMENTATION_FIELD
+N10,Provider settlement reconciliation,settlement,Payment,relation,False,UI_IMPLEMENTATION_FIELD
+N10,Provider settlement reconciliation,settlement,Gross amount,money,True,UI_IMPLEMENTATION_FIELD
+N10,Provider settlement reconciliation,settlement,Fees,money,False,UI_IMPLEMENTATION_FIELD
+N10,Provider settlement reconciliation,settlement,Net amount,money,False,UI_IMPLEMENTATION_FIELD
+N10,Provider settlement reconciliation,settlement,Bank reference,text,False,UI_IMPLEMENTATION_FIELD
+N10,Provider settlement reconciliation,settlement,Business date,date,True,UI_IMPLEMENTATION_FIELD
+N10,Provider settlement reconciliation,settlement,Resolution reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N11,Subscription billing support,support,Tenant,text,True,UI_IMPLEMENTATION_FIELD
+N11,Subscription billing support,support,Requested scope,textarea,True,UI_IMPLEMENTATION_FIELD
+N11,Subscription billing support,support,Requester,text,False,UI_IMPLEMENTATION_FIELD
+N11,Subscription billing support,support,Approver,text,False,UI_IMPLEMENTATION_FIELD
+N11,Subscription billing support,support,Expires,date,True,UI_IMPLEMENTATION_FIELD
+N11,Subscription billing support,support,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+N12,Platform tenant operations and health,tenant,Name,text,True,UI_IMPLEMENTATION_FIELD
+N12,Platform tenant operations and health,tenant,Slug,text,True,UI_IMPLEMENTATION_FIELD
+N12,Platform tenant operations and health,tenant,Region,text,True,UI_IMPLEMENTATION_FIELD
+N12,Platform tenant operations and health,tenant,Isolation,select,False,UI_IMPLEMENTATION_FIELD
+N12,Platform tenant operations and health,tenant,Plan,relation,False,UI_IMPLEMENTATION_FIELD
+N12,Platform tenant operations and health,tenant,Company,relation,False,UI_IMPLEMENTATION_FIELD
+N12,Platform tenant operations and health,tenant,Release cohort,text,False,UI_IMPLEMENTATION_FIELD
+N12,Platform tenant operations and health,tenant,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N13,Support grants / break-glass request,support,Tenant,text,True,UI_IMPLEMENTATION_FIELD
+N13,Support grants / break-glass request,support,Requested scope,textarea,True,UI_IMPLEMENTATION_FIELD
+N13,Support grants / break-glass request,support,Requester,text,False,UI_IMPLEMENTATION_FIELD
+N13,Support grants / break-glass request,support,Approver,text,False,UI_IMPLEMENTATION_FIELD
+N13,Support grants / break-glass request,support,Expires,date,True,UI_IMPLEMENTATION_FIELD
+N13,Support grants / break-glass request,support,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+N14,Connected desktop registration,device,Name,text,True,UI_IMPLEMENTATION_FIELD
+N14,Connected desktop registration,device,Branch,relation,True,UI_IMPLEMENTATION_FIELD
+N14,Connected desktop registration,device,Platform,select,False,UI_IMPLEMENTATION_FIELD
+N14,Connected desktop registration,device,Fingerprint,text,False,UI_IMPLEMENTATION_FIELD
+N14,Connected desktop registration,device,Epoch,number,False,UI_IMPLEMENTATION_FIELD
+N14,Connected desktop registration,device,Last acknowledged sequence,number,False,UI_IMPLEMENTATION_FIELD
+N14,Connected desktop registration,device,Pairing challenge,text,False,UI_IMPLEMENTATION_FIELD
+N14,Connected desktop registration,device,Expires,date,False,UI_IMPLEMENTATION_FIELD
+N14,Connected desktop registration,device,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N15,Synchronization queue and conflict console,sync,Device,relation,True,UI_IMPLEMENTATION_FIELD
+N15,Synchronization queue and conflict console,sync,Operation ID,text,True,UI_IMPLEMENTATION_FIELD
+N15,Synchronization queue and conflict console,sync,Source reference,text,False,UI_IMPLEMENTATION_FIELD
+N15,Synchronization queue and conflict console,sync,Expected version,number,False,UI_IMPLEMENTATION_FIELD
+N15,Synchronization queue and conflict console,sync,Sequence,number,False,UI_IMPLEMENTATION_FIELD
+N15,Synchronization queue and conflict console,sync,Receipt digest,text,False,UI_IMPLEMENTATION_FIELD
+N15,Synchronization queue and conflict console,sync,Evidence,file,False,UI_IMPLEMENTATION_FIELD
+N15,Synchronization queue and conflict console,sync,Resolution reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N16,Device quotas and offline stock allocation,quota,Device,relation,True,UI_IMPLEMENTATION_FIELD
+N16,Device quotas and offline stock allocation,quota,Product,relation,True,UI_IMPLEMENTATION_FIELD
+N16,Device quotas and offline stock allocation,quota,Granted quantity,decimal,True,UI_IMPLEMENTATION_FIELD
+N16,Device quotas and offline stock allocation,quota,Consumed quantity,decimal,False,UI_IMPLEMENTATION_FIELD
+N16,Device quotas and offline stock allocation,quota,Expiry,date,False,UI_IMPLEMENTATION_FIELD
+N16,Device quotas and offline stock allocation,quota,Grant reference,text,False,UI_IMPLEMENTATION_FIELD
+N16,Device quotas and offline stock allocation,quota,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+N17,Mobile role-specific home,device,Name,text,True,UI_IMPLEMENTATION_FIELD
+N17,Mobile role-specific home,device,Branch,relation,True,UI_IMPLEMENTATION_FIELD
+N17,Mobile role-specific home,device,Platform,select,False,UI_IMPLEMENTATION_FIELD
+N17,Mobile role-specific home,device,Fingerprint,text,False,UI_IMPLEMENTATION_FIELD
+N17,Mobile role-specific home,device,Epoch,number,False,UI_IMPLEMENTATION_FIELD
+N17,Mobile role-specific home,device,Last acknowledged sequence,number,False,UI_IMPLEMENTATION_FIELD
+N17,Mobile role-specific home,device,Pairing challenge,text,False,UI_IMPLEMENTATION_FIELD
+N17,Mobile role-specific home,device,Expires,date,False,UI_IMPLEMENTATION_FIELD
+N17,Mobile role-specific home,device,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N18,Mobile offline scan-and-sell,sale,Customer,relation,False,UI_IMPLEMENTATION_FIELD
+N18,Mobile offline scan-and-sell,sale,Business date,date,True,UI_IMPLEMENTATION_FIELD
+N18,Mobile offline scan-and-sell,sale,Channel,select,False,UI_IMPLEMENTATION_FIELD
+N18,Mobile offline scan-and-sell,sale,Fulfillment,select,False,UI_IMPLEMENTATION_FIELD
+N18,Mobile offline scan-and-sell,sale,Discount,money,False,UI_IMPLEMENTATION_FIELD
+N18,Mobile offline scan-and-sell,sale,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+N19,Mobile stock count and transfer,count,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+N19,Mobile stock count and transfer,count,Business date,date,True,UI_IMPLEMENTATION_FIELD
+N19,Mobile stock count and transfer,count,Assigned operator,relation,False,UI_IMPLEMENTATION_FIELD
+N19,Mobile stock count and transfer,count,Freeze strategy,select,False,UI_IMPLEMENTATION_FIELD
+N19,Mobile stock count and transfer,count,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+N20,Mobile sync/status/conflict resolution,sync,Device,relation,True,UI_IMPLEMENTATION_FIELD
+N20,Mobile sync/status/conflict resolution,sync,Operation ID,text,True,UI_IMPLEMENTATION_FIELD
+N20,Mobile sync/status/conflict resolution,sync,Source reference,text,False,UI_IMPLEMENTATION_FIELD
+N20,Mobile sync/status/conflict resolution,sync,Expected version,number,False,UI_IMPLEMENTATION_FIELD
+N20,Mobile sync/status/conflict resolution,sync,Sequence,number,False,UI_IMPLEMENTATION_FIELD
+N20,Mobile sync/status/conflict resolution,sync,Receipt digest,text,False,UI_IMPLEMENTATION_FIELD
+N20,Mobile sync/status/conflict resolution,sync,Evidence,file,False,UI_IMPLEMENTATION_FIELD
+N20,Mobile sync/status/conflict resolution,sync,Resolution reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N21,Mobile deliveries and proof of handover,fulfillment,Sale,relation,True,UI_IMPLEMENTATION_FIELD
+N21,Mobile deliveries and proof of handover,fulfillment,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+N21,Mobile deliveries and proof of handover,fulfillment,Warehouse,relation,False,UI_IMPLEMENTATION_FIELD
+N21,Mobile deliveries and proof of handover,fulfillment,Method,select,False,UI_IMPLEMENTATION_FIELD
+N21,Mobile deliveries and proof of handover,fulfillment,Scheduled date,date,False,UI_IMPLEMENTATION_FIELD
+N21,Mobile deliveries and proof of handover,fulfillment,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+N21,Mobile deliveries and proof of handover,fulfillment,Recipient name,text,False,UI_IMPLEMENTATION_FIELD
+N21,Mobile deliveries and proof of handover,fulfillment,Recipient phone,tel,False,UI_IMPLEMENTATION_FIELD
+N21,Mobile deliveries and proof of handover,fulfillment,Proof reference,text,False,UI_IMPLEMENTATION_FIELD
+N21,Mobile deliveries and proof of handover,fulfillment,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+N22,Mobile approvals and branch monitoring,expense,Category,text,True,UI_IMPLEMENTATION_FIELD
+N22,Mobile approvals and branch monitoring,expense,Payee,text,True,UI_IMPLEMENTATION_FIELD
+N22,Mobile approvals and branch monitoring,expense,Business date,date,True,UI_IMPLEMENTATION_FIELD
+N22,Mobile approvals and branch monitoring,expense,Amount,money,True,UI_IMPLEMENTATION_FIELD
+N22,Mobile approvals and branch monitoring,expense,Tender,select,False,UI_IMPLEMENTATION_FIELD
+N22,Mobile approvals and branch monitoring,expense,Description,textarea,True,UI_IMPLEMENTATION_FIELD
+N22,Mobile approvals and branch monitoring,expense,Evidence,file,False,UI_IMPLEMENTATION_FIELD
+N22,Mobile approvals and branch monitoring,expense,Approval reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,SKU,text,True,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Name,text,True,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Category,relation,False,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Brand,text,False,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Barcode,text,False,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Base unit,select,True,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Pack size,decimal,False,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Selling price,money,True,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Purchase cost,money,False,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Reorder level,decimal,False,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Tax rate,decimal,False,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Track stock,checkbox,False,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Track serial,checkbox,False,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Track expiry,checkbox,False,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Description,textarea,False,UI_IMPLEMENTATION_FIELD
+N23,Storefront public product catalogue,product,Status,select,False,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,SKU,text,True,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Name,text,True,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Category,relation,False,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Brand,text,False,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Barcode,text,False,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Base unit,select,True,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Pack size,decimal,False,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Selling price,money,True,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Purchase cost,money,False,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Reorder level,decimal,False,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Tax rate,decimal,False,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Track stock,checkbox,False,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Track serial,checkbox,False,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Track expiry,checkbox,False,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Description,textarea,False,UI_IMPLEMENTATION_FIELD
+N24,Storefront product detail,product,Status,select,False,UI_IMPLEMENTATION_FIELD
+N25,Storefront cart and delivery estimate,order,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+N25,Storefront cart and delivery estimate,order,Business date,date,True,UI_IMPLEMENTATION_FIELD
+N25,Storefront cart and delivery estimate,order,Delivery address,textarea,False,UI_IMPLEMENTATION_FIELD
+N25,Storefront cart and delivery estimate,order,Fulfillment branch,relation,False,UI_IMPLEMENTATION_FIELD
+N25,Storefront cart and delivery estimate,order,Delivery estimate,money,False,UI_IMPLEMENTATION_FIELD
+N25,Storefront cart and delivery estimate,order,Payment reference,text,False,UI_IMPLEMENTATION_FIELD
+N25,Storefront cart and delivery estimate,order,Return reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N26,Storefront checkout and payment status,order,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+N26,Storefront checkout and payment status,order,Business date,date,True,UI_IMPLEMENTATION_FIELD
+N26,Storefront checkout and payment status,order,Delivery address,textarea,False,UI_IMPLEMENTATION_FIELD
+N26,Storefront checkout and payment status,order,Fulfillment branch,relation,False,UI_IMPLEMENTATION_FIELD
+N26,Storefront checkout and payment status,order,Delivery estimate,money,False,UI_IMPLEMENTATION_FIELD
+N26,Storefront checkout and payment status,order,Payment reference,text,False,UI_IMPLEMENTATION_FIELD
+N26,Storefront checkout and payment status,order,Return reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N27,Storefront order status and return request,order,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+N27,Storefront order status and return request,order,Business date,date,True,UI_IMPLEMENTATION_FIELD
+N27,Storefront order status and return request,order,Delivery address,textarea,False,UI_IMPLEMENTATION_FIELD
+N27,Storefront order status and return request,order,Fulfillment branch,relation,False,UI_IMPLEMENTATION_FIELD
+N27,Storefront order status and return request,order,Delivery estimate,money,False,UI_IMPLEMENTATION_FIELD
+N27,Storefront order status and return request,order,Payment reference,text,False,UI_IMPLEMENTATION_FIELD
+N27,Storefront order status and return request,order,Return reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N28,"Storefront owner content, domains and SEO",content,Title,text,True,UI_IMPLEMENTATION_FIELD
+N28,"Storefront owner content, domains and SEO",content,Slug,text,True,UI_IMPLEMENTATION_FIELD
+N28,"Storefront owner content, domains and SEO",content,Locale,select,False,UI_IMPLEMENTATION_FIELD
+N28,"Storefront owner content, domains and SEO",content,Body,textarea,False,UI_IMPLEMENTATION_FIELD
+N28,"Storefront owner content, domains and SEO",content,Meta title,text,False,UI_IMPLEMENTATION_FIELD
+N28,"Storefront owner content, domains and SEO",content,Meta description,textarea,False,UI_IMPLEMENTATION_FIELD
+N28,"Storefront owner content, domains and SEO",content,Domain,text,False,UI_IMPLEMENTATION_FIELD
+N28,"Storefront owner content, domains and SEO",content,Policy version,text,False,UI_IMPLEMENTATION_FIELD
+N29,Commerce operations and fulfillment board,order,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+N29,Commerce operations and fulfillment board,order,Business date,date,True,UI_IMPLEMENTATION_FIELD
+N29,Commerce operations and fulfillment board,order,Delivery address,textarea,False,UI_IMPLEMENTATION_FIELD
+N29,Commerce operations and fulfillment board,order,Fulfillment branch,relation,False,UI_IMPLEMENTATION_FIELD
+N29,Commerce operations and fulfillment board,order,Delivery estimate,money,False,UI_IMPLEMENTATION_FIELD
+N29,Commerce operations and fulfillment board,order,Payment reference,text,False,UI_IMPLEMENTATION_FIELD
+N29,Commerce operations and fulfillment board,order,Return reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N30,Industry profile selection and extensions,industry,Name,text,True,UI_IMPLEMENTATION_FIELD
+N30,Industry profile selection and extensions,industry,Enable serials,checkbox,False,UI_IMPLEMENTATION_FIELD
+N30,Industry profile selection and extensions,industry,Enable expiry,checkbox,False,UI_IMPLEMENTATION_FIELD
+N30,Industry profile selection and extensions,industry,Enable cutting,checkbox,False,UI_IMPLEMENTATION_FIELD
+N30,Industry profile selection and extensions,industry,Enable repack,checkbox,False,UI_IMPLEMENTATION_FIELD
+N30,Industry profile selection and extensions,industry,Enable services,checkbox,False,UI_IMPLEMENTATION_FIELD
+N30,Industry profile selection and extensions,industry,Migration notes,textarea,False,UI_IMPLEMENTATION_FIELD
+N31,Serial/batch/expiry workflow (when enabled),lot,Product,relation,True,UI_IMPLEMENTATION_FIELD
+N31,Serial/batch/expiry workflow (when enabled),lot,Serial number,text,False,UI_IMPLEMENTATION_FIELD
+N31,Serial/batch/expiry workflow (when enabled),lot,Batch number,text,False,UI_IMPLEMENTATION_FIELD
+N31,Serial/batch/expiry workflow (when enabled),lot,Expiry,date,False,UI_IMPLEMENTATION_FIELD
+N31,Serial/batch/expiry workflow (when enabled),lot,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+N31,Serial/batch/expiry workflow (when enabled),lot,Quantity,decimal,True,UI_IMPLEMENTATION_FIELD
+N31,Serial/batch/expiry workflow (when enabled),lot,Parent lot,text,False,UI_IMPLEMENTATION_FIELD
+N31,Serial/batch/expiry workflow (when enabled),lot,Condition,select,False,UI_IMPLEMENTATION_FIELD
+N32,Merchant cloud export and termination,privacy,Requester,text,True,UI_IMPLEMENTATION_FIELD
+N32,Merchant cloud export and termination,privacy,Verified identity,checkbox,False,UI_IMPLEMENTATION_FIELD
+N32,Merchant cloud export and termination,privacy,Request type,select,False,UI_IMPLEMENTATION_FIELD
+N32,Merchant cloud export and termination,privacy,Received date,date,True,UI_IMPLEMENTATION_FIELD
+N32,Merchant cloud export and termination,privacy,Due date,date,True,UI_IMPLEMENTATION_FIELD
+N32,Merchant cloud export and termination,privacy,Legal hold,checkbox,False,UI_IMPLEMENTATION_FIELD
+N32,Merchant cloud export and termination,privacy,Systems affected,textarea,False,UI_IMPLEMENTATION_FIELD
+N32,Merchant cloud export and termination,privacy,Outcome,textarea,False,UI_IMPLEMENTATION_FIELD
+N33,Privacy rights requests and retention holds,privacy,Requester,text,True,UI_IMPLEMENTATION_FIELD
+N33,Privacy rights requests and retention holds,privacy,Verified identity,checkbox,False,UI_IMPLEMENTATION_FIELD
+N33,Privacy rights requests and retention holds,privacy,Request type,select,False,UI_IMPLEMENTATION_FIELD
+N33,Privacy rights requests and retention holds,privacy,Received date,date,True,UI_IMPLEMENTATION_FIELD
+N33,Privacy rights requests and retention holds,privacy,Due date,date,True,UI_IMPLEMENTATION_FIELD
+N33,Privacy rights requests and retention holds,privacy,Legal hold,checkbox,False,UI_IMPLEMENTATION_FIELD
+N33,Privacy rights requests and retention holds,privacy,Systems affected,textarea,False,UI_IMPLEMENTATION_FIELD
+N33,Privacy rights requests and retention holds,privacy,Outcome,textarea,False,UI_IMPLEMENTATION_FIELD
+N34,Operational incident and diagnostics status,incident,Title,text,True,UI_IMPLEMENTATION_FIELD
+N34,Operational incident and diagnostics status,incident,Severity,select,False,UI_IMPLEMENTATION_FIELD
+N34,Operational incident and diagnostics status,incident,Client version,text,False,UI_IMPLEMENTATION_FIELD
+N34,Operational incident and diagnostics status,incident,Server version,text,False,UI_IMPLEMENTATION_FIELD
+N34,Operational incident and diagnostics status,incident,Source reference,text,False,UI_IMPLEMENTATION_FIELD
+N34,Operational incident and diagnostics status,incident,Redacted diagnostics,textarea,False,UI_IMPLEMENTATION_FIELD
+N34,Operational incident and diagnostics status,incident,Assigned to,relation,False,UI_IMPLEMENTATION_FIELD
+N34,Operational incident and diagnostics status,incident,Resolution,textarea,False,UI_IMPLEMENTATION_FIELD
+N35,Subscription usage and quota limits,subscription,Tenant,text,True,UI_IMPLEMENTATION_FIELD
+N35,Subscription usage and quota limits,subscription,Plan,select,False,UI_IMPLEMENTATION_FIELD
+N35,Subscription usage and quota limits,subscription,Billing cycle,select,False,UI_IMPLEMENTATION_FIELD
+N35,Subscription usage and quota limits,subscription,Effective date,date,False,UI_IMPLEMENTATION_FIELD
+N35,Subscription usage and quota limits,subscription,Amount,money,False,UI_IMPLEMENTATION_FIELD
+N35,Subscription usage and quota limits,subscription,Seats,number,False,UI_IMPLEMENTATION_FIELD
+N35,Subscription usage and quota limits,subscription,Branches,number,False,UI_IMPLEMENTATION_FIELD
+N35,Subscription usage and quota limits,subscription,Invoice reference,text,False,UI_IMPLEMENTATION_FIELD
+N35,Subscription usage and quota limits,subscription,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N36,Public merchant SEO/legal content editor,content,Title,text,True,UI_IMPLEMENTATION_FIELD
+N36,Public merchant SEO/legal content editor,content,Slug,text,True,UI_IMPLEMENTATION_FIELD
+N36,Public merchant SEO/legal content editor,content,Locale,select,False,UI_IMPLEMENTATION_FIELD
+N36,Public merchant SEO/legal content editor,content,Body,textarea,False,UI_IMPLEMENTATION_FIELD
+N36,Public merchant SEO/legal content editor,content,Meta title,text,False,UI_IMPLEMENTATION_FIELD
+N36,Public merchant SEO/legal content editor,content,Meta description,textarea,False,UI_IMPLEMENTATION_FIELD
+N36,Public merchant SEO/legal content editor,content,Domain,text,False,UI_IMPLEMENTATION_FIELD
+N36,Public merchant SEO/legal content editor,content,Policy version,text,False,UI_IMPLEMENTATION_FIELD
+N37,Customer purchase/order self-service,customer,Name,text,True,UI_IMPLEMENTATION_FIELD
+N37,Customer purchase/order self-service,customer,Type,select,False,UI_IMPLEMENTATION_FIELD
+N37,Customer purchase/order self-service,customer,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+N37,Customer purchase/order self-service,customer,Email,email,False,UI_IMPLEMENTATION_FIELD
+N37,Customer purchase/order self-service,customer,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+N37,Customer purchase/order self-service,customer,Tax reference,text,False,UI_IMPLEMENTATION_FIELD
+N37,Customer purchase/order self-service,customer,Credit limit,money,False,UI_IMPLEMENTATION_FIELD
+N37,Customer purchase/order self-service,customer,Payment terms days,number,False,UI_IMPLEMENTATION_FIELD
+N37,Customer purchase/order self-service,customer,Consent,checkbox,False,UI_IMPLEMENTATION_FIELD
+N37,Customer purchase/order self-service,customer,Status,select,False,UI_IMPLEMENTATION_FIELD
+N38,Commerce dispatch / live fulfillment queue,fulfillment,Sale,relation,True,UI_IMPLEMENTATION_FIELD
+N38,Commerce dispatch / live fulfillment queue,fulfillment,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+N38,Commerce dispatch / live fulfillment queue,fulfillment,Warehouse,relation,False,UI_IMPLEMENTATION_FIELD
+N38,Commerce dispatch / live fulfillment queue,fulfillment,Method,select,False,UI_IMPLEMENTATION_FIELD
+N38,Commerce dispatch / live fulfillment queue,fulfillment,Scheduled date,date,False,UI_IMPLEMENTATION_FIELD
+N38,Commerce dispatch / live fulfillment queue,fulfillment,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+N38,Commerce dispatch / live fulfillment queue,fulfillment,Recipient name,text,False,UI_IMPLEMENTATION_FIELD
+N38,Commerce dispatch / live fulfillment queue,fulfillment,Recipient phone,tel,False,UI_IMPLEMENTATION_FIELD
+N38,Commerce dispatch / live fulfillment queue,fulfillment,Proof reference,text,False,UI_IMPLEMENTATION_FIELD
+N38,Commerce dispatch / live fulfillment queue,fulfillment,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+N39,Device enrollment QR/challenge screen,device,Name,text,True,UI_IMPLEMENTATION_FIELD
+N39,Device enrollment QR/challenge screen,device,Branch,relation,True,UI_IMPLEMENTATION_FIELD
+N39,Device enrollment QR/challenge screen,device,Platform,select,False,UI_IMPLEMENTATION_FIELD
+N39,Device enrollment QR/challenge screen,device,Fingerprint,text,False,UI_IMPLEMENTATION_FIELD
+N39,Device enrollment QR/challenge screen,device,Epoch,number,False,UI_IMPLEMENTATION_FIELD
+N39,Device enrollment QR/challenge screen,device,Last acknowledged sequence,number,False,UI_IMPLEMENTATION_FIELD
+N39,Device enrollment QR/challenge screen,device,Pairing challenge,text,False,UI_IMPLEMENTATION_FIELD
+N39,Device enrollment QR/challenge screen,device,Expires,date,False,UI_IMPLEMENTATION_FIELD
+N39,Device enrollment QR/challenge screen,device,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+N40,Cross-branch executive consolidation,consolidation,Company,relation,True,UI_IMPLEMENTATION_FIELD
+N40,Cross-branch executive consolidation,consolidation,Period,relation,True,UI_IMPLEMENTATION_FIELD
+N40,Cross-branch executive consolidation,consolidation,Pair reference,text,False,UI_IMPLEMENTATION_FIELD
+N40,Cross-branch executive consolidation,consolidation,Elimination debit,money,False,UI_IMPLEMENTATION_FIELD
+N40,Cross-branch executive consolidation,consolidation,Elimination credit,money,False,UI_IMPLEMENTATION_FIELD
+N40,Cross-branch executive consolidation,consolidation,Unmatched amount,money,False,UI_IMPLEMENTATION_FIELD
+N40,Cross-branch executive consolidation,consolidation,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+X01,Company books,company,Legal name,text,True,UI_IMPLEMENTATION_FIELD
+X01,Company books,company,Trading name,text,False,UI_IMPLEMENTATION_FIELD
+X01,Company books,company,Registration number,text,False,UI_IMPLEMENTATION_FIELD
+X01,Company books,company,Tax reference,text,False,UI_IMPLEMENTATION_FIELD
+X01,Company books,company,Phone,tel,False,UI_IMPLEMENTATION_FIELD
+X01,Company books,company,Email,email,False,UI_IMPLEMENTATION_FIELD
+X01,Company books,company,Address,textarea,False,UI_IMPLEMENTATION_FIELD
+X01,Company books,company,Timezone,select,False,UI_IMPLEMENTATION_FIELD
+X01,Company books,company,Currency,select,False,UI_IMPLEMENTATION_FIELD
+X01,Company books,company,Locale,select,False,UI_IMPLEMENTATION_FIELD
+X01,Company books,company,Logo,file,False,UI_IMPLEMENTATION_FIELD
+X02,Requisitions,requisition,Requester,relation,True,UI_IMPLEMENTATION_FIELD
+X02,Requisitions,requisition,Desired date,date,True,UI_IMPLEMENTATION_FIELD
+X02,Requisitions,requisition,Budget,money,True,UI_IMPLEMENTATION_FIELD
+X02,Requisitions,requisition,Warehouse,relation,False,UI_IMPLEMENTATION_FIELD
+X02,Requisitions,requisition,Justification,textarea,True,UI_IMPLEMENTATION_FIELD
+X03,RFQ comparison,rfq,Supplier,relation,True,UI_IMPLEMENTATION_FIELD
+X03,RFQ comparison,rfq,Product,relation,True,UI_IMPLEMENTATION_FIELD
+X03,RFQ comparison,rfq,Quantity,decimal,True,UI_IMPLEMENTATION_FIELD
+X03,RFQ comparison,rfq,Unit price,money,True,UI_IMPLEMENTATION_FIELD
+X03,RFQ comparison,rfq,Freight,money,False,UI_IMPLEMENTATION_FIELD
+X03,RFQ comparison,rfq,Terms,textarea,False,UI_IMPLEMENTATION_FIELD
+X03,RFQ comparison,rfq,Offer expiry,date,False,UI_IMPLEMENTATION_FIELD
+X03,RFQ comparison,rfq,Award reason,textarea,False,UI_IMPLEMENTATION_FIELD
+X04,Supplier invoice match,supplier_invoice,Supplier,relation,True,UI_IMPLEMENTATION_FIELD
+X04,Supplier invoice match,supplier_invoice,Supplier reference,text,True,UI_IMPLEMENTATION_FIELD
+X04,Supplier invoice match,supplier_invoice,Purchase order,relation,True,UI_IMPLEMENTATION_FIELD
+X04,Supplier invoice match,supplier_invoice,Goods receipt,relation,True,UI_IMPLEMENTATION_FIELD
+X04,Supplier invoice match,supplier_invoice,Invoice date,date,True,UI_IMPLEMENTATION_FIELD
+X04,Supplier invoice match,supplier_invoice,Amount,money,True,UI_IMPLEMENTATION_FIELD
+X04,Supplier invoice match,supplier_invoice,Tax amount,money,False,UI_IMPLEMENTATION_FIELD
+X04,Supplier invoice match,supplier_invoice,Discrepancy amount,money,False,UI_IMPLEMENTATION_FIELD
+X04,Supplier invoice match,supplier_invoice,Exception reason,textarea,False,UI_IMPLEMENTATION_FIELD
+X05,Landed cost,landed_cost,Goods receipt,relation,True,UI_IMPLEMENTATION_FIELD
+X05,Landed cost,landed_cost,Cost type,select,False,UI_IMPLEMENTATION_FIELD
+X05,Landed cost,landed_cost,Amount,money,True,UI_IMPLEMENTATION_FIELD
+X05,Landed cost,landed_cost,Allocation driver,select,False,UI_IMPLEMENTATION_FIELD
+X05,Landed cost,landed_cost,Business date,date,True,UI_IMPLEMENTATION_FIELD
+X05,Landed cost,landed_cost,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+X06,Valuation adjustments,valuation,Product,relation,True,UI_IMPLEMENTATION_FIELD
+X06,Valuation adjustments,valuation,Original cost,money,True,UI_IMPLEMENTATION_FIELD
+X06,Valuation adjustments,valuation,Revised cost,money,True,UI_IMPLEMENTATION_FIELD
+X06,Valuation adjustments,valuation,Remaining quantity,decimal,True,UI_IMPLEMENTATION_FIELD
+X06,Valuation adjustments,valuation,Issued quantity,decimal,False,UI_IMPLEMENTATION_FIELD
+X06,Valuation adjustments,valuation,Period,relation,False,UI_IMPLEMENTATION_FIELD
+X06,Valuation adjustments,valuation,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+X07,Supplier advances/returns,advance,Supplier,relation,True,UI_IMPLEMENTATION_FIELD
+X07,Supplier advances/returns,advance,Amount,money,True,UI_IMPLEMENTATION_FIELD
+X07,Supplier advances/returns,advance,Allocated amount,money,False,UI_IMPLEMENTATION_FIELD
+X07,Supplier advances/returns,advance,Business date,date,True,UI_IMPLEMENTATION_FIELD
+X07,Supplier advances/returns,advance,Payment reference,text,False,UI_IMPLEMENTATION_FIELD
+X07,Supplier advances/returns,advance,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+X08,Operational journal,journal,Batch reference,text,True,UI_IMPLEMENTATION_FIELD
+X08,Operational journal,journal,Account,text,True,UI_IMPLEMENTATION_FIELD
+X08,Operational journal,journal,Debit,money,False,UI_IMPLEMENTATION_FIELD
+X08,Operational journal,journal,Credit,money,False,UI_IMPLEMENTATION_FIELD
+X08,Operational journal,journal,Source reference,text,True,UI_IMPLEMENTATION_FIELD
+X08,Operational journal,journal,Period,relation,False,UI_IMPLEMENTATION_FIELD
+X08,Operational journal,journal,Business date,date,True,UI_IMPLEMENTATION_FIELD
+X08,Operational journal,journal,Reversal reason,textarea,False,UI_IMPLEMENTATION_FIELD
+X09,Bank reconciliation,bank,Statement reference,text,True,UI_IMPLEMENTATION_FIELD
+X09,Bank reconciliation,bank,Business date,date,True,UI_IMPLEMENTATION_FIELD
+X09,Bank reconciliation,bank,Bank amount,money,True,UI_IMPLEMENTATION_FIELD
+X09,Bank reconciliation,bank,Matched amount,money,False,UI_IMPLEMENTATION_FIELD
+X09,Bank reconciliation,bank,Payment,relation,False,UI_IMPLEMENTATION_FIELD
+X09,Bank reconciliation,bank,Fee amount,money,False,UI_IMPLEMENTATION_FIELD
+X09,Bank reconciliation,bank,Variance reason,textarea,False,UI_IMPLEMENTATION_FIELD
+X10,Disputes/chargebacks,dispute,Provider reference,text,True,UI_IMPLEMENTATION_FIELD
+X10,Disputes/chargebacks,dispute,Payment,relation,True,UI_IMPLEMENTATION_FIELD
+X10,Disputes/chargebacks,dispute,Amount,money,True,UI_IMPLEMENTATION_FIELD
+X10,Disputes/chargebacks,dispute,Evidence,file,False,UI_IMPLEMENTATION_FIELD
+X10,Disputes/chargebacks,dispute,Deadline,date,True,UI_IMPLEMENTATION_FIELD
+X10,Disputes/chargebacks,dispute,Assigned to,relation,False,UI_IMPLEMENTATION_FIELD
+X10,Disputes/chargebacks,dispute,Resolution,textarea,False,UI_IMPLEMENTATION_FIELD
+X11,Customer custody,custody,Sale,relation,True,UI_IMPLEMENTATION_FIELD
+X11,Customer custody,custody,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+X11,Customer custody,custody,Product,relation,True,UI_IMPLEMENTATION_FIELD
+X11,Customer custody,custody,Owned quantity,decimal,True,UI_IMPLEMENTATION_FIELD
+X11,Customer custody,custody,Collected quantity,decimal,False,UI_IMPLEMENTATION_FIELD
+X11,Customer custody,custody,Warehouse,relation,True,UI_IMPLEMENTATION_FIELD
+X11,Customer custody,custody,Collection date,date,False,UI_IMPLEMENTATION_FIELD
+X11,Customer custody,custody,Loss reason,textarea,False,UI_IMPLEMENTATION_FIELD
+X12,Offline completed exceptions,exception,Device,relation,True,UI_IMPLEMENTATION_FIELD
+X12,Offline completed exceptions,exception,Grant reference,text,True,UI_IMPLEMENTATION_FIELD
+X12,Offline completed exceptions,exception,Source receipt,text,True,UI_IMPLEMENTATION_FIELD
+X12,Offline completed exceptions,exception,Cash amount,money,False,UI_IMPLEMENTATION_FIELD
+X12,Offline completed exceptions,exception,Goods proof,textarea,False,UI_IMPLEMENTATION_FIELD
+X12,Offline completed exceptions,exception,Evidence,file,False,UI_IMPLEMENTATION_FIELD
+X12,Offline completed exceptions,exception,Investigator,relation,False,UI_IMPLEMENTATION_FIELD
+X12,Offline completed exceptions,exception,Resolution,textarea,True,UI_IMPLEMENTATION_FIELD
+X13,Device restore/retirement,device,Name,text,True,UI_IMPLEMENTATION_FIELD
+X13,Device restore/retirement,device,Branch,relation,True,UI_IMPLEMENTATION_FIELD
+X13,Device restore/retirement,device,Platform,select,False,UI_IMPLEMENTATION_FIELD
+X13,Device restore/retirement,device,Fingerprint,text,False,UI_IMPLEMENTATION_FIELD
+X13,Device restore/retirement,device,Epoch,number,False,UI_IMPLEMENTATION_FIELD
+X13,Device restore/retirement,device,Last acknowledged sequence,number,False,UI_IMPLEMENTATION_FIELD
+X13,Device restore/retirement,device,Pairing challenge,text,False,UI_IMPLEMENTATION_FIELD
+X13,Device restore/retirement,device,Expires,date,False,UI_IMPLEMENTATION_FIELD
+X13,Device restore/retirement,device,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+X14,Intercompany trade,intercompany,Seller company,relation,True,UI_IMPLEMENTATION_FIELD
+X14,Intercompany trade,intercompany,Buyer company,relation,True,UI_IMPLEMENTATION_FIELD
+X14,Intercompany trade,intercompany,Order reference,text,True,UI_IMPLEMENTATION_FIELD
+X14,Intercompany trade,intercompany,Tax amount,money,False,UI_IMPLEMENTATION_FIELD
+X14,Intercompany trade,intercompany,Dispatch reference,text,False,UI_IMPLEMENTATION_FIELD
+X14,Intercompany trade,intercompany,Receipt reference,text,False,UI_IMPLEMENTATION_FIELD
+X14,Intercompany trade,intercompany,Difference reason,textarea,False,UI_IMPLEMENTATION_FIELD
+X15,Consolidation book,consolidation,Company,relation,True,UI_IMPLEMENTATION_FIELD
+X15,Consolidation book,consolidation,Period,relation,True,UI_IMPLEMENTATION_FIELD
+X15,Consolidation book,consolidation,Pair reference,text,False,UI_IMPLEMENTATION_FIELD
+X15,Consolidation book,consolidation,Elimination debit,money,False,UI_IMPLEMENTATION_FIELD
+X15,Consolidation book,consolidation,Elimination credit,money,False,UI_IMPLEMENTATION_FIELD
+X15,Consolidation book,consolidation,Unmatched amount,money,False,UI_IMPLEMENTATION_FIELD
+X15,Consolidation book,consolidation,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+X16,Cut-to-size jobs,cut,Parent product,relation,True,UI_IMPLEMENTATION_FIELD
+X16,Cut-to-size jobs,cut,Parent length,decimal,True,UI_IMPLEMENTATION_FIELD
+X16,Cut-to-size jobs,cut,Output length,decimal,True,UI_IMPLEMENTATION_FIELD
+X16,Cut-to-size jobs,cut,Output count,number,True,UI_IMPLEMENTATION_FIELD
+X16,Cut-to-size jobs,cut,Kerf,decimal,True,UI_IMPLEMENTATION_FIELD
+X16,Cut-to-size jobs,cut,Waste,decimal,False,UI_IMPLEMENTATION_FIELD
+X16,Cut-to-size jobs,cut,Unit,select,False,UI_IMPLEMENTATION_FIELD
+X16,Cut-to-size jobs,cut,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+X17,Repack/kits,repack,Component product,relation,True,UI_IMPLEMENTATION_FIELD
+X17,Repack/kits,repack,Component quantity,decimal,True,UI_IMPLEMENTATION_FIELD
+X17,Repack/kits,repack,Output product,relation,True,UI_IMPLEMENTATION_FIELD
+X17,Repack/kits,repack,Output quantity,decimal,True,UI_IMPLEMENTATION_FIELD
+X17,Repack/kits,repack,Loss quantity,decimal,False,UI_IMPLEMENTATION_FIELD
+X17,Repack/kits,repack,Reason,textarea,False,UI_IMPLEMENTATION_FIELD
+X18,Contractor projects,project,Name,text,True,UI_IMPLEMENTATION_FIELD
+X18,Contractor projects,project,Customer,relation,True,UI_IMPLEMENTATION_FIELD
+X18,Contractor projects,project,Budget,money,True,UI_IMPLEMENTATION_FIELD
+X18,Contractor projects,project,Credit limit,money,False,UI_IMPLEMENTATION_FIELD
+X18,Contractor projects,project,Start date,date,False,UI_IMPLEMENTATION_FIELD
+X18,Contractor projects,project,End date,date,False,UI_IMPLEMENTATION_FIELD
+X18,Contractor projects,project,Site address,textarea,False,UI_IMPLEMENTATION_FIELD
+X18,Contractor projects,project,Notes,textarea,False,UI_IMPLEMENTATION_FIELD
+X19,Service/non-stock lines,service,Service code,text,True,UI_IMPLEMENTATION_FIELD
+X19,Service/non-stock lines,service,Name,text,True,UI_IMPLEMENTATION_FIELD
+X19,Service/non-stock lines,service,Price,money,True,UI_IMPLEMENTATION_FIELD
+X19,Service/non-stock lines,service,Tax rate,decimal,False,UI_IMPLEMENTATION_FIELD
+X19,Service/non-stock lines,service,Completion date,date,False,UI_IMPLEMENTATION_FIELD
+X19,Service/non-stock lines,service,Description,textarea,False,UI_IMPLEMENTATION_FIELD
+X20,Exchanges,exchange,Original sale,relation,True,UI_IMPLEMENTATION_FIELD
+X20,Exchanges,exchange,Return,relation,True,UI_IMPLEMENTATION_FIELD
+X20,Exchanges,exchange,Replacement sale,relation,False,UI_IMPLEMENTATION_FIELD
+X20,Exchanges,exchange,Credit amount,money,True,UI_IMPLEMENTATION_FIELD
+X20,Exchanges,exchange,Replacement amount,money,True,UI_IMPLEMENTATION_FIELD
+X20,Exchanges,exchange,Balance payment,money,False,UI_IMPLEMENTATION_FIELD
+X20,Exchanges,exchange,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+X21,Recall/quarantine,recall,Lot,relation,True,UI_IMPLEMENTATION_FIELD
+X21,Recall/quarantine,recall,Supplier,relation,False,UI_IMPLEMENTATION_FIELD
+X21,Recall/quarantine,recall,Affected quantity,decimal,True,UI_IMPLEMENTATION_FIELD
+X21,Recall/quarantine,recall,Reason,textarea,True,UI_IMPLEMENTATION_FIELD
+X21,Recall/quarantine,recall,Notice,textarea,False,UI_IMPLEMENTATION_FIELD
+X21,Recall/quarantine,recall,Disposition,select,False,UI_IMPLEMENTATION_FIELD
+X21,Recall/quarantine,recall,Evidence,file,False,UI_IMPLEMENTATION_FIELD
+X22,Tenant recovery,recovery,Tenant,relation,True,UI_IMPLEMENTATION_FIELD
+X22,Tenant recovery,recovery,Recovery point,date,True,UI_IMPLEMENTATION_FIELD
+X22,Tenant recovery,recovery,Manifest,file,False,UI_IMPLEMENTATION_FIELD
+X22,Tenant recovery,recovery,Expected records,number,False,UI_IMPLEMENTATION_FIELD
+X22,Tenant recovery,recovery,Recovered records,number,False,UI_IMPLEMENTATION_FIELD
+X22,Tenant recovery,recovery,Difference explanation,textarea,False,UI_IMPLEMENTATION_FIELD
+X22,Tenant recovery,recovery,Approval reason,textarea,True,UI_IMPLEMENTATION_FIELD
+X23,Perpetual deployment/licence,licence,Company,relation,True,UI_IMPLEMENTATION_FIELD
+X23,Perpetual deployment/licence,licence,Version,text,True,UI_IMPLEMENTATION_FIELD
+X23,Perpetual deployment/licence,licence,Deployment,select,False,UI_IMPLEMENTATION_FIELD
+X23,Perpetual deployment/licence,licence,Signed scope reference,text,False,UI_IMPLEMENTATION_FIELD
+X23,Perpetual deployment/licence,licence,Maintenance expiry,date,False,UI_IMPLEMENTATION_FIELD
+X23,Perpetual deployment/licence,licence,Backup reference,text,False,UI_IMPLEMENTATION_FIELD
+X23,Perpetual deployment/licence,licence,Host fingerprint,text,False,UI_IMPLEMENTATION_FIELD
+X24,Standalone mobile companion,companion,Device,relation,True,UI_IMPLEMENTATION_FIELD
+X24,Standalone mobile companion,companion,Pairing reference,text,True,UI_IMPLEMENTATION_FIELD
+X24,Standalone mobile companion,companion,Snapshot date,date,False,UI_IMPLEMENTATION_FIELD
+X24,Standalone mobile companion,companion,Package file,file,False,UI_IMPLEMENTATION_FIELD
+X24,Standalone mobile companion,companion,Draft count,number,False,UI_IMPLEMENTATION_FIELD
+X24,Standalone mobile companion,companion,Approval reason,textarea,False,UI_IMPLEMENTATION_FIELD

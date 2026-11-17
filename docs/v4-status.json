@@ -1,0 +1,39 @@
+{
+  "screens": 152,
+  "field_placements": 1140,
+  "actions": 656,
+  "action_kinds": {
+    "navigate": 231,
+    "detail": 39,
+    "filter": 36,
+    "export": 39,
+    "integration_required": 97,
+    "create": 37,
+    "edit": 52,
+    "transition": 81,
+    "document": 19,
+    "print": 11,
+    "duplicate": 5,
+    "policy": 8,
+    "refresh": 1
+  },
+  "reports": 76,
+  "documents": 26,
+  "render": "PASS",
+  "browser_tests": [
+    "owner login",
+    "detail navigation",
+    "server draft save",
+    "cross-session persistence",
+    "logout",
+    "cashier permission filtering",
+    "restricted direct route"
+  ],
+  "production_backend": "NOT_IMPLEMENTED",
+  "version": "4.0",
+  "security_tests": 14,
+  "security_test_result": "PASS",
+  "backend": "Python/SQLite local integration harness; production Java backend outstanding",
+  "completion": "PARTIAL: unified shell and local RBAC complete; full production workflows outstanding",
+  "pending_action_entries": 97
+}

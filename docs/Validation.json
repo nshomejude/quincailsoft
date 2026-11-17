@@ -1,0 +1,32 @@
+{
+  "screens": 152,
+  "field_placements": 1140,
+  "actions": 656,
+  "action_kinds": {
+    "navigate": 231,
+    "detail": 39,
+    "filter": 36,
+    "export": 39,
+    "integration_required": 97,
+    "create": 37,
+    "edit": 52,
+    "transition": 81,
+    "document": 19,
+    "print": 11,
+    "duplicate": 5,
+    "policy": 8,
+    "refresh": 1
+  },
+  "reports": 76,
+  "documents": 26,
+  "render": "PASS",
+  "browser_tests": {
+    "record_detail_navigation": "PASS",
+    "edit_save_reload": "PASS",
+    "sale_document_link": "PASS",
+    "snapshot_sha256": "PASS",
+    "report_search_calculation_drilldown": "PASS",
+    "full_mobile_accessibility_matrix": "NOT_VERIFIED"
+  },
+  "production_backend": "NOT_IMPLEMENTED"
+}

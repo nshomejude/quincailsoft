@@ -1,0 +1,98 @@
+Screen,Action,Reason
+S03,acknowledge,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S23,snooze alert,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S38,issue,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S54,Zoom,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S54,mark copy,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S55,disable,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S56,revoke,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S60,Discover,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S61,Backup now,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S61,choose external drive,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S62,safety backup,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S62,restore,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S63,commit,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S65,integrity check,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S66,system check,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S68,generate recovery,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S69,commit opening ledger,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S70,run backup,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S70,restore test,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S71,Sign in,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S71,reveal password,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S72,Unlock,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S72,switch user,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S72,close session,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S73,Change password,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S73,recover owner,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S73,revoke sessions,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S76,refund where authorized,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S77,refund,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S79,restore,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S80,mark recovered,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S85,return for correction,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+S88,silence,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N01,Verify,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N01,provision via M01/M03,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N02,pay/query status,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N06,Reserve,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N06,dispatch,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N07,resend,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N07,revoke,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N07,switch active membership,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N08,Enroll factor,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N08,revoke session/device,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N08,recover with step-up,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N09,test,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N09,rotate,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N09,enable after evidence,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N12,Resume provisioning,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N12,suspend permitted paths,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N12,schedule migration,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N13,grant,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N13,revoke,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N14,activate cutover,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N15,retry same ID,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N16,Grant disjoint quota,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N16,freeze,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N16,recall with proof,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N18,locally commit permitted sale,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N19,sync,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N19,dispatch/receive only under authorized authority,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N20,Retry,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N20,resnapshot,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N21,sync,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N25,remove,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N26,Reserve,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N26,query payment,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N26,retry safely,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N27,Verify access,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N28,Verify DNS,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N28,publish,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N28,disable,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N29,hold/release,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N34,Run checks,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N36,revert to prior public version,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N37,Verify identity,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N38,dispatch,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N39,issue grant,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+N39,expire unused challenge,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X03,Issue,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X11,release,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X12,freeze exposure,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X13,revoke,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X13,recover,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X13,retire,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X14,dispatch,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X15,publish management consolidation,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X16,confirm cut,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X21,block,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X21,notify authorized recipients,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X21,recover,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X21,dispose,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X22,Rehearse,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X22,freeze,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X22,restore/migrate,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X22,reopen,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X23,Activate offline,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.
+X23,recover host,This action requires its domain service or a dedicated workflow implementation. It is not represented as completed by this local UI.

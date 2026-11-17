@@ -1,0 +1,19 @@
+test_access_change_revokes_sessions (test_security.Security.test_access_change_revokes_sessions) ... ok
+test_all_nine_roles (test_security.Security.test_all_nine_roles) ... ok
+test_auditor_cannot_write (test_security.Security.test_auditor_cannot_write) ... ok
+test_branch_scope (test_security.Security.test_branch_scope) ... ok
+test_cost_redaction (test_security.Security.test_cost_redaction) ... ok
+test_csrf_and_cashier_price_override (test_security.Security.test_csrf_and_cashier_price_override) ... ok
+test_customer_scope (test_security.Security.test_customer_scope) ... ok
+test_logout_revokes (test_security.Security.test_logout_revokes) ... ok
+test_maker_checker (test_security.Security.test_maker_checker) ... ok
+test_oversell_rolls_back (test_security.Security.test_oversell_rolls_back) ... ok
+test_password_change_revokes_sessions (test_security.Security.test_password_change_revokes_sessions) ... ok
+test_unauthenticated_and_method_guard (test_security.Security.test_unauthenticated_and_method_guard) ... ok
+test_unimplemented_post_fails_closed (test_security.Security.test_unimplemented_post_fails_closed) ... ok
+test_version_and_idempotency (test_security.Security.test_version_and_idempotency) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 2.145s
+
+OK

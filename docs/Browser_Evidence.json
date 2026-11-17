@@ -1,0 +1,18 @@
+{
+  "environment": "Chrome preview",
+  "checks": {
+    "record_detail_navigation": "PASS",
+    "edit_save_reload": "PASS",
+    "sale_document_link": "PASS",
+    "snapshot_sha256": "PASS",
+    "report_search_calculation_drilldown": "PASS",
+    "full_mobile_accessibility_matrix": "NOT_VERIFIED"
+  },
+  "observations": [
+    "SALE-002 note persisted after reload; version increased to 2",
+    "SALE-001 invoice preview total 48500 XAF",
+    "DOC02 local snapshot created with SHA-256 digest",
+    "R007 gross 48500, discount 0, net 48500; source link opened SALE-001"
+  ],
+  "scope": "Representative browser workflows, not all actions or all viewport sizes"
+}
