@@ -1,0 +1,278 @@
+{
+  "testedCommit": "3d86cc4fac6ed5f146c8a3ba1a6ce146a04667b0",
+  "desktopBase": "e993fd6054a3b73fa034be6bf4f5a0e406582fee",
+  "date": "2026-11-18",
+  "runtime": {
+    "java": "25.0.5+8",
+    "maven": "3.9.11",
+    "springBoot": "4.0.9",
+    "postgresql": "18.7"
+  },
+  "runs": [
+    {
+      "kind": "focused",
+      "status": "PASS",
+      "suites": [
+        {
+          "class": "com.quincaisoft.documents.PostgresDocumentSettingsTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.reporting.ReportingPostgresTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.platformcontrol.PostgresPlatformIntegrationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "totals": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "log": "focused-maven.log",
+      "sha256": "d5681b0636a8264fa4f7c5b349698f6abce1666c345eb31aa5c4eedeecf3dab2"
+    },
+    {
+      "kind": "full-reactor",
+      "status": "PASS",
+      "suites": [
+        {
+          "class": "com.quincaisoft.shared.ValueObjectsTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.commerce.PostgresCommerceIntegrationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.customeraccounts.MasterDataPostgresTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.documents.PostgresDocumentSettingsTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.documents.DocumentSettingsHttpTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.documents.DocumentPermissionMatrixTest",
+          "tests": 510,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.finance.FinanceRulesTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.inventory.PostgresInventoryWorkflowTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.inventory.StockBalanceTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.purchasing.PurchaseRulesTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.purchasing.PostgresPurchasingIntegrationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.sales.SaleRulesTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.sales.PostgresSaleIntegrationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.tenders.TenderRulesTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.tenders.TenderPostgresTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.tenders.SettlementPostgresTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.returns.PostgresReturnIntegrationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.integrations.MtnAdapterTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.integrations.ProviderPostgresTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.expenses.ExpensePeriodPostgresTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.reporting.ReportingPostgresTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.reporting.ReportRulesTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.reporting.ReportPermissionMatrixTest",
+          "tests": 476,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.sync.PostgresSyncTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.sync.DeviceProofTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.platformcontrol.PostgresPlatformIntegrationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.workers.IdentityWorkerPostgresTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.security.FullApplicationPostgresTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.security.SecurityBoundaryTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "class": "com.quincaisoft.ModuleBoundaryTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "totals": {
+        "tests": 1049,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "log": "full-maven.log",
+      "sha256": "6b3605892d0f47d651a410e794d2c07accaa4235889515ccad4802ab038d88de"
+    }
+  ],
+  "productionSourceChanged": false,
+  "historicalRecordsImported": 0,
+  "liveProvidersVerified": false,
+  "uiVerified": false,
+  "restoreVerified": false,
+  "releaseCertified": false
+}
