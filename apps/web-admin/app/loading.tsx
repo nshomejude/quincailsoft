@@ -1,0 +1,1 @@
+import {locale,messages} from '@/lib/locale';export default async function Loading(){const t=messages[await locale()];return <section className="panel" role="status" aria-live="polite"><h2>{t.loading}</h2></section>}

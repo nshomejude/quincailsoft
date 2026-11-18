@@ -1,0 +1,4 @@
+package com.quincaisoft.finance.infrastructure;import jakarta.persistence.*;import java.util.*;import java.io.Serializable;
+@Entity @Table(name="period_change_request")@IdClass(PeriodRequestEntity.Key.class)public class PeriodRequestEntity {
+ @Id @Column(name="tenant_id")public UUID tenantId;@Id @Column(name="company_id")public UUID companyId;@Id public UUID id;@Column(name="branch_id")public UUID branchId;@Column(name="period_id")public UUID periodId;public String action;public String status;@Column(name="requested_by")public UUID requestedBy;@Column(name="decided_by")public UUID decidedBy;@Column(name="period_version")public long periodVersion;@Version public long version;public String reason;@Column(name="decision_reason")public String decisionReason;public record Key(UUID tenantId,UUID companyId,UUID id)implements Serializable{}
+}

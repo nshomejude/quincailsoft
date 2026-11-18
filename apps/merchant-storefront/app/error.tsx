@@ -1,0 +1,1 @@
+"use client";export default function ErrorPage({reset}:{reset:()=>void}){return <main><h1>Catalogue unavailable</h1><p>Please try again shortly.</p><button onClick={reset}>Retry</button></main>}

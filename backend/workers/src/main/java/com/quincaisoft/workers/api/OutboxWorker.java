@@ -1,0 +1,1 @@
+package com.quincaisoft.workers.api;public interface OutboxWorker {record Result(int processed,int failed){}Result projectAudit(int limit);}

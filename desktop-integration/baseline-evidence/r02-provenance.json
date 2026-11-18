@@ -1,0 +1,61 @@
+{
+  "artifact": "OPES_Quincalerie_R02_Cumulative_Inventory_Remediation_Candidate.zip",
+  "library_file_id": "libfile_069d86430a9881919ad730f58d130481",
+  "version": "2",
+  "size_bytes": 9779996,
+  "sha256": "3c79e18c64ef6fdfa3f02998262823097847b6662119d9d62990131bae7f1e34",
+  "files": [
+    {
+      "path": "README_R02.md",
+      "sha256": "1644ad6e73116f7d0b6f9e15a98c28d37e0cd4cd491746da0dd56eb063920a89"
+    },
+    {
+      "path": "README_C01.md",
+      "sha256": "a188054b8a5d5a6705149e0d16cf7416df7f865ca586faccc7fd35bc6b167b9d"
+    },
+    {
+      "path": "README_C02.md",
+      "sha256": "c4d418ab84855860e16fdb2a1505c65c2bac45a5ee97988ae1cd0750f8b8c551"
+    },
+    {
+      "path": "README_C03.md",
+      "sha256": "5f7dab446a51d88f050101bf11c68b4f02a3cbb1f9108d1c1b11d5a1314a0fbd"
+    },
+    {
+      "path": "README_C04.md",
+      "sha256": "f95be0a18d9d6fd13c8df704615fdccd1083e5f360f1007383e1c795835d3a61"
+    },
+    {
+      "path": "README_C05.md",
+      "sha256": "4c3d78ddf2fd2a3cd806ef3a059c82098e9a44a5d3638163f54fa912155d976b"
+    },
+    {
+      "path": "README_C06.md",
+      "sha256": "25fc7484c061767be2e421faa17e1692f4adb3f48cb81714a25dcf3d499c96c4"
+    },
+    {
+      "path": "src/Opes.Quincalerie.Desktop/Opes.Quincalerie.Desktop.csproj",
+      "sha256": "368a963f49c57e8a55d7a616ea6e1bd4c239bcdfe35110580943afda049f0279"
+    },
+    {
+      "path": "src/Opes.Quincalerie.Infrastructure/Persistence/SalesStore.cs",
+      "sha256": "872aff3cf40a766d6c644b24b4fa4d0cae9486ca2d5a2a459b6be32009b7d345"
+    },
+    {
+      "path": "src/Opes.Quincalerie.Infrastructure/Persistence/CreditStore.cs",
+      "sha256": "5b37a0e33de4fb97e76a055190add4231b0f94fc092788c8394c2a652ba768ef"
+    },
+    {
+      "path": "scripts/validate_r02_windows.ps1",
+      "sha256": "0f9807532f729e17b793222996d6b82b83aa7b36db498b8356aad47ac4d788c9"
+    },
+    {
+      "path": "docs/C06_WINDOWS_AND_SIGNOFF_RUNBOOK.md",
+      "sha256": "65b1539d9e3100186ffebc4f1da52d12cb768c9c7fdad07813429e516622c036"
+    },
+    {
+      "path": "baseline/Canonical_88_Screen_Contracts.csv",
+      "sha256": "2c2ae15d0459dcfd14ba647da5ac7b840f6a25009c7187a421ba68af7f2e7f5e"
+    }
+  ]
+}

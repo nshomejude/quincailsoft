@@ -1,0 +1,10 @@
+{
+  "name": "@quincaisoft/generated-ts-sdk",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "exports": {".": "./index.ts", "./schema": "./schema.d.ts"},
+  "scripts": {"generate": "node ../api-contracts/generate-source-contract.mjs && openapi-typescript ../api-contracts/openapi.json -o schema.d.ts", "typecheck": "tsc --noEmit --strict --module NodeNext --moduleResolution NodeNext --target ES2022 index.ts"},
+  "dependencies": {"openapi-fetch": "0.15.0"},
+  "devDependencies": {"openapi-typescript": "7.10.1", "typescript": "5.9.3"}
+}

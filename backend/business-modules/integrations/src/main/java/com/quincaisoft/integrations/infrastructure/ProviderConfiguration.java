@@ -1,0 +1,5 @@
+package com.quincaisoft.integrations.infrastructure;
+import com.quincaisoft.integrations.api.*;import org.springframework.context.annotation.*;import org.springframework.core.env.Environment;import java.net.URI;
+@Configuration public class ProviderConfiguration {
+ @Bean ProviderRuntime providerRuntime(Environment e){String user=e.getProperty("QUINCAI_MTN_USER_ID",""),credential=e.getProperty("QUINCAI_MTN_CREDENTIAL",""),key=e.getProperty("QUINCAI_MTN_SUBSCRIPTION_KEY",""),mode=e.getProperty("QUINCAI_MTN_ENVIRONMENT","sandbox");if(user.isBlank()||credential.isBlank()||key.isBlank())return new ProviderRuntime(null,mode,false);boolean enabled=Boolean.parseBoolean(e.getProperty("QUINCAI_MTN_LIVE_ENABLED","false"));if(!mode.equals("sandbox")&&!enabled)return new ProviderRuntime(null,mode,false);String origin=e.getProperty("QUINCAI_MTN_ORIGIN",mode.equals("sandbox")?"https://sandbox.momodeveloper.mtn.com":"");return new ProviderRuntime(new MtnCollectionAdapter(new MtnCollectionAdapter.Configuration(URI.create(origin),mode,user,credential,key,enabled),MtnCollectionAdapter.httpTransport()),mode,true);}
+}

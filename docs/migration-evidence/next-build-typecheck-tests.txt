@@ -1,0 +1,44 @@
+$ pnpm --filter @quincaisoft/web-admin build
+$ next build
+▲ Next.js 16.4.6 (Turbopack)
+✓ Running next.config.ts took 60ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 7.9s
+  Running TypeScript ...
+  Finished TypeScript in 3.6s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/5) ...
+  Generating static pages using 8 workers (1/5) 
+  Generating static pages using 8 workers (2/5) 
+  Generating static pages using 8 workers (3/5) 
+✓ Generating static pages using 8 workers (5/5) in 121ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /auth/callback
+├ ƒ /auth/login
+├ ƒ /auth/logout
+├ ƒ /catalog
+├ ƒ /sales
+├ ƒ /sales/[id]
+└ ƒ /sales/new
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+$ pnpm --filter @quincaisoft/web-admin typecheck
+$ tsc --noEmit
+✔ quantity wire format preserves exact precision (0.836995ms)
+✔ invalid fractional, exponential, negative and overflow inputs fail (0.322797ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 126.856533

@@ -1,0 +1,12 @@
+package com.quincaisoft.suppliers.application;
+import com.quincaisoft.suppliers.api.SupplierService;import com.quincaisoft.suppliers.infrastructure.*;import com.quincaisoft.shared.*;import jakarta.persistence.*;import org.springframework.stereotype.Service;import tools.jackson.databind.json.JsonMapper;import java.util.*;
+@Service public class DefaultSupplierService implements SupplierService {
+ private final EntityManager em;private final ScopedTransactions tx;private final OperationJournal operations;
+ public DefaultSupplierService(EntityManager em,ScopedTransactions tx,JsonMapper json){this.em=em;this.tx=tx;this.operations=new OperationJournal(em,json);}
+ private Supplier view(SupplierEntity r){return new Supplier(r.id,r.code,r.name,r.phone,r.email,r.active,r.version);}
+ public List<Supplier> list(){return tx.execute(()->em.createQuery("select s from SupplierEntity s order by s.name,s.id",SupplierEntity.class).setMaxResults(200).getResultList().stream().map(this::view).toList());}
+ public Supplier get(UUID id){return tx.execute(()->view(find(id)));}
+ private SupplierEntity find(UUID id){var s=TenantContext.current();var r=em.find(SupplierEntity.class,new SupplierEntity.Key(s.tenantId(),s.companyId(),id),LockModeType.PESSIMISTIC_READ);if(r==null)throw new NoSuchElementException("Supplier not found");return r;}
+ public void requireEligible(UUID id){tx.execute(()->{if(!find(id).active)throw new IllegalStateException("Supplier inactive");return null;});}
+ public Supplier create(Create q){if(q==null||q.code()==null||!q.code().matches("[A-Za-z0-9_-]{1,40}")||q.name()==null||q.name().isBlank()||q.name().length()>200||q.phone()!=null&&q.phone().length()>80||q.email()!=null&&q.email().length()>254)throw new IllegalArgumentException("Valid supplier code/name/contact required");return tx.execute(()->operations.once(q.operationId(),"SUPPLIER|"+q,"SupplierCreated",Supplier.class,()->{var s=TenantContext.current();var r=new SupplierEntity();r.tenantId=s.tenantId();r.companyId=s.companyId();r.id=UUID.randomUUID();r.code=q.code();r.name=q.name();r.phone=q.phone()==null?"":q.phone();r.email=q.email()==null?"":q.email();r.active=true;em.persist(r);em.flush();return view(r);},Supplier::id));}
+}

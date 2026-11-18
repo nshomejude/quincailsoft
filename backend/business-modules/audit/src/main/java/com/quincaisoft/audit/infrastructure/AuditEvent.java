@@ -1,0 +1,4 @@
+package com.quincaisoft.audit.infrastructure;
+import jakarta.persistence.*;import java.util.*;import java.time.*;
+@Entity @Table(name="audit_event") @IdClass(AuditEvent.Key.class)
+public class AuditEvent {public record Key(UUID tenantId,UUID id) implements java.io.Serializable{} @Id @Column(name="tenant_id") public UUID tenantId;@Id public UUID id;@Column(name="company_id") public UUID companyId;@Column(name="branch_id") public UUID branchId;@Column(name="actor_id") public UUID actorId;@Column(name="operation_id") public UUID operationId;public String action;@Column(name="source_type")public String sourceType;@Column(name="source_id")public UUID sourceId;public String reason;@Column(name="recorded_at")public Instant recordedAt;}

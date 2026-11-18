@@ -1,0 +1,9 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const api=JSON.parse(fs.readFileSync(new URL('./openapi.json',import.meta.url),'utf8'));
+const inventory=JSON.parse(fs.readFileSync(new URL('./endpoint-inventory.json',import.meta.url),'utf8'));
+assert.equal(api.openapi,'3.1.0');
+function visit(v){if(!v||typeof v!=='object')return;if(v.$ref){let target=api;for(const k of v.$ref.slice(2).split('/'))target=target?.[k];assert(target,`Unresolved ${v.$ref}`);}for(const child of Object.values(v))visit(child);}
+visit(api);let count=0;const ids=new Set();const idempotencyGaps=[];
+for(const [path,item] of Object.entries(api.paths))for(const [method,op]of Object.entries(item)){if(!['get','post','put','delete','patch'].includes(method))continue;count++;assert(op.responses);assert(!ids.has(op.operationId));ids.add(op.operationId);for(const p of op.parameters??[])if(p.in==='path')assert(path.includes('{'+p.name+'}'),`Unexpected path parameter ${p.name} for ${path}`);for(const name of [...path.matchAll(/\{([^}]+)\}/g)].map(m=>m[1]))assert(op.parameters.some(p=>p.name===name&&p.in==='path'&&p.required));if(method!=='get'&&path.startsWith('/api/')){assert(op.parameters.some(p=>p.name==='X-Request-ID'&&p.required),`${path} lacks inherited request ID`);if(!op.parameters.some(p=>p.name==='Idempotency-Key'&&p.required))idempotencyGaps.push(`${method.toUpperCase()} ${path}`);}}
+assert.equal(count,inventory.endpoints.length);const report=api.components.schemas.ReportingService_Report;assert.equal(report.properties.rows.items.items.type,'string');assert.equal(report.properties.totals.additionalProperties.type,'string');
+console.log(JSON.stringify({result:'PASS structural source contract',operations:count,unresolvedJavaTypes:inventory.unresolvedJavaTypes,idempotencyHeaderReview:idempotencyGaps,note:'Not runtime acceptance or full semantic OpenAPI lint.'},null,2));

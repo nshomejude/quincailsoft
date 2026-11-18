@@ -1,0 +1,1 @@
+"use client";export default function ErrorPage({reset}:{reset:()=>void}){return <main><h1>The operation could not be completed</h1><p>Review your access and current record state, then reload. No success is assumed.</p><button onClick={reset}>Reload</button></main>}

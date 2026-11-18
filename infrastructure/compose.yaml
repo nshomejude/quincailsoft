@@ -1,0 +1,22 @@
+# Local development database only. No provider secrets or production data.
+services:
+  postgres:
+    image: postgres:18.7-bookworm
+    environment:
+      POSTGRES_DB: quincaisoft
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD:?Set POSTGRES_ADMIN_PASSWORD}
+      QUINCAI_MIGRATOR_PASSWORD: ${QUINCAI_MIGRATOR_PASSWORD:?Set QUINCAI_MIGRATOR_PASSWORD}
+      QUINCAI_RUNTIME_PASSWORD: ${QUINCAI_RUNTIME_PASSWORD:?Set QUINCAI_RUNTIME_PASSWORD}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - quincai_pg18:/var/lib/postgresql
+      - ./postgres/010-roles.sh:/docker-entrypoint-initdb.d/010-roles.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d quincaisoft"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  quincai_pg18:

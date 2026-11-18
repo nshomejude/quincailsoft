@@ -1,0 +1,1 @@
+import './globals.css';import type {Metadata} from 'next';export const metadata:Metadata={title:"QuincaiSoft Merchant Store",description:'QuincaiSoft retail and trade'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body><header><strong>QuincaiSoft Merchant Store</strong><a href="/">Home</a></header>{children}</body></html>}

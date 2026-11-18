@@ -1,0 +1,23 @@
+PASS PostgreSQL major is 18
+MIGRATED V1__typed_business_foundation.sql
+MIGRATED V2__isolation_and_immutable_journals.sql
+MIGRATED V3__narrow_row_lock_privileges.sql
+PASS All tenant tables force RLS
+PASS Missing tenant context returns no data
+PASS Authorized product visible
+PASS Own membership visible
+PASS Other tenant concealed
+PASS Runtime can lock customer period and warehouse rows
+PASS Row-lock grant cannot change customer eligibility [42501]
+PASS Row-lock grant cannot close periods [42501]
+PASS Row-lock grant cannot deactivate warehouses [42501]
+PASS Runtime cannot grant memberships [42501]
+PASS Runtime cannot bypass RLS by truncation [42501]
+PASS Cross-tenant insert denied [42501]
+PASS Stock composite reference enforced [23503]
+PASS Empty journal rejected at commit [23514]
+PASS Balanced journal committed atomically
+PASS Committed journal cannot receive extra balancing lines [23514]
+PASS Runtime cannot mutate journal facts [42501]
+PASS Same tenant other company concealed
+PASS 19 PostgreSQL18 migration assertions

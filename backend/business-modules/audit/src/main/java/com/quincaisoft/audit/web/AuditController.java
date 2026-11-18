@@ -1,0 +1,3 @@
+package com.quincaisoft.audit.web;
+import com.quincaisoft.audit.api.*;import org.springframework.web.bind.annotation.*;import org.springframework.security.access.prepost.PreAuthorize;import java.util.*;
+@RestController @RequestMapping("/api/v1/audit") public class AuditController {private final AuditService service;public AuditController(AuditService service){this.service=service;}@GetMapping @PreAuthorize("hasAnyAuthority('audit:read','SCOPE_audit:read')") public List<AuditService.Event> list(){return service.recent();}}

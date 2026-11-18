@@ -1,0 +1,10 @@
+package com.quincaisoft.sync.domain;
+import java.security.*;import java.security.interfaces.RSAPublicKey;import java.security.spec.X509EncodedKeySpec;import java.util.*;import java.nio.charset.StandardCharsets;
+public final class DeviceProof {
+ private DeviceProof(){}
+ public static RSAPublicKey key(String pem){try{if(pem==null||pem.length()>6000||!pem.startsWith("-----BEGIN PUBLIC KEY-----"))throw new IllegalArgumentException();var bytes=Base64.getDecoder().decode(pem.replace("-----BEGIN PUBLIC KEY-----","").replace("-----END PUBLIC KEY-----","").replaceAll("\\s", ""));var key=(RSAPublicKey)KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(bytes));if(key.getModulus().bitLength()<2048)throw new IllegalArgumentException();return key;}catch(Exception e){throw new IllegalArgumentException("RSA public key with at least 2048 bits required");}}
+ public static String hash(String source){try{return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(source.getBytes(StandardCharsets.UTF_8)));}catch(Exception e){throw new IllegalStateException(e);}}
+ public static void verify(String pem,String canonical,String signature){try{var verifier=Signature.getInstance("SHA256withRSA");verifier.initVerify(key(pem));verifier.update(canonical.getBytes(StandardCharsets.UTF_8));if(!verifier.verify(Base64.getDecoder().decode(signature)))throw new IllegalArgumentException();}catch(Exception e){throw new IllegalArgumentException("Device signature is invalid");}}
+ public static String enrollment(UUID tenant,UUID company,UUID branch,UUID device,UUID epoch,String challenge){return String.join("\n","quincai-enroll-v1",tenant.toString(),company.toString(),branch.toString(),device.toString(),epoch.toString(),challenge);}
+ public static String recovery(UUID tenant,UUID company,UUID branch,UUID device,UUID epoch,long sequence,UUID operation,String classification,String hash){return String.join("\n","quincai-recovery-v1",tenant.toString(),company.toString(),branch.toString(),device.toString(),epoch.toString(),Long.toString(sequence),operation.toString(),classification,hash);}
+}

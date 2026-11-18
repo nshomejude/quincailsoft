@@ -1,0 +1,10 @@
+package com.quincaisoft.sync.web;import com.quincaisoft.sync.api.SyncService;import org.springframework.web.bind.annotation.*;import org.springframework.security.access.prepost.PreAuthorize;import java.util.*;
+@RestController @RequestMapping("/api/v1/sync") public class SyncController {private final SyncService sync;public SyncController(SyncService sync){this.sync=sync;}private void same(UUID header,UUID operation){if(!header.equals(operation))throw new IllegalArgumentException("Operation IDs must match");}
+@GetMapping("/devices") @PreAuthorize("hasAnyAuthority('sync:manage','SCOPE_sync:manage')")public List<SyncService.Device> devices(){return sync.devices();}
+@PostMapping("/devices/challenges") @PreAuthorize("hasAnyAuthority('sync:enroll','SCOPE_sync:enroll')")public SyncService.Device challenge(@RequestHeader("Idempotency-Key")UUID operation,@RequestBody SyncService.Challenge i){same(operation,i.operationId());return sync.challenge(i);}
+@PostMapping("/devices/{id}/prove") @PreAuthorize("hasAnyAuthority('sync:enroll','SCOPE_sync:enroll')")public SyncService.Device prove(@PathVariable UUID id,@RequestHeader("Idempotency-Key")UUID operation,@RequestBody SyncService.Proof i){same(operation,i.operationId());return sync.prove(id,i);}
+@PostMapping("/devices/{id}/approve") @PreAuthorize("hasAnyAuthority('sync:manage','SCOPE_sync:manage')")public SyncService.Device approve(@PathVariable UUID id,@RequestHeader("Idempotency-Key")UUID operation,@RequestBody SyncService.Approval i){same(operation,i.operationId());return sync.approve(id,i);}
+@PostMapping("/recovery-submissions") @PreAuthorize("hasAnyAuthority('sync:recover','SCOPE_sync:recover')")public SyncService.Receipt recover(@RequestHeader("Idempotency-Key")UUID operation,@RequestBody SyncService.Recovery i){same(operation,i.operationId());return sync.recover(i);}
+@GetMapping("/recovery-submissions") @PreAuthorize("hasAnyAuthority('sync:recover','SCOPE_sync:recover')")public List<SyncService.Receipt> recovery(){return sync.recovery();}
+@GetMapping("/operations/{id}")public SyncService.Operation status(@PathVariable UUID id){return sync.status(id);}
+}

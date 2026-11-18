@@ -1,0 +1,23 @@
+{
+  "overview": "Operations overview",
+  "catalog": "Products",
+  "sales": "Sales",
+  "signin": "Sign in",
+  "signout": "Sign out",
+  "loading": "Loading workspace…",
+  "stock": "Stock",
+  "quotations": "Quotations",
+  "returns": "Returns",
+  "purchasing": "Purchasing",
+  "suppliers": "Suppliers",
+  "finance": "Cash & payments",
+  "expenses": "Expenses",
+  "periods": "Accounting periods",
+  "documents": "Documents",
+  "reports": "Reports",
+  "identity": "Access management",
+  "audit": "Audit trail",
+  "settings": "Document settings",
+  "workspace": "Business workspace",
+  "skip": "Skip to content"
+}
