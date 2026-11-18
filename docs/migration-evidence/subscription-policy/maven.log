@@ -1,0 +1,92 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/workspace/scratch/8054c7c90089/toolchain/apache-maven-3.9.11/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO]
+[INFO] backend                                                            [pom]
+[INFO] shared-kernel                                                      [jar]
+[INFO] subscriptions                                                      [jar]
+[INFO]
+[INFO] ----------------------< com.quincaisoft:backend >-----------------------
+[INFO] Building backend 0.1.0-SNAPSHOT                                    [1/3]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.6.2:enforce (java25) @ backend ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO]
+[INFO] -------------------< com.quincaisoft:shared-kernel >--------------------
+[INFO] Building shared-kernel 0.1.0-SNAPSHOT                              [2/3]
+[INFO]   from shared-kernel/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.6.2:enforce (java25) @ shared-kernel ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ shared-kernel ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-subscriptions/backend/shared-kernel/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-subscriptions/backend/shared-kernel/src/main/resources
+[INFO]
+[INFO] --- compiler:3.14.1:compile (default-compile) @ shared-kernel ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 6 source files with javac [debug parameters release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ shared-kernel ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-subscriptions/backend/shared-kernel/src/test/resources
+[INFO]
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ shared-kernel ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO]
+[INFO] --- surefire:3.5.6:test (default-test) @ shared-kernel ---
+[INFO]
+[INFO] -------------------< com.quincaisoft:subscriptions >--------------------
+[INFO] Building subscriptions 0.1.0-SNAPSHOT                              [3/3]
+[INFO]   from business-modules/subscriptions/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.6.2:enforce (java25) @ subscriptions ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ subscriptions ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-subscriptions/backend/business-modules/subscriptions/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-subscriptions/backend/business-modules/subscriptions/src/main/resources
+[INFO]
+[INFO] --- compiler:3.14.1:compile (default-compile) @ subscriptions ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug parameters release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ subscriptions ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-subscriptions/backend/business-modules/subscriptions/src/test/resources
+[INFO]
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ subscriptions ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO]
+[INFO] --- surefire:3.5.6:test (default-test) @ subscriptions ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.quincaisoft.subscriptions.SubscriptionRestrictionPolicyTest
+[INFO] Tests run: 55, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.244 s -- in com.quincaisoft.subscriptions.SubscriptionRestrictionPolicyTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 55, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for backend 0.1.0-SNAPSHOT:
+[INFO]
+[INFO] backend ............................................ SUCCESS [  4.884 s]
+[INFO] shared-kernel ...................................... SUCCESS [  4.222 s]
+[INFO] subscriptions ...................................... SUCCESS [  8.819 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  25.369 s
+[INFO] Finished at: 2026-11-18T07:31:03+01:00
+[INFO] ------------------------------------------------------------------------
