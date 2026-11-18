@@ -11,6 +11,12 @@ public interface CatalogMasterService {
  record Family(UUID id,UUID manufacturerId,String productType,String modelNumber) {}
  Manufacturer createManufacturer(ManufacturerSave command);
  Family createFamily(FamilySave command);
+ record VariantSave(UUID operationId,UUID productId,UUID familyId,String colour,String size,String reason) {}
+ record Variant(UUID productId,UUID familyId,String colour,String size) {}
+ record OfferSave(UUID operationId,UUID productId,UUID supplierId,String supplierSku,String quotedCostXaf,int leadTimeDays,String minimumOrderMilli,boolean preferred,String reason) {}
+ record Offer(UUID productId,UUID supplierId,String supplierSku,String quotedCostXaf,int leadTimeDays,String minimumOrderMilli,boolean preferred) {}
+ Variant attachVariant(VariantSave command);
+ Offer createOffer(OfferSave command);
  List<Category> categories(); Category category(UUID id); Category saveCategory(UUID id,CategorySave command);
  List<Unit> units(); Unit unit(UUID id); Unit saveUnit(UUID id,UnitSave command);
 }

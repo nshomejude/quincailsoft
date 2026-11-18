@@ -27,5 +27,21 @@ public class CatalogMasterController {
   return masters.createFamily(command);
  }
 
+ @PostMapping("/variants")
+ @PreAuthorize("hasAnyAuthority('catalog:write','SCOPE_catalog:write')")
+ public CatalogMasterService.Variant attachVariant(@RequestHeader("Idempotency-Key") UUID key,
+     @RequestBody CatalogMasterService.VariantSave command) {
+  match(key, command.operationId());
+  return masters.attachVariant(command);
+ }
+
+ @PostMapping("/supplier-offers")
+ @PreAuthorize("hasAnyAuthority('catalog:write','SCOPE_catalog:write')")
+ public CatalogMasterService.Offer createOffer(@RequestHeader("Idempotency-Key") UUID key,
+     @RequestBody CatalogMasterService.OfferSave command) {
+  match(key, command.operationId());
+  return masters.createOffer(command);
+ }
+
  private void match(UUID key,UUID operation){if(!key.equals(operation))throw new IllegalArgumentException("Operation ID mismatch");}
 }

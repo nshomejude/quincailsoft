@@ -34,6 +34,8 @@ class MasterDataPostgresTest {
    try(var owner=DriverManager.getConnection(url,adminUser,"")){
     try(var paths=Files.list(Path.of("../../db-migrations/src/main/resources/db/migration"))){for(var path:paths.filter(p->p.toString().endsWith(".sql")).sorted(Comparator.comparingInt(p->Integer.parseInt(p.getFileName().toString().split("__")[0].substring(1)))).toList())sql(owner,Files.readString(path));}
     sql(owner,"INSERT INTO tenant(id,name)VALUES('"+tenant+"','Synthetic');INSERT INTO company(tenant_id,id,name)VALUES('"+tenant+"','"+company+"','Synthetic');INSERT INTO branch(tenant_id,company_id,id,name)VALUES('"+tenant+"','"+company+"','"+branch+"','Synthetic')");
+    UUID supplier = UUID.randomUUID();
+    sql(owner, "insert into supplier (tenant_id, company_id, id, code, name) values ('"+tenant+"','"+company+"','"+supplier+"','TEST','Scoped supplier')");
     factory=new LocalContainerEntityManagerFactoryBean();factory.setDataSource(new DriverManagerDataSource(url,role,""));factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());factory.setPackagesToScan("com.quincaisoft.customeraccounts.infrastructure","com.quincaisoft.catalog.infrastructure");factory.setJpaPropertyMap(Map.of("hibernate.hbm2ddl.auto","validate"));factory.afterPropertiesSet();
     var emf=factory.getObject();var em=SharedEntityManagerCreator.createSharedEntityManager(emf);var template=new TransactionTemplate(new JpaTransactionManager(emf));
     ScopedTransactions transactions=new ScopedTransactions(){public <T>T execute(Supplier<T> action){return template.execute(status->{var scope=TenantContext.current();em.createNativeQuery("select set_config('app.tenant_id',:t,true),set_config('app.company_id',:c,true),set_config('app.branch_id',:b,true),set_config('app.actor_id',:a,true)").setParameter("t",scope.tenantId().toString()).setParameter("c",scope.companyId().toString()).setParameter("b",scope.branchId().toString()).setParameter("a",scope.actorId().toString()).getSingleResult();return action.get();});}};
@@ -73,6 +75,19 @@ class MasterDataPostgresTest {
      var pack=masters.saveUnit(null,new CatalogMasterService.UnitSave(UUID.randomUUID(),"box","Box","piece","12","1",0,true,"0","create"));assertEquals("12",pack.factorNumerator());
      assertThrows(IllegalArgumentException.class,()->masters.saveUnit(pack.id(),new CatalogMasterService.UnitSave(UUID.randomUUID(),"box","Box","piece","10","1",0,true,pack.version(),"rescale")));
      var product=catalog.create(new CatalogService.Save(UUID.randomUUID(),"MASTER-SKU","Master product","piece","9007199254740993",0,"0",false,"import inactive",child.id(),"Brand","123456","12000","3000",true,false,false,"Full description"));
+     var variantCommand = new CatalogMasterService.VariantSave(UUID.randomUUID(), product.id(), firstFamily.id(), "Blue", "10mm", "Historical import fixture");
+     var variant = masters.attachVariant(variantCommand);
+     assertEquals(product.id(), variant.productId());
+     assertEquals(variant, masters.attachVariant(variantCommand));
+     assertThrows(IllegalStateException.class, () -> masters.attachVariant(
+         new CatalogMasterService.VariantSave(variantCommand.operationId(), product.id(), secondFamily.id(), "Blue", "10mm", "Historical import fixture")));
+     var offerCommand = new CatalogMasterService.OfferSave(UUID.randomUUID(), product.id(), supplier, "SUP-1", "9007199254740993", 7, "12000", true, "Historical import fixture");
+     var offer = masters.createOffer(offerCommand);
+     assertEquals("9007199254740993", offer.quotedCostXaf());
+     assertEquals(offer, masters.createOffer(offerCommand));
+     assertThrows(PersistenceException.class, () -> masters.createOffer(new CatalogMasterService.OfferSave(
+         UUID.randomUUID(), product.id(), UUID.randomUUID(), "BAD-SUP", "1", 0, "1", false, "Missing supplier")));
+
      assertFalse(product.active());assertEquals("12000",product.packSizeMilli());assertEquals(9007199254740993L,product.sellingPriceXaf());assertEquals(child.id(),product.categoryId());
      assertThrows(IllegalArgumentException.class,()->catalog.create(new CatalogService.Save(UUID.randomUUID(),"BAD","Bad","piece","10",0,"0",true,"invalid relation",UUID.randomUUID(),"","","1000","0",true,false,false,"")));
      return null;
