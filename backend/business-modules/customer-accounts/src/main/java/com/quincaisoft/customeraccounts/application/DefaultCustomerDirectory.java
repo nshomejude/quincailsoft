@@ -40,10 +40,10 @@ public class DefaultCustomerDirectory implements CustomerDirectory {
   return tx.execute(()->{
    var s=TenantContext.current();String hash=sha("CUSTOMER|"+id+"|"+s.actorId()+"|"+json.writeValueAsString(c));
    em.createNativeQuery("select pg_advisory_xact_lock(hashtextextended(:k,0))").setParameter("k",s.tenantId()+":"+c.operationId()).getSingleResult();
-   var prior=em.createNativeQuery("select request_hash,response_json::text from idempotency_result where tenant_id=:t and operation_id=:o")
+   var prior=em.createNativeQuery("select request_hash,response_json::text,company_id,branch_id,actor_id,source_type,status from idempotency_result where tenant_id=:t and operation_id=:o")
       .setParameter("t",s.tenantId()).setParameter("o",c.operationId()).getResultList();
    if(!prior.isEmpty()){
-    Object[] p=(Object[])prior.getFirst();if(!hash.equals(p[0])||p[1]==null)throw new IllegalStateException("Operation already used with different content or actor");
+    Object[] p=(Object[])prior.getFirst();if(!hash.equals(p[0])||p[1]==null||!s.companyId().equals(p[2])||!s.branchId().equals(p[3])||!s.actorId().equals(p[4])||!"CUSTOMER".equals(p[5])||!"ACCEPTED".equals(p[6]))throw new IllegalStateException("Operation already used with different content, actor, scope or outcome");
     return json.readValue((String)p[1],Entry.class);
    }
    CustomerEntity e;

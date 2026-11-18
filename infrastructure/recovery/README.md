@@ -45,3 +45,26 @@ PATH=/path/to/postgresql18/bin:$PATH \
 Freeze migration writers first. The test applies all current migrations to a temporary synthetic source on host loopback port 55448, inserts tenant/company/branch/catalog/stock and balanced journal fixtures, and uses the real backup and isolated restore tools. It requires exact source/restored table fingerprints, verifies representative row counts and isolated networking, then rejects evidence overwrite, changed archive bytes, invalid archive format and an intentionally wrong source reconciliation manifest. The source is stopped afterward. Successful evidence is copied to the optional new directory; failure artifacts are retained for inspection.
 
 Test execution is serialized by the integration lead. Shell syntax and helper compilation alone are not a restore pass. Record the executed command, source commit, environment, logs and result; do not carry earlier FAIL/BLOCKED results forward as successful acceptance.
+
+## Target-tenant manifest preflight
+
+`tenant-manifest-postgres.sh EXPORTED_SNAPSHOT TENANT_UUID NEW_EVIDENCE_DIRECTORY`
+creates a read-only, target-only fingerprint manifest under an already-held
+PostgreSQL18 snapshot. Use an approved recovery operator identity; runtime
+RLS-filtered reads fail rather than silently produce incomplete evidence. Freeze
+schema changes while the snapshot is held. It accepts only the public application
+schema and rejects unsupported external/non-MVCC objects.
+
+The output classifies all tables, hashes only tenant-scoped rows, and reports
+cross-tenant FK references and both inbound/outbound unscoped dependencies as
+BLOCKED (exit 2). Query failures return FAIL; existing evidence is never replaced.
+A PASS means only that target fingerprints and declared FK preflight completed.
+It does not verify JSON references, signing keys, external objects, lawful
+retention or cutover. Unscoped dependencies need reviewed extraction adapters;
+production routing is never enabled.
+
+Run `test-tenant-manifest.sh NEW_EVIDENCE_DIRECTORY` with PGHOST/PGPORT/PGUSER
+pointing to an approved disposable PostgreSQL18 test server. It creates its own
+database and synthetic fixtures, checks scope/closure failures and drops the
+database afterward. It never creates a network interface or changes server
+networking. Integration lead serializes this acceptance test.

@@ -43,6 +43,7 @@ class TenderPostgresTest {
     var catalog=new DefaultCatalogService(em,tx);var stock=new DefaultStockService(em,tx,catalog);var finance=new DefaultFinanceService(em,tx);var customers=new DefaultCustomerService(em,tx);var documents=new DefaultDocumentService(em,tx,JsonMapper.builder().build());var sales=new DefaultSalesService(em,tx,stock,catalog,finance,customers,JsonMapper.builder().build(),documents);
     var tenders=new DefaultTenderService(em,tx,finance,sales,customers,JsonMapper.builder().build());
     var scope=new TenantScope(t,c,b,a);
+    var differentActor=new TenantScope(t,c,b,UUID.randomUUID());
     var otherBranch=UUID.randomUUID();
     sql(owner,"INSERT INTO branch(tenant_id,company_id,id,name) VALUES('"+t+"','"+c+"','"+otherBranch+"','Other branch')");
     TenantContext.call(scope,1,()->{
@@ -63,8 +64,18 @@ class TenderPostgresTest {
      assertThrows(IllegalStateException.class,()->sales.post(next.id(),new SalesService.Post(UUID.randomUUID(),next.version(),"Closed period must rollback")));
      assertEquals("DRAFT",sales.get(next.id()).status());assertEquals(8000,count(owner,"select quantity_milli from stock_balance"));assertEquals(1,count(owner,"select count(*) from stock_movement"));assertEquals(1,count(owner,"select count(*) from journal_entry"));assertEquals(1,count(owner,"select count(*) from outbox_event"));assertEquals(1,count(owner,"select count(*) from document_snapshot"));
      sql(owner,"update financial_period set status='Open'");
-     var date=LocalDate.of(2026,11,18);var shift=tenders.open(new TenderService.Open(UUID.randomUUID(),"TILL-1",date,"100","Opening float declaration"));
-     var collect=new TenderService.Receipt(UUID.randomUUID(),draft.id(),customer,shift.id(),date,"500","Confirmed physical cash");var payment=tenders.receipt(collect);assertEquals(payment,tenders.receipt(collect));assertEquals(1500,finance.outstandingSale(draft.id()));
+     var date=LocalDate.of(2026,11,18);var opening=new TenderService.Open(UUID.randomUUID(),"TILL-1",date,"100","Opening float declaration");var shift=tenders.open(opening);
+     assertEquals(shift,tenders.open(opening));
+     assertThrows(IllegalStateException.class,()->TenantContext.call(differentActor,1,()->tenders.open(opening)));
+     assertEquals(1,tenders.sessions().size());
+     var collect=new TenderService.Receipt(UUID.randomUUID(),draft.id(),customer,shift.id(),date,"500","Confirmed physical cash");var payment=tenders.receipt(collect);assertEquals(payment,tenders.receipt(collect));
+     long journalCount=count(owner,"select count(*) from journal_entry");long factCount=count(owner,"select count(*) from tender_fact");
+     assertThrows(IllegalStateException.class,()->TenantContext.call(differentActor,1,()->tenders.receipt(collect)));
+     // Forced RLS conceals both the other branch receipt and the source sale.
+     var concealed=assertThrows(NoSuchElementException.class,()->TenantContext.call(new TenantScope(t,c,otherBranch,a),1,()->tenders.receipt(collect)));
+     assertEquals("Sale not found",concealed.getMessage());
+     assertEquals(journalCount,count(owner,"select count(*) from journal_entry"));assertEquals(factCount,count(owner,"select count(*) from tender_fact"));
+     assertEquals(1500,finance.outstandingSale(draft.id()));
      assertEquals(1,finance.pendingCollectionCount());
      assertEquals(0,TenantContext.call(new TenantScope(t,c,otherBranch,a),1,finance::pendingCollectionCount));
      var deposit=tenders.deposit(new TenderService.Deposit(UUID.randomUUID(),customer,shift.id(),date,"2500","Customer cash advance"));

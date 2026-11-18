@@ -1,0 +1,13 @@
+# Assignment 14 — supplier replay provenance
+
+Preflight: read AGENTS.md, architecture company-boundary §36 and security/data-lifecycle §44.3, migration summary, canonical coverage and Python parity inventory. Inspected actual server/server.py command replay (`user_id` + operation + request digest), tests/test_security.py::test_version_and_idempotency and tests/test_boundary_audit.py::test_cached_command_replay_rechecks_costs_and_scope, and supplier service/controller/receipt implementation.
+
+Owned changes are suppliers infrastructure OperationJournal and SupplierReplayPostgresTest. No migration, shared configuration or API wire change. The previous supplier helper already hashed actor material and verified company/branch, but could decode any matching receipt without validating its persisted actor, source type or accepted/rejected status. It now fails closed on these provenance mismatches before decoding a successful response.
+
+The new test applies real migrations, uses a PostgreSQL runtime role without bypass RLS, creates a typed supplier through its real service, verifies same-actor retry, denies different actor/company/branch, and seeds well-formed synthetic receipt fixtures for wrong source/rejected/wrong actor. It asserts the mutation callback never runs for these receipts, that the supplier stays unchanged, and exactly one supplier outbox event exists. This supports the scope/retry invariants; it does not certify the full legacy sale-specific cost-redaction assertions and leaves those parity rows OPEN.
+
+Root execution requested: `-pl business-modules/suppliers -am -Dtest=SupplierReplayPostgresTest -Dsurefire.failIfNoSpecifiedTests=false test` with PostgreSQL18 configured. Test execution remains pending root, not agent-certified. No module completion or release claim.
+
+Remaining gaps: supplier DTO exposes bank reference to purchasing readers under the current broad purchasing:read controller policy; field-level financial PII policy and UI redaction require an explicit complete workflow. This increment does not invent a new role matrix. Current epoch enforcement remains owned by the global authenticated scope boundary; live HTTP role/epoch acceptance is not tested here. Historical posted-link immutability, full supplier document/UI acceptance and data-retention scope remain independent requirements.
+
+Root full-run fixture correction: cross-company/branch fixtures now reference actual existing scopes. RLS hides the original receipt there; tests require SQLSTATE 23505 with the exact idempotency or supplier uniqueness constraint and assert supplier/receipt/outbox counts stay at one after rollback. Same-scope actor and synthetic provenance mismatches still require IllegalStateException. Final rerun pending root.

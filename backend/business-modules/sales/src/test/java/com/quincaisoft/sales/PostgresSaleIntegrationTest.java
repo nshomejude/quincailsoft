@@ -90,6 +90,16 @@ class PostgresSaleIntegrationTest {
      var delivery=new FulfillmentService.DeliveryDetails("DELIVERY",date.plusDays(1),
          "Synthetic address","Synthetic recipient","+237000000000","Synthetic instructions");
      var request=new FulfillmentService.Draft(UUID.randomUUID(),heldSale.id(),customer,date,"Prepare customer collection",delivery);
+     for (int invalid=0;invalid<2;invalid++) {
+      var forged=new FulfillmentService.Draft(UUID.randomUUID(),heldSale.id(),customer,date,"Forged fulfillment replay");
+      String material="DRAFT|"+forged.legacyFingerprintMaterial();
+      String hash=HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(material.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+      try(var insert=owner.prepareStatement("insert into idempotency_result(tenant_id,company_id,branch_id,operation_id,request_hash,source_type,actor_id,status,response_json)values(?,?,?,?,?,?,?,?,cast('{}' as jsonb))")) {
+       insert.setObject(1,t);insert.setObject(2,c);insert.setObject(3,b);insert.setObject(4,forged.operationId());insert.setString(5,hash);insert.setString(6,invalid==0?"SALE":"FULFILLMENT");insert.setObject(7,a);insert.setString(8,invalid==1?"REJECTED":"ACCEPTED");insert.executeUpdate();
+      }
+      assertThrows(IllegalStateException.class,()->fulfillment.draft(forged));
+      assertEquals(0,fulfillment.pendingPreparationCount());
+     }
      var task=fulfillment.draft(request);
      assertEquals(delivery,fulfillment.get(task.id()).delivery());
      assertEquals(task,fulfillment.draft(request));
@@ -114,19 +124,26 @@ class PostgresSaleIntegrationTest {
          List.of(new FulfillmentService.PickLine(p,"500")));
      var first=fulfillment.dispatchLines(task.id(),firstDispatch);
      assertEquals("PARTIAL",first.status());
+     assertEquals(List.of(new FulfillmentService.PickLine(p,"1500")),fulfillment.pickList(task.id()).lines());
+     assertThrows(IllegalStateException.class,()->TenantContext.call(new TenantScope(t,c,b,UUID.randomUUID()),1,()->fulfillment.dispatchLines(task.id(),firstDispatch)));
+     assertThrows(java.util.NoSuchElementException.class,()->TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->fulfillment.dispatchLines(task.id(),firstDispatch)));
      assertEquals(first,fulfillment.dispatchLines(task.id(),firstDispatch));
      assertThrows(RevisionConflict.class,()->fulfillment.dispatchLines(task.id(),
          new FulfillmentService.DispatchLines(UUID.randomUUID(),task.version(),"Stale dispatch",firstDispatch.lines())));
      assertThrows(IllegalArgumentException.class,()->fulfillment.dispatchLines(task.id(),
          new FulfillmentService.DispatchLines(UUID.randomUUID(),first.version(),"Excess dispatch",
              List.of(new FulfillmentService.PickLine(p,"1501")))));
+     assertEquals(1,count(owner,"select count(*) from fulfillment_dispatch_line"));
+     assertEquals(List.of(new FulfillmentService.PickLine(p,"1500")),fulfillment.pickList(task.id()).lines());
      var second=fulfillment.dispatchLines(task.id(),new FulfillmentService.DispatchLines(
          UUID.randomUUID(),first.version(),"Second dispatch",firstDispatch.lines()));
      assertEquals("PARTIAL",second.status());
      assertNotEquals(first.version(),second.version());
+     assertEquals(List.of(new FulfillmentService.PickLine(p,"1000")),fulfillment.pickList(task.id()).lines());
      var dispatched=fulfillment.dispatchLines(task.id(),new FulfillmentService.DispatchLines(
          UUID.randomUUID(),second.version(),"Final dispatch",List.of(new FulfillmentService.PickLine(p,"1000"))));
      assertEquals("DISPATCHED",dispatched.status());
+     assertTrue(fulfillment.pickList(task.id()).lines().isEmpty());
      assertEquals(3,count(owner,"select count(*) from fulfillment_dispatch_line"));
      var dispatchHistory=fulfillment.dispatchHistory(task.id());
      assertEquals(List.of("500","500","1000"),dispatchHistory.stream().map(FulfillmentService.DispatchEntry::quantityMilli).toList());
@@ -144,6 +161,7 @@ class PostgresSaleIntegrationTest {
            (payload ? 'command' or payload ? 'fulfillment' or payload::text like '%SIGNED-DELIVERY%' or payload::text like '%Synthetic recipient%')
          """));
      assertEquals(0,fulfillment.pendingPreparationCount());
+     assertTrue(fulfillment.pickList(task.id()).lines().isEmpty());
      assertTrue(TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,custody::positions).isEmpty());assertTrue(TenantContext.call(new TenantScope(UUID.randomUUID(),c,b,a),1,fulfillment::list).isEmpty());assertThrows(SQLException.class,()->sql(owner,"update customer_custody set frozen_cost_xaf=0"));assertThrows(SQLException.class,()->sql(owner,"update custody_collection set quantity_milli=1"));
      return null;
     });

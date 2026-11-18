@@ -12554,11 +12554,11 @@
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/application/DefaultCatalogMasterService.java",
-        "sha256": "482f84c7cf71a30e3ffce1763022680c3b4ab5dda304e7fecb9414b5d4047c2c"
+        "sha256": "ecaf1ed0f5ba070ae0cdf28b64b050b1df4ea9894aaeb1a47250e3fdcd778ca0"
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/application/DefaultCatalogService.java",
-        "sha256": "67a50b1e508a24b66d386e1a966f93831974b9539db65689a0cb9df9ae1661d3"
+        "sha256": "b8dbca88bbde65720b61c9ab8143dbdbed031456ea879933dd046f354f6bbf1b"
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogCategory.java",
@@ -12670,7 +12670,7 @@
       },
       {
         "path": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/application/DefaultCustomerDirectory.java",
-        "sha256": "347c9bc11553db95a1c5c22c2c6bed1c306bc3c3c6748116501b30c9d8bc636c"
+        "sha256": "a0accedef67a382e8af63ec0b99f9c37e9f7fe8397cb4a2c90b1067070cba50f"
       },
       {
         "path": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/application/DefaultCustomerService.java",
@@ -12718,11 +12718,11 @@
       },
       {
         "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/application/DocumentSourceReader.java",
-        "sha256": "caf18e7ab5d0e78a0ee1f2fa042463c71d5a114a74c8aff3dd8d657690b69917"
+        "sha256": "21e5e7566c29f19c3b2ded00581cf24237347a40ee40b63ee50d26a7b3b1c3ab"
       },
       {
         "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/application/DocumentWorkspaceService.java",
-        "sha256": "b4aed4d3f5f9587d30050f8ce640f496eeb03e2865cbe2920fa38e6f3b922a9f"
+        "sha256": "4c01814f3d662f24a57218778fa058658518d3ac3be2cdcae9b5e943e8ee2141"
       },
       {
         "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/infrastructure/CapturedDocument.java",
@@ -12750,7 +12750,7 @@
       },
       {
         "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentController.java",
-        "sha256": "f4ecf930af09da321f595544006d19a297fe54c84457ac70f78e17b59ad9763c"
+        "sha256": "cbc8bf5882772e3d3f8267399d336afa5a17220b3ed26c88033f9f52a081021d"
       },
       {
         "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentWorkspaceController.java",
@@ -12818,7 +12818,7 @@
       },
       {
         "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/DefaultPeriodService.java",
-        "sha256": "134b0f5e6e066b3a00929d81a4ce76b4ea57c59fbc03b30135c2f52921980399"
+        "sha256": "7a6517b2929cb679327b144f54a44070ddb6f09bb1d8dcf0729504b58a4bfb03"
       },
       {
         "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/ManualJournalPeriodGuard.java",
@@ -12830,7 +12830,11 @@
       },
       {
         "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceOperations.java",
-        "sha256": "847d5e12b04d615afd40b47dbb705eaa26bbe50980b0017ca676752b5831188c"
+        "sha256": "90fba9b9d090384bc1463ba8c5f62baa0458397c4a0270b028c9ffa7c6d7e802"
+      },
+      {
+        "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
+        "sha256": "7e8a1edd37026e32f406a140f3a6b8460cceb994652e08c138ba7cc41c6e007e"
       },
       {
         "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinancialPeriodEntity.java",
@@ -12881,12 +12885,24 @@
         "sha256": "fde09701627f8a4e9e5228063315548735a88b7945c43d86c9e5ee20b7864eb7"
       },
       {
+        "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java",
+        "sha256": "9f4af4baf21d4441848f72be7e672ea45c4d875046a0e7ad8f428e4eaf47c2c8"
+      },
+      {
+        "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpService.java",
+        "sha256": "0e50e6ceed5279011c9f3c2112aff85f199c92531d3fe4bf32f5d1f026e17324"
+      },
+      {
         "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
         "sha256": "f9380bbb6cea5b16e602776e542c4fef8ca5123714de12a5684b8f2ec6337ee4"
       },
       {
         "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
-        "sha256": "51ee88c2ef66a4d85b758a258fe077daf592f1806d1c92deca0283f44c63e7be"
+        "sha256": "c4465aff8377924a10778b9c0ac90531cdfd096f0a935a29fd55dd077b1e03d0"
+      },
+      {
+        "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultStepUpService.java",
+        "sha256": "95a03c5f75896d9bd27f7f16ffc2735b0f9b14c8d027e2199c2f85709a1d074c"
       },
       {
         "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
@@ -12986,7 +13002,7 @@
       },
       {
         "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/DefaultInventoryJobs.java",
-        "sha256": "0abc1c1f001872f387d250c1739591d31c0e07ae1d8099497e8f9b7e938be78b"
+        "sha256": "0de57c12476187fcfc23f7dd341b8f08ff5e1c7a303c8ffc97e1b2cf000f3d93"
       },
       {
         "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/DefaultInventoryQuality.java",
@@ -12994,7 +13010,7 @@
       },
       {
         "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/DefaultInventoryWorkflows.java",
-        "sha256": "05edca2c88a283fa86aaea12ed4ca6effcbf1d791a0cee5b32ecbb2568ce7dab"
+        "sha256": "3e9c726da4b34822e05a28ee7c6b20d4c23f9c30bf9ca37554be84c02767a51d"
       },
       {
         "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/DefaultStockService.java",
@@ -13002,7 +13018,7 @@
       },
       {
         "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/InventoryCommands.java",
-        "sha256": "e161aac189680199e17478ef9c7accddc89fc7465d92a4a7dd86224a3cbcad6f"
+        "sha256": "d9f6645fb2aa261beddadb122548db5c0d4ea5f61f14d582f917f994b516828d"
       },
       {
         "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/infrastructure/BootstrapWarehouse.java",
@@ -13073,6 +13089,10 @@
         "sha256": "2156ae17d60f49154c511f09cf70ab68177748b0522b88aab7622531477316cd"
       },
       {
+        "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/api/ExportService.java",
+        "sha256": "bb1b86498cbd41ece2079333286b3f9cb746e55723a16afbc3b86d7697f66efb"
+      },
+      {
         "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/api/OperationsService.java",
         "sha256": "a2c89c6eb4690a477bbaef65b67eda959e162b90c1134900f511a7e536aad01c"
       },
@@ -13093,6 +13113,10 @@
         "sha256": "f12774482f4225073d109a53b0c5551d940f6b15ea1f865f9d8251900beb49cd"
       },
       {
+        "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/DefaultExportService.java",
+        "sha256": "0bf986a9d024fb4e6b6255f8da1ff798f6db99f0792665d2f3e6f2fbb8c986e8"
+      },
+      {
         "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/DefaultRecoveryService.java",
         "sha256": "02e934d7cd397b998801ab3c410fcbbda1619531fc8619c628cb5483f37dd1a0"
       },
@@ -13110,7 +13134,7 @@
       },
       {
         "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/OperationalReads.java",
-        "sha256": "9b6848563074538c76dba17e594d34eb16f389cbcb0f8cc54592c1b812c732b7"
+        "sha256": "c0bfe6a718b42112b003e81d74a2e346f956e360397b8ed44fa0ff157a260604"
       },
       {
         "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/BackupManifest.java",
@@ -13165,6 +13189,10 @@
         "sha256": "c2e196537889d19d5eb4e1ada95d552a1416bb1f21560724bf923fa64d9bc48d"
       },
       {
+        "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+        "sha256": "a52f24131f66d1262e344918573ada66efc31db84df5358366b1fbeecf6ba483"
+      },
+      {
         "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportRetentionController.java",
         "sha256": "62ab532c64a1d3d4bd001b5ba55323f876a58baa42ee418f9187ddf6e72b4fb2"
       },
@@ -13190,7 +13218,7 @@
       },
       {
         "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/application/DefaultPurchasingService.java",
-        "sha256": "411c067485307cc05500ed93de3c635d04d2711d5ee0bebd78c9691901e81308"
+        "sha256": "068962cc67d24504334620e025e1ad56294810bca77b48e1adf29e6ec16a2b41"
       },
       {
         "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/domain/PurchaseRules.java",
@@ -13274,7 +13302,7 @@
       },
       {
         "path": "backend/business-modules/reporting/src/main/java/com/quincaisoft/reporting/application/DefaultReportingService.java",
-        "sha256": "298caec439ac9ebc2a374b3e5b95efb920817c28e800e0cd29b3c43160214cfe"
+        "sha256": "7b1a52167311d223fad65e826f726957859514ae7be18c89aebae00f3557048f"
       },
       {
         "path": "backend/business-modules/reporting/src/main/java/com/quincaisoft/reporting/domain/ReportRules.java",
@@ -13294,7 +13322,7 @@
       },
       {
         "path": "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/application/DefaultReturnService.java",
-        "sha256": "342a46256f9bd4d54dd5fa1b97278e41477608506af318cc7131f4aa3ee02ea9"
+        "sha256": "ffe4875bd97954d46a353a19087260f112525c4aeca14e6329389e145e7aec7e"
       },
       {
         "path": "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/application/ReturnsPeriodGuard.java",
@@ -13326,7 +13354,7 @@
       },
       {
         "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/application/DefaultFulfillmentService.java",
-        "sha256": "bd2e3d258e0ef5e3815bb25e8952e739650cd01cf2884931ec81ca95e9060a49"
+        "sha256": "5f40459843f9870e32e423d47ea0d595cad48f7177dc49b2013bf63ad404a187"
       },
       {
         "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/application/DefaultSalesService.java",
@@ -13398,7 +13426,7 @@
       },
       {
         "path": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/application/DefaultSubscriptionLifecycleService.java",
-        "sha256": "1d3a731b0678252df4a154b9c76d47bb58fa355115cef33ab88c0c23c159757f"
+        "sha256": "e9dfc94e712b4305c7caad088bf653358ea344c560cd26f5f60c9e5cdf6a7fdb"
       },
       {
         "path": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/application/DefaultSubscriptionQuotaService.java",
@@ -13530,7 +13558,7 @@
       },
       {
         "path": "backend/business-modules/suppliers/src/main/java/com/quincaisoft/suppliers/infrastructure/OperationJournal.java",
-        "sha256": "807f292277e6de26d052c524a890d7c8e9dbd80c1b322015278e765c71b43ae3"
+        "sha256": "442c76367aa7427e4a067c1b4061f9fc59e95aa524f4c7f78081a6a73fcc2a75"
       },
       {
         "path": "backend/business-modules/suppliers/src/main/java/com/quincaisoft/suppliers/infrastructure/SupplierEntity.java",
@@ -13550,7 +13578,7 @@
       },
       {
         "path": "backend/business-modules/sync/src/main/java/com/quincaisoft/sync/application/DefaultSyncService.java",
-        "sha256": "43a763e30e4cfca7c7ad219f2b279612132b7eadbeb0132652c8721404804a58"
+        "sha256": "cc46ceb962f4aa26185cea1d3d8bb031d07a3bd70a7de66ad6f9b4dca9e8e43e"
       },
       {
         "path": "backend/business-modules/sync/src/main/java/com/quincaisoft/sync/domain/DeviceProof.java",
@@ -13598,7 +13626,7 @@
       },
       {
         "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/application/DefaultTenderService.java",
-        "sha256": "4891356c06995460d6e4732e5749f0e3b1e6cc63a9e0b3d874e5d77936403234"
+        "sha256": "2188bda63d439f3e29c0104a505c2b18921a58d268cfd383c5f80ae91db3acf3"
       },
       {
         "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/domain/TenderRules.java",
@@ -13634,7 +13662,7 @@
       },
       {
         "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/TenderOperations.java",
-        "sha256": "6fb9dbcd4c153fc1d320c1737d232b850220cd503d27a0991592d1563797a8d6"
+        "sha256": "290880b6184d997307b34fa96753fa251d943ff62aa016cc8a4e4f6c3f1072d1"
       },
       {
         "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/BankController.java",
@@ -13658,7 +13686,7 @@
       },
       {
         "path": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/application/DefaultWorkforceService.java",
-        "sha256": "be0a0daa6cfb642ddc29881417eaed7b1524122c1bf6f6b9d3735f4d91ff9cc5"
+        "sha256": "6e2b4f7f861897611909d781c70d6dbb339680809de77394f0bd0f971605215d"
       },
       {
         "path": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/application/WorkforceRendering.java",
@@ -13975,6 +14003,14 @@
         "assertionCount": 0
       },
       {
+        "path": "backend/business-modules/catalog/src/test/java/com/quincaisoft/catalog/CatalogReplayPostgresTest.java",
+        "sha256": "d9db6f2d37373407c3890ad7a526bb4c509f779859deb598c2b0bdd521cb9b9b",
+        "testMethods": [
+          "catalogReplayCannotCrossScopeOrChangeReceiptMeaning"
+        ],
+        "assertionCount": 19
+      },
+      {
         "path": "backend/business-modules/commerce/src/test/java/com/quincaisoft/commerce/PostgresCommerceIntegrationTest.java",
         "sha256": "027bedcc0de21c24988ba40b947b49fbd52cc90c3d47ed731c787d1f6db3cb59",
         "testMethods": [
@@ -13984,11 +14020,20 @@
       },
       {
         "path": "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
-        "sha256": "3c3317080dd705a186e8188ae0f2e94a24c07a73275c6f0e8cfe8686a2ee7c4a",
+        "sha256": "93c3751e245e555811aa7ef3537a354ea1a6c84cdbf2331599921c47381b70b7",
         "testMethods": [
           "mastersPreserveScopeReplayMetadataAndVersionedUnitIdentity"
         ],
-        "assertionCount": 35
+        "assertionCount": 47
+      },
+      {
+        "path": "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
+        "sha256": "e054b1d08b627aac04aff0cebad6d164aff95198b7ea652f932393c17fb53719",
+        "testMethods": [
+          "callerCannotSuppressCopyMarkerThroughLegacyReadOnlyPrintRoute",
+          "unauthenticatedIdentityCannotUseAuthorityStringsToReadDocumentSources"
+        ],
+        "assertionCount": 1
       },
       {
         "path": "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
@@ -14003,6 +14048,14 @@
           "settingsRequiresUuidHeaderAndForwardsItToDurableCommand"
         ],
         "assertionCount": 4
+      },
+      {
+        "path": "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
+        "sha256": "1d203c3746b30b3a87ad9912714fea25db79f066a1169ebb3ae3e8f60c6393e5",
+        "testMethods": [
+          "ownerCaptureRemainsScopedAndSafeForCashierWithoutMutableLabelsOrCostProjection"
+        ],
+        "assertionCount": 23
       },
       {
         "path": "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
@@ -14029,6 +14082,14 @@
         "assertionCount": 20
       },
       {
+        "path": "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
+        "sha256": "f69560c01effa02906af9891f75296b74598b49922ee80192ef2fe30561b6e4a",
+        "testMethods": [
+          "durableFinanceReplayBindsActorAndKeepsJournalInvariants"
+        ],
+        "assertionCount": 25
+      },
+      {
         "path": "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "sha256": "665bcf9f8f97cb39a0191273c070cd9f5717c9205a6ef415aa70390f5eeea2e0",
         "testMethods": [
@@ -14038,6 +14099,26 @@
           "totalOverflowFails"
         ],
         "assertionCount": 5
+      },
+      {
+        "path": "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "sha256": "2d65a306cbfa710e37f5c0368e0d80eed3ab739c3826822b71fdfe34649b6d6e",
+        "testMethods": [
+          "staleEpochAndForeignApprovalReplayCannotAdministerMembership"
+        ],
+        "assertionCount": 29
+      },
+      {
+        "path": "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java",
+        "sha256": "37281bfa3612a22b262f3599224d8fbcfb17bfec49c73eede843d8af6ef7b572",
+        "testMethods": [
+          "acceptsOnlyExactOperationAndCurrentMembership",
+          "rejectsDifferentActorTenantCompanyBranchAndEpoch",
+          "rejectsExpiredFutureOverlongAndStaleAuthentication",
+          "deniesAbsentUnverifiedAndIncompleteEvidence",
+          "rejectsNoncanonicalAndOverflowAmounts"
+        ],
+        "assertionCount": 7
       },
       {
         "path": "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
@@ -14063,11 +14144,11 @@
       },
       {
         "path": "backend/business-modules/inventory/src/test/java/com/quincaisoft/inventory/PostgresInventoryWorkflowTest.java",
-        "sha256": "846a9865a43b6b3177282b514d451bd626855b067394d43882078745e3df3118",
+        "sha256": "95c6f3dbca68515441b6a3059d3360628510b5fbfcbdcc1c23c7f483e0b5690c",
         "testMethods": [
           "catalogAndApprovedPartialTransfersPreserveScopeVersionAndValue"
         ],
-        "assertionCount": 69
+        "assertionCount": 81
       },
       {
         "path": "backend/business-modules/inventory/src/test/java/com/quincaisoft/inventory/StockBalanceTest.java",
@@ -14105,6 +14186,14 @@
         "assertionCount": 18
       },
       {
+        "path": "backend/business-modules/operations/src/test/java/com/quincaisoft/operations/ExportJobPostgresTest.java",
+        "sha256": "f91a5f9b1f5c640289ec33b56fac3e384c2bf2e7034695398f90027017d25ba5",
+        "testMethods": [
+          "producerDownloadRevalidatePermissionsAndPreserveBoundedIsolation"
+        ],
+        "assertionCount": 32
+      },
+      {
         "path": "backend/business-modules/operations/src/test/java/com/quincaisoft/operations/ExportRetentionPostgresTest.java",
         "sha256": "8b4d9695099e7a0eeb0e925c9a23f9db8b52d4770e0b069b53f2a1e2fbd551cd",
         "testMethods": [
@@ -14122,11 +14211,11 @@
       },
       {
         "path": "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
-        "sha256": "e30a240eb4c9214448118d03370be3f734962da40fb1b6775875a7e1939b1a89",
+        "sha256": "5b92ed0a444c62c0f073ec92ed625722ff55dc24a9efb9d5c8871498667712c9",
         "testMethods": [
           "purchaseReceiptInvoiceAndRollback"
         ],
-        "assertionCount": 33
+        "assertionCount": 43
       },
       {
         "path": "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
@@ -14142,11 +14231,11 @@
       },
       {
         "path": "backend/business-modules/reporting/src/test/java/com/quincaisoft/reporting/ReportingPostgresTest.java",
-        "sha256": "6ed5255046d6501a53864550b9826061604fa6ee27a82d798279ccf8a3fafbf9",
+        "sha256": "e69056aa8e51070b54ff7af1c76a2d5ad7f3680b20497a59610f7501c6db2850",
         "testMethods": [
           "exactScopedPagedStockAndSafeCsv"
         ],
-        "assertionCount": 25
+        "assertionCount": 30
       },
       {
         "path": "backend/business-modules/reporting/src/test/java/com/quincaisoft/reporting/ReportPermissionMatrixTest.java",
@@ -14165,19 +14254,19 @@
       },
       {
         "path": "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "sha256": "72a53e22488d46c8d74a9124727334e1e9d98f715f0df398ef92087217b432c8",
+        "sha256": "8ae93a94164ab03cb14d432631caaea0f0c51066010768777c2eedacca97d0df",
         "testMethods": [
           "stockJournalsOutboxAndReplayCommitOrRollbackTogether"
         ],
-        "assertionCount": 29
+        "assertionCount": 42
       },
       {
         "path": "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
-        "sha256": "272b927a2b33db8bfe7ad9c00912c1d4fd5e1c122da7984abf19164c1c24077d",
+        "sha256": "b1033a0bde92c64fff18be69c7b225ba78bfd0089308aabe487ad3dcd2ca9124",
         "testMethods": [
           "stockJournalsOutboxAndReplayCommitOrRollbackTogether"
         ],
-        "assertionCount": 100
+        "assertionCount": 110
       },
       {
         "path": "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java",
@@ -14218,11 +14307,11 @@
       },
       {
         "path": "backend/business-modules/subscriptions/src/test/java/com/quincaisoft/subscriptions/PostgresSubscriptionLifecycleTest.java",
-        "sha256": "f52cad16f1d74e060b6f6f7006644c11a6d8013fc14b4da83b5e5572685d862a",
+        "sha256": "0a10a67602f21b2294fe42214e54ac71863b646e4ea8b769a0550d57cf428b4c",
         "testMethods": [
           "trialReviewGraceAndManualPaymentRemainAuditedAndSeparate"
         ],
-        "assertionCount": 73
+        "assertionCount": 84
       },
       {
         "path": "backend/business-modules/subscriptions/src/test/java/com/quincaisoft/subscriptions/PostgresSubscriptionQuotaTest.java",
@@ -14253,6 +14342,14 @@
         "assertionCount": 17
       },
       {
+        "path": "backend/business-modules/suppliers/src/test/java/com/quincaisoft/suppliers/SupplierReplayPostgresTest.java",
+        "sha256": "78138557d18245fc8c010a61f9f56b4210b4df3c31de32472e67ed5b9726b44f",
+        "testMethods": [
+          "supplierReplayRequiresAcceptedOriginalActorAndSource"
+        ],
+        "assertionCount": 17
+      },
+      {
         "path": "backend/business-modules/sync/src/test/java/com/quincaisoft/sync/DeviceProofTest.java",
         "sha256": "db783a5a9ac68d9d81faf89977debaa849ea605ab2628a42f81c5b2e85e1ed08",
         "testMethods": [
@@ -14264,27 +14361,27 @@
       },
       {
         "path": "backend/business-modules/sync/src/test/java/com/quincaisoft/sync/PostgresSyncTest.java",
-        "sha256": "cf728e7e501be983c175c812fdb14c04bbd737923630e1fe3422e01ceeb17af4",
+        "sha256": "51e66363519c862b02cb1978725880495d4d3d04889a1a100157045fd64979bb",
         "testMethods": [
           "proofApprovalRecoveryReplayAndQuarantineAreDurable"
         ],
-        "assertionCount": 13
+        "assertionCount": 21
       },
       {
         "path": "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java",
-        "sha256": "2a4fed59b4366cd52db89f5637c237e1333fc0310e9652826737e0146d4d442b",
+        "sha256": "4e2328b7495008237527888dd457c9da7c398c98245e1028b0929fb4788188c7",
         "testMethods": [
           "supplierBankAndManualJournalsConserveAndReplay"
         ],
-        "assertionCount": 41
+        "assertionCount": 48
       },
       {
         "path": "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/TenderPostgresTest.java",
-        "sha256": "b883f07f537c07193b15b11d710dcf4519d02ac6a752efa1be091eb2d1d5430d",
+        "sha256": "156f9c6943d497bbbf27c1343b5f2448683a05e39556ed643ad9b3beba043c8b",
         "testMethods": [
           "cashDepositsAllocationsRefundsConserveAndReplay"
         ],
-        "assertionCount": 42
+        "assertionCount": 50
       },
       {
         "path": "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/TenderRulesTest.java",
@@ -14298,11 +14395,11 @@
       },
       {
         "path": "backend/business-modules/workforce/src/test/java/com/quincaisoft/workforce/WorkforcePostgresTest.java",
-        "sha256": "f074ef8bbd6034ee2c5b5b10166be7a5f8a7e13241805a2d497d5b817cb9aa06",
+        "sha256": "a274c3b64ccf7a29c574ef8582da7f002ab69e1364bf1fa253ba39de9e90e1a5",
         "testMethods": [
           "scopedPersonnelAttendanceAndIndependentPayrollAreAtomicAndReplaySafe"
         ],
-        "assertionCount": 104
+        "assertionCount": 110
       },
       {
         "path": "backend/business-modules/workforce/src/test/java/com/quincaisoft/workforce/WorkforceRenderingTest.java",
@@ -14581,7 +14678,9 @@
       "candidateJavaTests": [
         "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
-        "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java"
+        "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
+        "backend/business-modules/catalog/src/test/java/com/quincaisoft/catalog/CatalogReplayPostgresTest.java",
+        "backend/business-modules/suppliers/src/test/java/com/quincaisoft/suppliers/SupplierReplayPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -14844,6 +14943,7 @@
       ],
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java"
       ],
       "acceptance": null
@@ -15166,6 +15266,7 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierReturnEntity.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierReturnLineEntity.java",
         "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/api/package-info.java",
@@ -15761,10 +15862,13 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/PeriodRequestEntity.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -16230,7 +16334,9 @@
         "condition": null
       },
       "status": "OPEN",
-      "candidateJavaSources": [],
+      "candidateJavaSources": [
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java"
+      ],
       "candidateGroup": "m09-operations",
       "candidateJavaTests": [],
       "acceptance": null
@@ -16752,7 +16858,8 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
-        "backend/api-server/src/main/java/com/quincaisoft/security/SecurityConfiguration.java"
+        "backend/api-server/src/main/java/com/quincaisoft/security/SecurityConfiguration.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [],
@@ -16874,6 +16981,7 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierReturnEntity.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierReturnLineEntity.java",
         "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/api/package-info.java",
@@ -16886,6 +16994,7 @@
       ],
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
@@ -16904,10 +17013,13 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/DepositBalanceEntity.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -16924,10 +17036,13 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/DepositBalanceEntity.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -16944,10 +17059,13 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/DepositBalanceEntity.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -16963,9 +17081,13 @@
         "condition": null
       },
       "status": "OPEN",
-      "candidateJavaSources": [],
+      "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java"
+      ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -16982,10 +17104,13 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierAdvance.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17002,10 +17127,13 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierAdvance.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17022,13 +17150,16 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/InvoiceEntity.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierAdvance.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierReturnEntity.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierReturnLineEntity.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17045,6 +17176,7 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/InvoiceEntity.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierAdvance.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierReturnEntity.java",
@@ -17052,7 +17184,9 @@
         "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/BankMatch.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17068,9 +17202,13 @@
         "condition": null
       },
       "status": "OPEN",
-      "candidateJavaSources": [],
+      "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java"
+      ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17086,9 +17224,13 @@
         "condition": null
       },
       "status": "OPEN",
-      "candidateJavaSources": [],
+      "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java"
+      ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17105,10 +17247,13 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
-        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/PeriodCloseGuard.java"
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/PeriodCloseGuard.java",
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17128,6 +17273,7 @@
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/ManualJournalService.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/DefaultManualJournalService.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/ManualJournalPeriodGuard.java",
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/JournalEntryEntity.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/JournalLineEntity.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/ManualJournal.java",
@@ -17136,7 +17282,9 @@
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/OperationJournal.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17156,6 +17304,7 @@
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/ManualJournalService.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/DefaultManualJournalService.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/ManualJournalPeriodGuard.java",
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/JournalEntryEntity.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/JournalLineEntity.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/ManualJournal.java",
@@ -17164,7 +17313,9 @@
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/OperationJournal.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17184,6 +17335,7 @@
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/ManualJournalService.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/DefaultManualJournalService.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/ManualJournalPeriodGuard.java",
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/JournalEntryEntity.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/JournalLineEntity.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/ManualJournal.java",
@@ -17192,7 +17344,9 @@
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/OperationJournal.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17214,6 +17368,7 @@
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/PeriodService.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/DefaultPeriodService.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/ManualJournalPeriodGuard.java",
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinancialPeriodEntity.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/PeriodRequestEntity.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/web/PeriodController.java",
@@ -17223,7 +17378,8 @@
       ],
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
-        "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java"
+        "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -17246,6 +17402,7 @@
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/PeriodService.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/DefaultPeriodService.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/ManualJournalPeriodGuard.java",
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinancialPeriodEntity.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/PeriodRequestEntity.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/web/PeriodController.java",
@@ -17255,7 +17412,8 @@
       ],
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
-        "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java"
+        "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -17278,6 +17436,7 @@
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/PeriodService.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/DefaultPeriodService.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/ManualJournalPeriodGuard.java",
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinancialPeriodEntity.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/PeriodRequestEntity.java",
         "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/web/PeriodController.java",
@@ -17287,7 +17446,8 @@
       ],
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
-        "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java"
+        "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -17304,9 +17464,13 @@
         "condition": null
       },
       "status": "OPEN",
-      "candidateJavaSources": [],
+      "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java"
+      ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17322,9 +17486,13 @@
         "condition": null
       },
       "status": "OPEN",
-      "candidateJavaSources": [],
+      "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java"
+      ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17346,11 +17514,13 @@
         "backend/business-modules/expenses/src/main/java/com/quincaisoft/expenses/application/DefaultExpenseService.java",
         "backend/business-modules/expenses/src/main/java/com/quincaisoft/expenses/application/ExpensePeriodGuard.java",
         "backend/business-modules/expenses/src/main/java/com/quincaisoft/expenses/infrastructure/ExpenseEntity.java",
-        "backend/business-modules/expenses/src/main/java/com/quincaisoft/expenses/web/ExpenseController.java"
+        "backend/business-modules/expenses/src/main/java/com/quincaisoft/expenses/web/ExpenseController.java",
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java"
       ],
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
-        "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java"
+        "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -17367,9 +17537,13 @@
         "condition": null
       },
       "status": "OPEN",
-      "candidateJavaSources": [],
+      "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java"
+      ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -17386,10 +17560,13 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/BankMatch.java"
       ],
       "candidateGroup": "m03-finance",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -18825,7 +19002,9 @@
         "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/BackupManifest.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -18846,7 +19025,9 @@
         "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/BackupManifest.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -18867,7 +19048,9 @@
         "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/BackupManifest.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -18888,7 +19071,9 @@
         "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/BackupManifest.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -18912,7 +19097,9 @@
         "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/ImportRow.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -18936,7 +19123,9 @@
         "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/ImportRow.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -18956,7 +19145,9 @@
         "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/ImportValidation.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -18976,7 +19167,9 @@
         "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/ImportValidation.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -18997,7 +19190,9 @@
         "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/BackupManifest.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -19029,8 +19224,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19065,8 +19262,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19101,8 +19300,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19137,8 +19338,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19173,8 +19376,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19209,8 +19414,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19245,8 +19452,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19281,8 +19490,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19317,8 +19528,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19353,8 +19566,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19389,8 +19604,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19425,8 +19642,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19461,8 +19680,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19497,8 +19718,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19533,8 +19756,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19569,8 +19794,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19605,8 +19832,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19641,8 +19870,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19677,8 +19908,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19713,8 +19946,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19749,8 +19984,10 @@
       ],
       "candidateGroup": "m10-documents-reports",
       "candidateJavaTests": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentCopyPreviewTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
@@ -19858,13 +20095,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -19929,6 +20166,7 @@
       ],
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java"
       ],
       "acceptance": null
@@ -20095,13 +20333,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -20605,13 +20843,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -21377,13 +21615,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -21517,13 +21755,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -21691,13 +21929,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -21731,13 +21969,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -21771,13 +22009,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -21929,13 +22167,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -21969,13 +22207,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -22009,13 +22247,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -22049,13 +22287,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -22560,6 +22798,7 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/ReceiptEntity.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/ReceiptLineEntity.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierReturnEntity.java",
@@ -22570,8 +22809,7 @@
         "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/application/ReturnsPeriodGuard.java",
         "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/infrastructure/CustomerReturnEntity.java",
         "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/infrastructure/CustomerReturnLine.java",
-        "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/web/ReturnController.java",
-        "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/BankEvidence.java"
+        "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/web/ReturnController.java"
       ],
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
@@ -22593,6 +22831,7 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceReplayEvidence.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/domain/PurchaseRules.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/PurchaseEntity.java",
         "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/PurchaseLineEntity.java",
@@ -22603,8 +22842,7 @@
         "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/application/DefaultReturnService.java",
         "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/application/ReturnsPeriodGuard.java",
         "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/infrastructure/CustomerReturnEntity.java",
-        "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/infrastructure/CustomerReturnLine.java",
-        "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/web/ReturnController.java"
+        "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/infrastructure/CustomerReturnLine.java"
       ],
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
@@ -22734,13 +22972,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -24775,13 +25013,13 @@
       "candidateGroup": "m03-finance",
       "candidateJavaTests": [
         "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+        "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceReplayPostgresTest.java",
         "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
         "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
         "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
-        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java"
+        "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "acceptance": null
     },
@@ -25840,17 +26078,21 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultStepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/RevocationRecord.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/SessionRevocationController.java",
-        "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/BackupManifest.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -26061,17 +26303,21 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultStepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/RevocationRecord.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/SessionRevocationController.java",
-        "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/BackupManifest.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -26091,18 +26337,21 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultStepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/RevocationRecord.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/SessionRevocationController.java",
-        "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/CandidateRecoveryReceipt.java",
-        "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/OperationReceipts.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -26269,18 +26518,21 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultStepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/RevocationRecord.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/SessionRevocationController.java",
-        "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/MasterImports.java",
-        "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/ImportPreview.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -26480,17 +26732,21 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultStepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/RevocationRecord.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/SessionRevocationController.java",
-        "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/ImportPreview.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -26922,17 +27178,21 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultStepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/RevocationRecord.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/SessionRevocationController.java",
-        "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/ImportPreview.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java"
       ],
       "candidateGroup": "m09-operations",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -27047,13 +27307,16 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java"
       ],
       "candidateGroup": "root-identity-master-data",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -27124,13 +27387,16 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java"
       ],
       "candidateGroup": "root-identity-master-data",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -27244,7 +27510,9 @@
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
         "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
-        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java"
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
       ],
       "acceptance": null
     },
@@ -27384,7 +27652,10 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/RevocationRecord.java"
       ],
       "candidateGroup": "root-identity-master-data",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/catalog/src/test/java/com/quincaisoft/catalog/CatalogReplayPostgresTest.java",
+        "backend/business-modules/suppliers/src/test/java/com/quincaisoft/suppliers/SupplierReplayPostgresTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -27451,12 +27722,15 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpService.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java"
       ],
       "candidateGroup": "root-identity-master-data",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -27634,12 +27908,14 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
         "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
-        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java"
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
       ],
       "acceptance": null
     },
@@ -28946,7 +29222,7 @@
         "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/SecurityBoundaryTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/SessionViewContractTest.java",
-        "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java"
+        "backend/business-modules/catalog/src/test/java/com/quincaisoft/catalog/CatalogReplayPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -29117,7 +29393,8 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
-        "backend/api-server/src/main/java/com/quincaisoft/security/ApiErrors.java"
+        "backend/api-server/src/main/java/com/quincaisoft/security/ApiErrors.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [],
@@ -29336,9 +29613,13 @@
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
+        "backend/business-modules/catalog/src/test/java/com/quincaisoft/catalog/CatalogReplayPostgresTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
-        "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java"
+        "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java",
+        "backend/business-modules/suppliers/src/test/java/com/quincaisoft/suppliers/SupplierReplayPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -29658,7 +29939,10 @@
         "backend/business-modules/company/src/main/java/com/quincaisoft/company/api/CompanyBootstrapService.java"
       ],
       "candidateGroup": "root-identity-master-data",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -29729,7 +30013,8 @@
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
-        "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java"
+        "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
+        "backend/business-modules/suppliers/src/test/java/com/quincaisoft/suppliers/SupplierReplayPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -29877,7 +30162,8 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
-        "backend/api-server/src/main/java/com/quincaisoft/security/ApiErrors.java"
+        "backend/api-server/src/main/java/com/quincaisoft/security/ApiErrors.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [],
@@ -30193,13 +30479,16 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java"
       ],
       "candidateGroup": "root-identity-master-data",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -30251,9 +30540,13 @@
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
+        "backend/business-modules/catalog/src/test/java/com/quincaisoft/catalog/CatalogReplayPostgresTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
-        "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java"
+        "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java",
+        "backend/business-modules/suppliers/src/test/java/com/quincaisoft/suppliers/SupplierReplayPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -30293,7 +30586,7 @@
         "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/SecurityBoundaryTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/SessionViewContractTest.java",
-        "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java"
+        "backend/business-modules/catalog/src/test/java/com/quincaisoft/catalog/CatalogReplayPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -30456,7 +30749,8 @@
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
         "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
-        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java"
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
+        "backend/business-modules/suppliers/src/test/java/com/quincaisoft/suppliers/SupplierReplayPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -30607,7 +30901,8 @@
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
         "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
-        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java"
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
+        "backend/business-modules/suppliers/src/test/java/com/quincaisoft/suppliers/SupplierReplayPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -30958,16 +31253,19 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpEvidenceProvider.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/StepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultStepUpService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/RevocationRecord.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/SessionRevocationController.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java"
       ],
       "candidateGroup": "root-identity-master-data",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+        "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/StepUpBindingTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -31568,7 +31866,8 @@
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
         "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
-        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java"
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
+        "backend/business-modules/suppliers/src/test/java/com/quincaisoft/suppliers/SupplierReplayPostgresTest.java"
       ],
       "acceptance": null
     },
