@@ -49,11 +49,11 @@ public final class CatalogHistoryImport {
 
     public static void main(String[] args) throws Exception {
         boolean opening = args.length == 5 && args[4].equals("--opening");
-        boolean receipt = args.length == 6 && args[4].equals("--receipt");
-        boolean settlement = args.length == 6 && args[4].equals("--supplier-settlement");
+        boolean receipt = (args.length == 6 || args.length == 7) && args[4].equals("--receipt");
+        boolean settlement = (args.length == 6 || args.length == 7) && args[4].equals("--supplier-settlement");
         if (args.length != 4 && !opening && !receipt && !settlement) throw new IllegalArgumentException(
             "Usage: <loopback-api-origin> <generated-directory> <reviewed-manifest> <new-mapping.ndjson> " +
-                "[--opening | --receipt <catalog-mapping.ndjson> | --supplier-settlement <receipt-mapping.ndjson>]");
+                "[--opening | --receipt <catalog-mapping.ndjson> | --supplier-settlement <receipt-mapping.ndjson>] [receipt-sequence]");
         URI api = URI.create(args[0]);
         if (!"http".equals(api.getScheme()) || !"127.0.0.1".equals(api.getHost()) ||
             api.getPort() < 1 || api.getRawUserInfo() != null || api.getRawQuery() != null ||
@@ -68,12 +68,15 @@ public final class CatalogHistoryImport {
             opening ? List.of("branches", "events", "journals") : FILES);
         Path output = Path.of(args[3]).toAbsolutePath();
         if (Files.exists(output)) throw new IllegalArgumentException("Mapping output already exists");
+        long sequence = args.length == 7 ? Long.parseLong(args[6]) : 2;
+        if (sequence < 2 || sequence > Long.MAX_VALUE - 2)
+            throw new IllegalArgumentException("Invalid receipt sequence");
         if (settlement) {
-            importSupplierSettlement(api, token, dir, output, Path.of(args[5]));
+            importSupplierSettlement(api, token, dir, output, Path.of(args[5]), sequence);
             return;
         }
         if (receipt) {
-            importReceipt(api, token, dir, output, Path.of(args[5]));
+            importReceipt(api, token, dir, output, Path.of(args[5]), sequence);
             return;
         }
         if (opening) {
@@ -184,13 +187,13 @@ public final class CatalogHistoryImport {
         System.out.println("Historical opening capital mappings: 1");
     }
 
-    private static void importReceipt(URI api, String token, Path dir, Path output, Path catalog) throws Exception {
+    private static void importReceipt(URI api, String token, Path dir, Path output, Path catalog, long sequence) throws Exception {
         String approverToken = System.getenv("QUINCAI_HISTORY_APPROVER_TOKEN");
         if (approverToken == null || approverToken.isBlank())
             throw new IllegalArgumentException("QUINCAI_HISTORY_APPROVER_TOKEN is required for receiving");
         var maker = new CatalogHistoryImport(api, token, null);
         var approver = new CatalogHistoryImport(api, approverToken, null);
-        var source = HistoricalReceipt.read(dir);
+        var source = HistoricalReceipt.read(dir, sequence);
         var event = source.event();
         var makerScope = maker.requireSyntheticScope(dir);
         var approverScope = approver.requireSyntheticScope(dir);
@@ -198,7 +201,7 @@ public final class CatalogHistoryImport {
         if (!branch.equals(uuid(makerScope, "branchId")) || !branch.equals(uuid(approverScope, "branchId")) ||
             uuid(makerScope, "actorId").equals(uuid(approverScope, "actorId")))
             throw new IllegalArgumentException("Receiving requires independent actors from the receipt branch");
-        var branchRow = first(dir.resolve("branches.ndjson"));
+        var branchRow = find(dir.resolve("branches.ndjson"), "id", branch.toString());
         UUID warehouse = uuid(source.movement(), "warehouseId");
         if (!branch.equals(uuid(branchRow, "id")) || !warehouse.equals(uuid(branchRow, "warehouseId")))
             throw new IllegalArgumentException("Receipt warehouse does not match the reviewed branch");
@@ -210,6 +213,10 @@ public final class CatalogHistoryImport {
         var date = event.required("businessDate");
         var quantity = event.required("quantityMilli");
         var value = event.required("estimatedCostXaf").asText();
+        var journal = find(dir.resolve("journals.ndjson"), "eventId", receiptSource.toString());
+        requireJournal(event, journal, Set.of(
+            new SourceJournalLine("INVENTORY", null, value, "0"),
+            new SourceJournalLine("GRNI", null, "0", value)));
         String reason = "Historical synthetic receipt " + receiptSource;
         var draft = maker.post("/purchases", operation("purchase-draft", orderSource),
             Map.of("supplierId", supplier, "warehouseId", warehouse, "businessDate", date,
@@ -239,27 +246,21 @@ public final class CatalogHistoryImport {
             StandardOpenOption.CREATE_NEW);
     }
 
-    private static void importSupplierSettlement(URI api, String token, Path dir, Path output, Path receiptMapping)
+    private static void importSupplierSettlement(URI api, String token, Path dir, Path output, Path receiptMapping, long sequence)
         throws Exception {
         String approverToken = System.getenv("QUINCAI_HISTORY_APPROVER_TOKEN");
         if (approverToken == null || approverToken.isBlank())
             throw new IllegalArgumentException("QUINCAI_HISTORY_APPROVER_TOKEN is required for bank evidence");
         var maker = new CatalogHistoryImport(api, token, null);
         var approver = new CatalogHistoryImport(api, approverToken, null);
-        var sourceReceipt = HistoricalReceipt.read(dir).event();
-        JsonNode invoice;
-        JsonNode payment;
-        try (var events = Files.newBufferedReader(dir.resolve("events.ndjson"))) {
-            events.readLine();
-            events.readLine();
-            invoice = JSON.readTree(events.readLine());
-            payment = JSON.readTree(events.readLine());
-        }
+        var sourceReceipt = HistoricalReceipt.read(dir, sequence).event();
+        var invoice = find(dir.resolve("events.ndjson"), "sequence", Long.toString(sequence + 1));
+        var payment = find(dir.resolve("events.ndjson"), "sequence", Long.toString(sequence + 2));
         UUID invoiceSource = uuid(invoice, "id");
         UUID paymentSource = uuid(payment, "id");
         var amount = sourceReceipt.required("estimatedCostXaf");
-        if (!matchesEconomicEvent(invoice, sourceReceipt, 3, "SUPPLIER_INVOICE") ||
-            !matchesEconomicEvent(payment, sourceReceipt, 4, "SUPPLIER_PAYMENT") ||
+        if (!matchesEconomicEvent(invoice, sourceReceipt, sequence + 1, "SUPPLIER_INVOICE") ||
+            !matchesEconomicEvent(payment, sourceReceipt, sequence + 2, "SUPPLIER_PAYMENT") ||
             !uuid(sourceReceipt, "id").equals(uuid(invoice, "receiptId")) ||
             !invoiceSource.equals(uuid(payment, "invoiceId")) || !amount.equals(invoice.required("netXaf")) ||
             !amount.equals(invoice.required("totalXaf")) || !amount.equals(payment.required("amountXaf")) ||
@@ -267,18 +268,15 @@ public final class CatalogHistoryImport {
             !"BANK".equals(payment.required("method").asText()))
             throw new IllegalArgumentException("Unexpected historical supplier invoice or bank payment");
 
-        try (var journals = Files.newBufferedReader(dir.resolve("journals.ndjson"))) {
-            journals.readLine();
-            journals.readLine();
-            String supplierSource = invoice.required("supplierId").asText();
-            String value = amount.asText();
-            requireJournal(invoice, JSON.readTree(journals.readLine()), Set.of(
-                new SourceJournalLine("GRNI", null, value, "0"),
-                new SourceJournalLine("AP", supplierSource, "0", value)));
-            requireJournal(payment, JSON.readTree(journals.readLine()), Set.of(
-                new SourceJournalLine("AP", supplierSource, value, "0"),
-                new SourceJournalLine("BANK", null, "0", value)));
-        }
+        Path journals = dir.resolve("journals.ndjson");
+        String supplierSource = invoice.required("supplierId").asText();
+        String value = amount.asText();
+        requireJournal(invoice, find(journals, "eventId", invoiceSource.toString()), Set.of(
+            new SourceJournalLine("GRNI", null, value, "0"),
+            new SourceJournalLine("AP", supplierSource, "0", value)));
+        requireJournal(payment, find(journals, "eventId", paymentSource.toString()), Set.of(
+            new SourceJournalLine("AP", supplierSource, value, "0"),
+            new SourceJournalLine("BANK", null, "0", value)));
 
         var makerScope = maker.requireSyntheticScope(dir);
         var approverScope = approver.requireSyntheticScope(dir);
@@ -372,21 +370,17 @@ public final class CatalogHistoryImport {
     }
 
     private record HistoricalReceipt(JsonNode event, JsonNode order, JsonNode movement, long unitPriceXaf) {
-        private static HistoricalReceipt read(Path dir) throws Exception {
-            JsonNode event;
-            try (var events = Files.newBufferedReader(dir.resolve("events.ndjson"))) {
-                events.readLine();
-                event = JSON.readTree(events.readLine());
-            }
+        private static HistoricalReceipt read(Path dir, long sequence) throws Exception {
+            var event = find(dir.resolve("events.ndjson"), "sequence", Long.toString(sequence));
             UUID receiptId = uuid(event, "id");
-            JsonNode order = first(dir.resolve("purchaseOrders.ndjson"));
-            JsonNode movement = first(dir.resolve("stockMovements.ndjson"));
-            if (event.path("sequence").asLong() != 2 || !event.path("synthetic").asBoolean() ||
+            var order = find(dir.resolve("purchaseOrders.ndjson"), "id", uuid(event, "purchaseOrderId").toString());
+            var movement = find(dir.resolve("stockMovements.ndjson"), "eventId", receiptId.toString());
+            if (event.path("sequence").asLong() != sequence || !event.path("synthetic").asBoolean() ||
                 !event.path("type").asText().equals("GOODS_RECEIPT") ||
                 !TENANT.equals(event.path("tenantId").asText()) || !COMPANY.equals(event.path("companyId").asText()) ||
                 !receiptId.equals(uuid(event, "operationId")) || !receiptId.equals(uuid(order, "receiptId")) ||
                 !receiptId.equals(uuid(movement, "eventId")) || !uuid(event, "purchaseOrderId").equals(uuid(order, "id")) ||
-                movement.path("sequence").asLong() != 2 || !order.path("status").asText().equals("FULLY_RECEIVED") ||
+                movement.path("sequence").asLong() != sequence || !order.path("status").asText().equals("FULLY_RECEIVED") ||
                 !event.required("supplierId").equals(order.required("supplierId"))) {
                 throw new IllegalArgumentException("Unexpected historical receipt or purchase order");
             }
@@ -408,6 +402,17 @@ public final class CatalogHistoryImport {
             }
             return new HistoricalReceipt(event, order, movement, scaledValue / quantity);
         }
+    }
+
+    private static JsonNode find(Path path, String field, String value) throws Exception {
+        try (var reader = Files.newBufferedReader(path)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                var row = JSON.readTree(line);
+                if (value.equals(row.path(field).asText())) return row;
+            }
+        }
+        throw new IllegalArgumentException("Missing " + path.getFileName() + " record for " + field + "=" + value);
     }
 
     private static JsonNode first(Path path) throws Exception {

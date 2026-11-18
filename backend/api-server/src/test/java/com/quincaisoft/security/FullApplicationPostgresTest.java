@@ -32,7 +32,7 @@ class FullApplicationPostgresTest {
    company=UUID.fromString("f6b40fb6-3f23-5891-a908-2de13a773d7d");
    branch=UUID.fromString("fdbf6a74-83c1-5ef6-a69c-3ea119eb69f3");
   }
-  UUID product=UUID.randomUUID(), supplier=UUID.randomUUID(), approver=UUID.randomUUID();
+  UUID product=UUID.randomUUID(), secondProduct=UUID.randomUUID(), supplier=UUID.randomUUID(), approver=UUID.randomUUID();
   try(var admin=DriverManager.getConnection(adminUrl,user,"")){
    sql(admin,"CREATE ROLE "+role+" LOGIN NOSUPERUSER NOBYPASSRLS INHERIT");sql(admin,"GRANT quincai_app TO "+role);sql(admin,"CREATE DATABASE "+db);
    try{
@@ -45,6 +45,7 @@ class FullApplicationPostgresTest {
       sql(owner,"INSERT INTO financial_period(tenant_id,company_id,id,start_date,end_date,status) VALUES ('"+tenant+"','"+company+"','"+UUID.randomUUID()+"','2024-01-01','2024-01-31','Open')");
      }
      sql(owner,"INSERT INTO catalog_product(tenant_id,company_id,id,sku,name,base_unit,selling_price_xaf,reorder_level_milli) VALUES ('"+tenant+"','"+company+"','"+product+"','TEST-SKU','Synthetic cable','piece',1000,1000)");
+     if(runSettlement) sql(owner,"INSERT INTO catalog_product(tenant_id,company_id,id,sku,name,base_unit,selling_price_xaf,reorder_level_milli) VALUES ('"+tenant+"','"+company+"','"+secondProduct+"','TEST-SECOND-SKU','Synthetic second product','piece',1000,1000)");
      sql(owner,"INSERT INTO supplier(tenant_id,company_id,id,code,name) VALUES ('"+tenant+"','"+company+"','"+supplier+"','TEST-SUP','Synthetic supplier')");
 
     }
@@ -63,7 +64,7 @@ class FullApplicationPostgresTest {
          "sales:read inventory:read tenders:read");
      var dashboardJson=tools.jackson.databind.json.JsonMapper.builder().build();
      for(var metric:Map.of("fulfillments/preparation-summary",Map.entry("pendingCount",0),
-                           "inventory/low-stock/summary",Map.entry("productCount",1),
+                           "inventory/low-stock/summary",Map.entry("productCount",runSettlement ? 2 : 1),
                            "tenders/collections/summary",Map.entry("pendingCount",0)).entrySet()){
       var uri=URI.create("http://127.0.0.1:"+port+"/api/v1/"+metric.getKey());
       assertEquals(401,client.send(HttpRequest.newBuilder(uri).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());
@@ -93,14 +94,27 @@ class FullApplicationPostgresTest {
       catalog = verifyHistoricalCatalog(port,historyWriter,url,user);
      }
      if(runReceipt){
-       if(catalog==null)catalog=settlementCatalogMapping(product,supplier);
+       if(catalog==null)catalog=settlementCatalogMapping(product,secondProduct,supplier);
        var receiver=token(key,issuer,"quincai-test",tenant,company,branch,actor,"purchasing:write purchasing:receive");
        var checker=token(key,issuer,"quincai-test",tenant,company,branch,approver,"purchasing:approve");
-       var receiptMapping=verifyHistoricalReceipt(port,receiver,checker,catalog,url,user);
+       var receiptMapping=verifyHistoricalReceipt(port,receiver,checker,catalog,url,user,2,52000);
        var settlementMaker=token(key,issuer,"quincai-test",tenant,company,branch,actor,
            "purchasing:invoice bank:write tenders:supplier-pay");
        var settlementChecker=token(key,issuer,"quincai-test",tenant,company,branch,approver,"bank:approve");
-       verifyHistoricalSupplierSettlement(port,settlementMaker,settlementChecker,receiptMapping,url,user);
+       verifyHistoricalSupplierSettlement(port,settlementMaker,settlementChecker,receiptMapping,url,user,2,52000,"DEMO-PAY-3");
+       var secondReceipt=verifyHistoricalReceipt(port,receiver,checker,catalog,url,user,5,107000);
+       verifyHistoricalSupplierSettlement(port,settlementMaker,settlementChecker,secondReceipt,url,user,5,107000,"DEMO-PAY-6");
+       try(var replayDatabase=DriverManager.getConnection(url,user,"");var query=replayDatabase.createStatement();
+           var rows=query.executeQuery("""
+               select (select count(*) from stock_movement),
+                      (select count(*) from purchase_order),
+                      (select count(*) from payable_balance),
+                      (select count(*) from settlement),
+                      (select count(*) from bank_evidence)
+               """)){
+        assertTrue(rows.next());
+        for(int column=1;column<=5;column++)assertEquals(2,rows.getLong(column));
+       }
      }
 
      var response=client.send(HttpRequest.newBuilder(endpoint).header("Authorization","Bearer "+token).header("X-Tenant-ID",UUID.randomUUID().toString()).GET().build(),HttpResponse.BodyHandlers.ofString());assertEquals(200,response.statusCode(),response.body());assertTrue(response.body().contains(tenant.toString()));
@@ -173,7 +187,7 @@ class FullApplicationPostgresTest {
   return output.resolve("initial.ndjson");
  }
 
- private static Path verifyHistoricalReceipt(int port,String maker,String approver,Path catalog,String url,String user)throws Exception{
+ private static Path verifyHistoricalReceipt(int port,String maker,String approver,Path catalog,String url,String user,long sequence,long value)throws Exception{
   Path output=Files.createTempDirectory(Path.of("target"),"receipt-acceptance-").toAbsolutePath();
   Path root=Path.of("../..").toAbsolutePath().normalize();
   for(String pass:List.of("initial","replay")){
@@ -182,7 +196,7 @@ class FullApplicationPostgresTest {
        root.resolve("backend/tools/history-import/src/main/java/com/quincaisoft/tools/CatalogHistoryImport.java").toString(),
        "http://127.0.0.1:"+port,root.resolve("datasets/business-history/generated").toString(),
        root.resolve("datasets/business-history/evidence/manifest.json").toString(),
-       output.resolve(pass+".ndjson").toString(),"--receipt",catalog.toString()).inheritIO();
+       output.resolve(pass+".ndjson").toString(),"--receipt",catalog.toString(),Long.toString(sequence)).inheritIO();
    process.environment().put("QUINCAI_HISTORY_TOKEN",maker);
    process.environment().put("QUINCAI_HISTORY_APPROVER_TOKEN",approver);
    assertEquals(0,process.start().waitFor(),pass+" receipt importer process");
@@ -191,16 +205,16 @@ class FullApplicationPostgresTest {
   assertEquals(json.readTree(Files.readString(output.resolve("initial.ndjson"))),
       json.readTree(Files.readString(output.resolve("replay.ndjson"))));
   try(var db=DriverManager.getConnection(url,user,"");var statement=db.createStatement()){
-   try(var rows=statement.executeQuery("select quantity_milli,value_xaf from stock_movement")){
+   try(var rows=statement.executeQuery("select quantity_milli,value_xaf from stock_movement where value_xaf="+value)){
     assertTrue(rows.next());
     assertEquals(20000,rows.getLong(1));
-    assertEquals(52000,rows.getLong(2));
+    assertEquals(value,rows.getLong(2));
     assertFalse(rows.next());
    }
-   try(var rows=statement.executeQuery("select status,total_xaf from purchase_order")){
+   try(var rows=statement.executeQuery("select status,total_xaf from purchase_order where total_xaf="+value)){
     assertTrue(rows.next());
     assertEquals("RECEIVED",rows.getString(1));
-    assertEquals(52000,rows.getLong(2));
+    assertEquals(value,rows.getLong(2));
     assertFalse(rows.next());
    }
    try(var query=db.prepareStatement("select l.account_code,l.debit_xaf-l.credit_xaf from journal_line l join journal_entry j on j.tenant_id=l.tenant_id and j.company_id=l.company_id and j.id=l.entry_id where j.operation_id=?")){
@@ -209,23 +223,24 @@ class FullApplicationPostgresTest {
     try(var rows=query.executeQuery()){
      var amounts=new HashMap<String,Long>();
      while(rows.next())assertNull(amounts.put(rows.getString(1),rows.getLong(2)));
-     assertEquals(Map.of("MERCHANT_INVENTORY",52000L,"GOODS_RECEIVED_NOT_INVOICED",-52000L),amounts);
+     assertEquals(Map.of("MERCHANT_INVENTORY",value,"GOODS_RECEIVED_NOT_INVOICED",-value),amounts);
     }
    }
   }
   return output.resolve("initial.ndjson");
  }
 
- private static Path settlementCatalogMapping(UUID product,UUID supplier)throws Exception{
+ private static Path settlementCatalogMapping(UUID product,UUID secondProduct,UUID supplier)throws Exception{
   Path output=Files.createTempFile(Path.of("target"),"settlement-catalog-fixture-",".ndjson").toAbsolutePath();
   var json=tools.jackson.databind.json.JsonMapper.builder().build();
   Files.write(output,List.of(
       json.writeValueAsString(Map.of("kind","variants","sourceId","4f4a14e3-270f-5b65-a143-d0bdaa594405","targetId",product)),
+      json.writeValueAsString(Map.of("kind","variants","sourceId","62012b44-865b-5ba6-a28a-9100d53aa5e5","targetId",secondProduct)),
       json.writeValueAsString(Map.of("kind","suppliers","sourceId","c239087b-a536-5522-a802-3d56bdbd4465","targetId",supplier))));
   return output;
  }
 
- private static void verifyHistoricalSupplierSettlement(int port,String maker,String approver,Path receipt,String url,String user)throws Exception{
+ private static void verifyHistoricalSupplierSettlement(int port,String maker,String approver,Path receipt,String url,String user,long sequence,long value,String reference)throws Exception{
   Path output=Files.createTempDirectory(Path.of("target"),"settlement-acceptance-").toAbsolutePath();
   Path root=Path.of("../..").toAbsolutePath().normalize();
   for(String pass:List.of("initial","replay")){
@@ -234,7 +249,7 @@ class FullApplicationPostgresTest {
        root.resolve("backend/tools/history-import/src/main/java/com/quincaisoft/tools/CatalogHistoryImport.java").toString(),
        "http://127.0.0.1:"+port,root.resolve("datasets/business-history/generated").toString(),
        root.resolve("datasets/business-history/evidence/manifest.json").toString(),
-       output.resolve(pass+".ndjson").toString(),"--supplier-settlement",receipt.toString()).inheritIO();
+       output.resolve(pass+".ndjson").toString(),"--supplier-settlement",receipt.toString(),Long.toString(sequence)).inheritIO();
    process.environment().put("QUINCAI_HISTORY_TOKEN",maker);
    process.environment().put("QUINCAI_HISTORY_APPROVER_TOKEN",approver);
    assertEquals(0,process.start().waitFor(),pass+" supplier settlement importer process");
@@ -249,12 +264,13 @@ class FullApplicationPostgresTest {
        from payable_balance p join settlement s
          on (p.tenant_id,p.company_id,p.id)=(s.tenant_id,s.company_id,s.source_id)
        join bank_evidence b on (s.tenant_id,s.company_id,s.bank_evidence_id)=(b.tenant_id,b.company_id,b.id)
-       """)){
+       where s.amount_xaf=%d
+       """.formatted(value))){
     assertTrue(rows.next());
-    assertEquals(52000,rows.getLong(1));
-    assertEquals(52000,rows.getLong(2));
-    assertEquals(52000,rows.getLong(3));
-    assertEquals("DEMO-PAY-3",rows.getString(4));
+    assertEquals(value,rows.getLong(1));
+    assertEquals(value,rows.getLong(2));
+    assertEquals(value,rows.getLong(3));
+    assertEquals(reference,rows.getString(4));
     assertEquals("OUT",rows.getString(5));
     assertEquals("APPROVED",rows.getString(6));
     assertTrue(rows.getBoolean(7));
@@ -269,13 +285,13 @@ class FullApplicationPostgresTest {
        select j.source_type,l.account_code,l.debit_xaf-l.credit_xaf
        from journal_entry j join journal_line l
          on (j.tenant_id,j.company_id,j.id)=(l.tenant_id,l.company_id,l.entry_id)
-       where j.source_type in ('SUPPLIER_INVOICE','SUPPLIER_PAYMENT')
-       """)){
+       where j.source_type in ('SUPPLIER_INVOICE','SUPPLIER_PAYMENT') and greatest(l.debit_xaf,l.credit_xaf)=%d
+       """.formatted(value))){
     var amounts=new HashMap<String,Long>();
     while(rows.next())assertNull(amounts.put(rows.getString(1)+":"+rows.getString(2),rows.getLong(3)));
-    assertEquals(Map.of("SUPPLIER_INVOICE:GOODS_RECEIVED_NOT_INVOICED",52000L,
-        "SUPPLIER_INVOICE:ACCOUNTS_PAYABLE",-52000L,"SUPPLIER_PAYMENT:ACCOUNTS_PAYABLE",52000L,
-        "SUPPLIER_PAYMENT:BANK_CONTROL",-52000L),amounts);
+    assertEquals(Map.of("SUPPLIER_INVOICE:GOODS_RECEIVED_NOT_INVOICED",value,
+        "SUPPLIER_INVOICE:ACCOUNTS_PAYABLE",-value,"SUPPLIER_PAYMENT:ACCOUNTS_PAYABLE",value,
+        "SUPPLIER_PAYMENT:BANK_CONTROL",-value),amounts);
    }
   }
  }
