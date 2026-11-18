@@ -47,3 +47,14 @@ Desktop Codex has taken integration ownership and cherry-picked the synthetic fi
 ## Issue #3 design fidelity and module acceptance
 
 Desktop Codex integrated the policy audit from commit 4e9520c and owns the screen and module registers. Run `node scripts/generate-acceptance-registers.mjs` after updating the canonical coverage and parity sources. The generated registers distinguish source candidates from accepted evidence. S01 now has a scoped Java posted-sales summary with a business-date selector in Next.js. Additional date presets, preparation, low-stock and collection queues remain unaccepted. See the [fidelity audit](migration/SCREEN_FIDELITY_AUDIT.md) and [dataset evidence](dataset-import-evidence.md).
+
+## Issue #4 consolidated delivery control
+
+Desktop acknowledges [issue #4](https://github.com/nshomejude/quincailsoft/issues/4) and integrated the published ownership proposal and platform audit. The proposal is reviewed for overlap. This acknowledgment records boundaries, without accepting any module or assigning work on behalf of the cloud agent.
+
+- Desktop active paths are `backend/business-modules/catalog/`, sales summary integration, historical Java import and source mapping, `infrastructure/local-preview/`, `apps/web-admin/`, and combined test/evidence. Shared Maven reactor, API security, common SDK/contracts and migration numbering remain serialized under Desktop.
+- V1–V22 remain immutable. V23 is reserved for the next Desktop catalog identity migration. This is a reservation; no V23 SQL has been applied. Coordinate any cloud migration numbers before editing shared schema.
+- Cloud source-dataset generation/reference validation and independent documents/reporting parity audit stay separate from Desktop Java ingestion and UI. Cloud platform/onboarding, billing, HR/payroll and deployment/recovery proposals remain in the consolidated ownership register. Shared code and module-level handoff require explicit path coordination.
+- The deposited preview shows the actual Java posted-sales result and day/week/month filtering. Preparation queues, reorder aggregates and pending collections remain visibly pending. Historical ingestion remains blocked before import and release verdict remains NO-GO. The historical dataset and exact branch/party reconciliation remain mandatory under issue #2. Mobile and native desktop remain paused.
+
+See [delivery control](DELIVERY_CONTROL.md), [screen fidelity](migration/screen-fidelity-register.json), and [module acceptance](migration/module-acceptance-register.json) for the current coordination boundaries.
