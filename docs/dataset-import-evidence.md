@@ -33,7 +33,7 @@ Published source totals in exact XAF are inventory 3,898,492,465, receivables 90
 | Dependency/security scans and SaaS capacity/recovery | NOT_RUN | No fresh release-scoped evidence for this build. |
 | Independent approval and exact economic behavior | NOT_RUN | Await reactor results and chronological import acceptance. |
 
-The preview at http://localhost:3100 uses the small synthetic application seed. Screenshots saved locally as `live-login.jpg`, `live-dashboard.jpg` and `live-product-detail.jpg` under the Git-ignored generated directory, with review copies in [issue-3 preview evidence](migration-evidence/issue-3-preview). The screenshots show the seeded preview only. The owner-side dashboard after installing the new API package is saved as `live-dashboard-sales-summary.jpg`. Its real posted-sales total is 0 FCFA. The remaining three required metrics still show their missing connections.
+The preview at http://localhost:3100 uses the small synthetic application seed. Screenshots saved locally as `live-login.jpg`, `live-dashboard.jpg` and `live-product-detail.jpg` under the Git-ignored generated directory, with review copies in [issue-3 preview evidence](migration-evidence/issue-3-preview). The screenshots show the seeded preview only. The owner-side dashboard after installing the new API package is saved as `live-dashboard-sales-summary.jpg`. Its real posted-sales total is 0 FCFA. Day, Monday-based week and calendar-month filters use the same Java API. The browser confirmed the 1–30 November 2026 month and the posted amount returned by the synthetic preview. The remaining three required metrics show their missing connections.
 
 ## Executed Java and web checks
 
@@ -41,7 +41,7 @@ The preview at http://localhost:3100 uses the small synthetic application seed. 
 - `PostgresSaleIntegrationTest` passed on the current sales code. It checks the exact scoped date total, exclusions for draft sales and wrong day, rejection of oversized ranges, empty cross-tenant/branch totals and immutable custody collection facts.
 - `FullApplicationPostgresTest` and four `SecurityBoundaryTest` cases passed. The signed test token can read the summary; an unauthenticated request cannot. This is narrower than the complete deployment RBAC/ABAC matrix.
 - The full rerun passed settlement, tender, return, provider, expense, reporting, sync and platform PostgreSQL tests before reaching the worker failure. The reporting case exercised permitted and denied source capabilities.
-- Nineteen web Node tests, Next.js TypeScript checks and the project rule gate passed. Strict parity still reports 735 unresolved entries. This checkpoint does not establish a release.
+- Twenty-one web Node tests, Next.js TypeScript checks and the project rule gate passed. Strict parity still reports 735 unresolved entries. This checkpoint does not establish a release.
 
 ## Next implementation boundary
 

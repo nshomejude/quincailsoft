@@ -79,7 +79,7 @@
         "controllerCandidates": []
       },
       "gaps": [
-        "Posted gross sales by business date are wired to the Java summary. Week/month controls, low-stock aggregate and order/collection queues remain unaccepted.",
+        "Day, week and month posted gross sales are wired to the scoped Java summary. Low-stock aggregate and order/collection queues remain unaccepted.",
         "Open POS and priority drilldowns need canonical workflow comparison."
       ],
       "captures": {
@@ -97,6 +97,11 @@
             "path": "docs/migration-evidence/issue-3-preview/live-dashboard-sales-summary.jpg",
             "commit": "f35d258dfc9a6a7d1618f6c59e1954d9bc866c35",
             "note": "Posted sales amount verified as owner on the small preview seed"
+          },
+          {
+            "path": "docs/migration-evidence/issue-3-preview/live-dashboard-month.jpg",
+            "commit": "0dd97db07cafd5c14050fefb2de36469e80f01ee",
+            "note": "Owner verified month range and the Java result"
           }
         ],
         "narrow": [

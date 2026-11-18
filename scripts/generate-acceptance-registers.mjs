@@ -25,7 +25,7 @@ const narrowAcceptance = {
     M26: [{test:'ReportingPostgresTest', commit:'831d2dfbeeaffa0df5d39e18433f0e6f7a1a10ae', status:'PASS', scope:'Scoped stock report, existing capability denials and exact CSV totals on PostgreSQL 18.7'}],
 };
 const reviewed = {
-    S01: {route:'/', component:'apps/web-admin/app/page.tsx', endpoints:['GET /api/v1/session','GET /api/v1/sales','GET /api/v1/sales/summary?from=&to='], screenshot:'live-dashboard.jpg', gaps:['Posted gross sales by business date are wired to the Java summary. Week/month controls, low-stock aggregate and order/collection queues remain unaccepted.','Open POS and priority drilldowns need canonical workflow comparison.']},
+    S01: {route:'/', component:'apps/web-admin/app/page.tsx', endpoints:['GET /api/v1/session','GET /api/v1/sales','GET /api/v1/sales/summary?from=&to='], screenshot:'live-dashboard.jpg', gaps:['Day, week and month posted gross sales are wired to the scoped Java summary. Low-stock aggregate and order/collection queues remain unaccepted.','Open POS and priority drilldowns need canonical workflow comparison.']},
     S11: {route:'/catalog/[id]', component:'apps/web-admin/app/catalog/[id]/page.tsx', endpoints:['GET /api/v1/products/{id}','PUT /api/v1/products/{id}','GET /api/v1/catalog/categories'], screenshot:'live-product-detail.jpg', gaps:['History, product-scoped stock card, and label printing are pending.','Manufacturer, model, family and variant identity are pending.']},
 };
 const endpoints = sourcePaths => sourcePaths.filter(path=>path.endsWith('Controller.java')&&exists(path)).map(path=>({
@@ -46,7 +46,7 @@ const screens = kind('screen').map(row=>{
         gaps:sample?.gaps??[row.reason,'Compare actionable fields, dialogs and permissions against original workflow.'],
         captures:{
             original:row.id==='S01'?['previews/QuincaiSoft_Dashboard_v4.jpg','app.js']:[],
-            desktop:sample?[{path:screenshotDirectory+sample.screenshot,commit:'831d2df',note:'Initial seeded preview capture'}, ...(row.id==='S01'?[{path:screenshotDirectory+'live-dashboard-sales-summary.jpg',commit:salesEvidenceCommit,note:'Posted sales amount verified as owner on the small preview seed'}]:[])]:[],
+            desktop:sample?[{path:screenshotDirectory+sample.screenshot,commit:'831d2df',note:'Initial seeded preview capture'}, ...(row.id==='S01'?[{path:screenshotDirectory+'live-dashboard-sales-summary.jpg',commit:salesEvidenceCommit,note:'Posted sales amount verified as owner on the small preview seed'}, {path:screenshotDirectory+'live-dashboard-month.jpg',commit:'0dd97db07cafd5c14050fefb2de36469e80f01ee',note:'Owner verified month range and the Java result'}]:[])]:[],
             narrow:sample?[{path:screenshotDirectory+(row.id==='S01'?'narrow-dashboard.jpg':'narrow-product-detail.jpg'),commit:responsiveEvidenceCommit,viewportWidth:390}]:[], comparableBeforeAfter:false,
         },
         status:sample?'FAIL':'NOT_RUN',
