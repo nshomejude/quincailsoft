@@ -11,5 +11,37 @@ public class CatalogMasterController {
  @GetMapping("/units/{id}") @PreAuthorize("hasAnyAuthority('catalog:read','SCOPE_catalog:read')") public CatalogMasterService.Unit unit(@PathVariable UUID id){return masters.unit(id);}
  @PostMapping("/units") @PreAuthorize("hasAnyAuthority('catalog:write','SCOPE_catalog:write')") public CatalogMasterService.Unit createUnit(@RequestHeader("Idempotency-Key") UUID key,@RequestBody CatalogMasterService.UnitSave c){match(key,c.operationId());return masters.saveUnit(null,c);}
  @PutMapping("/units/{id}") @PreAuthorize("hasAnyAuthority('catalog:write','SCOPE_catalog:write')") public CatalogMasterService.Unit updateUnit(@PathVariable UUID id,@RequestHeader("Idempotency-Key") UUID key,@RequestBody CatalogMasterService.UnitSave c){match(key,c.operationId());return masters.saveUnit(id,c);}
+ @PostMapping("/manufacturers")
+ @PreAuthorize("hasAnyAuthority('catalog:write','SCOPE_catalog:write')")
+ public CatalogMasterService.Manufacturer createManufacturer(@RequestHeader("Idempotency-Key") UUID key,
+     @RequestBody CatalogMasterService.ManufacturerSave command) {
+  match(key, command.operationId());
+  return masters.createManufacturer(command);
+ }
+
+ @PostMapping("/families")
+ @PreAuthorize("hasAnyAuthority('catalog:write','SCOPE_catalog:write')")
+ public CatalogMasterService.Family createFamily(@RequestHeader("Idempotency-Key") UUID key,
+     @RequestBody CatalogMasterService.FamilySave command) {
+  match(key, command.operationId());
+  return masters.createFamily(command);
+ }
+
+ @PostMapping("/variants")
+ @PreAuthorize("hasAnyAuthority('catalog:write','SCOPE_catalog:write')")
+ public CatalogMasterService.Variant attachVariant(@RequestHeader("Idempotency-Key") UUID key,
+     @RequestBody CatalogMasterService.VariantSave command) {
+  match(key, command.operationId());
+  return masters.attachVariant(command);
+ }
+
+ @PostMapping("/supplier-offers")
+ @PreAuthorize("hasAnyAuthority('catalog:write','SCOPE_catalog:write')")
+ public CatalogMasterService.Offer createOffer(@RequestHeader("Idempotency-Key") UUID key,
+     @RequestBody CatalogMasterService.OfferSave command) {
+  match(key, command.operationId());
+  return masters.createOffer(command);
+ }
+
  private void match(UUID key,UUID operation){if(!key.equals(operation))throw new IllegalArgumentException("Operation ID mismatch");}
 }

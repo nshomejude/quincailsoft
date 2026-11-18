@@ -1,0 +1,20 @@
+{
+  "baseCommit": "e993fd6054a3b73fa034be6bf4f5a0e406582fee",
+  "finishedAt": "2026-11-18T08:25:04+01:00",
+  "java": "25.0.5",
+  "postgresql": "18.7",
+  "maven": "3.9.11",
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "scope": "One database scenario; three concurrent phases plus revocation/replay assertions",
+  "sourceSha256": {
+    "backend/platform-control/src/test/java/com/quincaisoft/platformcontrol/PostgresOnboardingConcurrencyTest.java": "99f56e216d48c5e36f43f5febde275dfa0016adbf6a2c75908b632a93b1c0d05",
+    "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/application/DefaultPlatformService.java": "8d59d1ccb5a84e50592915717f61705847830c772868affa3b5cae7228981766"
+  },
+  "fullReactor": "NOT_RUN",
+  "httpOidc": "NOT_RUN",
+  "provisioning": "NOT_IMPLEMENTED",
+  "release": "NO_GO"
+}

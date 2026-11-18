@@ -30,6 +30,33 @@ class CsvInputBoundaryTest {
         assertThrows(IllegalArgumentException.class, () -> Csv.parse(row + "\r\n" + row + "\r\n", ";"));
     }
 
+    @Test void trailingEmptyFieldCountsTowardTheLimit() {
+        String forty = String.join(",", Collections.nCopies(40, "x"));
+        for (String end : new String[]{"", "\n", "\r", "\r\n"}) {
+            assertThrows(IllegalArgumentException.class, () -> Csv.parse("name\n" + forty + "," + end, ","));
+        }
+        assertEquals(40, Csv.parse("name\n" + String.join(",", Collections.nCopies(39, "x")) + ",", ",").get(1).size());
+    }
+
+    @Test void quotedNulIsRejectedAfterEscapedQuoteAndAcrossLines() {
+        assertThrows(IllegalArgumentException.class, () -> Csv.parse("name\n\"A\"\"\0B\"", ","));
+        assertThrows(IllegalArgumentException.class, () -> Csv.parse("name\n\"A\n\0B\"", ","));
+    }
+
+    @Test void preservesBomAndEmptyQuotedCells() {
+        assertEquals("", Csv.parse("\ufeffname\r\n\"\"\r\n", ",").get(1).getFirst());
+    }
+
+    @Test void enforcesUtf8ByteLimitRatherThanCharacterCount() {
+        String row = "é".repeat(1000) + "\n";
+        assertThrows(IllegalArgumentException.class, () -> Csv.parse("name\n" + row.repeat(260), ","));
+    }
+
+    @Test void rejectsMalformedQuotesWithoutDiscardingTrailingText() {
+        assertThrows(IllegalArgumentException.class, () -> Csv.parse("name\n\"value", ","));
+        assertThrows(IllegalArgumentException.class, () -> Csv.parse("name\n\"value\"suffix", ","));
+    }
+
     @Test void acceptsFiveHundredDataRowsAndRejectsNext() {
         assertEquals(501, Csv.parse("name\n" + "x\n".repeat(500), ",").size());
         assertThrows(IllegalArgumentException.class, () -> Csv.parse("name\n" + "x\n".repeat(501), ","));

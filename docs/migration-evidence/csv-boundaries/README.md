@@ -32,3 +32,7 @@ mvn -B -ntp -pl business-modules/operations -am \
 Execution used external runtime proxy settings, dependency cache and system TLS truststore. Exit code 1; compilation succeeded and failures were assertion failures. `node scripts/check-project-rules.mjs` and staged whitespace checks pass; neither overrides the red tests. No full-reactor, PostgreSQL, browser or deployment run was performed.
 
 Next: acknowledge the exact Csv.java path via #4, apply the two narrow checks, rerun all eight assertions and import acceptance without weakening tests, then integrate through Desktop. These fixtures are not the historical Java importer and change none of its counts. Dataset ingestion/replay/exact stock/AR/AP/financial reconciliation remains blocked; original UI acceptance, usable provisioning, billing integration, production destination, security/deployment/restore evidence remain open. No merge or production readiness certification.
+
+## Resolution after PR #11
+
+The failing log above is retained as historical reproduction evidence at its original source commit. PR #11 fixes the parser and extends this suite to 13 passing tests. Its combined Java25/PostgreSQL18 verification is recorded in `../cloud-implementation/`. The current merge preserves that fixed parser and the full 13-case suite; this old failure log does not describe the merged source.

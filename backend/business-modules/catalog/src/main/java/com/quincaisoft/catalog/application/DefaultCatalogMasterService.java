@@ -41,6 +41,129 @@ public class DefaultCatalogMasterService implements CatalogMasterService {
    e.name=c.name();e.active=c.active();if(id==null)em.persist(e);em.flush();var result=view(e);receipt(c.operationId(),e.id,"UNIT",hash,result,c.reason());return result;
   });
  }
+ @Override
+ public Manufacturer createManufacturer(ManufacturerSave command) {
+  if (command == null) throw new IllegalArgumentException("Manufacturer required");
+  validate(command.operationId(), command.code(), command.name(), command.reason());
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   String hash = identityHash("MANUFACTURER", command);
+   var previous = replay(command.operationId(), hash, Manufacturer.class);
+   if (previous != null) return previous;
+   var entity = new CatalogManufacturer();
+   entity.tenantId = scope.tenantId();
+   entity.companyId = scope.companyId();
+   entity.id = UUID.randomUUID();
+   entity.code = command.code();
+   entity.name = command.name();
+   em.persist(entity);
+   em.flush();
+   var result = new Manufacturer(entity.id, entity.code, entity.name);
+   receipt(command.operationId(), entity.id, "MANUFACTURER", hash, result, command.reason());
+   return result;
+  });
+ }
+
+ @Override
+ public Family createFamily(FamilySave command) {
+  if (command == null || command.operationId() == null || command.manufacturerId() == null)
+   throw new IllegalArgumentException("Operation and manufacturer required");
+  text(command.productType(), 80, true);
+  text(command.modelNumber(), 80, true);
+  text(command.reason(), 2000, true);
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   String hash = identityHash("PRODUCT_FAMILY", command);
+   var previous = replay(command.operationId(), hash, Family.class);
+   if (previous != null) return previous;
+   var key = new CatalogManufacturer.Key(scope.tenantId(), scope.companyId(), command.manufacturerId());
+   if (em.find(CatalogManufacturer.class, key) == null) throw new NoSuchElementException("Manufacturer not found");
+   var entity = new CatalogProductFamily();
+   entity.tenantId = scope.tenantId();
+   entity.companyId = scope.companyId();
+   entity.id = UUID.randomUUID();
+   entity.manufacturerId = command.manufacturerId();
+   entity.productType = command.productType();
+   entity.modelNumber = command.modelNumber();
+   em.persist(entity);
+   em.flush();
+   var result = new Family(entity.id, entity.manufacturerId, entity.productType, entity.modelNumber);
+   receipt(command.operationId(), entity.id, "PRODUCT_FAMILY", hash, result, command.reason());
+   return result;
+  });
+ }
+
+ @Override
+ public Variant attachVariant(VariantSave command) {
+  if (command == null || command.operationId() == null || command.productId() == null || command.familyId() == null)
+   throw new IllegalArgumentException("Operation, product and family required");
+  text(command.colour(), 80, true);
+  text(command.size(), 80, true);
+  text(command.reason(), 2000, true);
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   var hash = identityHash("CATALOG_VARIANT", command);
+   var previous = replay(command.operationId(), hash, Variant.class);
+   if (previous != null) return previous;
+   var product = em.find(CatalogProduct.class, new CatalogProduct.Key(scope.tenantId(), scope.companyId(), command.productId()));
+   var family = em.find(CatalogProductFamily.class, new CatalogProductFamily.Key(scope.tenantId(), scope.companyId(), command.familyId()));
+   if (product == null || family == null) throw new NoSuchElementException("Product or family not found");
+   var entity = new CatalogVariantIdentity();
+   entity.tenantId = scope.tenantId();
+   entity.companyId = scope.companyId();
+   entity.productId = command.productId();
+   entity.familyId = command.familyId();
+   entity.colour = command.colour();
+   entity.size = command.size();
+   em.persist(entity);
+   em.flush();
+   var result = new Variant(entity.productId, entity.familyId, entity.colour, entity.size);
+   receipt(command.operationId(), entity.productId, "CatalogVariant", hash, result, command.reason());
+   return result;
+  });
+ }
+
+ @Override
+ public Offer createOffer(OfferSave command) {
+  if (command == null || command.operationId() == null || command.productId() == null || command.supplierId() == null)
+   throw new IllegalArgumentException("Operation, product and supplier required");
+  text(command.supplierSku(), 120, true);
+  text(command.reason(), 2000, true);
+  long cost = number(command.quotedCostXaf(), false);
+  long minimum = number(command.minimumOrderMilli(), true);
+  if (command.leadTimeDays() < 0) throw new IllegalArgumentException("Lead time must be nonnegative");
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   var hash = identityHash("SUPPLIER_OFFER", command);
+   var previous = replay(command.operationId(), hash, Offer.class);
+   if (previous != null) return previous;
+   var variant = em.find(CatalogVariantIdentity.class, new CatalogVariantIdentity.Key(scope.tenantId(), scope.companyId(), command.productId()));
+   if (variant == null) throw new NoSuchElementException("Variant not found");
+   var entity = new CatalogSupplierOffer();
+   entity.tenantId = scope.tenantId();
+   entity.companyId = scope.companyId();
+   entity.productId = command.productId();
+   entity.supplierId = command.supplierId();
+   entity.supplierSku = command.supplierSku();
+   entity.quotedCostXaf = cost;
+   entity.minimumOrderMilli = minimum;
+   entity.leadTimeDays = command.leadTimeDays();
+   entity.preferred = command.preferred();
+   em.persist(entity);
+   em.flush();
+   var result = new Offer(entity.productId, entity.supplierId, entity.supplierSku, Long.toString(cost),
+       entity.leadTimeDays, Long.toString(minimum), entity.preferred);
+   receipt(command.operationId(), entity.productId, "CatalogSupplierOffer", hash, result, command.reason());
+   return result;
+  });
+ }
+
+ private String identityHash(String kind, Object command) {
+  var scope = TenantContext.current();
+  return digest(kind + "|" + scope.companyId() + "|" + scope.branchId() + "|" + scope.actorId()
+      + "|" + json.writeValueAsString(command));
+ }
+
  private CatalogCategory findCategory(UUID id,LockModeType lock){var s=TenantContext.current();var e=em.find(CatalogCategory.class,new CatalogCategory.Key(s.tenantId(),s.companyId(),id),lock);if(e==null)throw new NoSuchElementException("Category not found");return e;}
  private CatalogUnit findUnit(UUID id,LockModeType lock){var s=TenantContext.current();var e=em.find(CatalogUnit.class,new CatalogUnit.Key(s.tenantId(),s.companyId(),id),lock);if(e==null)throw new NoSuchElementException("Unit not found");return e;}
  private Category view(CatalogCategory e){return new Category(e.id,e.code,e.name,e.parentId,e.brand,e.description,e.active,Long.toString(e.version));}

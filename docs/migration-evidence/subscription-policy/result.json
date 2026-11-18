@@ -1,0 +1,25 @@
+{
+  "baseCommit": "e993fd6054a3b73fa034be6bf4f5a0e406582fee",
+  "finishedAt": "2026-11-18T07:31:03+01:00",
+  "java": "25.0.5",
+  "maven": "3.9.11",
+  "scope": "SubscriptionRestrictionPolicyTest only; selected dependency reactor",
+  "tests": 55,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "reactorModules": 3,
+  "projectRules": "PASS",
+  "whitespace": "PASS",
+  "databaseAcceptance": "NOT_RUN",
+  "httpAcceptance": "NOT_RUN",
+  "fullReactor": "NOT_RUN",
+  "serviceIntegration": "NOT_IMPLEMENTED",
+  "release": "NO_GO",
+  "sourceSha256": {
+    "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/domain/SubscriptionRestrictionPolicy.java": "1f228bd7920c9eac23a1676a3198a70879943e70a9872c3fa32b90e4e36976ea",
+    "backend/business-modules/subscriptions/src/test/java/com/quincaisoft/subscriptions/SubscriptionRestrictionPolicyTest.java": "06bf9b9483419d59559c253addbff79feb1d4334fd13f90c05f50ff54a5226f8"
+  },
+  "logSha256": "33c7ddef00e52a20190124579bd3679b50b34d6a4e9f7fbdcf5c8da936b6e8c0",
+  "logNormalization": "Trailing spaces removed; contents otherwise unchanged"
+}

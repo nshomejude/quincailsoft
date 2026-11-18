@@ -58,3 +58,7 @@ Desktop acknowledges [issue #4](https://github.com/nshomejude/quincailsoft/issue
 - The deposited preview shows the actual Java posted-sales result and day/week/month filtering. Preparation queues, reorder aggregates and pending collections remain visibly pending. Historical ingestion remains blocked before import and release verdict remains NO-GO. The historical dataset and exact branch/party reconciliation remain mandatory under issue #2. Mobile and native desktop remain paused.
 
 See [delivery control](DELIVERY_CONTROL.md), [screen fidelity](migration/screen-fidelity-register.json), and [module acceptance](migration/module-acceptance-register.json) for the current coordination boundaries.
+
+### Current migration coordination
+
+Issue #4 now records Cloud's V24 platform-control, V25 subscriptions, and V26 workforce reservations. Desktop retains V23 and the historical importer. The opening-capital adapter reuses the current journal workflow and does not allocate a migration. Cloud contributions still require focused review and combined acceptance before release.
