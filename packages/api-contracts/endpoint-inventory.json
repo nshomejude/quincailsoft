@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "4a1f73bfddeb5a80c3bb333b80b64b9859075e6cc0e67cef72334f5646c25e0e",
+  "sourceDigest": "ad6adaa5a0a171531529bee10841d0750d41a7b84f4be58253f06fb5d89255fd",
   "unresolvedJavaTypes": [],
   "endpoints": [
     {
@@ -1400,6 +1400,59 @@
       "returnType": "InventoryQuality.Reservation",
       "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
       "authorization": "hasAnyAuthority('inventory:write','SCOPE_inventory:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/retention/exports/{id}",
+      "controller": "ExportRetentionController",
+      "javaMethod": "get",
+      "returnType": "ExportRetentionService.Decision",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportRetentionController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/retention/exports",
+      "controller": "ExportRetentionController",
+      "javaMethod": "request",
+      "returnType": "ExportRetentionService.Decision",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportRetentionController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/retention/exports/{id}/approve",
+      "controller": "ExportRetentionController",
+      "javaMethod": "approve",
+      "returnType": "ExportRetentionService.Decision",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportRetentionController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/retention/exports/{id}/execute",
+      "controller": "ExportRetentionController",
+      "javaMethod": "execute",
+      "returnType": "ExportRetentionService.Decision",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportRetentionController.java",
+      "authorization": "HTTP security configuration",
       "requestHeaders": [
         "Idempotency-Key",
         "X-Request-ID"
