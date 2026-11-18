@@ -1,6 +1,6 @@
 # CLOUD implementation checkpoint — 18 November 2026
 
-Base: Desktop `aa44141cba428829536ef040e414ff7809fa2383`. This checkpoint implements code, not only ownership documents. Java25/Spring Boot4/PostgreSQL18 remain unchanged. No Python application code added; Desktop catalog, historical importer and UI files are preserved.
+Base: Desktop `6ec0fef643b1e53ba64c80f157783de17a084b34`, integrated after initial cloud checkpoint `9c1e13923b478ff41864f843613942e9ad3052da`. This checkpoint implements code, not only ownership documents. Java25/Spring Boot4/PostgreSQL18 remain unchanged. No Python application code added; Desktop catalog, historical importer and UI files are preserved.
 
 ## Delivered and executed
 
@@ -37,3 +37,5 @@ Review/cherry-pick this checkpoint into the current handover branch; do not merg
 Verdict: **TESTED IMPLEMENTATION CHECKPOINT; NOT PRODUCTION-READY.**
 
 Saved logs normalize trailing whitespace only; no result lines are removed.
+
+The full reactor was rerun successfully after integrating Desktop’s latest historical import changes. Optional historical catalog/opening acceptance flags were not enabled in this run; their earlier Desktop results retain their own scope. No running preview data import is claimed.

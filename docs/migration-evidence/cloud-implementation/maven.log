@@ -75,7 +75,7 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.shared.ValueObjectsTest
-[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.097 s -- in com.quincaisoft.shared.ValueObjectsTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.078 s -- in com.quincaisoft.shared.ValueObjectsTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -83,7 +83,6 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ shared-kernel ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/shared-kernel/target/shared-kernel-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] -------------------< com.quincaisoft:db-migrations >--------------------
 [INFO] Building db-migrations 0.1.0-SNAPSHOT                             [3/30]
@@ -109,7 +108,6 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] No tests to run.
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ db-migrations ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/db-migrations/target/db-migrations-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] -----------------------< com.quincaisoft:audit >------------------------
 [INFO] Building audit 0.1.0-SNAPSHOT                                     [4/30]
@@ -123,8 +121,7 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/audit/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ audit ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 5 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ audit ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/audit/src/test/resources
@@ -136,7 +133,6 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] No tests to run.
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ audit ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/audit/target/audit-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] -----------------------< com.quincaisoft:branch >-----------------------
 [INFO] Building branch 0.1.0-SNAPSHOT                                    [5/30]
@@ -150,8 +146,7 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/branch/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ branch ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 5 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ branch ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/branch/src/test/resources
@@ -163,7 +158,6 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] No tests to run.
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ branch ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/branch/target/branch-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ----------------------< com.quincaisoft:catalog >-----------------------
 [INFO] Building catalog 0.1.0-SNAPSHOT                                   [6/30]
@@ -177,8 +171,7 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/catalog/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ catalog ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 14 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ catalog ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/catalog/src/test/resources
@@ -190,7 +183,6 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] No tests to run.
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ catalog ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/catalog/target/catalog-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] -------------------< com.quincaisoft:subscriptions >--------------------
 [INFO] Building subscriptions 0.1.0-SNAPSHOT                             [7/30]
@@ -204,15 +196,13 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/subscriptions/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ subscriptions ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 9 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ subscriptions ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/subscriptions/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ subscriptions ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 2 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ subscriptions ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -221,30 +211,30 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.subscriptions.SubscriptionRestrictionPolicyTest
-[INFO] Tests run: 55, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.219 s -- in com.quincaisoft.subscriptions.SubscriptionRestrictionPolicyTest
+[INFO] Tests run: 55, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.193 s -- in com.quincaisoft.subscriptions.SubscriptionRestrictionPolicyTest
 [INFO] Running com.quincaisoft.subscriptions.PostgresSubscriptionBillingTest
-12:27:52.205 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:27:52.249 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:27:52.682 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:27:52.768 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/billing_test_625e8443483a446c8f84b980a9340885]
+12:37:32.651 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:37:32.690 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:37:33.149 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:37:33.248 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/billing_test_19994cd32e2c4b8b973ecadc7c3f467b]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: billing_test_625e8443483a446c8f84b980a9340885/public
+	Default catalog/schema: billing_test_19994cd32e2c4b8b973ecadc7c3f467b/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:27:53.508 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:27:53.594 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:27:54.462 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: P0001
-12:27:54.462 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: injected event failure
+12:37:33.981 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:37:34.071 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:37:34.868 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: P0001
+12:37:34.869 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: injected event failure
   Where: PL/pgSQL function billing_test_fail() line 1 at RAISE
-12:27:54.614 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.164 s -- in com.quincaisoft.subscriptions.PostgresSubscriptionBillingTest
+12:37:35.000 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.079 s -- in com.quincaisoft.subscriptions.PostgresSubscriptionBillingTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -252,7 +242,6 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ subscriptions ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/subscriptions/target/subscriptions-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ----------------------< com.quincaisoft:identity >----------------------
 [INFO] Building identity 0.1.0-SNAPSHOT                                  [8/30]
@@ -266,8 +255,7 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/identity/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ identity ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 8 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ identity ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/identity/src/test/resources
@@ -279,7 +267,6 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] No tests to run.
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ identity ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/identity/target/identity-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ----------------------< com.quincaisoft:commerce >----------------------
 [INFO] Building commerce 0.1.0-SNAPSHOT                                  [9/30]
@@ -293,15 +280,13 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/commerce/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ commerce ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 7 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ commerce ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/commerce/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ commerce ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ commerce ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -310,25 +295,25 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.commerce.PostgresCommerceIntegrationTest
-12:27:56.788 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:27:56.828 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:27:57.265 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:27:57.375 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/commerce_test_b421209ea6554c04ae182bf61d7ccfd5]
+12:37:36.546 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:37:36.583 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:37:36.992 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:37:37.061 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/commerce_test_2e4261ff47cd466285d9c801dbc56c79]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: commerce_test_b421209ea6554c04ae182bf61d7ccfd5/public
+	Default catalog/schema: commerce_test_2e4261ff47cd466285d9c801dbc56c79/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:27:58.239 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:27:58.331 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:27:59.405 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.432 s -- in com.quincaisoft.commerce.PostgresCommerceIntegrationTest
+12:37:37.856 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:37:37.947 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:37:38.930 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.085 s -- in com.quincaisoft.commerce.PostgresCommerceIntegrationTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -336,7 +321,6 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ commerce ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/commerce/target/commerce-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ----------------------< com.quincaisoft:company >-----------------------
 [INFO] Building company 0.1.0-SNAPSHOT                                  [10/30]
@@ -350,8 +334,7 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/company/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ company ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 5 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ company ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/company/src/test/resources
@@ -363,7 +346,6 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] No tests to run.
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ company ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/company/target/company-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] -----------------< com.quincaisoft:customer-accounts >------------------
 [INFO] Building customer-accounts 0.1.0-SNAPSHOT                        [11/30]
@@ -377,15 +359,13 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/customer-accounts/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ customer-accounts ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 8 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ customer-accounts ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/customer-accounts/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ customer-accounts ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ customer-accounts ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -394,32 +374,32 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.customeraccounts.MasterDataPostgresTest
-12:28:01.357 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:28:01.399 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:28:01.811 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:28:01.886 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/master_test_73ae77dd698b45a596f75078907c45a8]
+12:37:40.453 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:37:40.483 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:37:40.841 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:37:40.910 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/master_test_ea8f862331304a4086f5ce9ed23c28b4]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: master_test_73ae77dd698b45a596f75078907c45a8/public
+	Default catalog/schema: master_test_ea8f862331304a4086f5ce9ed23c28b4/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:28:02.112 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
-12:28:02.855 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:28:02.953 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:28:04.279 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: 23503
-12:28:04.279 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: insert or update on table "catalog_supplier_offer" violates foreign key constraint "catalog_supplier_offer_tenant_id_company_id_supplier_id_fkey"
+12:37:41.163 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
+12:37:41.934 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:37:42.012 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:37:43.202 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: 23503
+12:37:43.203 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: insert or update on table "catalog_supplier_offer" violates foreign key constraint "catalog_supplier_offer_tenant_id_company_id_supplier_id_fkey"
   Detail: Key is not present in table "supplier".
-12:28:04.340 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: 42501
-12:28:04.340 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: Customer changes require a scoped master-data command
+12:37:43.264 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: 42501
+12:37:43.264 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: Customer changes require a scoped master-data command
   Where: PL/pgSQL function protect_customer_master_update() line 6 at RAISE
-12:28:04.341 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.785 s -- in com.quincaisoft.customeraccounts.MasterDataPostgresTest
+12:37:43.264 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.491 s -- in com.quincaisoft.customeraccounts.MasterDataPostgresTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -427,7 +407,6 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ customer-accounts ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/customer-accounts/target/customer-accounts-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ---------------------< com.quincaisoft:documents >----------------------
 [INFO] Building documents 0.1.0-SNAPSHOT                                [12/30]
@@ -441,17 +420,13 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/documents/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ documents ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 15 source files with javac [debug parameters release 25] to target/classes
-[INFO] /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/documents/src/main/java/com/quincaisoft/documents/application/DefaultDocumentService.java: Some input files use or override a deprecated API.
-[INFO] /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/documents/src/main/java/com/quincaisoft/documents/application/DefaultDocumentService.java: Recompile with -Xlint:deprecation for details.
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ documents ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/documents/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ documents ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 3 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ documents ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -460,35 +435,35 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.documents.PostgresDocumentSettingsTest
-12:28:06.197 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:28:06.243 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:28:06.618 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:28:06.688 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/docs_test_8c3b2521752345058351b618768bf21c]
+12:37:44.735 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:37:44.764 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:37:45.099 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:37:45.181 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/docs_test_d5355df8122e428988e9dc01d6947655]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: docs_test_8c3b2521752345058351b618768bf21c/public
+	Default catalog/schema: docs_test_d5355df8122e428988e9dc01d6947655/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:28:07.471 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:28:07.562 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:28:08.061 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.588 s -- in com.quincaisoft.documents.PostgresDocumentSettingsTest
+12:37:45.898 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:37:45.959 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:37:46.408 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.326 s -- in com.quincaisoft.documents.PostgresDocumentSettingsTest
 [INFO] Running com.quincaisoft.documents.DocumentSettingsHttpTest
-12:28:08.341 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-12:28:08.342 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-12:28:08.344 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 2 ms
-12:28:08.393 [main] WARN org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver -- Resolved [org.springframework.web.bind.MissingRequestHeaderException: Required request header 'Idempotency-Key' for method parameter type UUID is not present]
-12:28:08.408 [main] WARN org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver -- Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'Idempotency-Key': Failed to convert value of type 'java.lang.String' to required type 'java.util.UUID'; Invalid UUID string: not-a-uuid]
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.351 s -- in com.quincaisoft.documents.DocumentSettingsHttpTest
+12:37:46.649 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:37:46.649 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:37:46.651 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 1 ms
+12:37:46.708 [main] WARN org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver -- Resolved [org.springframework.web.bind.MissingRequestHeaderException: Required request header 'Idempotency-Key' for method parameter type UUID is not present]
+12:37:46.733 [main] WARN org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver -- Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'Idempotency-Key': Failed to convert value of type 'java.lang.String' to required type 'java.util.UUID'; Invalid UUID string: not-a-uuid]
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.323 s -- in com.quincaisoft.documents.DocumentSettingsHttpTest
 [INFO] Running com.quincaisoft.documents.DocumentPermissionMatrixTest
 OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
-[INFO] Tests run: 510, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.705 s -- in com.quincaisoft.documents.DocumentPermissionMatrixTest
+[INFO] Tests run: 510, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.652 s -- in com.quincaisoft.documents.DocumentPermissionMatrixTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -496,7 +471,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ documents ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/documents/target/documents-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ---------------------< com.quincaisoft:suppliers >----------------------
 [INFO] Building suppliers 0.1.0-SNAPSHOT                                [13/30]
@@ -510,8 +484,7 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/suppliers/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ suppliers ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 6 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ suppliers ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/suppliers/src/test/resources
@@ -523,7 +496,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] No tests to run.
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ suppliers ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/suppliers/target/suppliers-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ----------------------< com.quincaisoft:finance >-----------------------
 [INFO] Building finance 0.1.0-SNAPSHOT                                  [14/30]
@@ -537,15 +509,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/finance/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ finance ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 19 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ finance ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/finance/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ finance ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ finance ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -554,7 +524,7 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.finance.FinanceRulesTest
-[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.069 s -- in com.quincaisoft.finance.FinanceRulesTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.064 s -- in com.quincaisoft.finance.FinanceRulesTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -562,7 +532,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ finance ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/finance/target/finance-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ---------------------< com.quincaisoft:inventory >----------------------
 [INFO] Building inventory 0.1.0-SNAPSHOT                                [15/30]
@@ -576,17 +545,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/inventory/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ inventory ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 27 source files with javac [debug parameters release 25] to target/classes
-[INFO] /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/DefaultInventoryWorkflows.java: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/DefaultInventoryWorkflows.java uses unchecked or unsafe operations.
-[INFO] /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/DefaultInventoryWorkflows.java: Recompile with -Xlint:unchecked for details.
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ inventory ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/inventory/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ inventory ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 2 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ inventory ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -595,28 +560,28 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.inventory.PostgresInventoryWorkflowTest
-12:28:12.282 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:28:12.316 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:28:12.721 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:28:12.789 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/sale_test_ca22645b01a04131ad0738d76759889e]
+12:37:49.695 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:37:49.737 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:37:50.118 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:37:50.187 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/sale_test_8703a92ee3374536a5c57a8d76fa7123]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: sale_test_ca22645b01a04131ad0738d76759889e/public
+	Default catalog/schema: sale_test_8703a92ee3374536a5c57a8d76fa7123/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:28:13.097 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
-12:28:13.984 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:28:14.072 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:28:16.425 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.806 s -- in com.quincaisoft.inventory.PostgresInventoryWorkflowTest
+12:37:50.497 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
+12:37:51.480 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:37:51.559 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:37:53.867 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.921 s -- in com.quincaisoft.inventory.PostgresInventoryWorkflowTest
 [INFO] Running com.quincaisoft.inventory.StockBalanceTest
-[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in com.quincaisoft.inventory.StockBalanceTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in com.quincaisoft.inventory.StockBalanceTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -624,7 +589,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ inventory ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/inventory/target/inventory-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ---------------------< com.quincaisoft:purchasing >---------------------
 [INFO] Building purchasing 0.1.0-SNAPSHOT                               [16/30]
@@ -638,15 +602,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/purchasing/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ purchasing ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 17 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ purchasing ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/purchasing/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ purchasing ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 2 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ purchasing ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -655,28 +617,28 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.purchasing.PurchaseRulesTest
-[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.072 s -- in com.quincaisoft.purchasing.PurchaseRulesTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.068 s -- in com.quincaisoft.purchasing.PurchaseRulesTest
 [INFO] Running com.quincaisoft.purchasing.PostgresPurchasingIntegrationTest
-12:28:18.308 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:28:18.342 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:28:18.738 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:28:18.808 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/purchase_test_0d92638f540f409dbee3b1d7fb3537d1]
+12:37:55.403 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:37:55.438 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:37:55.900 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:37:55.973 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/purchase_test_ad31dfd0536d472884daf9ec8824de27]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: purchase_test_0d92638f540f409dbee3b1d7fb3537d1/public
+	Default catalog/schema: purchase_test_ad31dfd0536d472884daf9ec8824de27/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:28:19.205 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
-12:28:20.222 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:28:20.324 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:28:21.634 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.073 s -- in com.quincaisoft.purchasing.PostgresPurchasingIntegrationTest
+12:37:56.310 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
+12:37:57.316 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:37:57.398 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:37:58.764 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.086 s -- in com.quincaisoft.purchasing.PostgresPurchasingIntegrationTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -684,7 +646,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ purchasing ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/purchasing/target/purchasing-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] -----------------------< com.quincaisoft:sales >------------------------
 [INFO] Building sales 0.1.0-SNAPSHOT                                    [17/30]
@@ -698,15 +659,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/sales/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ sales ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 11 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ sales ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/sales/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ sales ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 2 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ sales ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -715,28 +674,28 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.sales.SaleRulesTest
-[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.079 s -- in com.quincaisoft.sales.SaleRulesTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.085 s -- in com.quincaisoft.sales.SaleRulesTest
 [INFO] Running com.quincaisoft.sales.PostgresSaleIntegrationTest
-12:28:23.520 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:28:23.565 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:28:24.052 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:28:24.139 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/sale_test_061d55526f314bd79d84b9bbbebb81c9]
+12:38:00.405 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:38:00.438 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:38:00.807 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:38:00.881 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/sale_test_3dc832b46d174e16b58fb913c2269d0f]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: sale_test_061d55526f314bd79d84b9bbbebb81c9/public
+	Default catalog/schema: sale_test_3dc832b46d174e16b58fb913c2269d0f/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:28:24.475 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
-12:28:25.512 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:28:25.612 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:28:27.896 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.128 s -- in com.quincaisoft.sales.PostgresSaleIntegrationTest
+12:38:01.187 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
+12:38:02.134 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:38:02.214 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:38:03.912 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.272 s -- in com.quincaisoft.sales.PostgresSaleIntegrationTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -744,7 +703,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ sales ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/sales/target/sales-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ----------------------< com.quincaisoft:tenders >-----------------------
 [INFO] Building tenders 0.1.0-SNAPSHOT                                  [18/30]
@@ -758,15 +716,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/tenders/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ tenders ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 19 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ tenders ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/tenders/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ tenders ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 3 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ tenders ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -775,51 +731,51 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.tenders.TenderRulesTest
-[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.084 s -- in com.quincaisoft.tenders.TenderRulesTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.073 s -- in com.quincaisoft.tenders.TenderRulesTest
 [INFO] Running com.quincaisoft.tenders.TenderPostgresTest
-12:28:30.149 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:28:30.192 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:28:30.696 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:28:30.889 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/sale_test_a21cfa5557084a358458374f7072f8cf]
+12:38:05.314 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:38:05.348 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:38:05.721 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:38:05.795 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/sale_test_abf10011cd5640f8a3d52381640009d0]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: sale_test_a21cfa5557084a358458374f7072f8cf/public
+	Default catalog/schema: sale_test_abf10011cd5640f8a3d52381640009d0/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:28:31.279 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
-12:28:32.289 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:28:32.375 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:28:34.158 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.817 s -- in com.quincaisoft.tenders.TenderPostgresTest
+12:38:06.220 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
+12:38:07.199 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:38:07.281 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:38:08.665 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.991 s -- in com.quincaisoft.tenders.TenderPostgresTest
 [INFO] Running com.quincaisoft.tenders.SettlementPostgresTest
-12:28:34.598 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:28:34.618 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:28:34.626 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/purchase_test_8b6f8f0f239549059882cae850c6130b]
+12:38:09.006 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:38:09.023 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:38:09.032 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/purchase_test_0d3133be2b4b4da5bad008fc6efb5661]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: purchase_test_8b6f8f0f239549059882cae850c6130b/public
+	Default catalog/schema: purchase_test_0d3133be2b4b4da5bad008fc6efb5661/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:28:34.962 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:28:35.004 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:28:35.851 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: 23505
-12:28:35.851 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: duplicate key value violates unique constraint "bank_match_tenant_id_company_id_evidence_id_key"
-12:28:36.187 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: 23505
-12:28:36.187 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: duplicate key value violates unique constraint "manual_journal_tenant_id_company_id_reversal_of_key"
-12:28:36.295 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.127 s -- in com.quincaisoft.tenders.SettlementPostgresTest
+12:38:09.356 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:38:09.388 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:38:10.067 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: 23505
+12:38:10.067 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: duplicate key value violates unique constraint "bank_match_tenant_id_company_id_evidence_id_key"
+12:38:10.332 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: 23505
+12:38:10.332 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: duplicate key value violates unique constraint "manual_journal_tenant_id_company_id_reversal_of_key"
+12:38:10.409 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.737 s -- in com.quincaisoft.tenders.SettlementPostgresTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -827,7 +783,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ tenders ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/tenders/target/tenders-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ---------------------< com.quincaisoft:quotations >---------------------
 [INFO] Building quotations 0.1.0-SNAPSHOT                               [19/30]
@@ -841,8 +796,7 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/quotations/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ quotations ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 6 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ quotations ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/quotations/src/test/resources
@@ -854,7 +808,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] No tests to run.
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ quotations ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/quotations/target/quotations-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ----------------------< com.quincaisoft:returns >-----------------------
 [INFO] Building returns 0.1.0-SNAPSHOT                                  [20/30]
@@ -868,15 +821,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/returns/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ returns ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 7 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ returns ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/returns/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ returns ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ returns ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -885,26 +836,26 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.returns.PostgresReturnIntegrationTest
-12:28:38.541 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:28:38.586 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:28:39.039 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:28:39.136 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/sale_test_a70afa5ff9b24b0b823938d896804c46]
+12:38:11.810 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:38:11.852 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:38:12.356 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:38:12.443 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/sale_test_1e60bd00994a458180ed9ceb6ddac447]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: sale_test_a70afa5ff9b24b0b823938d896804c46/public
+	Default catalog/schema: sale_test_1e60bd00994a458180ed9ceb6ddac447/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:28:39.451 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
-12:28:40.405 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:28:40.481 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:28:41.905 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.199 s -- in com.quincaisoft.returns.PostgresReturnIntegrationTest
+12:38:12.797 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
+12:38:13.703 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:38:13.781 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:38:15.307 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.203 s -- in com.quincaisoft.returns.PostgresReturnIntegrationTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -912,7 +863,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ returns ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/returns/target/returns-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] --------------------< com.quincaisoft:integrations >--------------------
 [INFO] Building integrations 0.1.0-SNAPSHOT                             [21/30]
@@ -926,15 +876,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/integrations/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ integrations ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 10 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ integrations ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/integrations/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ integrations ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 2 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ integrations ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -943,28 +891,28 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.integrations.MtnAdapterTest
-[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.275 s -- in com.quincaisoft.integrations.MtnAdapterTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.396 s -- in com.quincaisoft.integrations.MtnAdapterTest
 [INFO] Running com.quincaisoft.integrations.ProviderPostgresTest
-12:28:43.782 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:28:43.817 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:28:44.204 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:28:44.276 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/sale_test_ec2e26d695804de49590143ef4f80b25]
+12:38:17.130 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:38:17.167 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:38:17.555 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:38:17.629 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/sale_test_4b4fc1a668b840c2ab7ba9b9ae250c7a]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: sale_test_ec2e26d695804de49590143ef4f80b25/public
+	Default catalog/schema: sale_test_4b4fc1a668b840c2ab7ba9b9ae250c7a/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:28:44.584 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
-12:28:45.486 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:28:45.588 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:28:47.020 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.833 s -- in com.quincaisoft.integrations.ProviderPostgresTest
+12:38:17.959 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
+12:38:19.009 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:38:19.090 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:38:20.755 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.319 s -- in com.quincaisoft.integrations.ProviderPostgresTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -972,7 +920,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ integrations ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/integrations/target/integrations-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ----------------------< com.quincaisoft:expenses >----------------------
 [INFO] Building expenses 0.1.0-SNAPSHOT                                 [22/30]
@@ -986,15 +933,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/expenses/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ expenses ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 6 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ expenses ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/expenses/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ expenses ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ expenses ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -1003,29 +948,29 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.expenses.ExpensePeriodPostgresTest
-12:28:48.774 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:28:48.807 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:28:49.190 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:28:49.275 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/expense_test_8aceb38f3a50402b8ae8d3f94e6fc62d]
+12:38:22.127 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:38:22.168 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:38:22.591 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:38:22.666 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/expense_test_8db8cf6d824f45039d114742c210f65b]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: expense_test_8aceb38f3a50402b8ae8d3f94e6fc62d/public
+	Default catalog/schema: expense_test_8db8cf6d824f45039d114742c210f65b/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:28:49.601 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
-12:28:50.342 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:28:50.411 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:28:51.530 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: 42501
-12:28:51.531 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: Approved current transaction period request required
+12:38:22.918 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
+12:38:23.669 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:38:23.754 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:38:25.109 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: 42501
+12:38:25.109 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: Approved current transaction period request required
   Where: PL/pgSQL function guard_period_status() line 3 at RAISE
-12:28:51.543 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.454 s -- in com.quincaisoft.expenses.ExpensePeriodPostgresTest
+12:38:25.122 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.699 s -- in com.quincaisoft.expenses.ExpensePeriodPostgresTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -1033,7 +978,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ expenses ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/expenses/target/expenses-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ---------------------< com.quincaisoft:operations >---------------------
 [INFO] Building operations 0.1.0-SNAPSHOT                               [23/30]
@@ -1047,15 +991,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/operations/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ operations ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 17 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ operations ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/operations/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ operations ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ operations ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -1064,7 +1006,7 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.operations.CsvInputBoundaryTest
-[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.107 s -- in com.quincaisoft.operations.CsvInputBoundaryTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.105 s -- in com.quincaisoft.operations.CsvInputBoundaryTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -1072,7 +1014,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ operations ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/operations/target/operations-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ---------------------< com.quincaisoft:reporting >----------------------
 [INFO] Building reporting 0.1.0-SNAPSHOT                                [24/30]
@@ -1086,15 +1027,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/reporting/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ reporting ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 5 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ reporting ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/reporting/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ reporting ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 3 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ reporting ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -1103,7 +1042,7 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.reporting.ReportingPostgresTest
-12:28:54.877 [main] INFO org.jooq.Constants --
+12:38:27.829 [main] INFO org.jooq.Constants --
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1123,17 +1062,17 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.19.39 (Build date: 2026-09-24T13:37:59Z)
 
-12:28:54.879 [main] INFO org.jooq.Constants --
+12:38:27.831 [main] INFO org.jooq.Constants --
 
-jOOQ tip of the day: Want to learn more about SQL? Check out our many blog posts: https://blog.jooq.org/sql
+jOOQ tip of the day:
 
-12:28:54.943 [main] INFO org.jooq.impl.DefaultExecuteContext.logVersionSupport -- Version                  : Database version is supported by dialect SQLDialect.POSTGRES: 18.7
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.298 s -- in com.quincaisoft.reporting.ReportingPostgresTest
+12:38:27.902 [main] INFO org.jooq.impl.DefaultExecuteContext.logVersionSupport -- Version                  : Database version is supported by dialect SQLDialect.POSTGRES: 18.7
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.403 s -- in com.quincaisoft.reporting.ReportingPostgresTest
 [INFO] Running com.quincaisoft.reporting.ReportRulesTest
-[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in com.quincaisoft.reporting.ReportRulesTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.quincaisoft.reporting.ReportRulesTest
 [INFO] Running com.quincaisoft.reporting.ReportPermissionMatrixTest
 OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
-[INFO] Tests run: 476, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.828 s -- in com.quincaisoft.reporting.ReportPermissionMatrixTest
+[INFO] Tests run: 476, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.826 s -- in com.quincaisoft.reporting.ReportPermissionMatrixTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -1141,7 +1080,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ reporting ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/reporting/target/reporting-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ------------------------< com.quincaisoft:sync >------------------------
 [INFO] Building sync 0.1.0-SNAPSHOT                                     [25/30]
@@ -1155,15 +1093,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/sync/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ sync ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 7 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ sync ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/sync/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ sync ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 2 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ sync ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -1172,27 +1108,27 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.sync.PostgresSyncTest
-12:28:57.477 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:28:57.524 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:28:58.025 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:28:58.100 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/sync_test_9c0f2b9c2721459f8449e7ff37565d30]
+12:38:30.185 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:38:30.222 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:38:30.599 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:38:30.666 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/sync_test_ae5f22f5373d4373b72170ac4e8bd3c8]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: sync_test_9c0f2b9c2721459f8449e7ff37565d30/public
+	Default catalog/schema: sync_test_ae5f22f5373d4373b72170ac4e8bd3c8/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:28:58.911 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:28:58.983 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:29:00.132 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.362 s -- in com.quincaisoft.sync.PostgresSyncTest
+12:38:31.393 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:38:31.468 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:38:32.447 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.980 s -- in com.quincaisoft.sync.PostgresSyncTest
 [INFO] Running com.quincaisoft.sync.DeviceProofTest
-[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.154 s -- in com.quincaisoft.sync.DeviceProofTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.108 s -- in com.quincaisoft.sync.DeviceProofTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -1200,7 +1136,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ sync ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/sync/target/sync-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ---------------------< com.quincaisoft:workforce >----------------------
 [INFO] Building workforce 0.1.0-SNAPSHOT                                [26/30]
@@ -1214,15 +1149,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/workforce/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ workforce ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 8 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ workforce ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/workforce/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ workforce ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ workforce ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -1231,28 +1164,28 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.workforce.WorkforcePostgresTest
-12:29:02.055 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:29:02.086 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:29:02.427 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:29:02.504 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/workforce_test_b8c197db352747a48d46002702c30b13]
+12:38:33.924 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:38:33.955 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:38:34.329 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:38:34.396 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/workforce_test_bd5869bd71c040dd8f0aabf90f1cd165]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: workforce_test_b8c197db352747a48d46002702c30b13/public
+	Default catalog/schema: workforce_test_bd5869bd71c040dd8f0aabf90f1cd165/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:29:02.734 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
-12:29:03.435 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:29:03.512 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:29:04.326 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: 23505
-12:29:04.326 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: duplicate key value violates unique constraint "workforce_attendance_tenant_id_company_id_employee_id_busin_key"
-12:29:04.626 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.391 s -- in com.quincaisoft.workforce.WorkforcePostgresTest
+12:38:34.651 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.0.2.Final
+12:38:35.409 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:38:35.498 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:38:36.390 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: 23505
+12:38:36.391 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: duplicate key value violates unique constraint "workforce_attendance_tenant_id_company_id_employee_id_busin_key"
+12:38:36.735 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.519 s -- in com.quincaisoft.workforce.WorkforcePostgresTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -1260,7 +1193,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ workforce ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/business-modules/workforce/target/workforce-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ------------------< com.quincaisoft:platform-control >------------------
 [INFO] Building platform-control 0.1.0-SNAPSHOT                         [27/30]
@@ -1274,15 +1206,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/platform-control/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ platform-control ---
-[INFO] Recompiling the module because of changed source code.
-[INFO] Compiling 14 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ platform-control ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/platform-control/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ platform-control ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 4 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ platform-control ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -1291,68 +1221,68 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.platformcontrol.PostgresPlatformIntegrationTest
-12:29:06.334 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:29:06.365 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:29:06.729 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:29:06.813 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/platform_test_43fbcfba698c459880aafb43f44c9041]
+12:38:38.093 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:38:38.129 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:38:38.509 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:38:38.583 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/platform_test_fb1bf7216c0747e38369db3a5e299b0c]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: platform_test_43fbcfba698c459880aafb43f44c9041/public
+	Default catalog/schema: platform_test_fb1bf7216c0747e38369db3a5e299b0c/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:29:07.555 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:29:07.643 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:29:08.193 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.563 s -- in com.quincaisoft.platformcontrol.PostgresPlatformIntegrationTest
+12:38:39.318 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:38:39.394 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:38:39.858 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.456 s -- in com.quincaisoft.platformcontrol.PostgresPlatformIntegrationTest
 [INFO] Running com.quincaisoft.platformcontrol.PostgresOnboardingConfigurationTest
-12:29:08.569 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:29:08.586 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:29:08.597 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/onboard_config_f41c86b225e84aeb8ee6013cc14d8a42]
+12:38:40.246 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:38:40.260 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:38:40.275 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/onboard_config_16785498b1d540389d30a72e7261d359]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: onboard_config_f41c86b225e84aeb8ee6013cc14d8a42/public
+	Default catalog/schema: onboard_config_16785498b1d540389d30a72e7261d359/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:29:08.644 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:29:08.677 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:29:09.235 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: P0001
-12:29:09.235 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: injected event failure
+12:38:40.313 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:38:40.353 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:38:40.903 [main] WARN org.hibernate.orm.jdbc.error -- HHH000247: ErrorCode: 0, SQLState: P0001
+12:38:40.903 [main] WARN org.hibernate.orm.jdbc.error -- ERROR: injected event failure
   Where: PL/pgSQL function reject_config_event_test() line 1 at RAISE
-12:29:09.276 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.064 s -- in com.quincaisoft.platformcontrol.PostgresOnboardingConfigurationTest
+12:38:40.938 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.068 s -- in com.quincaisoft.platformcontrol.PostgresOnboardingConfigurationTest
 [INFO] Running com.quincaisoft.platformcontrol.application.OidcOnboardingIdentityVerifierTest
-[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.410 s -- in com.quincaisoft.platformcontrol.application.OidcOnboardingIdentityVerifierTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.515 s -- in com.quincaisoft.platformcontrol.application.OidcOnboardingIdentityVerifierTest
 [INFO] Running com.quincaisoft.platformcontrol.PostgresOnboardingConcurrencyTest
-12:29:10.008 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:29:10.026 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:29:10.034 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/platform_test_390af691b88545c5a9c5ab08eabb7a4b]
+12:38:41.755 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:38:41.769 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:38:41.778 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/platform_test_ba79b2cc19ee4f10b61b5ad3b6dc99cf]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: platform_test_390af691b88545c5a9c5ab08eabb7a4b/public
+	Default catalog/schema: platform_test_ba79b2cc19ee4f10b61b5ad3b6dc99cf/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:29:10.074 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:29:10.114 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:29:10.218 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.526 s -- in com.quincaisoft.platformcontrol.PostgresOnboardingConcurrencyTest
+12:38:41.810 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:38:41.844 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:38:41.945 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.486 s -- in com.quincaisoft.platformcontrol.PostgresOnboardingConcurrencyTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -1360,7 +1290,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ platform-control ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/platform-control/target/platform-control-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ----------------------< com.quincaisoft:workers >-----------------------
 [INFO] Building workers 0.1.0-SNAPSHOT                                  [28/30]
@@ -1374,15 +1303,13 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/workers/src/main/resources
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ workers ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 4 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ workers ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/workers/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ workers ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ workers ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -1391,25 +1318,25 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.workers.IdentityWorkerPostgresTest
-12:29:11.724 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
-12:29:11.759 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
-12:29:12.267 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
-12:29:12.342 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/identity_af30455e58f849d0b79401093027a86c]
+12:38:43.214 [main] INFO org.hibernate.orm.jpa -- HHH008540: Processing PersistenceUnitInfo [name: default]
+12:38:43.251 [main] INFO org.hibernate.orm.core -- HHH000001: Hibernate ORM core version 7.2.25.Final
+12:38:43.644 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+12:38:43.721 [main] INFO org.hibernate.orm.connections.pooling -- HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/identity_c2e6ed9b09454e8e94507d3c65636cf1]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: identity_af30455e58f849d0b79401093027a86c/public
+	Default catalog/schema: identity_c2e6ed9b09454e8e94507d3c65636cf1/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-12:29:12.990 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:29:13.051 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:29:13.680 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.685 s -- in com.quincaisoft.workers.IdentityWorkerPostgresTest
+12:38:44.478 [main] INFO org.hibernate.orm.core -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:38:44.548 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:38:45.215 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.694 s -- in com.quincaisoft.workers.IdentityWorkerPostgresTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -1417,7 +1344,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ workers ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/workers/target/workers-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] ---------------------< com.quincaisoft:api-server >---------------------
 [INFO] Building api-server 0.1.0-SNAPSHOT                               [29/30]
@@ -1431,15 +1357,16 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] Copying 0 resource from src/main/resources to target/classes
 [INFO]
 [INFO] --- compiler:3.14.1:compile (default-compile) @ api-server ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 10 source files with javac [debug parameters release 25] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ api-server ---
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/api-server/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ api-server ---
-[INFO] Recompiling the module because of changed dependency.
+[INFO] Recompiling the module because of changed source code.
 [INFO] Compiling 3 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] /workspace/scratch/ce037b7504c9/implementation/backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java: /workspace/scratch/ce037b7504c9/implementation/backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java uses or overrides a deprecated API.
+[INFO] /workspace/scratch/ce037b7504c9/implementation/backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java: Recompile with -Xlint:deprecation for details.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ api-server ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -1458,51 +1385,51 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 
  :: Spring Boot ::                (v4.0.9)
 
-2026-11-18T12:29:16.247+01:00  INFO 1886 --- [quincaisoft] [           main] o.a.maven.surefire.booter.ForkedBooter   : Starting ForkedBooter v3.5.6 using Java 25.0.5 with PID 1886 (started by agent in /workspace/scratch/ce037b7504c9/implementation/backend/api-server)
-2026-11-18T12:29:16.251+01:00  INFO 1886 --- [quincaisoft] [           main] o.a.maven.surefire.booter.ForkedBooter   : No active profile set, falling back to 1 default profile: "default"
-2026-11-18T12:29:17.433+01:00  INFO 1886 --- [quincaisoft] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-18T12:29:17.466+01:00  INFO 1886 --- [quincaisoft] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 0 JPA repository interfaces.
-2026-11-18T12:29:18.158+01:00  INFO 1886 --- [quincaisoft] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
-2026-11-18T12:29:18.173+01:00  INFO 1886 --- [quincaisoft] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-11-18T12:29:18.174+01:00  INFO 1886 --- [quincaisoft] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.27]
-2026-11-18T12:29:18.258+01:00  INFO 1886 --- [quincaisoft] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1967 ms
-2026-11-18T12:29:18.540+01:00  INFO 1886 --- [quincaisoft] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-11-18T12:29:18.582+01:00  INFO 1886 --- [quincaisoft] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.25.Final
-2026-11-18T12:29:18.966+01:00  INFO 1886 --- [quincaisoft] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-18T12:29:18.997+01:00  INFO 1886 --- [quincaisoft] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-11-18T12:29:19.021+01:00  INFO 1886 --- [quincaisoft] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2fca9fae
-2026-11-18T12:29:19.023+01:00  INFO 1886 --- [quincaisoft] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-11-18T12:29:19.082+01:00  INFO 1886 --- [quincaisoft] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/boot_test_ebcd962f7254464e81e761d15eff8ada]
+2026-11-18T12:38:48.433+01:00  INFO 1625 --- [quincaisoft] [           main] o.a.maven.surefire.booter.ForkedBooter   : Starting ForkedBooter v3.5.6 using Java 25.0.5 with PID 1625 (started by agent in /workspace/scratch/ce037b7504c9/implementation/backend/api-server)
+2026-11-18T12:38:48.437+01:00  INFO 1625 --- [quincaisoft] [           main] o.a.maven.surefire.booter.ForkedBooter   : No active profile set, falling back to 1 default profile: "default"
+2026-11-18T12:38:49.603+01:00  INFO 1625 --- [quincaisoft] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-18T12:38:49.635+01:00  INFO 1625 --- [quincaisoft] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 0 JPA repository interfaces.
+2026-11-18T12:38:50.305+01:00  INFO 1625 --- [quincaisoft] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
+2026-11-18T12:38:50.322+01:00  INFO 1625 --- [quincaisoft] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-18T12:38:50.323+01:00  INFO 1625 --- [quincaisoft] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.27]
+2026-11-18T12:38:50.371+01:00  INFO 1625 --- [quincaisoft] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1895 ms
+2026-11-18T12:38:50.736+01:00  INFO 1625 --- [quincaisoft] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-18T12:38:50.794+01:00  INFO 1625 --- [quincaisoft] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.25.Final
+2026-11-18T12:38:51.211+01:00  INFO 1625 --- [quincaisoft] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-18T12:38:51.235+01:00  INFO 1625 --- [quincaisoft] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-18T12:38:51.253+01:00  INFO 1625 --- [quincaisoft] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@36ec4071
+2026-11-18T12:38:51.255+01:00  INFO 1625 --- [quincaisoft] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-18T12:38:51.312+01:00  INFO 1625 --- [quincaisoft] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://127.0.0.1:55439/boot_test_af404f9bd17049ca9801312a85a49721]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 18.7
-	Default catalog/schema: boot_test_ebcd962f7254464e81e761d15eff8ada/public
+	Default catalog/schema: boot_test_af404f9bd17049ca9801312a85a49721/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
 	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-11-18T12:29:20.896+01:00  INFO 1886 --- [quincaisoft] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-11-18T12:29:21.005+01:00  INFO 1886 --- [quincaisoft] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-18T12:29:22.977+01:00  INFO 1886 --- [quincaisoft] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-11-18T12:29:23.055+01:00  INFO 1886 --- [quincaisoft] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 46437 (http) with context path '/'
-2026-11-18T12:29:23.065+01:00  INFO 1886 --- [quincaisoft] [           main] o.s.s.config.TaskSchedulerRouter         : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
-2026-11-18T12:29:23.070+01:00  INFO 1886 --- [quincaisoft] [           main] o.a.maven.surefire.booter.ForkedBooter   : Started ForkedBooter in 7.242 seconds (process running for 8.774)
-2026-11-18T12:29:23.354+01:00  INFO 1886 --- [quincaisoft] [1-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-11-18T12:29:23.355+01:00  INFO 1886 --- [quincaisoft] [1-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-11-18T12:29:23.356+01:00  INFO 1886 --- [quincaisoft] [1-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2026-11-18T12:29:23.752+01:00  INFO 1886 --- [quincaisoft] [           main] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
-2026-11-18T12:29:23.755+01:00  INFO 1886 --- [quincaisoft] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
-2026-11-18T12:29:23.765+01:00  INFO 1886 --- [quincaisoft] [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-11-18T12:29:23.767+01:00  INFO 1886 --- [quincaisoft] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-11-18T12:29:23.770+01:00  INFO 1886 --- [quincaisoft] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.902 s -- in com.quincaisoft.security.FullApplicationPostgresTest
+2026-11-18T12:38:53.126+01:00  INFO 1625 --- [quincaisoft] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-18T12:38:53.218+01:00  INFO 1625 --- [quincaisoft] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-18T12:38:54.978+01:00  INFO 1625 --- [quincaisoft] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-11-18T12:38:55.061+01:00  INFO 1625 --- [quincaisoft] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 34563 (http) with context path '/'
+2026-11-18T12:38:55.070+01:00  INFO 1625 --- [quincaisoft] [           main] o.s.s.config.TaskSchedulerRouter         : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2026-11-18T12:38:55.075+01:00  INFO 1625 --- [quincaisoft] [           main] o.a.maven.surefire.booter.ForkedBooter   : Started ForkedBooter in 6.973 seconds (process running for 8.456)
+2026-11-18T12:38:55.395+01:00  INFO 1625 --- [quincaisoft] [1-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-18T12:38:55.395+01:00  INFO 1625 --- [quincaisoft] [1-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-18T12:38:55.397+01:00  INFO 1625 --- [quincaisoft] [1-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-11-18T12:38:56.263+01:00  INFO 1625 --- [quincaisoft] [           main] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-11-18T12:38:56.268+01:00  INFO 1625 --- [quincaisoft] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-11-18T12:38:56.277+01:00  INFO 1625 --- [quincaisoft] [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-18T12:38:56.279+01:00  INFO 1625 --- [quincaisoft] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-18T12:38:56.282+01:00  INFO 1625 --- [quincaisoft] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.022 s -- in com.quincaisoft.security.FullApplicationPostgresTest
 [INFO] Running com.quincaisoft.security.SecurityBoundaryTest
-[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.030 s -- in com.quincaisoft.security.SecurityBoundaryTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 s -- in com.quincaisoft.security.SecurityBoundaryTest
 [INFO] Running com.quincaisoft.security.DeploymentSafetyPostgresTest
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.150 s -- in com.quincaisoft.security.DeploymentSafetyPostgresTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.116 s -- in com.quincaisoft.security.DeploymentSafetyPostgresTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -1510,7 +1437,6 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ api-server ---
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/api-server/target/api-server-0.1.0-SNAPSHOT.jar
 [INFO]
 [INFO] --- spring-boot:4.0.9:repackage (repackage) @ api-server ---
 [INFO] Attaching repackaged archive /workspace/scratch/ce037b7504c9/implementation/backend/api-server/target/api-server-0.1.0-SNAPSHOT-exec.jar with classifier exec
@@ -1533,8 +1459,7 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO] skip non existing resourceDirectory /workspace/scratch/ce037b7504c9/implementation/backend/architecture-tests/src/test/resources
 [INFO]
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ architecture-tests ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- surefire:3.5.6:test (default-test) @ architecture-tests ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -1543,8 +1468,8 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running com.quincaisoft.ModuleBoundaryTest
-12:29:25.997 [main] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 25.0.5
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.870 s -- in com.quincaisoft.ModuleBoundaryTest
+12:38:58.174 [main] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 25.0.5
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.331 s -- in com.quincaisoft.ModuleBoundaryTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -1553,43 +1478,42 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 [INFO]
 [INFO] --- jar:3.4.2:jar (default-jar) @ architecture-tests ---
 [WARNING] JAR will be empty - no content was marked for inclusion!
-[INFO] Building jar: /workspace/scratch/ce037b7504c9/implementation/backend/architecture-tests/target/architecture-tests-0.1.0-SNAPSHOT.jar
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary for backend 0.1.0-SNAPSHOT:
 [INFO]
-[INFO] backend ............................................ SUCCESS [  0.258 s]
-[INFO] shared-kernel ...................................... SUCCESS [  1.637 s]
-[INFO] db-migrations ...................................... SUCCESS [  0.048 s]
-[INFO] audit .............................................. SUCCESS [  0.783 s]
-[INFO] branch ............................................. SUCCESS [  0.401 s]
-[INFO] catalog ............................................ SUCCESS [  0.566 s]
-[INFO] subscriptions ...................................... SUCCESS [  5.005 s]
-[INFO] identity ........................................... SUCCESS [  0.249 s]
-[INFO] commerce ........................................... SUCCESS [  4.538 s]
-[INFO] company ............................................ SUCCESS [  0.124 s]
-[INFO] customer-accounts .................................. SUCCESS [  4.818 s]
-[INFO] documents .......................................... SUCCESS [  4.815 s]
-[INFO] suppliers .......................................... SUCCESS [  0.172 s]
-[INFO] finance ............................................ SUCCESS [  0.995 s]
-[INFO] inventory .......................................... SUCCESS [  6.119 s]
-[INFO] purchasing ......................................... SUCCESS [  5.198 s]
-[INFO] sales .............................................. SUCCESS [  6.243 s]
-[INFO] tenders ............................................ SUCCESS [  8.409 s]
-[INFO] quotations ......................................... SUCCESS [  0.242 s]
-[INFO] returns ............................................ SUCCESS [  5.364 s]
-[INFO] integrations ....................................... SUCCESS [  5.108 s]
-[INFO] expenses ........................................... SUCCESS [  4.527 s]
-[INFO] operations ......................................... SUCCESS [  0.945 s]
-[INFO] reporting .......................................... SUCCESS [  3.380 s]
-[INFO] sync ............................................... SUCCESS [  4.417 s]
-[INFO] workforce .......................................... SUCCESS [  4.369 s]
-[INFO] platform-control ................................... SUCCESS [  5.546 s]
-[INFO] workers ............................................ SUCCESS [  3.508 s]
-[INFO] api-server ......................................... SUCCESS [ 10.945 s]
-[INFO] architecture-tests ................................. SUCCESS [  4.808 s]
+[INFO] backend ............................................ SUCCESS [  0.228 s]
+[INFO] shared-kernel ...................................... SUCCESS [  1.464 s]
+[INFO] db-migrations ...................................... SUCCESS [  0.038 s]
+[INFO] audit .............................................. SUCCESS [  0.208 s]
+[INFO] branch ............................................. SUCCESS [  0.048 s]
+[INFO] catalog ............................................ SUCCESS [  0.039 s]
+[INFO] subscriptions ...................................... SUCCESS [  4.198 s]
+[INFO] identity ........................................... SUCCESS [  0.149 s]
+[INFO] commerce ........................................... SUCCESS [  3.802 s]
+[INFO] company ............................................ SUCCESS [  0.021 s]
+[INFO] customer-accounts .................................. SUCCESS [  4.313 s]
+[INFO] documents .......................................... SUCCESS [  4.127 s]
+[INFO] suppliers .......................................... SUCCESS [  0.025 s]
+[INFO] finance ............................................ SUCCESS [  0.754 s]
+[INFO] inventory .......................................... SUCCESS [  5.699 s]
+[INFO] purchasing ......................................... SUCCESS [  4.887 s]
+[INFO] sales .............................................. SUCCESS [  5.125 s]
+[INFO] tenders ............................................ SUCCESS [  6.497 s]
+[INFO] quotations ......................................... SUCCESS [  0.026 s]
+[INFO] returns ............................................ SUCCESS [  4.884 s]
+[INFO] integrations ....................................... SUCCESS [  5.440 s]
+[INFO] expenses ........................................... SUCCESS [  4.374 s]
+[INFO] operations ......................................... SUCCESS [  0.793 s]
+[INFO] reporting .......................................... SUCCESS [  2.912 s]
+[INFO] sync ............................................... SUCCESS [  3.731 s]
+[INFO] workforce .......................................... SUCCESS [  4.177 s]
+[INFO] platform-control ................................... SUCCESS [  5.189 s]
+[INFO] workers ............................................ SUCCESS [  3.309 s]
+[INFO] api-server ......................................... SUCCESS [ 11.856 s]
+[INFO] architecture-tests ................................. SUCCESS [  4.001 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  01:44 min
-[INFO] Finished at: 2026-11-18T12:29:29+01:00
+[INFO] Total time:  01:32 min
+[INFO] Finished at: 2026-11-18T12:39:01+01:00
 [INFO] ------------------------------------------------------------------------

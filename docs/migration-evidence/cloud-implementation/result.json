@@ -1,5 +1,5 @@
 {
-  "baseCommit": "aa44141cba428829536ef040e414ff7809fa2383",
+  "baseCommit": "6ec0fef643b1e53ba64c80f157783de17a084b34",
   "date": "2026-11-18",
   "java": "25.0.5",
   "springBoot": "4.0.9",
@@ -286,7 +286,7 @@
       "skipped": 0
     }
   ],
-  "sourceDigest": "d9ec1a122006a2011707af70297bd61977c664972e90e72e31da976a40884252",
+  "sourceDigest": "3908854408cd85317a40a387e00baad278b061bfedad576036038705dbdd6af8",
   "sources": [
     {
       "path": "backend/api-server/pom.xml",
@@ -338,7 +338,7 @@
     },
     {
       "path": "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java",
-      "sha256": "e67bf479bb1e1d4a825e8f2b44060df72961fab5fcbf61121528448cc8481822"
+      "sha256": "59a4414789c4b9f9f1a51b11195635281d7d5debae15dcd135383bacc7560af6"
     },
     {
       "path": "backend/api-server/src/test/java/com/quincaisoft/security/SecurityBoundaryTest.java",
@@ -1749,6 +1749,14 @@
       "sha256": "479211744efd9198d3feeecb4e18607acd844d9d66d2c36c6baa1df962242a9d"
     },
     {
+      "path": "backend/tools/history-import/pom.xml",
+      "sha256": "2aea5ff4582a97deb71d15313192b45bdbe5605fcf87c23a35b5e4127ee86a1a"
+    },
+    {
+      "path": "backend/tools/history-import/src/main/java/com/quincaisoft/tools/CatalogHistoryImport.java",
+      "sha256": "1ed0174893bb8b8a519ed91aa11934fa5e3815530d7a7c77614b22ed30435b35"
+    },
+    {
       "path": "backend/workers/pom.xml",
       "sha256": "4059515cb1fed82ab4db985b75693fa2050ee379d87d4c226092950e09ac1107"
     },
@@ -1773,7 +1781,7 @@
       "sha256": "ad00b5eeb18acf9dc936dfd0c260e891f9aa1c83d3cf9bc4d069e42ab97ffa70"
     }
   ],
-  "jarSha256": "8a8160e3e6f600c24ba3d2d25510e6751fbc3e2786cf5e4838a702e7f118d690",
+  "jarSha256": "49cf1e7987a5d9ed8f886a27c3cf139f67bbaeb32984a1a54bfdcef51eb19d61",
   "nodeEnvironmentTests": {
     "tests": 12,
     "failures": 0,
@@ -1786,5 +1794,7 @@
   "restoreRehearsal": "BLOCKED_EXECUTOR_UNIX_SOCKET_PERMISSION",
   "containerBuild": "NOT_RUN_DOCKER_UNAVAILABLE",
   "productionDeployment": "NOT_RUN_NO_TARGET_AND_RELEASE_GATES_OPEN",
-  "releaseReady": false
+  "releaseReady": false,
+  "cloudImplementationParent": "9c1e13923b478ff41864f843613942e9ad3052da",
+  "historicalAcceptanceFlags": "NOT_SET_IN_THIS_RUN; Desktop-specific historical dataset scenarios not re-certified"
 }
