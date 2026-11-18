@@ -1,1 +1,43 @@
-import {api,Product,Me,permitted,xaf} from '@/lib/api';import {Access} from '@/components/Access';import {CommandForm} from '@/components/CommandForm';export const dynamic='force-dynamic';export default async function ProductDetail({params}:{params:Promise<{id:string}>}){try{const {id}=await params;const [p,me]=await Promise.all([api<Product>('products/'+id),api<Me>('me')]);return <><h1>{p.name}</h1><section className="panel"><dl><div><dt>SKU</dt><dd>{p.sku}</dd></div><div><dt>Base unit</dt><dd>{p.baseUnit}</dd></div><div><dt>Price</dt><dd>{xaf(p.sellingPriceXaf)}</dd></div><div><dt>Status</dt><dd>{p.active?'Active':'Inactive'}</dd></div></dl></section>{permitted(me,'catalog:write')&&<section className="panel"><h2>Edit product</h2><CommandForm path={'products/'+id} method="PUT" fixed={{version:p.version}} fields={[{name:'sku',label:'SKU',value:p.sku},{name:'name',label:'Product name',value:p.name},{name:'baseUnit',label:'Base unit',value:p.baseUnit,readOnly:true},{name:'sellingPriceXaf',label:'Selling price (FCFA)',type:'money',value:p.sellingPriceXaf},{name:'taxBasisPoints',label:'Tax rate (basis points)',type:'number',value:String(p.taxBasisPoints??0)},{name:'active',label:'Active',type:'checkbox',value:p.active},{name:'reason',label:'Change reason',type:'textarea'}]}/></section>}</>}catch(error){return <Access error={error}/>}}
+import {api,Product,Me,permitted} from '@/lib/api';
+import {Access} from '@/components/Access';
+import {CommandForm} from '@/components/CommandForm';
+import {PageTitle,Records} from '@/components/Records';
+import type {Category} from '@/lib/catalog-fields';
+import {productFields} from '@/lib/product-fields';
+
+export const dynamic='force-dynamic';
+export default async function ProductDetail({params}:{params:Promise<{id:string}>}) {
+ try {
+  const {id}=await params;
+  const [product,me,categories]=await Promise.all([
+   api<Product>('products/'+encodeURIComponent(id)),api<Me>('me'),api<Category[]>('catalog/categories')
+  ]);
+  const category=categories.find(item=>item.id===product.categoryId);
+  return <>
+   <PageTitle title={product.name} description={product.sku}/>
+   <section className="panel">
+    <Records rows={[{...product,categoryName:category?.name??product.categoryId}]} columns={[
+     {key:'baseUnit',label:'Base unit'},
+     {key:'categoryName',label:'Category'},
+     {key:'brand',label:'Brand'},
+     {key:'barcode',label:'Barcode'},
+     {key:'sellingPriceXaf',label:'Selling price (FCFA)',money:true},
+     {key:'taxBasisPoints',label:'Tax (basis points)'},
+     {key:'packSizeMilli',label:'Pack size (milli units)'},
+     {key:'reorderLevelMilli',label:'Reorder level (milli units)'},
+     {key:'trackStock',label:'Track stock'},
+     {key:'trackSerial',label:'Track serial numbers'},
+     {key:'trackExpiry',label:'Track expiry'},
+     {key:'description',label:'Description'},
+     {key:'active',label:'Active'}
+    ]}/>
+   </section>
+   {permitted(me,'catalog:write')&&<section className="panel">
+    <CommandForm path={'products/'+id} method="PUT" title="Save product"
+     fixed={{version:product.version,baseUnit:product.baseUnit}} fields={productFields(categories,product)}/>
+   </section>}
+  </>;
+ } catch(error) {
+  return <Access error={error}/>;
+ }
+}

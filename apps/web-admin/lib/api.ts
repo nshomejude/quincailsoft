@@ -1,5 +1,5 @@
 import 'server-only';import {session} from './auth';
-export type Product={id:string;sku:string;name:string;baseUnit:string;sellingPriceXaf:string;taxBasisPoints:number;version:string;active:boolean};
+export type Product={id:string;sku:string;name:string;baseUnit:string;sellingPriceXaf:string;taxBasisPoints:number;version:string;active:boolean;categoryId:string|null;brand:string;barcode:string;packSizeMilli:string;reorderLevelMilli:string;trackStock:boolean;trackSerial:boolean;trackExpiry:boolean;description:string};
 export type Named={id:string;name:string;active?:boolean;version?:string};
 export type Sale={id:string;status:string;businessDate:string;totalXaf:string;version:number;warehouseId:string;customerId:string;lines:{id:string;productId:string;quantityMilli:string;unitPriceXaf:string;lineTotalXaf:string}[]};
 export type Me={scope:{tenantId:string;companyId:string;branchId:string;actorId:string};authorities:string[]};

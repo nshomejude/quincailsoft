@@ -1,1 +1,23 @@
-import {api,Me,permitted,ApiError} from '@/lib/api';import {Access} from '@/components/Access';import {CommandForm} from '@/components/CommandForm';export const dynamic='force-dynamic';export default async function NewProduct(){try{const me=await api<Me>('me');if(!permitted(me,'catalog:write'))throw new ApiError(403);return <><h1>New product</h1><section className="panel"><CommandForm path="products" redirectBase="/catalog" fields={[{name:'sku',label:'SKU'},{name:'name',label:'Product name'},{name:'baseUnit',label:'Base unit',value:'piece'},{name:'sellingPriceXaf',label:'Selling price (FCFA)',type:'money'},{name:'taxBasisPoints',label:'Tax rate (basis points)',type:'number',value:'0'},{name:'reason',label:'Creation reason',type:'textarea'}]}/></section></>}catch(error){return <Access error={error}/>}}
+import {api,Me,permitted,ApiError} from '@/lib/api';
+import {Access} from '@/components/Access';
+import {CommandForm} from '@/components/CommandForm';
+import {PageTitle} from '@/components/Records';
+import type {Category} from '@/lib/catalog-fields';
+import {productFields} from '@/lib/product-fields';
+
+export const dynamic='force-dynamic';
+export default async function NewProduct() {
+ try {
+  const me=await api<Me>('me');
+  if(!permitted(me,'catalog:write'))throw new ApiError(403);
+  const categories=await api<Category[]>('catalog/categories');
+  return <>
+   <PageTitle title="New product"/>
+   <section className="panel">
+    <CommandForm path="products" redirectBase="/catalog" fields={productFields(categories)}/>
+   </section>
+  </>;
+ } catch(error) {
+  return <Access error={error}/>;
+ }
+}
