@@ -17,6 +17,11 @@ import com.quincaisoft.sales.api.FulfillmentService;import org.springframework.w
  }
  @GetMapping("/{id}") @PreAuthorize("hasAnyAuthority('sales:read','SCOPE_sales:read')")public FulfillmentService.Fulfillment get(@PathVariable UUID id){return service.get(id);}
  @PostMapping @PreAuthorize("hasAnyAuthority('sales:write','SCOPE_sales:write')")public FulfillmentService.Fulfillment draft(@RequestHeader("Idempotency-Key")UUID key,@RequestBody FulfillmentService.Draft c){match(key,c.operationId());return service.draft(c);}
+ @GetMapping("/{id}/dispatches")
+ @PreAuthorize("hasAnyAuthority('sales:read','SCOPE_sales:read')")
+ public List<FulfillmentService.DispatchEntry> dispatchHistory(@PathVariable UUID id) {
+  return service.dispatchHistory(id);
+ }
  @PostMapping("/{id}/dispatch-lines")
  @PreAuthorize("hasAnyAuthority('sales:write','SCOPE_sales:write')")
  public FulfillmentService.Fulfillment dispatchLines(@PathVariable UUID id,

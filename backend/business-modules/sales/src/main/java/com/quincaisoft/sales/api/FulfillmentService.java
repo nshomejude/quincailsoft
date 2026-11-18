@@ -19,6 +19,8 @@ public interface FulfillmentService {
  record Fulfillment(UUID id,UUID saleId,UUID customerId,String status,LocalDate businessDate,String proofReference,String version,DeliveryDetails delivery){}
  record DispatchLines(UUID operationId,String version,String reason,List<PickLine> lines) {}
  Fulfillment dispatchLines(UUID id,DispatchLines command);
+ record DispatchEntry(UUID operationId,UUID productId,String quantityMilli,Instant dispatchedAt,UUID dispatchedBy) {}
+ List<DispatchEntry> dispatchHistory(UUID fulfillmentId);
  record PickLine(UUID productId,String quantityMilli) {}
  record PickList(UUID fulfillmentId,UUID saleId,UUID warehouseId,String status,List<PickLine> lines) {}
  PickList pickList(UUID fulfillmentId);

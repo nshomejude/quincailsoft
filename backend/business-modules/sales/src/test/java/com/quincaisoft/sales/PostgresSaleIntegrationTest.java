@@ -119,6 +119,12 @@ class PostgresSaleIntegrationTest {
          UUID.randomUUID(),second.version(),"Final dispatch",List.of(new FulfillmentService.PickLine(p,"1000"))));
      assertEquals("DISPATCHED",dispatched.status());
      assertEquals(3,count(owner,"select count(*) from fulfillment_dispatch_line"));
+     var dispatchHistory=fulfillment.dispatchHistory(task.id());
+     assertEquals(List.of("500","500","1000"),dispatchHistory.stream().map(FulfillmentService.DispatchEntry::quantityMilli).toList());
+     assertEquals(firstDispatch.operationId(),dispatchHistory.getFirst().operationId());
+     assertTrue(dispatchHistory.stream().allMatch(entry->entry.productId().equals(p) && entry.dispatchedBy().equals(a)));
+     assertThrows(NoSuchElementException.class,()->TenantContext.call(
+         new TenantScope(t,c,UUID.randomUUID(),a),1,()->fulfillment.dispatchHistory(task.id())));
      assertEquals(2000,count(owner,"select sum(quantity_milli) from fulfillment_dispatch_line"));
      assertEquals(journalCount,count(owner,"select count(*) from journal_entry"));
      assertEquals(movementCount,count(owner,"select count(*) from stock_movement"));

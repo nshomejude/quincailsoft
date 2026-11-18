@@ -120,6 +120,26 @@ import jakarta.persistence.*;import org.springframework.stereotype.Service;impor
    return task;
   }));
  }
+ @Override
+ public List<DispatchEntry> dispatchHistory(UUID fulfillmentId) {
+  return tx.execute(() -> {
+   var task = find(fulfillmentId, LockModeType.NONE);
+   List<?> rows = em.createNativeQuery("""
+       select operation_id, product_id, quantity_milli, cast(extract(epoch from dispatched_at)*1000000 as bigint), dispatched_by
+       from fulfillment_dispatch_line
+       where tenant_id=:tenant and company_id=:company and branch_id=:branch and fulfillment_id=:id
+       order by dispatched_at, operation_id, product_id
+       """, DispatchEntryRow.class)
+       .setParameter("tenant",task.tenantId).setParameter("company",task.companyId)
+       .setParameter("branch",task.branchId).setParameter("id",task.id).getResultList();
+   return rows.stream().map(DispatchEntryRow.class::cast)
+       .map(row -> new DispatchEntry(row.operationId(),row.productId(),Long.toString(row.quantityMilli()),
+           Instant.EPOCH.plus(row.dispatchedMicros(),java.time.temporal.ChronoUnit.MICROS),row.dispatchedBy())).toList();
+  });
+ }
+
+ public record DispatchEntryRow(UUID operationId,UUID productId,Long quantityMilli,
+                                Long dispatchedMicros,UUID dispatchedBy) {}
  public Fulfillment dispatch(UUID id,Action c){return action(id,c,false);}
  public Fulfillment complete(UUID id,Action c){return action(id,c,true);}
  private Fulfillment action(UUID id,Action c,boolean complete){text(c.reason());if(c.version()==null||!c.version().matches("0|[1-9][0-9]*"))throw new IllegalArgumentException("Version required");long version=Long.parseLong(c.version());if(complete)text(c.proofReference());return tx.execute(()->once(c.operationId(),(complete?"COMPLETE":"DISPATCH")+"|"+id+"|"+c,()->{var f=find(id, LockModeType.PESSIMISTIC_WRITE);if(f.version!=version)throw new RevisionConflict("Fulfillment changed");if(!(complete?Set.of("PENDING","DISPATCHED").contains(f.status):f.status.equals("PENDING")))throw new IllegalStateException("Invalid fulfillment state");finance.requireOpenPeriod(f.businessDate);stock.requireCustodyCollected(f.saleId);if(complete){f.proofReference=c.proofReference();f.status="COMPLETED";}else f.status="DISPATCHED";em.flush();return f;}));}
