@@ -3,6 +3,13 @@ import com.quincaisoft.sales.api.FulfillmentService;import org.springframework.w
 @RestController @RequestMapping("/api/v1/fulfillments")public class FulfillmentController{
  private final FulfillmentService service;public FulfillmentController(FulfillmentService service){this.service=service;}
  @GetMapping @PreAuthorize("hasAnyAuthority('sales:read','SCOPE_sales:read')")public List<FulfillmentService.Fulfillment> list(){return service.list();}
+ public record PreparationSummary(long pendingCount) {}
+
+ @GetMapping("/preparation-summary")
+ @PreAuthorize("hasAnyAuthority('sales:read','SCOPE_sales:read')")
+ public PreparationSummary preparationSummary() {
+  return new PreparationSummary(service.pendingPreparationCount());
+ }
  @GetMapping("/{id}") @PreAuthorize("hasAnyAuthority('sales:read','SCOPE_sales:read')")public FulfillmentService.Fulfillment get(@PathVariable UUID id){return service.get(id);}
  @PostMapping @PreAuthorize("hasAnyAuthority('sales:write','SCOPE_sales:write')")public FulfillmentService.Fulfillment draft(@RequestHeader("Idempotency-Key")UUID key,@RequestBody FulfillmentService.Draft c){match(key,c.operationId());return service.draft(c);}
  @PostMapping("/{id}/dispatch") @PreAuthorize("hasAnyAuthority('sales:write','SCOPE_sales:write')")public FulfillmentService.Fulfillment dispatch(@PathVariable UUID id,@RequestHeader("Idempotency-Key")UUID key,@RequestBody FulfillmentService.Action c){match(key,c.operationId());return service.dispatch(id,c);}

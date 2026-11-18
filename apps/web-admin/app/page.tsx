@@ -25,7 +25,8 @@ export default async function Dashboard({searchParams}: {searchParams: Promise<{
         const range = dashboardRange(selectedDate, period);
         const mayReadSales = permitted(me,'sales:read');
         const mayReadCollections = permitted(me, 'tenders:read');
-        const [summary, sales, collections] = await Promise.all([
+        const mayReadInventory = permitted(me, 'inventory:read');
+        const [summary, sales, collections, preparation, lowStock] = await Promise.all([
             mayReadSales ? api<{totalXaf: string}>('sales/summary?'+new URLSearchParams(range)).catch((error:unknown) => {
                 if (error instanceof ApiError && (error.status === 404 || error.status === 400)) return null;
                 throw error;
@@ -34,11 +35,19 @@ export default async function Dashboard({searchParams}: {searchParams: Promise<{
             mayReadCollections
                 ? api<{pendingCount: number}>('tenders/collections/summary').catch(() => null)
                 : null,
+            mayReadSales
+                ? api<{pendingCount: number}>('fulfillments/preparation-summary').catch(() => null)
+                : null,
+            mayReadInventory
+                ? api<{productCount: number}>('inventory/low-stock/summary').catch(() => null)
+                : null,
         ]);
         const metrics = [
             {label: period==='week' ? 'Sales this week' : period==='month' ? 'Sales this month' : selectedDate===today ? 'Sales today' : 'Sales on selected date', value: summary ? xaf(summary.totalXaf) : null, note: mayReadSales ? 'Posted gross sales · before returns' : 'Sales access required'},
-            {label:'Orders to prepare', value:null, note:'Order queue connection pending'},
-            {label:'Low-stock products', value:null, note:'Reorder aggregate connection pending'},
+            {label:'Orders to prepare', value: preparation?.pendingCount ?? null,
+                note: !mayReadSales ? 'Sales access required' : preparation ? 'Pending fulfillment in this branch' : 'Order count unavailable'},
+            {label:'Low-stock products', value: lowStock?.productCount ?? null,
+                note: !mayReadInventory ? 'Inventory access required' : lowStock ? 'Available stock below reorder level' : 'Low-stock count unavailable'},
             {label:'Collection pending', value: collections?.pendingCount ?? null,
                 note: !mayReadCollections ? 'Collection access required' : collections ? 'Sales with an outstanding balance' : 'Collection count unavailable'},
         ];
@@ -65,7 +74,7 @@ export default async function Dashboard({searchParams}: {searchParams: Promise<{
                 <section className="panel dashboard-access"><h2>Today’s priorities</h2>
                     {permitted(me,'inventory:read')&&<p><Link href="/inventory">Review stock</Link></p>}
                     {permitted(me,'tenders:read')&&<p><Link href="/finance">Review collections and payments</Link></p>}
-                    <p className="muted">Order and reorder priorities are pending integration.</p>
+
                 </section>
             </div>
         </>;

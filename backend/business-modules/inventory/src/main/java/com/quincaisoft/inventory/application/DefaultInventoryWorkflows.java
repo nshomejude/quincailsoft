@@ -6,6 +6,29 @@ public class DefaultInventoryWorkflows implements InventoryWorkflows {
  private final EntityManager em;private final ScopedTransactions tx;private final StockService stock;private final com.quincaisoft.finance.api.FinanceService finance;private final CatalogService catalog;private final JsonMapper json=JsonMapper.builder().build();
  public DefaultInventoryWorkflows(EntityManager em,ScopedTransactions tx,StockService stock,CatalogService catalog,com.quincaisoft.finance.api.FinanceService finance){this.em=em;this.tx=tx;this.stock=stock;this.catalog=catalog;this.finance=finance;}
  public List<Warehouse> warehouses(){return tx.execute(()->{var s=TenantContext.current();return em.createNativeQuery("select id,name,active,lock_version from warehouse where tenant_id=:t and company_id=:c and branch_id=:b order by name,id").setParameter("t",s.tenantId()).setParameter("c",s.companyId()).setParameter("b",s.branchId()).getResultStream().map(row->{Object[] a=(Object[])row;return new Warehouse((UUID)a[0],(String)a[1],(Boolean)a[2],((Number)a[3]).longValue());}).toList();});}
+ @Override
+ public long lowStockCount() {
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   return ((Number) em.createNativeQuery("""
+       select count(*) from catalog_product p
+       left join (
+           select product_id,
+                  sum(quantity_milli - reserved_milli - allocated_milli - quarantined_milli) as available
+           from stock_balance
+           where tenant_id = :tenant and company_id = :company and branch_id = :branch
+           group by product_id
+       ) stock on stock.product_id = p.id
+       where p.tenant_id = :tenant and p.company_id = :company
+         and p.active and p.track_stock and p.reorder_level_milli > 0
+         and coalesce(stock.available, 0) < p.reorder_level_milli
+       """)
+       .setParameter("tenant", scope.tenantId())
+       .setParameter("company", scope.companyId())
+       .setParameter("branch", scope.branchId())
+       .getSingleResult()).longValue();
+  });
+ }
  public List<Balance> balances(UUID warehouseId){return tx.execute(()->{stock.requireWarehouse(warehouseId);var s=TenantContext.current();return em.createQuery("select b from StockBalance b where b.tenantId=:t and b.companyId=:c and b.branchId=:b and b.warehouseId=:w order by b.productId",StockBalance.class).setParameter("t",s.tenantId()).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setParameter("w",warehouseId).getResultList().stream().map(b->new Balance(b.warehouseId,b.productId,b.quantityMilli,b.reservedMilli,b.allocatedMilli,b.valueXaf,b.version,b.quarantinedMilli,b.available())).toList();});}
  public List<Transfer> transfers(){return tx.execute(()->{var s=TenantContext.current();return em.createQuery("select t from TransferEntity t where t.tenantId=:t and t.companyId=:c and t.branchId=:b order by t.createdAt desc",TransferEntity.class).setParameter("t",s.tenantId()).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setMaxResults(200).getResultList().stream().map(this::view).toList();});}
  public Transfer get(UUID id){return tx.execute(()->view(find(id)));}

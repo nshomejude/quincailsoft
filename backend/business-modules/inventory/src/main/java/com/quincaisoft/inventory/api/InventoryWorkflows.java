@@ -6,6 +6,7 @@ public interface InventoryWorkflows {
  record Draft(UUID operationId,UUID originWarehouse,UUID destinationWarehouse,UUID productId,String quantityMilli,java.time.LocalDate businessDate,String reason){}
  record Command(UUID operationId,String version,String quantityMilli,String reason){}
  record Transfer(UUID id,UUID originWarehouse,UUID destinationWarehouse,UUID productId,String quantityMilli,String receivedMilli,String valueXaf,String receivedValueXaf,String status,String version){}
+ long lowStockCount();
  List<Warehouse> warehouses(); List<Balance> balances(UUID warehouseId); List<Transfer> transfers();Transfer get(UUID id);
  Transfer draft(Draft command);Transfer approve(UUID id,Command command);Transfer dispatch(UUID id,Command command);Transfer receive(UUID id,Command command);
 }

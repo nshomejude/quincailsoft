@@ -7,6 +7,21 @@ import jakarta.persistence.*;import org.springframework.stereotype.Service;impor
  private Fulfillment view(FulfillmentEntity f){return new Fulfillment(f.id,f.saleId,f.customerId,f.status,f.businessDate,f.proofReference,""+f.version);}
  private FulfillmentEntity find(UUID id){var s=TenantContext.current();var f=em.find(FulfillmentEntity.class,new FulfillmentEntity.Key(s.tenantId(),s.companyId(),id),LockModeType.PESSIMISTIC_WRITE);if(f==null||!f.branchId.equals(s.branchId()))throw new NoSuchElementException("Fulfillment not found");return f;}
  public List<Fulfillment> list(){return tx.execute(()->em.createQuery("select f from FulfillmentEntity f order by f.createdAt desc,f.id",FulfillmentEntity.class).setMaxResults(200).getResultList().stream().map(this::view).toList());}
+ @Override
+ public long pendingPreparationCount() {
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   return em.createQuery("""
+       select count(f) from FulfillmentEntity f
+       where f.tenantId = :tenant and f.companyId = :company and f.branchId = :branch
+         and f.status = 'PENDING'
+       """, Long.class)
+       .setParameter("tenant", scope.tenantId())
+       .setParameter("company", scope.companyId())
+       .setParameter("branch", scope.branchId())
+       .getSingleResult();
+  });
+ }
  public Fulfillment get(UUID id){return tx.execute(()->view(find(id)));}
  public Fulfillment draft(Draft c){if(c.businessDate()==null||c.customerId()==null||c.saleId()==null)throw new IllegalArgumentException("Sale, customer and date required");text(c.reason());return tx.execute(()->once(c.operationId(),"DRAFT|"+c,()->{var sale=sales.get(c.saleId());if(!sale.status().equals("POSTED")||!sale.customerId().equals(c.customerId())||c.businessDate().isBefore(sale.businessDate()))throw new IllegalArgumentException("Completed sale for the same customer and valid date required");var s=TenantContext.current();var f=new FulfillmentEntity();f.tenantId=s.tenantId();f.companyId=s.companyId();f.branchId=s.branchId();f.id=UUID.randomUUID();f.saleId=c.saleId();f.customerId=c.customerId();f.businessDate=c.businessDate();f.createdBy=s.actorId();f.createdAt=Instant.now();f.status="PENDING";em.persist(f);em.flush();return f;}));}
  public Fulfillment dispatch(UUID id,Action c){return action(id,c,false);}
