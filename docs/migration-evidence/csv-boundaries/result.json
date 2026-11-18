@@ -1,0 +1,18 @@
+{
+  "baseCommit": "e993fd6054a3b73fa034be6bf4f5a0e406582fee",
+  "finishedAt": "2026-11-18T09:25:27+01:00",
+  "java": "25.0.5",
+  "maven": "3.9.11",
+  "tests": 8,
+  "failures": 3,
+  "errors": 0,
+  "skipped": 0,
+  "build": "FAIL",
+  "sourceSha256": {
+    "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/Csv.java": "91c86aa6eb9bc9efd2feba51ea8c3b99a24b659d77fd19c5ccaa192ab5986718",
+    "backend/business-modules/operations/src/test/java/com/quincaisoft/operations/CsvInputBoundaryTest.java": "27cb1363ebf65b6d504e4eb7f8afa95c27f37e3fcdc5b43942baef42831d150b"
+  },
+  "database": "NOT_RUN",
+  "http": "NOT_RUN",
+  "release": "NO_GO"
+}

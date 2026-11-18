@@ -1,0 +1,265 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/workspace/scratch/8054c7c90089/toolchain/apache-maven-3.9.11/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO]
+[INFO] backend                                                            [pom]
+[INFO] shared-kernel                                                      [jar]
+[INFO] audit                                                              [jar]
+[INFO] catalog                                                            [jar]
+[INFO] identity                                                           [jar]
+[INFO] customer-accounts                                                  [jar]
+[INFO] suppliers                                                          [jar]
+[INFO] operations                                                         [jar]
+[INFO]
+[INFO] ----------------------< com.quincaisoft:backend >-----------------------
+[INFO] Building backend 0.1.0-SNAPSHOT                                    [1/8]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.6.2:enforce (java25) @ backend ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO]
+[INFO] -------------------< com.quincaisoft:shared-kernel >--------------------
+[INFO] Building shared-kernel 0.1.0-SNAPSHOT                              [2/8]
+[INFO]   from shared-kernel/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.6.2:enforce (java25) @ shared-kernel ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ shared-kernel ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/shared-kernel/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/shared-kernel/src/main/resources
+[INFO]
+[INFO] --- compiler:3.14.1:compile (default-compile) @ shared-kernel ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 6 source files with javac [debug parameters release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ shared-kernel ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/shared-kernel/src/test/resources
+[INFO]
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ shared-kernel ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO]
+[INFO] --- surefire:3.5.6:test (default-test) @ shared-kernel ---
+[INFO]
+[INFO] -----------------------< com.quincaisoft:audit >------------------------
+[INFO] Building audit 0.1.0-SNAPSHOT                                      [3/8]
+[INFO]   from business-modules/audit/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.6.2:enforce (java25) @ audit ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ audit ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/audit/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/audit/src/main/resources
+[INFO]
+[INFO] --- compiler:3.14.1:compile (default-compile) @ audit ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug parameters release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ audit ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/audit/src/test/resources
+[INFO]
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ audit ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- surefire:3.5.6:test (default-test) @ audit ---
+[INFO] No tests to run.
+[INFO]
+[INFO] ----------------------< com.quincaisoft:catalog >-----------------------
+[INFO] Building catalog 0.1.0-SNAPSHOT                                    [4/8]
+[INFO]   from business-modules/catalog/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.6.2:enforce (java25) @ catalog ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ catalog ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/catalog/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/catalog/src/main/resources
+[INFO]
+[INFO] --- compiler:3.14.1:compile (default-compile) @ catalog ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 10 source files with javac [debug parameters release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ catalog ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/catalog/src/test/resources
+[INFO]
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ catalog ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- surefire:3.5.6:test (default-test) @ catalog ---
+[INFO] No tests to run.
+[INFO]
+[INFO] ----------------------< com.quincaisoft:identity >----------------------
+[INFO] Building identity 0.1.0-SNAPSHOT                                   [5/8]
+[INFO]   from business-modules/identity/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.6.2:enforce (java25) @ identity ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ identity ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/identity/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/identity/src/main/resources
+[INFO]
+[INFO] --- compiler:3.14.1:compile (default-compile) @ identity ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 8 source files with javac [debug parameters release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ identity ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/identity/src/test/resources
+[INFO]
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ identity ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- surefire:3.5.6:test (default-test) @ identity ---
+[INFO] No tests to run.
+[INFO]
+[INFO] -----------------< com.quincaisoft:customer-accounts >------------------
+[INFO] Building customer-accounts 0.1.0-SNAPSHOT                          [6/8]
+[INFO]   from business-modules/customer-accounts/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.6.2:enforce (java25) @ customer-accounts ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ customer-accounts ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/customer-accounts/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/customer-accounts/src/main/resources
+[INFO]
+[INFO] --- compiler:3.14.1:compile (default-compile) @ customer-accounts ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 8 source files with javac [debug parameters release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ customer-accounts ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/customer-accounts/src/test/resources
+[INFO]
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ customer-accounts ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO]
+[INFO] --- surefire:3.5.6:test (default-test) @ customer-accounts ---
+[INFO]
+[INFO] ---------------------< com.quincaisoft:suppliers >----------------------
+[INFO] Building suppliers 0.1.0-SNAPSHOT                                  [7/8]
+[INFO]   from business-modules/suppliers/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.6.2:enforce (java25) @ suppliers ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ suppliers ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/suppliers/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/suppliers/src/main/resources
+[INFO]
+[INFO] --- compiler:3.14.1:compile (default-compile) @ suppliers ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 6 source files with javac [debug parameters release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ suppliers ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/suppliers/src/test/resources
+[INFO]
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ suppliers ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- surefire:3.5.6:test (default-test) @ suppliers ---
+[INFO] No tests to run.
+[INFO]
+[INFO] ---------------------< com.quincaisoft:operations >---------------------
+[INFO] Building operations 0.1.0-SNAPSHOT                                 [8/8]
+[INFO]   from business-modules/operations/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.6.2:enforce (java25) @ operations ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ operations ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/operations/src/main/resources
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/operations/src/main/resources
+[INFO]
+[INFO] --- compiler:3.14.1:compile (default-compile) @ operations ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 17 source files with javac [debug parameters release 25] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ operations ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/operations/src/test/resources
+[INFO]
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ operations ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO]
+[INFO] --- surefire:3.5.6:test (default-test) @ operations ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.quincaisoft.operations.CsvInputBoundaryTest
+[ERROR] Tests run: 8, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.146 s <<< FAILURE! -- in com.quincaisoft.operations.CsvInputBoundaryTest
+[ERROR] com.quincaisoft.operations.CsvInputBoundaryTest.rejectsFortyOneColumnsAtEndOfInput -- Time elapsed: 0.017 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at com.quincaisoft.operations.CsvInputBoundaryTest.rejectsFortyOneColumnsAtEndOfInput(CsvInputBoundaryTest.java:25)
+
+[ERROR] com.quincaisoft.operations.CsvInputBoundaryTest.rejectsQuotedNul -- Time elapsed: 0.003 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at com.quincaisoft.operations.CsvInputBoundaryTest.rejectsQuotedNul(CsvInputBoundaryTest.java:15)
+
+[ERROR] com.quincaisoft.operations.CsvInputBoundaryTest.rejectsFortyOneColumnsWithLineTerminator -- Time elapsed: 0.003 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at com.quincaisoft.operations.CsvInputBoundaryTest.rejectsFortyOneColumnsWithLineTerminator(CsvInputBoundaryTest.java:30)
+
+[INFO]
+[INFO] Results:
+[INFO]
+[ERROR] Failures:
+[ERROR]   CsvInputBoundaryTest.rejectsFortyOneColumnsAtEndOfInput:25 Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+[ERROR]   CsvInputBoundaryTest.rejectsFortyOneColumnsWithLineTerminator:30 Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+[ERROR]   CsvInputBoundaryTest.rejectsQuotedNul:15 Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+[INFO]
+[ERROR] Tests run: 8, Failures: 3, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for backend 0.1.0-SNAPSHOT:
+[INFO]
+[INFO] backend ............................................ SUCCESS [  0.271 s]
+[INFO] shared-kernel ...................................... SUCCESS [  1.151 s]
+[INFO] audit .............................................. SUCCESS [  0.572 s]
+[INFO] catalog ............................................ SUCCESS [  0.491 s]
+[INFO] identity ........................................... SUCCESS [  0.492 s]
+[INFO] customer-accounts .................................. SUCCESS [  9.968 s]
+[INFO] suppliers .......................................... SUCCESS [  0.165 s]
+[INFO] operations ......................................... FAILURE [  1.542 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15.130 s
+[INFO] Finished at: 2026-11-18T09:25:27+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.6:test (default-test) on project operations: There are test failures.
+[ERROR]
+[ERROR] See /workspace/scratch/8054c7c90089/quincailsoft-csv/backend/business-modules/operations/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR]
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :operations
