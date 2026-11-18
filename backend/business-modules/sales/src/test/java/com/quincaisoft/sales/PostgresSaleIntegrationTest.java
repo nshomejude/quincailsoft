@@ -95,6 +95,11 @@ class PostgresSaleIntegrationTest {
      assertEquals("COLLECTED",custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),partial.version(),"1000","CUSTOMER-SIGNED-PICKUP-2","Final collection")).status());assertEquals(2,custody.collections(position.id()).size());
      assertEquals(6000,count(owner,"select quantity_milli from stock_balance"));assertEquals(3000,count(owner,"select value_xaf from stock_balance"));assertEquals(journalCount,count(owner,"select count(*) from journal_entry"));assertEquals(movementCount,count(owner,"select count(*) from stock_movement"));assertEquals(0,count(owner,"select sum(quantity_milli-collected_milli) from customer_custody"));
      var dispatched=fulfillment.dispatch(task.id(),new FulfillmentService.Action(UUID.randomUUID(),task.version(),null,"Dispatch documented handover"));assertThrows(IllegalArgumentException.class,()->fulfillment.complete(task.id(),new FulfillmentService.Action(UUID.randomUUID(),dispatched.version()," ","Missing proof")));var completion=new FulfillmentService.Action(UUID.randomUUID(),dispatched.version(),"SIGNED-DELIVERY","Complete delivery");var completed=fulfillment.complete(task.id(),completion);assertEquals("COMPLETED",completed.status());assertEquals(completed,fulfillment.complete(task.id(),completion));
+     assertEquals(0,count(owner,"""
+         select count(*) from outbox_event
+         where event_type='FulfillmentChanged.v1' and
+           (payload ? 'command' or payload ? 'fulfillment' or payload::text like '%SIGNED-DELIVERY%')
+         """));
      assertEquals(0,fulfillment.pendingPreparationCount());
      assertTrue(TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,custody::positions).isEmpty());assertTrue(TenantContext.call(new TenantScope(UUID.randomUUID(),c,b,a),1,fulfillment::list).isEmpty());assertThrows(SQLException.class,()->sql(owner,"update customer_custody set frozen_cost_xaf=0"));assertThrows(SQLException.class,()->sql(owner,"update custody_collection set quantity_milli=1"));
      return null;

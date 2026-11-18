@@ -6166,11 +6166,11 @@
       },
       "roleBranchScope": "NOT_RUN per-screen capability and branch review",
       "java": {
-        "reviewedEndpoints": [],
+        "reviewedEndpoints": ["GET /api/v1/fulfillments/{id}/picklist"],
         "controllerCandidates": []
       },
       "gaps": [
-        "No dedicated implementation evidence mapped for this canonical item.",
+        "Picklist read API verified at 1d54897. Original screen wiring, dispatch workflow and print acceptance remain open.",
         "Compare actionable fields, dialogs and permissions against original workflow."
       ],
       "captures": {
@@ -6249,11 +6249,11 @@
       },
       "roleBranchScope": "NOT_RUN per-screen capability and branch review",
       "java": {
-        "reviewedEndpoints": [],
+        "reviewedEndpoints": ["GET /api/v1/fulfillments/{id}/picklist"],
         "controllerCandidates": []
       },
       "gaps": [
-        "No dedicated implementation evidence mapped for this canonical item.",
+        "Picklist read API verified at 1d54897. Original screen wiring, dispatch workflow and print acceptance remain open.",
         "Compare actionable fields, dialogs and permissions against original workflow."
       ],
       "captures": {
