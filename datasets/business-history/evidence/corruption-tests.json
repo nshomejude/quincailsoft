@@ -1,0 +1,16 @@
+{
+  "negativeCases": [
+    {
+      "file": "journals.ndjson",
+      "expected": "journal balanced",
+      "rejected": true,
+      "checksumUpdatedToEnsureBehavioralDetection": true
+    },
+    {
+      "file": "stockBalances.ndjson",
+      "expected": "stock replay",
+      "rejected": true,
+      "checksumUpdatedToEnsureBehavioralDetection": true
+    }
+  ]
+}

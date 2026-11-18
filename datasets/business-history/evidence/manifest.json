@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "datasetId": "quincaisoft-synthetic-history-v1",
+  "synthetic": true,
+  "seed": 20241118,
+  "from": "2024-01-01",
+  "through": "2026-11-18",
+  "currency": "XAF",
+  "quantityScale": 1000,
+  "rounding": "HALF_EVEN",
+  "productFamilies": 1000,
+  "sellableVariants": 3000,
+  "files": [
+    {
+      "file": "branches.ndjson",
+      "rows": 6,
+      "bytes": 1566,
+      "sha256": "346f561eb98719285d8bbeaddf5456d27d5ee2d9321cb691b43bb773c20bf92c"
+    },
+    {
+      "file": "companies.ndjson",
+      "rows": 1,
+      "bytes": 200,
+      "sha256": "c46214af950fc1ae3c3d3b1e6229990dbbe5d2be07f3877d9edbc0675605f841"
+    },
+    {
+      "file": "employees.ndjson",
+      "rows": 72,
+      "bytes": 25036,
+      "sha256": "267e0c90eeecfbf2c9b8290bc8aae61e22c3f74b2cf69795789b2d5d853ded89"
+    },
+    {
+      "file": "customers.ndjson",
+      "rows": 1000,
+      "bytes": 405317,
+      "sha256": "74b5c6684504a09478b2fd872fc61dc3f4213cb66d716a975c0f2bfcf085f602"
+    },
+    {
+      "file": "suppliers.ndjson",
+      "rows": 80,
+      "bytes": 24017,
+      "sha256": "9af14790358d3ef914701554bc5a603c5a099f65a3ebb8efbd2e2e6c2c5885b8"
+    },
+    {
+      "file": "categories.ndjson",
+      "rows": 20,
+      "bytes": 1930,
+      "sha256": "7899db2c6d1894f05c634b5bc67ff900df102c98a4453fa8cc9560738bf0bde5"
+    },
+    {
+      "file": "units.ndjson",
+      "rows": 7,
+      "bytes": 1165,
+      "sha256": "ad8a94709fefd89639e8f729ad1634faf0eb42a197ad73ce2cc5b48889a05c5d"
+    },
+    {
+      "file": "manufacturers.ndjson",
+      "rows": 10,
+      "bytes": 1626,
+      "sha256": "115cb5095e7b3e1929500e3b277b06831778d8d016a6671b1b12b4f9b7c5d564"
+    },
+    {
+      "file": "products.ndjson",
+      "rows": 1000,
+      "bytes": 361700,
+      "sha256": "1e376a608a6543af7c8aaaa992815c3b856e70b1d109a32ca1eeb7319cb7f582"
+    },
+    {
+      "file": "variants.ndjson",
+      "rows": 3000,
+      "bytes": 1785976,
+      "sha256": "5f4c130bf1c292554808c9dd8f6cf06727650a183ab12e2b3110782ef0c48b7b"
+    },
+    {
+      "file": "taxPolicies.ndjson",
+      "rows": 2,
+      "bytes": 493,
+      "sha256": "4f15873b786bb1b5879465002c20e901f0f510dfc3f0fd172af2b9997ad173ff"
+    },
+    {
+      "file": "events.ndjson",
+      "rows": 137984,
+      "bytes": 93149113,
+      "sha256": "bd201358197e603959b6a8f4088c37d06910c97681ee9b337963c496ce162c75"
+    },
+    {
+      "file": "journals.ndjson",
+      "rows": 137984,
+      "bytes": 57811211,
+      "sha256": "bf543b7c08d3df02b960a904a7a0cab03133fdc390aec395598912596dec1b39"
+    },
+    {
+      "file": "stockMovements.ndjson",
+      "rows": 98572,
+      "bytes": 33328412,
+      "sha256": "1a7cd15b4f5b48438087d9fefbef9a143d595f65ead3f7b985adee52058d4349"
+    },
+    {
+      "file": "attendance.ndjson",
+      "rows": 59336,
+      "bytes": 12289772,
+      "sha256": "b9f5e4f895e646b251f6c71c3043477755b2bbb2bed127bfd96756090627e936"
+    },
+    {
+      "file": "employmentContracts.ndjson",
+      "rows": 72,
+      "bytes": 17569,
+      "sha256": "7d5d4bcb13ceb0ba9d3fab58b224c991e25807df3d66579f44235c59a7b1f4b1"
+    },
+    {
+      "file": "supplierCatalog.ndjson",
+      "rows": 9000,
+      "bytes": 3093426,
+      "sha256": "47676afe23e43c6748067a3e6e31c8ec45dcddcd567a113798c8dfa3d4495e92"
+    },
+    {
+      "file": "priceLists.ndjson",
+      "rows": 9000,
+      "bytes": 1921557,
+      "sha256": "22382e93ae3af5d140f763095351bf7952898a3311b60d952b996df637912723"
+    },
+    {
+      "file": "purchaseOrders.ndjson",
+      "rows": 21987,
+      "bytes": 7800895,
+      "sha256": "9cdd27f591b1c95fcac98a04e4cce985e35ba0432b3db5cc1d35f54cb3a2eae9"
+    },
+    {
+      "file": "payslips.ndjson",
+      "rows": 2302,
+      "bytes": 622490,
+      "sha256": "d486569b749548a8c780240dad250afaab24ee76eb671fcb21bab4189d365257"
+    },
+    {
+      "file": "stockBalances.ndjson",
+      "rows": 18000,
+      "bytes": 3590640,
+      "sha256": "5ea5730736377b6e1f920de44a8b94c7232550d43b5044a3f137d081dfa1f881"
+    },
+    {
+      "file": "customerOpenItems.ndjson",
+      "rows": 29675,
+      "bytes": 8207034,
+      "sha256": "eeb995bb5787c62c493b475eb6665b9f884075e149fa803d4a93ff90047f5043"
+    },
+    {
+      "file": "supplierOpenItems.ndjson",
+      "rows": 21987,
+      "bytes": 5773122,
+      "sha256": "0d4ac57d11f73e483841c9751361ee6effaa7e51d1b070a16a041ae703bd9eaf"
+    },
+    {
+      "file": "quotations.ndjson",
+      "rows": 600,
+      "bytes": 516076,
+      "sha256": "53dccb221ebac25be9d42d754a3230501526e59af356d2201d900985c17b8ff4"
+    },
+    {
+      "file": "providerExceptions.ndjson",
+      "rows": 100,
+      "bytes": 24875,
+      "sha256": "1dcc1346172497ef14aacc6bfac874221cc2408e671a19d0f2f538e936f5b7b4"
+    },
+    {
+      "file": "workflowCases.ndjson",
+      "rows": 120,
+      "bytes": 35010,
+      "sha256": "5daf4371589c561ceec5a4905c7a03c8d6d34c136532273b27afe72fb4620c7f"
+    },
+    {
+      "file": "accountStatements.ndjson",
+      "rows": 159169,
+      "bytes": 48275078,
+      "sha256": "4414fadc52d73e79ea72cead565f4ff41b4b2268fef39f56180d58407ec18781"
+    },
+    {
+      "file": "trialBalance.ndjson",
+      "rows": 144,
+      "bytes": 15809,
+      "sha256": "48300b6ed089aa6c16c552bd845700e4b5dcee81849d3bfb75de5cf3dfdc40a9"
+    },
+    {
+      "file": "monthlyAnalytics.ndjson",
+      "rows": 210,
+      "bytes": 60722,
+      "sha256": "67d506f9e386389340688f5fa3e17468ed16b7d3cb32d5fea6743e342f9a3366"
+    },
+    {
+      "file": "taxSummaries.ndjson",
+      "rows": 210,
+      "bytes": 38413,
+      "sha256": "73eb758ffc46c5a0e639b05b413a7f856a3db0ff0678cd49516dce7207a00ec0"
+    },
+    {
+      "file": "documentFixtures.ndjson",
+      "rows": 56236,
+      "bytes": 16736310,
+      "sha256": "00e85e4eb1370b9c8ab1d171d2df4c7c79e802440ad3acf287b62ea4aad7841a"
+    },
+    {
+      "file": "financialPeriods.ndjson",
+      "rows": 35,
+      "bytes": 9938,
+      "sha256": "6ca53d40ea921b117ab18cbea035babed53d6ac5034b87630b5d3e49c6072557"
+    },
+    {
+      "file": "chartOfAccounts.ndjson",
+      "rows": 24,
+      "bytes": 2635,
+      "sha256": "a317abfb511f9300c1a46edceb31f2039e182ff3780d99e70dd312f1b150312b"
+    }
+  ],
+  "importStatus": "NOT_IMPORTED",
+  "taxAndPayroll": "SCENARIO_PARAMETERS_NOT_STATUTORY",
+  "providerEvidence": "SIMULATED_NO_LIVE_PROVIDER_VERIFICATION"
+}
