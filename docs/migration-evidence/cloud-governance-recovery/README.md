@@ -26,3 +26,11 @@ Remaining boundaries are explicit: no live PSP settlement, production target dep
 Selective tenant PITR dependency closure, document/object/key recovery, production restore cutover, statutory retention/deletion execution and external legal/accounting acceptance remain separate unfinished scope. Payroll statutory filings/rates, partial salary settlement and already-paid salary recovery are not certified. No guessed statutory rules or silent destructive restore are introduced. The full parity gate remains blocked at 735 unresolved accepted-evidence mappings; no screens/modules are automatically accepted from these tests.
 
 The generated parity candidate refresh exceeded the connector payload limit and is not included in this commit. The existing inventory remains wholly unaccepted (735 unresolved). Run `node scripts/inventory-python-parity.mjs` to reproduce current source candidates; generation never supplies acceptance. No reviewed Desktop screen notes were overwritten.
+
+## Review corrections before merge
+
+Tenant suspension now fences corrective merchant writes as well as new business commitments, including workforce reversals, inventory corrections, returns, bank/finance operations and document mutations. Retained-write exemptions are limited to five audited sales/purchasing methods; their common receipt helpers validate source type, actor, scope, accepted status and request hash before invoking mutations. Tenant APIs with private receipt stores always perform the lifecycle check, so an unrelated global receipt cannot authorize an identity request. Historical reads remain available.
+
+Provider reconciliation retains its nontransactional external-I/O boundary. Lifecycle checks execute inside each existing mutation transaction and immediately before dispatch. An external request already in flight cannot be recalled by a database lock: suspension quarantines its unresolved outcome and resumed reconciliation queries the same stable intent. This is another reason receipt review does not certify production recovery cutover.
+
+The live OIDC attempt is retained in `http-blocked-result.json`: precompilation completed, but the Next development worker dropped the socket before authenticated checks completed. It is not a workflow or performance pass. No further runtime retries are counted as acceptance.

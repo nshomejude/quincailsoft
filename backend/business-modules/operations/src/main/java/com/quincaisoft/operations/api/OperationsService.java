@@ -23,8 +23,8 @@ public interface OperationsService {
  record Rehearse(UUID operationId,String expectedStateDigest,String reason) {}
  record Rehearsal(UUID id,UUID backupId,String status,String currentDigest,List<String> differences,List<String> requiredControls,boolean productionRestoreAllowed) {}
  record Integrity(boolean consistent,String stateDigest,List<Section> sections,List<String> checks,List<String> notChecked) {}
- Preview preview(PreviewRequest request);Preview preview(UUID id);ImportResult commit(UUID id,Commit request);
+ @com.quincaisoft.shared.TenantMutation Preview preview(PreviewRequest request);Preview preview(UUID id);@com.quincaisoft.shared.TenantMutation ImportResult commit(UUID id,Commit request);
  List<Export> exports();Export export(ExportRequest request);Export export(UUID id);Export runExport(UUID id,Command request);Export cancelExport(UUID id,Command request);Content content(UUID id);
- List<Notice> notifications();Notice read(UUID id,Command request);
+ List<Notice> notifications();@com.quincaisoft.shared.TenantMutation Notice read(UUID id,Command request);
  List<Backup> backups();Backup backup(BackupRequest request);Verify verify(UUID id);Rehearsal rehearse(UUID id,Rehearse request);Integrity integrity();
 }

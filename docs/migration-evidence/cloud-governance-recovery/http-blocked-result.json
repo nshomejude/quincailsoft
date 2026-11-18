@@ -1,0 +1,29 @@
+{
+  "result": "FAIL",
+  "checks": [
+    "Unauthenticated dev compilation prewarmed before Java services; not workflow acceptance"
+  ],
+  "scope": "Real OIDC and authenticated HTTP/SSR; not browser visual acceptance",
+  "ports": {
+    "pg": 55441,
+    "kc": 18180,
+    "redis": 16379,
+    "api": 18080,
+    "web": 13100,
+    "platform": 13200
+  },
+  "evidence": {
+    "commit": "325bd8d5b0a0cb8870b546361d634807edd0ff27",
+    "harnessSha256": "f6a2066e059eb84278a61a8f5c03a8dfe215c8f2fa90e4cd446eb4ba7d10043d",
+    "jarSha256": "260a90b4384c6338cf5609e93b80a7a39a21d68e0e720b977607ec5577db025c"
+  },
+  "resourceProfile": {
+    "apiHeapMiB": 256,
+    "keycloakHeapMiB": 192,
+    "javaActiveProcessors": 2,
+    "nodeRuntimeHeapMiB": 512,
+    "nodePrewarmHeapMiB": 1024,
+    "postgresSharedBuffersMiB": 32,
+    "nextApps": "sequential"
+  }
+}

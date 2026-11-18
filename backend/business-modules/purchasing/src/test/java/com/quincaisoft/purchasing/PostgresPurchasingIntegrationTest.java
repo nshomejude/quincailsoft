@@ -46,6 +46,15 @@ class PostgresPurchasingIntegrationTest {
     var scope=new TenantScope(t,c,b,a);
     final Connection ownerConnection=owner;
     var supplier=TenantContext.call(scope,1,()->suppliers.create(new SupplierService.Create(UUID.randomUUID(),"SUP-1","Synthetic supplier","","")));
+    // Receipt provenance and acceptance are checked before the action, even with the exact hash.
+    for(int invalid=0;invalid<3;invalid++){
+     var forged=new PurchasingService.Draft(UUID.randomUUID(),supplier.id(),w,LocalDate.of(2026,11,18),List.of(new PurchasingService.RequestedLine(p,"10000","500")));
+     String hash=HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(("PO_DRAFT|"+forged).getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+     try(var insert=owner.prepareStatement("insert into idempotency_result(tenant_id,company_id,branch_id,operation_id,request_hash,source_type,actor_id,status,response_json)values(?,?,?,?,?,?,?,?,cast('{}' as jsonb))")){
+      insert.setObject(1,t);insert.setObject(2,c);insert.setObject(3,b);insert.setObject(4,forged.operationId());insert.setString(5,hash);insert.setString(6,invalid==0?"CATALOG":"PurchaseDrafted");insert.setObject(7,invalid==1?UUID.randomUUID():a);insert.setString(8,invalid==2?"REJECTED":"ACCEPTED");insert.executeUpdate();
+     }
+     assertThrows(IllegalStateException.class,()->TenantContext.call(scope,1,()->purchases.draft(forged)));assertEquals(0,count(owner,"select count(*) from purchase_order"));
+    }
     var orderRequest=new PurchasingService.Draft(UUID.randomUUID(),supplier.id(),w,LocalDate.of(2026,11,18),List.of(new PurchasingService.RequestedLine(p,"10000","500")));
     var draft=TenantContext.call(scope,1,()->purchases.draft(orderRequest));assertEquals("5000",draft.totalXaf());
     assertEquals(10000,count(owner,"select quantity_milli from stock_balance"));

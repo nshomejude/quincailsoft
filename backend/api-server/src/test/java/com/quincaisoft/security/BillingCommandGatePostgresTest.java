@@ -53,11 +53,26 @@ class BillingCommandGatePostgresTest {
       assertThrows(IllegalStateException.class,()->gate.execute(new Object[]{new Command(op)},()->{proxy.draft(new Command(op));throw new IllegalStateException("fail after write");}));
       assertEquals(0L,tx.execute(()->jdbc.queryForObject("select count(*) from catalog_product",Long.class)));
       tx.execute(()->{jdbc.update("insert into idempotency_result(tenant_id,company_id,branch_id,operation_id,request_hash,source_type,response_json)values(?,?,?,?,'"+"a".repeat(64)+"','SALE','{}')",t,c,b,op);return null;});
+      doThrow(new AccessDeniedException("tenant suspended")).when(tenantPolicy).requireNewMutation();
+      assertThrows(AccessDeniedException.class,()->proxy.change(new Command(op)),"An unrelated global receipt must not exempt a private-receipt mutation");
+      var processor=new BillingCommandProxy(beans.getBeanProvider(BillingCommandGate.class));
+      var rawIdentity=mock(com.quincaisoft.identity.api.IdentityService.class);
+      var identity=(com.quincaisoft.identity.api.IdentityService)processor.postProcessAfterInitialization(rawIdentity,"identity");
+      assertThrows(AccessDeniedException.class,()->identity.request(new com.quincaisoft.identity.api.IdentityService.Request(op,UUID.randomUUID(),"cashier",true,1,"unrelated receipt")));
+      verifyNoInteractions(rawIdentity);
+      var rawWorkforce=mock(com.quincaisoft.workforce.api.WorkforceService.class);
+      var workforce=(com.quincaisoft.workforce.api.WorkforceService)processor.postProcessAfterInitialization(rawWorkforce,"workforce");
+      assertThrows(AccessDeniedException.class,()->workforce.approveReversal(UUID.randomUUID(),new com.quincaisoft.workforce.api.WorkforceService.Approval(UUID.randomUUID(),"0","review reversal")));
+      verifyNoInteractions(rawWorkforce);
+
+      verify(tenantPolicy,atLeastOnce()).requireNewMutation();
+      reset(tenantPolicy);
       reset(lifecycle);doThrow(new AccessDeniedException("restricted")).when(lifecycle).requireAllowed(SubscriptionLifecycleService.Operation.NEW_BUSINESS_POSTING);
       // The real domain command must still validate its receipt/hash; the gate must allow retrieval.
       assertEquals("original",gate.execute(new Object[]{new Command(op)},()->"original"));
       assertEquals("original",gate.execute(new Object[]{new NestedCommand(new Command(op))},()->"original"));
       verifyNoInteractions(lifecycle);
+      assertThrows(AccessDeniedException.class,()->proxy.draft(new Command(op)),"Unreviewed common-receipt methods cannot bypass billing using any retained UUID");
       assertThrows(AccessDeniedException.class,()->gate.execute(new Object[]{new Command(UUID.randomUUID())},()->"new"));
       return null;
     });

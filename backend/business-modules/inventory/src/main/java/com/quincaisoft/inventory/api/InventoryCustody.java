@@ -7,6 +7,6 @@ public interface InventoryCustody {
  record Position(UUID id,UUID saleId,UUID customerId,UUID warehouseId,UUID productId,String quantityMilli,String collectedMilli,String frozenCostXaf,String status,String version){}
  record Collect(UUID operationId,String version,String quantityMilli,String proofReference,String reason){}
  record Collection(UUID id,UUID custodyId,String quantityMilli,String proofReference,UUID actorId,Instant collectedAt){}
- List<Policy> policies();Policy requestPolicy(PolicyRequest request);Policy approvePolicy(UUID id,Approve request);
- List<Position> positions();Position collect(UUID id,Collect request);List<Collection> collections(UUID custodyId);
+ List<Policy> policies();@com.quincaisoft.shared.TenantMutation Policy requestPolicy(PolicyRequest request);@com.quincaisoft.shared.TenantMutation Policy approvePolicy(UUID id,Approve request);
+ List<Position> positions();@com.quincaisoft.shared.TenantMutation Position collect(UUID id,Collect request);List<Collection> collections(UUID custodyId);
 }

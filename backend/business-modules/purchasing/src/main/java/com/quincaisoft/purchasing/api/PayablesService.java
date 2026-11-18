@@ -3,5 +3,5 @@ package com.quincaisoft.purchasing.api;import java.util.*;
 public interface PayablesService {
  record Balance(UUID id,UUID supplierId,String originalXaf,String paidXaf,String outstandingXaf,long version){}
  record Advance(UUID id,UUID supplierId,String originalXaf,String allocatedXaf,String remainingXaf,long version){}
- List<Balance> balances();List<Advance> advances();void applyPayment(UUID invoiceId,UUID supplierId,long amount);void createAdvance(UUID id,UUID supplierId,long amount);void allocateAdvance(UUID advanceId,UUID invoiceId,long amount);
+ List<Balance> balances();List<Advance> advances();@com.quincaisoft.shared.TenantMutation void applyPayment(UUID invoiceId,UUID supplierId,long amount);@com.quincaisoft.shared.TenantMutation void createAdvance(UUID id,UUID supplierId,long amount);@com.quincaisoft.shared.TenantMutation void allocateAdvance(UUID advanceId,UUID invoiceId,long amount);
 }

@@ -57,14 +57,34 @@ class ProviderPostgresTest {
      assertThrows(IllegalStateException.class,()->sales.post(next.id(),new SalesService.Post(UUID.randomUUID(),next.version(),"Closed period must rollback")));
      assertEquals("DRAFT",sales.get(next.id()).status());assertEquals(8000,count(owner,"select quantity_milli from stock_balance"));assertEquals(1,count(owner,"select count(*) from stock_movement"));assertEquals(1,count(owner,"select count(*) from journal_entry"));assertEquals(1,count(owner,"select count(*) from outbox_event"));assertEquals(1,count(owner,"select count(*) from document_snapshot"));
      sql(owner,"update financial_period set status='Open'");
+     var suspended=new java.util.concurrent.atomic.AtomicBoolean();
+     TenantLifecyclePolicy lifecycle=new TenantLifecyclePolicy(){
+      public State current(){return new State(t,suspended.get()?"SUSPENDED":"ACTIVE",0,null);}
+      public void requireNewMutation(){assertTrue(em.isJoinedToTransaction(),"Policy requires the mutation transaction");if(suspended.get())throw new IllegalStateException("Tenant suspended");}
+      public State requireSuspended(UUID decision,long epoch){throw new UnsupportedOperationException();}
+     };
      var initiations=new java.util.concurrent.atomic.AtomicInteger();var queries=new java.util.concurrent.atomic.AtomicInteger();
      CollectionProvider fake=new CollectionProvider(){public Result initiate(CollectionProvider.Intent i){initiations.incrementAndGet();throw new IllegalStateException("Ambiguous synthetic network timeout");}public Result query(CollectionProvider.Intent i){queries.incrementAndGet();return new Result(Outcome.SANDBOX_VERIFIED,"synthetic-sandbox");}};
-     var money=new DefaultMobileMoneyService(em,tx,finance,sales,new ProviderRuntime(fake,"sandbox",true),JsonMapper.builder().build());
+     var money=new DefaultMobileMoneyService(em,tx,finance,sales,new ProviderRuntime(fake,"sandbox",true),JsonMapper.builder().build(),lifecycle);
      var request=new MobileMoneyService.Prepare(UUID.randomUUID(),draft.id(),"500","237600000000",LocalDate.of(2026,11,18),"Synthetic sandbox request");var intent=money.prepare(request);assertEquals(intent,money.prepare(request));assertEquals("QUEUED",intent.status());assertEquals(0,initiations.get());
      assertEquals("UNKNOWN",money.reconcile(intent.id()).status());assertEquals(1,initiations.get());money.callbackHint(intent.id());assertEquals("SANDBOX_VERIFIED",money.reconcile(intent.id()).status());assertEquals(1,initiations.get());assertEquals(1,queries.get());assertEquals(2000,finance.outstandingSale(draft.id()));assertEquals(1,count(owner,"select count(*) from journal_entry"));
      CollectionProvider liveFake=new CollectionProvider(){public Result initiate(CollectionProvider.Intent i){initiations.incrementAndGet();return new Result(Outcome.VERIFIED,"synthetic-"+i.reference());}public Result query(CollectionProvider.Intent i){queries.incrementAndGet();return new Result(Outcome.VERIFIED,"synthetic-"+i.reference());}};
-     var live=new DefaultMobileMoneyService(em,tx,finance,sales,new ProviderRuntime(liveFake,"mtncameroon",true),JsonMapper.builder().build());var liveIntent=live.prepare(new MobileMoneyService.Prepare(UUID.randomUUID(),draft.id(),"500","237600000000",LocalDate.of(2026,11,18),"Simulated verified collection"));assertEquals("CONFIRMED",live.reconcile(liveIntent.id()).status());assertEquals("CONFIRMED",live.reconcile(liveIntent.id()).status());assertEquals(2,initiations.get());assertEquals(1500,finance.outstandingSale(draft.id()));assertEquals(2,count(owner,"select count(*) from journal_entry"));
+     var live=new DefaultMobileMoneyService(em,tx,finance,sales,new ProviderRuntime(liveFake,"mtncameroon",true),JsonMapper.builder().build(),lifecycle);var liveIntent=live.prepare(new MobileMoneyService.Prepare(UUID.randomUUID(),draft.id(),"500","237600000000",LocalDate.of(2026,11,18),"Simulated verified collection"));assertEquals("CONFIRMED",live.reconcile(liveIntent.id()).status());assertEquals("CONFIRMED",live.reconcile(liveIntent.id()).status());assertEquals(2,initiations.get());assertEquals(1500,finance.outstandingSale(draft.id()));assertEquals(2,count(owner,"select count(*) from journal_entry"));
      var late=live.prepare(new MobileMoneyService.Prepare(UUID.randomUUID(),draft.id(),"500","237600000000",LocalDate.of(2026,11,18),"Provider settled after close"));sql(owner,"update financial_period set status='Closed'");assertEquals("PROVIDER_VERIFIED_REVIEW",live.reconcile(late.id()).status());assertEquals(1500,finance.outstandingSale(draft.id()));sql(owner,"update financial_period set status='Open'");assertEquals("CONFIRMED",live.reconcile(late.id()).status());assertEquals(3,initiations.get());assertEquals(1000,finance.outstandingSale(draft.id()));assertEquals(3,count(owner,"select count(*) from journal_entry"));
+     // Suspension before dispatch writes nothing and never contacts the provider.
+     suspended.set(true);long intentCount=count(owner,"select count(*) from provider_intent");
+     assertThrows(IllegalStateException.class,()->live.prepare(new MobileMoneyService.Prepare(UUID.randomUUID(),draft.id(),"100","237600000000",LocalDate.of(2026,11,18),"Blocked while suspended")));
+     assertThrows(IllegalStateException.class,()->live.reconcile(late.id()));assertThrows(IllegalStateException.class,()->live.callbackHint(late.id()));
+     assertEquals(intentCount,count(owner,"select count(*) from provider_intent"));assertEquals(3,initiations.get());
+     suspended.set(false);
+     // A suspension racing external I/O keeps local UNKNOWN; resumed reconciliation queries, never initiates again.
+     CollectionProvider racing=new CollectionProvider(){public Result initiate(CollectionProvider.Intent i){assertFalse(em.isJoinedToTransaction());initiations.incrementAndGet();suspended.set(true);return new Result(Outcome.VERIFIED,"racing-"+i.reference());}public Result query(CollectionProvider.Intent i){assertFalse(em.isJoinedToTransaction());queries.incrementAndGet();return new Result(Outcome.VERIFIED,"racing-"+i.reference());}};
+     var raced=new DefaultMobileMoneyService(em,tx,finance,sales,new ProviderRuntime(racing,"mtncameroon",true),JsonMapper.builder().build(),lifecycle);
+     var racedIntent=raced.prepare(new MobileMoneyService.Prepare(UUID.randomUUID(),draft.id(),"500","237600000000",LocalDate.of(2026,11,18),"Synthetic suspension race"));
+     assertThrows(IllegalStateException.class,()->raced.reconcile(racedIntent.id()));
+     assertEquals("UNKNOWN",raced.list().stream().filter(i->i.id().equals(racedIntent.id())).findFirst().orElseThrow().status());
+     assertEquals(4,initiations.get());assertEquals(1000,finance.outstandingSale(draft.id()));assertEquals(3,count(owner,"select count(*) from journal_entry"));
+     suspended.set(false);assertEquals("CONFIRMED",raced.reconcile(racedIntent.id()).status());assertEquals(4,initiations.get());assertEquals(500,finance.outstandingSale(draft.id()));assertEquals(4,count(owner,"select count(*) from journal_entry"));
      return null;
     });
    }finally{if(factory!=null)factory.destroy();sql(admin,"DROP DATABASE "+db);sql(admin,"DROP ROLE "+role);}

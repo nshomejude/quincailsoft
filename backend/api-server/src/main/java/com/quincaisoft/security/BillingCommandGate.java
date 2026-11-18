@@ -17,8 +17,8 @@ public final class BillingCommandGate {
     public BillingCommandGate(ScopedTransactions transactions,JdbcTemplate jdbc,SubscriptionLifecycleService subscriptions,TenantLifecyclePolicy lifecycle) {
         this.transactions=transactions;this.jdbc=jdbc;this.subscriptions=subscriptions;this.lifecycle=lifecycle;
     }
-    public <T>T execute(Object[] arguments,Supplier<T> command) {return execute(arguments,true,true,command);}
-    public <T>T execute(Object[] arguments,boolean billing,boolean tenant,Supplier<T> command) {
+    public <T>T execute(Object[] arguments,Supplier<T> command) {return execute(arguments,true,true,true,command);}
+    public <T>T execute(Object[] arguments,boolean billing,boolean tenant,boolean verifiedCommonReceipt,Supplier<T> command) {
         return transactions.execute(()-> {
             var scope=TenantContext.current();UUID operation=operation(arguments);
             // The domain service still validates the original request hash and permissions.
@@ -28,8 +28,11 @@ public final class BillingCommandGate {
                   where tenant_id=? and company_id=? and branch_id=? and actor_id=?
                     and operation_id=? and status='ACCEPTED' and response_json is not null)
                 """,Boolean.class,scope.tenantId(),scope.companyId(),scope.branchId(),scope.actorId(),operation));
-            if(!retained&&tenant)lifecycle.requireNewMutation();
-            if(!retained&&billing)subscriptions.requireAllowed(SubscriptionLifecycleService.Operation.NEW_BUSINESS_POSTING);
+            // Only explicitly audited methods use the common receipt contract.
+            // TenantMutation-only APIs may keep private receipts, so an unrelated global
+            // operation must never exempt their lifecycle check. Reads stay available.
+            if(tenant&&(!retained||!verifiedCommonReceipt))lifecycle.requireNewMutation();
+            if(billing&&(!retained||!verifiedCommonReceipt))subscriptions.requireAllowed(SubscriptionLifecycleService.Operation.NEW_BUSINESS_POSTING);
             return command.get();
         });
     }

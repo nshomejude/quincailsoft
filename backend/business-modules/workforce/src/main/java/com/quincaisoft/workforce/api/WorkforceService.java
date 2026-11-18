@@ -40,9 +40,9 @@ public interface WorkforceService {
     Contract contractAt(UUID employeeId, LocalDate date);
     @com.quincaisoft.shared.TenantMutation Payslip draftDetailedPayroll(DetailedPayroll input);
     List<Deduction> deductions(UUID payslipId);
-    Payslip cancelPayroll(UUID id, Approval input);
-    Reversal requestReversal(UUID payslipId, ReversalRequest input);
-    Reversal approveReversal(UUID id, Approval input);
+    @com.quincaisoft.shared.TenantMutation Payslip cancelPayroll(UUID id, Approval input);
+    @com.quincaisoft.shared.TenantMutation Reversal requestReversal(UUID payslipId, ReversalRequest input);
+    @com.quincaisoft.shared.TenantMutation Reversal approveReversal(UUID id, Approval input);
     @com.quincaisoft.shared.TenantMutation Payment payBank(UUID payslipId, BankPayment input);
     List<Reversal> reversals(UUID payslipId);
     List<Payment> payments(UUID payslipId);

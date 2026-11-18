@@ -7,11 +7,11 @@ public interface SubscriptionQuotaService {
  record Reserve(UUID operationId,Resource resource,UUID subjectId){}
  record Reservation(UUID id,Resource resource,UUID subjectId,UUID companyId,String units,String status,Instant createdAt){}
  List<Usage> usage();
- Reservation reserve(Reserve input);
+ @com.quincaisoft.shared.TenantMutation Reservation reserve(Reserve input);
  Reservation get(UUID id);
- Reservation release(UUID operationId,UUID reservationId);
+ @com.quincaisoft.shared.TenantMutation Reservation release(UUID operationId,UUID reservationId);
  /** Internal owning-command hook. Binding lasts only in the caller's transaction. */
- void bind(UUID reservationId);
+ @com.quincaisoft.shared.TenantMutation void bind(UUID reservationId);
  /** Does not allocate usage; verifies the authoritative owning-table trigger consumed the hold. */
  Reservation committed(UUID reservationId);
  void requireCapacity(Resource resource,long requestedCount);
