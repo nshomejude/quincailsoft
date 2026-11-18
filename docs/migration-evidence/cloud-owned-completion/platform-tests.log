@@ -1,0 +1,23 @@
+✔ explicit safe locale overrides browser preference (1.054566ms)
+✔ browser language respects preference quality and exclusions (0.181427ms)
+✔ French workflow and failures translate without changing amounts or references (0.356055ms)
+✔ preserves integer amounts beyond JavaScript safe number range (12.698207ms)
+✔ rejects noncanonical or overflowing amount -1 (0.424296ms)
+✔ rejects noncanonical or overflowing amount 1.2 (0.103172ms)
+✔ rejects noncanonical or overflowing amount 1e4 (0.150112ms)
+✔ rejects noncanonical or overflowing amount 01 (0.092847ms)
+✔ rejects noncanonical or overflowing amount NaN (0.075732ms)
+✔ rejects noncanonical or overflowing amount 9223372036854775808 (0.079697ms)
+✔ total overflow and excessive discount fail (0.152615ms)
+✔ invalid and missing IDs rejected (0.491305ms)
+✔ version cannot silently lose precision (0.298711ms)
+✔ calendar dates cannot silently roll over (0.588098ms)
+✔ bank evidence digest is normalized and malformed evidence rejected (0.334383ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 158.78931

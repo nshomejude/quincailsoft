@@ -1,0 +1,12 @@
+✔ qualified ResponseEntity workforce exports retain declared media and string payload (1.513544ms)
+✔ billing printable records retain HTML content type (0.20341ms)
+✔ detailed payroll exposes nested payroll and explicit deduction line shapes (0.184943ms)
+✔ report route enum includes actual expanded source catalog (0.547908ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 114.242828

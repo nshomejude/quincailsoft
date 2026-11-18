@@ -1,0 +1,11 @@
+✔ workforce BFF allowlist excludes unrelated APIs and method escalation (1.265568ms)
+✔ period filters reject malformed dates and offsets (1.000967ms)
+✔ employee edit cannot silently change effective dated salary or contract type (0.297659ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 196.199363
