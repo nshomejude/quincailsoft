@@ -4,7 +4,7 @@ import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 export const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
-export const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+export const read=p=>fs.readFileSync(path.join(root,p),'utf8').replace(/\r\n/g,'\n');
 export function files(dir){if(!fs.existsSync(path.join(root,dir)))return [];return fs.readdirSync(path.join(root,dir),{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name)).flatMap(e=>['node_modules','target','.git','.next','__pycache__','runtime'].includes(e.name)?[]:e.isDirectory()?files(dir+'/'+e.name):[dir+'/'+e.name]);}
 function span(lines,index){const indent=lines[index].match(/^\s*/)[0].length;let end=index+1;while(end<lines.length){if(lines[end].trim()&&!lines[end].trimStart().startsWith('#')&&lines[end].match(/^\s*/)[0].length<=indent)break;end++;}return {line:index+1,endLine:end,source:lines.slice(index,end).join('\n')};}
 const ownerFor=(file,text='')=>file.includes('inventory_workflows')?'m08-inventory':file.includes('finance_workflows')||file.includes('mobile_money')?'m03-finance':file.includes('operations')?'m09-operations':/snapshot|document|report/i.test(text)?'m10-documents-reports':file.endsWith('.cjs')?'m05-web':'root-identity-master-data';
