@@ -87,3 +87,9 @@ safety checks before the full-application historical replay was interrupted.
 There is no combined result for that run. Docker Desktop was restarted, and
 the original preview database volume recovered. Windows loopback checks
 returned HTTP 200 for the preview and Keycloak sign-in and UP for the Java API.
+
+## Cloud delivery after merging PRs 5–11
+
+All seven PRs were merged into `handover/codex-computer-2026-11-18`, culminating at `831d2faf55c65832182086be780f356cc3d3b0ad`. Main remains separate. The subsequent cloud implementation owns V27–V30, onboarding bootstrap APIs, subscription lifecycle, workforce lifecycle, operational documents/reports, platform-admin, new web workforce routes, and shared billing command enforcement. Existing Desktop historical importer/catalog flows are preserved.
+
+The new implementation and source-bound verification are recorded in `docs/migration-evidence/cloud-owned-completion/`. These results supersede the earlier cloud checkpoint only for the explicitly tested changes; the earlier evidence remains historical. Full module/screen/parity/release acceptance is not inferred from compilation or test counts.

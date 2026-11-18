@@ -188,6 +188,8 @@
         "record:service"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/security/DeploymentSafetyPostgresTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/SecurityBoundaryTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
@@ -320,7 +322,6 @@
         "branch:server/policy.py:23",
         "branch:server/policy.py:26",
         "branch:server/policy.py:30",
-        "branch:server/policy.py:34",
         "branch:server/server.py:54",
         "branch:server/server.py:63",
         "branch:server/server.py:69",
@@ -340,6 +341,7 @@
         "record:identity"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java"
       ],
       "executedAcceptance": [
@@ -475,7 +477,6 @@
         "branch:server/policy.py:23",
         "branch:server/policy.py:26",
         "branch:server/policy.py:30",
-        "branch:server/policy.py:34",
         "branch:server/server.py:54",
         "branch:server/server.py:63",
         "branch:server/server.py:69",
@@ -495,6 +496,7 @@
         "record:identity"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java"
       ],
       "executedAcceptance": [],
@@ -756,14 +758,24 @@
         "catalog:write"
       ],
       "legacyParityCandidates": [
+        "branch:server/policy.py:23",
+        "branch:server/policy.py:26",
+        "branch:server/policy.py:34",
+        "branch:server/server.py:80",
+        "branch:server/server.py:95",
         "branch:server/server.py:100",
         "branch:server/server.py:280",
         "branch:server/server.py:314",
         "branch:server/server.py:319",
         "branch:server/server.py:371",
+        "branch:server/server.py:373",
         "branch:server/server.py:383",
         "record:product",
         "record:category",
+        "record:supplier",
+        "record:supplier_return",
+        "record:identity",
+        "record:supplier_invoice",
         "record:service"
       ],
       "integrationTestCandidates": [
@@ -952,14 +964,24 @@
         "catalog:write"
       ],
       "legacyParityCandidates": [
+        "branch:server/policy.py:23",
+        "branch:server/policy.py:26",
+        "branch:server/policy.py:34",
+        "branch:server/server.py:80",
+        "branch:server/server.py:95",
         "branch:server/server.py:100",
         "branch:server/server.py:280",
         "branch:server/server.py:314",
         "branch:server/server.py:319",
         "branch:server/server.py:371",
+        "branch:server/server.py:373",
         "branch:server/server.py:383",
         "record:product",
         "record:category",
+        "record:supplier",
+        "record:supplier_return",
+        "record:identity",
+        "record:supplier_invoice",
         "record:service"
       ],
       "integrationTestCandidates": [
@@ -1148,14 +1170,24 @@
         "catalog:write"
       ],
       "legacyParityCandidates": [
+        "branch:server/policy.py:23",
+        "branch:server/policy.py:26",
+        "branch:server/policy.py:34",
+        "branch:server/server.py:80",
+        "branch:server/server.py:95",
         "branch:server/server.py:100",
         "branch:server/server.py:280",
         "branch:server/server.py:314",
         "branch:server/server.py:319",
         "branch:server/server.py:371",
+        "branch:server/server.py:373",
         "branch:server/server.py:383",
         "record:product",
         "record:category",
+        "record:supplier",
+        "record:supplier_return",
+        "record:identity",
+        "record:supplier_invoice",
         "record:service"
       ],
       "integrationTestCandidates": [
@@ -1347,6 +1379,7 @@
         "branch:server/inventory_workflows.py:53",
         "branch:server/inventory_workflows.py:63",
         "branch:server/inventory_workflows.py:77",
+        "branch:server/inventory_workflows.py:84",
         "branch:server/inventory_workflows.py:98",
         "branch:server/inventory_workflows.py:110",
         "branch:server/inventory_workflows.py:118",
@@ -1363,6 +1396,8 @@
         "branch:server/inventory_workflows.py:168",
         "branch:server/inventory_workflows.py:176",
         "branch:server/inventory_workflows.py:180",
+        "branch:server/inventory_workflows.py:196",
+        "branch:server/inventory_workflows.py:204",
         "branch:server/inventory_workflows.py:205",
         "branch:server/inventory_workflows.py:208",
         "branch:server/inventory_workflows.py:211",
@@ -1373,6 +1408,7 @@
       "integrationTestCandidates": [
         "backend/business-modules/inventory/src/test/java/com/quincaisoft/inventory/PostgresInventoryWorkflowTest.java",
         "backend/business-modules/inventory/src/test/java/com/quincaisoft/inventory/StockBalanceTest.java",
+        "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
         "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "executedAcceptance": [],
@@ -1559,6 +1595,7 @@
         "branch:server/inventory_workflows.py:53",
         "branch:server/inventory_workflows.py:63",
         "branch:server/inventory_workflows.py:77",
+        "branch:server/inventory_workflows.py:84",
         "branch:server/inventory_workflows.py:98",
         "branch:server/inventory_workflows.py:110",
         "branch:server/inventory_workflows.py:118",
@@ -1575,6 +1612,8 @@
         "branch:server/inventory_workflows.py:168",
         "branch:server/inventory_workflows.py:176",
         "branch:server/inventory_workflows.py:180",
+        "branch:server/inventory_workflows.py:196",
+        "branch:server/inventory_workflows.py:204",
         "branch:server/inventory_workflows.py:205",
         "branch:server/inventory_workflows.py:208",
         "branch:server/inventory_workflows.py:211",
@@ -1585,6 +1624,7 @@
       "integrationTestCandidates": [
         "backend/business-modules/inventory/src/test/java/com/quincaisoft/inventory/PostgresInventoryWorkflowTest.java",
         "backend/business-modules/inventory/src/test/java/com/quincaisoft/inventory/StockBalanceTest.java",
+        "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
         "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "executedAcceptance": [],
@@ -1771,6 +1811,7 @@
         "branch:server/inventory_workflows.py:53",
         "branch:server/inventory_workflows.py:63",
         "branch:server/inventory_workflows.py:77",
+        "branch:server/inventory_workflows.py:84",
         "branch:server/inventory_workflows.py:98",
         "branch:server/inventory_workflows.py:110",
         "branch:server/inventory_workflows.py:118",
@@ -1787,6 +1828,8 @@
         "branch:server/inventory_workflows.py:168",
         "branch:server/inventory_workflows.py:176",
         "branch:server/inventory_workflows.py:180",
+        "branch:server/inventory_workflows.py:196",
+        "branch:server/inventory_workflows.py:204",
         "branch:server/inventory_workflows.py:205",
         "branch:server/inventory_workflows.py:208",
         "branch:server/inventory_workflows.py:211",
@@ -1797,6 +1840,7 @@
       "integrationTestCandidates": [
         "backend/business-modules/inventory/src/test/java/com/quincaisoft/inventory/PostgresInventoryWorkflowTest.java",
         "backend/business-modules/inventory/src/test/java/com/quincaisoft/inventory/StockBalanceTest.java",
+        "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
         "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java"
       ],
       "executedAcceptance": [],
@@ -1886,7 +1930,9 @@
         "record:supplier_invoice",
         "record:journal"
       ],
-      "integrationTestCandidates": [],
+      "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java"
+      ],
       "executedAcceptance": [],
       "remaining": [
         "Related source exists; canonical field/action invariants, complete workflow and end-to-end acceptance are not certified.",
@@ -2030,7 +2076,6 @@
         "branch:server/finance_workflows.py:114",
         "branch:server/finance_workflows.py:120",
         "branch:server/finance_workflows.py:124",
-        "branch:server/finance_workflows.py:136",
         "branch:server/finance_workflows.py:162",
         "branch:server/finance_workflows.py:164",
         "branch:server/finance_workflows.py:172",
@@ -2479,7 +2524,6 @@
         "branch:server/policy.py:23",
         "branch:server/policy.py:26",
         "branch:server/policy.py:32",
-        "branch:server/policy.py:34",
         "branch:server/server.py:63",
         "branch:server/server.py:80",
         "branch:server/server.py:95",
@@ -2489,14 +2533,13 @@
         "branch:server/server.py:258",
         "branch:server/server.py:276",
         "branch:server/server.py:299",
-        "branch:server/server.py:314",
         "branch:server/server.py:322",
         "branch:server/server.py:373",
         "record:customer",
-        "record:count",
-        "record:service"
+        "record:count"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java"
       ],
       "executedAcceptance": [],
@@ -2910,6 +2953,7 @@
         "record:fulfillment"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java"
@@ -3870,8 +3914,10 @@
         "branch:server/server.py:361"
       ],
       "integrationTestCandidates": [
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
         "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
-        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java"
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
+        "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresOperationalDocumentsTest.java"
       ],
       "executedAcceptance": [],
       "remaining": [

@@ -21,4 +21,5 @@ public interface SubscriptionBillingService {
     Invoice issue(UUID requestId, Issue input);
     List<Invoice> platformInvoices(UUID tenantId);
     List<Invoice> merchantInvoices();
+    String printInvoice(UUID id,boolean platform,String locale);
 }
