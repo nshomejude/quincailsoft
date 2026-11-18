@@ -57,8 +57,20 @@ start_snapshot
 if "$root/tenant-manifest-postgres.sh" "$snapshot" "$a" "$evidence/cross-tenant";then exit 1;else [[ $? == 2 ]];fi
 grep -q $'CROSS_TENANT:child_company_id_fkey\t1' "$evidence/cross-tenant/blockers.tsv"
 end_snapshot
+# Reverse edge: an unrelated tenant child points into the target tenant. The
+# target-owned child remains valid, so an outgoing-only check would miss this.
 psql -X -v ON_ERROR_STOP=1 <<SQL >>"$evidence/setup.log" 2>&1
 UPDATE child SET company_id='$a' WHERE tenant_id='$a';
+UPDATE child SET company_id='$a' WHERE tenant_id='$b';
+SQL
+start_snapshot
+if "$root/tenant-manifest-postgres.sh" "$snapshot" "$a" "$evidence/inbound-cross-tenant";then exit 1;else [[ $? == 2 ]];fi
+grep -q $'CROSS_TENANT:child_company_id_fkey\t1' "$evidence/inbound-cross-tenant/blockers.tsv"
+# Detection does not add unrelated child rows to the target fingerprint.
+cmp "$evidence/initial/tenant-fingerprints.tsv" "$evidence/inbound-cross-tenant/tenant-fingerprints.tsv"
+end_snapshot
+psql -X -v ON_ERROR_STOP=1 <<SQL >>"$evidence/setup.log" 2>&1
+UPDATE child SET company_id='$b' WHERE tenant_id='$b';
 CREATE TABLE external_dependency(id uuid PRIMARY KEY,company_id uuid REFERENCES company(id));
 INSERT INTO external_dependency VALUES('$a','$a');
 SQL
@@ -72,5 +84,5 @@ if "$root/tenant-manifest-postgres.sh" "$snapshot" "$a" "$evidence/unknown-schem
 grep -q 'Unsupported schema' "$evidence/unknown-schema.log"
 end_snapshot
 ! grep -R -E 'SECRET unrelated|CHANGED unrelated' "$evidence/initial" "$evidence/new-snapshot"
-printf '%s\n' 'PASS: target-only fingerprints, snapshot consistency, unrelated-change invariance, RLS denial, evidence-overwrite denial, cross-tenant FK blocker, inbound unscoped dependency blocker, unknown-schema rejection' >"$evidence/result.txt"
+printf '%s\n' 'PASS: target-only fingerprints, snapshot consistency, unrelated-change invariance, RLS denial, evidence-overwrite denial, bidirectional cross-tenant FK blockers, inbound unscoped dependency blocker, unknown-schema rejection' >"$evidence/result.txt"
 cat "$evidence/result.txt"

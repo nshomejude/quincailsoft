@@ -12,12 +12,16 @@ The operator tool consumes a live exported PostgreSQL18 snapshot, canonical tena
 
 Public is the explicit schema allowlist. Foreign tables, sequences, materialized views, database large objects and tables in additional schemas are rejected. Runtime RLS-filtered reads fail with row_security=off rather than silently certifying a partial tenant. Table classification includes RLS/forced-RLS metadata and explicitly identifies every unscoped table not exported. Partition roots include their leaves once.
 
-Both directions of declared FKs are inspected. Cross-tenant parent references, target references to unscoped parents and unscoped children referencing target rows create counted blockers. Unvalidated FKs are blockers. The tool returns exit 2 and BLOCKED for these dependencies, keeps its count/hash evidence for review, and never calls these incomplete closures successful. Query/permission failures instead record FAIL. Existing evidence cannot be overwritten.
+Both directions of declared FKs are inspected. Both target-child → unrelated-parent and unrelated-child → target-parent references, target references to unscoped parents and unscoped children referencing target rows create counted blockers. Unvalidated FKs are blockers. The tool returns exit 2 and BLOCKED for these dependencies, keeps its count/hash evidence for review, and never calls these incomplete closures successful. Query/permission failures instead record FAIL. Existing evidence cannot be overwritten.
 
 ## Acceptance
 
-`test-tenant-manifest.sh` uses real PostgreSQL18: two tenants, forced RLS, a weak FK permitting a deliberate cross-tenant reference, and an unscoped child dependency. It checks snapshot consistency, target fingerprint invariance after unrelated changes, RLS denial, overwrite denial, counted cross-tenant/inbound closure blockers and schema rejection. Root executes this script serially; no runtime PASS is claimed before results arrive.
+`test-tenant-manifest.sh` uses real PostgreSQL18: two tenants, forced RLS, a weak FK permitting a deliberate cross-tenant reference, and an unscoped child dependency. It checks snapshot consistency, target fingerprint invariance after unrelated changes, RLS denial, overwrite denial, counted outgoing and incoming cross-tenant closure blockers (with unchanged target fingerprints), inbound unscoped closure blockers and schema rejection. Root executes this script serially; no runtime PASS is claimed before results arrive.
 
 ## Exact remaining gaps
 
 This is a database fingerprint and declared-FK preflight, not complete tenant extraction. Unscoped control-plane/identity dependencies require reviewed extraction adapters. JSON/polymorphic references, external documents, signing/IdP keys, ownership authorization, legal-hold approvals, live writer fencing, routing cutover, post-backup fact replay and staged resume are not verified by this tool. Source and candidate schemas must be frozen while fingerprinting; exported MVCC snapshots are not a DDL coordination mechanism. No production data is changed and `production_cutover_allowed=false` is always recorded. Recovery API remains receipt-review-only.
+
+## PR15 review correction
+
+The initial tenant-scoped FK predicate checked only target-owned child rows. It missed an unrelated tenant child referencing a target parent. The predicate now checks both directions; a dedicated reversed-edge fixture requires BLOCKED while proving the target fingerprint remains unchanged. Root must rerun the PostgreSQL18 fixture against these source hashes before marking this correction PASS.

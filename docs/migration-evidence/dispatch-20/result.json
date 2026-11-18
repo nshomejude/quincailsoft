@@ -37,8 +37,8 @@
     "backend/business-modules/operations/src/test/java/com/quincaisoft/operations/ExportJobPostgresTest.java": "f91a5f9b1f5c640289ec33b56fac3e384c2bf2e7034695398f90027017d25ba5",
     "backend/business-modules/suppliers/src/test/java/com/quincaisoft/suppliers/SupplierReplayPostgresTest.java": "78138557d18245fc8c010a61f9f56b4210b4df3c31de32472e67ed5b9726b44f",
     "backend/db-migrations/src/main/resources/db/migration/V49__normalized_supplier_invoice_identity.sql": "7e1504f7da83d66ffcba78674b0ac784e8ad09c7244b3874274e6bc048373920",
-    "infrastructure/recovery/tenant-manifest-postgres.sh": "fc96b360f009efec546b84a8bfa304485fd9b43d69458ce696577bd2a1a41182",
-    "infrastructure/recovery/test-tenant-manifest.sh": "e216e8f8b1084c9e4e865703cb6dfaa5d3042206eac385476ad06a0ed368e0bf",
+    "infrastructure/recovery/tenant-manifest-postgres.sh": "87328c44b6aec25ba73a46eb90182aaa4ff86b4a9dd1e3b596c774971ad2dcd0",
+    "infrastructure/recovery/test-tenant-manifest.sh": "43ee24541dc1bfbd18154ece6152d64b42d6ee65aa7e3180bdcd76509fe8fb05",
     "apps/web-admin/app/reports/[code]/export/route.ts": "b2fb5b09fd052e7316aba37c29f82f132b13c6118cbd793a055a11d1b3237d68",
     "apps/web-admin/app/reports/page.tsx": "e8f791b5de93af83e3b15e6ab516a3ed254bed55c5049c1f2b3fbbc23345b846",
     "backend/business-modules/catalog/pom.xml": "74aaded3f5ba09b3cfa951214b8540fb23a341d43330532be209aab0d7148eb1",
@@ -83,5 +83,6 @@
     "packages/generated-ts-sdk/schema.d.ts": "3fc1208758cc19e6e690c7e04a052fa6e1bd9646f98740544d055e482b44ae59"
   },
   "fullMigrationAcceptance": "OPEN: 735 requirements not accepted",
-  "liveOidcAndVisualAcceptance": "NOT_RUN"
+  "liveOidcAndVisualAcceptance": "NOT_RUN",
+  "reviewCorrection": "PR15 P2: bidirectional tenant FK references detected; PostgreSQL fixture rerun PASS"
 }

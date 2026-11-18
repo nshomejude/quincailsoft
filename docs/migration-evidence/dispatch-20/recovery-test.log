@@ -1,1 +1,1 @@
-PASS: target-only fingerprints, snapshot consistency, unrelated-change invariance, RLS denial, evidence-overwrite denial, cross-tenant FK blocker, inbound unscoped dependency blocker, unknown-schema rejection
+PASS: target-only fingerprints, snapshot consistency, unrelated-change invariance, RLS denial, evidence-overwrite denial, bidirectional cross-tenant FK blockers, inbound unscoped dependency blocker, unknown-schema rejection

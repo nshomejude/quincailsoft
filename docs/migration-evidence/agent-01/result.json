@@ -7,13 +7,14 @@
     "44.3"
   ],
   "sourceSha256": {
-    "infrastructure/recovery/tenant-manifest-postgres.sh": "fc96b360f009efec546b84a8bfa304485fd9b43d69458ce696577bd2a1a41182",
-    "infrastructure/recovery/test-tenant-manifest.sh": "e216e8f8b1084c9e4e865703cb6dfaa5d3042206eac385476ad06a0ed368e0bf"
+    "infrastructure/recovery/tenant-manifest-postgres.sh": "87328c44b6aec25ba73a46eb90182aaa4ff86b4a9dd1e3b596c774971ad2dcd0",
+    "infrastructure/recovery/test-tenant-manifest.sh": "43ee24541dc1bfbd18154ece6152d64b42d6ee65aa7e3180bdcd76509fe8fb05"
   },
   "database": "PostgreSQL18 synthetic disposable schema, not full V1\u2013V40",
   "syntax": "PASS",
-  "runtime": "PASS: root final TSV source rerun on PostgreSQL18",
+  "runtime": "PASS PostgreSQL18 final bidirectional FK regression",
   "productionCutoverAllowed": false,
   "fullDependencyClosure": "NOT_IMPLEMENTED",
-  "legacyAcceptanceAdvanced": false
+  "legacyAcceptanceAdvanced": false,
+  "reviewCorrection": "Detect incoming unrelated-tenant child references to target parent as well as outgoing cross-tenant references"
 }

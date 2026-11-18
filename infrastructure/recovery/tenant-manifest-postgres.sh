@@ -40,7 +40,7 @@ query "WITH tables AS (
  SELECT format('SELECT %L, count(*) FROM public.%I c JOIN public.%I p ON %s WHERE %s',
  CASE WHEN child_scope IS NULL THEN 'UNSCOPED_CHILD:' WHEN parent_scope IS NULL THEN 'UNSCOPED_PARENT:' ELSE 'CROSS_TENANT:' END||conname,
  child,parent,predicate,
- CASE WHEN child_scope IS NULL THEN format('p.%I=%L::uuid',parent_scope,'$tenant') WHEN parent_scope IS NULL THEN format('c.%I=%L::uuid',child_scope,'$tenant') ELSE format('c.%I=%L::uuid AND p.%I IS DISTINCT FROM %L::uuid',child_scope,'$tenant',parent_scope,'$tenant') END)
+ CASE WHEN child_scope IS NULL THEN format('p.%I=%L::uuid',parent_scope,'$tenant') WHEN parent_scope IS NULL THEN format('c.%I=%L::uuid',child_scope,'$tenant') ELSE format('((c.%I=%L::uuid AND p.%I IS DISTINCT FROM %L::uuid) OR (p.%I=%L::uuid AND c.%I IS DISTINCT FROM %L::uuid))',child_scope,'$tenant',parent_scope,'$tenant',parent_scope,'$tenant',child_scope,'$tenant') END)
  FROM edges WHERE child_scope IS NOT NULL OR parent_scope IS NOT NULL ORDER BY conname COLLATE \"C\"" >"$evidence/dependency-checks.sql"
 : >"$evidence/dependency-counts.tsv"
 while IFS= read -r statement; do [[ -z "$statement" ]] || query "$statement" >>"$evidence/dependency-counts.tsv"; done <"$evidence/dependency-checks.sql"
