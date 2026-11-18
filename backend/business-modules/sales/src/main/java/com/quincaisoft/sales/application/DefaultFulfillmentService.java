@@ -62,6 +62,64 @@ import jakarta.persistence.*;import org.springframework.stereotype.Service;impor
  }
  public Fulfillment get(UUID id){return tx.execute(()->view(find(id, LockModeType.NONE)));}
  public Fulfillment draft(Draft c){if(c.businessDate()==null||c.customerId()==null||c.saleId()==null)throw new IllegalArgumentException("Sale, customer and date required");text(c.reason());return tx.execute(()->once(c.operationId(),"DRAFT|"+(c.delivery()==null?c.legacyFingerprintMaterial():json.writeValueAsString(c)),()->{var sale=sales.get(c.saleId());if(!sale.status().equals("POSTED")||!sale.customerId().equals(c.customerId())||c.businessDate().isBefore(sale.businessDate()))throw new IllegalArgumentException("Completed sale for the same customer and valid date required");var s=TenantContext.current();var f=new FulfillmentEntity();f.tenantId=s.tenantId();f.companyId=s.companyId();f.branchId=s.branchId();f.id=UUID.randomUUID();f.saleId=c.saleId();f.customerId=c.customerId();f.businessDate=c.businessDate();f.createdBy=s.actorId();f.createdAt=Instant.now();f.status="PENDING";applyDetails(f,c.delivery());em.persist(f);em.flush();return f;}));}
+ @Override
+ public Fulfillment dispatchLines(UUID id, DispatchLines command) {
+  text(command.reason());
+  if (command.version() == null || !command.version().matches("0|[1-9][0-9]*"))
+   throw new IllegalArgumentException("Version required");
+  if (command.lines() == null || command.lines().isEmpty() || command.lines().size() > 500)
+   throw new IllegalArgumentException("One to 500 dispatch lines required");
+  long version = Long.parseLong(command.version());
+  return tx.execute(() -> once(command.operationId(),"DISPATCH_LINES|"+id+"|"+json.writeValueAsString(command),() -> {
+   var task = find(id, LockModeType.PESSIMISTIC_WRITE);
+   if (task.version != version) throw new RevisionConflict("Fulfillment changed");
+   if (!Set.of("PENDING","PARTIAL").contains(task.status)) throw new IllegalStateException("Invalid fulfillment state");
+   finance.requireOpenPeriod(task.businessDate);
+   stock.requireCustodyCollected(task.saleId);
+
+   var remaining = new HashMap<UUID,Long>();
+   for (var line : sales.valuation(task.saleId).lines())
+    remaining.merge(line.productId(),line.quantityMilli(),Math::addExact);
+   var previous = em.createNativeQuery("""
+       select product_id, sum(quantity_milli) from fulfillment_dispatch_line
+       where tenant_id=:tenant and company_id=:company and branch_id=:branch and fulfillment_id=:id
+       group by product_id
+       """,Object[].class)
+       .setParameter("tenant",task.tenantId).setParameter("company",task.companyId)
+       .setParameter("branch",task.branchId).setParameter("id",task.id).getResultList();
+   for (var result : previous) {
+    var row = (Object[]) result;
+    remaining.compute((UUID) row[0],(product,quantity) -> Math.subtractExact(quantity,
+        ((java.math.BigDecimal) row[1]).longValueExact()));
+   }
+
+   var seen = new HashSet<UUID>();
+   var scope = TenantContext.current();
+   for (var line : command.lines()) {
+    if (line == null || line.productId() == null || !seen.add(line.productId()) ||
+        line.quantityMilli() == null || !line.quantityMilli().matches("[1-9][0-9]*"))
+     throw new IllegalArgumentException("Distinct products and positive dispatch quantities required");
+    long quantity = Long.parseLong(line.quantityMilli());
+    long available = remaining.getOrDefault(line.productId(),0L);
+    if (quantity > available) throw new IllegalArgumentException("Dispatch exceeds remaining authorized quantity");
+    remaining.put(line.productId(),available-quantity);
+    em.createNativeQuery("""
+        insert into fulfillment_dispatch_line
+        (tenant_id,company_id,branch_id,fulfillment_id,operation_id,product_id,quantity_milli,dispatched_at,dispatched_by)
+        values (:tenant,:company,:branch,:id,:operation,:product,:quantity,:at,:actor)
+        """).setParameter("tenant",task.tenantId).setParameter("company",task.companyId)
+        .setParameter("branch",task.branchId).setParameter("id",task.id)
+        .setParameter("operation",command.operationId()).setParameter("product",line.productId())
+        .setParameter("quantity",quantity).setParameter("at",Instant.now()).setParameter("actor",scope.actorId())
+        .executeUpdate();
+   }
+   var nextStatus = remaining.values().stream().allMatch(quantity -> quantity == 0) ? "DISPATCHED" : "PARTIAL";
+   if (nextStatus.equals(task.status)) em.lock(task, LockModeType.PESSIMISTIC_FORCE_INCREMENT);
+   task.status = nextStatus;
+   em.flush();
+   return task;
+  }));
+ }
  public Fulfillment dispatch(UUID id,Action c){return action(id,c,false);}
  public Fulfillment complete(UUID id,Action c){return action(id,c,true);}
  private Fulfillment action(UUID id,Action c,boolean complete){text(c.reason());if(c.version()==null||!c.version().matches("0|[1-9][0-9]*"))throw new IllegalArgumentException("Version required");long version=Long.parseLong(c.version());if(complete)text(c.proofReference());return tx.execute(()->once(c.operationId(),(complete?"COMPLETE":"DISPATCH")+"|"+id+"|"+c,()->{var f=find(id, LockModeType.PESSIMISTIC_WRITE);if(f.version!=version)throw new RevisionConflict("Fulfillment changed");if(!(complete?Set.of("PENDING","DISPATCHED").contains(f.status):f.status.equals("PENDING")))throw new IllegalStateException("Invalid fulfillment state");finance.requireOpenPeriod(f.businessDate);stock.requireCustodyCollected(f.saleId);if(complete){f.proofReference=c.proofReference();f.status="COMPLETED";}else f.status="DISPATCHED";em.flush();return f;}));}
