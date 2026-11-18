@@ -1,0 +1,17 @@
+package com.quincaisoft.inventory.web;
+import com.quincaisoft.inventory.api.InventoryQuality;import org.springframework.web.bind.annotation.*;import org.springframework.security.access.prepost.PreAuthorize;import java.util.*;
+@RestController @RequestMapping("/api/v1/inventory") public class InventoryQualityController {
+private final InventoryQuality quality;public InventoryQualityController(InventoryQuality quality){this.quality=quality;}
+@GetMapping("/lots") @PreAuthorize("hasAnyAuthority('inventory:read','SCOPE_inventory:read')") public List<InventoryQuality.Lot> lots(){return quality.lots();}
+@GetMapping("/recalls") @PreAuthorize("hasAnyAuthority('inventory:read','SCOPE_inventory:read')") public List<InventoryQuality.Recall> recalls(){return quality.recalls();}
+@GetMapping("/reservations") @PreAuthorize("hasAnyAuthority('inventory:read','SCOPE_inventory:read')") public List<InventoryQuality.Reservation> reservations(){return quality.reservations();}
+@PostMapping("/lots") @PreAuthorize("hasAnyAuthority('inventory:approve','SCOPE_inventory:approve')") public InventoryQuality.Lot registerLot(@RequestHeader("Idempotency-Key")UUID key,@RequestBody InventoryQuality.RegisterLot c){match(key,c.operationId());return quality.registerLot(c);}
+@PostMapping("/recalls") @PreAuthorize("hasAnyAuthority('inventory:write','SCOPE_inventory:write')") public InventoryQuality.Recall draftRecall(@RequestHeader("Idempotency-Key")UUID key,@RequestBody InventoryQuality.DraftRecall c){match(key,c.operationId());return quality.draftRecall(c);}
+@PostMapping("/reservations") @PreAuthorize("hasAnyAuthority('inventory:write','SCOPE_inventory:write')") public InventoryQuality.Reservation reserve(@RequestHeader("Idempotency-Key")UUID key,@RequestBody InventoryQuality.Reserve c){match(key,c.operationId());return quality.reserve(c);}
+@PostMapping("/recalls/{id}/approve") @PreAuthorize("hasAnyAuthority('inventory:approve','SCOPE_inventory:approve')") public InventoryQuality.Recall approve(@PathVariable UUID id,@RequestHeader("Idempotency-Key")UUID key,@RequestBody InventoryQuality.Action c){match(key,c.operationId());return quality.approve(id,c);}
+@PostMapping("/recalls/{id}/block") @PreAuthorize("hasAnyAuthority('inventory:approve','SCOPE_inventory:approve')") public InventoryQuality.Recall block(@PathVariable UUID id,@RequestHeader("Idempotency-Key")UUID key,@RequestBody InventoryQuality.Action c){match(key,c.operationId());return quality.block(id,c);}
+@PostMapping("/recalls/{id}/recover") @PreAuthorize("hasAnyAuthority('inventory:approve','SCOPE_inventory:approve')") public InventoryQuality.Recall recover(@PathVariable UUID id,@RequestHeader("Idempotency-Key")UUID key,@RequestBody InventoryQuality.Action c){match(key,c.operationId());return quality.recover(id,c);}
+@PostMapping("/recalls/{id}/dispose") @PreAuthorize("hasAnyAuthority('inventory:approve','SCOPE_inventory:approve')") public InventoryQuality.Recall dispose(@PathVariable UUID id,@RequestHeader("Idempotency-Key")UUID key,@RequestBody InventoryQuality.Action c){match(key,c.operationId());return quality.dispose(id,c);}
+@PostMapping("/reservations/{id}/release") @PreAuthorize("hasAnyAuthority('inventory:write','SCOPE_inventory:write')") public InventoryQuality.Reservation release(@PathVariable UUID id,@RequestHeader("Idempotency-Key")UUID key,@RequestBody InventoryQuality.Release c){match(key,c.operationId());return quality.release(id,c);}
+private static void match(UUID a,UUID b){if(!a.equals(b))throw new IllegalArgumentException("Operation ID mismatch");}
+}

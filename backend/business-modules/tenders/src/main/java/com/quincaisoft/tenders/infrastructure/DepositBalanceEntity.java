@@ -9,6 +9,6 @@ import jakarta.persistence.*;import java.util.*;import java.time.*;import java.i
  @Column(name="original_xaf") public long originalXaf;
  @Column(name="allocated_xaf") public long allocatedXaf;
  @Column(name="refunded_xaf") public long refundedXaf;
- @Version @Column(name="version") public long version;
+ @Column(name="funding_kind") public String fundingKind="CASH";@Version @Column(name="version") public long version;
  public record Key(UUID tenantId,UUID companyId,UUID id) implements Serializable {}
 }

@@ -1,5 +1,9 @@
 package com.quincaisoft.sales;
 import com.quincaisoft.sales.api.SalesService;
+import com.quincaisoft.sales.api.FulfillmentService;
+import com.quincaisoft.sales.application.DefaultFulfillmentService;
+import com.quincaisoft.inventory.api.InventoryCustody;
+import com.quincaisoft.inventory.application.DefaultInventoryCustody;
 import com.quincaisoft.documents.application.DefaultDocumentService;
 import com.quincaisoft.documents.api.DocumentService;
 import com.quincaisoft.sales.application.DefaultSalesService;
@@ -54,7 +58,26 @@ class PostgresSaleIntegrationTest {
      var next=sales.draft(new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"1000"))));
      sql(owner,"update financial_period set status='Closed'");
      assertThrows(IllegalStateException.class,()->sales.post(next.id(),new SalesService.Post(UUID.randomUUID(),next.version(),"Closed period must rollback")));
-     assertEquals("DRAFT",sales.get(next.id()).status());assertEquals(8000,count(owner,"select quantity_milli from stock_balance"));assertEquals(1,count(owner,"select count(*) from stock_movement"));assertEquals(1,count(owner,"select count(*) from journal_entry"));assertEquals(1,count(owner,"select count(*) from outbox_event"));assertEquals(1,count(owner,"select count(*) from document_snapshot"));return null;
+     assertEquals("DRAFT",sales.get(next.id()).status());assertEquals(8000,count(owner,"select quantity_milli from stock_balance"));assertEquals(1,count(owner,"select count(*) from stock_movement"));assertEquals(1,count(owner,"select count(*) from journal_entry"));assertEquals(1,count(owner,"select count(*) from outbox_event"));assertEquals(1,count(owner,"select count(*) from document_snapshot"));
+     sql(owner,"update financial_period set status='Open'");var custody=new DefaultInventoryCustody(em,tx);var fulfillment=new DefaultFulfillmentService(em,tx,sales,stock,finance);
+     var heldDraft=sales.draft(new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"2000"))));
+     var heldPost=new SalesService.Post(UUID.randomUUID(),heldDraft.version(),"Recognize title while customer goods stay here","SALE_WITH_CUSTOMER_CUSTODY");
+     assertThrows(IllegalStateException.class,()->sales.post(heldDraft.id(),heldPost));assertEquals(8000,count(owner,"select quantity_milli from stock_balance"));assertEquals(0,count(owner,"select count(*) from customer_custody"));
+     var policy=custody.requestPolicy(new InventoryCustody.PolicyRequest(UUID.randomUUID(),"SALE_WITH_CUSTOMER_CUSTODY",LocalDate.of(2026,11,18),"FINANCE-CONTRACT-ACCEPTANCE","Enable approved issuing contract"));var policyApproval=new InventoryCustody.Approve(UUID.randomUUID(),policy.version(),"Finance independently reviewed contract");assertThrows(IllegalStateException.class,()->custody.approvePolicy(policy.id(),policyApproval));
+     var approvedPolicy=TenantContext.call(new TenantScope(t,c,b,UUID.randomUUID()),1,()->custody.approvePolicy(policy.id(),policyApproval));assertEquals("APPROVED",approvedPolicy.status());
+     var heldSale=sales.post(heldDraft.id(),heldPost);assertEquals("SALE_WITH_CUSTOMER_CUSTODY",heldSale.recognitionPolicy());assertEquals(heldSale,sales.post(heldDraft.id(),heldPost));assertEquals(6000,count(owner,"select quantity_milli from stock_balance"));assertEquals(3000,count(owner,"select value_xaf from stock_balance"));assertEquals(2000,count(owner,"select sum(quantity_milli-collected_milli) from customer_custody"));assertEquals(8000,count(owner,"select (select sum(quantity_milli) from stock_balance)+(select sum(quantity_milli-collected_milli) from customer_custody)"));
+     long journalCount=count(owner,"select count(*) from journal_entry"),movementCount=count(owner,"select count(*) from stock_movement");
+     var position=custody.positions().getFirst();assertEquals("1000",position.frozenCostXaf());assertThrows(IllegalStateException.class,()->stock.requireCustodyCollected(heldSale.id()));
+     var task=fulfillment.draft(new FulfillmentService.Draft(UUID.randomUUID(),heldSale.id(),customer,LocalDate.of(2026,11,18),"Prepare customer collection"));assertThrows(IllegalStateException.class,()->fulfillment.dispatch(task.id(),new FulfillmentService.Action(UUID.randomUUID(),task.version(),null,"Must collect custody first")));
+     assertThrows(IllegalArgumentException.class,()->custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),position.version(),"1000"," ","Missing proof must reject")));
+     var collection=new InventoryCustody.Collect(UUID.randomUUID(),position.version(),"1000","CUSTOMER-SIGNED-PICKUP-1","Partial collection");var partial=custody.collect(position.id(),collection);assertEquals("PARTIALLY_COLLECTED",partial.status());assertEquals(partial,custody.collect(position.id(),collection));
+     assertThrows(IllegalArgumentException.class,()->custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),partial.version(),"2000","EXCESS","Excess collection")));
+     assertThrows(RevisionConflict.class,()->custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),position.version(),"1000","STALE","Stale collection")));
+     assertEquals("COLLECTED",custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),partial.version(),"1000","CUSTOMER-SIGNED-PICKUP-2","Final collection")).status());assertEquals(2,custody.collections(position.id()).size());
+     assertEquals(6000,count(owner,"select quantity_milli from stock_balance"));assertEquals(3000,count(owner,"select value_xaf from stock_balance"));assertEquals(journalCount,count(owner,"select count(*) from journal_entry"));assertEquals(movementCount,count(owner,"select count(*) from stock_movement"));assertEquals(0,count(owner,"select sum(quantity_milli-collected_milli) from customer_custody"));
+     var dispatched=fulfillment.dispatch(task.id(),new FulfillmentService.Action(UUID.randomUUID(),task.version(),null,"Dispatch documented handover"));assertThrows(IllegalArgumentException.class,()->fulfillment.complete(task.id(),new FulfillmentService.Action(UUID.randomUUID(),dispatched.version()," ","Missing proof")));var completion=new FulfillmentService.Action(UUID.randomUUID(),dispatched.version(),"SIGNED-DELIVERY","Complete delivery");var completed=fulfillment.complete(task.id(),completion);assertEquals("COMPLETED",completed.status());assertEquals(completed,fulfillment.complete(task.id(),completion));
+     assertTrue(TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,custody::positions).isEmpty());assertTrue(TenantContext.call(new TenantScope(UUID.randomUUID(),c,b,a),1,fulfillment::list).isEmpty());assertThrows(SQLException.class,()->sql(owner,"update customer_custody set frozen_cost_xaf=0"));assertThrows(SQLException.class,()->sql(owner,"update custody_collection set quantity_milli=1"));
+     return null;
     });
    }finally{if(factory!=null)factory.destroy();sql(admin,"DROP DATABASE "+db);sql(admin,"DROP ROLE "+role);}
   }

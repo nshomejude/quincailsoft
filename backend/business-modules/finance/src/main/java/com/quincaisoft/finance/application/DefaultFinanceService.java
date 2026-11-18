@@ -10,8 +10,8 @@ public class DefaultFinanceService implements FinanceService {
  private final EntityManager em; private final ScopedTransactions tx;
  public DefaultFinanceService(EntityManager em,ScopedTransactions tx){this.em=em;this.tx=tx;}
  public void recognizeSale(UUID saleId,UUID operationId,LocalDate date,long revenue,long cost){
-  if(revenue<=0||cost<=0)throw new IllegalArgumentException("Positive sale revenue and cost required");
-  var entries=List.of(new Entry("ACCOUNTS_RECEIVABLE",revenue,0),new Entry("SALES_REVENUE",0,revenue),new Entry("COST_OF_GOODS_SOLD",cost,0),new Entry("MERCHANT_INVENTORY",0,cost));FinanceService.balanced(entries);
+  if(revenue<=0||cost<0)throw new IllegalArgumentException("Positive sale revenue and nonnegative allocated cost required");
+  var entries=new ArrayList<Entry>();entries.add(new Entry("ACCOUNTS_RECEIVABLE",revenue,0));entries.add(new Entry("SALES_REVENUE",0,revenue));if(cost>0){entries.add(new Entry("COST_OF_GOODS_SOLD",cost,0));entries.add(new Entry("MERCHANT_INVENTORY",0,cost));}FinanceService.balanced(entries);
   tx.execute(()->{post(saleId,operationId,date,"SALE",entries);var s=TenantContext.current();var balance=new ReceivableBalanceEntity();balance.tenantId=s.tenantId();balance.companyId=s.companyId();balance.branchId=s.branchId();balance.saleId=saleId;balance.outstandingXaf=revenue;em.persist(balance);em.flush();return null;});
  }
  public void requireOpenPeriod(LocalDate date){

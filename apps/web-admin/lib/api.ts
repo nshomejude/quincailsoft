@@ -12,5 +12,4 @@ export async function api<T>(path:string,init?:RequestInit):Promise<T>{
 }
 export const products=()=>api<Product[]>('products');export const sales=()=>api<Sale[]>('sales');
 export const permitted=(me:Me,permission:string)=>me.authorities.some(a=>a===permission||a==='SCOPE_'+permission);
-export function xaf(value:string){try{return new Intl.NumberFormat('fr-CM',{style:'currency',currency:'XAF',maximumFractionDigits:0}).format(BigInt(value))}catch{return '—'}}
-export function units(value:string){const n=BigInt(value);return (n/1000n).toString()+((n%1000n)?'.'+(n%1000n).toString().padStart(3,'0').replace(/0+$/,''):'')}
+export {xaf,units} from './format';

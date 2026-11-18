@@ -1,0 +1,13 @@
+package com.quincaisoft.tenders.infrastructure;
+import com.quincaisoft.shared.*;import jakarta.persistence.*;import tools.jackson.databind.json.JsonMapper;import java.util.*;import java.util.function.Supplier;import java.security.*;import java.nio.charset.StandardCharsets;
+public final class TenderOperations {
+ private final EntityManager em;private final JsonMapper json;public TenderOperations(EntityManager em,JsonMapper json){this.em=em;this.json=json;}
+ public <T>T once(UUID operation,String material,String type,Class<T> dto,Supplier<T> action,java.util.function.Function<T,UUID> id){
+ if(operation==null)throw new IllegalArgumentException("Operation ID required");var s=TenantContext.current();String hash;try{hash=HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(material.getBytes(StandardCharsets.UTF_8)));}catch(Exception e){throw new IllegalStateException(e);}
+ em.createNativeQuery("select 1 from pg_advisory_xact_lock(hashtextextended(:k,0))").setParameter("k",s.tenantId()+":"+operation).getSingleResult();
+ var rows=em.createNativeQuery("select request_hash,company_id,branch_id,response_json::text from idempotency_result where tenant_id=:t and operation_id=:o").setParameter("t",s.tenantId()).setParameter("o",operation).getResultList();
+ if(!rows.isEmpty()){Object[] r=(Object[])rows.getFirst();if(!hash.equals(r[0])||!s.companyId().equals(r[1])||!s.branchId().equals(r[2]))throw new IllegalStateException("Operation reused with another request or scope");if(r[3]==null)throw new IllegalStateException("Operation committed; response expired");return json.readValue((String)r[3],dto);}
+ T result=action.get();em.flush();em.createNativeQuery("insert into idempotency_result(tenant_id,operation_id,company_id,branch_id,request_hash,source_type,source_id,response_json) values(:t,:o,:c,:b,:h,:s,:i,cast(:r as jsonb))").setParameter("t",s.tenantId()).setParameter("o",operation).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setParameter("h",hash).setParameter("s",type).setParameter("i",id.apply(result)).setParameter("r",json.writeValueAsString(result)).executeUpdate();
+ em.createNativeQuery("insert into outbox_event(tenant_id,id,company_id,branch_id,operation_id,event_type,aggregate_type,aggregate_id,payload) values(:t,:i,:c,:b,:o,:e,:a,:s,cast(:p as jsonb))").setParameter("t",s.tenantId()).setParameter("i",UUID.randomUUID()).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setParameter("o",operation).setParameter("e",type+".v1").setParameter("a",type).setParameter("s",id.apply(result)).setParameter("p",json.writeValueAsString(Map.of("sourceId",id.apply(result),"actorId",s.actorId(),"requestEvidence",material))).executeUpdate();return result;
+ }
+}

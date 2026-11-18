@@ -6,4 +6,6 @@ public interface StockService {
  void requireWarehouse(UUID warehouseId);
  StockResult issue(UUID warehouseId,UUID productId,long quantityMilli,UUID operationId,String reason);
  StockResult receive(UUID warehouseId,UUID productId,long quantityMilli,long valueXaf,UUID operationId,String reason);
+ StockResult issueToCustomerCustody(UUID warehouseId,UUID productId,long quantityMilli,UUID operationId,String reason,UUID saleId,UUID customerId,java.time.LocalDate businessDate);
+ void requireCustodyCollected(UUID saleId);
 }

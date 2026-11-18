@@ -7,6 +7,8 @@ public interface TenderService {
  record Deposit(UUID operationId,UUID customerId,UUID cashSessionId,LocalDate businessDate,String amountXaf,String reason){}
  record Allocation(UUID operationId,UUID saleId,UUID cashSessionId,LocalDate businessDate,String amountXaf,String reason){}
  record CashExpense(UUID operationId,UUID expenseId,UUID cashSessionId,LocalDate businessDate,String amountXaf,String reason){}
+ record SupplierCash(UUID operationId,UUID settlementId,UUID cashSessionId,LocalDate businessDate,String amountXaf,String kind,String reason){}
+ Fact supplierDisbursement(SupplierCash request);
  Fact expense(CashExpense request);
  record Session(UUID id,String tillCode,LocalDate businessDate,String status,String openingXaf,String expectedXaf,String countedXaf,long version){}
  record Fact(UUID id,String kind,UUID customerId,UUID saleId,UUID depositId,UUID cashSessionId,LocalDate businessDate,String amountXaf,String cashDeltaXaf,UUID journalId,String reason){}

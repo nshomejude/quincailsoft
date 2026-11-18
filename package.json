@@ -9,6 +9,10 @@
     "check:web": "pnpm --filter @quincaisoft/web-admin typecheck",
     "test:backend": "cd backend && ./mvnw verify",
     "legacy:demo": "python3 server/server.py --demo --data-dir runtime/v5",
-    "legacy:test": "python3 -m unittest discover -s tests -v"
+    "legacy:test": "python3 -m unittest discover -s tests -v",
+    "check:rules": "node scripts/check-project-rules.mjs",
+    "check:parity": "node scripts/check-python-java-parity.mjs",
+    "inventory:parity": "node scripts/inventory-python-parity.mjs",
+    "test:project-gates": "node --test scripts/project-gates.test.mjs"
   }
 }

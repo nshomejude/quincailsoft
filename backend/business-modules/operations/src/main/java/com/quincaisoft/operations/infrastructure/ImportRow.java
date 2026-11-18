@@ -1,0 +1,33 @@
+package com.quincaisoft.operations.infrastructure;
+import jakarta.persistence.*;import java.util.*;import java.time.Instant;
+@Entity @Table(name="operation_import_row") @IdClass(ScopeKey.class) public class ImportRow extends ScopedRecord {
+ @Column(name="preview_id")public UUID previewId;
+ @Column(name="row_number")public int rowNumber;
+ @Column(name="name")public String name;
+ @Column(name="code")public String code;
+ @Column(name="base_unit")public String baseUnit;
+ @Column(name="selling_price_xaf")public String sellingPriceXaf;
+ @Column(name="tax_basis_points")public String taxBasisPoints;
+ @Column(name="relation_id")public UUID relationId;
+ @Column(name="brand")public String brand;
+ @Column(name="barcode")public String barcode;
+ @Column(name="description")public String description;
+ @Column(name="pack_size")public String packSize;
+ @Column(name="reorder_level")public String reorderLevel;
+ @Column(name="track_stock")public boolean trackStock;
+ @Column(name="track_serial")public boolean trackSerial;
+ @Column(name="track_expiry")public boolean trackExpiry;
+ @Column(name="customer_type")public String customerType;
+ @Column(name="contact_person")public String contactPerson;
+ @Column(name="phone")public String phone;
+ @Column(name="email")public String email;
+ @Column(name="address")public String address;
+ @Column(name="tax_reference")public String taxReference;
+ @Column(name="credit_limit_xaf")public String creditLimitXaf;
+ @Column(name="payment_terms_days")public int paymentTermsDays;
+ @Column(name="consent")public boolean consent;
+ @Column(name="bank_reference")public String bankReference;
+ @Column(name="symbol")public String symbol;
+ @Column(name="conversion_factor")public String conversionFactor;
+ @Column(name="rounding_precision")public int roundingPrecision;
+}

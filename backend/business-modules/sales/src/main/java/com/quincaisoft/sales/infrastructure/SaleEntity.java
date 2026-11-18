@@ -20,6 +20,7 @@ public class SaleEntity {
  @Column(name="cost_xaf") public long costXaf;
  @Column(name="version") public long version;
  @Column(name="created_at") public Instant createdAt;
+ @Column(name="recognition_policy") public String recognitionPolicy="HANDOVER";
  public SaleEntity() {}
  public static class Key implements Serializable {
   public UUID tenantId;

@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "changePolicy": "Changing these hashes requires explicit review of the actual specification/rules diff. They are change detectors, not signatures or a substitute for branch protection.",
+  "protectedSources": {
+    "AGENTS.md": "03a7e9eae2cd72556a92c66f5cf65d746145e6c110184477a28009ac0f94a337",
+    "ARCHITECTURE.md": "b1fd55ab6cadf0c0fd0aa9e36af2e3b70679797dd8a7abede485198ee52b97c9"
+  }
+}
