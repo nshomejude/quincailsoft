@@ -25,6 +25,7 @@ class FullApplicationPostgresTest {
   UUID tenant=UUID.randomUUID(),company=UUID.randomUUID(),branch=UUID.randomUUID(),actor=UUID.randomUUID();
   boolean runHistory = "true".equals(System.getenv("QUINCAI_HISTORY_CATALOG_ACCEPTANCE"));
   boolean runOpening = "true".equals(System.getenv("QUINCAI_HISTORY_OPENING_ACCEPTANCE"));
+  boolean runReceipt = runHistory && runOpening;
   if (runHistory || runOpening) {
    tenant=UUID.fromString("0984ca97-010e-51fc-a6a0-7c33453e214e");
    company=UUID.fromString("f6b40fb6-3f23-5891-a908-2de13a773d7d");
@@ -37,6 +38,7 @@ class FullApplicationPostgresTest {
     try(var owner=DriverManager.getConnection(url,user,"")){
      try(var files=Files.list(Path.of("../db-migrations/src/main/resources/db/migration"))){for(var p:files.filter(p->p.toString().endsWith(".sql")).sorted(java.util.Comparator.comparingInt(migrationFile -> Integer.parseInt(migrationFile.getFileName().toString().split("__")[0].substring(1)))).toList())sql(owner,Files.readString(p));}
      sql(owner,"INSERT INTO tenant(id,name)VALUES('"+tenant+"','Synthetic');INSERT INTO company(tenant_id,id,name)VALUES('"+tenant+"','"+company+"','Synthetic');INSERT INTO branch(tenant_id,company_id,id,name)VALUES('"+tenant+"','"+company+"','"+branch+"','Synthetic');INSERT INTO tenant_memberships(tenant_id,actor_id,company_id,branch_id,role_code)VALUES('"+tenant+"','"+actor+"','"+company+"','"+branch+"','owner')");
+     if(runReceipt) sql(owner,"INSERT INTO warehouse(tenant_id,company_id,branch_id,id,name) VALUES ('"+tenant+"','"+company+"','"+branch+"','32d21a83-c93c-5b83-af73-be07d3b094fd','Historical acceptance warehouse')");
      if(runOpening){
       sql(owner,"INSERT INTO tenant_memberships(tenant_id,company_id,branch_id,actor_id,role_code) VALUES ('"+tenant+"','"+company+"','"+branch+"','"+approver+"','owner')");
       sql(owner,"INSERT INTO financial_period(tenant_id,company_id,id,start_date,end_date,status) VALUES ('"+tenant+"','"+company+"','"+UUID.randomUUID()+"','2024-01-01','2024-01-31','Open')");
@@ -72,7 +74,12 @@ class FullApplicationPostgresTest {
      }
      if(runHistory){
       var historyWriter=token(key,issuer,"quincai-test",tenant,company,branch,actor,"catalog:write purchasing:write customers:write");
-      verifyHistoricalCatalog(port,historyWriter,url,user);
+      var catalog = verifyHistoricalCatalog(port,historyWriter,url,user);
+      if(runReceipt){
+       var receiver=token(key,issuer,"quincai-test",tenant,company,branch,actor,"purchasing:write purchasing:receive");
+       var checker=token(key,issuer,"quincai-test",tenant,company,branch,approver,"purchasing:approve");
+       verifyHistoricalReceipt(port,receiver,checker,catalog,url,user);
+      }
      }
 
      var response=client.send(HttpRequest.newBuilder(endpoint).header("Authorization","Bearer "+token).header("X-Tenant-ID",UUID.randomUUID().toString()).GET().build(),HttpResponse.BodyHandlers.ofString());assertEquals(200,response.statusCode(),response.body());assertTrue(response.body().contains(tenant.toString()));
@@ -118,7 +125,7 @@ class FullApplicationPostgresTest {
   }
  }
 
- private static void verifyHistoricalCatalog(int port,String token,String url,String user)throws Exception{
+ private static Path verifyHistoricalCatalog(int port,String token,String url,String user)throws Exception{
   Path output=Files.createTempDirectory(Path.of("target"),"history-acceptance-").toAbsolutePath();
   Path root=Path.of("../..").toAbsolutePath().normalize();
   for(String pass:List.of("initial","replay")){
@@ -139,6 +146,49 @@ class FullApplicationPostgresTest {
     try(var statement=db.createStatement();var rows=statement.executeQuery("select count(*) from "+expected.getKey())){
      assertTrue(rows.next());
      assertEquals(expected.getValue().intValue(),rows.getInt(1),expected.getKey());
+    }
+   }
+  }
+  return output.resolve("initial.ndjson");
+ }
+
+ private static void verifyHistoricalReceipt(int port,String maker,String approver,Path catalog,String url,String user)throws Exception{
+  Path output=Files.createTempDirectory(Path.of("target"),"receipt-acceptance-").toAbsolutePath();
+  Path root=Path.of("../..").toAbsolutePath().normalize();
+  for(String pass:List.of("initial","replay")){
+   var process=new ProcessBuilder(Path.of(System.getProperty("java.home"),"bin","java").toString(),
+       "--class-path",System.getProperty("surefire.test.class.path",System.getProperty("java.class.path")),
+       root.resolve("backend/tools/history-import/src/main/java/com/quincaisoft/tools/CatalogHistoryImport.java").toString(),
+       "http://127.0.0.1:"+port,root.resolve("datasets/business-history/generated").toString(),
+       root.resolve("datasets/business-history/evidence/manifest.json").toString(),
+       output.resolve(pass+".ndjson").toString(),"--receipt",catalog.toString()).inheritIO();
+   process.environment().put("QUINCAI_HISTORY_TOKEN",maker);
+   process.environment().put("QUINCAI_HISTORY_APPROVER_TOKEN",approver);
+   assertEquals(0,process.start().waitFor(),pass+" receipt importer process");
+  }
+  var json=tools.jackson.databind.json.JsonMapper.builder().build();
+  assertEquals(json.readTree(Files.readString(output.resolve("initial.ndjson"))),
+      json.readTree(Files.readString(output.resolve("replay.ndjson"))));
+  try(var db=DriverManager.getConnection(url,user,"");var statement=db.createStatement()){
+   try(var rows=statement.executeQuery("select quantity_milli,value_xaf from stock_movement")){
+    assertTrue(rows.next());
+    assertEquals(20000,rows.getLong(1));
+    assertEquals(52000,rows.getLong(2));
+    assertFalse(rows.next());
+   }
+   try(var rows=statement.executeQuery("select status,total_xaf from purchase_order")){
+    assertTrue(rows.next());
+    assertEquals("RECEIVED",rows.getString(1));
+    assertEquals(52000,rows.getLong(2));
+    assertFalse(rows.next());
+   }
+   try(var query=db.prepareStatement("select l.account_code,l.debit_xaf-l.credit_xaf from journal_line l join journal_entry j on j.tenant_id=l.tenant_id and j.company_id=l.company_id and j.id=l.entry_id where j.operation_id=?")){
+    var mapping=json.readTree(Files.readString(output.resolve("initial.ndjson")));
+    query.setObject(1,UUID.fromString(mapping.required("postingOperationId").asText()));
+    try(var rows=query.executeQuery()){
+     var amounts=new HashMap<String,Long>();
+     while(rows.next())assertNull(amounts.put(rows.getString(1),rows.getLong(2)));
+     assertEquals(Map.of("MERCHANT_INVENTORY",52000L,"GOODS_RECEIVED_NOT_INVOICED",-52000L),amounts);
     }
    }
   }

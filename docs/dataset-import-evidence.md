@@ -73,3 +73,20 @@ This database was disposed of by the test. The running preview has zero historic
 Sequence 1 (`50568a8b-4ab9-5696-a1ab-c3f17692357d`) was posted through draft, submit and independent approval on the Spring Boot API. The disposable PostgreSQL 18.7 test observed one posted journal after two passes, with exact source net lines BANK 1,900,000,000 XAF, CASH 100,000,000 XAF, and EQUITY −2,000,000,000 XAF. The initial and replay mappings had the same SHA-256 `e6f254f54d95ac950331e50df0af93b76eee88c7477b370711420ccc4bb9b155`.
 
 Executed `QUINCAI_HISTORY_OPENING_ACCEPTANCE=true mvn -B -ntp -pl api-server -am -Dtest=FullApplicationPostgresTest -Dsurefire.failIfNoSpecifiedTests=false verify` on the isolated fixture. The expanded scenario passed without failures, errors or skips. This is one historical economic event, not full replay or financial reconciliation. Sequence 2 and later events, interruption coverage and deployment of historical data in the running preview remain pending.
+
+## Authenticated historical goods receipt
+
+Sequence 2 (`3dff5119-474a-5e6a-ae87-19c5ca515e88`) ran on Spring Boot 4.0.9
+with Java 25 and isolated PostgreSQL 18.7. The test imported the catalog and
+opening capital first, then ran the receipt stage twice with the same scoped
+maker and independent approver. Both runs returned identical source-to-Java
+mappings. PostgreSQL recorded one received purchase order, one movement of
+20,000 milli-units worth 52,000 XAF, and one receipt journal with a 52,000 XAF
+debit to MERCHANT_INVENTORY and a 52,000 XAF credit to GOODS_RECEIVED_NOT_INVOICED.
+
+Both `QUINCAI_HISTORY_CATALOG_ACCEPTANCE` and
+`QUINCAI_HISTORY_OPENING_ACCEPTANCE` were set to `true` for
+`mvn -B -ntp -q -pl api-server -am -Dtest=FullApplicationPostgresTest -Dsurefire.failIfNoSpecifiedTests=false verify`.
+The expanded scenario passed in 397.6 seconds with zero failures, errors or
+skips. The supplier invoice at sequence 3, payment at sequence 4, later events,
+interruption recovery and whole-dataset reconciliation are pending.

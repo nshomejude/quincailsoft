@@ -49,8 +49,9 @@ public final class CatalogHistoryImport {
 
     public static void main(String[] args) throws Exception {
         boolean opening = args.length == 5 && args[4].equals("--opening");
-        if (args.length != 4 && !opening) throw new IllegalArgumentException(
-            "Usage: <loopback-api-origin> <generated-directory> <reviewed-manifest> <new-mapping.ndjson> [--opening]");
+        boolean receipt = args.length == 6 && args[4].equals("--receipt");
+        if (args.length != 4 && !opening && !receipt) throw new IllegalArgumentException(
+            "Usage: <loopback-api-origin> <generated-directory> <reviewed-manifest> <new-mapping.ndjson> [--opening | --receipt <catalog-mapping.ndjson>]");
         URI api = URI.create(args[0]);
         if (!"http".equals(api.getScheme()) || !"127.0.0.1".equals(api.getHost()) ||
             api.getPort() < 1 || api.getRawUserInfo() != null || api.getRawQuery() != null ||
@@ -61,9 +62,14 @@ public final class CatalogHistoryImport {
 
         Path dir = Path.of(args[1]);
         JsonNode manifest = JSON.readTree(Files.readString(Path.of(args[2])));
-        validateInputs(dir, manifest, opening ? List.of("branches", "events", "journals") : FILES);
+        validateInputs(dir, manifest, receipt ? List.of("branches", "events", "journals", "purchaseOrders", "stockMovements") :
+            opening ? List.of("branches", "events", "journals") : FILES);
         Path output = Path.of(args[3]).toAbsolutePath();
         if (Files.exists(output)) throw new IllegalArgumentException("Mapping output already exists");
+        if (receipt) {
+            importReceipt(api, token, dir, output, Path.of(args[5]));
+            return;
+        }
         if (opening) {
             importOpening(api, token, dir, output);
             return;
@@ -170,6 +176,116 @@ public final class CatalogHistoryImport {
         entry.put("postingOperationId", operation("opening-approve", source));
         Files.writeString(output, JSON.writeValueAsString(entry) + "\n", StandardOpenOption.CREATE_NEW);
         System.out.println("Historical opening capital mappings: 1");
+    }
+
+    private static void importReceipt(URI api, String token, Path dir, Path output, Path catalog) throws Exception {
+        String approverToken = System.getenv("QUINCAI_HISTORY_APPROVER_TOKEN");
+        if (approverToken == null || approverToken.isBlank())
+            throw new IllegalArgumentException("QUINCAI_HISTORY_APPROVER_TOKEN is required for receiving");
+        var maker = new CatalogHistoryImport(api, token, null);
+        var approver = new CatalogHistoryImport(api, approverToken, null);
+        var source = HistoricalReceipt.read(dir);
+        var event = source.event();
+        var makerScope = maker.requireSyntheticScope(dir);
+        var approverScope = approver.requireSyntheticScope(dir);
+        UUID branch = uuid(event, "branchId");
+        if (!branch.equals(uuid(makerScope, "branchId")) || !branch.equals(uuid(approverScope, "branchId")) ||
+            uuid(makerScope, "actorId").equals(uuid(approverScope, "actorId")))
+            throw new IllegalArgumentException("Receiving requires independent actors from the receipt branch");
+        var branchRow = first(dir.resolve("branches.ndjson"));
+        UUID warehouse = uuid(source.movement(), "warehouseId");
+        if (!branch.equals(uuid(branchRow, "id")) || !warehouse.equals(uuid(branchRow, "warehouseId")))
+            throw new IllegalArgumentException("Receipt warehouse does not match the reviewed branch");
+
+        UUID supplier = mappedTarget(catalog, "suppliers", uuid(event, "supplierId"));
+        UUID product = mappedTarget(catalog, "variants", uuid(event, "variantId"));
+        UUID orderSource = uuid(source.order(), "id");
+        UUID receiptSource = uuid(event, "id");
+        var date = event.required("businessDate");
+        var quantity = event.required("quantityMilli");
+        var value = event.required("estimatedCostXaf").asText();
+        String reason = "Historical synthetic receipt " + receiptSource;
+        var draft = maker.post("/purchases", operation("purchase-draft", orderSource),
+            Map.of("supplierId", supplier, "warehouseId", warehouse, "businessDate", date,
+                "lines", List.of(Map.of("productId", product, "quantityMilli", quantity,
+                    "unitPriceXaf", Long.toString(source.unitPriceXaf())))));
+        if (!value.equals(draft.path("totalXaf").asText()))
+            throw new IllegalStateException("Purchase order total differs from the source");
+        UUID purchase = uuid(draft, "id");
+        String path = "/purchases/" + purchase;
+        var submitted = maker.post(path + "/submit", operation("purchase-submit", orderSource),
+            Map.of("version", draft.required("version"), "reason", reason));
+        var approved = approver.post(path + "/approve", operation("purchase-approve", orderSource),
+            Map.of("version", submitted.required("version"), "reason", reason));
+        UUID line = uuid(draft.required("lines").required(0), "id");
+        UUID posting = operation("purchase-receipt", receiptSource);
+        var receipt = maker.post(path + "/receipts", posting, Map.of("version", approved.required("version"),
+            "reason", reason, "businessDate", date,
+            "lines", List.of(Map.of("lineId", line, "quantityMilli", quantity))));
+        var receiptLine = receipt.required("lines").required(0);
+        if (!value.equals(receipt.path("totalXaf").asText()) || !value.equals(receiptLine.path("valueXaf").asText()) ||
+            !quantity.asText().equals(receiptLine.path("quantityMilli").asText()) ||
+            !product.equals(uuid(receiptLine, "productId")) || !line.equals(uuid(receiptLine, "purchaseLineId")))
+            throw new IllegalStateException("Posted receipt differs from the source");
+        Files.writeString(output, JSON.writeValueAsString(Map.of("sourceId", receiptSource,
+            "sourcePurchaseOrderId", orderSource, "sourceMovementId", uuid(source.movement(), "id"),
+            "purchaseId", purchase, "receiptId", uuid(receipt, "id"), "postingOperationId", posting)) + "\n",
+            StandardOpenOption.CREATE_NEW);
+    }
+
+    private static UUID mappedTarget(Path catalog, String kind, UUID source) throws Exception {
+        UUID target = null;
+        try (var rows = Files.newBufferedReader(catalog)) {
+            String line;
+            while ((line = rows.readLine()) != null) {
+                var row = JSON.readTree(line);
+                if (kind.equals(row.path("kind").asText()) && source.equals(uuid(row, "sourceId"))) {
+                    if (target != null) throw new IllegalArgumentException("Duplicate catalog mapping for " + source);
+                    target = uuid(row, "targetId");
+                }
+            }
+        }
+        if (target == null) throw new IllegalArgumentException("Missing catalog mapping for " + source);
+        return target;
+    }
+
+    private record HistoricalReceipt(JsonNode event, JsonNode order, JsonNode movement, long unitPriceXaf) {
+        private static HistoricalReceipt read(Path dir) throws Exception {
+            JsonNode event;
+            try (var events = Files.newBufferedReader(dir.resolve("events.ndjson"))) {
+                events.readLine();
+                event = JSON.readTree(events.readLine());
+            }
+            UUID receiptId = uuid(event, "id");
+            JsonNode order = first(dir.resolve("purchaseOrders.ndjson"));
+            JsonNode movement = first(dir.resolve("stockMovements.ndjson"));
+            if (event.path("sequence").asLong() != 2 || !event.path("synthetic").asBoolean() ||
+                !event.path("type").asText().equals("GOODS_RECEIPT") ||
+                !TENANT.equals(event.path("tenantId").asText()) || !COMPANY.equals(event.path("companyId").asText()) ||
+                !receiptId.equals(uuid(event, "operationId")) || !receiptId.equals(uuid(order, "receiptId")) ||
+                !receiptId.equals(uuid(movement, "eventId")) || !uuid(event, "purchaseOrderId").equals(uuid(order, "id")) ||
+                movement.path("sequence").asLong() != 2 || !order.path("status").asText().equals("FULLY_RECEIVED") ||
+                !event.required("supplierId").equals(order.required("supplierId"))) {
+                throw new IllegalArgumentException("Unexpected historical receipt or purchase order");
+            }
+            for (String field : List.of("branchId", "businessDate", "variantId", "quantityMilli")) {
+                if (!event.required(field).equals(order.required(field)) ||
+                    !event.required(field).equals(movement.required(field))) {
+                    throw new IllegalArgumentException("Historical receipt disagrees with order or movement: " + field);
+                }
+            }
+            if (!event.required("estimatedCostXaf").equals(order.required("estimatedNetXaf")) ||
+                !event.required("estimatedCostXaf").equals(movement.required("valueXaf"))) {
+                throw new IllegalArgumentException("Historical receipt valuation disagrees with order or movement");
+            }
+            long quantity = Long.parseLong(event.required("quantityMilli").asText());
+            long value = Long.parseLong(event.required("estimatedCostXaf").asText());
+            long scaledValue = Math.multiplyExact(value, 1000L);
+            if (quantity <= 0 || value <= 0 || scaledValue % quantity != 0) {
+                throw new IllegalArgumentException("Historical receipt requires an exact positive XAF unit price");
+            }
+            return new HistoricalReceipt(event, order, movement, scaledValue / quantity);
+        }
     }
 
     private static JsonNode first(Path path) throws Exception {

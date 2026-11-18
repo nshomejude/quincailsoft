@@ -25,3 +25,19 @@ Append `--opening` after the mapping path. Set `QUINCAI_HISTORY_TOKEN` for a his
 The adapter verifies the event and journal file hashes, accepts only the first historical event, submits its balanced lines through the manual journal API, and records the returned journal ID. The three operation keys are stable across reruns. Use another output path on replay. The adapter stops at the opening prefix so it cannot jump over unimplemented events. The next source event is the first purchase receipt.
 
 An isolated full-application test can execute this prefix with `QUINCAI_HISTORY_OPENING_ACCEPTANCE=true`. It compares the exact BANK, CASH and EQUITY lines and confirms one posted journal after replay.
+
+## First historical goods receipt
+
+Run the opening capital stage first. For sequence 2, invoke the same adapter with
+a fresh receipt mapping output and append `--receipt <catalog-mapping.ndjson>`.
+Use the catalog mapping exported from the same synthetic database. The maker
+needs `purchasing:write` and `purchasing:receive`. The separate approver needs
+`purchasing:approve`. Both actors must belong to the historical receipt branch.
+Set up that branch's reviewed warehouse and the open January 2024 financial
+period in the isolated database before running.
+
+The adapter validates the receipt, purchase order, and stock movement in the
+reviewed fixture before it drafts the order. Retry using the same source and
+actors with a fresh output path. The output maps the source order, receipt, and
+movement to the Java purchase, receipt, and posting operation. The PostgreSQL
+acceptance test checks the resulting stock and journal records independently.
