@@ -1,0 +1,8 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {validate,percentile} from './run.mjs';
+const env={QUINCAI_PERF_SYNTHETIC:'true',QUINCAI_PERF_BASE_URL:'http://127.0.0.1:8080',QUINCAI_PERF_TOKEN_OWNER:'test-token'};
+const config={durationSeconds:1,ratePerSecond:1,concurrency:1,timeoutMs:1000,tokenEnvs:['QUINCAI_PERF_TOKEN_OWNER'],operations:[{name:'products',method:'GET',path:'/api/v1/products',expectedStatuses:[200]}]};
+test('requires explicit synthetic target and credentials',()=>{assert.doesNotThrow(()=>validate(config,env));assert.throws(()=>validate(config,{...env,QUINCAI_PERF_SYNTHETIC:'false'}));assert.throws(()=>validate(config,{...env,QUINCAI_PERF_TOKEN_OWNER:''}));});
+test('rejects insecure remote and credential-bearing base URLs',()=>{for(const url of ['http://example.com','https://user:password@example.com','https://example.com/?secret=1'])assert.throws(()=>validate(config,{...env,QUINCAI_PERF_BASE_URL:url}));});
+test('rejects cross origin paths, failed-status acceptance and unapproved writes',()=>{for(const op of [{path:'//example.com/api/v1/products'},{expectedStatuses:[500]},{method:'POST'}])assert.throws(()=>validate({...config,operations:[{...config.operations[0],...op}]},env));});
+test('bounds execution and requires complete thresholds',()=>{assert.throws(()=>validate({...config,concurrency:101},env));assert.throws(()=>validate({...config,durationSeconds:600,ratePerSecond:100},env));assert.throws(()=>validate({...config,thresholds:{p95Ms:100}},env));});
+test('percentiles use nearest rank and preserve input',()=>{const data=[30,10,20];assert.equal(percentile(data,.5),20);assert.equal(percentile(data,.95),30);assert.equal(percentile([], .95),null);assert.deepEqual(data,[30,10,20]);});

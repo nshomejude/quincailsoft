@@ -1,0 +1,18 @@
+groups:
+  - name: scoped-operational-signals
+    rules:
+      - alert: QuincaiScopedCollectionUnavailable
+        expr: up{job="quincai-synthetic-scope"} == 0
+        for: 2m
+      - alert: QuincaiScopedJournalImbalance
+        expr: quincai_scoped_journal_imbalanced > 0
+        for: 0m
+      - alert: QuincaiScopedUnknownLivePayment
+        expr: quincai_scoped_unknown_live > 0
+        for: 5m
+      - alert: QuincaiScopedOutboxDelayed
+        expr: quincai_scoped_outbox_oldest_seconds > 300
+        for: 5m
+      - alert: QuincaiScopedSampleIncomplete
+        expr: quincai_scoped_outbox_sample_complete == 0 or quincai_scoped_unknown_sample_complete == 0 or quincai_scoped_journal_sample_complete == 0
+        for: 2m

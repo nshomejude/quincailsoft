@@ -5,5 +5,5 @@ public interface ManualJournalService{
  record Command(UUID operationId,long version,String reason){}
  record Reversal(UUID operationId,long version,LocalDate businessDate,String reason){}
  record Journal(UUID id,LocalDate businessDate,String status,String reason,UUID createdBy,UUID approvedBy,UUID reversalOf,UUID journalId,long version,List<Line> lines){}
- Journal get(UUID id);List<Journal> list();Journal draft(Draft p);Journal command(UUID id,String action,Command p);Journal reversal(UUID id,Reversal p);
+ Journal get(UUID id);List<Journal> list();@com.quincaisoft.shared.TenantMutation Journal draft(Draft p);@com.quincaisoft.shared.TenantMutation Journal command(UUID id,String action,Command p);@com.quincaisoft.shared.TenantMutation Journal reversal(UUID id,Reversal p);
 }

@@ -22,4 +22,10 @@ public interface SubscriptionBillingService {
     List<Invoice> platformInvoices(UUID tenantId);
     List<Invoice> merchantInvoices();
     String printInvoice(UUID id,boolean platform,String locale);
+    record InvoicePage(List<Invoice> items,String nextCursor,Instant cutoff,String currentCursor) {}
+    record CsvPage(String content,String nextCursor,Instant cutoff,String currentCursor) {}
+    InvoicePage platformPage(UUID tenantId,String cursor,int limit);
+    InvoicePage merchantPage(String cursor,int limit);
+    CsvPage platformExport(UUID tenantId,String cursor,int limit);
+    CsvPage merchantExport(String cursor,int limit);
 }

@@ -5,6 +5,6 @@ public interface ExpenseService {
  record Command(UUID operationId,long version,String reason,UUID cashSessionId){}
  record Expense(UUID id,LocalDate businessDate,String category,String payee,String amountXaf,String status,long version,UUID paidFactId){}
  record BankPay(UUID operationId,long version,String reason,UUID bankEvidenceId){}
- Expense payBank(UUID id,BankPay request);
- List<Expense> list();Expense draft(Draft request);Expense command(UUID id,String action,Command request);
+ @com.quincaisoft.shared.TenantMutation Expense payBank(UUID id,BankPay request);
+ List<Expense> list();@com.quincaisoft.shared.TenantMutation Expense draft(Draft request);@com.quincaisoft.shared.TenantMutation Expense command(UUID id,String action,Command request);
 }

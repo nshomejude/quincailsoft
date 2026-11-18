@@ -20,3 +20,7 @@ This is the navigation point for the delivery plan. Do not create competing comp
 - Desktop integrates and runs the combined suite. Each author runs focused tests. CLOUD independently reviews evidence; production execution requires a known authorized target. Technical sign-off is scoped, not a legal or third-party security certificate.
 - Mobile/WPF remain paused and explicitly excluded from current execution, not counted as finished.
 - The user's four-hour deadline never permits fake acceptance, skipped security, provider-success fabrication, deleting evidence or declaring incomplete modules production ready.
+
+## Latest cloud integration evidence
+
+The V33–V39 integration, including reviewed governance, authoritative quotas, workforce benefits, notification delivery, deployment packaging and isolated whole-database recovery, is tracked in [cloud governance/recovery evidence](migration-evidence/cloud-governance-recovery/README.md). Its source-bound result manifest supersedes older cloud limitations only for checks actually executed. It does not change module, screen, parity or production release acceptance.

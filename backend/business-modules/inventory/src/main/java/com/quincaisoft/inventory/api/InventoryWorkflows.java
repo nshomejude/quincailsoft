@@ -8,5 +8,5 @@ public interface InventoryWorkflows {
  record Transfer(UUID id,UUID originWarehouse,UUID destinationWarehouse,UUID productId,String quantityMilli,String receivedMilli,String valueXaf,String receivedValueXaf,String status,String version){}
  long lowStockCount();
  List<Warehouse> warehouses(); List<Balance> balances(UUID warehouseId); List<Transfer> transfers();Transfer get(UUID id);
- Transfer draft(Draft command);Transfer approve(UUID id,Command command);Transfer dispatch(UUID id,Command command);Transfer receive(UUID id,Command command);
+ @com.quincaisoft.shared.TenantMutation Transfer draft(Draft command);@com.quincaisoft.shared.TenantMutation Transfer approve(UUID id,Command command);@com.quincaisoft.shared.TenantMutation Transfer dispatch(UUID id,Command command);@com.quincaisoft.shared.TenantMutation Transfer receive(UUID id,Command command);
 }

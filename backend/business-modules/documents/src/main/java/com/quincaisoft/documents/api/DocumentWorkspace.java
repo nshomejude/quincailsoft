@@ -13,7 +13,7 @@ public interface DocumentWorkspace {
  record OutcomeRequest(UUID operationId,String status,String reason){}
  record Outcome(UUID id,UUID attemptId,UUID actorId,Instant recordedAt,String status,String reason){}
  List<Template> templates();List<SourceCandidate> sources(String templateId);
- Capture capture(CaptureRequest request);Capture get(UUID id);List<Capture> list();
- String preview(UUID id,String paper);PrintResult print(UUID id,boolean capture,PrintRequest request);
- List<PrintResult> attempts();Outcome outcome(UUID id,OutcomeRequest request);
+ @com.quincaisoft.shared.TenantMutation Capture capture(CaptureRequest request);Capture get(UUID id);List<Capture> list();
+ String preview(UUID id,String paper);@com.quincaisoft.shared.TenantMutation PrintResult print(UUID id,boolean capture,PrintRequest request);
+ List<PrintResult> attempts();@com.quincaisoft.shared.TenantMutation Outcome outcome(UUID id,OutcomeRequest request);
 }

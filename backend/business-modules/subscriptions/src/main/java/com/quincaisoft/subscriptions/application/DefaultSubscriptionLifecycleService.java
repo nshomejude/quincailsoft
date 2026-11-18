@@ -2,6 +2,7 @@ package com.quincaisoft.subscriptions.application;
 
 import com.quincaisoft.shared.*;
 import com.quincaisoft.subscriptions.api.SubscriptionLifecycleService;
+import com.quincaisoft.subscriptions.api.SubscriptionQuotaService;
 import com.quincaisoft.subscriptions.domain.SubscriptionRestrictionPolicy;
 import com.quincaisoft.subscriptions.infrastructure.*;
 import jakarta.persistence.*;
@@ -9,6 +10,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 import tools.jackson.databind.json.JsonMapper;
@@ -21,8 +23,9 @@ import java.util.function.Supplier;
 
 @Service
 public class DefaultSubscriptionLifecycleService implements SubscriptionLifecycleService {
-    private final EntityManager em; private final TransactionTemplate tx; private final ScopedTransactions merchantTx; private final JsonMapper json;
-    public DefaultSubscriptionLifecycleService(EntityManager em,PlatformTransactionManager manager,ScopedTransactions merchantTx,JsonMapper json){this.em=em;this.tx=new TransactionTemplate(manager);this.merchantTx=merchantTx;this.json=json;}
+    private final EntityManager em; private final TransactionTemplate tx; private final ScopedTransactions merchantTx; private final JsonMapper json;private final SubscriptionQuotaService quota;
+    public DefaultSubscriptionLifecycleService(EntityManager em,PlatformTransactionManager manager,ScopedTransactions merchantTx,JsonMapper json){this(em,manager,merchantTx,json,new DefaultSubscriptionQuotaService(em,merchantTx,json));}
+    @Autowired public DefaultSubscriptionLifecycleService(EntityManager em,PlatformTransactionManager manager,ScopedTransactions merchantTx,JsonMapper json,SubscriptionQuotaService quota){this.em=em;this.tx=new TransactionTemplate(manager);this.merchantTx=merchantTx;this.json=json;this.quota=quota;}
     private Instant now(){return Instant.now().truncatedTo(ChronoUnit.MICROS);}
     private UUID actor(String... authorities){
         var a=SecurityContextHolder.getContext().getAuthentication();
@@ -115,7 +118,8 @@ public class DefaultSubscriptionLifecycleService implements SubscriptionLifecycl
         if(em.find(SubscriptionActivation.class,invoice.id)!=null)throw new IllegalStateException("Invoice already consumed for subscription activation; a new term requires a new invoice");
         if(s.termEndsAt!=null&&end.isBefore(s.termEndsAt))throw new IllegalStateException("A historical receipt cannot shorten the paid term");
         var chosen=plan(payment.planCode);
-        if(invoice.subtotalXaf!=chosen.monthlyPriceXaf||invoice.discountXaf!=0||credits.signum()!=0||invoice.periodStart.getDayOfMonth()!=1||!invoice.periodEnd.equals(invoice.periodStart.plusMonths(1).minusDays(1)))throw new IllegalStateException("Paid activation requires the exact selected monthly plan price and uncredited full-month invoice");
+        Boolean commercial=(Boolean)em.createNativeQuery("select subscription_commercial_matches(i,:plan) from subscription_invoice i where i.id=:id").setParameter("plan",chosen.code).setParameter("id",invoice.id).getSingleResult();
+        if(!Boolean.TRUE.equals(commercial)||credits.signum()!=0)throw new IllegalStateException("Paid activation requires matching plan price or independently approved commercial terms, with no credited invoice");
         var activation=new SubscriptionActivation();activation.invoiceId=invoice.id;activation.tenantId=s.tenantId;activation.paymentId=payment.id;activation.activatedAt=now();em.persist(activation);em.flush();
         s.planCode=chosen.code;s.status="ACTIVE";s.termEndsAt=end;s.activationPaymentId=payment.id;s.version=Math.incrementExact(s.version);s.updatedAt=now();
         var entitlement=em.find(TrialEntitlement.class,new TrialEntitlement.Key(s.tenantId,"COMMERCE"),LockModeType.PESSIMISTIC_WRITE);
@@ -138,7 +142,8 @@ public class DefaultSubscriptionLifecycleService implements SubscriptionLifecycl
     }
     @Override public void requireAllocation(Resource resource,long existing,long requested){
         if(resource==null||existing<0||requested<=0)throw new IllegalArgumentException("Trusted nonnegative usage and positive allocation required");
-        merchantTx.execute(()->{var s=subscription(TenantContext.current().tenantId(),LockModeType.PESSIMISTIC_READ);var p=plan(s.planCode);long limit=switch(resource){case STAFF_SEATS->p.seatLimit;case BRANCHES->p.branchLimit;case WAREHOUSES->p.warehouseLimit;};if(Math.addExact(existing,requested)>limit)throw new IllegalStateException("Subscription allocation limit reached");return null;});
+        // Retained source compatibility only: caller-provided usage is never authoritative.
+        quota.requireCapacity(SubscriptionQuotaService.Resource.valueOf(resource.name()),requested);
     }
     private static void bounded(String s,String name){if(s==null||s.isBlank()||s.length()>2000||s.indexOf('\0')>=0)throw new IllegalArgumentException(name+" required and bounded");}
     private static String hash(String s){try{return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(s.getBytes(StandardCharsets.UTF_8)));}catch(Exception e){throw new IllegalStateException(e);}}

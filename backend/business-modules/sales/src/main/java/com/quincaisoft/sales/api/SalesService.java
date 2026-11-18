@@ -11,6 +11,6 @@ public interface SalesService {
  record PostedSalesSummary(LocalDate from, LocalDate to, String totalXaf) {}
  PostedSalesSummary postedSalesSummary(LocalDate from, LocalDate to);
  Valuation valuation(UUID id);
- List<Sale> list(); Sale get(UUID id); @com.quincaisoft.shared.NewBusinessCommand Sale draft(Draft request); @com.quincaisoft.shared.NewBusinessCommand Sale post(UUID id,Post request);
+ List<Sale> list(); Sale get(UUID id); @com.quincaisoft.shared.NewBusinessCommand @com.quincaisoft.shared.TenantMutation Sale draft(Draft request); @com.quincaisoft.shared.NewBusinessCommand @com.quincaisoft.shared.TenantMutation Sale post(UUID id,Post request);
  public static class RevisionMismatch extends com.quincaisoft.shared.RevisionConflict {public RevisionMismatch(){super("Sale revision changed");}}
 }

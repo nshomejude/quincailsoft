@@ -10,6 +10,6 @@ public interface CatalogService {
              UUID categoryId,String brand,String barcode,String packSizeMilli,String reorderLevelMilli,Boolean trackStock,Boolean trackSerial,Boolean trackExpiry,String description){
   public Save(UUID operationId,String sku,String name,String baseUnit,String sellingPriceXaf,int taxBasisPoints,String version,Boolean active,String reason){this(operationId,sku,name,baseUnit,sellingPriceXaf,taxBasisPoints,version,active,reason,null,null,null,null,null,null,null,null,null);}
  }
- Product create(Save command); Product update(UUID id,Save command);
+ @com.quincaisoft.shared.TenantMutation Product create(Save command); @com.quincaisoft.shared.TenantMutation Product update(UUID id,Save command);
  List<Product> list(); Product get(UUID id);
 }

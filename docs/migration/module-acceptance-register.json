@@ -52,6 +52,7 @@
         "platform:tenants:write"
       ],
       "legacyParityCandidates": [
+        "branch:server/server.py:261",
         "branch:server/server.py:296",
         "branch:server/server.py:299"
       ],
@@ -188,10 +189,13 @@
         "record:service"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/DeploymentSafetyPostgresTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/SecurityBoundaryTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/security/SessionViewContractTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java"
@@ -341,7 +345,10 @@
         "record:identity"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/security/SessionViewContractTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java"
       ],
       "executedAcceptance": [
@@ -496,7 +503,10 @@
         "record:identity"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/security/SessionViewContractTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java"
       ],
       "executedAcceptance": [],
@@ -779,6 +789,8 @@
         "record:service"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java"
@@ -985,6 +997,8 @@
         "record:service"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java"
@@ -1191,6 +1205,8 @@
         "record:service"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java"
@@ -1931,7 +1947,10 @@
         "record:journal"
       ],
       "integrationTestCandidates": [
-        "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java"
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/security/SessionViewContractTest.java"
       ],
       "executedAcceptance": [],
       "remaining": [
@@ -2539,7 +2558,10 @@
         "record:count"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/security/SessionViewContractTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java"
       ],
       "executedAcceptance": [],
@@ -2953,6 +2975,8 @@
         "record:fulfillment"
       ],
       "integrationTestCandidates": [
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
@@ -4880,6 +4904,7 @@
         "platform:tenants:write"
       ],
       "legacyParityCandidates": [
+        "branch:server/server.py:261",
         "branch:server/server.py:296",
         "branch:server/server.py:299"
       ],

@@ -27,6 +27,8 @@ export async function subscriptionCommand(_:FormState,fd:FormData):Promise<FormS
  let path='/admin/subscriptions';
  try {
  if(kind==='plan')path+='/plans';
+ else if(kind==='commercial-terms')path+='/commercial-terms';
+ else if(kind==='approve-commercial-terms')path+='/commercial-terms/'+uuid(text(fd,'id',36))+'/approve';
  else if(kind==='notice'||kind==='payment')path+='/'+kind+'s';
  else if(kind==='approve-notice'||kind==='approve-payment')path+='/'+(kind==='approve-notice'?'notices':'payments')+'/'+uuid(text(fd,'id',36))+'/approve';
  else if(kind==='activate-payment')path+='/payments/'+uuid(text(fd,'id',36))+'/activate';
@@ -38,6 +40,7 @@ export async function subscriptionCommand(_:FormState,fd:FormData):Promise<FormS
  if(kind==='plan'){const capacity=(name:string)=>{const n=version(text(fd,name));if(n<1||n>2147483647)throw new Error('Capacity must be a positive whole number.');return n;};return {operationId,plan:{code:text(fd,'code',80),name:text(fd,'name',200),monthlyPriceXaf:money(text(fd,'monthlyPriceXaf',19)),seatLimit:capacity('seatLimit'),branchLimit:capacity('branchLimit'),warehouseLimit:capacity('warehouseLimit'),commerceAccess:fd.get('commerceAccess')==='on',effectiveAt:instant('effectiveAt')}};}
  if(kind.startsWith('approve-')||kind==='activate-payment')return {operationId};
  const tenantId=uuid(text(fd,'tenantId',36));
+ if(kind==='commercial-terms'){const basis=text(fd,'basis',20);if(basis!=='PRORATED'&&basis!=='NEGOTIATED')throw new Error('Select prorated or negotiated terms.');return {operationId,tenantId,invoiceId:uuid(text(fd,'invoiceId',36)),planCode:text(fd,'planCode',80),basis,evidenceReference:text(fd,'evidenceReference'),evidenceSha256:sha256(text(fd,'evidenceSha256',64)),reason:text(fd,'reason')};}
  if(kind==='notice')return {operationId,tenantId,subscriptionVersion:version(text(fd,'version')),deliveryReference:text(fd,'deliveryReference'),deliveredAt:instant('deliveredAt'),graceEndsAt:instant('graceEndsAt'),contractReference:text(fd,'contractReference'),reason:text(fd,'reason')};
  if(kind==='payment'){const evidenceSha256=sha256(text(fd,'evidenceSha256',64));return {operationId,tenantId,invoiceId:uuid(text(fd,'invoiceId',36)),planCode:text(fd,'planCode',80),amountXaf:money(text(fd,'amountXaf',19)),bankReference:text(fd,'bankReference'),evidenceSha256,reason:text(fd,'reason')};}
  return {operationId,expectedVersion:version(text(fd,'version')),reason:text(fd,'reason')};

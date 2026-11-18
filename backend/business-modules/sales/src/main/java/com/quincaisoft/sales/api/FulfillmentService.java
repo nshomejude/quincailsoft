@@ -18,12 +18,13 @@ public interface FulfillmentService {
  record Action(UUID operationId,String version,String proofReference,String reason){}
  record Fulfillment(UUID id,UUID saleId,UUID customerId,String status,LocalDate businessDate,String proofReference,String version,DeliveryDetails delivery){}
  record DispatchLines(UUID operationId,String version,String reason,List<PickLine> lines) {}
- Fulfillment dispatchLines(UUID id,DispatchLines command);
+ @com.quincaisoft.shared.TenantMutation Fulfillment dispatchLines(UUID id,DispatchLines command);
  record DispatchEntry(UUID operationId,UUID productId,String quantityMilli,Instant dispatchedAt,UUID dispatchedBy) {}
  List<DispatchEntry> dispatchHistory(UUID fulfillmentId);
  record PickLine(UUID productId,String quantityMilli) {}
  record PickList(UUID fulfillmentId,UUID saleId,UUID warehouseId,String status,List<PickLine> lines) {}
  PickList pickList(UUID fulfillmentId);
  long pendingPreparationCount();
- List<Fulfillment> list();Fulfillment get(UUID id);Fulfillment draft(Draft c);Fulfillment dispatch(UUID id,Action c);Fulfillment complete(UUID id,Action c);
+ List<Fulfillment> list();Fulfillment get(UUID id);@com.quincaisoft.shared.TenantMutation Fulfillment draft(Draft c);@com.quincaisoft.shared.TenantMutation Fulfillment dispatch(UUID id,Action c);@com.quincaisoft.shared.TenantMutation Fulfillment complete(UUID id,Action c);
+
 }

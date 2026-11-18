@@ -5,5 +5,5 @@ public interface ReturnService {
  record Command(UUID operationId,long version,String reason){}
  record Line(UUID productId,String quantityMilli,String creditXaf){}
  record CustomerReturn(UUID id,UUID saleId,String status,LocalDate businessDate,long version,String evidenceReference,String creditXaf,String customerCreditXaf,List<Line> lines){}
- List<CustomerReturn> list();CustomerReturn get(UUID id);CustomerReturn draft(Draft request);CustomerReturn approve(UUID id,Command command);CustomerReturn post(UUID id,Command command);
+ List<CustomerReturn> list();CustomerReturn get(UUID id);@com.quincaisoft.shared.TenantMutation CustomerReturn draft(Draft request);@com.quincaisoft.shared.TenantMutation CustomerReturn approve(UUID id,Command command);@com.quincaisoft.shared.TenantMutation CustomerReturn post(UUID id,Command command);
 }
