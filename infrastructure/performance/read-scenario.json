@@ -1,0 +1,12 @@
+{
+  "durationSeconds": 30,
+  "ratePerSecond": 5,
+  "concurrency": 5,
+  "timeoutMs": 5000,
+  "tokenEnvs": ["QUINCAI_PERF_TOKEN_OWNER"],
+  "operations": [
+    {"name": "product-list", "method": "GET", "path": "/api/v1/products", "expectedStatuses": [200]},
+    {"name": "category-list", "method": "GET", "path": "/api/v1/catalog/categories", "expectedStatuses": [200]}
+  ],
+  "thresholds": {"p95Ms": 1000, "maxErrorFraction": 0, "maxDroppedFraction": 0}
+}

@@ -1,0 +1,2 @@
+package com.quincaisoft.platformcontrol.infrastructure;import jakarta.persistence.*;import java.util.*;import java.time.*;
+@Entity @Table(name="platform_governance_event")public class GovernanceEvent{@Id public UUID id;@Column(name="tenant_id")public UUID tenantId;@Column(name="actor_id")public UUID actorId;@Column(name="correlation_id")public UUID correlationId;@Column(name="source_id")public UUID sourceId;@Column(name="event_type")public String eventType;@Column(name="created_at")public Instant createdAt;}

@@ -13,10 +13,12 @@ public final class BillingCommandGate {
     private final ScopedTransactions transactions;
     private final JdbcTemplate jdbc;
     private final SubscriptionLifecycleService subscriptions;
-    public BillingCommandGate(ScopedTransactions transactions,JdbcTemplate jdbc,SubscriptionLifecycleService subscriptions) {
-        this.transactions=transactions;this.jdbc=jdbc;this.subscriptions=subscriptions;
+    private final TenantLifecyclePolicy lifecycle;
+    public BillingCommandGate(ScopedTransactions transactions,JdbcTemplate jdbc,SubscriptionLifecycleService subscriptions,TenantLifecyclePolicy lifecycle) {
+        this.transactions=transactions;this.jdbc=jdbc;this.subscriptions=subscriptions;this.lifecycle=lifecycle;
     }
-    public <T>T execute(Object[] arguments,Supplier<T> command) {
+    public <T>T execute(Object[] arguments,Supplier<T> command) {return execute(arguments,true,true,command);}
+    public <T>T execute(Object[] arguments,boolean billing,boolean tenant,Supplier<T> command) {
         return transactions.execute(()-> {
             var scope=TenantContext.current();UUID operation=operation(arguments);
             // The domain service still validates the original request hash and permissions.
@@ -26,17 +28,21 @@ public final class BillingCommandGate {
                   where tenant_id=? and company_id=? and branch_id=? and actor_id=?
                     and operation_id=? and status='ACCEPTED' and response_json is not null)
                 """,Boolean.class,scope.tenantId(),scope.companyId(),scope.branchId(),scope.actorId(),operation));
-            if(!retained)subscriptions.requireAllowed(SubscriptionLifecycleService.Operation.NEW_BUSINESS_POSTING);
+            if(!retained&&tenant)lifecycle.requireNewMutation();
+            if(!retained&&billing)subscriptions.requireAllowed(SubscriptionLifecycleService.Operation.NEW_BUSINESS_POSTING);
             return command.get();
         });
     }
-    private static UUID operation(Object[] args) {
+    private static UUID operation(Object[] args) {return operation(args,0);}
+    private static UUID operation(Object[] args,int depth) {
         for(Object value:args) if(value!=null&&value.getClass().isRecord()) {
-            for(RecordComponent part:value.getClass().getRecordComponents())
+            for(RecordComponent part:value.getClass().getRecordComponents()) {
                 if(part.getName().equals("operationId")&&part.getType()==UUID.class) {
                     try {return (UUID)part.getAccessor().invoke(value);}
                     catch(ReflectiveOperationException e){throw new IllegalArgumentException("Operation identity unavailable",e);}
                 }
+                if(depth<2&&part.getType().isRecord())try {UUID nested=operation(new Object[]{part.getAccessor().invoke(value)},depth+1);if(nested!=null)return nested;}catch(ReflectiveOperationException e){throw new IllegalArgumentException("Operation identity unavailable",e);}
+            }
         }
         return null;
     }

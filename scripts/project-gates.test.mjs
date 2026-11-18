@@ -30,3 +30,5 @@ test('rule gate tolerates CRLF checkouts and still rejects a Python executable i
     fs.rmSync(tmp, {recursive: true, force: true});
   }
 });
+
+test('rule gate rejects colliding Flyway versions including numeric aliases',()=>{const tmp=fixture();try{const target=path.join(tmp,'backend/db-migrations/src/main/resources/db/migration/V031_0__collision.sql');fs.writeFileSync(target,'select 1;');const result=run(tmp,'check-project-rules.mjs');assert.equal(result.code,1);assert.match(result.text,/Duplicate Flyway migration version 31:/);}finally{fs.rmSync(tmp,{recursive:true,force:true});}});

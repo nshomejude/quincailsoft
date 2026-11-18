@@ -1,0 +1,66 @@
+▲ Next.js 16.4.6 (webpack)
+✓ Running next.config.ts took 48ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.7s
+  Running TypeScript ...
+  Finished TypeScript in 1929ms ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/6) ...
+  Generating static pages using 8 workers (1/6) 
+  Generating static pages using 8 workers (2/6) 
+  Generating static pages using 8 workers (4/6) 
+✓ Generating static pages using 8 workers (6/6) in 567ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+⚠ 27 traced files were not included in the standalone output
+because their paths are outside of `outputFileTracingRoot`.
+First 100 skipped files:
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/compiled/jest-worker/processChild.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/compiled/jest-worker/threadChild.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/lib/start-server.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/next-server.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/next.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/require-hook.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/app-page/module.compiled.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/app-router-context.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/entrypoints.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/head-manager-context.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/hooks-client-context.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/image-config-context.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/router-context.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/server-inserted-html.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/pages/module.compiled.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/pages/vendored/contexts/app-router-context.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/pages/vendored/contexts/entrypoints.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/pages/vendored/contexts/head-manager-context.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/pages/vendored/contexts/hooks-client-context.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/pages/vendored/contexts/html-context.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/pages/vendored/contexts/image-config-context.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/pages/vendored/contexts/loadable-context.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/pages/vendored/contexts/loadable.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/pages/vendored/contexts/router-context.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/next@16.4.6_@babel+core@7.29.13_supports-color@10.2.2__@types+node@24.10.1_babel-plugin_76c44889a2e62c4b4b5e8f437cc61e0f/node_modules/next/dist/server/route-modules/pages/vendored/contexts/server-inserted-html.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/styled-jsx@5.1.6_@babel+core@7.29.13_supports-color@10.2.2__react@19.3.1/node_modules/styled-jsx/index.js
+  - ../../workspace/scratch/ce037b7504c9/app_v4/node_modules/.pnpm/styled-jsx@5.1.6_@babel+core@7.29.13_supports-color@10.2.2__react@19.3.1/node_modules/styled-jsx/style.js
+Set `outputFileTracingRoot` to a common parent directory
+to include these files.
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /auth/callback
+├ ƒ /auth/login
+├ ƒ /auth/logout
+├ ƒ /billing
+├ ƒ /billing/export
+├ ƒ /documents/[kind]/[id]
+├ ƒ /governance
+├ ƒ /governance/support/[id]
+├ ƒ /language
+├ ƒ /onboarding/[id]
+└ ƒ /subscriptions
+
+
+ƒ  (Dynamic)  server-rendered on demand
+

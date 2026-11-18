@@ -1,0 +1,10 @@
+{
+  "result": "PASS structural source contract",
+  "operations": 293,
+  "unresolvedJavaTypes": [],
+  "idempotencyHeaderReview": [
+    "POST /api/v1/mobile-money/intents/{id}/reconcile",
+    "POST /api/v1/operations/outbox/project-audit"
+  ],
+  "note": "Not runtime acceptance or full semantic OpenAPI lint."
+}

@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @EnabledIfEnvironmentVariable(named="QUINCAI_PG_TEST_URL",matches=".+")
 class WorkforcePostgresTest {
-    private static final List<String> PERMISSIONS=List.of("workforce:employees:write","workforce:employees:read","workforce:attendance:write","workforce:payroll:write","workforce:payroll:approve","workforce:payroll:read","workforce:payroll:pay");
+    private static final List<String> PERMISSIONS=List.of("workforce:employees:write","workforce:employees:read","workforce:attendance:write","workforce:payroll:write","workforce:payroll:approve","workforce:payroll:read","workforce:payroll:pay","workforce:leave:read","workforce:leave:write","workforce:leave:approve","workforce:benefits:read","workforce:benefits:write","workforce:benefits:approve");
     private static final LocalDate START=LocalDate.of(2024,1,1),END=LocalDate.of(2024,1,31);
     static void sql(Connection c,String sql)throws SQLException {try(var s=c.createStatement()){s.execute(sql);}}
     static long count(Connection c,String sql)throws SQLException{try(var s=c.createStatement();var r=s.executeQuery(sql)){r.next();return r.getLong(1);}}
@@ -136,6 +136,49 @@ class WorkforcePostgresTest {
                 assertThrows(SQLException.class,()->sql(owner,"UPDATE bank_consumption SET settlement_id=id,payroll_payment_id=null"));
                 assertThrows(SQLException.class,()->sql(owner,"UPDATE workforce_contract SET monthly_gross_xaf=5"));
                 assertThrows(SQLException.class,()->sql(owner,"UPDATE workforce_deduction SET amount_xaf=1"));
+                // Independent leave decisions preserve attendance and do not invent statutory balances.
+                var leaveInput=new WorkforceService.LeaveRequest(UUID.randomUUID(),entry.id(),LocalDate.of(2024,4,2),LocalDate.of(2024,4,3),"ANNUAL",960,"Explicit approved company leave");
+                var leave=TenantContext.call(scope,1,()->{var l=service.requestLeave(leaveInput);assertEquals(l,service.requestLeave(leaveInput));assertThrows(AccessDeniedException.class,()->service.decideLeave(l.id(),"approve",new WorkforceService.Approval(UUID.randomUUID(),l.version(),"Self approval denied")));return l;});
+                var approvedLeave=TenantContext.call(checkerScope,1,()->service.decideLeave(leave.id(),"approve",new WorkforceService.Approval(UUID.randomUUID(),leave.version(),"Independent leave review")));
+                TenantContext.call(scope,1,()->{
+                    assertEquals("APPROVED",service.leave(leave.id()).status());assertEquals(1,service.leaves(entry.id(),"APPROVED",LocalDate.of(2024,4,1),LocalDate.of(2024,4,30),0,25).size());
+                    assertThrows(IllegalStateException.class,()->service.recordAttendance(new WorkforceService.AttendanceSave(UUID.randomUUID(),entry.id(),LocalDate.of(2024,4,2),"PRESENT",480,"Conflict with approved leave")));
+                    service.recordAttendance(new WorkforceService.AttendanceSave(UUID.randomUUID(),entry.id(),LocalDate.of(2024,4,2),"APPROVED_LEAVE",0,"Approved leave evidence"));
+                    assertThrows(IllegalStateException.class,()->service.decideLeave(leave.id(),"cancel",new WorkforceService.Approval(UUID.randomUUID(),approvedLeave.version(),"Cannot erase attendance evidence")));return null;
+                });
+                var rejectedLeave=TenantContext.call(scope,1,()->service.requestLeave(new WorkforceService.LeaveRequest(UUID.randomUUID(),entry.id(),LocalDate.of(2024,4,4),LocalDate.of(2024,4,4),"OTHER",480,"Request for review")));
+                TenantContext.call(checkerScope,1,()->{assertEquals("REJECTED",service.decideLeave(rejectedLeave.id(),"reject",new WorkforceService.Approval(UUID.randomUUID(),rejectedLeave.version(),"Operational reason" )).status());return null;});
+                var cancelLeave=TenantContext.call(scope,1,()->service.requestLeave(new WorkforceService.LeaveRequest(UUID.randomUUID(),entry.id(),LocalDate.of(2024,4,5),LocalDate.of(2024,4,5),"UNPAID",480,"Cancel before use")));
+                var cancelApproved=TenantContext.call(checkerScope,1,()->service.decideLeave(cancelLeave.id(),"approve",new WorkforceService.Approval(UUID.randomUUID(),cancelLeave.version(),"Independent review")));
+                TenantContext.call(scope,1,()->{assertEquals("CANCELLED",service.decideLeave(cancelLeave.id(),"cancel",new WorkforceService.Approval(UUID.randomUUID(),cancelApproved.version(),"No attendance or payroll yet")).status());return null;});
+                LocalDate april=LocalDate.of(2024,4,1),aprilEnd=LocalDate.of(2024,4,30);
+                var policyInput=new WorkforceService.BenefitPolicyRequest(UUID.randomUUID(),"MEDICAL","Reviewed medical benefit",april,aprilEnd,"100","200","COMPANY_POLICY_2024_04","Fixed reviewed values, no statutory formula");
+                var policy=TenantContext.call(scope,1,()->{var p=service.requestBenefitPolicy(policyInput);assertEquals(p,service.requestBenefitPolicy(policyInput));assertThrows(AccessDeniedException.class,()->service.decideBenefitPolicy(p.id(),"approve",new WorkforceService.Approval(UUID.randomUUID(),p.version(),"Self approval denied")));return p;});
+                TenantContext.call(checkerScope,1,()->service.decideBenefitPolicy(policy.id(),"approve",new WorkforceService.Approval(UUID.randomUUID(),policy.version(),"Independent company policy review")));
+                var electionInput=new WorkforceService.BenefitElectionRequest(UUID.randomUUID(),entry.id(),policy.id(),april,aprilEnd,"Employee benefit election evidence");
+                var election=TenantContext.call(scope,1,()->{var e=service.requestBenefitElection(electionInput);assertEquals(e,service.requestBenefitElection(electionInput));return e;});
+                var activeElection=TenantContext.call(checkerScope,1,()->service.decideBenefitElection(election.id(),"approve",new WorkforceService.Approval(UUID.randomUUID(),election.version(),"Independent election review")));
+                TenantContext.call(scope,1,()->{
+                    assertEquals(1,service.benefitPolicies("APPROVED",0,25).size());assertEquals(1,service.benefitElections(entry.id(),"APPROVED",0,25).size());assertEquals("APPROVED",service.benefitElection(election.id()).status());assertEquals("200",service.benefitPreview(entry.id(),april,aprilEnd).getFirst().employerContributionXaf());
+                    assertThrows(IllegalStateException.class,()->service.benefitPreview(entry.id(),april.minusDays(1),aprilEnd));
+                    assertThrows(IllegalArgumentException.class,()->service.draftPayroll(new WorkforceService.PayrollDraft(UUID.randomUUID(),entry.id(),april,aprilEnd,aprilEnd,"1000","100","Manual reviewed benefit","Missing itemized benefit")));
+                    return null;
+                });
+                var benefitDraftInput=new WorkforceService.DetailedPayroll(new WorkforceService.PayrollDraft(UUID.randomUUID(),entry.id(),april,aprilEnd,aprilEnd,"1000","100","Reviewed company policy","Include approved benefits"),List.of(new WorkforceService.Deduction("BENEFIT_MEDICAL","Reviewed medical benefit","100","COMPANY_POLICY_2024_04")),null);
+                var benefitDraft=TenantContext.call(scope,1,()->{var p=service.draftDetailedPayroll(benefitDraftInput);assertEquals(1,service.payrollBenefits(p.id()).size());assertTrue(service.payslipHtml(p.id()).contains("Employer contribution XAF"));return p;});
+                var benefitAccrued=TenantContext.call(checkerScope,1,()->service.approvePayroll(benefitDraft.id(),new WorkforceService.Approval(UUID.randomUUID(),benefitDraft.version(),"Approve reviewed benefit snapshots")));
+                assertEquals(200,count(owner,"SELECT sum(debit_xaf::numeric-credit_xaf::numeric) FROM journal_line WHERE account_code='EMPLOYER_BENEFIT_EXPENSE'"));
+                assertEquals(200,count(owner,"SELECT sum(credit_xaf::numeric-debit_xaf::numeric) FROM journal_line WHERE account_code='EMPLOYER_BENEFIT_PAYABLE'"));
+                TenantContext.call(scope,1,()->{assertThrows(IllegalStateException.class,()->service.decideBenefitElection(election.id(),"cancel",new WorkforceService.Approval(UUID.randomUUID(),activeElection.version(),"Cannot erase accrued election")));return null;});
+                var benefitReversal=TenantContext.call(scope,1,()->service.requestReversal(benefitAccrued.id(),new WorkforceService.ReversalRequest(UUID.randomUUID(),benefitAccrued.version(),aprilEnd,"Reverse reviewed payroll")));
+                TenantContext.call(checkerScope,1,()->service.approveReversal(benefitReversal.id(),new WorkforceService.Approval(UUID.randomUUID(),benefitReversal.version(),"Independent reversal")));
+                assertEquals(0,count(owner,"SELECT sum(debit_xaf::numeric-credit_xaf::numeric) FROM journal_line WHERE account_code='EMPLOYER_BENEFIT_EXPENSE'"));
+                TenantContext.call(scope,1,()->{assertEquals("CANCELLED",service.decideBenefitElection(election.id(),"cancel",new WorkforceService.Approval(UUID.randomUUID(),activeElection.version(),"Cancel after reversal")).status());assertTrue(service.benefitPreview(entry.id(),april,aprilEnd).isEmpty());assertEquals("200",service.payrollBenefits(benefitDraft.id()).getFirst().employerContributionXaf());return null;});
+                var rejectedPolicy=TenantContext.call(scope,1,()->service.requestBenefitPolicy(new WorkforceService.BenefitPolicyRequest(UUID.randomUUID(),"OTHER","Other benefit",april,aprilEnd,"0","5","REVIEW-ME","Review explicit fixed contribution")));
+                TenantContext.call(checkerScope,1,()->{assertEquals("REJECTED",service.decideBenefitPolicy(rejectedPolicy.id(),"reject",new WorkforceService.Approval(UUID.randomUUID(),rejectedPolicy.version(),"Policy not accepted")).status());return null;});
+                assertThrows(SQLException.class,()->sql(owner,"UPDATE workforce_benefit_snapshot SET employer_contribution_xaf=1"));
+                assertThrows(SQLException.class,()->sql(owner,"UPDATE workforce_benefit_policy SET employee_deduction_xaf=1"));
+
 
             }finally{SecurityContextHolder.clearContext();if(factory!=null)factory.destroy();sql(admin,"DROP DATABASE "+db+" WITH (FORCE)");sql(admin,"DROP ROLE "+role);}
         }

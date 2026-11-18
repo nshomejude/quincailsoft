@@ -1,0 +1,12 @@
+**/node_modules
+**/.next
+**/target
+.git
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+**/*.p12
+runtime
+**/test-results
+**/playwright-report

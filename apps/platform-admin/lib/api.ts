@@ -6,7 +6,7 @@ export async function platform<T>(path:string,body?:object,operation?:string):Pr
  const s=await session();if(!s)throw new PlatformError(401,null);
  const base=process.env.PLATFORM_API_URL;if(!base)throw new Error('Platform API is not configured.');
  if(!path.startsWith('/admin/')||path.startsWith('//'))throw new Error('Invalid platform route.');
- const response=await fetch(new URL(path,base),{method:body?'POST':'GET',headers:{Authorization:'Bearer '+s.accessToken,...(body?{'Content-Type':'application/json','Idempotency-Key':operation!,'X-Request-ID':crypto.randomUUID()}:{})},body:body?JSON.stringify(body):undefined,cache:'no-store',signal:AbortSignal.timeout(30000)});
+ const response=await fetch(new URL(path,base),{method:body?'POST':'GET',headers:{Authorization:'Bearer '+s.accessToken,'X-Request-ID':crypto.randomUUID(),...(body?{'Content-Type':'application/json','Idempotency-Key':operation!}:{})},body:body?JSON.stringify(body):undefined,cache:'no-store',signal:AbortSignal.timeout(30000)});
  if(!response.ok)throw new PlatformError(response.status,response.headers.get('X-Request-ID'));
  return response.json() as Promise<T>;
 }
@@ -18,4 +18,12 @@ export async function platformHtml(path:string):Promise<string>{
  if(!response.ok)throw new PlatformError(response.status,response.headers.get('X-Request-ID'));
  if(!response.headers.get('content-type')?.toLowerCase().startsWith('text/html'))throw new Error('Unexpected document format.');
  return response.text();
+}
+export async function platformBillingCsv(query:URLSearchParams):Promise<{csv:string;nextCursor:string|null;cutoff:string|null}>{
+ const s=await session();if(!s)throw new PlatformError(401,null);
+ const base=process.env.PLATFORM_API_URL;if(!base)throw new Error('Platform API is not configured.');
+ const response=await fetch(new URL('/admin/billing/invoices/export.csv?'+query,base),{headers:{Authorization:'Bearer '+s.accessToken,Accept:'text/csv'},cache:'no-store',signal:AbortSignal.timeout(30000),redirect:'error'});
+ if(!response.ok)throw new PlatformError(response.status,response.headers.get('X-Request-ID'));
+ if(!response.headers.get('content-type')?.toLowerCase().startsWith('text/csv'))throw new Error('Unexpected document format.');
+ return {csv:await response.text(),nextCursor:response.headers.get('X-Next-Cursor'),cutoff:response.headers.get('X-Export-Cutoff')};
 }

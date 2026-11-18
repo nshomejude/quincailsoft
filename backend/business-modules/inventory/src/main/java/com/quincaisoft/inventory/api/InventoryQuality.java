@@ -12,5 +12,5 @@ public interface InventoryQuality {
  record Reservation(UUID id,UUID warehouseId,UUID productId,String quantityMilli,String releasedMilli,String status,String sourceReference,String version){}
  List<Lot> lots();Lot registerLot(RegisterLot command);List<Recall> recalls();Recall draftRecall(DraftRecall command);
  Recall approve(UUID id,Action command);Recall block(UUID id,Action command);Recall recover(UUID id,Action command);Recall dispose(UUID id,Action command);
- List<Reservation> reservations();Reservation reserve(Reserve command);Reservation release(UUID id,Release command);
+ List<Reservation> reservations();@com.quincaisoft.shared.TenantMutation Reservation reserve(Reserve command);Reservation release(UUID id,Release command);
 }

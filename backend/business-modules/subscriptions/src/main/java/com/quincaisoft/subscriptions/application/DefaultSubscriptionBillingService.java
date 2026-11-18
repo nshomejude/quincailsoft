@@ -134,6 +134,37 @@ public class DefaultSubscriptionBillingService implements SubscriptionBillingSer
         return em.createQuery("select i from SubscriptionInvoice i where i.tenantId=:tenant order by i.createdAt desc,i.id",SubscriptionInvoice.class)
             .setParameter("tenant",tenantId).setMaxResults(100).getResultList().stream().map(this::view).toList();
     }
+    private record Cursor(UUID tenantId,Instant cutoff,Instant createdAt,UUID id,Instant expiresAt,String criteria){}
+    private static final String CURSOR_CRITERIA="SUBSCRIPTION_INVOICES_CREATED_DESC_ID_DESC_V1";
+    @Override public InvoicePage platformPage(UUID tenant,String cursor,int limit){Objects.requireNonNull(tenant);return platform("platform:billing:read",()->page(tenant,cursor,limit));}
+    @Override public InvoicePage merchantPage(String cursor,int limit){return merchant(()->page(TenantContext.current().tenantId(),cursor,limit));}
+    @Override public CsvPage platformExport(UUID tenant,String cursor,int limit){return csv(platformPage(tenant,cursor,limit));}
+    @Override public CsvPage merchantExport(String cursor,int limit){return csv(merchantPage(cursor,limit));}
+    private InvoicePage page(UUID tenant,String token,int limit){
+        if(limit<1||limit>200)throw new IllegalArgumentException("Page size must be between 1 and 200");
+        Instant now=Instant.now().truncatedTo(ChronoUnit.MICROS);Cursor cursor=new Cursor(tenant,now,null,null,now.plusSeconds(900),CURSOR_CRITERIA);Instant cutoff=now;
+        byte[] key=(byte[])em.createNativeQuery("select secret from subscription_cursor_key where id=1").getSingleResult();
+        if(token!=null&&!token.isBlank()){
+            try{if(token.length()>1024)throw new IllegalArgumentException();String[] parts=token.split("\\.",-1);if(parts.length!=2||!MessageDigest.isEqual(mac(parts[0],key),Base64.getUrlDecoder().decode(parts[1])))throw new IllegalArgumentException();cursor=json.readValue(new String(Base64.getUrlDecoder().decode(parts[0]),StandardCharsets.UTF_8),Cursor.class);}
+            catch(RuntimeException invalid){throw new IllegalArgumentException("Invalid invoice cursor");}
+            if(cursor.tenantId()==null||!tenant.equals(cursor.tenantId())||cursor.cutoff()==null||cursor.expiresAt()==null||!cursor.expiresAt().isAfter(now)||!CURSOR_CRITERIA.equals(cursor.criteria())||(cursor.createdAt()==null)!=(cursor.id()==null)||cursor.cutoff().isAfter(cutoff)||(cursor.createdAt()!=null&&cursor.createdAt().isAfter(cursor.cutoff())))throw new IllegalArgumentException("Cursor belongs to another scope, sort or expired time boundary");
+            if(cursor.id()!=null){var anchor=em.find(SubscriptionInvoice.class,cursor.id());if(anchor==null||!anchor.tenantId.equals(tenant)||!anchor.createdAt.equals(cursor.createdAt()))throw new IllegalArgumentException("Invoice cursor anchor is unavailable");}cutoff=cursor.cutoff();
+        }
+        String current=encode(cursor,key);
+        var query=em.createQuery("select i from SubscriptionInvoice i where i.tenantId=:tenant and i.createdAt<=:cutoff"+(cursor.id()==null?"":" and (i.createdAt<:afterTime or (i.createdAt=:afterTime and i.id<:afterId))")+" order by i.createdAt desc,i.id desc",SubscriptionInvoice.class).setParameter("tenant",tenant).setParameter("cutoff",cutoff);
+        if(cursor.id()!=null)query.setParameter("afterTime",cursor.createdAt()).setParameter("afterId",cursor.id());
+        var rows=query.setMaxResults(limit+1).getResultList();boolean more=rows.size()>limit;var items=rows.subList(0,Math.min(rows.size(),limit)).stream().map(this::view).toList();String next=null;
+        if(more){var last=items.getLast();next=encode(new Cursor(tenant,cutoff,last.createdAt(),last.id(),cursor.expiresAt(),CURSOR_CRITERIA),key);}
+        return new InvoicePage(items,next,cutoff,current);
+    }
+    private String encode(Cursor cursor,byte[] key){String payload=Base64.getUrlEncoder().withoutPadding().encodeToString(json.writeValueAsString(cursor).getBytes(StandardCharsets.UTF_8));return payload+"."+Base64.getUrlEncoder().withoutPadding().encodeToString(mac(payload,key));}
+    private static byte[] mac(String payload,byte[] key){try{var mac=javax.crypto.Mac.getInstance("HmacSHA256");mac.init(new javax.crypto.spec.SecretKeySpec(key,"HmacSHA256"));return mac.doFinal(payload.getBytes(StandardCharsets.UTF_8));}catch(java.security.GeneralSecurityException error){throw new IllegalStateException("Cursor signing unavailable",error);}}
+    private static CsvPage csv(InvoicePage page){
+        StringBuilder out=new StringBuilder("invoice_id,tenant_id,kind,number,original_id,issuer,issuer_tax_reference,customer,customer_tax_reference,description,jurisdiction,period_start,period_end,due_date,subtotal_xaf,discount_xaf,tax_xaf,total_xaf,created_at\r\n");
+        for(var i:page.items()){String[] fields={i.id().toString(),i.tenantId().toString(),i.kind(),i.number(),i.originalId()==null?"":i.originalId().toString(),i.issuerName(),i.issuerTaxReference(),i.customerName(),i.customerTaxReference(),i.description(),i.jurisdiction(),i.periodStart().toString(),i.periodEnd().toString(),i.dueDate().toString(),i.subtotalXaf(),i.discountXaf(),i.taxXaf(),i.totalXaf(),i.createdAt().toString()};for(int n=0;n<fields.length;n++){if(n>0)out.append(',');out.append(csvCell(fields[n]));}out.append("\r\n");}
+        return new CsvPage(out.toString(),page.nextCursor(),page.cutoff(),page.currentCursor());
+    }
+    private static String csvCell(String value){String safe=value==null?"":value;String leading=safe.stripLeading();if((!leading.isEmpty()&&"=+-@".indexOf(leading.charAt(0))>=0)||(!safe.isEmpty()&&"\t\r\n".indexOf(safe.charAt(0))>=0))safe="'"+safe;return "\""+safe.replace("\"","\"\"")+"\"";}
     private Invoice view(SubscriptionInvoice i) {
         return new Invoice(i.id,i.tenantId,i.kind,i.originalId,i.number,i.issuerName,i.issuerTaxReference,
             i.customerName,i.customerTaxReference,i.description,i.jurisdiction,i.periodStart,i.periodEnd,i.dueDate,

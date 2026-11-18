@@ -1,0 +1,2 @@
+package com.quincaisoft.platformcontrol.infrastructure;import jakarta.persistence.*;import java.util.*;import java.time.*;
+@Entity @Table(name="platform_legal_hold")public class TenantLegalHold{@Id public UUID id;@Column(name="tenant_id")public UUID tenantId;public String reference;public String reason;public String status;@Column(name="placed_by")public UUID placedBy;@Column(name="released_by")public UUID releasedBy;@Column(name="created_at")public Instant createdAt;@Version public long version;}

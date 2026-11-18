@@ -1,0 +1,31 @@
+✔ paging preserves opaque cursor and tenant in encoded links (1.389981ms)
+✔ paging rejects oversized limits, duplicate filters and invalid cursors (0.46779ms)
+✔ governance uses displayed target version and independent command identity (1.907195ms)
+✔ hold release requires a valid target and unsafe versions fail (0.956531ms)
+✔ explicit safe locale overrides browser preference (7.030304ms)
+✔ browser language respects preference quality and exclusions (0.471806ms)
+✔ French workflow and failures translate without changing amounts or references (0.452248ms)
+✔ preserves integer amounts beyond JavaScript safe number range (53.885926ms)
+✔ rejects noncanonical or overflowing amount -1 (0.384507ms)
+✔ rejects noncanonical or overflowing amount 1.2 (0.133888ms)
+✔ rejects noncanonical or overflowing amount 1e4 (0.199595ms)
+✔ rejects noncanonical or overflowing amount 01 (0.143221ms)
+✔ rejects noncanonical or overflowing amount NaN (0.125175ms)
+✔ rejects noncanonical or overflowing amount 9223372036854775808 (0.113838ms)
+✔ total overflow and excessive discount fail (0.18303ms)
+✔ invalid and missing IDs rejected (6.46519ms)
+✔ version cannot silently lose precision (0.400401ms)
+✔ calendar dates cannot silently roll over (0.687204ms)
+✔ bank evidence digest is normalized and malformed evidence rejected (0.472286ms)
+✔ owner consent preserves the named operator, purpose and bounded expiration (2.591033ms)
+✔ consent rejects expired, overly long and timezone-free grants (0.796205ms)
+✔ revocation is version checked and cannot name another API action (0.351258ms)
+✔ French consent and error copy is available (0.278341ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 367.284552

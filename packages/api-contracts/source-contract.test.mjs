@@ -28,3 +28,34 @@ test('report route enum includes actual expanded source catalog',()=>{
  assert(codes.includes('customer-custody'));assert(codes.includes('recalls'));
  for(const [path,item] of Object.entries(api.paths))if(path.startsWith('/api/v1/reports/'))for(const operation of Object.values(item))for(const parameter of operation.parameters??[])if(parameter.name==='code')assert.deepEqual(parameter.schema.enum,codes);
 });
+test('governance and quota enum schemas preserve their declaration owners and exact values',()=>{
+ const schemas=api.components.schemas;
+ assert.deepEqual(schemas.PlatformGovernanceService_Kind.enum,['SUSPEND','RESUME','PLACE_LEGAL_HOLD','RELEASE_LEGAL_HOLD']);
+ assert.equal(schemas.PlatformGovernanceService_Request.properties.kind.$ref,'#/components/schemas/PlatformGovernanceService_Kind');
+ assert.equal(schemas.PlatformGovernanceService_Review.properties.kind.$ref,'#/components/schemas/PlatformGovernanceService_Kind');
+ assert.deepEqual(schemas.SubscriptionQuotaService_Resource.enum,['STAFF_SEATS','BRANCHES','WAREHOUSES']);
+ for(const name of ['Usage','Reserve','Reservation'])assert.equal(schemas['SubscriptionQuotaService_'+name].properties.resource.$ref,'#/components/schemas/SubscriptionQuotaService_Resource');
+});
+test('both session aliases expose the exact typed scope and authority list',()=>{
+ for(const route of ['/api/v1/session','/api/v1/me'])assert.equal(api.paths[route].get.responses['200'].content['application/json'].schema.$ref,'#/components/schemas/SessionController_SessionView');
+ const view=api.components.schemas.SessionController_SessionView.properties;
+ assert.deepEqual(Object.keys(view).sort(),['authorities','scope']);
+ assert.deepEqual(view.authorities,{type:'array',items:{type:'string'}});
+ assert.equal(view.scope.$ref,'#/components/schemas/TenantScope');
+ const scope=api.components.schemas.TenantScope.properties;
+ assert.deepEqual(Object.keys(scope).sort(),['actorId','branchId','companyId','tenantId']);
+ for(const value of Object.values(scope))assert.deepEqual(value,{type:'string',format:'uuid'});
+});
+test('fulfillment canonical record components survive the legacy overload and expose delivery and pick-list detail',()=>{
+ const schemas=api.components.schemas;
+ assert.deepEqual(Object.keys(schemas.FulfillmentService_Draft.properties),['operationId','saleId','customerId','businessDate','reason','delivery']);
+ assert.equal(schemas.FulfillmentService_Draft.properties.delivery.$ref,'#/components/schemas/FulfillmentService_DeliveryDetails');
+ assert.equal(schemas.FulfillmentService_Fulfillment.properties.delivery.$ref,'#/components/schemas/FulfillmentService_DeliveryDetails');
+ assert.deepEqual(Object.keys(schemas.FulfillmentService_DeliveryDetails.properties),['method','scheduledDate','address','recipientName','recipientPhone','notes']);
+ assert.deepEqual(schemas.FulfillmentService_DeliveryDetails.properties.scheduledDate,{type:'string',format:'date'});
+ assert.deepEqual(Object.keys(schemas.FulfillmentService_PickList.properties),['fulfillmentId','saleId','warehouseId','status','lines']);
+ assert.equal(schemas.FulfillmentService_PickList.properties.lines.items.$ref,'#/components/schemas/FulfillmentService_PickLine');
+ assert.deepEqual(schemas.FulfillmentService_PickLine.properties.quantityMilli,{type:'string'});
+ assert.equal(api.paths['/api/v1/fulfillments/{id}/picklist'].get.responses['200'].content['application/json'].schema.$ref,'#/components/schemas/FulfillmentService_PickList');
+ assert.equal(api.paths['/api/v1/fulfillments'].post.requestBody.content['application/json'].schema.$ref,'#/components/schemas/FulfillmentService_Draft');
+});
