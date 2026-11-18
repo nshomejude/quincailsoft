@@ -1,0 +1,6 @@
+package com.quincaisoft.branch.application;
+import com.quincaisoft.branch.api.BranchBootstrapService;import com.quincaisoft.branch.infrastructure.*;import com.quincaisoft.shared.BootstrapScope;import jakarta.persistence.*;import org.springframework.stereotype.Service;import org.springframework.transaction.annotation.*;import java.util.*;import java.time.*;
+@Service public class DefaultBranchBootstrapService implements BranchBootstrapService { private final EntityManager em; public DefaultBranchBootstrapService(EntityManager em){this.em=em;}
+@Transactional(propagation=Propagation.MANDATORY) public void initialize(BootstrapScope s,String name,String timezone) {require(s);var b=new BranchEntity();b.tenantId=s.tenantId();b.companyId=s.companyId();b.id=s.branchId();b.name=name;b.timezone=timezone;em.persist(b);em.flush();}
+private void require(BootstrapScope s) { if(!em.isJoinedToTransaction()) throw new IllegalStateException("Bootstrap must join platform transaction"); Number n=(Number)em.createNativeQuery(BootstrapScope.AUTHORIZATION_SQL).setParameter("p",s.provisioningId()).setParameter("t",s.tenantId()).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setParameter("o",s.ownerId()).getSingleResult(); if(n.longValue()!=1)throw new org.springframework.security.access.AccessDeniedException("Approved current platform bootstrap required"); }
+}

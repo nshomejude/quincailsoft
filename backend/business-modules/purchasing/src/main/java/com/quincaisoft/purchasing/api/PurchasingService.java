@@ -16,6 +16,6 @@ public interface PurchasingService {
  record ReturnRequest(UUID operationId,java.time.LocalDate businessDate,String reason,List<ReturnLineRequest> lines){}
  record SupplierReturn(UUID id,UUID receiptId,java.time.LocalDate businessDate,String totalXaf){}
  SupplierReturn returnToSupplier(UUID receiptId,ReturnRequest request);List<SupplierReturn> supplierReturns(UUID receiptId);
- List<Purchase> list();Purchase get(UUID id);Purchase draft(Draft request);Purchase submit(UUID id,Decision request);Purchase approve(UUID id,Decision request);
+ List<Purchase> list();Purchase get(UUID id);@com.quincaisoft.shared.NewBusinessCommand Purchase draft(Draft request);@com.quincaisoft.shared.NewBusinessCommand Purchase submit(UUID id,Decision request);@com.quincaisoft.shared.NewBusinessCommand Purchase approve(UUID id,Decision request);
  Receipt receive(UUID id,Receive request);List<Receipt> receipts(UUID id);Invoice invoice(UUID receiptId,InvoiceRequest request);List<Invoice> invoices();
 }

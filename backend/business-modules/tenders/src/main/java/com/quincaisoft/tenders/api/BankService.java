@@ -7,4 +7,6 @@ public interface BankService {
  record Match(UUID id,UUID evidenceId,String statementReference,String bankXaf,String feeXaf,UUID journalId){}
  Evidence get(UUID id);List<Evidence> list();Evidence request(Request request);Evidence approve(UUID id,Approve request);List<Match> matches();Match match(MatchRequest request);
  void consume(UUID evidenceId,UUID sourceId,LocalDate date,long amount,String direction);
+ /** Payroll payment must be persisted in the same transaction; this does not certify a provider transfer. */
+ void consumePayroll(UUID evidenceId,UUID payrollPaymentId,LocalDate date,long amount);
 }

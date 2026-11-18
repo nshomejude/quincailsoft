@@ -111,6 +111,9 @@ public class DefaultSubscriptionBillingService implements SubscriptionBillingSer
         return platform("platform:billing:read",()->list(tenantId));
     }
     @Override public List<Invoice> merchantInvoices() {
+        return merchant(()->list(TenantContext.current().tenantId()));
+    }
+    private <T>T merchant(Supplier<T> work){
         UUID actor=require("billing:read");
         return merchantTx.execute(()->{
             var scope=TenantContext.current();
@@ -120,8 +123,12 @@ public class DefaultSubscriptionBillingService implements SubscriptionBillingSer
                 .setParameter("branch",scope.branchId()).setParameter("actor",scope.actorId())
                 .setParameter("epoch",TenantContext.authorizationEpoch()).getSingleResult();
             if(count.longValue()!=1)throw new AccessDeniedException("Current owner or finance billing membership required");
-            return list(scope.tenantId());
+            return work.get();
         });
+    }
+    @Override public String printInvoice(UUID id,boolean platform,String locale){
+        Supplier<String> render=()->{var invoice=em.find(SubscriptionInvoice.class,id);if(invoice==null)throw new NoSuchElementException("Subscription invoice not found");return SubscriptionHtml.invoice(invoice,locale);};
+        return platform?platform("platform:billing:read",render):merchant(render);
     }
     private List<Invoice> list(UUID tenantId) {
         return em.createQuery("select i from SubscriptionInvoice i where i.tenantId=:tenant order by i.createdAt desc,i.id",SubscriptionInvoice.class)

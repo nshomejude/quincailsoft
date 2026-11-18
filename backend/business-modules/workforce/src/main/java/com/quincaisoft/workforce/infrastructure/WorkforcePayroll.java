@@ -22,5 +22,6 @@ public class WorkforcePayroll {
     @Column(name="prepared_by") public UUID preparedBy;
     @Column(name="approved_by") public UUID approvedBy;
     @Column(name="journal_id") public UUID journalId;
+    @Column(name="replaces_payroll_id") public UUID replacesPayrollId;
     @Version public long version;
 }

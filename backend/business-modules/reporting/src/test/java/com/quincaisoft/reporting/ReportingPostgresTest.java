@@ -35,6 +35,7 @@ class ReportingPostgresTest {
      for(var p:files.filter(x->x.toString().endsWith(".sql")).sorted(Comparator.comparingInt(x->Integer.parseInt(x.getFileName().toString().split("__")[0].substring(1)))).toList())exec(owner,Files.readString(p));
     }
     seed(owner,t,c,b,"10000000000000001");seed(owner,t,c,b,"9");
+    seedPayable(owner,t,c,b);
     seed(owner,UUID.randomUUID(),UUID.randomUUID(),UUID.randomUUID(),"77");
     var ds=new DriverManagerDataSource(url,role,"");var jdbc=new JdbcTemplate(ds);var template=new TransactionTemplate(new DataSourceTransactionManager(ds));
     ScopedTransactions tx=new ScopedTransactions(){public <T>T execute(Supplier<T> action){return template.execute(status->{var s=TenantContext.current();jdbc.queryForObject("select set_config('app.tenant_id',?,true)||set_config('app.company_id',?,true)||set_config('app.branch_id',?,true)||set_config('app.actor_id',?,true)",String.class,s.tenantId().toString(),s.companyId().toString(),s.branchId().toString(),s.actorId().toString());return action.get();});}};
@@ -55,6 +56,13 @@ class ReportingPostgresTest {
         });
         assertEquals(0,jdbc.queryForObject("select count(*) from report_stock_v1",Integer.class));
         TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->{assertTrue(reports.run("stock",null,null,0,10).rows().isEmpty());return null;});
+        assertThrows(AccessDeniedException.class,()->reports.run("supplier-payables",null,null,0,10));
+        context.setAuthentication(UsernamePasswordAuthenticationToken.authenticated(a,null,List.of(new SimpleGrantedAuthority("finance:read"))));
+        TenantContext.call(new TenantScope(t,c,b,a),1,()->{
+         var payable=reports.run("supplier-payables",null,null,0,10);assertEquals(1,payable.rows().size());assertEquals("10000000000000001",payable.totals().get("original_xaf"));assertEquals("9",payable.totals().get("paid_xaf"));assertEquals("9999999999999992",payable.totals().get("outstanding_xaf"));assertTrue(payable.rows().getFirst().contains("Supplier fixture"));assertFalse(payable.columns().contains("due_date"));
+         assertThrows(IllegalArgumentException.class,()->reports.run("supplier-payables",java.time.LocalDate.now(),java.time.LocalDate.now(),0,10));return null;
+        });
+        TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->{assertTrue(reports.run("supplier-payables",null,null,0,10).rows().isEmpty());return null;});
     } finally {
         SecurityContextHolder.clearContext();
     }
@@ -66,4 +74,15 @@ class ReportingPostgresTest {
   exec(c,"INSERT INTO tenant(id,name)VALUES('"+t+"','test') ON CONFLICT DO NOTHING;INSERT INTO company(tenant_id,id,name)VALUES('"+t+"','"+company+"','test') ON CONFLICT DO NOTHING;INSERT INTO branch(tenant_id,company_id,id,name)VALUES('"+t+"','"+company+"','"+branch+"','test') ON CONFLICT DO NOTHING;INSERT INTO warehouse(tenant_id,company_id,branch_id,id,name)VALUES('"+t+"','"+company+"','"+branch+"','"+warehouse+"','test');INSERT INTO catalog_product(tenant_id,company_id,id,sku,name,base_unit,selling_price_xaf)VALUES('"+t+"','"+company+"','"+product+"','"+product+"','=HYPERLINK','piece',1);INSERT INTO stock_balance(tenant_id,company_id,branch_id,warehouse_id,product_id,quantity_milli,value_xaf)VALUES('"+t+"','"+company+"','"+branch+"','"+warehouse+"','"+product+"',1000,"+value+")");
  }
  static void exec(Connection c,String q)throws SQLException {try(var s=c.createStatement()){s.execute(q);}}
+ static void seedPayable(Connection connection,UUID tenant,UUID company,UUID branch)throws SQLException {
+  UUID supplier=UUID.randomUUID(),purchase=UUID.randomUUID(),line=UUID.randomUUID(),receipt=UUID.randomUUID(),invoice=UUID.randomUUID(),actor=UUID.randomUUID();
+  UUID warehouse,product;
+  try(var s=connection.createStatement();var r=s.executeQuery("select warehouse_id,product_id from stock_balance where tenant_id='"+tenant+"' and company_id='"+company+"' and branch_id='"+branch+"' limit 1")){r.next();warehouse=r.getObject(1,UUID.class);product=r.getObject(2,UUID.class);}
+  String scope="'"+tenant+"','"+company+"','"+branch+"'",amount="10000000000000001";
+  connection.setAutoCommit(false);
+  try {
+   exec(connection,"INSERT INTO supplier(tenant_id,company_id,id,code,name)VALUES('"+tenant+"','"+company+"','"+supplier+"','SUP-TEST','Supplier fixture');INSERT INTO purchase_order(tenant_id,company_id,branch_id,id,supplier_id,warehouse_id,created_by,approved_by,business_date,status,total_xaf)VALUES("+scope+",'"+purchase+"','"+supplier+"','"+warehouse+"','"+actor+"','"+UUID.randomUUID()+"','2026-11-18','RECEIVED',"+amount+");INSERT INTO purchase_line(tenant_id,company_id,branch_id,id,purchase_id,product_id,quantity_milli,received_milli,unit_price_xaf,total_xaf)VALUES("+scope+",'"+line+"','"+purchase+"','"+product+"',1000,1000,"+amount+","+amount+");INSERT INTO purchase_receipt(tenant_id,company_id,branch_id,id,purchase_id,operation_id,actor_id,business_date,total_xaf,reason)VALUES("+scope+",'"+receipt+"','"+purchase+"','"+UUID.randomUUID()+"','"+actor+"','2026-11-18',"+amount+",'Fixture receipt');INSERT INTO purchase_receipt_line VALUES("+scope+",'"+UUID.randomUUID()+"','"+receipt+"','"+line+"','"+product+"',1000,"+amount+");INSERT INTO supplier_invoice VALUES("+scope+",'"+invoice+"','"+receipt+"','"+supplier+"','"+UUID.randomUUID()+"','"+actor+"','2026-11-18',"+amount+",'SUP-INV-001','Fixture invoice');INSERT INTO payable_balance(tenant_id,company_id,branch_id,id,supplier_id,original_xaf,paid_xaf)VALUES("+scope+",'"+invoice+"','"+supplier+"',"+amount+",9)");
+   connection.commit();
+  }catch(SQLException e){connection.rollback();throw e;}finally{connection.setAutoCommit(true);}
+ }
 }

@@ -108,6 +108,146 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/catalog/categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** CatalogMaster categories */
+        get: operations["CatalogMasterController_categories_8"];
+        put?: never;
+        /** CatalogMaster createCategory */
+        post: operations["CatalogMasterController_createCategory_10"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/catalog/categories/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** CatalogMaster category */
+        get: operations["CatalogMasterController_category_9"];
+        /** CatalogMaster updateCategory */
+        put: operations["CatalogMasterController_updateCategory_11"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/catalog/units": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** CatalogMaster units */
+        get: operations["CatalogMasterController_units_12"];
+        put?: never;
+        /** CatalogMaster createUnit */
+        post: operations["CatalogMasterController_createUnit_14"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/catalog/units/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** CatalogMaster unit */
+        get: operations["CatalogMasterController_unit_13"];
+        /** CatalogMaster updateUnit */
+        put: operations["CatalogMasterController_updateUnit_15"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/catalog/manufacturers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** CatalogMaster createManufacturer */
+        post: operations["CatalogMasterController_createManufacturer_16"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/catalog/families": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** CatalogMaster createFamily */
+        post: operations["CatalogMasterController_createFamily_17"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/catalog/variants": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** CatalogMaster attachVariant */
+        post: operations["CatalogMasterController_attachVariant_18"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/catalog/supplier-offers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** CatalogMaster createOffer */
+        post: operations["CatalogMasterController_createOffer_19"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/commerce/store": {
         parameters: {
             query?: never;
@@ -116,10 +256,10 @@ export interface paths {
             cookie?: never;
         };
         /** Commerce store */
-        get: operations["CommerceController_store_8"];
+        get: operations["CommerceController_store_20"];
         put?: never;
         /** Commerce configure */
-        post: operations["CommerceController_configure_9"];
+        post: operations["CommerceController_configure_21"];
         delete?: never;
         options?: never;
         head?: never;
@@ -134,10 +274,10 @@ export interface paths {
             cookie?: never;
         };
         /** Commerce listings */
-        get: operations["CommerceController_listings_10"];
+        get: operations["CommerceController_listings_22"];
         put?: never;
         /** Commerce publish */
-        post: operations["CommerceController_publish_11"];
+        post: operations["CommerceController_publish_23"];
         delete?: never;
         options?: never;
         head?: never;
@@ -152,7 +292,7 @@ export interface paths {
             cookie?: never;
         };
         /** PublicStore store */
-        get: operations["PublicStoreController_store_12"];
+        get: operations["PublicStoreController_store_24"];
         put?: never;
         post?: never;
         delete?: never;
@@ -169,7 +309,7 @@ export interface paths {
             cookie?: never;
         };
         /** Company list */
-        get: operations["CompanyController_list_13"];
+        get: operations["CompanyController_list_25"];
         put?: never;
         post?: never;
         delete?: never;
@@ -186,8 +326,44 @@ export interface paths {
             cookie?: never;
         };
         /** Customer list */
-        get: operations["CustomerController_list_14"];
+        get: operations["CustomerController_list_26"];
         put?: never;
+        /** CustomerDirectory create */
+        post: operations["CustomerDirectoryController_create_29"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/customers/page": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** CustomerDirectory page */
+        get: operations["CustomerDirectoryController_page_27"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/customers/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** CustomerDirectory get */
+        get: operations["CustomerDirectoryController_get_28"];
+        /** CustomerDirectory update */
+        put: operations["CustomerDirectoryController_update_30"];
         post?: never;
         delete?: never;
         options?: never;
@@ -203,7 +379,7 @@ export interface paths {
             cookie?: never;
         };
         /** Document list */
-        get: operations["DocumentController_list_15"];
+        get: operations["DocumentController_list_31"];
         put?: never;
         post?: never;
         delete?: never;
@@ -220,7 +396,7 @@ export interface paths {
             cookie?: never;
         };
         /** Document get */
-        get: operations["DocumentController_get_16"];
+        get: operations["DocumentController_get_32"];
         put?: never;
         post?: never;
         delete?: never;
@@ -237,7 +413,7 @@ export interface paths {
             cookie?: never;
         };
         /** Document print */
-        get: operations["DocumentController_print_17"];
+        get: operations["DocumentController_print_33"];
         put?: never;
         post?: never;
         delete?: never;
@@ -254,10 +430,164 @@ export interface paths {
             cookie?: never;
         };
         /** Document settings */
-        get: operations["DocumentController_settings_18"];
+        get: operations["DocumentController_settings_34"];
         /** Document configure */
-        put: operations["DocumentController_configure_19"];
+        put: operations["DocumentController_configure_35"];
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/templates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** DocumentWorkspace templates */
+        get: operations["DocumentWorkspaceController_templates_36"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/templates/{templateId}/sources": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** DocumentWorkspace sources */
+        get: operations["DocumentWorkspaceController_sources_37"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/captures": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** DocumentWorkspace list */
+        get: operations["DocumentWorkspaceController_list_38"];
+        put?: never;
+        /** DocumentWorkspace capture */
+        post: operations["DocumentWorkspaceController_capture_40"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/captures/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** DocumentWorkspace get */
+        get: operations["DocumentWorkspaceController_get_39"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/captures/{id}/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** DocumentWorkspace preview */
+        get: operations["DocumentWorkspaceController_preview_41"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/captures/{id}/print-attempts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** DocumentWorkspace printCapture */
+        post: operations["DocumentWorkspaceController_printCapture_42"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/{id}/print-attempts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** DocumentWorkspace printOriginal */
+        post: operations["DocumentWorkspaceController_printOriginal_43"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/print-attempts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** DocumentWorkspace attempts */
+        get: operations["DocumentWorkspaceController_attempts_44"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/print-attempts/{id}/outcomes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** DocumentWorkspace outcome */
+        post: operations["DocumentWorkspaceController_outcome_45"];
         delete?: never;
         options?: never;
         head?: never;
@@ -272,10 +602,10 @@ export interface paths {
             cookie?: never;
         };
         /** Expense list */
-        get: operations["ExpenseController_list_20"];
+        get: operations["ExpenseController_list_46"];
         put?: never;
         /** Expense create */
-        post: operations["ExpenseController_create_21"];
+        post: operations["ExpenseController_create_47"];
         delete?: never;
         options?: never;
         head?: never;
@@ -292,7 +622,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Expense submit */
-        post: operations["ExpenseController_submit_22"];
+        post: operations["ExpenseController_submit_48"];
         delete?: never;
         options?: never;
         head?: never;
@@ -309,7 +639,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Expense submit */
-        post: operations["ExpenseController_submit_23"];
+        post: operations["ExpenseController_submit_49"];
         delete?: never;
         options?: never;
         head?: never;
@@ -326,7 +656,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Expense approve */
-        post: operations["ExpenseController_approve_24"];
+        post: operations["ExpenseController_approve_50"];
         delete?: never;
         options?: never;
         head?: never;
@@ -343,7 +673,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Expense approve */
-        post: operations["ExpenseController_approve_25"];
+        post: operations["ExpenseController_approve_51"];
         delete?: never;
         options?: never;
         head?: never;
@@ -360,7 +690,127 @@ export interface paths {
         get?: never;
         put?: never;
         /** Expense pay */
-        post: operations["ExpenseController_pay_26"];
+        post: operations["ExpenseController_pay_52"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/expenses/{id}/pay-bank": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Expense payBank */
+        post: operations["ExpenseController_payBank_53"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/manual-journals": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** ManualJournal list */
+        get: operations["ManualJournalController_list_54"];
+        put?: never;
+        /** ManualJournal create */
+        post: operations["ManualJournalController_create_55"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/manual-journals/{id}/submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** ManualJournal submit */
+        post: operations["ManualJournalController_submit_56"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/manual-journals/{id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** ManualJournal approve */
+        post: operations["ManualJournalController_approve_57"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/manual-journals/{id}/reject": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** ManualJournal approve */
+        post: operations["ManualJournalController_approve_58"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/manual-journals/{id}/reversals": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** ManualJournal reversal */
+        post: operations["ManualJournalController_reversal_59"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/manual-journals/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** ManualJournal get */
+        get: operations["ManualJournalController_get_60"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -375,10 +825,10 @@ export interface paths {
             cookie?: never;
         };
         /** Period list */
-        get: operations["PeriodController_list_27"];
+        get: operations["PeriodController_list_61"];
         put?: never;
         /** Period create */
-        post: operations["PeriodController_create_29"];
+        post: operations["PeriodController_create_63"];
         delete?: never;
         options?: never;
         head?: never;
@@ -393,7 +843,7 @@ export interface paths {
             cookie?: never;
         };
         /** Period requests */
-        get: operations["PeriodController_requests_28"];
+        get: operations["PeriodController_requests_62"];
         put?: never;
         post?: never;
         delete?: never;
@@ -412,7 +862,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Period request */
-        post: operations["PeriodController_request_30"];
+        post: operations["PeriodController_request_64"];
         delete?: never;
         options?: never;
         head?: never;
@@ -429,7 +879,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Period request */
-        post: operations["PeriodController_request_31"];
+        post: operations["PeriodController_request_65"];
         delete?: never;
         options?: never;
         head?: never;
@@ -446,7 +896,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Period decide */
-        post: operations["PeriodController_decide_32"];
+        post: operations["PeriodController_decide_66"];
         delete?: never;
         options?: never;
         head?: never;
@@ -463,7 +913,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Period decide */
-        post: operations["PeriodController_decide_33"];
+        post: operations["PeriodController_decide_67"];
         delete?: never;
         options?: never;
         head?: never;
@@ -478,7 +928,7 @@ export interface paths {
             cookie?: never;
         };
         /** Identity members */
-        get: operations["IdentityController_members_34"];
+        get: operations["IdentityController_members_68"];
         put?: never;
         post?: never;
         delete?: never;
@@ -495,10 +945,10 @@ export interface paths {
             cookie?: never;
         };
         /** Identity changes */
-        get: operations["IdentityController_changes_35"];
+        get: operations["IdentityController_changes_69"];
         put?: never;
         /** Identity request */
-        post: operations["IdentityController_request_36"];
+        post: operations["IdentityController_request_70"];
         delete?: never;
         options?: never;
         head?: never;
@@ -515,7 +965,24 @@ export interface paths {
         get?: never;
         put?: never;
         /** Identity approve */
-        post: operations["IdentityController_approve_37"];
+        post: operations["IdentityController_approve_71"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/identity/sessions/revoke": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** SessionRevocation revoke */
+        post: operations["SessionRevocationController_revoke_72"];
         delete?: never;
         options?: never;
         head?: never;
@@ -530,7 +997,7 @@ export interface paths {
             cookie?: never;
         };
         /** Provider status */
-        get: operations["ProviderController_status_38"];
+        get: operations["ProviderController_status_73"];
         put?: never;
         post?: never;
         delete?: never;
@@ -547,10 +1014,10 @@ export interface paths {
             cookie?: never;
         };
         /** Provider intents */
-        get: operations["ProviderController_intents_39"];
+        get: operations["ProviderController_intents_74"];
         put?: never;
         /** Provider prepare */
-        post: operations["ProviderController_prepare_40"];
+        post: operations["ProviderController_prepare_75"];
         delete?: never;
         options?: never;
         head?: never;
@@ -570,7 +1037,7 @@ export interface paths {
          * Provider query
          * @description Reconcile existing intent identity. Retries query the same provider reference; this endpoint does not create a new collection command or accept a new Idempotency-Key. Initial intent prepare requires operationId and Idempotency-Key.
          */
-        post: operations["ProviderController_query_41"];
+        post: operations["ProviderController_query_76"];
         delete?: never;
         options?: never;
         head?: never;
@@ -585,7 +1052,7 @@ export interface paths {
             cookie?: never;
         };
         /** Inventory warehouses */
-        get: operations["InventoryController_warehouses_42"];
+        get: operations["InventoryController_warehouses_77"];
         put?: never;
         post?: never;
         delete?: never;
@@ -602,7 +1069,7 @@ export interface paths {
             cookie?: never;
         };
         /** Inventory balances */
-        get: operations["InventoryController_balances_43"];
+        get: operations["InventoryController_balances_78"];
         put?: never;
         post?: never;
         delete?: never;
@@ -619,10 +1086,10 @@ export interface paths {
             cookie?: never;
         };
         /** Inventory transfers */
-        get: operations["InventoryController_transfers_44"];
+        get: operations["InventoryController_transfers_79"];
         put?: never;
         /** Inventory draft */
-        post: operations["InventoryController_draft_46"];
+        post: operations["InventoryController_draft_81"];
         delete?: never;
         options?: never;
         head?: never;
@@ -637,7 +1104,7 @@ export interface paths {
             cookie?: never;
         };
         /** Inventory transfer */
-        get: operations["InventoryController_transfer_45"];
+        get: operations["InventoryController_transfer_80"];
         put?: never;
         post?: never;
         delete?: never;
@@ -656,7 +1123,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Inventory approve */
-        post: operations["InventoryController_approve_47"];
+        post: operations["InventoryController_approve_82"];
         delete?: never;
         options?: never;
         head?: never;
@@ -673,7 +1140,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Inventory dispatch */
-        post: operations["InventoryController_dispatch_48"];
+        post: operations["InventoryController_dispatch_83"];
         delete?: never;
         options?: never;
         head?: never;
@@ -690,7 +1157,93 @@ export interface paths {
         get?: never;
         put?: never;
         /** Inventory receive */
-        post: operations["InventoryController_receive_49"];
+        post: operations["InventoryController_receive_84"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/custody": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** InventoryCustody positions */
+        get: operations["InventoryCustodyController_positions_85"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/custody/{id}/collections": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** InventoryCustody collections */
+        get: operations["InventoryCustodyController_collections_86"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/custody/{id}/collect": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** InventoryCustody collect */
+        post: operations["InventoryCustodyController_collect_87"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/recognition-policies": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** InventoryCustody policies */
+        get: operations["InventoryCustodyController_policies_88"];
+        put?: never;
+        /** InventoryCustody request */
+        post: operations["InventoryCustodyController_request_89"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/recognition-policies/{id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** InventoryCustody approve */
+        post: operations["InventoryCustodyController_approve_90"];
         delete?: never;
         options?: never;
         head?: never;
@@ -705,7 +1258,7 @@ export interface paths {
             cookie?: never;
         };
         /** InventoryJobs list */
-        get: operations["InventoryJobsController_list_50"];
+        get: operations["InventoryJobsController_list_91"];
         put?: never;
         post?: never;
         delete?: never;
@@ -722,7 +1275,7 @@ export interface paths {
             cookie?: never;
         };
         /** InventoryJobs get */
-        get: operations["InventoryJobsController_get_51"];
+        get: operations["InventoryJobsController_get_92"];
         put?: never;
         post?: never;
         delete?: never;
@@ -741,7 +1294,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** InventoryJobs start */
-        post: operations["InventoryJobsController_start_52"];
+        post: operations["InventoryJobsController_start_93"];
         delete?: never;
         options?: never;
         head?: never;
@@ -758,7 +1311,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** InventoryJobs draft */
-        post: operations["InventoryJobsController_draft_53"];
+        post: operations["InventoryJobsController_draft_94"];
         delete?: never;
         options?: never;
         head?: never;
@@ -775,7 +1328,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** InventoryJobs capture */
-        post: operations["InventoryJobsController_capture_54"];
+        post: operations["InventoryJobsController_capture_95"];
         delete?: never;
         options?: never;
         head?: never;
@@ -792,7 +1345,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** InventoryJobs approve */
-        post: operations["InventoryJobsController_approve_55"];
+        post: operations["InventoryJobsController_approve_96"];
         delete?: never;
         options?: never;
         head?: never;
@@ -809,7 +1362,146 @@ export interface paths {
         get?: never;
         put?: never;
         /** InventoryJobs post */
-        post: operations["InventoryJobsController_post_56"];
+        post: operations["InventoryJobsController_post_97"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/lots": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** InventoryQuality lots */
+        get: operations["InventoryQualityController_lots_98"];
+        put?: never;
+        /** InventoryQuality registerLot */
+        post: operations["InventoryQualityController_registerLot_101"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/recalls": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** InventoryQuality recalls */
+        get: operations["InventoryQualityController_recalls_99"];
+        put?: never;
+        /** InventoryQuality draftRecall */
+        post: operations["InventoryQualityController_draftRecall_102"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/reservations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** InventoryQuality reservations */
+        get: operations["InventoryQualityController_reservations_100"];
+        put?: never;
+        /** InventoryQuality reserve */
+        post: operations["InventoryQualityController_reserve_103"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/recalls/{id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** InventoryQuality approve */
+        post: operations["InventoryQualityController_approve_104"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/recalls/{id}/block": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** InventoryQuality block */
+        post: operations["InventoryQualityController_block_105"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/recalls/{id}/recover": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** InventoryQuality recover */
+        post: operations["InventoryQualityController_recover_106"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/recalls/{id}/dispose": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** InventoryQuality dispose */
+        post: operations["InventoryQualityController_dispose_107"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/inventory/reservations/{id}/release": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** InventoryQuality release */
+        post: operations["InventoryQualityController_release_108"];
         delete?: never;
         options?: never;
         head?: never;
@@ -824,10 +1516,10 @@ export interface paths {
             cookie?: never;
         };
         /** Purchasing list */
-        get: operations["PurchasingController_list_57"];
+        get: operations["PurchasingController_list_109"];
         put?: never;
         /** Purchasing draft */
-        post: operations["PurchasingController_draft_59"];
+        post: operations["PurchasingController_draft_111"];
         delete?: never;
         options?: never;
         head?: never;
@@ -842,7 +1534,7 @@ export interface paths {
             cookie?: never;
         };
         /** Purchasing get */
-        get: operations["PurchasingController_get_58"];
+        get: operations["PurchasingController_get_110"];
         put?: never;
         post?: never;
         delete?: never;
@@ -861,7 +1553,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Purchasing submit */
-        post: operations["PurchasingController_submit_60"];
+        post: operations["PurchasingController_submit_112"];
         delete?: never;
         options?: never;
         head?: never;
@@ -878,7 +1570,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Purchasing approve */
-        post: operations["PurchasingController_approve_61"];
+        post: operations["PurchasingController_approve_113"];
         delete?: never;
         options?: never;
         head?: never;
@@ -893,10 +1585,10 @@ export interface paths {
             cookie?: never;
         };
         /** Purchasing receipts */
-        get: operations["PurchasingController_receipts_63"];
+        get: operations["PurchasingController_receipts_115"];
         put?: never;
         /** Purchasing receive */
-        post: operations["PurchasingController_receive_62"];
+        post: operations["PurchasingController_receive_114"];
         delete?: never;
         options?: never;
         head?: never;
@@ -913,7 +1605,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Purchasing invoice */
-        post: operations["PurchasingController_invoice_64"];
+        post: operations["PurchasingController_invoice_116"];
         delete?: never;
         options?: never;
         head?: never;
@@ -928,7 +1620,7 @@ export interface paths {
             cookie?: never;
         };
         /** Purchasing invoices */
-        get: operations["PurchasingController_invoices_65"];
+        get: operations["PurchasingController_invoices_117"];
         put?: never;
         post?: never;
         delete?: never;
@@ -945,10 +1637,10 @@ export interface paths {
             cookie?: never;
         };
         /** Purchasing supplierReturns */
-        get: operations["PurchasingController_supplierReturns_67"];
+        get: operations["PurchasingController_supplierReturns_119"];
         put?: never;
         /** Purchasing returnToSupplier */
-        post: operations["PurchasingController_returnToSupplier_66"];
+        post: operations["PurchasingController_returnToSupplier_118"];
         delete?: never;
         options?: never;
         head?: never;
@@ -963,10 +1655,10 @@ export interface paths {
             cookie?: never;
         };
         /** Quotation list */
-        get: operations["QuotationController_list_68"];
+        get: operations["QuotationController_list_120"];
         put?: never;
         /** Quotation draft */
-        post: operations["QuotationController_draft_70"];
+        post: operations["QuotationController_draft_122"];
         delete?: never;
         options?: never;
         head?: never;
@@ -981,7 +1673,7 @@ export interface paths {
             cookie?: never;
         };
         /** Quotation get */
-        get: operations["QuotationController_get_69"];
+        get: operations["QuotationController_get_121"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1000,7 +1692,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Quotation issue */
-        post: operations["QuotationController_issue_71"];
+        post: operations["QuotationController_issue_123"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1017,7 +1709,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Quotation convert */
-        post: operations["QuotationController_convert_72"];
+        post: operations["QuotationController_convert_124"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1033,9 +1725,9 @@ export interface paths {
         };
         /**
          * Reporting catalog
-         * @description Implemented codes: posted-sales, stock, receivables, cash, provider-intents. Dates required for posted-sales/cash/provider-intents and forbidden for current stock/receivables. All row cells and total values are exact strings. Totals cover all filtered rows on nonempty pages; empty pages have no totals. CSV exports one bounded page, with X-Report-Has-More indicating more rows.
+         * @description Implemented codes: audit-events, cash, count-variances, customer-custody, deposits, expenses, journal-lines, posted-sales, provider-intents, purchase-progress, recalls, receivables, returns, sales-lines, sales-register, stock, stock-movements, supplier-invoices, supplier-payables, tender-facts. Dates required for recalls, posted-sales, sales-register, cash, provider-intents, returns, expenses, purchase-progress, supplier-invoices, count-variances, journal-lines, audit-events and forbidden for customer-custody, supplier-payables, sales-lines, stock, receivables, deposits, stock-movements, tender-facts. All row cells and total values are exact strings. Totals cover all filtered rows on nonempty pages; empty pages have no totals. CSV exports one bounded page, with X-Report-Has-More indicating more rows.
          */
-        get: operations["ReportingController_catalog_73"];
+        get: operations["ReportingController_catalog_125"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1053,9 +1745,9 @@ export interface paths {
         };
         /**
          * Reporting run
-         * @description Implemented codes: posted-sales, stock, receivables, cash, provider-intents. Dates required for posted-sales/cash/provider-intents and forbidden for current stock/receivables. All row cells and total values are exact strings. Totals cover all filtered rows on nonempty pages; empty pages have no totals. CSV exports one bounded page, with X-Report-Has-More indicating more rows.
+         * @description Implemented codes: audit-events, cash, count-variances, customer-custody, deposits, expenses, journal-lines, posted-sales, provider-intents, purchase-progress, recalls, receivables, returns, sales-lines, sales-register, stock, stock-movements, supplier-invoices, supplier-payables, tender-facts. Dates required for recalls, posted-sales, sales-register, cash, provider-intents, returns, expenses, purchase-progress, supplier-invoices, count-variances, journal-lines, audit-events and forbidden for customer-custody, supplier-payables, sales-lines, stock, receivables, deposits, stock-movements, tender-facts. All row cells and total values are exact strings. Totals cover all filtered rows on nonempty pages; empty pages have no totals. CSV exports one bounded page, with X-Report-Has-More indicating more rows.
          */
-        get: operations["ReportingController_run_74"];
+        get: operations["ReportingController_run_126"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1073,9 +1765,9 @@ export interface paths {
         };
         /**
          * Reporting export
-         * @description Implemented codes: posted-sales, stock, receivables, cash, provider-intents. Dates required for posted-sales/cash/provider-intents and forbidden for current stock/receivables. All row cells and total values are exact strings. Totals cover all filtered rows on nonempty pages; empty pages have no totals. CSV exports one bounded page, with X-Report-Has-More indicating more rows.
+         * @description Implemented codes: audit-events, cash, count-variances, customer-custody, deposits, expenses, journal-lines, posted-sales, provider-intents, purchase-progress, recalls, receivables, returns, sales-lines, sales-register, stock, stock-movements, supplier-invoices, supplier-payables, tender-facts. Dates required for recalls, posted-sales, sales-register, cash, provider-intents, returns, expenses, purchase-progress, supplier-invoices, count-variances, journal-lines, audit-events and forbidden for customer-custody, supplier-payables, sales-lines, stock, receivables, deposits, stock-movements, tender-facts. All row cells and total values are exact strings. Totals cover all filtered rows on nonempty pages; empty pages have no totals. CSV exports one bounded page, with X-Report-Has-More indicating more rows.
          */
-        get: operations["ReportingController_export_75"];
+        get: operations["ReportingController_export_127"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1092,10 +1784,10 @@ export interface paths {
             cookie?: never;
         };
         /** Return list */
-        get: operations["ReturnController_list_76"];
+        get: operations["ReturnController_list_128"];
         put?: never;
         /** Return draft */
-        post: operations["ReturnController_draft_78"];
+        post: operations["ReturnController_draft_130"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1110,7 +1802,7 @@ export interface paths {
             cookie?: never;
         };
         /** Return get */
-        get: operations["ReturnController_get_77"];
+        get: operations["ReturnController_get_129"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1129,7 +1821,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Return approve */
-        post: operations["ReturnController_approve_79"];
+        post: operations["ReturnController_approve_131"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1146,7 +1838,76 @@ export interface paths {
         get?: never;
         put?: never;
         /** Return post */
-        post: operations["ReturnController_post_80"];
+        post: operations["ReturnController_post_132"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fulfillments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Fulfillment list */
+        get: operations["FulfillmentController_list_133"];
+        put?: never;
+        /** Fulfillment draft */
+        post: operations["FulfillmentController_draft_135"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fulfillments/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Fulfillment get */
+        get: operations["FulfillmentController_get_134"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fulfillments/{id}/dispatch": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Fulfillment dispatch */
+        post: operations["FulfillmentController_dispatch_136"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fulfillments/{id}/complete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Fulfillment complete */
+        post: operations["FulfillmentController_complete_137"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1161,10 +1922,27 @@ export interface paths {
             cookie?: never;
         };
         /** Sales list */
-        get: operations["SalesController_list_81"];
+        get: operations["SalesController_list_138"];
         put?: never;
         /** Sales draft */
-        post: operations["SalesController_draft_83"];
+        post: operations["SalesController_draft_141"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/sales/summary": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Sales summary */
+        get: operations["SalesController_summary_139"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -1179,7 +1957,7 @@ export interface paths {
             cookie?: never;
         };
         /** Sales get */
-        get: operations["SalesController_get_82"];
+        get: operations["SalesController_get_140"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1198,7 +1976,298 @@ export interface paths {
         get?: never;
         put?: never;
         /** Sales post */
-        post: operations["SalesController_post_84"];
+        post: operations["SalesController_post_142"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/billing/invoices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** SubscriptionBilling platform */
+        get: operations["SubscriptionBillingController_platform_144"];
+        put?: never;
+        /** SubscriptionBilling issue */
+        post: operations["SubscriptionBillingController_issue_143"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/billing/invoices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** SubscriptionBilling merchant */
+        get: operations["SubscriptionBillingController_merchant_145"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/subscriptions/plans": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** SubscriptionLifecycle plans */
+        get: operations["SubscriptionLifecycleController_plans_146"];
+        put?: never;
+        /** SubscriptionLifecycle create */
+        post: operations["SubscriptionLifecycleController_create_147"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/subscriptions/{tenantId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** SubscriptionLifecycle get */
+        get: operations["SubscriptionLifecycleController_get_148"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/subscriptions/{tenantId}/expire": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** SubscriptionLifecycle expire */
+        post: operations["SubscriptionLifecycleController_expire_149"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/subscriptions/{tenantId}/cancel": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** SubscriptionLifecycle cancel */
+        post: operations["SubscriptionLifecycleController_cancel_150"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/subscriptions/notices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** SubscriptionLifecycle notice */
+        post: operations["SubscriptionLifecycleController_notice_151"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/subscriptions/notices/{id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** SubscriptionLifecycle approve */
+        post: operations["SubscriptionLifecycleController_approve_152"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/subscriptions/{tenantId}/notices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** SubscriptionLifecycle notices */
+        get: operations["SubscriptionLifecycleController_notices_153"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/subscriptions/{tenantId}/payments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** SubscriptionLifecycle payments */
+        get: operations["SubscriptionLifecycleController_payments_154"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/subscriptions/payments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** SubscriptionLifecycle payment */
+        post: operations["SubscriptionLifecycleController_payment_155"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/subscriptions/payments/{id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** SubscriptionLifecycle approvePayment */
+        post: operations["SubscriptionLifecycleController_approvePayment_156"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/subscriptions/payments/{id}/activate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** SubscriptionLifecycle activate */
+        post: operations["SubscriptionLifecycleController_activate_157"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/billing/invoices/{id}/print": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** SubscriptionPrint platformInvoice */
+        get: operations["SubscriptionPrintController_platformInvoice_158"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/billing/invoices/{id}/print": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** SubscriptionPrint merchantInvoice */
+        get: operations["SubscriptionPrintController_merchantInvoice_159"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/subscriptions/payments/{id}/print": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** SubscriptionPrint platformReceipt */
+        get: operations["SubscriptionPrintController_platformReceipt_160"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/billing/payments/{id}/print": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** SubscriptionPrint merchantReceipt */
+        get: operations["SubscriptionPrintController_merchantReceipt_161"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -1213,10 +2282,10 @@ export interface paths {
             cookie?: never;
         };
         /** Supplier list */
-        get: operations["SupplierController_list_85"];
+        get: operations["SupplierController_list_162"];
         put?: never;
         /** Supplier create */
-        post: operations["SupplierController_create_87"];
+        post: operations["SupplierController_create_164"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1231,9 +2300,44 @@ export interface paths {
             cookie?: never;
         };
         /** Supplier get */
-        get: operations["SupplierController_get_86"];
+        get: operations["SupplierController_get_163"];
+        /** Supplier update */
+        put: operations["SupplierController_update_167"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/suppliers/page": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Supplier page */
+        get: operations["SupplierController_page_165"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/suppliers/directory": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Supplier createDirectory */
+        post: operations["SupplierController_createDirectory_166"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1248,7 +2352,7 @@ export interface paths {
             cookie?: never;
         };
         /** Sync devices */
-        get: operations["SyncController_devices_88"];
+        get: operations["SyncController_devices_168"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1267,7 +2371,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Sync challenge */
-        post: operations["SyncController_challenge_89"];
+        post: operations["SyncController_challenge_169"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1284,7 +2388,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Sync prove */
-        post: operations["SyncController_prove_90"];
+        post: operations["SyncController_prove_170"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1301,7 +2405,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Sync approve */
-        post: operations["SyncController_approve_91"];
+        post: operations["SyncController_approve_171"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1316,10 +2420,10 @@ export interface paths {
             cookie?: never;
         };
         /** Sync recovery */
-        get: operations["SyncController_recovery_93"];
+        get: operations["SyncController_recovery_173"];
         put?: never;
         /** Sync recover */
-        post: operations["SyncController_recover_92"];
+        post: operations["SyncController_recover_172"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1334,7 +2438,214 @@ export interface paths {
             cookie?: never;
         };
         /** Sync status */
-        get: operations["SyncController_status_94"];
+        get: operations["SyncController_status_174"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/bank-evidence": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Bank list */
+        get: operations["BankController_list_175"];
+        put?: never;
+        /** Bank request */
+        post: operations["BankController_request_176"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/bank-evidence/{id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Bank approve */
+        post: operations["BankController_approve_177"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/bank-matches": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Bank matches */
+        get: operations["BankController_matches_178"];
+        put?: never;
+        /** Bank match */
+        post: operations["BankController_match_179"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/bank-evidence/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Bank get */
+        get: operations["BankController_get_180"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/settlements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Settlement list */
+        get: operations["SettlementController_list_181"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/payables": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Settlement balances */
+        get: operations["SettlementController_balances_182"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/supplier-advances": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Settlement advances */
+        get: operations["SettlementController_advances_183"];
+        put?: never;
+        /** Settlement advance */
+        post: operations["SettlementController_advance_185"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/settlements/supplier-payment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Settlement supplierPayment */
+        post: operations["SettlementController_supplierPayment_184"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/supplier-advances/allocate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Settlement allocate */
+        post: operations["SettlementController_allocate_186"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/settlements/bank-receipt": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Settlement receipt */
+        post: operations["SettlementController_receipt_187"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/settlements/bank-deposit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Settlement deposit */
+        post: operations["SettlementController_deposit_188"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/settlements/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Settlement get */
+        get: operations["SettlementController_get_189"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1351,7 +2662,7 @@ export interface paths {
             cookie?: never;
         };
         /** Tender sessions */
-        get: operations["TenderController_sessions_95"];
+        get: operations["TenderController_sessions_190"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1370,7 +2681,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Tender open */
-        post: operations["TenderController_open_96"];
+        post: operations["TenderController_open_191"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1387,7 +2698,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Tender close */
-        post: operations["TenderController_close_97"];
+        post: operations["TenderController_close_192"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1402,7 +2713,7 @@ export interface paths {
             cookie?: never;
         };
         /** Tender facts */
-        get: operations["TenderController_facts_98"];
+        get: operations["TenderController_facts_193"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1419,10 +2730,10 @@ export interface paths {
             cookie?: never;
         };
         /** Tender deposits */
-        get: operations["TenderController_deposits_99"];
+        get: operations["TenderController_deposits_194"];
         put?: never;
         /** Tender deposit */
-        post: operations["TenderController_deposit_101"];
+        post: operations["TenderController_deposit_196"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1439,7 +2750,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Tender receipt */
-        post: operations["TenderController_receipt_100"];
+        post: operations["TenderController_receipt_195"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1456,7 +2767,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Tender allocate */
-        post: operations["TenderController_allocate_102"];
+        post: operations["TenderController_allocate_197"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1473,7 +2784,370 @@ export interface paths {
         get?: never;
         put?: never;
         /** Tender refund */
-        post: operations["TenderController_refund_103"];
+        post: operations["TenderController_refund_198"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/employees": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workforce employees */
+        get: operations["WorkforceController_employees_199"];
+        put?: never;
+        /** Workforce create */
+        post: operations["WorkforceController_create_201"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/employees/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workforce employee */
+        get: operations["WorkforceController_employee_200"];
+        /** Workforce update */
+        put: operations["WorkforceController_update_202"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/attendance": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Workforce record */
+        post: operations["WorkforceController_record_203"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/employees/{id}/attendance": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workforce attendance */
+        get: operations["WorkforceController_attendance_204"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/payroll": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workforce payroll */
+        get: operations["WorkforceController_payroll_208"];
+        put?: never;
+        /** Workforce draft */
+        post: operations["WorkforceController_draft_205"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/payroll/{id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Workforce approve */
+        post: operations["WorkforceController_approve_206"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/payroll/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workforce get */
+        get: operations["WorkforceController_get_207"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/employees/{id}/contracts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workforce contracts */
+        get: operations["WorkforceController_contracts_210"];
+        put?: never;
+        /** Workforce changeContract */
+        post: operations["WorkforceController_changeContract_209"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/employees/{id}/contract-at": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workforce contractAt */
+        get: operations["WorkforceController_contractAt_211"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/payroll/detailed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Workforce detailed */
+        post: operations["WorkforceController_detailed_212"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/payroll/{id}/deductions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workforce deductions */
+        get: operations["WorkforceController_deductions_213"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/payroll/{id}/cancel": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Workforce cancel */
+        post: operations["WorkforceController_cancel_214"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/payroll/{id}/reversals": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workforce reversals */
+        get: operations["WorkforceController_reversals_220"];
+        put?: never;
+        /** Workforce requestReversal */
+        post: operations["WorkforceController_requestReversal_215"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/payroll/reversals/{id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Workforce approveReversal */
+        post: operations["WorkforceController_approveReversal_216"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/payroll/{id}/bank-payment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Workforce payBank */
+        post: operations["WorkforceController_payBank_217"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/payroll/{id}/print": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workforce print */
+        get: operations["WorkforceController_print_218"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/payroll/export.csv": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workforce export */
+        get: operations["WorkforceController_export_219"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workforce/payroll/{id}/payments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workforce payments */
+        get: operations["WorkforceController_payments_221"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/onboarding/{id}/configuration": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** OnboardingConfiguration get */
+        get: operations["OnboardingConfigurationController_get_222"];
+        put?: never;
+        /** OnboardingConfiguration configure */
+        post: operations["OnboardingConfigurationController_configure_223"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/onboarding/{id}/configuration/verify-owner": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** OnboardingConfiguration verify */
+        post: operations["OnboardingConfigurationController_verify_224"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/onboarding/{id}/configuration/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** OnboardingConfiguration approve */
+        post: operations["OnboardingConfigurationController_approve_225"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1488,10 +3162,27 @@ export interface paths {
             cookie?: never;
         };
         /** Platform list */
-        get: operations["PlatformController_list_104"];
+        get: operations["PlatformController_list_226"];
         put?: never;
         /** Platform request */
-        post: operations["PlatformController_request_105"];
+        post: operations["PlatformController_request_228"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/onboarding/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Platform get */
+        get: operations["PlatformController_get_227"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -1508,7 +3199,25 @@ export interface paths {
         get?: never;
         put?: never;
         /** Platform approve */
-        post: operations["PlatformController_approve_106"];
+        post: operations["PlatformController_approve_229"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/onboarding/{id}/provision-trial": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** TenantProvisioning get */
+        get: operations["TenantProvisioningController_get_230"];
+        put?: never;
+        /** TenantProvisioning provision */
+        post: operations["TenantProvisioningController_provision_231"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1525,7 +3234,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Operations process */
-        post: operations["OperationsController_process_107"];
+        post: operations["OperationsController_process_232"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1568,6 +3277,16 @@ export interface components {
             taxBasisPoints?: number;
             version?: string;
             active?: boolean;
+            /** Format: uuid */
+            categoryId?: string;
+            brand?: string;
+            barcode?: string;
+            packSizeMilli?: string;
+            reorderLevelMilli?: string;
+            trackStock?: boolean;
+            trackSerial?: boolean;
+            trackExpiry?: boolean;
+            description?: string;
         };
         CatalogService_Save: {
             /** Format: uuid */
@@ -1580,6 +3299,144 @@ export interface components {
             taxBasisPoints?: number;
             version?: string;
             active?: boolean;
+            reason?: string;
+            /** Format: uuid */
+            categoryId?: string;
+            brand?: string;
+            barcode?: string;
+            packSizeMilli?: string;
+            reorderLevelMilli?: string;
+            trackStock?: boolean;
+            trackSerial?: boolean;
+            trackExpiry?: boolean;
+            description?: string;
+        };
+        CatalogMasterService_Category: {
+            /** Format: uuid */
+            id?: string;
+            code?: string;
+            name?: string;
+            /** Format: uuid */
+            parentId?: string;
+            brand?: string;
+            description?: string;
+            active?: boolean;
+            version?: string;
+        };
+        CatalogMasterService_CategorySave: {
+            /** Format: uuid */
+            operationId?: string;
+            code?: string;
+            name?: string;
+            /** Format: uuid */
+            parentId?: string;
+            brand?: string;
+            description?: string;
+            active?: boolean;
+            version?: string;
+            reason?: string;
+        };
+        CatalogMasterService_Unit: {
+            /** Format: uuid */
+            id?: string;
+            code?: string;
+            name?: string;
+            baseUnit?: string;
+            factorNumerator?: string;
+            factorDenominator?: string;
+            /** Format: int32 */
+            precision?: number;
+            active?: boolean;
+            version?: string;
+        };
+        CatalogMasterService_UnitSave: {
+            /** Format: uuid */
+            operationId?: string;
+            code?: string;
+            name?: string;
+            baseUnit?: string;
+            factorNumerator?: string;
+            factorDenominator?: string;
+            /** Format: int32 */
+            precision?: number;
+            active?: boolean;
+            version?: string;
+            reason?: string;
+        };
+        CatalogMasterService_Manufacturer: {
+            /** Format: uuid */
+            id?: string;
+            code?: string;
+            name?: string;
+        };
+        CatalogMasterService_ManufacturerSave: {
+            /** Format: uuid */
+            operationId?: string;
+            code?: string;
+            name?: string;
+            reason?: string;
+        };
+        CatalogMasterService_Family: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            manufacturerId?: string;
+            productType?: string;
+            modelNumber?: string;
+        };
+        CatalogMasterService_FamilySave: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            manufacturerId?: string;
+            productType?: string;
+            modelNumber?: string;
+            reason?: string;
+        };
+        CatalogMasterService_Variant: {
+            /** Format: uuid */
+            productId?: string;
+            /** Format: uuid */
+            familyId?: string;
+            colour?: string;
+            size?: string;
+        };
+        CatalogMasterService_VariantSave: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            productId?: string;
+            /** Format: uuid */
+            familyId?: string;
+            colour?: string;
+            size?: string;
+            reason?: string;
+        };
+        CatalogMasterService_Offer: {
+            /** Format: uuid */
+            productId?: string;
+            /** Format: uuid */
+            supplierId?: string;
+            supplierSku?: string;
+            quotedCostXaf?: string;
+            /** Format: int32 */
+            leadTimeDays?: number;
+            minimumOrderMilli?: string;
+            preferred?: boolean;
+        };
+        CatalogMasterService_OfferSave: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            productId?: string;
+            /** Format: uuid */
+            supplierId?: string;
+            supplierSku?: string;
+            quotedCostXaf?: string;
+            /** Format: int32 */
+            leadTimeDays?: number;
+            minimumOrderMilli?: string;
+            preferred?: boolean;
             reason?: string;
         };
         CommerceService_StoreView: {
@@ -1650,6 +3507,48 @@ export interface components {
             name?: string;
             active?: boolean;
         };
+        CustomerDirectory_Page: {
+            items?: components["schemas"]["CustomerDirectory_Entry"][];
+            /** Format: int64 */
+            total?: number;
+            /** Format: int32 */
+            offset?: number;
+            /** Format: int32 */
+            limit?: number;
+        };
+        CustomerDirectory_Entry: {
+            /** Format: uuid */
+            id?: string;
+            name?: string;
+            type?: string;
+            phone?: string;
+            email?: string;
+            address?: string;
+            taxReference?: string;
+            creditLimitXaf?: string;
+            /** Format: int32 */
+            paymentTermsDays?: number;
+            consent?: boolean;
+            active?: boolean;
+            version?: string;
+        };
+        CustomerDirectory_Save: {
+            /** Format: uuid */
+            operationId?: string;
+            name?: string;
+            type?: string;
+            phone?: string;
+            email?: string;
+            address?: string;
+            taxReference?: string;
+            creditLimitXaf?: string;
+            /** Format: int32 */
+            paymentTermsDays?: number;
+            consent?: boolean;
+            active?: boolean;
+            version?: string;
+            reason?: string;
+        };
         DocumentService_Snapshot: {
             /** Format: uuid */
             id?: string;
@@ -1673,6 +3572,105 @@ export interface components {
             locale?: string;
             /** Format: int64 */
             version?: number;
+        };
+        DocumentWorkspace_Template: {
+            id?: string;
+            title?: string;
+            titleFr?: string;
+            paper?: string;
+            permission?: string;
+            basis?: string;
+        };
+        DocumentWorkspace_SourceCandidate: {
+            /** Format: uuid */
+            id?: string;
+            label?: string;
+            status?: string;
+            /** Format: date */
+            businessDate?: string;
+        };
+        DocumentWorkspace_Capture: {
+            /** Format: uuid */
+            id?: string;
+            templateId?: string;
+            /** Format: uuid */
+            sourceId?: string;
+            /** Format: uuid */
+            actorId?: string;
+            /** Format: date-time */
+            capturedAt?: string;
+            sha256?: string;
+            content?: components["schemas"]["DocumentWorkspace_Content"];
+        };
+        DocumentWorkspace_Content: {
+            templateVersion?: string;
+            template?: components["schemas"]["DocumentWorkspace_Template"];
+            issuer?: components["schemas"]["DocumentService_Settings"];
+            source?: components["schemas"]["DocumentWorkspace_Body"];
+            /** Format: uuid */
+            actorId?: string;
+            /** Format: date-time */
+            capturedAt?: string;
+        };
+        DocumentWorkspace_Body: {
+            sourceReference?: string;
+            sourceStatus?: string;
+            sourceVersion?: string;
+            /** Format: date */
+            businessDate?: string;
+            party?: string;
+            columns?: string[];
+            rows?: string[][];
+            totalXaf?: string;
+            basis?: string;
+        };
+        DocumentWorkspace_CaptureRequest: {
+            /** Format: uuid */
+            operationId?: string;
+            templateId?: string;
+            /** Format: uuid */
+            sourceId?: string;
+        };
+        DocumentWorkspace_PrintResult: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            documentId?: string;
+            capture?: boolean;
+            /** Format: uuid */
+            actorId?: string;
+            /** Format: date-time */
+            requestedAt?: string;
+            paper?: string;
+            duplicate?: boolean;
+            reason?: string;
+            documentHash?: string;
+            status?: string;
+            html?: string;
+        };
+        DocumentWorkspace_PrintRequest: {
+            /** Format: uuid */
+            operationId?: string;
+            reason?: string;
+            paper?: string;
+        };
+        DocumentWorkspace_Outcome: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            attemptId?: string;
+            /** Format: uuid */
+            actorId?: string;
+            /** Format: date-time */
+            recordedAt?: string;
+            status?: string;
+            reason?: string;
+        };
+        DocumentWorkspace_OutcomeRequest: {
+            /** Format: uuid */
+            operationId?: string;
+            status?: string;
+            reason?: string;
         };
         ExpenseService_Expense: {
             /** Format: uuid */
@@ -1706,6 +3704,63 @@ export interface components {
             reason?: string;
             /** Format: uuid */
             cashSessionId?: string;
+        };
+        ExpenseService_BankPay: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: int64 */
+            version?: number;
+            reason?: string;
+            /** Format: uuid */
+            bankEvidenceId?: string;
+        };
+        ManualJournalService_Journal: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: date */
+            businessDate?: string;
+            status?: string;
+            reason?: string;
+            /** Format: uuid */
+            createdBy?: string;
+            /** Format: uuid */
+            approvedBy?: string;
+            /** Format: uuid */
+            reversalOf?: string;
+            /** Format: uuid */
+            journalId?: string;
+            /** Format: int64 */
+            version?: number;
+            lines?: components["schemas"]["ManualJournalService_Line"][];
+        };
+        ManualJournalService_Line: {
+            account?: string;
+            debitXaf?: string;
+            creditXaf?: string;
+        };
+        ManualJournalService_Draft: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: date */
+            businessDate?: string;
+            reason?: string;
+            lines?: components["schemas"]["ManualJournalService_Line"][];
+        };
+        ManualJournalService_Command: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: int64 */
+            version?: number;
+            reason?: string;
+        };
+        ManualJournalService_Reversal: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: int64 */
+            version?: number;
+            /** Format: date */
+            businessDate?: string;
+            reason?: string;
         };
         PeriodService_Period: {
             /** Format: uuid */
@@ -1797,6 +3852,25 @@ export interface components {
             /** Format: int64 */
             version?: number;
         };
+        IdentityService_Revocation: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            actorId?: string;
+            /** Format: int64 */
+            authorizationEpoch?: number;
+            reauthenticate?: boolean;
+            scope?: string;
+        };
+        IdentityService_Revoke: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            targetActor?: string;
+            /** Format: int64 */
+            expectedEpoch?: number;
+            reason?: string;
+        };
         ProviderController_ProviderStatus: {
             provider?: string;
             enabled?: boolean;
@@ -1846,6 +3920,8 @@ export interface components {
             allocatedMilli?: string;
             valueXaf?: string;
             version?: string;
+            quarantinedMilli?: string;
+            availableMilli?: string;
         };
         InventoryWorkflows_Transfer: {
             /** Format: uuid */
@@ -1882,6 +3958,68 @@ export interface components {
             operationId?: string;
             version?: string;
             quantityMilli?: string;
+            reason?: string;
+        };
+        InventoryCustody_Position: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            saleId?: string;
+            /** Format: uuid */
+            customerId?: string;
+            /** Format: uuid */
+            warehouseId?: string;
+            /** Format: uuid */
+            productId?: string;
+            quantityMilli?: string;
+            collectedMilli?: string;
+            frozenCostXaf?: string;
+            status?: string;
+            version?: string;
+        };
+        InventoryCustody_Collection: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            custodyId?: string;
+            quantityMilli?: string;
+            proofReference?: string;
+            /** Format: uuid */
+            actorId?: string;
+            /** Format: date-time */
+            collectedAt?: string;
+        };
+        InventoryCustody_Collect: {
+            /** Format: uuid */
+            operationId?: string;
+            version?: string;
+            quantityMilli?: string;
+            proofReference?: string;
+            reason?: string;
+        };
+        InventoryCustody_Policy: {
+            /** Format: uuid */
+            id?: string;
+            mode?: string;
+            /** Format: date */
+            effectiveFrom?: string;
+            contractReference?: string;
+            status?: string;
+            version?: string;
+        };
+        InventoryCustody_PolicyRequest: {
+            /** Format: uuid */
+            operationId?: string;
+            mode?: string;
+            /** Format: date */
+            effectiveFrom?: string;
+            contractReference?: string;
+            reason?: string;
+        };
+        InventoryCustody_Approve: {
+            /** Format: uuid */
+            operationId?: string;
+            version?: string;
             reason?: string;
         };
         InventoryJobs_Job: {
@@ -1940,6 +4078,95 @@ export interface components {
             version?: string;
             quantityMilli?: string;
             evidenceReference?: string;
+            reason?: string;
+        };
+        InventoryQuality_Lot: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            warehouseId?: string;
+            /** Format: uuid */
+            productId?: string;
+            lotNumber?: string;
+            quantityMilli?: string;
+            quarantinedMilli?: string;
+            /** Format: date */
+            expiresOn?: string;
+            sourceReference?: string;
+            version?: string;
+        };
+        InventoryQuality_Recall: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            lotId?: string;
+            quantityMilli?: string;
+            status?: string;
+            /** Format: date */
+            businessDate?: string;
+            evidenceReference?: string;
+            version?: string;
+        };
+        InventoryQuality_Reservation: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            warehouseId?: string;
+            /** Format: uuid */
+            productId?: string;
+            quantityMilli?: string;
+            releasedMilli?: string;
+            status?: string;
+            sourceReference?: string;
+            version?: string;
+        };
+        InventoryQuality_RegisterLot: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            warehouseId?: string;
+            /** Format: uuid */
+            productId?: string;
+            lotNumber?: string;
+            quantityMilli?: string;
+            /** Format: date */
+            expiresOn?: string;
+            sourceReference?: string;
+            reason?: string;
+        };
+        InventoryQuality_DraftRecall: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            lotId?: string;
+            quantityMilli?: string;
+            /** Format: date */
+            businessDate?: string;
+            reason?: string;
+        };
+        InventoryQuality_Reserve: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            warehouseId?: string;
+            /** Format: uuid */
+            productId?: string;
+            quantityMilli?: string;
+            sourceReference?: string;
+            reason?: string;
+        };
+        InventoryQuality_Action: {
+            /** Format: uuid */
+            operationId?: string;
+            version?: string;
+            evidenceReference?: string;
+            reason?: string;
+        };
+        InventoryQuality_Release: {
+            /** Format: uuid */
+            operationId?: string;
+            version?: string;
+            quantityMilli?: string;
             reason?: string;
         };
         PurchasingService_Purchase: {
@@ -2126,6 +4353,8 @@ export interface components {
             title?: string;
             basis?: string;
             columns?: string[];
+            requiresDateRange?: boolean;
+            permission?: string;
         };
         ReportingService_Report: {
             code?: string;
@@ -2197,6 +4426,37 @@ export interface components {
             version?: number;
             reason?: string;
         };
+        FulfillmentService_Fulfillment: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            saleId?: string;
+            /** Format: uuid */
+            customerId?: string;
+            status?: string;
+            /** Format: date */
+            businessDate?: string;
+            proofReference?: string;
+            version?: string;
+        };
+        FulfillmentService_Draft: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            saleId?: string;
+            /** Format: uuid */
+            customerId?: string;
+            /** Format: date */
+            businessDate?: string;
+            reason?: string;
+        };
+        FulfillmentService_Action: {
+            /** Format: uuid */
+            operationId?: string;
+            version?: string;
+            proofReference?: string;
+            reason?: string;
+        };
         SalesService_Sale: {
             /** Format: uuid */
             id?: string;
@@ -2211,6 +4471,14 @@ export interface components {
             /** Format: uuid */
             customerId?: string;
             lines?: components["schemas"]["SalesService_Line"][];
+            recognitionPolicy?: string;
+        };
+        SalesService_PostedSalesSummary: {
+            /** Format: date */
+            from?: string;
+            /** Format: date */
+            to?: string;
+            totalXaf?: string;
         };
         SalesService_Draft: {
             /** Format: uuid */
@@ -2229,6 +4497,178 @@ export interface components {
             /** Format: int64 */
             version?: number;
             reason?: string;
+            recognitionPolicy?: string;
+        };
+        SubscriptionBillingService_Invoice: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            tenantId?: string;
+            kind?: string;
+            /** Format: uuid */
+            originalId?: string;
+            number?: string;
+            issuerName?: string;
+            issuerTaxReference?: string;
+            customerName?: string;
+            customerTaxReference?: string;
+            description?: string;
+            jurisdiction?: string;
+            /** Format: date */
+            periodStart?: string;
+            /** Format: date */
+            periodEnd?: string;
+            /** Format: date */
+            dueDate?: string;
+            subtotalXaf?: string;
+            discountXaf?: string;
+            taxXaf?: string;
+            totalXaf?: string;
+            /** Format: date-time */
+            createdAt?: string;
+        };
+        SubscriptionBillingService_Issue: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            tenantId?: string;
+            /** Format: uuid */
+            originalId?: string;
+            issuerName?: string;
+            issuerTaxReference?: string;
+            customerName?: string;
+            customerTaxReference?: string;
+            description?: string;
+            jurisdiction?: string;
+            /** Format: date */
+            periodStart?: string;
+            /** Format: date */
+            periodEnd?: string;
+            /** Format: date */
+            dueDate?: string;
+            subtotalXaf?: string;
+            discountXaf?: string;
+            taxXaf?: string;
+        };
+        SubscriptionLifecycleService_Plan: {
+            code?: string;
+            name?: string;
+            monthlyPriceXaf?: string;
+            /** Format: int32 */
+            seatLimit?: number;
+            /** Format: int32 */
+            branchLimit?: number;
+            /** Format: int32 */
+            warehouseLimit?: number;
+            commerceAccess?: boolean;
+            /** Format: date-time */
+            effectiveAt?: string;
+        };
+        SubscriptionLifecycleController_PlanCommand: {
+            /** Format: uuid */
+            operationId?: string;
+            plan?: components["schemas"]["SubscriptionLifecycleService_Plan"];
+        };
+        SubscriptionLifecycleService_Snapshot: {
+            /** Format: uuid */
+            tenantId?: string;
+            planCode?: string;
+            status?: string;
+            /** Format: date-time */
+            trialEndsAt?: string;
+            /** Format: int64 */
+            version?: number;
+            mobileAccess?: boolean;
+            commerceAccess?: boolean;
+            /** Format: int32 */
+            seatLimit?: number;
+            /** Format: int32 */
+            branchLimit?: number;
+            /** Format: int32 */
+            warehouseLimit?: number;
+            /** Format: date-time */
+            termEndsAt?: string;
+        };
+        SubscriptionLifecycleController_Transition: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: int64 */
+            expectedVersion?: number;
+            reason?: string;
+        };
+        SubscriptionLifecycleService_NoticeView: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            tenantId?: string;
+            /** Format: int64 */
+            subscriptionVersion?: number;
+            status?: string;
+            /** Format: uuid */
+            recordedBy?: string;
+            /** Format: uuid */
+            reviewedBy?: string;
+            /** Format: date-time */
+            deliveredAt?: string;
+            /** Format: date-time */
+            graceEndsAt?: string;
+            /** Format: date-time */
+            reviewedAt?: string;
+            deliveryReference?: string;
+            contractReference?: string;
+            reason?: string;
+        };
+        SubscriptionLifecycleService_Notice: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            tenantId?: string;
+            /** Format: int64 */
+            subscriptionVersion?: number;
+            deliveryReference?: string;
+            /** Format: date-time */
+            deliveredAt?: string;
+            /** Format: date-time */
+            graceEndsAt?: string;
+            contractReference?: string;
+            reason?: string;
+        };
+        SubscriptionLifecycleController_Approval: {
+            /** Format: uuid */
+            operationId?: string;
+        };
+        SubscriptionLifecycleService_PaymentView: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            tenantId?: string;
+            /** Format: uuid */
+            invoiceId?: string;
+            planCode?: string;
+            amountXaf?: string;
+            bankReference?: string;
+            evidenceSha256?: string;
+            reason?: string;
+            status?: string;
+            /** Format: uuid */
+            recordedBy?: string;
+            /** Format: uuid */
+            reviewedBy?: string;
+            /** Format: date-time */
+            reviewedAt?: string;
+        };
+        SubscriptionLifecycleService_Payment: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            tenantId?: string;
+            /** Format: uuid */
+            invoiceId?: string;
+            planCode?: string;
+            amountXaf?: string;
+            bankReference?: string;
+            evidenceSha256?: string;
+            reason?: string;
         };
         SupplierService_Supplier: {
             /** Format: uuid */
@@ -2240,6 +4680,12 @@ export interface components {
             active?: boolean;
             /** Format: int64 */
             version?: number;
+            contactPerson?: string;
+            address?: string;
+            taxReference?: string;
+            /** Format: int32 */
+            paymentTermsDays?: number;
+            bankReference?: string;
         };
         SupplierService_Create: {
             /** Format: uuid */
@@ -2248,6 +4694,32 @@ export interface components {
             name?: string;
             phone?: string;
             email?: string;
+        };
+        SupplierService_Page: {
+            items?: components["schemas"]["SupplierService_Supplier"][];
+            /** Format: int64 */
+            total?: number;
+            /** Format: int32 */
+            offset?: number;
+            /** Format: int32 */
+            limit?: number;
+        };
+        SupplierService_Save: {
+            /** Format: uuid */
+            operationId?: string;
+            code?: string;
+            name?: string;
+            contactPerson?: string;
+            phone?: string;
+            email?: string;
+            address?: string;
+            taxReference?: string;
+            /** Format: int32 */
+            paymentTermsDays?: number;
+            bankReference?: string;
+            active?: boolean;
+            version?: string;
+            reason?: string;
         };
         SyncService_Device: {
             /** Format: uuid */
@@ -2322,6 +4794,137 @@ export interface components {
             sourceId?: string;
             /** Format: date-time */
             acceptedAt?: string;
+        };
+        BankService_Evidence: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: date */
+            businessDate?: string;
+            reference?: string;
+            direction?: string;
+            amountXaf?: string;
+            status?: string;
+            /** Format: uuid */
+            requestedBy?: string;
+            /** Format: uuid */
+            approvedBy?: string;
+            /** Format: uuid */
+            consumedBy?: string;
+            /** Format: int64 */
+            version?: number;
+        };
+        BankService_Request: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: date */
+            businessDate?: string;
+            reference?: string;
+            direction?: string;
+            amountXaf?: string;
+            reason?: string;
+        };
+        BankService_Approve: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: int64 */
+            version?: number;
+            reason?: string;
+        };
+        BankService_Match: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            evidenceId?: string;
+            statementReference?: string;
+            bankXaf?: string;
+            feeXaf?: string;
+            /** Format: uuid */
+            journalId?: string;
+        };
+        BankService_MatchRequest: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            evidenceId?: string;
+            /** Format: date */
+            businessDate?: string;
+            statementReference?: string;
+            bankXaf?: string;
+            feeXaf?: string;
+            reason?: string;
+        };
+        SettlementService_Settlement: {
+            /** Format: uuid */
+            id?: string;
+            kind?: string;
+            /** Format: uuid */
+            partyId?: string;
+            /** Format: uuid */
+            sourceId?: string;
+            /** Format: uuid */
+            relatedId?: string;
+            amountXaf?: string;
+            /** Format: date */
+            businessDate?: string;
+            /** Format: uuid */
+            bankEvidenceId?: string;
+            /** Format: uuid */
+            cashFactId?: string;
+            /** Format: uuid */
+            journalId?: string;
+        };
+        PayablesService_Balance: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            supplierId?: string;
+            originalXaf?: string;
+            paidXaf?: string;
+            outstandingXaf?: string;
+            /** Format: int64 */
+            version?: number;
+        };
+        PayablesService_Advance: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            supplierId?: string;
+            originalXaf?: string;
+            allocatedXaf?: string;
+            remainingXaf?: string;
+            /** Format: int64 */
+            version?: number;
+        };
+        SettlementService_Payment: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            partyId?: string;
+            /** Format: uuid */
+            sourceId?: string;
+            /** Format: date */
+            businessDate?: string;
+            amountXaf?: string;
+            funding?: components["schemas"]["SettlementService_Funding"];
+            reason?: string;
+        };
+        SettlementService_Funding: {
+            /** Format: uuid */
+            cashSessionId?: string;
+            /** Format: uuid */
+            bankEvidenceId?: string;
+        };
+        SettlementService_Allocate: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            advanceId?: string;
+            /** Format: uuid */
+            invoiceId?: string;
+            /** Format: date */
+            businessDate?: string;
+            amountXaf?: string;
+            reason?: string;
         };
         TenderService_Session: {
             /** Format: uuid */
@@ -2425,6 +5028,246 @@ export interface components {
             amountXaf?: string;
             reason?: string;
         };
+        WorkforceService_Employee: {
+            /** Format: uuid */
+            id?: string;
+            employeeNumber?: string;
+            name?: string;
+            email?: string;
+            department?: string;
+            jobTitle?: string;
+            contractType?: string;
+            /** Format: date */
+            hiredOn?: string;
+            /** Format: date */
+            leftOn?: string;
+            monthlyGrossXaf?: string;
+            version?: string;
+        };
+        WorkforceService_EmployeeSave: {
+            /** Format: uuid */
+            operationId?: string;
+            employeeNumber?: string;
+            name?: string;
+            email?: string;
+            department?: string;
+            jobTitle?: string;
+            contractType?: string;
+            /** Format: date */
+            hiredOn?: string;
+            /** Format: date */
+            leftOn?: string;
+            monthlyGrossXaf?: string;
+            version?: string;
+            reason?: string;
+        };
+        WorkforceService_Attendance: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            employeeId?: string;
+            /** Format: date */
+            date?: string;
+            status?: string;
+            /** Format: int32 */
+            workedMinutes?: number;
+        };
+        WorkforceService_AttendanceSave: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            employeeId?: string;
+            /** Format: date */
+            date?: string;
+            status?: string;
+            /** Format: int32 */
+            workedMinutes?: number;
+            reason?: string;
+        };
+        WorkforceService_Payslip: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            employeeId?: string;
+            employeeName?: string;
+            employeeNumber?: string;
+            /** Format: date */
+            periodStart?: string;
+            /** Format: date */
+            periodEnd?: string;
+            /** Format: date */
+            businessDate?: string;
+            grossXaf?: string;
+            deductionXaf?: string;
+            netXaf?: string;
+            calculationPolicy?: string;
+            status?: string;
+            /** Format: uuid */
+            preparedBy?: string;
+            /** Format: uuid */
+            approvedBy?: string;
+            /** Format: uuid */
+            journalId?: string;
+            version?: string;
+        };
+        WorkforceService_PayrollDraft: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: uuid */
+            employeeId?: string;
+            /** Format: date */
+            periodStart?: string;
+            /** Format: date */
+            periodEnd?: string;
+            /** Format: date */
+            businessDate?: string;
+            grossXaf?: string;
+            deductionXaf?: string;
+            calculationPolicy?: string;
+            reason?: string;
+        };
+        WorkforceService_Approval: {
+            /** Format: uuid */
+            operationId?: string;
+            version?: string;
+            reason?: string;
+        };
+        WorkforceService_Contract: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            employeeId?: string;
+            /** Format: date */
+            effectiveFrom?: string;
+            contractType?: string;
+            monthlyGrossXaf?: string;
+            reference?: string;
+            /** Format: uuid */
+            recordedBy?: string;
+        };
+        WorkforceService_ContractChange: {
+            /** Format: uuid */
+            operationId?: string;
+            employeeVersion?: string;
+            /** Format: date */
+            effectiveFrom?: string;
+            contractType?: string;
+            monthlyGrossXaf?: string;
+            reference?: string;
+            reason?: string;
+        };
+        WorkforceService_DetailedPayroll: {
+            payroll?: components["schemas"]["WorkforceService_PayrollDraft"];
+            deductions?: components["schemas"]["WorkforceService_Deduction"][];
+            /** Format: uuid */
+            replacesPayslipId?: string;
+        };
+        WorkforceService_Deduction: {
+            code?: string;
+            label?: string;
+            amountXaf?: string;
+            policyReference?: string;
+        };
+        WorkforceService_Reversal: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            payslipId?: string;
+            /** Format: date */
+            businessDate?: string;
+            status?: string;
+            /** Format: uuid */
+            requestedBy?: string;
+            /** Format: uuid */
+            approvedBy?: string;
+            /** Format: uuid */
+            journalId?: string;
+            version?: string;
+        };
+        WorkforceService_ReversalRequest: {
+            /** Format: uuid */
+            operationId?: string;
+            version?: string;
+            /** Format: date */
+            businessDate?: string;
+            reason?: string;
+        };
+        WorkforceService_Payment: {
+            /** Format: uuid */
+            id?: string;
+            /** Format: uuid */
+            payslipId?: string;
+            /** Format: date */
+            businessDate?: string;
+            amountXaf?: string;
+            /** Format: uuid */
+            bankEvidenceId?: string;
+            /** Format: uuid */
+            journalId?: string;
+            status?: string;
+        };
+        WorkforceService_BankPayment: {
+            /** Format: uuid */
+            operationId?: string;
+            version?: string;
+            /** Format: date */
+            businessDate?: string;
+            /** Format: uuid */
+            bankEvidenceId?: string;
+            reason?: string;
+        };
+        OnboardingConfigurationService_Configuration: {
+            /** Format: uuid */
+            requestId?: string;
+            profile?: components["schemas"]["OnboardingConfigurationService_Profile"];
+            /** Format: uuid */
+            configuredBy?: string;
+            /** Format: uuid */
+            approvedBy?: string;
+            status?: string;
+            version?: string;
+            /** Format: date-time */
+            identityVerifiedAt?: string;
+            identityIssuer?: string;
+            /** Format: date-time */
+            createdAt?: string;
+        };
+        OnboardingConfigurationService_Profile: {
+            legalName?: string;
+            registrationNumber?: string;
+            address?: string;
+            /** Format: uuid */
+            ownerSubject?: string;
+            ownerEmail?: string;
+            region?: string;
+            timezone?: string;
+            locale?: string;
+            documentPrefix?: string;
+            openingMode?: string;
+            privacyVersion?: string;
+            termsVersion?: string;
+            planCode?: string;
+        };
+        OnboardingConfigurationService_Configure: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: int64 */
+            requestVersion?: number;
+            profile?: components["schemas"]["OnboardingConfigurationService_Profile"];
+        };
+        OnboardingConfigurationService_VerifyIdentity: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: int64 */
+            version?: number;
+            ownerToken?: string;
+        };
+        OnboardingConfigurationService_Approval: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: int64 */
+            version?: number;
+        };
         PlatformService_Item: {
             /** Format: uuid */
             id?: string;
@@ -2450,6 +5293,36 @@ export interface components {
             operationId?: string;
             /** Format: int64 */
             version?: number;
+        };
+        TenantProvisioningService_Result: {
+            /** Format: uuid */
+            requestId?: string;
+            /** Format: uuid */
+            tenantId?: string;
+            /** Format: uuid */
+            companyId?: string;
+            /** Format: uuid */
+            branchId?: string;
+            /** Format: uuid */
+            warehouseId?: string;
+            /** Format: uuid */
+            ownerSubject?: string;
+            status?: string;
+            version?: string;
+            /** Format: date-time */
+            trialEndsAt?: string;
+            completedSteps?: string[];
+            authorizationEpoch?: string;
+        };
+        TenantProvisioningService_Trial: {
+            /** Format: uuid */
+            operationId?: string;
+            /** Format: int64 */
+            configurationVersion?: number;
+            branchName?: string;
+            warehouseName?: string;
+            /** Format: date */
+            businessDate?: string;
         };
         OutboxWorker_Result: {
             /** Format: int32 */
@@ -2654,7 +5527,319 @@ export interface operations {
             };
         };
     };
-    CommerceController_store_8: {
+    CatalogMasterController_categories_8: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogMasterService_Category"][];
+                };
+            };
+        };
+    };
+    CatalogMasterController_createCategory_10: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CatalogMasterService_CategorySave"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogMasterService_Category"];
+                };
+            };
+        };
+    };
+    CatalogMasterController_category_9: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogMasterService_Category"];
+                };
+            };
+        };
+    };
+    CatalogMasterController_updateCategory_11: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CatalogMasterService_CategorySave"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogMasterService_Category"];
+                };
+            };
+        };
+    };
+    CatalogMasterController_units_12: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogMasterService_Unit"][];
+                };
+            };
+        };
+    };
+    CatalogMasterController_createUnit_14: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CatalogMasterService_UnitSave"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogMasterService_Unit"];
+                };
+            };
+        };
+    };
+    CatalogMasterController_unit_13: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogMasterService_Unit"];
+                };
+            };
+        };
+    };
+    CatalogMasterController_updateUnit_15: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CatalogMasterService_UnitSave"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogMasterService_Unit"];
+                };
+            };
+        };
+    };
+    CatalogMasterController_createManufacturer_16: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CatalogMasterService_ManufacturerSave"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogMasterService_Manufacturer"];
+                };
+            };
+        };
+    };
+    CatalogMasterController_createFamily_17: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CatalogMasterService_FamilySave"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogMasterService_Family"];
+                };
+            };
+        };
+    };
+    CatalogMasterController_attachVariant_18: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CatalogMasterService_VariantSave"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogMasterService_Variant"];
+                };
+            };
+        };
+    };
+    CatalogMasterController_createOffer_19: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CatalogMasterService_OfferSave"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogMasterService_Offer"];
+                };
+            };
+        };
+    };
+    CommerceController_store_20: {
         parameters: {
             query?: never;
             header?: never;
@@ -2674,7 +5859,7 @@ export interface operations {
             };
         };
     };
-    CommerceController_configure_9: {
+    CommerceController_configure_21: {
         parameters: {
             query?: never;
             header: {
@@ -2702,7 +5887,7 @@ export interface operations {
             };
         };
     };
-    CommerceController_listings_10: {
+    CommerceController_listings_22: {
         parameters: {
             query?: never;
             header?: never;
@@ -2722,7 +5907,7 @@ export interface operations {
             };
         };
     };
-    CommerceController_publish_11: {
+    CommerceController_publish_23: {
         parameters: {
             query?: never;
             header: {
@@ -2750,7 +5935,7 @@ export interface operations {
             };
         };
     };
-    PublicStoreController_store_12: {
+    PublicStoreController_store_24: {
         parameters: {
             query?: never;
             header?: never;
@@ -2772,7 +5957,7 @@ export interface operations {
             };
         };
     };
-    CompanyController_list_13: {
+    CompanyController_list_25: {
         parameters: {
             query?: never;
             header?: never;
@@ -2792,7 +5977,7 @@ export interface operations {
             };
         };
     };
-    CustomerController_list_14: {
+    CustomerController_list_26: {
         parameters: {
             query?: never;
             header?: never;
@@ -2812,7 +5997,111 @@ export interface operations {
             };
         };
     };
-    DocumentController_list_15: {
+    CustomerDirectoryController_create_29: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CustomerDirectory_Save"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CustomerDirectory_Entry"];
+                };
+            };
+        };
+    };
+    CustomerDirectoryController_page_27: {
+        parameters: {
+            query: {
+                q: string;
+                offset?: number;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CustomerDirectory_Page"];
+                };
+            };
+        };
+    };
+    CustomerDirectoryController_get_28: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CustomerDirectory_Entry"];
+                };
+            };
+        };
+    };
+    CustomerDirectoryController_update_30: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CustomerDirectory_Save"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CustomerDirectory_Entry"];
+                };
+            };
+        };
+    };
+    DocumentController_list_31: {
         parameters: {
             query?: {
                 sourceId?: string;
@@ -2834,7 +6123,7 @@ export interface operations {
             };
         };
     };
-    DocumentController_get_16: {
+    DocumentController_get_32: {
         parameters: {
             query?: never;
             header?: never;
@@ -2856,7 +6145,7 @@ export interface operations {
             };
         };
     };
-    DocumentController_print_17: {
+    DocumentController_print_33: {
         parameters: {
             query?: {
                 copy?: boolean;
@@ -2880,7 +6169,7 @@ export interface operations {
             };
         };
     };
-    DocumentController_settings_18: {
+    DocumentController_settings_34: {
         parameters: {
             query?: never;
             header?: never;
@@ -2900,7 +6189,7 @@ export interface operations {
             };
         };
     };
-    DocumentController_configure_19: {
+    DocumentController_configure_35: {
         parameters: {
             query?: never;
             header: {
@@ -2928,7 +6217,253 @@ export interface operations {
             };
         };
     };
-    ExpenseController_list_20: {
+    DocumentWorkspaceController_templates_36: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentWorkspace_Template"][];
+                };
+            };
+        };
+    };
+    DocumentWorkspaceController_sources_37: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentWorkspace_SourceCandidate"][];
+                };
+            };
+        };
+    };
+    DocumentWorkspaceController_list_38: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentWorkspace_Capture"][];
+                };
+            };
+        };
+    };
+    DocumentWorkspaceController_capture_40: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DocumentWorkspace_CaptureRequest"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentWorkspace_Capture"];
+                };
+            };
+        };
+    };
+    DocumentWorkspaceController_get_39: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentWorkspace_Capture"];
+                };
+            };
+        };
+    };
+    DocumentWorkspaceController_preview_41: {
+        parameters: {
+            query?: {
+                paper?: string;
+            };
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/html": string;
+                };
+            };
+        };
+    };
+    DocumentWorkspaceController_printCapture_42: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DocumentWorkspace_PrintRequest"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentWorkspace_PrintResult"];
+                };
+            };
+        };
+    };
+    DocumentWorkspaceController_printOriginal_43: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DocumentWorkspace_PrintRequest"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentWorkspace_PrintResult"];
+                };
+            };
+        };
+    };
+    DocumentWorkspaceController_attempts_44: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentWorkspace_PrintResult"][];
+                };
+            };
+        };
+    };
+    DocumentWorkspaceController_outcome_45: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DocumentWorkspace_OutcomeRequest"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentWorkspace_Outcome"];
+                };
+            };
+        };
+    };
+    ExpenseController_list_46: {
         parameters: {
             query?: never;
             header?: never;
@@ -2948,7 +6483,7 @@ export interface operations {
             };
         };
     };
-    ExpenseController_create_21: {
+    ExpenseController_create_47: {
         parameters: {
             query?: never;
             header: {
@@ -2976,7 +6511,7 @@ export interface operations {
             };
         };
     };
-    ExpenseController_submit_22: {
+    ExpenseController_submit_48: {
         parameters: {
             query?: never;
             header: {
@@ -3006,7 +6541,7 @@ export interface operations {
             };
         };
     };
-    ExpenseController_submit_23: {
+    ExpenseController_submit_49: {
         parameters: {
             query?: never;
             header: {
@@ -3036,7 +6571,7 @@ export interface operations {
             };
         };
     };
-    ExpenseController_approve_24: {
+    ExpenseController_approve_50: {
         parameters: {
             query?: never;
             header: {
@@ -3066,7 +6601,7 @@ export interface operations {
             };
         };
     };
-    ExpenseController_approve_25: {
+    ExpenseController_approve_51: {
         parameters: {
             query?: never;
             header: {
@@ -3096,7 +6631,7 @@ export interface operations {
             };
         };
     };
-    ExpenseController_pay_26: {
+    ExpenseController_pay_52: {
         parameters: {
             query?: never;
             header: {
@@ -3126,7 +6661,227 @@ export interface operations {
             };
         };
     };
-    PeriodController_list_27: {
+    ExpenseController_payBank_53: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ExpenseService_BankPay"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExpenseService_Expense"];
+                };
+            };
+        };
+    };
+    ManualJournalController_list_54: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManualJournalService_Journal"][];
+                };
+            };
+        };
+    };
+    ManualJournalController_create_55: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ManualJournalService_Draft"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManualJournalService_Journal"];
+                };
+            };
+        };
+    };
+    ManualJournalController_submit_56: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ManualJournalService_Command"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManualJournalService_Journal"];
+                };
+            };
+        };
+    };
+    ManualJournalController_approve_57: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ManualJournalService_Command"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManualJournalService_Journal"];
+                };
+            };
+        };
+    };
+    ManualJournalController_approve_58: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ManualJournalService_Command"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManualJournalService_Journal"];
+                };
+            };
+        };
+    };
+    ManualJournalController_reversal_59: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ManualJournalService_Reversal"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManualJournalService_Journal"];
+                };
+            };
+        };
+    };
+    ManualJournalController_get_60: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManualJournalService_Journal"];
+                };
+            };
+        };
+    };
+    PeriodController_list_61: {
         parameters: {
             query?: never;
             header?: never;
@@ -3146,7 +6901,7 @@ export interface operations {
             };
         };
     };
-    PeriodController_create_29: {
+    PeriodController_create_63: {
         parameters: {
             query?: never;
             header: {
@@ -3174,7 +6929,7 @@ export interface operations {
             };
         };
     };
-    PeriodController_requests_28: {
+    PeriodController_requests_62: {
         parameters: {
             query?: never;
             header?: never;
@@ -3194,7 +6949,7 @@ export interface operations {
             };
         };
     };
-    PeriodController_request_30: {
+    PeriodController_request_64: {
         parameters: {
             query?: never;
             header: {
@@ -3224,7 +6979,7 @@ export interface operations {
             };
         };
     };
-    PeriodController_request_31: {
+    PeriodController_request_65: {
         parameters: {
             query?: never;
             header: {
@@ -3254,7 +7009,7 @@ export interface operations {
             };
         };
     };
-    PeriodController_decide_32: {
+    PeriodController_decide_66: {
         parameters: {
             query?: never;
             header: {
@@ -3284,7 +7039,7 @@ export interface operations {
             };
         };
     };
-    PeriodController_decide_33: {
+    PeriodController_decide_67: {
         parameters: {
             query?: never;
             header: {
@@ -3314,7 +7069,7 @@ export interface operations {
             };
         };
     };
-    IdentityController_members_34: {
+    IdentityController_members_68: {
         parameters: {
             query?: never;
             header?: never;
@@ -3334,7 +7089,7 @@ export interface operations {
             };
         };
     };
-    IdentityController_changes_35: {
+    IdentityController_changes_69: {
         parameters: {
             query?: never;
             header?: never;
@@ -3354,7 +7109,7 @@ export interface operations {
             };
         };
     };
-    IdentityController_request_36: {
+    IdentityController_request_70: {
         parameters: {
             query?: never;
             header: {
@@ -3382,7 +7137,7 @@ export interface operations {
             };
         };
     };
-    IdentityController_approve_37: {
+    IdentityController_approve_71: {
         parameters: {
             query?: never;
             header: {
@@ -3412,7 +7167,34 @@ export interface operations {
             };
         };
     };
-    ProviderController_status_38: {
+    SessionRevocationController_revoke_72: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["IdentityService_Revoke"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["IdentityService_Revocation"];
+                };
+            };
+        };
+    };
+    ProviderController_status_73: {
         parameters: {
             query?: never;
             header?: never;
@@ -3432,7 +7214,7 @@ export interface operations {
             };
         };
     };
-    ProviderController_intents_39: {
+    ProviderController_intents_74: {
         parameters: {
             query?: never;
             header?: never;
@@ -3452,7 +7234,7 @@ export interface operations {
             };
         };
     };
-    ProviderController_prepare_40: {
+    ProviderController_prepare_75: {
         parameters: {
             query?: never;
             header: {
@@ -3480,7 +7262,7 @@ export interface operations {
             };
         };
     };
-    ProviderController_query_41: {
+    ProviderController_query_76: {
         parameters: {
             query?: never;
             header: {
@@ -3505,7 +7287,7 @@ export interface operations {
             };
         };
     };
-    InventoryController_warehouses_42: {
+    InventoryController_warehouses_77: {
         parameters: {
             query?: never;
             header?: never;
@@ -3525,7 +7307,7 @@ export interface operations {
             };
         };
     };
-    InventoryController_balances_43: {
+    InventoryController_balances_78: {
         parameters: {
             query: {
                 warehouseId: string;
@@ -3547,7 +7329,7 @@ export interface operations {
             };
         };
     };
-    InventoryController_transfers_44: {
+    InventoryController_transfers_79: {
         parameters: {
             query?: never;
             header?: never;
@@ -3567,7 +7349,7 @@ export interface operations {
             };
         };
     };
-    InventoryController_draft_46: {
+    InventoryController_draft_81: {
         parameters: {
             query?: never;
             header: {
@@ -3595,7 +7377,7 @@ export interface operations {
             };
         };
     };
-    InventoryController_transfer_45: {
+    InventoryController_transfer_80: {
         parameters: {
             query?: never;
             header?: never;
@@ -3617,7 +7399,7 @@ export interface operations {
             };
         };
     };
-    InventoryController_approve_47: {
+    InventoryController_approve_82: {
         parameters: {
             query?: never;
             header: {
@@ -3647,7 +7429,7 @@ export interface operations {
             };
         };
     };
-    InventoryController_dispatch_48: {
+    InventoryController_dispatch_83: {
         parameters: {
             query?: never;
             header: {
@@ -3677,7 +7459,7 @@ export interface operations {
             };
         };
     };
-    InventoryController_receive_49: {
+    InventoryController_receive_84: {
         parameters: {
             query?: never;
             header: {
@@ -3707,7 +7489,157 @@ export interface operations {
             };
         };
     };
-    InventoryJobsController_list_50: {
+    InventoryCustodyController_positions_85: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryCustody_Position"][];
+                };
+            };
+        };
+    };
+    InventoryCustodyController_collections_86: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryCustody_Collection"][];
+                };
+            };
+        };
+    };
+    InventoryCustodyController_collect_87: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InventoryCustody_Collect"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryCustody_Position"];
+                };
+            };
+        };
+    };
+    InventoryCustodyController_policies_88: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryCustody_Policy"][];
+                };
+            };
+        };
+    };
+    InventoryCustodyController_request_89: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InventoryCustody_PolicyRequest"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryCustody_Policy"];
+                };
+            };
+        };
+    };
+    InventoryCustodyController_approve_90: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InventoryCustody_Approve"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryCustody_Policy"];
+                };
+            };
+        };
+    };
+    InventoryJobsController_list_91: {
         parameters: {
             query: {
                 kind: string;
@@ -3729,7 +7661,7 @@ export interface operations {
             };
         };
     };
-    InventoryJobsController_get_51: {
+    InventoryJobsController_get_92: {
         parameters: {
             query?: never;
             header?: never;
@@ -3751,7 +7683,7 @@ export interface operations {
             };
         };
     };
-    InventoryJobsController_start_52: {
+    InventoryJobsController_start_93: {
         parameters: {
             query?: never;
             header: {
@@ -3779,7 +7711,7 @@ export interface operations {
             };
         };
     };
-    InventoryJobsController_draft_53: {
+    InventoryJobsController_draft_94: {
         parameters: {
             query?: never;
             header: {
@@ -3809,7 +7741,7 @@ export interface operations {
             };
         };
     };
-    InventoryJobsController_capture_54: {
+    InventoryJobsController_capture_95: {
         parameters: {
             query?: never;
             header: {
@@ -3839,7 +7771,7 @@ export interface operations {
             };
         };
     };
-    InventoryJobsController_approve_55: {
+    InventoryJobsController_approve_96: {
         parameters: {
             query?: never;
             header: {
@@ -3869,7 +7801,7 @@ export interface operations {
             };
         };
     };
-    InventoryJobsController_post_56: {
+    InventoryJobsController_post_97: {
         parameters: {
             query?: never;
             header: {
@@ -3899,7 +7831,301 @@ export interface operations {
             };
         };
     };
-    PurchasingController_list_57: {
+    InventoryQualityController_lots_98: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryQuality_Lot"][];
+                };
+            };
+        };
+    };
+    InventoryQualityController_registerLot_101: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InventoryQuality_RegisterLot"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryQuality_Lot"];
+                };
+            };
+        };
+    };
+    InventoryQualityController_recalls_99: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryQuality_Recall"][];
+                };
+            };
+        };
+    };
+    InventoryQualityController_draftRecall_102: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InventoryQuality_DraftRecall"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryQuality_Recall"];
+                };
+            };
+        };
+    };
+    InventoryQualityController_reservations_100: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryQuality_Reservation"][];
+                };
+            };
+        };
+    };
+    InventoryQualityController_reserve_103: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InventoryQuality_Reserve"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryQuality_Reservation"];
+                };
+            };
+        };
+    };
+    InventoryQualityController_approve_104: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InventoryQuality_Action"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryQuality_Recall"];
+                };
+            };
+        };
+    };
+    InventoryQualityController_block_105: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InventoryQuality_Action"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryQuality_Recall"];
+                };
+            };
+        };
+    };
+    InventoryQualityController_recover_106: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InventoryQuality_Action"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryQuality_Recall"];
+                };
+            };
+        };
+    };
+    InventoryQualityController_dispose_107: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InventoryQuality_Action"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryQuality_Recall"];
+                };
+            };
+        };
+    };
+    InventoryQualityController_release_108: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InventoryQuality_Release"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InventoryQuality_Reservation"];
+                };
+            };
+        };
+    };
+    PurchasingController_list_109: {
         parameters: {
             query?: never;
             header?: never;
@@ -3919,7 +8145,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_draft_59: {
+    PurchasingController_draft_111: {
         parameters: {
             query?: never;
             header: {
@@ -3946,7 +8172,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_get_58: {
+    PurchasingController_get_110: {
         parameters: {
             query?: never;
             header?: never;
@@ -3968,7 +8194,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_submit_60: {
+    PurchasingController_submit_112: {
         parameters: {
             query?: never;
             header: {
@@ -3997,7 +8223,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_approve_61: {
+    PurchasingController_approve_113: {
         parameters: {
             query?: never;
             header: {
@@ -4026,7 +8252,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_receipts_63: {
+    PurchasingController_receipts_115: {
         parameters: {
             query?: never;
             header?: never;
@@ -4048,7 +8274,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_receive_62: {
+    PurchasingController_receive_114: {
         parameters: {
             query?: never;
             header: {
@@ -4077,7 +8303,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_invoice_64: {
+    PurchasingController_invoice_116: {
         parameters: {
             query?: never;
             header: {
@@ -4106,7 +8332,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_invoices_65: {
+    PurchasingController_invoices_117: {
         parameters: {
             query?: never;
             header?: never;
@@ -4126,7 +8352,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_supplierReturns_67: {
+    PurchasingController_supplierReturns_119: {
         parameters: {
             query?: never;
             header?: never;
@@ -4148,7 +8374,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_returnToSupplier_66: {
+    PurchasingController_returnToSupplier_118: {
         parameters: {
             query?: never;
             header: {
@@ -4177,7 +8403,7 @@ export interface operations {
             };
         };
     };
-    QuotationController_list_68: {
+    QuotationController_list_120: {
         parameters: {
             query?: never;
             header?: never;
@@ -4197,7 +8423,7 @@ export interface operations {
             };
         };
     };
-    QuotationController_draft_70: {
+    QuotationController_draft_122: {
         parameters: {
             query?: never;
             header: {
@@ -4225,7 +8451,7 @@ export interface operations {
             };
         };
     };
-    QuotationController_get_69: {
+    QuotationController_get_121: {
         parameters: {
             query?: never;
             header?: never;
@@ -4247,7 +8473,7 @@ export interface operations {
             };
         };
     };
-    QuotationController_issue_71: {
+    QuotationController_issue_123: {
         parameters: {
             query?: never;
             header: {
@@ -4277,7 +8503,7 @@ export interface operations {
             };
         };
     };
-    QuotationController_convert_72: {
+    QuotationController_convert_124: {
         parameters: {
             query?: never;
             header: {
@@ -4307,7 +8533,7 @@ export interface operations {
             };
         };
     };
-    ReportingController_catalog_73: {
+    ReportingController_catalog_125: {
         parameters: {
             query?: never;
             header?: never;
@@ -4327,7 +8553,7 @@ export interface operations {
             };
         };
     };
-    ReportingController_run_74: {
+    ReportingController_run_126: {
         parameters: {
             query?: {
                 from?: string;
@@ -4337,7 +8563,7 @@ export interface operations {
             };
             header?: never;
             path: {
-                code: "posted-sales" | "stock" | "receivables" | "cash" | "provider-intents";
+                code: "audit-events" | "cash" | "count-variances" | "customer-custody" | "deposits" | "expenses" | "journal-lines" | "posted-sales" | "provider-intents" | "purchase-progress" | "recalls" | "receivables" | "returns" | "sales-lines" | "sales-register" | "stock" | "stock-movements" | "supplier-invoices" | "supplier-payables" | "tender-facts";
             };
             cookie?: never;
         };
@@ -4354,7 +8580,7 @@ export interface operations {
             };
         };
     };
-    ReportingController_export_75: {
+    ReportingController_export_127: {
         parameters: {
             query?: {
                 from?: string;
@@ -4364,7 +8590,7 @@ export interface operations {
             };
             header?: never;
             path: {
-                code: "posted-sales" | "stock" | "receivables" | "cash" | "provider-intents";
+                code: "audit-events" | "cash" | "count-variances" | "customer-custody" | "deposits" | "expenses" | "journal-lines" | "posted-sales" | "provider-intents" | "purchase-progress" | "recalls" | "receivables" | "returns" | "sales-lines" | "sales-register" | "stock" | "stock-movements" | "supplier-invoices" | "supplier-payables" | "tender-facts";
             };
             cookie?: never;
         };
@@ -4382,7 +8608,7 @@ export interface operations {
             };
         };
     };
-    ReturnController_list_76: {
+    ReturnController_list_128: {
         parameters: {
             query?: never;
             header?: never;
@@ -4402,7 +8628,7 @@ export interface operations {
             };
         };
     };
-    ReturnController_draft_78: {
+    ReturnController_draft_130: {
         parameters: {
             query?: never;
             header: {
@@ -4430,7 +8656,7 @@ export interface operations {
             };
         };
     };
-    ReturnController_get_77: {
+    ReturnController_get_129: {
         parameters: {
             query?: never;
             header?: never;
@@ -4452,7 +8678,7 @@ export interface operations {
             };
         };
     };
-    ReturnController_approve_79: {
+    ReturnController_approve_131: {
         parameters: {
             query?: never;
             header: {
@@ -4482,7 +8708,7 @@ export interface operations {
             };
         };
     };
-    ReturnController_post_80: {
+    ReturnController_post_132: {
         parameters: {
             query?: never;
             header: {
@@ -4512,7 +8738,137 @@ export interface operations {
             };
         };
     };
-    SalesController_list_81: {
+    FulfillmentController_list_133: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FulfillmentService_Fulfillment"][];
+                };
+            };
+        };
+    };
+    FulfillmentController_draft_135: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FulfillmentService_Draft"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FulfillmentService_Fulfillment"];
+                };
+            };
+        };
+    };
+    FulfillmentController_get_134: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FulfillmentService_Fulfillment"];
+                };
+            };
+        };
+    };
+    FulfillmentController_dispatch_136: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FulfillmentService_Action"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FulfillmentService_Fulfillment"];
+                };
+            };
+        };
+    };
+    FulfillmentController_complete_137: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FulfillmentService_Action"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FulfillmentService_Fulfillment"];
+                };
+            };
+        };
+    };
+    SalesController_list_138: {
         parameters: {
             query?: never;
             header?: never;
@@ -4532,7 +8888,7 @@ export interface operations {
             };
         };
     };
-    SalesController_draft_83: {
+    SalesController_draft_141: {
         parameters: {
             query?: never;
             header: {
@@ -4559,7 +8915,30 @@ export interface operations {
             };
         };
     };
-    SalesController_get_82: {
+    SalesController_summary_139: {
+        parameters: {
+            query: {
+                from: string;
+                to: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SalesService_PostedSalesSummary"];
+                };
+            };
+        };
+    };
+    SalesController_get_140: {
         parameters: {
             query?: never;
             header?: never;
@@ -4581,7 +8960,7 @@ export interface operations {
             };
         };
     };
-    SalesController_post_84: {
+    SalesController_post_142: {
         parameters: {
             query?: never;
             header: {
@@ -4610,7 +8989,484 @@ export interface operations {
             };
         };
     };
-    SupplierController_list_85: {
+    SubscriptionBillingController_platform_144: {
+        parameters: {
+            query: {
+                tenantId: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionBillingService_Invoice"][];
+                };
+            };
+        };
+    };
+    SubscriptionBillingController_issue_143: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubscriptionBillingService_Issue"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionBillingService_Invoice"];
+                };
+            };
+        };
+    };
+    SubscriptionBillingController_merchant_145: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionBillingService_Invoice"][];
+                };
+            };
+        };
+    };
+    SubscriptionLifecycleController_plans_146: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionLifecycleService_Plan"][];
+                };
+            };
+        };
+    };
+    SubscriptionLifecycleController_create_147: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubscriptionLifecycleController_PlanCommand"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionLifecycleService_Plan"];
+                };
+            };
+        };
+    };
+    SubscriptionLifecycleController_get_148: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                tenantId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionLifecycleService_Snapshot"];
+                };
+            };
+        };
+    };
+    SubscriptionLifecycleController_expire_149: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                tenantId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubscriptionLifecycleController_Transition"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionLifecycleService_Snapshot"];
+                };
+            };
+        };
+    };
+    SubscriptionLifecycleController_cancel_150: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                tenantId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubscriptionLifecycleController_Transition"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionLifecycleService_Snapshot"];
+                };
+            };
+        };
+    };
+    SubscriptionLifecycleController_notice_151: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubscriptionLifecycleService_Notice"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionLifecycleService_NoticeView"];
+                };
+            };
+        };
+    };
+    SubscriptionLifecycleController_approve_152: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubscriptionLifecycleController_Approval"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionLifecycleService_NoticeView"];
+                };
+            };
+        };
+    };
+    SubscriptionLifecycleController_notices_153: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                tenantId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionLifecycleService_NoticeView"][];
+                };
+            };
+        };
+    };
+    SubscriptionLifecycleController_payments_154: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                tenantId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionLifecycleService_PaymentView"][];
+                };
+            };
+        };
+    };
+    SubscriptionLifecycleController_payment_155: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubscriptionLifecycleService_Payment"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionLifecycleService_PaymentView"];
+                };
+            };
+        };
+    };
+    SubscriptionLifecycleController_approvePayment_156: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubscriptionLifecycleController_Approval"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionLifecycleService_PaymentView"];
+                };
+            };
+        };
+    };
+    SubscriptionLifecycleController_activate_157: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubscriptionLifecycleController_Approval"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubscriptionLifecycleService_Snapshot"];
+                };
+            };
+        };
+    };
+    SubscriptionPrintController_platformInvoice_158: {
+        parameters: {
+            query?: {
+                locale?: string;
+            };
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/html": string;
+                };
+            };
+        };
+    };
+    SubscriptionPrintController_merchantInvoice_159: {
+        parameters: {
+            query?: {
+                locale?: string;
+            };
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/html": string;
+                };
+            };
+        };
+    };
+    SubscriptionPrintController_platformReceipt_160: {
+        parameters: {
+            query?: {
+                locale?: string;
+            };
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/html": string;
+                };
+            };
+        };
+    };
+    SubscriptionPrintController_merchantReceipt_161: {
+        parameters: {
+            query?: {
+                locale?: string;
+            };
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/html": string;
+                };
+            };
+        };
+    };
+    SupplierController_list_162: {
         parameters: {
             query?: never;
             header?: never;
@@ -4630,7 +9486,7 @@ export interface operations {
             };
         };
     };
-    SupplierController_create_87: {
+    SupplierController_create_164: {
         parameters: {
             query?: never;
             header: {
@@ -4657,7 +9513,7 @@ export interface operations {
             };
         };
     };
-    SupplierController_get_86: {
+    SupplierController_get_163: {
         parameters: {
             query?: never;
             header?: never;
@@ -4679,7 +9535,87 @@ export interface operations {
             };
         };
     };
-    SyncController_devices_88: {
+    SupplierController_update_167: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SupplierService_Save"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SupplierService_Supplier"];
+                };
+            };
+        };
+    };
+    SupplierController_page_165: {
+        parameters: {
+            query: {
+                query: string;
+                offset?: number;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SupplierService_Page"];
+                };
+            };
+        };
+    };
+    SupplierController_createDirectory_166: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SupplierService_Save"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SupplierService_Supplier"];
+                };
+            };
+        };
+    };
+    SyncController_devices_168: {
         parameters: {
             query?: never;
             header?: never;
@@ -4699,7 +9635,7 @@ export interface operations {
             };
         };
     };
-    SyncController_challenge_89: {
+    SyncController_challenge_169: {
         parameters: {
             query?: never;
             header: {
@@ -4727,7 +9663,7 @@ export interface operations {
             };
         };
     };
-    SyncController_prove_90: {
+    SyncController_prove_170: {
         parameters: {
             query?: never;
             header: {
@@ -4757,7 +9693,7 @@ export interface operations {
             };
         };
     };
-    SyncController_approve_91: {
+    SyncController_approve_171: {
         parameters: {
             query?: never;
             header: {
@@ -4787,7 +9723,7 @@ export interface operations {
             };
         };
     };
-    SyncController_recovery_93: {
+    SyncController_recovery_173: {
         parameters: {
             query?: never;
             header?: never;
@@ -4807,7 +9743,7 @@ export interface operations {
             };
         };
     };
-    SyncController_recover_92: {
+    SyncController_recover_172: {
         parameters: {
             query?: never;
             header: {
@@ -4835,7 +9771,7 @@ export interface operations {
             };
         };
     };
-    SyncController_status_94: {
+    SyncController_status_174: {
         parameters: {
             query?: never;
             header?: never;
@@ -4857,7 +9793,377 @@ export interface operations {
             };
         };
     };
-    TenderController_sessions_95: {
+    BankController_list_175: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BankService_Evidence"][];
+                };
+            };
+        };
+    };
+    BankController_request_176: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BankService_Request"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BankService_Evidence"];
+                };
+            };
+        };
+    };
+    BankController_approve_177: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BankService_Approve"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BankService_Evidence"];
+                };
+            };
+        };
+    };
+    BankController_matches_178: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BankService_Match"][];
+                };
+            };
+        };
+    };
+    BankController_match_179: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BankService_MatchRequest"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BankService_Match"];
+                };
+            };
+        };
+    };
+    BankController_get_180: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BankService_Evidence"];
+                };
+            };
+        };
+    };
+    SettlementController_list_181: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettlementService_Settlement"][];
+                };
+            };
+        };
+    };
+    SettlementController_balances_182: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PayablesService_Balance"][];
+                };
+            };
+        };
+    };
+    SettlementController_advances_183: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PayablesService_Advance"][];
+                };
+            };
+        };
+    };
+    SettlementController_advance_185: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SettlementService_Payment"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettlementService_Settlement"];
+                };
+            };
+        };
+    };
+    SettlementController_supplierPayment_184: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SettlementService_Payment"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettlementService_Settlement"];
+                };
+            };
+        };
+    };
+    SettlementController_allocate_186: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SettlementService_Allocate"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettlementService_Settlement"];
+                };
+            };
+        };
+    };
+    SettlementController_receipt_187: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SettlementService_Payment"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettlementService_Settlement"];
+                };
+            };
+        };
+    };
+    SettlementController_deposit_188: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                /** @description Enforced globally by RequestIdentityFilter for API commands. */
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SettlementService_Payment"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettlementService_Settlement"];
+                };
+            };
+        };
+    };
+    SettlementController_get_189: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettlementService_Settlement"];
+                };
+            };
+        };
+    };
+    TenderController_sessions_190: {
         parameters: {
             query?: never;
             header?: never;
@@ -4877,7 +10183,7 @@ export interface operations {
             };
         };
     };
-    TenderController_open_96: {
+    TenderController_open_191: {
         parameters: {
             query?: never;
             header: {
@@ -4905,7 +10211,7 @@ export interface operations {
             };
         };
     };
-    TenderController_close_97: {
+    TenderController_close_192: {
         parameters: {
             query?: never;
             header: {
@@ -4935,7 +10241,7 @@ export interface operations {
             };
         };
     };
-    TenderController_facts_98: {
+    TenderController_facts_193: {
         parameters: {
             query?: never;
             header?: never;
@@ -4955,7 +10261,7 @@ export interface operations {
             };
         };
     };
-    TenderController_deposits_99: {
+    TenderController_deposits_194: {
         parameters: {
             query?: never;
             header?: never;
@@ -4975,7 +10281,7 @@ export interface operations {
             };
         };
     };
-    TenderController_deposit_101: {
+    TenderController_deposit_196: {
         parameters: {
             query?: never;
             header: {
@@ -5003,7 +10309,7 @@ export interface operations {
             };
         };
     };
-    TenderController_receipt_100: {
+    TenderController_receipt_195: {
         parameters: {
             query?: never;
             header: {
@@ -5031,7 +10337,7 @@ export interface operations {
             };
         };
     };
-    TenderController_allocate_102: {
+    TenderController_allocate_197: {
         parameters: {
             query?: never;
             header: {
@@ -5061,7 +10367,7 @@ export interface operations {
             };
         };
     };
-    TenderController_refund_103: {
+    TenderController_refund_198: {
         parameters: {
             query?: never;
             header: {
@@ -5091,7 +10397,706 @@ export interface operations {
             };
         };
     };
-    PlatformController_list_104: {
+    WorkforceController_employees_199: {
+        parameters: {
+            query?: {
+                offset?: number;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Employee"][];
+                };
+            };
+        };
+    };
+    WorkforceController_create_201: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkforceService_EmployeeSave"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Employee"];
+                };
+            };
+        };
+    };
+    WorkforceController_employee_200: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Employee"];
+                };
+            };
+        };
+    };
+    WorkforceController_update_202: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkforceService_EmployeeSave"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Employee"];
+                };
+            };
+        };
+    };
+    WorkforceController_record_203: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkforceService_AttendanceSave"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Attendance"];
+                };
+            };
+        };
+    };
+    WorkforceController_attendance_204: {
+        parameters: {
+            query: {
+                from: string;
+                through: string;
+            };
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Attendance"][];
+                };
+            };
+        };
+    };
+    WorkforceController_payroll_208: {
+        parameters: {
+            query: {
+                from: string;
+                through: string;
+                offset?: number;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Payslip"][];
+                };
+            };
+        };
+    };
+    WorkforceController_draft_205: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkforceService_PayrollDraft"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Payslip"];
+                };
+            };
+        };
+    };
+    WorkforceController_approve_206: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkforceService_Approval"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Payslip"];
+                };
+            };
+        };
+    };
+    WorkforceController_get_207: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Payslip"];
+                };
+            };
+        };
+    };
+    WorkforceController_contracts_210: {
+        parameters: {
+            query?: {
+                offset?: number;
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Contract"][];
+                };
+            };
+        };
+    };
+    WorkforceController_changeContract_209: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkforceService_ContractChange"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Contract"];
+                };
+            };
+        };
+    };
+    WorkforceController_contractAt_211: {
+        parameters: {
+            query: {
+                date: string;
+            };
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Contract"];
+                };
+            };
+        };
+    };
+    WorkforceController_detailed_212: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkforceService_DetailedPayroll"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Payslip"];
+                };
+            };
+        };
+    };
+    WorkforceController_deductions_213: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Deduction"][];
+                };
+            };
+        };
+    };
+    WorkforceController_cancel_214: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkforceService_Approval"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Payslip"];
+                };
+            };
+        };
+    };
+    WorkforceController_reversals_220: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Reversal"][];
+                };
+            };
+        };
+    };
+    WorkforceController_requestReversal_215: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkforceService_ReversalRequest"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Reversal"];
+                };
+            };
+        };
+    };
+    WorkforceController_approveReversal_216: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkforceService_Approval"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Reversal"];
+                };
+            };
+        };
+    };
+    WorkforceController_payBank_217: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkforceService_BankPayment"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Payment"];
+                };
+            };
+        };
+    };
+    WorkforceController_print_218: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/html": string;
+                };
+            };
+        };
+    };
+    WorkforceController_export_219: {
+        parameters: {
+            query: {
+                from: string;
+                through: string;
+                offset?: number;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/csv": string;
+                };
+            };
+        };
+    };
+    WorkforceController_payments_221: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkforceService_Payment"][];
+                };
+            };
+        };
+    };
+    OnboardingConfigurationController_get_222: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OnboardingConfigurationService_Configuration"];
+                };
+            };
+        };
+    };
+    OnboardingConfigurationController_configure_223: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OnboardingConfigurationService_Configure"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OnboardingConfigurationService_Configuration"];
+                };
+            };
+        };
+    };
+    OnboardingConfigurationController_verify_224: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OnboardingConfigurationService_VerifyIdentity"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OnboardingConfigurationService_Configuration"];
+                };
+            };
+        };
+    };
+    OnboardingConfigurationController_approve_225: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OnboardingConfigurationService_Approval"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OnboardingConfigurationService_Configuration"];
+                };
+            };
+        };
+    };
+    PlatformController_list_226: {
         parameters: {
             query?: never;
             header?: never;
@@ -5111,7 +11116,7 @@ export interface operations {
             };
         };
     };
-    PlatformController_request_105: {
+    PlatformController_request_228: {
         parameters: {
             query?: never;
             header: {
@@ -5138,7 +11143,29 @@ export interface operations {
             };
         };
     };
-    PlatformController_approve_106: {
+    PlatformController_get_227: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlatformService_Item"];
+                };
+            };
+        };
+    };
+    PlatformController_approve_229: {
         parameters: {
             query?: never;
             header: {
@@ -5167,7 +11194,58 @@ export interface operations {
             };
         };
     };
-    OperationsController_process_107: {
+    TenantProvisioningController_get_230: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TenantProvisioningService_Result"];
+                };
+            };
+        };
+    };
+    TenantProvisioningController_provision_231: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TenantProvisioningService_Trial"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TenantProvisioningService_Result"];
+                };
+            };
+        };
+    };
+    OperationsController_process_232: {
         parameters: {
             query?: never;
             header: {

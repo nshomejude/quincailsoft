@@ -1,0 +1,13 @@
+# Workforce web workflow
+
+Entry: `/workforce`, employee detail `/workforce/employees/[id]`, payroll register `/workforce/payroll`, payslip detail `/workforce/payroll/[id]`.
+
+Owned additions: this route tree and `lib/workforce.ts`. Reuses the existing authenticated shell, visual tokens, Records, PageTitle and Access components. Original Dashboard v4 preview and brand requirements reviewed. No database effects originate in Next: all commands pass to the Java workforce aggregate through a session-authenticated, origin-checked, operation-allowlisted server proxy. No access tokens are serialized to the browser.
+
+Specification basis: AGENTS, architecture §39.1 (detail identity, exact money, permissions, operation identity and expected version), brand requirements. This implements API-connected personnel/profile/terms/attendance forms, employee paging, reviewed payroll with itemized deductions, independently approved accruals/reversals, draft cancellation/replacement, approved bank evidence recording, printable snapshots and paged CSV. Fixed XAF uses strings/BigInt; worked minutes alone converts to a bounded integer. Scope checks hide unavailable commands; Java remains authoritative for fresh membership, independent approvals, evidence validity and lifecycle transitions. Payroll-only users can enter through the register link without employee reads.
+
+Validation: three Node tests in workforce.test.ts cover operation allowlisting/method denial, filter normalization, and protecting effective-dated contract/salary edits. Full backend acceptance is owned by the integration agent.
+
+Remaining acceptance: genuine authenticated desktop/narrow browser screenshots and workflow tests require the configured OIDC and Java runtime. No visual-equivalence or module-parity certification is claimed. No statutory tax calculation or externally verified bank settlement is presented. Entered payroll amounts require review. Bank evidence ID entry is validated by the backend; contract evidence attachments are not implemented. Draft replacement uses an explicit cancelled/reversed payslip reference. CSV exports the displayed server page and is labelled accordingly.
+
+Executed on this implementation worktree: TypeScript `tsc --noEmit --incremental false -p apps/web-admin/tsconfig.json` PASS; `node --test apps/web-admin/app/workforce/workforce.test.ts` 3/3 PASS; existing `node --test apps/web-admin/tests/*.test.ts` 21/21 PASS; `next build --webpack apps/web-admin` PASS with all six workforce routes generated as dynamic server routes. Dependencies reused from the supplied app_v4 cache through a temporary symlink, removed after verification. These are build/unit results, not authenticated browser acceptance.

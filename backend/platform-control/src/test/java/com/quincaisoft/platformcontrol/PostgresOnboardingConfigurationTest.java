@@ -43,6 +43,8 @@ class PostgresOnboardingConfigurationTest {
     OnboardingIdentityVerifier proof=token->{calls.incrementAndGet();if(token.equals("bad-proof"))throw new AccessDeniedException("Rejected proof");return new OnboardingIdentityVerifier.VerifiedOwner(ownerId,"owner@example.test","https://idp.example.test");};
     var service=new DefaultOnboardingConfigurationService(em,manager,proof);
     as(maker);var request=base.request(new PlatformService.Request(UUID.randomUUID(),"Hardware business","New tenant"));
+    assertEquals(request,base.get(request.id()));
+    as(maker,"platform:tenants:write");assertThrows(AccessDeniedException.class,()->base.get(request.id()));
     as(checker);base.approve(request.id(),new PlatformService.Review(UUID.randomUUID(),0));
     var profile=new OnboardingConfigurationService.Profile("Hardware SARL","REG-TEST","Douala",ownerId,"owner@example.test","CM","Africa/Douala","fr","HQ","EMPTY","privacy-v1","terms-v1","standard-trial");
     var configure=new OnboardingConfigurationService.Configure(UUID.randomUUID(),1,profile);
