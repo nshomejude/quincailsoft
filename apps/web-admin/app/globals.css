@@ -35,3 +35,5 @@ aside{background:var(--sidebar);color:var(--brand-navy);border-right-color:trans
 nav a{color:var(--brand-navy)}
 nav a:hover,nav a[aria-current=page]{background:var(--sidebar-tint);color:var(--brand-navy)}
 .dashboard-date{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 18px}.dashboard-date input{padding:8px;border:1px solid var(--control-border);border-radius:5px;background:var(--canvas);color:var(--text)}
+.workspace-menu-toggle{display:none}.workspace-navigation{display:flex;flex:1;min-height:0;flex-direction:column}
+@media(max-width:800px){.workspace-menu-toggle{display:inline-block;align-self:start}.workspace-navigation[data-open=false]{display:none}.workspace-navigation[data-open=true]{display:flex}.workspace-navigation nav{max-height:60vh}}

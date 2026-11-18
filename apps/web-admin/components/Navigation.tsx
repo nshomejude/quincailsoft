@@ -10,13 +10,17 @@ const groups = [
 export function Navigation({authorities,labels}:{authorities:string[];labels:Record<string,string>}) {
     const path = usePathname();
     const [query, setQuery] = useState('');
+    const [menuOpen, setMenuOpen] = useState(false);
     const allowed = (permission:string) => authorities.includes(permission) || authorities.includes('SCOPE_' + permission);
     const available = items.filter(([href,,permission])=>!permission || allowed(permission) || (href==='/finance' && allowed('cash:read')));
     return <>
+        <button type="button" className="workspace-menu-toggle secondary" aria-controls="workspace-navigation" aria-expanded={menuOpen} onClick={()=>setMenuOpen(open=>!open)}>Workspaces</button>
+        <div className="workspace-navigation" id="workspace-navigation" data-open={menuOpen}>
         <div className="workspace-nav-search"><label htmlFor="workspace-search">Find a workspace</label><input id="workspace-search" type="search" value={query} onChange={event=>setQuery(event.target.value)} placeholder="Search available screens"/></div>
         <nav aria-label="Workspaces">{groups.map(([group, order])=>{
             const links = order.flatMap(href=>available.filter(item=>item[0]===href)).filter(([,label])=>(labels[label]??label).toLowerCase().includes(query.trim().toLowerCase()));
-            return links.length>0 && <div key={group}><h3>{group}</h3>{links.map(([href,label,,Icon])=><Link key={href} href={href} aria-current={path===href?'page':undefined}><Icon size={16} aria-hidden/>{labels[label]??label}</Link>)}</div>;
+            return links.length>0 && <div key={group}><h3>{group}</h3>{links.map(([href,label,,Icon])=><Link key={href} href={href} onClick={()=>setMenuOpen(false)} aria-current={path===href?'page':undefined}><Icon size={16} aria-hidden/>{labels[label]??label}</Link>)}</div>;
         })}</nav>
+        </div>
     </>;
 }

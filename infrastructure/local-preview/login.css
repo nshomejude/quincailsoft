@@ -11,3 +11,6 @@ body.quincai-login{margin:0;background:var(--canvas);color:var(--text);font-fami
 @media(max-width:720px){.quincai-login .pf-v5-c-login__container{grid-template-columns:1fr;grid-template-areas:"header" "main";grid-template-rows:auto 1fr;min-height:100dvh}.quincai-login #kc-header{min-height:0;padding:18px 22px}.quincai-login #kc-header-wrapper{min-height:0}.quincai-login .quincai-logo-surface{margin-bottom:10px}.quincai-login .quincai-copy strong{font-size:23px;margin:4px 0}.quincai-login .quincai-copy p{display:none}}
 
 .quincai-login .pf-v5-c-login{display:block;padding:0;min-height:100vh}.quincai-login .quincai-logo-surface{align-self:flex-start}
+.quincai-login .pf-v5-c-login,.quincai-login .pf-v5-c-login__container,.quincai-login .pf-v5-c-login__main{box-sizing:border-box;min-width:0}
+@media(max-width:720px){body.quincai-login{overflow-x:clip}.quincai-login .pf-v5-c-login{width:100%;min-width:0}.quincai-login .pf-v5-c-login__container{max-width:100%}}
+@media(max-width:720px){.quincai-login .kc-tooltip-text{left:auto;right:0;transform:none;max-width:70vw;white-space:normal}}
