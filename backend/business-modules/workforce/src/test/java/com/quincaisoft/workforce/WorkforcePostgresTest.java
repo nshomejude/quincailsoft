@@ -56,6 +56,22 @@ class WorkforcePostgresTest {
                     var a=pool.submit(run);var b=pool.submit(run);start.countDown();created=a.get(30,TimeUnit.SECONDS);assertEquals(created,b.get(30,TimeUnit.SECONDS));
                 }
                 auth(true);var entry=created;
+                // Matching request hashes alone must not turn rejected or unrelated receipts into HR data.
+                var mapper=tools.jackson.databind.json.JsonMapper.builder().build();
+                for(String outcome:List.of("REJECTED","WRONG_SOURCE")){
+                    UUID poisonedOperation=UUID.randomUUID();var poisoned=employee(poisonedOperation,"Synthetic employee");
+                    String material="EmployeeSaved|null|"+scope+"|"+mapper.writeValueAsString(poisoned);
+                    String hash=HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(material.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+                    try(var insert=owner.prepareStatement("insert into idempotency_result(tenant_id,company_id,branch_id,operation_id,actor_id,request_hash,source_type,source_id,status,response_json)values(?,?,?,?,?,?,?,?,?,cast(? as jsonb))")){
+                        insert.setObject(1,tenant);insert.setObject(2,company);insert.setObject(3,branch);insert.setObject(4,poisonedOperation);insert.setObject(5,maker);insert.setString(6,hash);insert.setString(7,outcome.equals("WRONG_SOURCE")?"SALE":"WORKFORCE");insert.setObject(8,entry.id());insert.setString(9,outcome.equals("REJECTED")?"REJECTED":"ACCEPTED");insert.setString(10,mapper.writeValueAsString(entry));insert.executeUpdate();
+                    }
+                    TenantContext.call(scope,1,()->{assertThrows(IllegalStateException.class,()->service.saveEmployee(null,poisoned));return null;});
+                }
+                assertEquals(1,count(owner,"SELECT count(*) FROM workforce_employee"));
+                auth(false);TenantContext.call(scope,1,()->{assertThrows(AccessDeniedException.class,()->service.saveEmployee(null,command));return null;});auth(true);
+                TenantContext.call(scope,2,()->{assertThrows(AccessDeniedException.class,()->service.saveEmployee(null,command));return null;});
+                TenantContext.call(checkerScope,1,()->{assertThrows(IllegalStateException.class,()->service.saveEmployee(null,command));return null;});
+                TenantContext.call(scope,1,()->{assertEquals(entry,service.saveEmployee(null,command));return null;});
                 var draft=TenantContext.call(scope,1,()->{
                     assertEquals("9007199254740993",entry.monthlyGrossXaf());assertEquals(1,service.employees(0,25).size());assertEquals(entry,service.employee(entry.id()));
                     assertThrows(IllegalStateException.class,()->service.saveEmployee(null,employee(command.operationId(),"Conflicting employee")));

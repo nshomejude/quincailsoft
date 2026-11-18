@@ -1,0 +1,9 @@
+# Assignment 16: authoritative workforce replay outcomes
+
+Preflight: read repository AGENTS, architecture workforce/security/receipt requirements including §44.3, migration summary and canonical/parity inventories. Inspected server/policy.py and server/server.py generic staff protections (generic draft writes to staff are forbidden), tests/test_security.py session revocation and tests/test_boundary_audit.py staff-label disclosure. Java workforce is a typed normative replacement, not certification of the entire legacy staff screen.
+
+Owned files: DefaultWorkforceService, WorkforcePostgresTest and this evidence. No migration V56 required; no API/schema change. Existing helper already hashed full actor/company/branch context and authorized against active membership epoch. This increment additionally verifies authoritative receipt company, branch, actor, source WORKFORCE and status ACCEPTED before returning a cached sensitive HR response. Matching request hashes no longer make rejected or wrong-source receipts successful.
+
+Acceptance request: root runs WorkforcePostgresTest and WorkforceRenderingTest against PostgreSQL18. New assertions seed matching-hash REJECTED and wrong-source receipts and require denial without a second employee; revoke JWT permission and change epoch before retry to confirm reauthorization; verify cross-actor denial and unchanged legitimate original replay. Existing test retains exact XAF beyond JS-safe integers, independent accrual/reversal, concurrent replay, payroll journal balance, paid-bank evidence, scope/PII denial, immutable facts and rollback.
+
+Status: implementation and tests authored; runtime execution PENDING ROOT. No source-only acceptance or complete workforce migration claim. Statutory payroll formula/provider verification, all canonical HR screens and live OIDC/browser acceptance remain separate unfinished work. No invented statutory rates were added.

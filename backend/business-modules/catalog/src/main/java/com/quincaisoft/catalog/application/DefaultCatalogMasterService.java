@@ -16,7 +16,7 @@ public class DefaultCatalogMasterService implements CatalogMasterService {
  public Category saveCategory(UUID id,CategorySave c){
   if(c==null)throw new IllegalArgumentException("Category required");validate(c.operationId(),c.code(),c.name(),c.reason());text(c.brand(),120,false);text(c.description(),4000,false);
   return tx.execute(()->{
-   var s=TenantContext.current();String hash=digest("CATEGORY|"+id+"|"+s.actorId()+"|"+json.writeValueAsString(c));var replay=replay(c.operationId(),hash,Category.class);if(replay!=null)return replay;
+   var s=TenantContext.current();String hash=digest("CATEGORY|"+id+"|"+s.actorId()+"|"+json.writeValueAsString(c));var replay=replay(c.operationId(),hash,"CATEGORY",Category.class);if(replay!=null)return replay;
    // Serialize parent changes so two concurrent moves cannot introduce a cycle.
    em.createNativeQuery("select pg_advisory_xact_lock(hashtextextended(:k,0))").setParameter("k","category-tree:"+s.tenantId()+":"+s.companyId()).getSingleResult();
    CatalogCategory e;
@@ -32,7 +32,7 @@ public class DefaultCatalogMasterService implements CatalogMasterService {
   if(c==null)throw new IllegalArgumentException("Unit required");validate(c.operationId(),c.code(),c.name(),c.reason());text(c.baseUnit(),80,true);long numerator=number(c.factorNumerator(),true),denominator=number(c.factorDenominator(),true);
   if(c.precision()<0||c.precision()>6)throw new IllegalArgumentException("Unit precision outside bounds");
   return tx.execute(()->{
-   var s=TenantContext.current();String hash=digest("UNIT|"+id+"|"+s.actorId()+"|"+json.writeValueAsString(c));var replay=replay(c.operationId(),hash,Unit.class);if(replay!=null)return replay;
+   var s=TenantContext.current();String hash=digest("UNIT|"+id+"|"+s.actorId()+"|"+json.writeValueAsString(c));var replay=replay(c.operationId(),hash,"UNIT",Unit.class);if(replay!=null)return replay;
    if(c.baseUnit().equals(c.code())){if(numerator!=1||denominator!=1)throw new IllegalArgumentException("Base unit factor must be one");}
    else {var bases=em.createQuery("select u from CatalogUnit u where u.code=:code and u.active=true",CatalogUnit.class).setParameter("code",c.baseUnit()).setLockMode(LockModeType.PESSIMISTIC_READ).getResultList();if(bases.isEmpty()||!bases.getFirst().baseUnit.equals(bases.getFirst().code)||bases.getFirst().factorNumerator!=1||bases.getFirst().factorDenominator!=1)throw new IllegalArgumentException("Active base unit required");}
    CatalogUnit e;
@@ -48,7 +48,7 @@ public class DefaultCatalogMasterService implements CatalogMasterService {
   return tx.execute(() -> {
    var scope = TenantContext.current();
    String hash = identityHash("MANUFACTURER", command);
-   var previous = replay(command.operationId(), hash, Manufacturer.class);
+   var previous = replay(command.operationId(), hash, "MANUFACTURER", Manufacturer.class);
    if (previous != null) return previous;
    var entity = new CatalogManufacturer();
    entity.tenantId = scope.tenantId();
@@ -74,7 +74,7 @@ public class DefaultCatalogMasterService implements CatalogMasterService {
   return tx.execute(() -> {
    var scope = TenantContext.current();
    String hash = identityHash("PRODUCT_FAMILY", command);
-   var previous = replay(command.operationId(), hash, Family.class);
+   var previous = replay(command.operationId(), hash, "PRODUCT_FAMILY", Family.class);
    if (previous != null) return previous;
    var key = new CatalogManufacturer.Key(scope.tenantId(), scope.companyId(), command.manufacturerId());
    if (em.find(CatalogManufacturer.class, key) == null) throw new NoSuchElementException("Manufacturer not found");
@@ -103,7 +103,7 @@ public class DefaultCatalogMasterService implements CatalogMasterService {
   return tx.execute(() -> {
    var scope = TenantContext.current();
    var hash = identityHash("CATALOG_VARIANT", command);
-   var previous = replay(command.operationId(), hash, Variant.class);
+   var previous = replay(command.operationId(), hash, "CatalogVariant", Variant.class);
    if (previous != null) return previous;
    var product = em.find(CatalogProduct.class, new CatalogProduct.Key(scope.tenantId(), scope.companyId(), command.productId()));
    var family = em.find(CatalogProductFamily.class, new CatalogProductFamily.Key(scope.tenantId(), scope.companyId(), command.familyId()));
@@ -135,7 +135,7 @@ public class DefaultCatalogMasterService implements CatalogMasterService {
   return tx.execute(() -> {
    var scope = TenantContext.current();
    var hash = identityHash("SUPPLIER_OFFER", command);
-   var previous = replay(command.operationId(), hash, Offer.class);
+   var previous = replay(command.operationId(), hash, "CatalogSupplierOffer", Offer.class);
    if (previous != null) return previous;
    var variant = em.find(CatalogVariantIdentity.class, new CatalogVariantIdentity.Key(scope.tenantId(), scope.companyId(), command.productId()));
    if (variant == null) throw new NoSuchElementException("Variant not found");
@@ -168,10 +168,10 @@ public class DefaultCatalogMasterService implements CatalogMasterService {
  private CatalogUnit findUnit(UUID id,LockModeType lock){var s=TenantContext.current();var e=em.find(CatalogUnit.class,new CatalogUnit.Key(s.tenantId(),s.companyId(),id),lock);if(e==null)throw new NoSuchElementException("Unit not found");return e;}
  private Category view(CatalogCategory e){return new Category(e.id,e.code,e.name,e.parentId,e.brand,e.description,e.active,Long.toString(e.version));}
  private Unit view(CatalogUnit e){return new Unit(e.id,e.code,e.name,e.baseUnit,Long.toString(e.factorNumerator),Long.toString(e.factorDenominator),e.precision,e.active,Long.toString(e.version));}
- private <T>T replay(UUID operation,String hash,Class<T> type){
+ private <T>T replay(UUID operation,String hash,String kind,Class<T> type){
   var s=TenantContext.current();em.createNativeQuery("select pg_advisory_xact_lock(hashtextextended(:k,0))").setParameter("k",s.tenantId()+":"+operation).getSingleResult();
-  var rows=em.createNativeQuery("select request_hash,response_json::text from idempotency_result where tenant_id=:t and operation_id=:o").setParameter("t",s.tenantId()).setParameter("o",operation).getResultList();
-  if(rows.isEmpty())return null;Object[] r=(Object[])rows.getFirst();if(!hash.equals(r[0])||r[1]==null)throw new IllegalStateException("Operation already used");return json.readValue((String)r[1],type);
+  var rows=em.createNativeQuery("select request_hash,response_json::text,company_id,branch_id,actor_id,source_type,status from idempotency_result where tenant_id=:t and operation_id=:o").setParameter("t",s.tenantId()).setParameter("o",operation).getResultList();
+  if(rows.isEmpty())return null;Object[] r=(Object[])rows.getFirst();if(!hash.equals(r[0])||r[1]==null||!s.companyId().equals(r[2])||!s.branchId().equals(r[3])||!s.actorId().equals(r[4])||!kind.equals(r[5])||!"ACCEPTED".equals(r[6]))throw new IllegalStateException("Operation already used");return json.readValue((String)r[1],type);
  }
  private void receipt(UUID operation,UUID id,String kind,String hash,Object result,String reason){
   var s=TenantContext.current();em.createNativeQuery("insert into idempotency_result(tenant_id,company_id,branch_id,operation_id,request_hash,source_type,source_id,response_json) values(:t,:c,:b,:o,:h,:kind,:id,cast(:r as jsonb))")

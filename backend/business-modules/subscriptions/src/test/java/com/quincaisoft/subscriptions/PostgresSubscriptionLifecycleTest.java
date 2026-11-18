@@ -27,7 +27,7 @@ class PostgresSubscriptionLifecycleTest {
   String adminUrl=System.getenv("QUINCAI_PG_TEST_URL"),adminUser=System.getenv().getOrDefault("QUINCAI_PG_TEST_USER","agent");
   String db="lifecycle_"+UUID.randomUUID().toString().replace("-",""),role="lifecycle_role_"+UUID.randomUUID().toString().replace("-","");
   String url=adminUrl.substring(0,adminUrl.lastIndexOf('/')+1)+db;
-  UUID maker=UUID.randomUUID(),checker=UUID.randomUUID(),tenant=UUID.randomUUID(),otherTenant=UUID.randomUUID(),company=UUID.randomUUID(),branch=UUID.randomUUID(),merchant=UUID.randomUUID();
+  UUID maker=UUID.randomUUID(),checker=UUID.randomUUID(),tenant=UUID.randomUUID(),otherTenant=UUID.randomUUID(),company=UUID.randomUUID(),branch=UUID.randomUUID(),merchant=UUID.randomUUID(),inactiveMerchant=UUID.randomUUID();
   try(var admin=DriverManager.getConnection(adminUrl,adminUser,"")){
    sql(admin,"DO $$ BEGIN IF NOT EXISTS(SELECT FROM pg_roles WHERE rolname='quincai_app') THEN CREATE ROLE quincai_app NOLOGIN NOSUPERUSER NOBYPASSRLS; END IF; END $$");
    sql(admin,"CREATE ROLE "+role+" LOGIN NOSUPERUSER NOBYPASSRLS INHERIT");sql(admin,"GRANT quincai_app TO "+role);sql(admin,"CREATE DATABASE "+db);
@@ -39,6 +39,7 @@ class PostgresSubscriptionLifecycleTest {
     sql(owner,"INSERT INTO company(tenant_id,id,name)VALUES('"+tenant+"','"+company+"','Synthetic')");
     sql(owner,"INSERT INTO branch(tenant_id,company_id,id,name)VALUES('"+tenant+"','"+company+"','"+branch+"','Synthetic')");
     sql(owner,"INSERT INTO tenant_memberships(tenant_id,company_id,branch_id,actor_id,role_code)VALUES('"+tenant+"','"+company+"','"+branch+"','"+merchant+"','owner')");
+    sql(owner,"INSERT INTO tenant_memberships(tenant_id,company_id,branch_id,actor_id,role_code,active)VALUES('"+tenant+"','"+company+"','"+branch+"','"+inactiveMerchant+"','owner',false)");
     factory=new LocalContainerEntityManagerFactoryBean();factory.setDataSource(new DriverManagerDataSource(url,role,""));factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());factory.setPackagesToScan("com.quincaisoft.subscriptions.infrastructure");factory.setJpaPropertyMap(Map.of("hibernate.hbm2ddl.auto","validate"));factory.afterPropertiesSet();
     var emf=factory.getObject();var em=SharedEntityManagerCreator.createSharedEntityManager(emf);var manager=new JpaTransactionManager(emf);
     ScopedTransactions scoped=new ScopedTransactions(){public <T>T execute(Supplier<T> work){return new TransactionTemplate(manager).execute(status->{var s=TenantContext.current();em.createNativeQuery("select set_config('app.tenant_id',:t,true),set_config('app.company_id',:c,true),set_config('app.branch_id',:b,true),set_config('app.actor_id',:a,true)").setParameter("t",s.tenantId().toString()).setParameter("c",s.companyId().toString()).setParameter("b",s.branchId().toString()).setParameter("a",s.actorId().toString()).getSingleResult();return work.get();});}};
@@ -76,6 +77,14 @@ class PostgresSubscriptionLifecycleTest {
     assertTrue(lifecycle.printReceipt(p.id(),true,"fr").contains("MANUALLY_RECONCILED"));assertTrue(invoices.printInvoice(invoice.id(),true,"fr").contains("Facture d’abonnement"));
     TenantContext.call(scope,1,()->{lifecycle.requireAllowed(SubscriptionLifecycleService.Operation.NEW_BUSINESS_POSTING);return null;});
     as(merchant,"billing:read");TenantContext.call(scope,1,()->{assertTrue(lifecycle.printReceipt(p.id(),false,"en").contains("Synthetic bank"));assertTrue(invoices.printInvoice(invoice.id(),false,"en").contains(invoice.number()));return null;});
+    TenantContext.call(scope,1,()->{assertEquals("ACTIVE",lifecycle.current().status());return null;});
+    TenantContext.call(scope,2,()->{assertThrows(AccessDeniedException.class,lifecycle::current);assertThrows(AccessDeniedException.class,()->lifecycle.printReceipt(p.id(),false,"en"));return null;});
+    TenantContext.call(new TenantScope(tenant,company,UUID.randomUUID(),merchant),1,()->{assertThrows(AccessDeniedException.class,lifecycle::current);return null;});
+    as(UUID.randomUUID(),"billing:read");TenantContext.call(scope,1,()->{assertThrows(AccessDeniedException.class,lifecycle::current);assertThrows(AccessDeniedException.class,()->lifecycle.printReceipt(p.id(),false,"en"));return null;});
+    as(merchant,"billing:write");TenantContext.call(scope,1,()->{assertThrows(AccessDeniedException.class,lifecycle::current);return null;});
+    as(merchant,"billing:read");SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+    TenantContext.call(scope,1,()->{assertThrows(AccessDeniedException.class,lifecycle::current);assertThrows(AccessDeniedException.class,()->lifecycle.printReceipt(p.id(),false,"en"));return null;});
+    as(inactiveMerchant,"billing:read");TenantContext.call(new TenantScope(tenant,company,branch,inactiveMerchant),1,()->{assertThrows(AccessDeniedException.class,lifecycle::current);assertThrows(AccessDeniedException.class,()->lifecycle.printReceipt(p.id(),false,"en"));return null;});
     as(maker,"platform:billing:write");lifecycle.cancel(UUID.randomUUID(),tenant,2,"Synthetic cancellation after payment");
     as(checker,"platform:billing:approve","platform:billing:read");assertThrows(IllegalStateException.class,()->lifecycle.activatePayment(UUID.randomUUID(),finalPayment.id()));
     assertEquals(0,count(owner,"SELECT count(*) FROM tender_fact"));assertEquals(0,count(owner,"SELECT count(*) FROM sale"));

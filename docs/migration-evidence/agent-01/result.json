@@ -1,0 +1,19 @@
+{
+  "assignment": 1,
+  "scope": "Tenant-only PostgreSQL fingerprint and declared-FK preflight",
+  "specification": [
+    "41.2(3)",
+    "41.3 Q036 (partial)",
+    "44.3"
+  ],
+  "sourceSha256": {
+    "infrastructure/recovery/tenant-manifest-postgres.sh": "fc96b360f009efec546b84a8bfa304485fd9b43d69458ce696577bd2a1a41182",
+    "infrastructure/recovery/test-tenant-manifest.sh": "e216e8f8b1084c9e4e865703cb6dfaa5d3042206eac385476ad06a0ed368e0bf"
+  },
+  "database": "PostgreSQL18 synthetic disposable schema, not full V1\u2013V40",
+  "syntax": "PASS",
+  "runtime": "PASS: root final TSV source rerun on PostgreSQL18",
+  "productionCutoverAllowed": false,
+  "fullDependencyClosure": "NOT_IMPLEMENTED",
+  "legacyAcceptanceAdvanced": false
+}

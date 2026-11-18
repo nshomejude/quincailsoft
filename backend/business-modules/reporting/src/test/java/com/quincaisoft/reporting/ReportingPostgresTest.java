@@ -36,6 +36,7 @@ class ReportingPostgresTest {
     }
     seed(owner,t,c,b,"10000000000000001");seed(owner,t,c,b,"9");
     seedPayable(owner,t,c,b);
+    exec(owner,"INSERT INTO tenant_memberships(tenant_id,company_id,branch_id,actor_id,role_code)VALUES('"+t+"','"+c+"','"+b+"','"+a+"','owner')");
     seed(owner,UUID.randomUUID(),UUID.randomUUID(),UUID.randomUUID(),"77");
     var ds=new DriverManagerDataSource(url,role,"");var jdbc=new JdbcTemplate(ds);var template=new TransactionTemplate(new DataSourceTransactionManager(ds));
     ScopedTransactions tx=new ScopedTransactions(){public <T>T execute(Supplier<T> action){return template.execute(status->{var s=TenantContext.current();jdbc.queryForObject("select set_config('app.tenant_id',?,true)||set_config('app.company_id',?,true)||set_config('app.branch_id',?,true)||set_config('app.actor_id',?,true)",String.class,s.tenantId().toString(),s.companyId().toString(),s.branchId().toString(),s.actorId().toString());return action.get();});}};
@@ -55,14 +56,23 @@ class ReportingPostgresTest {
          assertThrows(NoSuchElementException.class,()->reports.run("arbitrary_table",null,null,0,10));return null;
         });
         assertEquals(0,jdbc.queryForObject("select count(*) from report_stock_v1",Integer.class));
-        TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->{assertTrue(reports.run("stock",null,null,0,10).rows().isEmpty());return null;});
+        TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->{assertThrows(AccessDeniedException.class,()->reports.run("stock",null,null,0,10));return null;});
         assertThrows(AccessDeniedException.class,()->reports.run("supplier-payables",null,null,0,10));
         context.setAuthentication(UsernamePasswordAuthenticationToken.authenticated(a,null,List.of(new SimpleGrantedAuthority("finance:read"))));
         TenantContext.call(new TenantScope(t,c,b,a),1,()->{
          var payable=reports.run("supplier-payables",null,null,0,10);assertEquals(1,payable.rows().size());assertEquals("10000000000000001",payable.totals().get("original_xaf"));assertEquals("9",payable.totals().get("paid_xaf"));assertEquals("9999999999999992",payable.totals().get("outstanding_xaf"));assertTrue(payable.rows().getFirst().contains("Supplier fixture"));assertFalse(payable.columns().contains("due_date"));
          assertThrows(IllegalArgumentException.class,()->reports.run("supplier-payables",java.time.LocalDate.now(),java.time.LocalDate.now(),0,10));return null;
         });
-        TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->{assertTrue(reports.run("supplier-payables",null,null,0,10).rows().isEmpty());return null;});
+        TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->{assertThrows(AccessDeniedException.class,()->reports.run("supplier-payables",null,null,0,10));return null;});
+        // JWT capability alone must not bypass revoked/deactivated membership or stale epoch.
+        TenantContext.call(new TenantScope(t,c,b,a),2,()->{assertThrows(AccessDeniedException.class,()->reports.run("supplier-payables",null,null,0,10));return null;});
+        UUID inactive=UUID.randomUUID(),rekeyed=UUID.randomUUID();
+        exec(owner,"INSERT INTO tenant_memberships(tenant_id,company_id,branch_id,actor_id,role_code,active,authorization_epoch)VALUES('"+t+"','"+c+"','"+b+"','"+inactive+"','finance',false,2),('"+t+"','"+c+"','"+b+"','"+rekeyed+"','finance',true,2)");
+        TenantContext.call(new TenantScope(t,c,b,inactive),2,()->{assertThrows(AccessDeniedException.class,()->reports.run("supplier-payables",null,null,0,10));return null;});
+        TenantContext.call(new TenantScope(t,c,b,rekeyed),1,()->{assertThrows(AccessDeniedException.class,()->reports.run("supplier-payables",null,null,0,10));return null;});
+        TenantContext.call(new TenantScope(t,c,b,rekeyed),2,()->{assertEquals("9999999999999992",reports.run("supplier-payables",null,null,0,10).totals().get("outstanding_xaf"));return null;});
+        var unauthenticated=UsernamePasswordAuthenticationToken.authenticated(a,null,List.of(new SimpleGrantedAuthority("finance:read")));unauthenticated.setAuthenticated(false);context.setAuthentication(unauthenticated);
+        assertThrows(AccessDeniedException.class,()->reports.run("supplier-payables",null,null,0,10));
     } finally {
         SecurityContextHolder.clearContext();
     }

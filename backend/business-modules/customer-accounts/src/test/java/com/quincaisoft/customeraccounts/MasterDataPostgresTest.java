@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @EnabledIfEnvironmentVariable(named="QUINCAI_PG_TEST_URL",matches=".+")
 class MasterDataPostgresTest {
  static void sql(Connection connection,String text)throws Exception {try(var statement=connection.createStatement()){statement.execute(text);}}
+ static long count(Connection connection,String query)throws Exception {try(var statement=connection.createStatement();var rows=statement.executeQuery(query)){rows.next();return rows.getLong(1);}}
  @Test void mastersPreserveScopeReplayMetadataAndVersionedUnitIdentity()throws Exception {
   String adminUrl=System.getenv("QUINCAI_PG_TEST_URL"),adminUser=System.getenv().getOrDefault("QUINCAI_PG_TEST_USER","agent");
   String name=UUID.randomUUID().toString().replace("-",""),db="master_test_"+name,role="master_role_"+name;
@@ -93,6 +94,28 @@ class MasterDataPostgresTest {
      return null;
     });
     TenantContext.call(new TenantScope(tenant,company,branch,UUID.randomUUID()),1,()->{assertThrows(IllegalStateException.class,()->customers.create(original));return null;});
+    // The same actor and identical payload must not expose a prior company's/branch's customer receipt.
+    UUID otherCompany=UUID.randomUUID(),otherBranch=UUID.randomUUID(),companyBranch=UUID.randomUUID();
+    sql(owner,"INSERT INTO company(tenant_id,id,name)VALUES('"+tenant+"','"+otherCompany+"','Other company');INSERT INTO branch(tenant_id,company_id,id,name)VALUES('"+tenant+"','"+company+"','"+otherBranch+"','Other branch'),('"+tenant+"','"+otherCompany+"','"+companyBranch+"','Other company branch')");
+    long customersBefore=count(owner,"select count(*) from customer"),receiptsBefore=count(owner,"select count(*) from idempotency_result"),eventsBefore=count(owner,"select count(*) from outbox_event");
+    for(var deniedScope:List.of(new TenantScope(tenant,company,otherBranch,actor),new TenantScope(tenant,otherCompany,companyBranch,actor))){
+     // RLS hides the original receipt; its tenant-wide unique key rejects the attempted second claim.
+     TenantContext.call(deniedScope,1,()->{var failure=assertThrows(org.hibernate.exception.ConstraintViolationException.class,()->customers.create(original));assertEquals("23505",failure.getSQLState());assertEquals("idempotency_result_pkey",failure.getConstraintName());return null;});
+     assertEquals(customersBefore,count(owner,"select count(*) from customer"));assertEquals(receiptsBefore,count(owner,"select count(*) from idempotency_result"));assertEquals(eventsBefore,count(owner,"select count(*) from outbox_event"));
+    }
+    TenantContext.call(new TenantScope(tenant,otherCompany,companyBranch,actor),1,()->{assertEquals(0,customers.page("",0,10).total());assertThrows(NoSuchElementException.class,()->customers.get(stored.id()));return null;});
+    TenantContext.call(scope,1,()->{assertEquals(stored,customers.create(original));assertEquals(1,customers.page("",0,10).total());return null;});
+    // Matching request bytes alone cannot turn a rejected/different-kind receipt into successful customer data.
+    for(String outcome:List.of("REJECTED","WRONG_SOURCE")){
+     UUID poisonedOperation=UUID.randomUUID();
+     var poisoned=new CustomerDirectory.Save(poisonedOperation,"Synthetic customer","Contractor","+237600000000","synthetic@example.invalid","Address","REG","9007199254740993",30,true,false,"0","test customer");
+     String hash=HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(("CUSTOMER|null|"+actor+"|"+JsonMapper.builder().build().writeValueAsString(poisoned)).getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+     try(var insert=owner.prepareStatement("insert into idempotency_result(tenant_id,company_id,branch_id,operation_id,actor_id,request_hash,source_type,source_id,status,response_json)values(?,?,?,?,?,?,?,?,?,cast(? as jsonb))")){
+      insert.setObject(1,tenant);insert.setObject(2,company);insert.setObject(3,branch);insert.setObject(4,poisonedOperation);insert.setObject(5,actor);insert.setString(6,hash);insert.setString(7,outcome.equals("WRONG_SOURCE")?"SALE":"CUSTOMER");insert.setObject(8,stored.id());insert.setString(9,outcome.equals("REJECTED")?"REJECTED":"ACCEPTED");insert.setString(10,JsonMapper.builder().build().writeValueAsString(stored));insert.executeUpdate();
+     }
+     TenantContext.call(scope,1,()->{assertThrows(IllegalStateException.class,()->customers.create(poisoned));assertEquals(1,customers.page("",0,10).total());return null;});
+    }
+
     TenantContext.call(new TenantScope(UUID.randomUUID(),company,branch,actor),1,()->{assertEquals(0,customers.page("",0,10).total());assertThrows(NoSuchElementException.class,()->customers.get(stored.id()));assertTrue(masters.categories().isEmpty());return null;});
     TenantContext.call(scope,1,()->{assertThrows(RuntimeException.class,()->transactions.execute(()->{em.createNativeQuery("update customer set active=false").executeUpdate();return null;}));return null;});
    }finally{if(factory!=null)factory.destroy();sql(admin,"DROP DATABASE "+db+" WITH (FORCE)");sql(admin,"DROP ROLE "+role);}

@@ -71,8 +71,8 @@ class PostgresPurchasingIntegrationTest {
     var partial=TenantContext.call(scope,1,()->purchases.get(draft.id()));assertEquals("PARTIALLY_RECEIVED",partial.status());
     assertThrows(IllegalArgumentException.class,()->TenantContext.call(scope,1,()->purchases.receive(draft.id(),new PurchasingService.Receive(UUID.randomUUID(),partial.version(),"Excess receipt",LocalDate.of(2026,11,18),List.of(new PurchasingService.ReceiveLine(partial.lines().getFirst().id(),"6001"))))));
     assertEquals(14000,count(owner,"select quantity_milli from stock_balance"));
-    var invoiceRequest=new PurchasingService.InvoiceRequest(UUID.randomUUID(),"SUP-INV-1",LocalDate.of(2026,11,18),"Matched original receipt");
-    var invoice=TenantContext.call(manager,1,()->purchases.invoice(receipt.id(),invoiceRequest));assertEquals("2000",invoice.totalXaf());
+    var invoiceRequest=new PurchasingService.InvoiceRequest(UUID.randomUUID(),"  SUP-INV-1  ",LocalDate.of(2026,11,18),"Matched original receipt");
+    var invoice=TenantContext.call(manager,1,()->purchases.invoice(receipt.id(),invoiceRequest));assertEquals("2000",invoice.totalXaf());assertEquals("  SUP-INV-1  ",invoice.supplierReference());
     assertEquals(invoice,TenantContext.call(manager,1,()->purchases.invoice(receipt.id(),invoiceRequest)));
     assertThrows(IllegalStateException.class,()->TenantContext.call(manager,1,()->purchases.invoice(receipt.id(),new PurchasingService.InvoiceRequest(UUID.randomUUID(),"SUP-INV-2",LocalDate.of(2026,11,18),"Duplicate invoice rejected"))));
     assertEquals(2,count(owner,"select count(*) from journal_entry"));
@@ -82,6 +82,19 @@ class PostgresPurchasingIntegrationTest {
     assertEquals("4000",TenantContext.call(scope,1,()->purchases.get(draft.id())).lines().getFirst().receivedMilli());
     sql(owner,"update financial_period set status='Open'");
     var second=TenantContext.call(scope,1,()->purchases.receive(draft.id(),new PurchasingService.Receive(UUID.randomUUID(),partial.version(),"Receive remainder",LocalDate.of(2026,11,18),List.of(new PurchasingService.ReceiveLine(partial.lines().getFirst().id(),"6000")))));
+    // A new receipt must not let a case/outer-whitespace variant create a second payable.
+    for(String duplicate:List.of("sup-inv-1","\tSuP-InV-1\n")){
+     var duplicateRequest=new PurchasingService.InvoiceRequest(UUID.randomUUID(),duplicate,LocalDate.of(2026,11,18),"Duplicate normalized supplier identity");
+     var denied=assertThrows(RuntimeException.class,()->TenantContext.call(manager,1,()->purchases.invoice(second.id(),duplicateRequest)));
+     Throwable cause=denied;while(cause!=null&&!(cause instanceof SQLException))cause=cause.getCause();
+     assertInstanceOf(SQLException.class,cause);assertEquals("23505",((SQLException)cause).getSQLState());
+     assertEquals(1,count(owner,"select count(*) from supplier_invoice"));
+     assertEquals(1,count(owner,"select count(*) from payable_balance"));
+     assertEquals(3,count(owner,"select count(*) from journal_entry"));
+     assertEquals(0,count(owner,"select count(*) from idempotency_result where operation_id='"+duplicateRequest.operationId()+"'"));
+     assertEquals(0,count(owner,"select count(*) from outbox_event where operation_id='"+duplicateRequest.operationId()+"'"));
+    }
+    assertEquals("  SUP-INV-1  ",TenantContext.call(manager,1,()->purchases.invoice(receipt.id(),invoiceRequest)).supplierReference());
     var returnRequest=new PurchasingService.ReturnRequest(UUID.randomUUID(),LocalDate.of(2026,11,18),"Return inspected goods to supplier",List.of(new PurchasingService.ReturnLineRequest(second.lines().getFirst().id(),"2000")));
     var returned=TenantContext.call(manager,1,()->purchases.returnToSupplier(second.id(),returnRequest));assertEquals("1000",returned.totalXaf());assertEquals(returned,TenantContext.call(manager,1,()->purchases.returnToSupplier(second.id(),returnRequest)));
     assertEquals(18000,count(owner,"select quantity_milli from stock_balance"));assertEquals(9000,count(owner,"select value_xaf from stock_balance"));

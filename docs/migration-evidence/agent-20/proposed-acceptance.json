@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "agent-20",
+  "automaticAcceptance": false,
+  "note": "Proposals only. Do not copy directly into scripts/parity-acceptance.json; root owns executed report binding and final review.",
+  "requirements": [
+    {
+      "requirementId": "test:tests/test_boundary_audit.py:test_owner_snapshot_labels_do_not_leak_to_cashier",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "proposedAfterRootReview": "REPLACED_ACCEPTED",
+      "legacyAssertions": [
+        "owner=self.login('owner');status,data,_=self.request('/api/snapshot',{'doc':'DOC01','record':'sale-1'},owner);self.assertEqual(status,200,data)",
+        "snapid=data['snapshot']['id'];status,state,_=self.request('/api/state',auth=self.login('cashier'));self.assertEqual(status,200,state)",
+        "self.assertFalse(any(k.startswith(('supplier:','staff:','role:','integration:')) for k in snap.get('labels',{})), 'Snapshot labels must obey reader permissions, not creator permissions')"
+      ],
+      "reviewNotes": "Fixed typed DOC01 capture replaces arbitrary global label dictionaries. The same owner-issued capture is read/listed by cashier; immutable payload excludes supplier/staff/role/integration labels. This proposes only the source-disclosure behavior, not /api/state migration.",
+      "replacement": {
+        "section": "### 34.2 Snapshot and permission boundaries",
+        "reason": "Role/scope-bound typed source projections avoid copying unrelated label dictionaries while preserving authorized access to the same captured document."
+      },
+      "sourceEvidence": [
+        {
+          "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/application/DocumentSourceReader.java",
+          "sha256": "21e5e7566c29f19c3b2ded00581cf24237347a40ee40b63ee50d26a7b3b1c3ab",
+          "symbol": "public void authorize(String id)"
+        },
+        {
+          "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/application/DocumentWorkspaceService.java",
+          "sha256": "4c01814f3d662f24a57218778fa058658518d3ac3be2cdcae9b5e943e8ee2141",
+          "symbol": "public Capture get(UUID id)"
+        }
+      ],
+      "testEvidence": [
+        {
+          "path": "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentDisclosureTest.java",
+          "sha256": "1d203c3746b30b3a87ad9912714fea25db79f066a1169ebb3ae3e8f60c6393e5",
+          "testName": "ownerCaptureRemainsScopedAndSafeForCashierWithoutMutableLabelsOrCostProjection",
+          "className": "com.quincaisoft.documents.PostgresDocumentDisclosureTest",
+          "assertionSnippets": [
+            "assertFalse(immutable.contains(forbidden),forbidden);",
+            "assertEquals(captured,workspace.get(captured.id()));assertEquals(List.of(captured),workspace.list());",
+            "assertThrows(AccessDeniedException.class,()->workspace.get(captured.id()));"
+          ],
+          "executionReport": null
+        }
+      ],
+      "remainingGate": [
+        "Root must attach committed passing JUnit XML with test/source hashes and review exact tested tree.",
+        "Confirm normative replacement acceptance for positive API status assertions formerly exercised through /api/snapshot and /api/state; current test invokes typed service methods, not live authenticated HTTP."
+      ]
+    },
+    {
+      "requirementId": "test:tests/test_security.py:test_access_change_revokes_sessions",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "proposedAfterRootReview": null,
+      "legacyAssertions": [
+        "status,b,_=self.request('/api/users/update',{'id':'purchasing','role':'purchasing','branch_id':'branch-1','active':True,'reason':'Verify session revocation'},owner);self.assertEqual(status,200,b);self.assertEqual(self.request('/api/state',auth=staff)[0],401)",
+        "self.assertEqual(self.request('/api/users/update',{'id':'owner'},owner)[0],403)"
+      ],
+      "reviewNotes": "Current test proves explicit revocation denies stale epoch and independent approval updates membership, but does not reproduce every original assertion. Do not accept entire legacy row yet.",
+      "sourceEvidence": [
+        {
+          "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
+          "sha256": "c4465aff8377924a10778b9c0ac90531cdfd096f0a935a29fd55dd077b1e03d0",
+          "symbol": "private void owner()"
+        }
+      ],
+      "testEvidence": [
+        {
+          "path": "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
+          "sha256": "2d65a306cbfa710e37f5c0368e0d80eed3ab739c3826822b71fdfe34649b6d6e",
+          "testName": "staleEpochAndForeignApprovalReplayCannotAdministerMembership",
+          "className": "com.quincaisoft.identity.IdentityAuthorizationPostgresTest",
+          "assertionSnippets": [
+            "assertThrows(AccessDeniedException.class,identity::current);",
+            "assertEquals(2,member.authorizationEpoch());"
+          ],
+          "executionReport": null
+        }
+      ],
+      "remainingGate": [
+        "Legacy access update preserves existing role and active=true yet invalidates prior session. New fixture changes role and active=false; add same-value active update case.",
+        "Legacy self-target user update returns403. New test denies self-approval, a different invariant; add self-target request denial.",
+        "HTTP old token/session rejection and exact status remain unexecuted here."
+      ]
+    },
+    {
+      "requirementId": "test:tests/test_boundary_audit.py:test_cached_command_replay_rechecks_costs_and_scope",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "proposedAfterRootReview": null,
+      "legacyAssertions": [
+        "self.assertNotIn('unit_cost',result['record']['lines'][0])",
+        "with self.assertRaises(server.APIError):server.replay_result(c,cashier,'sale',raw)"
+      ],
+      "reviewNotes": "Actor/company/branch receipt checks improve replay ownership but do not prove same-actor role downgrade redaction of sensitive historical payloads. The documents test checks a typed invoice, not cached sale replay.",
+      "sourceEvidence": [],
+      "testEvidence": [],
+      "remainingGate": [
+        "Map actual sale replay DTO and its serialization to exclusion of unit_cost after authority changes.",
+        "Execute same-actor cached replay with changed role/capabilities and cross-branch rejection against the real authorized HTTP or service boundary."
+      ]
+    }
+  ],
+  "confirmedP1Findings": [],
+  "reviewLimit": "Bounded source/diff and assertion review; not full security or all-module certification."
+}

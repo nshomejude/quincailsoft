@@ -1,0 +1,32 @@
+✔ BFF permits implemented routes and commands (2.06122ms)
+✔ BFF rejects traversal, arbitrary services and destructive methods (0.400088ms)
+✔ BFF separates updates from commands (0.171206ms)
+✔ a blank base selection sends the new code as the base unit (1.51237ms)
+✔ a converted unit can select only active base units (1.970605ms)
+✔ editing a unit preserves its identity, scale and version (0.435761ms)
+✔ count capture preserves explicit zero and drops fields from previous selected resource (1.021086ms)
+✔ economic integer strings remain exact while bounded settings numbers convert (0.304646ms)
+✔ retry identity stays stable but changing resource, amount or method starts a new operation (0.131596ms)
+✔ partial receiving uses exact remaining quantity and count accepts zero without accepting invalid text (0.142893ms)
+✔ dashboard filters reject invalid dates and unknown periods (1.009539ms)
+✔ dashboard periods include the full calendar week or month (0.572736ms)
+✔ quantity wire format preserves exact precision (1.142538ms)
+✔ invalid fractional, exponential, negative and overflow inputs fail (0.322652ms)
+✔ manual journal balances exact amounts beyond floating precision (1.065212ms)
+✔ journal rejects imbalance, mixed-side line, malformed and overflow input (0.297574ms)
+✔ creation forwards product metadata with exact pack and reorder values (1.571408ms)
+✔ editing can retain a retired category and preserves stock tracking and scale (0.206729ms)
+✔ money sorting preserves exact integer ordering above Number safe range (1.830756ms)
+✔ search combines visible-column text and exact status without leaking hidden fields (0.171236ms)
+✔ money presentation rejects malformed values rather than inventing zero (16.774325ms)
+✔ new dated reports retain date filters and exact paging instead of five hardcoded report names (1.426872ms)
+✔ export resolves any actual catalog entry while preserving only supported filters (0.371445ms)
+✔ unknown reports and arbitrary targets stay denied even if malicious catalog data is supplied (0.19404ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 277.718432

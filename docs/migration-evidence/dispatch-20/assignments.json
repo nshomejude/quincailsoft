@@ -1,0 +1,169 @@
+{
+  "baseCommit": "960bb7e3a17b3ee61b8042c75f24dc32ae375633",
+  "workerConcurrency": 6,
+  "integrationOwner": "root",
+  "requestedAgents": 20,
+  "assignments": [
+    {
+      "assignment": 1,
+      "agent": "migration_01_recovery",
+      "scope": "recovery",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V41"
+    },
+    {
+      "assignment": 2,
+      "agent": "migration_02_exports",
+      "scope": "exports",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V42"
+    },
+    {
+      "assignment": 3,
+      "agent": "migration_03_finance",
+      "scope": "finance",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V43"
+    },
+    {
+      "assignment": 4,
+      "agent": "migration_04_inventory",
+      "scope": "inventory",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V44"
+    },
+    {
+      "assignment": 5,
+      "agent": "migration_05_documents",
+      "scope": "documents",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V45"
+    },
+    {
+      "assignment": 6,
+      "agent": "migration_06_identity",
+      "scope": "identity",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V46"
+    },
+    {
+      "assignment": 7,
+      "agent": "migration_07_step_up",
+      "scope": "step_up",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V47"
+    },
+    {
+      "assignment": 8,
+      "agent": "migration_08_sales",
+      "scope": "sales",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V48"
+    },
+    {
+      "assignment": 9,
+      "agent": "migration_09_purchasing",
+      "scope": "purchasing",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V49"
+    },
+    {
+      "assignment": 10,
+      "agent": "migration_10_tenders",
+      "scope": "tenders",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V50"
+    },
+    {
+      "assignment": 11,
+      "agent": "migration_11_returns",
+      "scope": "returns",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V51"
+    },
+    {
+      "assignment": 12,
+      "agent": "migration_12_customer_accounts",
+      "scope": "customer_accounts",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V52"
+    },
+    {
+      "assignment": 13,
+      "agent": "migration_13_catalog",
+      "scope": "catalog",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V53"
+    },
+    {
+      "assignment": 14,
+      "agent": "migration_14_suppliers",
+      "scope": "suppliers",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V54"
+    },
+    {
+      "assignment": 15,
+      "agent": "migration_15_reporting",
+      "scope": "reporting",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V55"
+    },
+    {
+      "assignment": 16,
+      "agent": "migration_16_workforce",
+      "scope": "workforce",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V56"
+    },
+    {
+      "assignment": 17,
+      "agent": "migration_17_subscriptions",
+      "scope": "subscriptions",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V57"
+    },
+    {
+      "assignment": 18,
+      "agent": "migration_18_offline_sync",
+      "scope": "offline_sync",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V58"
+    },
+    {
+      "assignment": 19,
+      "agent": "migration_19_web_acceptance",
+      "scope": "web_acceptance",
+      "status": "RETURNED",
+      "acceptance": "PASS_BOUNDED_TESTS_NOT_MODULE_COMPLETION",
+      "migrationReserved": "V59"
+    },
+    {
+      "assignment": 20,
+      "agent": "migration_20_parity_reconciliation",
+      "scope": "parity_reconciliation",
+      "status": "RETURNED",
+      "acceptance": "BOUNDED_REVIEW_ONLY",
+      "migrationReserved": "V60"
+    }
+  ],
+  "dispatchedAgents": 20
+}

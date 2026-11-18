@@ -1,0 +1,15 @@
+# Assignment 07 — exact-operation step-up foundation
+
+Architecture: §44.3 and Q053 require actor/action/resource/amount/short-expiry binding; §17 security and §43.1 require external MFA and safe failure when new privileged authentication is unavailable. Read AGENTS, architecture and current migration summary/registers. No legacy MFA implementation or MFA acceptance tests were found in `server`/`tests`; this is a specification-mandated missing security capability, not blanket Python parity.
+
+Owned files: identity `StepUpService`, `StepUpEvidenceProvider`, `DefaultStepUpService`, and `StepUpBindingTest`. No SQL migration; V47 remains unused. No accepted source or agent06 identity fixes are replaced. Dependencies: IdentityService.current (active membership/epoch), immutable TenantContext, a trusted authentication adapter, Spring injection and Clock.
+
+The validator requires exact tenant/company/branch/actor/authorization epoch plus an exact enum action, resource ID, operation ID and canonical checked integer XAF amount. It requires verified MFA assurance, a grant ID, authentication within five minutes, no future timestamps, expiry strictly after now, maximum five-minute grant duration and expiry no later than the verified token's expiry. Missing or ambiguous adapter configuration fails closed. The current membership is checked on every call, including an exact-operation retry. Domain permissions, independent approval and durable command receipts remain mandatory; step-up does not replace them.
+
+`StepUpBindingTest` exercises exact-operation retry, changed operation/resource/action/amount rejection, every scope dimension, stale epoch and inactive membership, expired/future/overlong timestamps, missing/unverified evidence, integer canonicalization and overflow. Root executes tests; this file does not claim an unexecuted pass.
+
+## Deliberate deployment block
+
+No provider bean or HTTP grant-issuing endpoint is installed. The public SPI is a trusted application port, not a request DTO. Root must wire an API-server authentication adapter accepting only the existing cryptographically verified JwtAuthenticationToken from the configured issuer/audience. Its issuer-managed signed approval must bind actor and scope, authorization epoch, grant ID, operation ID, resource, action, amount, recent authentication and expiration, under an explicit issuer MFA policy. Generic role/scope or a client-provided JSON claim is insufficient. Issuer issuance and real OIDC acceptance remain unimplemented/unverified, so customer exports remain denied. No generic authenticated boolean is treated as MFA.
+
+Replay of one grant for a different operation is denied. An exact operation may retry while valid; only the domain's durable receipt can prove one business effect. A domain must revalidate mutable business amount/version state and current authorization at execution. Export request, execution and download are separate sensitive operations; each needs its own action/resource/operation binding. The current GET download has no operation ID and cannot safely consume this API without a root-owned HTTP contract change.

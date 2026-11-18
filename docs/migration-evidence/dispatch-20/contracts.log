@@ -1,0 +1,33 @@
+305 source operations; 238 record/enum schemas; unresolved types: none
+{
+  "result": "PASS structural source contract",
+  "operations": 305,
+  "unresolvedJavaTypes": [],
+  "idempotencyHeaderReview": [
+    "POST /api/v1/mobile-money/intents/{id}/reconcile",
+    "POST /api/v1/operations/outbox/project-audit"
+  ],
+  "note": "Not runtime acceptance or full semantic OpenAPI lint."
+}
+✔ retention approval and purge preserve command identity and evidence schema (0.723441ms)
+✔ same-named enum fields bind to their lexical declaration owner (1.92051ms)
+✔ top-level records resolve through actual imports without inventing Object structure (0.283113ms)
+✔ custom or annotated enum serialization remains explicitly unsupported (0.237846ms)
+✔ qualified ResponseEntity workforce exports retain declared media and string payload (0.965963ms)
+✔ billing printable records retain HTML content type (0.134902ms)
+✔ detailed payroll exposes nested payroll and explicit deduction line shapes (0.176113ms)
+✔ report route enum includes actual expanded source catalog (0.714317ms)
+✔ governance and quota enum schemas preserve their declaration owners and exact values (0.170455ms)
+✔ both session aliases expose the exact typed scope and authority list (0.242152ms)
+✔ fulfillment canonical record components survive the legacy overload and expose delivery and pick-list detail (0.181732ms)
+✔ partial fulfillment dispatch and history retain exact quantities and command identity (0.237365ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 118.59736
+✨ openapi-typescript 7.10.1
+🚀 packages/api-contracts/openapi.json → packages/generated-ts-sdk/schema.d.ts [246.3ms]

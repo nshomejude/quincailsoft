@@ -76,6 +76,9 @@ class SettlementPostgresTest {
     var shift=TenantContext.call(scope,1,()->cash.open(new TenderService.Open(UUID.randomUUID(),"AP-TILL",date,"10000","Verified opening float")));
     var pay=new SettlementService.Payment(UUID.randomUUID(),supplier.id(),invoice.id(),date,"500",new SettlementService.Funding(shift.id(),null),"Supplier cash payment");
     var paid=TenantContext.call(manager,1,()->settlements.supplierPayment(pay));assertEquals(paid,TenantContext.call(manager,1,()->settlements.supplierPayment(pay)));
+    long paidFacts=count(owner,"select count(*) from tender_fact");long paidJournals=count(owner,"select count(*) from journal_entry");
+    assertThrows(IllegalStateException.class,()->TenantContext.call(scope,1,()->settlements.supplierPayment(pay)));
+    assertEquals(paidFacts,count(owner,"select count(*) from tender_fact"));assertEquals(paidJournals,count(owner,"select count(*) from journal_entry"));
     assertEquals("1500",TenantContext.call(scope,1,()->payables.balances().getFirst().outstandingXaf()));
     assertThrows(IllegalArgumentException.class,()->TenantContext.call(manager,1,()->settlements.supplierPayment(new SettlementService.Payment(UUID.randomUUID(),supplier.id(),invoice.id(),date,"1501",new SettlementService.Funding(shift.id(),null),"Overpayment rejected"))));
     assertEquals("9500",TenantContext.call(scope,1,()->cash.sessions().getFirst().expectedXaf()));
@@ -85,11 +88,16 @@ class SettlementPostgresTest {
     assertThrows(IllegalArgumentException.class,()->TenantContext.call(manager,1,()->settlements.allocateAdvance(new SettlementService.Allocate(UUID.randomUUID(),advance.id(),invoice.id(),date,"1","Advance exhausted"))));
     var evidence=TenantContext.call(scope,1,()->bank.request(new BankService.Request(UUID.randomUUID(),date,"BANK-OUT-500","OUT","500","Bank payment evidence")));
     assertThrows(IllegalArgumentException.class,()->TenantContext.call(scope,1,()->bank.approve(evidence.id(),new BankService.Approve(UUID.randomUUID(),evidence.version(),"Self verification denied"))));
-    TenantContext.call(manager,1,()->bank.approve(evidence.id(),new BankService.Approve(UUID.randomUUID(),evidence.version(),"Independent bank verification")));
+    var approvalRequest=new BankService.Approve(UUID.randomUUID(),evidence.version(),"Independent bank verification");
+    var approvedEvidence=TenantContext.call(manager,1,()->bank.approve(evidence.id(),approvalRequest));
+    assertEquals(approvedEvidence,TenantContext.call(manager,1,()->bank.approve(evidence.id(),approvalRequest)));
+    assertThrows(IllegalStateException.class,()->TenantContext.call(scope,1,()->bank.approve(evidence.id(),approvalRequest)));
     TenantContext.call(manager,1,()->settlements.supplierPayment(new SettlementService.Payment(UUID.randomUUID(),supplier.id(),invoice.id(),date,"500",new SettlementService.Funding(null,evidence.id()),"Pay remainder by bank")));
     assertEquals("0",TenantContext.call(scope,1,()->payables.balances().getFirst().outstandingXaf()));
     assertThrows(IllegalArgumentException.class,()->TenantContext.call(manager,1,()->bank.match(new BankService.MatchRequest(UUID.randomUUID(),evidence.id(),date,"STAT-OUT","504","5","Wrong net denied"))));
     var matchRequest=new BankService.MatchRequest(UUID.randomUUID(),evidence.id(),date,"STAT-OUT","505","5","Exact bank statement");var match=TenantContext.call(manager,1,()->bank.match(matchRequest));assertEquals(match,TenantContext.call(manager,1,()->bank.match(matchRequest)));
+    assertThrows(IllegalStateException.class,()->TenantContext.call(scope,1,()->bank.match(matchRequest)));
+    assertEquals(1,count(owner,"select count(*) from bank_match"));
     assertThrows(RuntimeException.class,()->TenantContext.call(manager,1,()->bank.match(new BankService.MatchRequest(UUID.randomUUID(),evidence.id(),date,"OTHER-STAT","505","5","Already matched denied"))));
     var depositEvidence=TenantContext.call(scope,1,()->bank.request(new BankService.Request(UUID.randomUUID(),date,"BANK-IN-500","IN","500","Customer bank deposit")));
     TenantContext.call(manager,1,()->bank.approve(depositEvidence.id(),new BankService.Approve(UUID.randomUUID(),depositEvidence.version(),"Independent incoming verification")));

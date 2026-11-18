@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "ad6adaa5a0a171531529bee10841d0750d41a7b84f4be58253f06fb5d89255fd",
+  "sourceDigest": "f202dcdc783556ec70270cb3428d8511d829f0c55efab5b0248954fa09decd6b",
   "unresolvedJavaTypes": [],
   "endpoints": [
     {
@@ -1404,6 +1404,81 @@
         "Idempotency-Key",
         "X-Request-ID"
       ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/exports",
+      "controller": "ExportController",
+      "javaMethod": "list",
+      "returnType": "List<OperationsService.Export>",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/exports/{id}",
+      "controller": "ExportController",
+      "javaMethod": "get",
+      "returnType": "OperationsService.Export",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/exports",
+      "controller": "ExportController",
+      "javaMethod": "request",
+      "returnType": "OperationsService.Export",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/exports/{id}/run",
+      "controller": "ExportController",
+      "javaMethod": "run",
+      "returnType": "OperationsService.Export",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/exports/{id}/cancel",
+      "controller": "ExportController",
+      "javaMethod": "cancel",
+      "returnType": "OperationsService.Export",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/exports/{id}/content",
+      "controller": "ExportController",
+      "javaMethod": "download",
+      "returnType": "ResponseEntity<String>",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
       "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
     },
     {

@@ -52,13 +52,36 @@ import jakarta.persistence.*;import org.springframework.stereotype.Service;impor
  @Override
  public PickList pickList(UUID fulfillmentId) {
   return tx.execute(() -> {
-   var task = find(fulfillmentId, LockModeType.NONE);
+   // Hold the task stable while reading its dispatch facts; otherwise a concurrent
+   // dispatch could mix an old task state with new quantities in one pick list.
+   var task = find(fulfillmentId, LockModeType.PESSIMISTIC_READ);
    var sale = sales.valuation(task.saleId);
-   var lines = sale.lines().stream()
-       .map(line -> new PickLine(line.productId(), Long.toString(line.quantityMilli())))
+   var lines = Set.of("DISPATCHED","COMPLETED").contains(task.status) ? List.<PickLine>of() :
+       remaining(task, sale).entrySet().stream().filter(line -> line.getValue() > 0)
+       .map(line -> new PickLine(line.getKey(), Long.toString(line.getValue())))
        .toList();
    return new PickList(task.id, task.saleId, sale.warehouseId(), task.status, lines);
   });
+ }
+ private Map<UUID,Long> remaining(FulfillmentEntity task, SalesService.Valuation sale) {
+  var quantities = new LinkedHashMap<UUID,Long>();
+  for (var line : sale.lines()) quantities.merge(line.productId(),line.quantityMilli(),Math::addExact);
+  var previous = em.createNativeQuery("""
+      select product_id, sum(quantity_milli) from fulfillment_dispatch_line
+      where tenant_id=:tenant and company_id=:company and branch_id=:branch and fulfillment_id=:id
+      group by product_id
+      """,Object[].class)
+      .setParameter("tenant",task.tenantId).setParameter("company",task.companyId)
+      .setParameter("branch",task.branchId).setParameter("id",task.id).getResultList();
+  for (var result : previous) {
+   var row = (Object[]) result;
+   var quantity = quantities.get((UUID) row[0]);
+   if (quantity == null) throw new IllegalStateException("Dispatch product absent from original sale");
+   long outstanding = Math.subtractExact(quantity, ((java.math.BigDecimal) row[1]).longValueExact());
+   if (outstanding < 0) throw new IllegalStateException("Dispatch exceeds original sale");
+   quantities.put((UUID) row[0],outstanding);
+  }
+  return quantities;
  }
  public Fulfillment get(UUID id){return tx.execute(()->view(find(id, LockModeType.NONE)));}
  public Fulfillment draft(Draft c){if(c.businessDate()==null||c.customerId()==null||c.saleId()==null)throw new IllegalArgumentException("Sale, customer and date required");text(c.reason());return tx.execute(()->once(c.operationId(),"DRAFT|"+(c.delivery()==null?c.legacyFingerprintMaterial():json.writeValueAsString(c)),()->{var sale=sales.get(c.saleId());if(!sale.status().equals("POSTED")||!sale.customerId().equals(c.customerId())||c.businessDate().isBefore(sale.businessDate()))throw new IllegalArgumentException("Completed sale for the same customer and valid date required");var s=TenantContext.current();var f=new FulfillmentEntity();f.tenantId=s.tenantId();f.companyId=s.companyId();f.branchId=s.branchId();f.id=UUID.randomUUID();f.saleId=c.saleId();f.customerId=c.customerId();f.businessDate=c.businessDate();f.createdBy=s.actorId();f.createdAt=Instant.now();f.status="PENDING";applyDetails(f,c.delivery());em.persist(f);em.flush();return f;}));}
@@ -77,21 +100,7 @@ import jakarta.persistence.*;import org.springframework.stereotype.Service;impor
    finance.requireOpenPeriod(task.businessDate);
    stock.requireCustodyCollected(task.saleId);
 
-   var remaining = new HashMap<UUID,Long>();
-   for (var line : sales.valuation(task.saleId).lines())
-    remaining.merge(line.productId(),line.quantityMilli(),Math::addExact);
-   var previous = em.createNativeQuery("""
-       select product_id, sum(quantity_milli) from fulfillment_dispatch_line
-       where tenant_id=:tenant and company_id=:company and branch_id=:branch and fulfillment_id=:id
-       group by product_id
-       """,Object[].class)
-       .setParameter("tenant",task.tenantId).setParameter("company",task.companyId)
-       .setParameter("branch",task.branchId).setParameter("id",task.id).getResultList();
-   for (var result : previous) {
-    var row = (Object[]) result;
-    remaining.compute((UUID) row[0],(product,quantity) -> Math.subtractExact(quantity,
-        ((java.math.BigDecimal) row[1]).longValueExact()));
-   }
+   var remaining = remaining(task, sales.valuation(task.saleId));
 
    var seen = new HashSet<UUID>();
    var scope = TenantContext.current();
@@ -143,6 +152,6 @@ import jakarta.persistence.*;import org.springframework.stereotype.Service;impor
  public Fulfillment dispatch(UUID id,Action c){return action(id,c,false);}
  public Fulfillment complete(UUID id,Action c){return action(id,c,true);}
  private Fulfillment action(UUID id,Action c,boolean complete){text(c.reason());if(c.version()==null||!c.version().matches("0|[1-9][0-9]*"))throw new IllegalArgumentException("Version required");long version=Long.parseLong(c.version());if(complete)text(c.proofReference());return tx.execute(()->once(c.operationId(),(complete?"COMPLETE":"DISPATCH")+"|"+id+"|"+c,()->{var f=find(id, LockModeType.PESSIMISTIC_WRITE);if(f.version!=version)throw new RevisionConflict("Fulfillment changed");if(!(complete?Set.of("PENDING","DISPATCHED").contains(f.status):f.status.equals("PENDING")))throw new IllegalStateException("Invalid fulfillment state");finance.requireOpenPeriod(f.businessDate);stock.requireCustodyCollected(f.saleId);if(complete){f.proofReference=c.proofReference();f.status="COMPLETED";}else f.status="DISPATCHED";em.flush();return f;}));}
- private Fulfillment once(UUID op,String material,Supplier<FulfillmentEntity> action){if(op==null)throw new IllegalArgumentException("Operation required");var s=TenantContext.current();String hash=DefaultSalesService.digest(material);em.createNativeQuery("select 1 from pg_advisory_xact_lock(hashtextextended(:key,0))").setParameter("key",s.tenantId()+":"+op).getSingleResult();var rows=em.createNativeQuery("select request_hash,response_json::text,company_id,branch_id,actor_id from idempotency_result where tenant_id=:t and operation_id=:o").setParameter("t",s.tenantId()).setParameter("o",op).getResultList();if(!rows.isEmpty()){Object[] row=(Object[])rows.getFirst();if(!hash.equals(row[0])||!s.companyId().equals(row[2])||!s.branchId().equals(row[3])||!s.actorId().equals(row[4]))throw new IllegalStateException("Operation belongs to another request or actor");if(row[1]==null)throw new IllegalStateException("Committed result expired; reconcile original operation");return json.readValue((String)row[1],Fulfillment.class);}var f=action.get();var result=view(f);String body=json.writeValueAsString(result);em.createNativeQuery("insert into idempotency_result(tenant_id,operation_id,company_id,branch_id,request_hash,source_type,source_id,response_json)values(:t,:o,:c,:b,:h,'FULFILLMENT',:id,cast(:body as jsonb))").setParameter("t",s.tenantId()).setParameter("o",op).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setParameter("h",hash).setParameter("id",f.id).setParameter("body",body).executeUpdate();em.createNativeQuery("insert into outbox_event(tenant_id,id,company_id,branch_id,operation_id,event_type,aggregate_type,aggregate_id,payload)values(:t,:event,:c,:b,:o,'FulfillmentChanged.v1','sale_fulfillment',:id,cast(:body as jsonb))").setParameter("t",s.tenantId()).setParameter("event",UUID.randomUUID()).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setParameter("o",op).setParameter("id",f.id).setParameter("body",json.writeValueAsString(Map.of("fulfillmentId",result.id(),"saleId",result.saleId(),"status",result.status()))).executeUpdate();return result;}
+ private Fulfillment once(UUID op,String material,Supplier<FulfillmentEntity> action){if(op==null)throw new IllegalArgumentException("Operation required");var s=TenantContext.current();String hash=DefaultSalesService.digest(material);em.createNativeQuery("select 1 from pg_advisory_xact_lock(hashtextextended(:key,0))").setParameter("key",s.tenantId()+":"+op).getSingleResult();var rows=em.createNativeQuery("select request_hash,response_json::text,company_id,branch_id,actor_id,source_type,status from idempotency_result where tenant_id=:t and operation_id=:o").setParameter("t",s.tenantId()).setParameter("o",op).getResultList();if(!rows.isEmpty()){Object[] row=(Object[])rows.getFirst();if(!hash.equals(row[0])||!s.companyId().equals(row[2])||!s.branchId().equals(row[3])||!s.actorId().equals(row[4])||!"FULFILLMENT".equals(row[5])||!"ACCEPTED".equals(row[6]))throw new IllegalStateException("Operation belongs to another request, actor, source or status");if(row[1]==null)throw new IllegalStateException("Committed result expired; reconcile original operation");return json.readValue((String)row[1],Fulfillment.class);}var f=action.get();var result=view(f);String body=json.writeValueAsString(result);em.createNativeQuery("insert into idempotency_result(tenant_id,operation_id,company_id,branch_id,request_hash,source_type,source_id,response_json)values(:t,:o,:c,:b,:h,'FULFILLMENT',:id,cast(:body as jsonb))").setParameter("t",s.tenantId()).setParameter("o",op).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setParameter("h",hash).setParameter("id",f.id).setParameter("body",body).executeUpdate();em.createNativeQuery("insert into outbox_event(tenant_id,id,company_id,branch_id,operation_id,event_type,aggregate_type,aggregate_id,payload)values(:t,:event,:c,:b,:o,'FulfillmentChanged.v1','sale_fulfillment',:id,cast(:body as jsonb))").setParameter("t",s.tenantId()).setParameter("event",UUID.randomUUID()).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setParameter("o",op).setParameter("id",f.id).setParameter("body",json.writeValueAsString(Map.of("fulfillmentId",result.id(),"saleId",result.saleId(),"status",result.status()))).executeUpdate();return result;}
  private static void text(String s){if(s==null||s.isBlank()||s.length()>2000)throw new IllegalArgumentException("Bounded reason/proof required");}
 }

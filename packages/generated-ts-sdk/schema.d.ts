@@ -1542,6 +1542,92 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/operations/exports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Export list */
+        get: operations["ExportController_list_111"];
+        put?: never;
+        /** Export request */
+        post: operations["ExportController_request_113"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/operations/exports/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Export get */
+        get: operations["ExportController_get_112"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/operations/exports/{id}/run": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Export run */
+        post: operations["ExportController_run_114"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/operations/exports/{id}/cancel": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Export cancel */
+        post: operations["ExportController_cancel_115"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/operations/exports/{id}/content": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Export download */
+        get: operations["ExportController_download_116"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/operations/retention/exports/{id}": {
         parameters: {
             query?: never;
@@ -1550,7 +1636,7 @@ export interface paths {
             cookie?: never;
         };
         /** ExportRetention get */
-        get: operations["ExportRetentionController_get_111"];
+        get: operations["ExportRetentionController_get_117"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1569,7 +1655,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** ExportRetention request */
-        post: operations["ExportRetentionController_request_112"];
+        post: operations["ExportRetentionController_request_118"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1586,7 +1672,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** ExportRetention approve */
-        post: operations["ExportRetentionController_approve_113"];
+        post: operations["ExportRetentionController_approve_119"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1603,7 +1689,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** ExportRetention execute */
-        post: operations["ExportRetentionController_execute_114"];
+        post: operations["ExportRetentionController_execute_120"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1618,10 +1704,10 @@ export interface paths {
             cookie?: never;
         };
         /** Recovery list */
-        get: operations["RecoveryController_list_115"];
+        get: operations["RecoveryController_list_121"];
         put?: never;
         /** Recovery request */
-        post: operations["RecoveryController_request_117"];
+        post: operations["RecoveryController_request_123"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1636,7 +1722,7 @@ export interface paths {
             cookie?: never;
         };
         /** Recovery get */
-        get: operations["RecoveryController_get_116"];
+        get: operations["RecoveryController_get_122"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1655,7 +1741,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Recovery approveScope */
-        post: operations["RecoveryController_approveScope_118"];
+        post: operations["RecoveryController_approveScope_124"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1670,7 +1756,7 @@ export interface paths {
             cookie?: never;
         };
         /** Recovery receipts */
-        get: operations["RecoveryController_receipts_119"];
+        get: operations["RecoveryController_receipts_125"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1689,7 +1775,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Recovery batch */
-        post: operations["RecoveryController_batch_120"];
+        post: operations["RecoveryController_batch_126"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1706,7 +1792,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Recovery compare */
-        post: operations["RecoveryController_compare_121"];
+        post: operations["RecoveryController_compare_127"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1721,7 +1807,7 @@ export interface paths {
             cookie?: never;
         };
         /** Recovery differences */
-        get: operations["RecoveryController_differences_122"];
+        get: operations["RecoveryController_differences_128"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1740,7 +1826,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Recovery approve */
-        post: operations["RecoveryController_approve_123"];
+        post: operations["RecoveryController_approve_129"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1757,7 +1843,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Recovery cancel */
-        post: operations["RecoveryController_cancel_124"];
+        post: operations["RecoveryController_cancel_130"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1772,10 +1858,10 @@ export interface paths {
             cookie?: never;
         };
         /** Purchasing list */
-        get: operations["PurchasingController_list_125"];
+        get: operations["PurchasingController_list_131"];
         put?: never;
         /** Purchasing draft */
-        post: operations["PurchasingController_draft_127"];
+        post: operations["PurchasingController_draft_133"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1790,7 +1876,7 @@ export interface paths {
             cookie?: never;
         };
         /** Purchasing get */
-        get: operations["PurchasingController_get_126"];
+        get: operations["PurchasingController_get_132"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1809,7 +1895,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Purchasing submit */
-        post: operations["PurchasingController_submit_128"];
+        post: operations["PurchasingController_submit_134"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1826,7 +1912,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Purchasing approve */
-        post: operations["PurchasingController_approve_129"];
+        post: operations["PurchasingController_approve_135"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1841,10 +1927,10 @@ export interface paths {
             cookie?: never;
         };
         /** Purchasing receipts */
-        get: operations["PurchasingController_receipts_131"];
+        get: operations["PurchasingController_receipts_137"];
         put?: never;
         /** Purchasing receive */
-        post: operations["PurchasingController_receive_130"];
+        post: operations["PurchasingController_receive_136"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1861,7 +1947,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Purchasing invoice */
-        post: operations["PurchasingController_invoice_132"];
+        post: operations["PurchasingController_invoice_138"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1876,7 +1962,7 @@ export interface paths {
             cookie?: never;
         };
         /** Purchasing invoices */
-        get: operations["PurchasingController_invoices_133"];
+        get: operations["PurchasingController_invoices_139"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1893,10 +1979,10 @@ export interface paths {
             cookie?: never;
         };
         /** Purchasing supplierReturns */
-        get: operations["PurchasingController_supplierReturns_135"];
+        get: operations["PurchasingController_supplierReturns_141"];
         put?: never;
         /** Purchasing returnToSupplier */
-        post: operations["PurchasingController_returnToSupplier_134"];
+        post: operations["PurchasingController_returnToSupplier_140"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1911,10 +1997,10 @@ export interface paths {
             cookie?: never;
         };
         /** Quotation list */
-        get: operations["QuotationController_list_136"];
+        get: operations["QuotationController_list_142"];
         put?: never;
         /** Quotation draft */
-        post: operations["QuotationController_draft_138"];
+        post: operations["QuotationController_draft_144"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1929,7 +2015,7 @@ export interface paths {
             cookie?: never;
         };
         /** Quotation get */
-        get: operations["QuotationController_get_137"];
+        get: operations["QuotationController_get_143"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1948,7 +2034,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Quotation issue */
-        post: operations["QuotationController_issue_139"];
+        post: operations["QuotationController_issue_145"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1965,7 +2051,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Quotation convert */
-        post: operations["QuotationController_convert_140"];
+        post: operations["QuotationController_convert_146"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1983,7 +2069,7 @@ export interface paths {
          * Reporting catalog
          * @description Implemented codes: audit-events, cash, count-variances, customer-custody, deposits, expenses, journal-lines, posted-sales, provider-intents, purchase-progress, recalls, receivables, returns, sales-lines, sales-register, stock, stock-movements, supplier-invoices, supplier-payables, tender-facts. Dates required for recalls, posted-sales, sales-register, cash, provider-intents, returns, expenses, purchase-progress, supplier-invoices, count-variances, journal-lines, audit-events and forbidden for customer-custody, supplier-payables, sales-lines, stock, receivables, deposits, stock-movements, tender-facts. All row cells and total values are exact strings. Totals cover all filtered rows on nonempty pages; empty pages have no totals. CSV exports one bounded page, with X-Report-Has-More indicating more rows.
          */
-        get: operations["ReportingController_catalog_141"];
+        get: operations["ReportingController_catalog_147"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2003,7 +2089,7 @@ export interface paths {
          * Reporting run
          * @description Implemented codes: audit-events, cash, count-variances, customer-custody, deposits, expenses, journal-lines, posted-sales, provider-intents, purchase-progress, recalls, receivables, returns, sales-lines, sales-register, stock, stock-movements, supplier-invoices, supplier-payables, tender-facts. Dates required for recalls, posted-sales, sales-register, cash, provider-intents, returns, expenses, purchase-progress, supplier-invoices, count-variances, journal-lines, audit-events and forbidden for customer-custody, supplier-payables, sales-lines, stock, receivables, deposits, stock-movements, tender-facts. All row cells and total values are exact strings. Totals cover all filtered rows on nonempty pages; empty pages have no totals. CSV exports one bounded page, with X-Report-Has-More indicating more rows.
          */
-        get: operations["ReportingController_run_142"];
+        get: operations["ReportingController_run_148"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2023,7 +2109,7 @@ export interface paths {
          * Reporting export
          * @description Implemented codes: audit-events, cash, count-variances, customer-custody, deposits, expenses, journal-lines, posted-sales, provider-intents, purchase-progress, recalls, receivables, returns, sales-lines, sales-register, stock, stock-movements, supplier-invoices, supplier-payables, tender-facts. Dates required for recalls, posted-sales, sales-register, cash, provider-intents, returns, expenses, purchase-progress, supplier-invoices, count-variances, journal-lines, audit-events and forbidden for customer-custody, supplier-payables, sales-lines, stock, receivables, deposits, stock-movements, tender-facts. All row cells and total values are exact strings. Totals cover all filtered rows on nonempty pages; empty pages have no totals. CSV exports one bounded page, with X-Report-Has-More indicating more rows.
          */
-        get: operations["ReportingController_export_143"];
+        get: operations["ReportingController_export_149"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2040,10 +2126,10 @@ export interface paths {
             cookie?: never;
         };
         /** Return list */
-        get: operations["ReturnController_list_144"];
+        get: operations["ReturnController_list_150"];
         put?: never;
         /** Return draft */
-        post: operations["ReturnController_draft_146"];
+        post: operations["ReturnController_draft_152"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2058,7 +2144,7 @@ export interface paths {
             cookie?: never;
         };
         /** Return get */
-        get: operations["ReturnController_get_145"];
+        get: operations["ReturnController_get_151"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2077,7 +2163,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Return approve */
-        post: operations["ReturnController_approve_147"];
+        post: operations["ReturnController_approve_153"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2094,7 +2180,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Return post */
-        post: operations["ReturnController_post_148"];
+        post: operations["ReturnController_post_154"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2109,10 +2195,10 @@ export interface paths {
             cookie?: never;
         };
         /** Fulfillment list */
-        get: operations["FulfillmentController_list_149"];
+        get: operations["FulfillmentController_list_155"];
         put?: never;
         /** Fulfillment draft */
-        post: operations["FulfillmentController_draft_153"];
+        post: operations["FulfillmentController_draft_159"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2127,7 +2213,7 @@ export interface paths {
             cookie?: never;
         };
         /** Fulfillment preparationSummary */
-        get: operations["FulfillmentController_preparationSummary_150"];
+        get: operations["FulfillmentController_preparationSummary_156"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2144,7 +2230,7 @@ export interface paths {
             cookie?: never;
         };
         /** Fulfillment pickList */
-        get: operations["FulfillmentController_pickList_151"];
+        get: operations["FulfillmentController_pickList_157"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2161,7 +2247,7 @@ export interface paths {
             cookie?: never;
         };
         /** Fulfillment get */
-        get: operations["FulfillmentController_get_152"];
+        get: operations["FulfillmentController_get_158"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2178,7 +2264,7 @@ export interface paths {
             cookie?: never;
         };
         /** Fulfillment dispatchHistory */
-        get: operations["FulfillmentController_dispatchHistory_154"];
+        get: operations["FulfillmentController_dispatchHistory_160"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2197,7 +2283,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Fulfillment dispatchLines */
-        post: operations["FulfillmentController_dispatchLines_155"];
+        post: operations["FulfillmentController_dispatchLines_161"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2214,7 +2300,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Fulfillment dispatch */
-        post: operations["FulfillmentController_dispatch_156"];
+        post: operations["FulfillmentController_dispatch_162"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2231,7 +2317,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Fulfillment complete */
-        post: operations["FulfillmentController_complete_157"];
+        post: operations["FulfillmentController_complete_163"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2246,10 +2332,10 @@ export interface paths {
             cookie?: never;
         };
         /** Sales list */
-        get: operations["SalesController_list_158"];
+        get: operations["SalesController_list_164"];
         put?: never;
         /** Sales draft */
-        post: operations["SalesController_draft_161"];
+        post: operations["SalesController_draft_167"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2264,7 +2350,7 @@ export interface paths {
             cookie?: never;
         };
         /** Sales summary */
-        get: operations["SalesController_summary_159"];
+        get: operations["SalesController_summary_165"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2281,7 +2367,7 @@ export interface paths {
             cookie?: never;
         };
         /** Sales get */
-        get: operations["SalesController_get_160"];
+        get: operations["SalesController_get_166"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2300,7 +2386,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Sales post */
-        post: operations["SalesController_post_162"];
+        post: operations["SalesController_post_168"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2315,7 +2401,7 @@ export interface paths {
             cookie?: never;
         };
         /** BillingNotification list */
-        get: operations["BillingNotificationController_list_163"];
+        get: operations["BillingNotificationController_list_169"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2332,7 +2418,7 @@ export interface paths {
             cookie?: never;
         };
         /** BillingNotification attempts */
-        get: operations["BillingNotificationController_attempts_164"];
+        get: operations["BillingNotificationController_attempts_170"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2351,7 +2437,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** BillingNotification redrive */
-        post: operations["BillingNotificationController_redrive_165"];
+        post: operations["BillingNotificationController_redrive_171"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2366,10 +2452,10 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionBilling platform */
-        get: operations["SubscriptionBillingController_platform_167"];
+        get: operations["SubscriptionBillingController_platform_173"];
         put?: never;
         /** SubscriptionBilling issue */
-        post: operations["SubscriptionBillingController_issue_166"];
+        post: operations["SubscriptionBillingController_issue_172"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2384,7 +2470,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionBilling merchant */
-        get: operations["SubscriptionBillingController_merchant_168"];
+        get: operations["SubscriptionBillingController_merchant_174"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2403,7 +2489,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** SubscriptionCommercialTerms request */
-        post: operations["SubscriptionCommercialTermsController_request_169"];
+        post: operations["SubscriptionCommercialTermsController_request_175"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2420,7 +2506,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** SubscriptionCommercialTerms approve */
-        post: operations["SubscriptionCommercialTermsController_approve_170"];
+        post: operations["SubscriptionCommercialTermsController_approve_176"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2435,7 +2521,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionCommercialTerms list */
-        get: operations["SubscriptionCommercialTermsController_list_171"];
+        get: operations["SubscriptionCommercialTermsController_list_177"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2452,7 +2538,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionExport platformPage */
-        get: operations["SubscriptionExportController_platformPage_172"];
+        get: operations["SubscriptionExportController_platformPage_178"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2469,7 +2555,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionExport merchantPage */
-        get: operations["SubscriptionExportController_merchantPage_173"];
+        get: operations["SubscriptionExportController_merchantPage_179"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2486,7 +2572,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionExport platformExport */
-        get: operations["SubscriptionExportController_platformExport_174"];
+        get: operations["SubscriptionExportController_platformExport_180"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2503,7 +2589,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionExport merchantExport */
-        get: operations["SubscriptionExportController_merchantExport_175"];
+        get: operations["SubscriptionExportController_merchantExport_181"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2520,10 +2606,10 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionLifecycle plans */
-        get: operations["SubscriptionLifecycleController_plans_176"];
+        get: operations["SubscriptionLifecycleController_plans_182"];
         put?: never;
         /** SubscriptionLifecycle create */
-        post: operations["SubscriptionLifecycleController_create_177"];
+        post: operations["SubscriptionLifecycleController_create_183"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2538,7 +2624,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionLifecycle get */
-        get: operations["SubscriptionLifecycleController_get_178"];
+        get: operations["SubscriptionLifecycleController_get_184"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2557,7 +2643,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** SubscriptionLifecycle expire */
-        post: operations["SubscriptionLifecycleController_expire_179"];
+        post: operations["SubscriptionLifecycleController_expire_185"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2574,7 +2660,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** SubscriptionLifecycle cancel */
-        post: operations["SubscriptionLifecycleController_cancel_180"];
+        post: operations["SubscriptionLifecycleController_cancel_186"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2591,7 +2677,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** SubscriptionLifecycle notice */
-        post: operations["SubscriptionLifecycleController_notice_181"];
+        post: operations["SubscriptionLifecycleController_notice_187"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2608,7 +2694,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** SubscriptionLifecycle approve */
-        post: operations["SubscriptionLifecycleController_approve_182"];
+        post: operations["SubscriptionLifecycleController_approve_188"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2623,7 +2709,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionLifecycle notices */
-        get: operations["SubscriptionLifecycleController_notices_183"];
+        get: operations["SubscriptionLifecycleController_notices_189"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2640,7 +2726,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionLifecycle payments */
-        get: operations["SubscriptionLifecycleController_payments_184"];
+        get: operations["SubscriptionLifecycleController_payments_190"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2659,7 +2745,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** SubscriptionLifecycle payment */
-        post: operations["SubscriptionLifecycleController_payment_185"];
+        post: operations["SubscriptionLifecycleController_payment_191"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2676,7 +2762,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** SubscriptionLifecycle approvePayment */
-        post: operations["SubscriptionLifecycleController_approvePayment_186"];
+        post: operations["SubscriptionLifecycleController_approvePayment_192"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2693,7 +2779,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** SubscriptionLifecycle activate */
-        post: operations["SubscriptionLifecycleController_activate_187"];
+        post: operations["SubscriptionLifecycleController_activate_193"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2708,7 +2794,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionPrint platformInvoice */
-        get: operations["SubscriptionPrintController_platformInvoice_188"];
+        get: operations["SubscriptionPrintController_platformInvoice_194"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2725,7 +2811,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionPrint merchantInvoice */
-        get: operations["SubscriptionPrintController_merchantInvoice_189"];
+        get: operations["SubscriptionPrintController_merchantInvoice_195"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2742,7 +2828,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionPrint platformReceipt */
-        get: operations["SubscriptionPrintController_platformReceipt_190"];
+        get: operations["SubscriptionPrintController_platformReceipt_196"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2759,7 +2845,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionPrint merchantReceipt */
-        get: operations["SubscriptionPrintController_merchantReceipt_191"];
+        get: operations["SubscriptionPrintController_merchantReceipt_197"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2776,7 +2862,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionQuota usage */
-        get: operations["SubscriptionQuotaController_usage_192"];
+        get: operations["SubscriptionQuotaController_usage_198"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2795,7 +2881,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** SubscriptionQuota reserve */
-        post: operations["SubscriptionQuotaController_reserve_193"];
+        post: operations["SubscriptionQuotaController_reserve_199"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2810,7 +2896,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionQuota get */
-        get: operations["SubscriptionQuotaController_get_194"];
+        get: operations["SubscriptionQuotaController_get_200"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2829,7 +2915,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** SubscriptionQuota release */
-        post: operations["SubscriptionQuotaController_release_195"];
+        post: operations["SubscriptionQuotaController_release_201"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2844,7 +2930,7 @@ export interface paths {
             cookie?: never;
         };
         /** SubscriptionQuota committed */
-        get: operations["SubscriptionQuotaController_committed_196"];
+        get: operations["SubscriptionQuotaController_committed_202"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2861,10 +2947,10 @@ export interface paths {
             cookie?: never;
         };
         /** Supplier list */
-        get: operations["SupplierController_list_197"];
+        get: operations["SupplierController_list_203"];
         put?: never;
         /** Supplier create */
-        post: operations["SupplierController_create_199"];
+        post: operations["SupplierController_create_205"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2879,9 +2965,9 @@ export interface paths {
             cookie?: never;
         };
         /** Supplier get */
-        get: operations["SupplierController_get_198"];
+        get: operations["SupplierController_get_204"];
         /** Supplier update */
-        put: operations["SupplierController_update_202"];
+        put: operations["SupplierController_update_208"];
         post?: never;
         delete?: never;
         options?: never;
@@ -2897,7 +2983,7 @@ export interface paths {
             cookie?: never;
         };
         /** Supplier page */
-        get: operations["SupplierController_page_200"];
+        get: operations["SupplierController_page_206"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2916,7 +3002,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Supplier createDirectory */
-        post: operations["SupplierController_createDirectory_201"];
+        post: operations["SupplierController_createDirectory_207"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2931,7 +3017,7 @@ export interface paths {
             cookie?: never;
         };
         /** Sync devices */
-        get: operations["SyncController_devices_203"];
+        get: operations["SyncController_devices_209"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2950,7 +3036,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Sync challenge */
-        post: operations["SyncController_challenge_204"];
+        post: operations["SyncController_challenge_210"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2967,7 +3053,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Sync prove */
-        post: operations["SyncController_prove_205"];
+        post: operations["SyncController_prove_211"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2984,7 +3070,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Sync approve */
-        post: operations["SyncController_approve_206"];
+        post: operations["SyncController_approve_212"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2999,10 +3085,10 @@ export interface paths {
             cookie?: never;
         };
         /** Sync recovery */
-        get: operations["SyncController_recovery_208"];
+        get: operations["SyncController_recovery_214"];
         put?: never;
         /** Sync recover */
-        post: operations["SyncController_recover_207"];
+        post: operations["SyncController_recover_213"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3017,7 +3103,7 @@ export interface paths {
             cookie?: never;
         };
         /** Sync status */
-        get: operations["SyncController_status_209"];
+        get: operations["SyncController_status_215"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3034,10 +3120,10 @@ export interface paths {
             cookie?: never;
         };
         /** Bank list */
-        get: operations["BankController_list_210"];
+        get: operations["BankController_list_216"];
         put?: never;
         /** Bank request */
-        post: operations["BankController_request_211"];
+        post: operations["BankController_request_217"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3054,7 +3140,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Bank approve */
-        post: operations["BankController_approve_212"];
+        post: operations["BankController_approve_218"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3069,10 +3155,10 @@ export interface paths {
             cookie?: never;
         };
         /** Bank matches */
-        get: operations["BankController_matches_213"];
+        get: operations["BankController_matches_219"];
         put?: never;
         /** Bank match */
-        post: operations["BankController_match_214"];
+        post: operations["BankController_match_220"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3087,7 +3173,7 @@ export interface paths {
             cookie?: never;
         };
         /** Bank get */
-        get: operations["BankController_get_215"];
+        get: operations["BankController_get_221"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3104,7 +3190,7 @@ export interface paths {
             cookie?: never;
         };
         /** Settlement list */
-        get: operations["SettlementController_list_216"];
+        get: operations["SettlementController_list_222"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3121,7 +3207,7 @@ export interface paths {
             cookie?: never;
         };
         /** Settlement balances */
-        get: operations["SettlementController_balances_217"];
+        get: operations["SettlementController_balances_223"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3138,10 +3224,10 @@ export interface paths {
             cookie?: never;
         };
         /** Settlement advances */
-        get: operations["SettlementController_advances_218"];
+        get: operations["SettlementController_advances_224"];
         put?: never;
         /** Settlement advance */
-        post: operations["SettlementController_advance_220"];
+        post: operations["SettlementController_advance_226"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3158,7 +3244,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Settlement supplierPayment */
-        post: operations["SettlementController_supplierPayment_219"];
+        post: operations["SettlementController_supplierPayment_225"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3175,7 +3261,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Settlement allocate */
-        post: operations["SettlementController_allocate_221"];
+        post: operations["SettlementController_allocate_227"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3192,7 +3278,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Settlement receipt */
-        post: operations["SettlementController_receipt_222"];
+        post: operations["SettlementController_receipt_228"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3209,7 +3295,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Settlement deposit */
-        post: operations["SettlementController_deposit_223"];
+        post: operations["SettlementController_deposit_229"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3224,7 +3310,7 @@ export interface paths {
             cookie?: never;
         };
         /** Settlement get */
-        get: operations["SettlementController_get_224"];
+        get: operations["SettlementController_get_230"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3241,7 +3327,7 @@ export interface paths {
             cookie?: never;
         };
         /** Tender collectionSummary */
-        get: operations["TenderController_collectionSummary_225"];
+        get: operations["TenderController_collectionSummary_231"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3258,7 +3344,7 @@ export interface paths {
             cookie?: never;
         };
         /** Tender sessions */
-        get: operations["TenderController_sessions_226"];
+        get: operations["TenderController_sessions_232"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3277,7 +3363,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Tender open */
-        post: operations["TenderController_open_227"];
+        post: operations["TenderController_open_233"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3294,7 +3380,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Tender close */
-        post: operations["TenderController_close_228"];
+        post: operations["TenderController_close_234"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3309,7 +3395,7 @@ export interface paths {
             cookie?: never;
         };
         /** Tender facts */
-        get: operations["TenderController_facts_229"];
+        get: operations["TenderController_facts_235"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3326,10 +3412,10 @@ export interface paths {
             cookie?: never;
         };
         /** Tender deposits */
-        get: operations["TenderController_deposits_230"];
+        get: operations["TenderController_deposits_236"];
         put?: never;
         /** Tender deposit */
-        post: operations["TenderController_deposit_232"];
+        post: operations["TenderController_deposit_238"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3346,7 +3432,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Tender receipt */
-        post: operations["TenderController_receipt_231"];
+        post: operations["TenderController_receipt_237"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3363,7 +3449,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Tender allocate */
-        post: operations["TenderController_allocate_233"];
+        post: operations["TenderController_allocate_239"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3380,7 +3466,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Tender refund */
-        post: operations["TenderController_refund_234"];
+        post: operations["TenderController_refund_240"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3395,10 +3481,10 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce employees */
-        get: operations["WorkforceController_employees_235"];
+        get: operations["WorkforceController_employees_241"];
         put?: never;
         /** Workforce create */
-        post: operations["WorkforceController_create_237"];
+        post: operations["WorkforceController_create_243"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3413,9 +3499,9 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce employee */
-        get: operations["WorkforceController_employee_236"];
+        get: operations["WorkforceController_employee_242"];
         /** Workforce update */
-        put: operations["WorkforceController_update_238"];
+        put: operations["WorkforceController_update_244"];
         post?: never;
         delete?: never;
         options?: never;
@@ -3433,7 +3519,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce record */
-        post: operations["WorkforceController_record_239"];
+        post: operations["WorkforceController_record_245"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3448,7 +3534,7 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce attendance */
-        get: operations["WorkforceController_attendance_240"];
+        get: operations["WorkforceController_attendance_246"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3465,10 +3551,10 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce payroll */
-        get: operations["WorkforceController_payroll_244"];
+        get: operations["WorkforceController_payroll_250"];
         put?: never;
         /** Workforce draft */
-        post: operations["WorkforceController_draft_241"];
+        post: operations["WorkforceController_draft_247"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3485,7 +3571,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce approve */
-        post: operations["WorkforceController_approve_242"];
+        post: operations["WorkforceController_approve_248"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3500,7 +3586,7 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce get */
-        get: operations["WorkforceController_get_243"];
+        get: operations["WorkforceController_get_249"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3517,10 +3603,10 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce contracts */
-        get: operations["WorkforceController_contracts_246"];
+        get: operations["WorkforceController_contracts_252"];
         put?: never;
         /** Workforce changeContract */
-        post: operations["WorkforceController_changeContract_245"];
+        post: operations["WorkforceController_changeContract_251"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3535,7 +3621,7 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce contractAt */
-        get: operations["WorkforceController_contractAt_247"];
+        get: operations["WorkforceController_contractAt_253"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3554,7 +3640,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce detailed */
-        post: operations["WorkforceController_detailed_248"];
+        post: operations["WorkforceController_detailed_254"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3569,7 +3655,7 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce deductions */
-        get: operations["WorkforceController_deductions_249"];
+        get: operations["WorkforceController_deductions_255"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3588,7 +3674,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce cancel */
-        post: operations["WorkforceController_cancel_250"];
+        post: operations["WorkforceController_cancel_256"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3603,10 +3689,10 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce reversals */
-        get: operations["WorkforceController_reversals_256"];
+        get: operations["WorkforceController_reversals_262"];
         put?: never;
         /** Workforce requestReversal */
-        post: operations["WorkforceController_requestReversal_251"];
+        post: operations["WorkforceController_requestReversal_257"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3623,7 +3709,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce approveReversal */
-        post: operations["WorkforceController_approveReversal_252"];
+        post: operations["WorkforceController_approveReversal_258"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3640,7 +3726,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce payBank */
-        post: operations["WorkforceController_payBank_253"];
+        post: operations["WorkforceController_payBank_259"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3655,7 +3741,7 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce print */
-        get: operations["WorkforceController_print_254"];
+        get: operations["WorkforceController_print_260"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3672,7 +3758,7 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce export */
-        get: operations["WorkforceController_export_255"];
+        get: operations["WorkforceController_export_261"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3689,7 +3775,7 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce payments */
-        get: operations["WorkforceController_payments_257"];
+        get: operations["WorkforceController_payments_263"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3706,10 +3792,10 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce leaves */
-        get: operations["WorkforceController_leaves_258"];
+        get: operations["WorkforceController_leaves_264"];
         put?: never;
         /** Workforce requestLeave */
-        post: operations["WorkforceController_requestLeave_260"];
+        post: operations["WorkforceController_requestLeave_266"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3724,7 +3810,7 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce leave */
-        get: operations["WorkforceController_leave_259"];
+        get: operations["WorkforceController_leave_265"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3743,7 +3829,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce decideLeave */
-        post: operations["WorkforceController_decideLeave_261"];
+        post: operations["WorkforceController_decideLeave_267"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3760,7 +3846,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce decideLeave */
-        post: operations["WorkforceController_decideLeave_262"];
+        post: operations["WorkforceController_decideLeave_268"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3777,7 +3863,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce decideLeave */
-        post: operations["WorkforceController_decideLeave_263"];
+        post: operations["WorkforceController_decideLeave_269"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3792,10 +3878,10 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce policies */
-        get: operations["WorkforceController_policies_264"];
+        get: operations["WorkforceController_policies_270"];
         put?: never;
         /** Workforce requestPolicy */
-        post: operations["WorkforceController_requestPolicy_266"];
+        post: operations["WorkforceController_requestPolicy_272"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3810,7 +3896,7 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce policy */
-        get: operations["WorkforceController_policy_265"];
+        get: operations["WorkforceController_policy_271"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3829,7 +3915,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce decidePolicy */
-        post: operations["WorkforceController_decidePolicy_267"];
+        post: operations["WorkforceController_decidePolicy_273"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3846,7 +3932,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce decidePolicy */
-        post: operations["WorkforceController_decidePolicy_268"];
+        post: operations["WorkforceController_decidePolicy_274"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3861,10 +3947,10 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce elections */
-        get: operations["WorkforceController_elections_269"];
+        get: operations["WorkforceController_elections_275"];
         put?: never;
         /** Workforce requestElection */
-        post: operations["WorkforceController_requestElection_271"];
+        post: operations["WorkforceController_requestElection_277"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3879,7 +3965,7 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce election */
-        get: operations["WorkforceController_election_270"];
+        get: operations["WorkforceController_election_276"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3898,7 +3984,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce decideElection */
-        post: operations["WorkforceController_decideElection_272"];
+        post: operations["WorkforceController_decideElection_278"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3915,7 +4001,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce decideElection */
-        post: operations["WorkforceController_decideElection_273"];
+        post: operations["WorkforceController_decideElection_279"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3932,7 +4018,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Workforce decideElection */
-        post: operations["WorkforceController_decideElection_274"];
+        post: operations["WorkforceController_decideElection_280"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3947,7 +4033,7 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce benefitPreview */
-        get: operations["WorkforceController_benefitPreview_275"];
+        get: operations["WorkforceController_benefitPreview_281"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3964,7 +4050,7 @@ export interface paths {
             cookie?: never;
         };
         /** Workforce benefits */
-        get: operations["WorkforceController_benefits_276"];
+        get: operations["WorkforceController_benefits_282"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3981,10 +4067,10 @@ export interface paths {
             cookie?: never;
         };
         /** OnboardingConfiguration get */
-        get: operations["OnboardingConfigurationController_get_277"];
+        get: operations["OnboardingConfigurationController_get_283"];
         put?: never;
         /** OnboardingConfiguration configure */
-        post: operations["OnboardingConfigurationController_configure_278"];
+        post: operations["OnboardingConfigurationController_configure_284"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4001,7 +4087,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** OnboardingConfiguration verify */
-        post: operations["OnboardingConfigurationController_verify_279"];
+        post: operations["OnboardingConfigurationController_verify_285"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4018,7 +4104,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** OnboardingConfiguration approve */
-        post: operations["OnboardingConfigurationController_approve_280"];
+        post: operations["OnboardingConfigurationController_approve_286"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4033,10 +4119,10 @@ export interface paths {
             cookie?: never;
         };
         /** Platform list */
-        get: operations["PlatformController_list_281"];
+        get: operations["PlatformController_list_287"];
         put?: never;
         /** Platform request */
-        post: operations["PlatformController_request_283"];
+        post: operations["PlatformController_request_289"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4051,7 +4137,7 @@ export interface paths {
             cookie?: never;
         };
         /** Platform get */
-        get: operations["PlatformController_get_282"];
+        get: operations["PlatformController_get_288"];
         put?: never;
         post?: never;
         delete?: never;
@@ -4070,7 +4156,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Platform approve */
-        post: operations["PlatformController_approve_284"];
+        post: operations["PlatformController_approve_290"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4085,10 +4171,10 @@ export interface paths {
             cookie?: never;
         };
         /** PlatformGovernance merchantGrants */
-        get: operations["PlatformGovernanceController_merchantGrants_285"];
+        get: operations["PlatformGovernanceController_merchantGrants_291"];
         put?: never;
         /** PlatformGovernance consent */
-        post: operations["PlatformGovernanceController_consent_286"];
+        post: operations["PlatformGovernanceController_consent_292"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4105,7 +4191,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** PlatformGovernance revoke */
-        post: operations["PlatformGovernanceController_revoke_287"];
+        post: operations["PlatformGovernanceController_revoke_293"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4120,7 +4206,7 @@ export interface paths {
             cookie?: never;
         };
         /** PlatformGovernance platformGrants */
-        get: operations["PlatformGovernanceController_platformGrants_288"];
+        get: operations["PlatformGovernanceController_platformGrants_294"];
         put?: never;
         post?: never;
         delete?: never;
@@ -4139,7 +4225,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** PlatformGovernance approveGrant */
-        post: operations["PlatformGovernanceController_approveGrant_289"];
+        post: operations["PlatformGovernanceController_approveGrant_295"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4154,7 +4240,7 @@ export interface paths {
             cookie?: never;
         };
         /** PlatformGovernance diagnostics */
-        get: operations["PlatformGovernanceController_diagnostics_290"];
+        get: operations["PlatformGovernanceController_diagnostics_296"];
         put?: never;
         post?: never;
         delete?: never;
@@ -4171,7 +4257,7 @@ export interface paths {
             cookie?: never;
         };
         /** PlatformGovernance status */
-        get: operations["PlatformGovernanceController_status_291"];
+        get: operations["PlatformGovernanceController_status_297"];
         put?: never;
         post?: never;
         delete?: never;
@@ -4188,7 +4274,7 @@ export interface paths {
             cookie?: never;
         };
         /** PlatformGovernance holds */
-        get: operations["PlatformGovernanceController_holds_292"];
+        get: operations["PlatformGovernanceController_holds_298"];
         put?: never;
         post?: never;
         delete?: never;
@@ -4205,7 +4291,7 @@ export interface paths {
             cookie?: never;
         };
         /** PlatformGovernance requests */
-        get: operations["PlatformGovernanceController_requests_293"];
+        get: operations["PlatformGovernanceController_requests_299"];
         put?: never;
         post?: never;
         delete?: never;
@@ -4224,7 +4310,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** PlatformGovernance request */
-        post: operations["PlatformGovernanceController_request_294"];
+        post: operations["PlatformGovernanceController_request_300"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4241,7 +4327,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** PlatformGovernance approve */
-        post: operations["PlatformGovernanceController_approve_295"];
+        post: operations["PlatformGovernanceController_approve_301"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4256,10 +4342,10 @@ export interface paths {
             cookie?: never;
         };
         /** TenantProvisioning get */
-        get: operations["TenantProvisioningController_get_296"];
+        get: operations["TenantProvisioningController_get_302"];
         put?: never;
         /** TenantProvisioning provision */
-        post: operations["TenantProvisioningController_provision_297"];
+        post: operations["TenantProvisioningController_provision_303"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4276,7 +4362,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Operations process */
-        post: operations["OperationsController_process_298"];
+        post: operations["OperationsController_process_304"];
         delete?: never;
         options?: never;
         head?: never;
@@ -5227,6 +5313,35 @@ export interface components {
             operationId?: string;
             version?: string;
             quantityMilli?: string;
+            reason?: string;
+        };
+        OperationsService_Export: {
+            /** Format: uuid */
+            id?: string;
+            entity?: components["schemas"]["OperationsService_Entity"];
+            status?: string;
+            /** Format: int32 */
+            rowCount?: number;
+            digest?: string;
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            expiresAt?: string;
+            version?: string;
+            failure?: string;
+        };
+        /** @enum {string} */
+        OperationsService_Entity: "PRODUCT" | "CUSTOMER" | "SUPPLIER" | "CATEGORY" | "UNIT";
+        OperationsService_ExportRequest: {
+            /** Format: uuid */
+            operationId?: string;
+            entity?: components["schemas"]["OperationsService_Entity"];
+            reason?: string;
+        };
+        OperationsService_Command: {
+            /** Format: uuid */
+            operationId?: string;
+            version?: string;
             reason?: string;
         };
         ExportRetentionService_Decision: {
@@ -9738,7 +9853,156 @@ export interface operations {
             };
         };
     };
-    ExportRetentionController_get_111: {
+    ExportController_list_111: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OperationsService_Export"][];
+                };
+            };
+        };
+    };
+    ExportController_request_113: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OperationsService_ExportRequest"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OperationsService_Export"];
+                };
+            };
+        };
+    };
+    ExportController_get_112: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OperationsService_Export"];
+                };
+            };
+        };
+    };
+    ExportController_run_114: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OperationsService_Command"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OperationsService_Export"];
+                };
+            };
+        };
+    };
+    ExportController_cancel_115: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-Request-ID": string;
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OperationsService_Command"];
+            };
+        };
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OperationsService_Export"];
+                };
+            };
+        };
+    };
+    ExportController_download_116: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Source-declared result. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/csv": string;
+                };
+            };
+        };
+    };
+    ExportRetentionController_get_117: {
         parameters: {
             query?: never;
             header?: never;
@@ -9760,7 +10024,7 @@ export interface operations {
             };
         };
     };
-    ExportRetentionController_request_112: {
+    ExportRetentionController_request_118: {
         parameters: {
             query?: never;
             header: {
@@ -9787,7 +10051,7 @@ export interface operations {
             };
         };
     };
-    ExportRetentionController_approve_113: {
+    ExportRetentionController_approve_119: {
         parameters: {
             query?: never;
             header: {
@@ -9816,7 +10080,7 @@ export interface operations {
             };
         };
     };
-    ExportRetentionController_execute_114: {
+    ExportRetentionController_execute_120: {
         parameters: {
             query?: never;
             header: {
@@ -9845,7 +10109,7 @@ export interface operations {
             };
         };
     };
-    RecoveryController_list_115: {
+    RecoveryController_list_121: {
         parameters: {
             query?: {
                 offset?: number;
@@ -9868,7 +10132,7 @@ export interface operations {
             };
         };
     };
-    RecoveryController_request_117: {
+    RecoveryController_request_123: {
         parameters: {
             query?: never;
             header: {
@@ -9895,7 +10159,7 @@ export interface operations {
             };
         };
     };
-    RecoveryController_get_116: {
+    RecoveryController_get_122: {
         parameters: {
             query?: never;
             header?: never;
@@ -9917,7 +10181,7 @@ export interface operations {
             };
         };
     };
-    RecoveryController_approveScope_118: {
+    RecoveryController_approveScope_124: {
         parameters: {
             query?: never;
             header: {
@@ -9946,7 +10210,7 @@ export interface operations {
             };
         };
     };
-    RecoveryController_receipts_119: {
+    RecoveryController_receipts_125: {
         parameters: {
             query: {
                 asOf: string;
@@ -9970,7 +10234,7 @@ export interface operations {
             };
         };
     };
-    RecoveryController_batch_120: {
+    RecoveryController_batch_126: {
         parameters: {
             query?: never;
             header: {
@@ -9999,7 +10263,7 @@ export interface operations {
             };
         };
     };
-    RecoveryController_compare_121: {
+    RecoveryController_compare_127: {
         parameters: {
             query?: never;
             header: {
@@ -10028,7 +10292,7 @@ export interface operations {
             };
         };
     };
-    RecoveryController_differences_122: {
+    RecoveryController_differences_128: {
         parameters: {
             query?: {
                 after?: string;
@@ -10053,7 +10317,7 @@ export interface operations {
             };
         };
     };
-    RecoveryController_approve_123: {
+    RecoveryController_approve_129: {
         parameters: {
             query?: never;
             header: {
@@ -10082,7 +10346,7 @@ export interface operations {
             };
         };
     };
-    RecoveryController_cancel_124: {
+    RecoveryController_cancel_130: {
         parameters: {
             query?: never;
             header: {
@@ -10111,7 +10375,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_list_125: {
+    PurchasingController_list_131: {
         parameters: {
             query?: never;
             header?: never;
@@ -10131,7 +10395,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_draft_127: {
+    PurchasingController_draft_133: {
         parameters: {
             query?: never;
             header: {
@@ -10158,7 +10422,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_get_126: {
+    PurchasingController_get_132: {
         parameters: {
             query?: never;
             header?: never;
@@ -10180,7 +10444,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_submit_128: {
+    PurchasingController_submit_134: {
         parameters: {
             query?: never;
             header: {
@@ -10209,7 +10473,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_approve_129: {
+    PurchasingController_approve_135: {
         parameters: {
             query?: never;
             header: {
@@ -10238,7 +10502,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_receipts_131: {
+    PurchasingController_receipts_137: {
         parameters: {
             query?: never;
             header?: never;
@@ -10260,7 +10524,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_receive_130: {
+    PurchasingController_receive_136: {
         parameters: {
             query?: never;
             header: {
@@ -10289,7 +10553,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_invoice_132: {
+    PurchasingController_invoice_138: {
         parameters: {
             query?: never;
             header: {
@@ -10318,7 +10582,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_invoices_133: {
+    PurchasingController_invoices_139: {
         parameters: {
             query?: never;
             header?: never;
@@ -10338,7 +10602,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_supplierReturns_135: {
+    PurchasingController_supplierReturns_141: {
         parameters: {
             query?: never;
             header?: never;
@@ -10360,7 +10624,7 @@ export interface operations {
             };
         };
     };
-    PurchasingController_returnToSupplier_134: {
+    PurchasingController_returnToSupplier_140: {
         parameters: {
             query?: never;
             header: {
@@ -10389,7 +10653,7 @@ export interface operations {
             };
         };
     };
-    QuotationController_list_136: {
+    QuotationController_list_142: {
         parameters: {
             query?: never;
             header?: never;
@@ -10409,7 +10673,7 @@ export interface operations {
             };
         };
     };
-    QuotationController_draft_138: {
+    QuotationController_draft_144: {
         parameters: {
             query?: never;
             header: {
@@ -10437,7 +10701,7 @@ export interface operations {
             };
         };
     };
-    QuotationController_get_137: {
+    QuotationController_get_143: {
         parameters: {
             query?: never;
             header?: never;
@@ -10459,7 +10723,7 @@ export interface operations {
             };
         };
     };
-    QuotationController_issue_139: {
+    QuotationController_issue_145: {
         parameters: {
             query?: never;
             header: {
@@ -10489,7 +10753,7 @@ export interface operations {
             };
         };
     };
-    QuotationController_convert_140: {
+    QuotationController_convert_146: {
         parameters: {
             query?: never;
             header: {
@@ -10519,7 +10783,7 @@ export interface operations {
             };
         };
     };
-    ReportingController_catalog_141: {
+    ReportingController_catalog_147: {
         parameters: {
             query?: never;
             header?: never;
@@ -10539,7 +10803,7 @@ export interface operations {
             };
         };
     };
-    ReportingController_run_142: {
+    ReportingController_run_148: {
         parameters: {
             query?: {
                 from?: string;
@@ -10566,7 +10830,7 @@ export interface operations {
             };
         };
     };
-    ReportingController_export_143: {
+    ReportingController_export_149: {
         parameters: {
             query?: {
                 from?: string;
@@ -10594,7 +10858,7 @@ export interface operations {
             };
         };
     };
-    ReturnController_list_144: {
+    ReturnController_list_150: {
         parameters: {
             query?: never;
             header?: never;
@@ -10614,7 +10878,7 @@ export interface operations {
             };
         };
     };
-    ReturnController_draft_146: {
+    ReturnController_draft_152: {
         parameters: {
             query?: never;
             header: {
@@ -10642,7 +10906,7 @@ export interface operations {
             };
         };
     };
-    ReturnController_get_145: {
+    ReturnController_get_151: {
         parameters: {
             query?: never;
             header?: never;
@@ -10664,7 +10928,7 @@ export interface operations {
             };
         };
     };
-    ReturnController_approve_147: {
+    ReturnController_approve_153: {
         parameters: {
             query?: never;
             header: {
@@ -10694,7 +10958,7 @@ export interface operations {
             };
         };
     };
-    ReturnController_post_148: {
+    ReturnController_post_154: {
         parameters: {
             query?: never;
             header: {
@@ -10724,7 +10988,7 @@ export interface operations {
             };
         };
     };
-    FulfillmentController_list_149: {
+    FulfillmentController_list_155: {
         parameters: {
             query?: never;
             header?: never;
@@ -10744,7 +11008,7 @@ export interface operations {
             };
         };
     };
-    FulfillmentController_draft_153: {
+    FulfillmentController_draft_159: {
         parameters: {
             query?: never;
             header: {
@@ -10772,7 +11036,7 @@ export interface operations {
             };
         };
     };
-    FulfillmentController_preparationSummary_150: {
+    FulfillmentController_preparationSummary_156: {
         parameters: {
             query?: never;
             header?: never;
@@ -10792,7 +11056,7 @@ export interface operations {
             };
         };
     };
-    FulfillmentController_pickList_151: {
+    FulfillmentController_pickList_157: {
         parameters: {
             query?: never;
             header?: never;
@@ -10814,7 +11078,7 @@ export interface operations {
             };
         };
     };
-    FulfillmentController_get_152: {
+    FulfillmentController_get_158: {
         parameters: {
             query?: never;
             header?: never;
@@ -10836,7 +11100,7 @@ export interface operations {
             };
         };
     };
-    FulfillmentController_dispatchHistory_154: {
+    FulfillmentController_dispatchHistory_160: {
         parameters: {
             query?: never;
             header?: never;
@@ -10858,7 +11122,7 @@ export interface operations {
             };
         };
     };
-    FulfillmentController_dispatchLines_155: {
+    FulfillmentController_dispatchLines_161: {
         parameters: {
             query?: never;
             header: {
@@ -10888,7 +11152,7 @@ export interface operations {
             };
         };
     };
-    FulfillmentController_dispatch_156: {
+    FulfillmentController_dispatch_162: {
         parameters: {
             query?: never;
             header: {
@@ -10918,7 +11182,7 @@ export interface operations {
             };
         };
     };
-    FulfillmentController_complete_157: {
+    FulfillmentController_complete_163: {
         parameters: {
             query?: never;
             header: {
@@ -10948,7 +11212,7 @@ export interface operations {
             };
         };
     };
-    SalesController_list_158: {
+    SalesController_list_164: {
         parameters: {
             query?: never;
             header?: never;
@@ -10968,7 +11232,7 @@ export interface operations {
             };
         };
     };
-    SalesController_draft_161: {
+    SalesController_draft_167: {
         parameters: {
             query?: never;
             header: {
@@ -10995,7 +11259,7 @@ export interface operations {
             };
         };
     };
-    SalesController_summary_159: {
+    SalesController_summary_165: {
         parameters: {
             query: {
                 from: string;
@@ -11018,7 +11282,7 @@ export interface operations {
             };
         };
     };
-    SalesController_get_160: {
+    SalesController_get_166: {
         parameters: {
             query?: never;
             header?: never;
@@ -11040,7 +11304,7 @@ export interface operations {
             };
         };
     };
-    SalesController_post_162: {
+    SalesController_post_168: {
         parameters: {
             query?: never;
             header: {
@@ -11069,7 +11333,7 @@ export interface operations {
             };
         };
     };
-    BillingNotificationController_list_163: {
+    BillingNotificationController_list_169: {
         parameters: {
             query?: {
                 status?: string;
@@ -11091,7 +11355,7 @@ export interface operations {
             };
         };
     };
-    BillingNotificationController_attempts_164: {
+    BillingNotificationController_attempts_170: {
         parameters: {
             query?: never;
             header?: never;
@@ -11113,7 +11377,7 @@ export interface operations {
             };
         };
     };
-    BillingNotificationController_redrive_165: {
+    BillingNotificationController_redrive_171: {
         parameters: {
             query?: never;
             header: {
@@ -11142,7 +11406,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionBillingController_platform_167: {
+    SubscriptionBillingController_platform_173: {
         parameters: {
             query: {
                 tenantId: string;
@@ -11164,7 +11428,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionBillingController_issue_166: {
+    SubscriptionBillingController_issue_172: {
         parameters: {
             query?: never;
             header: {
@@ -11191,7 +11455,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionBillingController_merchant_168: {
+    SubscriptionBillingController_merchant_174: {
         parameters: {
             query?: never;
             header?: never;
@@ -11211,7 +11475,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionCommercialTermsController_request_169: {
+    SubscriptionCommercialTermsController_request_175: {
         parameters: {
             query?: never;
             header: {
@@ -11238,7 +11502,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionCommercialTermsController_approve_170: {
+    SubscriptionCommercialTermsController_approve_176: {
         parameters: {
             query?: never;
             header: {
@@ -11267,7 +11531,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionCommercialTermsController_list_171: {
+    SubscriptionCommercialTermsController_list_177: {
         parameters: {
             query?: never;
             header?: never;
@@ -11289,7 +11553,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionExportController_platformPage_172: {
+    SubscriptionExportController_platformPage_178: {
         parameters: {
             query: {
                 tenantId: string;
@@ -11313,7 +11577,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionExportController_merchantPage_173: {
+    SubscriptionExportController_merchantPage_179: {
         parameters: {
             query?: {
                 cursor?: string;
@@ -11336,7 +11600,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionExportController_platformExport_174: {
+    SubscriptionExportController_platformExport_180: {
         parameters: {
             query: {
                 tenantId: string;
@@ -11360,7 +11624,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionExportController_merchantExport_175: {
+    SubscriptionExportController_merchantExport_181: {
         parameters: {
             query?: {
                 cursor?: string;
@@ -11383,7 +11647,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionLifecycleController_plans_176: {
+    SubscriptionLifecycleController_plans_182: {
         parameters: {
             query?: never;
             header?: never;
@@ -11403,7 +11667,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionLifecycleController_create_177: {
+    SubscriptionLifecycleController_create_183: {
         parameters: {
             query?: never;
             header: {
@@ -11430,7 +11694,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionLifecycleController_get_178: {
+    SubscriptionLifecycleController_get_184: {
         parameters: {
             query?: never;
             header?: never;
@@ -11452,7 +11716,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionLifecycleController_expire_179: {
+    SubscriptionLifecycleController_expire_185: {
         parameters: {
             query?: never;
             header: {
@@ -11481,7 +11745,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionLifecycleController_cancel_180: {
+    SubscriptionLifecycleController_cancel_186: {
         parameters: {
             query?: never;
             header: {
@@ -11510,7 +11774,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionLifecycleController_notice_181: {
+    SubscriptionLifecycleController_notice_187: {
         parameters: {
             query?: never;
             header: {
@@ -11537,7 +11801,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionLifecycleController_approve_182: {
+    SubscriptionLifecycleController_approve_188: {
         parameters: {
             query?: never;
             header: {
@@ -11566,7 +11830,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionLifecycleController_notices_183: {
+    SubscriptionLifecycleController_notices_189: {
         parameters: {
             query?: never;
             header?: never;
@@ -11588,7 +11852,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionLifecycleController_payments_184: {
+    SubscriptionLifecycleController_payments_190: {
         parameters: {
             query?: never;
             header?: never;
@@ -11610,7 +11874,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionLifecycleController_payment_185: {
+    SubscriptionLifecycleController_payment_191: {
         parameters: {
             query?: never;
             header: {
@@ -11637,7 +11901,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionLifecycleController_approvePayment_186: {
+    SubscriptionLifecycleController_approvePayment_192: {
         parameters: {
             query?: never;
             header: {
@@ -11666,7 +11930,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionLifecycleController_activate_187: {
+    SubscriptionLifecycleController_activate_193: {
         parameters: {
             query?: never;
             header: {
@@ -11695,7 +11959,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionPrintController_platformInvoice_188: {
+    SubscriptionPrintController_platformInvoice_194: {
         parameters: {
             query?: {
                 locale?: string;
@@ -11719,7 +11983,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionPrintController_merchantInvoice_189: {
+    SubscriptionPrintController_merchantInvoice_195: {
         parameters: {
             query?: {
                 locale?: string;
@@ -11743,7 +12007,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionPrintController_platformReceipt_190: {
+    SubscriptionPrintController_platformReceipt_196: {
         parameters: {
             query?: {
                 locale?: string;
@@ -11767,7 +12031,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionPrintController_merchantReceipt_191: {
+    SubscriptionPrintController_merchantReceipt_197: {
         parameters: {
             query?: {
                 locale?: string;
@@ -11791,7 +12055,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionQuotaController_usage_192: {
+    SubscriptionQuotaController_usage_198: {
         parameters: {
             query?: never;
             header?: never;
@@ -11811,7 +12075,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionQuotaController_reserve_193: {
+    SubscriptionQuotaController_reserve_199: {
         parameters: {
             query?: never;
             header: {
@@ -11838,7 +12102,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionQuotaController_get_194: {
+    SubscriptionQuotaController_get_200: {
         parameters: {
             query?: never;
             header?: never;
@@ -11860,7 +12124,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionQuotaController_release_195: {
+    SubscriptionQuotaController_release_201: {
         parameters: {
             query?: never;
             header: {
@@ -11889,7 +12153,7 @@ export interface operations {
             };
         };
     };
-    SubscriptionQuotaController_committed_196: {
+    SubscriptionQuotaController_committed_202: {
         parameters: {
             query?: never;
             header?: never;
@@ -11911,7 +12175,7 @@ export interface operations {
             };
         };
     };
-    SupplierController_list_197: {
+    SupplierController_list_203: {
         parameters: {
             query?: never;
             header?: never;
@@ -11931,7 +12195,7 @@ export interface operations {
             };
         };
     };
-    SupplierController_create_199: {
+    SupplierController_create_205: {
         parameters: {
             query?: never;
             header: {
@@ -11958,7 +12222,7 @@ export interface operations {
             };
         };
     };
-    SupplierController_get_198: {
+    SupplierController_get_204: {
         parameters: {
             query?: never;
             header?: never;
@@ -11980,7 +12244,7 @@ export interface operations {
             };
         };
     };
-    SupplierController_update_202: {
+    SupplierController_update_208: {
         parameters: {
             query?: never;
             header: {
@@ -12009,7 +12273,7 @@ export interface operations {
             };
         };
     };
-    SupplierController_page_200: {
+    SupplierController_page_206: {
         parameters: {
             query: {
                 query: string;
@@ -12033,7 +12297,7 @@ export interface operations {
             };
         };
     };
-    SupplierController_createDirectory_201: {
+    SupplierController_createDirectory_207: {
         parameters: {
             query?: never;
             header: {
@@ -12060,7 +12324,7 @@ export interface operations {
             };
         };
     };
-    SyncController_devices_203: {
+    SyncController_devices_209: {
         parameters: {
             query?: never;
             header?: never;
@@ -12080,7 +12344,7 @@ export interface operations {
             };
         };
     };
-    SyncController_challenge_204: {
+    SyncController_challenge_210: {
         parameters: {
             query?: never;
             header: {
@@ -12108,7 +12372,7 @@ export interface operations {
             };
         };
     };
-    SyncController_prove_205: {
+    SyncController_prove_211: {
         parameters: {
             query?: never;
             header: {
@@ -12138,7 +12402,7 @@ export interface operations {
             };
         };
     };
-    SyncController_approve_206: {
+    SyncController_approve_212: {
         parameters: {
             query?: never;
             header: {
@@ -12168,7 +12432,7 @@ export interface operations {
             };
         };
     };
-    SyncController_recovery_208: {
+    SyncController_recovery_214: {
         parameters: {
             query?: never;
             header?: never;
@@ -12188,7 +12452,7 @@ export interface operations {
             };
         };
     };
-    SyncController_recover_207: {
+    SyncController_recover_213: {
         parameters: {
             query?: never;
             header: {
@@ -12216,7 +12480,7 @@ export interface operations {
             };
         };
     };
-    SyncController_status_209: {
+    SyncController_status_215: {
         parameters: {
             query?: never;
             header?: never;
@@ -12238,7 +12502,7 @@ export interface operations {
             };
         };
     };
-    BankController_list_210: {
+    BankController_list_216: {
         parameters: {
             query?: never;
             header?: never;
@@ -12258,7 +12522,7 @@ export interface operations {
             };
         };
     };
-    BankController_request_211: {
+    BankController_request_217: {
         parameters: {
             query?: never;
             header: {
@@ -12286,7 +12550,7 @@ export interface operations {
             };
         };
     };
-    BankController_approve_212: {
+    BankController_approve_218: {
         parameters: {
             query?: never;
             header: {
@@ -12316,7 +12580,7 @@ export interface operations {
             };
         };
     };
-    BankController_matches_213: {
+    BankController_matches_219: {
         parameters: {
             query?: never;
             header?: never;
@@ -12336,7 +12600,7 @@ export interface operations {
             };
         };
     };
-    BankController_match_214: {
+    BankController_match_220: {
         parameters: {
             query?: never;
             header: {
@@ -12364,7 +12628,7 @@ export interface operations {
             };
         };
     };
-    BankController_get_215: {
+    BankController_get_221: {
         parameters: {
             query?: never;
             header?: never;
@@ -12386,7 +12650,7 @@ export interface operations {
             };
         };
     };
-    SettlementController_list_216: {
+    SettlementController_list_222: {
         parameters: {
             query?: never;
             header?: never;
@@ -12406,7 +12670,7 @@ export interface operations {
             };
         };
     };
-    SettlementController_balances_217: {
+    SettlementController_balances_223: {
         parameters: {
             query?: never;
             header?: never;
@@ -12426,7 +12690,7 @@ export interface operations {
             };
         };
     };
-    SettlementController_advances_218: {
+    SettlementController_advances_224: {
         parameters: {
             query?: never;
             header?: never;
@@ -12446,7 +12710,7 @@ export interface operations {
             };
         };
     };
-    SettlementController_advance_220: {
+    SettlementController_advance_226: {
         parameters: {
             query?: never;
             header: {
@@ -12474,7 +12738,7 @@ export interface operations {
             };
         };
     };
-    SettlementController_supplierPayment_219: {
+    SettlementController_supplierPayment_225: {
         parameters: {
             query?: never;
             header: {
@@ -12502,7 +12766,7 @@ export interface operations {
             };
         };
     };
-    SettlementController_allocate_221: {
+    SettlementController_allocate_227: {
         parameters: {
             query?: never;
             header: {
@@ -12530,7 +12794,7 @@ export interface operations {
             };
         };
     };
-    SettlementController_receipt_222: {
+    SettlementController_receipt_228: {
         parameters: {
             query?: never;
             header: {
@@ -12558,7 +12822,7 @@ export interface operations {
             };
         };
     };
-    SettlementController_deposit_223: {
+    SettlementController_deposit_229: {
         parameters: {
             query?: never;
             header: {
@@ -12586,7 +12850,7 @@ export interface operations {
             };
         };
     };
-    SettlementController_get_224: {
+    SettlementController_get_230: {
         parameters: {
             query?: never;
             header?: never;
@@ -12608,7 +12872,7 @@ export interface operations {
             };
         };
     };
-    TenderController_collectionSummary_225: {
+    TenderController_collectionSummary_231: {
         parameters: {
             query?: never;
             header?: never;
@@ -12628,7 +12892,7 @@ export interface operations {
             };
         };
     };
-    TenderController_sessions_226: {
+    TenderController_sessions_232: {
         parameters: {
             query?: never;
             header?: never;
@@ -12648,7 +12912,7 @@ export interface operations {
             };
         };
     };
-    TenderController_open_227: {
+    TenderController_open_233: {
         parameters: {
             query?: never;
             header: {
@@ -12676,7 +12940,7 @@ export interface operations {
             };
         };
     };
-    TenderController_close_228: {
+    TenderController_close_234: {
         parameters: {
             query?: never;
             header: {
@@ -12706,7 +12970,7 @@ export interface operations {
             };
         };
     };
-    TenderController_facts_229: {
+    TenderController_facts_235: {
         parameters: {
             query?: never;
             header?: never;
@@ -12726,7 +12990,7 @@ export interface operations {
             };
         };
     };
-    TenderController_deposits_230: {
+    TenderController_deposits_236: {
         parameters: {
             query?: never;
             header?: never;
@@ -12746,7 +13010,7 @@ export interface operations {
             };
         };
     };
-    TenderController_deposit_232: {
+    TenderController_deposit_238: {
         parameters: {
             query?: never;
             header: {
@@ -12774,7 +13038,7 @@ export interface operations {
             };
         };
     };
-    TenderController_receipt_231: {
+    TenderController_receipt_237: {
         parameters: {
             query?: never;
             header: {
@@ -12802,7 +13066,7 @@ export interface operations {
             };
         };
     };
-    TenderController_allocate_233: {
+    TenderController_allocate_239: {
         parameters: {
             query?: never;
             header: {
@@ -12832,7 +13096,7 @@ export interface operations {
             };
         };
     };
-    TenderController_refund_234: {
+    TenderController_refund_240: {
         parameters: {
             query?: never;
             header: {
@@ -12862,7 +13126,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_employees_235: {
+    WorkforceController_employees_241: {
         parameters: {
             query?: {
                 offset?: number;
@@ -12885,7 +13149,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_create_237: {
+    WorkforceController_create_243: {
         parameters: {
             query?: never;
             header: {
@@ -12912,7 +13176,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_employee_236: {
+    WorkforceController_employee_242: {
         parameters: {
             query?: never;
             header?: never;
@@ -12934,7 +13198,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_update_238: {
+    WorkforceController_update_244: {
         parameters: {
             query?: never;
             header: {
@@ -12963,7 +13227,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_record_239: {
+    WorkforceController_record_245: {
         parameters: {
             query?: never;
             header: {
@@ -12990,7 +13254,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_attendance_240: {
+    WorkforceController_attendance_246: {
         parameters: {
             query: {
                 from: string;
@@ -13015,7 +13279,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_payroll_244: {
+    WorkforceController_payroll_250: {
         parameters: {
             query: {
                 from: string;
@@ -13040,7 +13304,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_draft_241: {
+    WorkforceController_draft_247: {
         parameters: {
             query?: never;
             header: {
@@ -13067,7 +13331,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_approve_242: {
+    WorkforceController_approve_248: {
         parameters: {
             query?: never;
             header: {
@@ -13096,7 +13360,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_get_243: {
+    WorkforceController_get_249: {
         parameters: {
             query?: never;
             header?: never;
@@ -13118,7 +13382,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_contracts_246: {
+    WorkforceController_contracts_252: {
         parameters: {
             query?: {
                 offset?: number;
@@ -13143,7 +13407,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_changeContract_245: {
+    WorkforceController_changeContract_251: {
         parameters: {
             query?: never;
             header: {
@@ -13172,7 +13436,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_contractAt_247: {
+    WorkforceController_contractAt_253: {
         parameters: {
             query: {
                 date: string;
@@ -13196,7 +13460,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_detailed_248: {
+    WorkforceController_detailed_254: {
         parameters: {
             query?: never;
             header: {
@@ -13223,7 +13487,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_deductions_249: {
+    WorkforceController_deductions_255: {
         parameters: {
             query?: never;
             header?: never;
@@ -13245,7 +13509,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_cancel_250: {
+    WorkforceController_cancel_256: {
         parameters: {
             query?: never;
             header: {
@@ -13274,7 +13538,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_reversals_256: {
+    WorkforceController_reversals_262: {
         parameters: {
             query?: never;
             header?: never;
@@ -13296,7 +13560,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_requestReversal_251: {
+    WorkforceController_requestReversal_257: {
         parameters: {
             query?: never;
             header: {
@@ -13325,7 +13589,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_approveReversal_252: {
+    WorkforceController_approveReversal_258: {
         parameters: {
             query?: never;
             header: {
@@ -13354,7 +13618,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_payBank_253: {
+    WorkforceController_payBank_259: {
         parameters: {
             query?: never;
             header: {
@@ -13383,7 +13647,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_print_254: {
+    WorkforceController_print_260: {
         parameters: {
             query?: never;
             header?: never;
@@ -13405,7 +13669,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_export_255: {
+    WorkforceController_export_261: {
         parameters: {
             query: {
                 from: string;
@@ -13430,7 +13694,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_payments_257: {
+    WorkforceController_payments_263: {
         parameters: {
             query?: never;
             header?: never;
@@ -13452,7 +13716,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_leaves_258: {
+    WorkforceController_leaves_264: {
         parameters: {
             query: {
                 employeeId?: string;
@@ -13479,7 +13743,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_requestLeave_260: {
+    WorkforceController_requestLeave_266: {
         parameters: {
             query?: never;
             header: {
@@ -13506,7 +13770,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_leave_259: {
+    WorkforceController_leave_265: {
         parameters: {
             query?: never;
             header?: never;
@@ -13528,7 +13792,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_decideLeave_261: {
+    WorkforceController_decideLeave_267: {
         parameters: {
             query?: never;
             header: {
@@ -13557,7 +13821,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_decideLeave_262: {
+    WorkforceController_decideLeave_268: {
         parameters: {
             query?: never;
             header: {
@@ -13586,7 +13850,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_decideLeave_263: {
+    WorkforceController_decideLeave_269: {
         parameters: {
             query?: never;
             header: {
@@ -13615,7 +13879,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_policies_264: {
+    WorkforceController_policies_270: {
         parameters: {
             query: {
                 status: string;
@@ -13639,7 +13903,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_requestPolicy_266: {
+    WorkforceController_requestPolicy_272: {
         parameters: {
             query?: never;
             header: {
@@ -13666,7 +13930,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_policy_265: {
+    WorkforceController_policy_271: {
         parameters: {
             query?: never;
             header?: never;
@@ -13688,7 +13952,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_decidePolicy_267: {
+    WorkforceController_decidePolicy_273: {
         parameters: {
             query?: never;
             header: {
@@ -13717,7 +13981,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_decidePolicy_268: {
+    WorkforceController_decidePolicy_274: {
         parameters: {
             query?: never;
             header: {
@@ -13746,7 +14010,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_elections_269: {
+    WorkforceController_elections_275: {
         parameters: {
             query: {
                 employeeId?: string;
@@ -13771,7 +14035,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_requestElection_271: {
+    WorkforceController_requestElection_277: {
         parameters: {
             query?: never;
             header: {
@@ -13798,7 +14062,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_election_270: {
+    WorkforceController_election_276: {
         parameters: {
             query?: never;
             header?: never;
@@ -13820,7 +14084,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_decideElection_272: {
+    WorkforceController_decideElection_278: {
         parameters: {
             query?: never;
             header: {
@@ -13849,7 +14113,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_decideElection_273: {
+    WorkforceController_decideElection_279: {
         parameters: {
             query?: never;
             header: {
@@ -13878,7 +14142,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_decideElection_274: {
+    WorkforceController_decideElection_280: {
         parameters: {
             query?: never;
             header: {
@@ -13907,7 +14171,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_benefitPreview_275: {
+    WorkforceController_benefitPreview_281: {
         parameters: {
             query: {
                 from: string;
@@ -13932,7 +14196,7 @@ export interface operations {
             };
         };
     };
-    WorkforceController_benefits_276: {
+    WorkforceController_benefits_282: {
         parameters: {
             query?: never;
             header?: never;
@@ -13954,7 +14218,7 @@ export interface operations {
             };
         };
     };
-    OnboardingConfigurationController_get_277: {
+    OnboardingConfigurationController_get_283: {
         parameters: {
             query?: never;
             header?: never;
@@ -13976,7 +14240,7 @@ export interface operations {
             };
         };
     };
-    OnboardingConfigurationController_configure_278: {
+    OnboardingConfigurationController_configure_284: {
         parameters: {
             query?: never;
             header: {
@@ -14005,7 +14269,7 @@ export interface operations {
             };
         };
     };
-    OnboardingConfigurationController_verify_279: {
+    OnboardingConfigurationController_verify_285: {
         parameters: {
             query?: never;
             header: {
@@ -14034,7 +14298,7 @@ export interface operations {
             };
         };
     };
-    OnboardingConfigurationController_approve_280: {
+    OnboardingConfigurationController_approve_286: {
         parameters: {
             query?: never;
             header: {
@@ -14063,7 +14327,7 @@ export interface operations {
             };
         };
     };
-    PlatformController_list_281: {
+    PlatformController_list_287: {
         parameters: {
             query?: never;
             header?: never;
@@ -14083,7 +14347,7 @@ export interface operations {
             };
         };
     };
-    PlatformController_request_283: {
+    PlatformController_request_289: {
         parameters: {
             query?: never;
             header: {
@@ -14110,7 +14374,7 @@ export interface operations {
             };
         };
     };
-    PlatformController_get_282: {
+    PlatformController_get_288: {
         parameters: {
             query?: never;
             header?: never;
@@ -14132,7 +14396,7 @@ export interface operations {
             };
         };
     };
-    PlatformController_approve_284: {
+    PlatformController_approve_290: {
         parameters: {
             query?: never;
             header: {
@@ -14161,7 +14425,7 @@ export interface operations {
             };
         };
     };
-    PlatformGovernanceController_merchantGrants_285: {
+    PlatformGovernanceController_merchantGrants_291: {
         parameters: {
             query?: never;
             header?: never;
@@ -14181,7 +14445,7 @@ export interface operations {
             };
         };
     };
-    PlatformGovernanceController_consent_286: {
+    PlatformGovernanceController_consent_292: {
         parameters: {
             query?: never;
             header: {
@@ -14208,7 +14472,7 @@ export interface operations {
             };
         };
     };
-    PlatformGovernanceController_revoke_287: {
+    PlatformGovernanceController_revoke_293: {
         parameters: {
             query?: never;
             header: {
@@ -14237,7 +14501,7 @@ export interface operations {
             };
         };
     };
-    PlatformGovernanceController_platformGrants_288: {
+    PlatformGovernanceController_platformGrants_294: {
         parameters: {
             query?: never;
             header?: never;
@@ -14257,7 +14521,7 @@ export interface operations {
             };
         };
     };
-    PlatformGovernanceController_approveGrant_289: {
+    PlatformGovernanceController_approveGrant_295: {
         parameters: {
             query?: never;
             header: {
@@ -14286,7 +14550,7 @@ export interface operations {
             };
         };
     };
-    PlatformGovernanceController_diagnostics_290: {
+    PlatformGovernanceController_diagnostics_296: {
         parameters: {
             query?: never;
             header: {
@@ -14310,7 +14574,7 @@ export interface operations {
             };
         };
     };
-    PlatformGovernanceController_status_291: {
+    PlatformGovernanceController_status_297: {
         parameters: {
             query?: never;
             header?: never;
@@ -14332,7 +14596,7 @@ export interface operations {
             };
         };
     };
-    PlatformGovernanceController_holds_292: {
+    PlatformGovernanceController_holds_298: {
         parameters: {
             query?: never;
             header?: never;
@@ -14354,7 +14618,7 @@ export interface operations {
             };
         };
     };
-    PlatformGovernanceController_requests_293: {
+    PlatformGovernanceController_requests_299: {
         parameters: {
             query: {
                 tenantId: string;
@@ -14376,7 +14640,7 @@ export interface operations {
             };
         };
     };
-    PlatformGovernanceController_request_294: {
+    PlatformGovernanceController_request_300: {
         parameters: {
             query?: never;
             header: {
@@ -14405,7 +14669,7 @@ export interface operations {
             };
         };
     };
-    PlatformGovernanceController_approve_295: {
+    PlatformGovernanceController_approve_301: {
         parameters: {
             query?: never;
             header: {
@@ -14434,7 +14698,7 @@ export interface operations {
             };
         };
     };
-    TenantProvisioningController_get_296: {
+    TenantProvisioningController_get_302: {
         parameters: {
             query?: never;
             header?: never;
@@ -14456,7 +14720,7 @@ export interface operations {
             };
         };
     };
-    TenantProvisioningController_provision_297: {
+    TenantProvisioningController_provision_303: {
         parameters: {
             query?: never;
             header: {
@@ -14485,7 +14749,7 @@ export interface operations {
             };
         };
     };
-    OperationsController_process_298: {
+    OperationsController_process_304: {
         parameters: {
             query?: never;
             header: {
