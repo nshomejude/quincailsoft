@@ -13526,7 +13526,7 @@
       },
       {
         "path": "backend/tools/history-import/src/main/java/com/quincaisoft/tools/CatalogHistoryImport.java",
-        "sha256": "b0ae1c94e62c0e9b94cc1b93ab4839afd3f40a47f6e12d615096f044c4d8bbcb"
+        "sha256": "1041caadc652606afff9cc0029af5355f6cb0fb1700deedffe2810b919cb775c"
       },
       {
         "path": "backend/workers/src/main/java/com/quincaisoft/workers/api/OutboxWorker.java",
@@ -13556,11 +13556,11 @@
       },
       {
         "path": "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java",
-        "sha256": "c53f8c96bfca24bf251b3c9913b675e5a255474cc270c7167cd37783f51a287d",
+        "sha256": "520daa3a0d84f7ae14018b7ed43dec8d37a0a483b02419fef3b143e86d29dbda",
         "testMethods": [
           "applicationStartsAndAuthenticatesAgainstRealScopedDatabase"
         ],
-        "assertionCount": 41
+        "assertionCount": 59
       },
       {
         "path": "backend/api-server/src/test/java/com/quincaisoft/security/SecurityBoundaryTest.java",

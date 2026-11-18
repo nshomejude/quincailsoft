@@ -79,3 +79,11 @@ The local deployment environment validator passed 12 tests. Historical supplier
 payment needs authenticated bank evidence creation and approval before the
 settlement can consume it. The historical bank reference must be preserved in
 that evidence. Continue checking the actual payable and journal after replay.
+
+The first combined local reactor run was interrupted when Docker Desktop's
+Linux container API began returning HTTP 500 and disconnected the Maven client.
+It completed the module-level reporting, workforce, onboarding and deployment
+safety checks before the full-application historical replay was interrupted.
+There is no combined result for that run. Docker Desktop was restarted, and
+the original preview database volume recovered. Windows loopback checks
+returned HTTP 200 for the preview and Keycloak sign-in and UP for the Java API.

@@ -41,3 +41,16 @@ reviewed fixture before it drafts the order. Retry using the same source and
 actors with a fresh output path. The output maps the source order, receipt, and
 movement to the Java purchase, receipt, and posting operation. The PostgreSQL
 acceptance test checks the resulting stock and journal records independently.
+
+## First historical supplier invoice and settlement
+
+After sequence 2 completes, append `--supplier-settlement <receipt-mapping.ndjson>`
+to run sequences 3 and 4. Supply a new mapping output path and the receipt
+mapping from the same isolated database. Use the same makers on replay.
+The maker needs `purchasing:invoice`, `bank:write` and `tenders:supplier-pay`.
+A separate actor in the same branch needs `bank:approve`.
+
+The adapter posts the invoice against the mapped receipt, requests outbound
+bank evidence using the source bank reference, obtains independent approval,
+then pays the invoice through the settlement API. The test checks the payable,
+bank evidence, and both journal entries after replay.

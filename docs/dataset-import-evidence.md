@@ -90,3 +90,21 @@ Both `QUINCAI_HISTORY_CATALOG_ACCEPTANCE` and
 The expanded scenario passed in 397.6 seconds with zero failures, errors or
 skips. The supplier invoice at sequence 3, payment at sequence 4, later events,
 interruption recovery and whole-dataset reconciliation are pending.
+
+## Authenticated first supplier invoice and bank payment
+
+The focused `QUINCAI_HISTORY_SETTLEMENT_ACCEPTANCE=true` execution of
+`FullApplicationPostgresTest` passed against PostgreSQL 18.7 and Java 25
+in 160.6 seconds with zero failures, errors or skips. It used one fixture
+product/supplier map and executed opening capital, receiving, invoicing, bank
+evidence request and independent approval, and settlement through the real API.
+The source invoice and payment journals were validated before posting.
+
+Sequences 3 and 4 created one 52,000 XAF invoice and one 52,000 XAF payment,
+leaving zero outstanding on that payable. The consumed bank evidence retained
+`DEMO-PAY-3` and the test identified the exact invoice, settlement, bank evidence
+and journal IDs in PostgreSQL. Both journals matched the expected ledger rows.
+Initial and replay mapping SHA-256 were both
+`515e534cfb4e91f3260fd67e555f0b67c8d8f20dfbf2de850fe1491c7956cc7f`.
+The focused test does not supply evidence for later source events, full catalog
+replay in the same run, or preview data import.

@@ -50,8 +50,10 @@ public final class CatalogHistoryImport {
     public static void main(String[] args) throws Exception {
         boolean opening = args.length == 5 && args[4].equals("--opening");
         boolean receipt = args.length == 6 && args[4].equals("--receipt");
-        if (args.length != 4 && !opening && !receipt) throw new IllegalArgumentException(
-            "Usage: <loopback-api-origin> <generated-directory> <reviewed-manifest> <new-mapping.ndjson> [--opening | --receipt <catalog-mapping.ndjson>]");
+        boolean settlement = args.length == 6 && args[4].equals("--supplier-settlement");
+        if (args.length != 4 && !opening && !receipt && !settlement) throw new IllegalArgumentException(
+            "Usage: <loopback-api-origin> <generated-directory> <reviewed-manifest> <new-mapping.ndjson> " +
+                "[--opening | --receipt <catalog-mapping.ndjson> | --supplier-settlement <receipt-mapping.ndjson>]");
         URI api = URI.create(args[0]);
         if (!"http".equals(api.getScheme()) || !"127.0.0.1".equals(api.getHost()) ||
             api.getPort() < 1 || api.getRawUserInfo() != null || api.getRawQuery() != null ||
@@ -62,10 +64,14 @@ public final class CatalogHistoryImport {
 
         Path dir = Path.of(args[1]);
         JsonNode manifest = JSON.readTree(Files.readString(Path.of(args[2])));
-        validateInputs(dir, manifest, receipt ? List.of("branches", "events", "journals", "purchaseOrders", "stockMovements") :
+        validateInputs(dir, manifest, receipt || settlement ? List.of("branches", "events", "journals", "purchaseOrders", "stockMovements") :
             opening ? List.of("branches", "events", "journals") : FILES);
         Path output = Path.of(args[3]).toAbsolutePath();
         if (Files.exists(output)) throw new IllegalArgumentException("Mapping output already exists");
+        if (settlement) {
+            importSupplierSettlement(api, token, dir, output, Path.of(args[5]));
+            return;
+        }
         if (receipt) {
             importReceipt(api, token, dir, output, Path.of(args[5]));
             return;
@@ -231,6 +237,122 @@ public final class CatalogHistoryImport {
             "sourcePurchaseOrderId", orderSource, "sourceMovementId", uuid(source.movement(), "id"),
             "purchaseId", purchase, "receiptId", uuid(receipt, "id"), "postingOperationId", posting)) + "\n",
             StandardOpenOption.CREATE_NEW);
+    }
+
+    private static void importSupplierSettlement(URI api, String token, Path dir, Path output, Path receiptMapping)
+        throws Exception {
+        String approverToken = System.getenv("QUINCAI_HISTORY_APPROVER_TOKEN");
+        if (approverToken == null || approverToken.isBlank())
+            throw new IllegalArgumentException("QUINCAI_HISTORY_APPROVER_TOKEN is required for bank evidence");
+        var maker = new CatalogHistoryImport(api, token, null);
+        var approver = new CatalogHistoryImport(api, approverToken, null);
+        var sourceReceipt = HistoricalReceipt.read(dir).event();
+        JsonNode invoice;
+        JsonNode payment;
+        try (var events = Files.newBufferedReader(dir.resolve("events.ndjson"))) {
+            events.readLine();
+            events.readLine();
+            invoice = JSON.readTree(events.readLine());
+            payment = JSON.readTree(events.readLine());
+        }
+        UUID invoiceSource = uuid(invoice, "id");
+        UUID paymentSource = uuid(payment, "id");
+        var amount = sourceReceipt.required("estimatedCostXaf");
+        if (!matchesEconomicEvent(invoice, sourceReceipt, 3, "SUPPLIER_INVOICE") ||
+            !matchesEconomicEvent(payment, sourceReceipt, 4, "SUPPLIER_PAYMENT") ||
+            !uuid(sourceReceipt, "id").equals(uuid(invoice, "receiptId")) ||
+            !invoiceSource.equals(uuid(payment, "invoiceId")) || !amount.equals(invoice.required("netXaf")) ||
+            !amount.equals(invoice.required("totalXaf")) || !amount.equals(payment.required("amountXaf")) ||
+            !"0".equals(invoice.required("taxXaf").asText()) || !"POSTED".equals(invoice.required("status").asText()) ||
+            !"BANK".equals(payment.required("method").asText()))
+            throw new IllegalArgumentException("Unexpected historical supplier invoice or bank payment");
+
+        try (var journals = Files.newBufferedReader(dir.resolve("journals.ndjson"))) {
+            journals.readLine();
+            journals.readLine();
+            String supplierSource = invoice.required("supplierId").asText();
+            String value = amount.asText();
+            requireJournal(invoice, JSON.readTree(journals.readLine()), Set.of(
+                new SourceJournalLine("GRNI", null, value, "0"),
+                new SourceJournalLine("AP", supplierSource, "0", value)));
+            requireJournal(payment, JSON.readTree(journals.readLine()), Set.of(
+                new SourceJournalLine("AP", supplierSource, value, "0"),
+                new SourceJournalLine("BANK", null, "0", value)));
+        }
+
+        var makerScope = maker.requireSyntheticScope(dir);
+        var approverScope = approver.requireSyntheticScope(dir);
+        UUID branch = uuid(sourceReceipt, "branchId");
+        if (!branch.equals(uuid(makerScope, "branchId")) || !branch.equals(uuid(approverScope, "branchId")) ||
+            uuid(makerScope, "actorId").equals(uuid(approverScope, "actorId")))
+            throw new IllegalArgumentException("Bank evidence requires independent actors from the receipt branch");
+        var mapping = JSON.readTree(Files.readString(receiptMapping));
+        if (!uuid(sourceReceipt, "id").equals(uuid(mapping, "sourceId")) ||
+            !operation("purchase-receipt", uuid(sourceReceipt, "id")).equals(uuid(mapping, "postingOperationId")))
+            throw new IllegalArgumentException("Receipt mapping must be from the historical receipt stage");
+        UUID receipt = uuid(mapping, "receiptId");
+        var invoicePost = maker.post("/purchases/receipts/" + receipt + "/invoice",
+            operation("supplier-invoice", invoiceSource), Map.of("businessDate", invoice.required("businessDate"),
+                "supplierReference", invoice.required("reference"), "reason", "Historical synthetic invoice " + invoiceSource));
+        UUID invoiceId = uuid(invoicePost, "id");
+        if (!amount.equals(invoicePost.required("totalXaf")) || !receipt.equals(uuid(invoicePost, "receiptId")) ||
+            !invoice.required("reference").equals(invoicePost.required("supplierReference")))
+            throw new IllegalStateException("Posted supplier invoice differs from the source");
+        UUID supplier = uuid(invoicePost, "supplierId");
+        String reason = "Historical synthetic bank payment " + paymentSource;
+        var date = payment.required("businessDate");
+        var evidence = maker.post("/bank-evidence", operation("supplier-payment-bank-request", paymentSource),
+            Map.of("businessDate", date, "reference", payment.required("bankReference"), "direction", "OUT",
+                "amountXaf", amount, "reason", reason));
+        UUID evidenceId = uuid(evidence, "id");
+        var approved = approver.post("/bank-evidence/" + evidenceId + "/approve",
+            operation("supplier-payment-bank-approve", paymentSource),
+            Map.of("version", evidence.required("version"), "reason", reason));
+        if (!uuid(approverScope, "actorId").equals(uuid(approved, "approvedBy")) ||
+            !payment.required("bankReference").equals(approved.required("reference")))
+            throw new IllegalStateException("Payment bank evidence differs from the source");
+        UUID posting = operation("supplier-payment", paymentSource);
+        var settlement = maker.post("/settlements/supplier-payment", posting,
+            Map.of("businessDate", date, "partyId", supplier, "sourceId", invoiceId, "amountXaf", amount,
+                "funding", Map.of("bankEvidenceId", evidenceId), "reason", reason));
+        if (!amount.equals(settlement.required("amountXaf")) || !invoiceId.equals(uuid(settlement, "sourceId")) ||
+            !supplier.equals(uuid(settlement, "partyId")) || !evidenceId.equals(uuid(settlement, "bankEvidenceId")))
+            throw new IllegalStateException("Posted supplier payment differs from the source");
+        var result = new LinkedHashMap<String, Object>();
+        result.put("sourceInvoiceId", invoiceSource);
+        result.put("sourceId", paymentSource);
+        result.put("invoiceId", invoiceId);
+        result.put("settlementId", uuid(settlement, "id"));
+        result.put("bankEvidenceId", evidenceId);
+        result.put("journalId", uuid(settlement, "journalId"));
+        result.put("postingOperationId", posting);
+        Files.writeString(output, JSON.writeValueAsString(result) + "\n", StandardOpenOption.CREATE_NEW);
+    }
+
+    private static boolean matchesEconomicEvent(JsonNode event, JsonNode receipt, long sequence, String type) {
+        return event.path("sequence").asLong() == sequence && event.path("synthetic").asBoolean() &&
+            type.equals(event.path("type").asText()) && uuid(event, "id").equals(uuid(event, "operationId")) &&
+            List.of("tenantId", "companyId", "branchId", "supplierId").stream()
+                .allMatch(field -> event.required(field).equals(receipt.required(field)));
+    }
+
+    private record SourceJournalLine(String account, String partyId, String debit, String credit) {}
+
+    private static void requireJournal(JsonNode event, JsonNode journal, Set<SourceJournalLine> expected) {
+        if (!uuid(event, "id").equals(uuid(journal, "eventId")) ||
+            !event.required("branchId").equals(journal.required("branchId")) ||
+            !event.required("businessDate").equals(journal.required("businessDate")))
+            throw new IllegalArgumentException("Historical journal does not match event " + uuid(event, "id"));
+        var lines = new HashSet<SourceJournalLine>();
+        for (var line : journal.required("lines")) {
+            var party = line.required("partyId");
+            var entry = new SourceJournalLine(line.required("account").asText(),
+                party.isNull() ? null : party.asText(), line.required("debitXaf").asText(),
+                line.required("creditXaf").asText());
+            if (!lines.add(entry)) throw new IllegalArgumentException("Duplicate historical journal line");
+        }
+        if (!lines.equals(expected))
+            throw new IllegalArgumentException("Historical journal valuation differs for " + uuid(event, "id"));
     }
 
     private static UUID mappedTarget(Path catalog, String kind, UUID source) throws Exception {
