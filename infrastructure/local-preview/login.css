@@ -1,11 +1,13 @@
 :root{--brand-navy:#0a2354;--brand-sky:#1595e6;--canvas:#fff;--surface:#f7fafd;--text:#162238;--muted:#667085;--border:#e3e8f0}
 body.quincai-login{margin:0;background:var(--canvas);color:var(--text);font-family:Inter,"Segoe UI",system-ui,sans-serif}
-.quincai-login .login-pf-page{display:grid;grid-template-columns:1.08fr 1fr;min-height:100vh;padding:0;background:var(--canvas)}
-.quincai-login #kc-header{display:flex;align-items:center;margin:0;padding:clamp(28px,5vw,72px);min-height:100%;color:white;background:var(--brand-navy)}
+.quincai-login .pf-v5-c-login__container{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);grid-template-areas:"header main";grid-template-rows:1fr;width:100%;max-width:none;margin:0;min-height:100vh;padding:0;background:var(--canvas)}
+.quincai-login #kc-header{grid-area:header;display:flex;align-items:center;margin:0;padding:clamp(28px,5vw,72px);min-height:100%;color:white;background:var(--brand-navy)}
 .quincai-login #kc-header-wrapper{padding:0;text-align:left;text-transform:none;letter-spacing:normal;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-height:70vh;width:100%}
 .quincai-login .quincai-logo-surface{background:#e8f4fc;padding:10px 14px;border-radius:8px;margin-bottom:clamp(48px,20vh,190px)}
 .quincai-login .quincai-logo-surface img{display:block;width:min(185px,100%);height:auto;mix-blend-mode:multiply}
 .quincai-login .quincai-copy{max-width:560px}.quincai-login .quincai-copy p{margin:0 0 14px;color:#b8daf3;font-size:14px;line-height:1.6}.quincai-login .quincai-copy strong{display:block;margin:12px 0 18px;color:white;font-size:clamp(29px,3.6vw,50px);line-height:1.08}
-.quincai-login .login-pf-page .card-pf{width:min(100%,570px);margin:auto;padding:36px clamp(22px,4vw,62px);border:0;box-shadow:none;background:var(--canvas)}
+.quincai-login .pf-v5-c-login__main{grid-area:main;width:min(100%,570px);margin:auto;padding:36px clamp(22px,4vw,62px);border:0;box-shadow:none;background:var(--canvas)}
 .quincai-login legend{color:var(--brand-navy);font-weight:650;font-size:14px}.quincai-login #kc-login{background:#086cb4;border-color:#086cb4}
-@media(max-width:720px){.quincai-login .login-pf-page{grid-template-columns:1fr;min-height:100dvh}.quincai-login #kc-header{min-height:0;padding:18px 22px}.quincai-login #kc-header-wrapper{min-height:0}.quincai-login .quincai-logo-surface{margin-bottom:10px}.quincai-login .quincai-copy strong{font-size:23px;margin:4px 0}.quincai-login .quincai-copy p{display:none}}
+@media(max-width:720px){.quincai-login .pf-v5-c-login__container{grid-template-columns:1fr;grid-template-areas:"header" "main";grid-template-rows:auto 1fr;min-height:100dvh}.quincai-login #kc-header{min-height:0;padding:18px 22px}.quincai-login #kc-header-wrapper{min-height:0}.quincai-login .quincai-logo-surface{margin-bottom:10px}.quincai-login .quincai-copy strong{font-size:23px;margin:4px 0}.quincai-login .quincai-copy p{display:none}}
+
+.quincai-login .pf-v5-c-login{display:block;padding:0;min-height:100vh}.quincai-login .quincai-logo-surface{align-self:flex-start}
