@@ -43,11 +43,15 @@ class TenderPostgresTest {
     var catalog=new DefaultCatalogService(em,tx);var stock=new DefaultStockService(em,tx,catalog);var finance=new DefaultFinanceService(em,tx);var customers=new DefaultCustomerService(em,tx);var documents=new DefaultDocumentService(em,tx,JsonMapper.builder().build());var sales=new DefaultSalesService(em,tx,stock,catalog,finance,customers,JsonMapper.builder().build(),documents);
     var tenders=new DefaultTenderService(em,tx,finance,sales,customers,JsonMapper.builder().build());
     var scope=new TenantScope(t,c,b,a);
+    var otherBranch=UUID.randomUUID();
+    sql(owner,"INSERT INTO branch(tenant_id,company_id,id,name) VALUES('"+t+"','"+c+"','"+otherBranch+"','Other branch')");
     TenantContext.call(scope,1,()->{
+     assertEquals(0,finance.pendingCollectionCount());
      documents.configure(new DocumentService.Settings("Synthetic merchant","Synthetic address","TEST-REG","TEST","en",0));
      var draftRequest=new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"2000")));
      var draft=sales.draft(draftRequest);assertEquals("DRAFT",draft.status());assertEquals("2000",draft.totalXaf());
      var postRequest=new SalesService.Post(UUID.randomUUID(),draft.version(),"Synthetic acceptance posting");var posted=sales.post(draft.id(),postRequest);assertEquals("POSTED",posted.status());assertEquals(posted,sales.post(draft.id(),postRequest));assertEquals(1,documents.list(draft.id()).size());assertTrue(documents.render(documents.list(draft.id()).getFirst().id(),true).contains("COPY"));assertEquals(draft,sales.draft(draftRequest));
+     assertEquals(1,finance.pendingCollectionCount());
      assertEquals(8000,count(owner,"select quantity_milli from stock_balance"));assertEquals(4000,count(owner,"select value_xaf from stock_balance"));assertEquals(1,count(owner,"select count(*) from journal_entry"));assertEquals(4,count(owner,"select count(*) from journal_line"));assertEquals(1,count(owner,"select count(*) from outbox_event"));assertEquals(0,count(owner,"select sum(debit_xaf-credit_xaf) from journal_line"));
      assertThrows(IllegalStateException.class,()->sales.post(draft.id(),new SalesService.Post(postRequest.operationId(),draft.version(),"Different request must conflict")));
      var excessive=sales.draft(new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"100000"))));
@@ -61,8 +65,11 @@ class TenderPostgresTest {
      sql(owner,"update financial_period set status='Open'");
      var date=LocalDate.of(2026,11,18);var shift=tenders.open(new TenderService.Open(UUID.randomUUID(),"TILL-1",date,"100","Opening float declaration"));
      var collect=new TenderService.Receipt(UUID.randomUUID(),draft.id(),customer,shift.id(),date,"500","Confirmed physical cash");var payment=tenders.receipt(collect);assertEquals(payment,tenders.receipt(collect));assertEquals(1500,finance.outstandingSale(draft.id()));
+     assertEquals(1,finance.pendingCollectionCount());
+     assertEquals(0,TenantContext.call(new TenantScope(t,c,otherBranch,a),1,finance::pendingCollectionCount));
      var deposit=tenders.deposit(new TenderService.Deposit(UUID.randomUUID(),customer,shift.id(),date,"2500","Customer cash advance"));
      tenders.allocate(deposit.depositId(),new TenderService.Allocation(UUID.randomUUID(),draft.id(),null,date,"1500","Allocate advance to debt"));assertEquals(0,finance.outstandingSale(draft.id()));
+     assertEquals(0,finance.pendingCollectionCount());
      tenders.refund(deposit.depositId(),new TenderService.Allocation(UUID.randomUUID(),null,shift.id(),date,"500","Approved cash refund"));
      assertEquals("500",tenders.deposits().getFirst().remainingXaf());assertEquals("2600",tenders.sessions().getFirst().expectedXaf());
      assertThrows(IllegalArgumentException.class,()->tenders.refund(deposit.depositId(),new TenderService.Allocation(UUID.randomUUID(),null,shift.id(),date,"501","Excess refund rejected")));

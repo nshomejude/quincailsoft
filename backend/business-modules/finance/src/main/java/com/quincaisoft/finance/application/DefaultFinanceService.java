@@ -26,6 +26,21 @@ public class DefaultFinanceService implements FinanceService {
    for(var e:entries){var l=new JournalLineEntity();l.tenantId=s.tenantId();l.companyId=s.companyId();l.entryId=j.id;l.id=UUID.randomUUID();l.accountCode=e.account();l.debitXaf=e.debit();l.creditXaf=e.credit();em.persist(l);}em.flush();return j.id;});
  }
  private ReceivableBalanceEntity balance(UUID id){var s=TenantContext.current();var r=em.find(ReceivableBalanceEntity.class,new ReceivableBalanceEntity.Key(s.tenantId(),s.companyId(),id),jakarta.persistence.LockModeType.PESSIMISTIC_WRITE);if(r==null||!r.branchId.equals(s.branchId()))throw new NoSuchElementException("Scoped receivable not found");return r;}
+ @Override
+ public long pendingCollectionCount() {
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   return em.createQuery("""
+       select count(r) from ReceivableBalanceEntity r
+       where r.tenantId = :tenant and r.companyId = :company and r.branchId = :branch
+         and r.outstandingXaf > 0
+       """, Long.class)
+       .setParameter("tenant", scope.tenantId())
+       .setParameter("company", scope.companyId())
+       .setParameter("branch", scope.branchId())
+       .getSingleResult();
+  });
+ }
  public long outstandingSale(UUID id){return tx.execute(()->balance(id).outstandingXaf);}
  public void applyReceipt(UUID id,long amount){if(amount<=0)throw new IllegalArgumentException("Positive receipt required");tx.execute(()->{var r=balance(id);if(amount>r.outstandingXaf)throw new IllegalArgumentException("Payment exceeds outstanding debt; record surplus as a deposit");r.outstandingXaf=Math.subtractExact(r.outstandingXaf,amount);em.flush();return null;});}
  public CreditSplit applyCredit(UUID id,long amount){if(amount<=0)throw new IllegalArgumentException("Positive credit required");return tx.execute(()->{var r=balance(id);long applied=Math.min(amount,r.outstandingXaf);r.outstandingXaf=Math.subtractExact(r.outstandingXaf,applied);em.flush();return new CreditSplit(applied,Math.subtractExact(amount,applied));});}

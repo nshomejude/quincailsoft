@@ -24,18 +24,23 @@ export default async function Dashboard({searchParams}: {searchParams: Promise<{
         const period = dashboardPeriod(query.period);
         const range = dashboardRange(selectedDate, period);
         const mayReadSales = permitted(me,'sales:read');
-        const [summary, sales] = await Promise.all([
+        const mayReadCollections = permitted(me, 'tenders:read');
+        const [summary, sales, collections] = await Promise.all([
             mayReadSales ? api<{totalXaf: string}>('sales/summary?'+new URLSearchParams(range)).catch((error:unknown) => {
                 if (error instanceof ApiError && (error.status === 404 || error.status === 400)) return null;
                 throw error;
             }) : null,
             mayReadSales ? api<Sale[]>('sales') : null,
+            mayReadCollections
+                ? api<{pendingCount: number}>('tenders/collections/summary').catch(() => null)
+                : null,
         ]);
         const metrics = [
             {label: period==='week' ? 'Sales this week' : period==='month' ? 'Sales this month' : selectedDate===today ? 'Sales today' : 'Sales on selected date', value: summary ? xaf(summary.totalXaf) : null, note: mayReadSales ? 'Posted gross sales · before returns' : 'Sales access required'},
             {label:'Orders to prepare', value:null, note:'Order queue connection pending'},
             {label:'Low-stock products', value:null, note:'Reorder aggregate connection pending'},
-            {label:'Collection pending', value:null, note:'Collection queue connection pending'},
+            {label:'Collection pending', value: collections?.pendingCount ?? null,
+                note: !mayReadCollections ? 'Collection access required' : collections ? 'Sales with an outstanding balance' : 'Collection count unavailable'},
         ];
 
         return <>
@@ -60,7 +65,7 @@ export default async function Dashboard({searchParams}: {searchParams: Promise<{
                 <section className="panel dashboard-access"><h2>Today’s priorities</h2>
                     {permitted(me,'inventory:read')&&<p><Link href="/inventory">Review stock</Link></p>}
                     {permitted(me,'tenders:read')&&<p><Link href="/finance">Review collections and payments</Link></p>}
-                    <p className="muted">Live order, reorder and collection priorities are pending integration.</p>
+                    <p className="muted">Order and reorder priorities are pending integration.</p>
                 </section>
             </div>
         </>;
