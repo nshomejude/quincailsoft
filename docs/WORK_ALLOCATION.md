@@ -33,3 +33,9 @@ Start from the published checkpoint on a separate branch. Read `AGENTS.md`, the 
 | Operations parity review | Compare `server/operations.py` and its tests with the Java imports, recovery and export components. Document missing handlers and failure cases under §§38, 39 and 41. Coordinate before implementing API changes. |
 
 Codex coordinates migrations, shared security and final integration. Submit an independent branch or draft PR with changed paths, spec references, legacy cases, executed tests and remaining gaps. Coordinate shared database or reactor execution before running it. Leave mobile and native desktop untouched.
+
+## Local integration follow-up
+
+- The Java 25 API package built. Flyway started the disposable PostgreSQL 18.7 preview and the synthetic seed committed. The browser signed in as the preview owner through Keycloak and loaded a dashboard with two catalog records from Java.
+- A forward custody collection immutability migration and the reporting RBAC fixture correction are reviewable. The targeted PostgreSQL rerun is pending following a Docker engine error.
+- The workspace restoration references the original login and dashboard previews and the S11 product-detail contract. The final branded login/dashboard/detail screenshots and narrow-width verification are pending after the browser stopped responding. Product history and label printing still require Java integration.

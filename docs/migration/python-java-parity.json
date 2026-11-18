@@ -4,7 +4,7 @@
     "architecture": "ARCHITECTURE.md",
     "sha256": "b1fd55ab6cadf0c0fd0aa9e36af2e3b70679797dd8a7abede485198ee52b97c9",
     "rules": "AGENTS.md",
-    "rulesSha256": "03a7e9eae2cd72556a92c66f5cf65d746145e6c110184477a28009ac0f94a337",
+    "rulesSha256": "eacbf512380392f89d8fbe3b566d398ac25ba0c79633d5aea51a5ed76b4bbf3f",
     "precedence": "ARCHITECTURE sections31–46 override earlier examples; legacy security defects require tested normative replacements, never literal reintroduction."
   },
   "method": "Deterministic lexical inventory preserves every Python function, every if/elif block, route literal, supported specialized command, generic transition, schema field and actual regression assertion. Branches retain original source to avoid inventing semantics. Candidate Java sources/tests are search aids only, never acceptance. ACCEPTED requires explicit reviewed assertion mapping plus executed test artifact bound to source hashes. Helper functions are inventoried, not assumed to require a one-to-one Java method.",
@@ -13579,11 +13579,11 @@
       },
       {
         "path": "backend/business-modules/reporting/src/test/java/com/quincaisoft/reporting/ReportingPostgresTest.java",
-        "sha256": "4b8688e9a9f592ca251b9a5d002131cd9f711dde20cd8af730d9f424d9eaa913",
+        "sha256": "8108817b38f85d3017d276ae5e5158a8330b33850470d0494795bbe5c73d4cc6",
         "testMethods": [
           "exactScopedPagedStockAndSafeCsv"
         ],
-        "assertionCount": 14
+        "assertionCount": 16
       },
       {
         "path": "backend/business-modules/reporting/src/test/java/com/quincaisoft/reporting/ReportRulesTest.java",

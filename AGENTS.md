@@ -37,3 +37,9 @@ These rules apply to every human or agent changing this repository, including fu
 ## Prohibited shortcuts
 
 No weakened tests to obtain green builds, swallowed integration errors, disabled financial constraints, fake payment success, fabricated screenshots, empty handlers represented as implementations, or automatic completion based on route counts. Never silently change the architecture to make a tool limitation disappear.
+
+## QuincaiSoft branding
+
+- Read [QuincaiSoft brand requirements](docs/QUINCAISOFT_BRAND_REQUIREMENTS.md) before UI changes. Use the original QuincaiSoft wordmark at assets/logo.png and preserve its artwork and proportions. The sky-blue web sidebar uses a white rendering of that same wordmark with the rectangular background removed.
+- Reuse the architecture tokens for navy, sky blue, white canvas, surface, text, muted text and borders across sign-in, navigation, actions, forms, details, reports and printable branding. Preserve semantic warning, error and success colors. Use accessible contrast and readable operational surfaces.
+- Preserve UTF-8 English and French copy. Verify the running sign-in, dashboard, one detail view and one report or document at desktop and narrow widths.

@@ -34,7 +34,7 @@ export async function startLogin(){
  const id=randomBytes(32).toString('hex');
  await (await redis()).set('quincai:web:login:'+id,JSON.stringify({verifier,state,nonce}),{EX:600});
  (await cookies()).set('quincai_login',id,{...cookieOptions,maxAge:600});
- return oidc.buildAuthorizationUrl(config,{redirect_uri:new URL('/auth/callback',appUrl()).href,scope:process.env.OIDC_SCOPES??'openid profile',code_challenge:await oidc.calculatePKCECodeChallenge(verifier),code_challenge_method:'S256',state,nonce});
+ return oidc.buildAuthorizationUrl(config,{redirect_uri:new URL('/auth/callback',appUrl()).href,...(process.env.NODE_ENV==='development'&&process.env.QUINCAI_PREVIEW_DEMO==='true'?{prompt:'login'}:{}),scope:process.env.OIDC_SCOPES??'openid profile',code_challenge:await oidc.calculatePKCECodeChallenge(verifier),code_challenge_method:'S256',state,nonce});
 }
 export async function completeLogin(url:URL){
  const jar=await cookies(),id=jar.get('quincai_login')?.value;

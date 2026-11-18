@@ -7,6 +7,10 @@ import org.jooq.impl.DSL;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.jdbc.datasource.*;
 import org.springframework.transaction.support.TransactionTemplate;
 import java.sql.*;
@@ -36,14 +40,24 @@ class ReportingPostgresTest {
     ScopedTransactions tx=new ScopedTransactions(){public <T>T execute(Supplier<T> action){return template.execute(status->{var s=TenantContext.current();jdbc.queryForObject("select set_config('app.tenant_id',?,true)||set_config('app.company_id',?,true)||set_config('app.branch_id',?,true)||set_config('app.actor_id',?,true)",String.class,s.tenantId().toString(),s.companyId().toString(),s.branchId().toString(),s.actorId().toString());return action.get();});}};
     var reports=new DefaultReportingService(DSL.using(new TransactionAwareDataSourceProxy(ds),SQLDialect.POSTGRES),tx);
     assertEquals(0,jdbc.queryForObject("select count(*) from report_stock_v1",Integer.class));
-    TenantContext.call(new TenantScope(t,c,b,a),1,()->{
-     var page=reports.run("stock",null,null,0,1);assertEquals(1,page.rows().size());assertTrue(page.hasMore());assertEquals("10000000000000010",page.totals().get("value_xaf"));assertEquals(Set.of("value_xaf"),page.totals().keySet());assertTrue(reports.csv(page).contains("'=HYPERLINK"));
-     var last=reports.run("stock",null,null,1,1);assertFalse(last.hasMore());assertEquals(page.totals(),last.totals());assertNotEquals(page.rows(),last.rows());assertTrue(reports.run("stock",null,null,2,1).totals().isEmpty());
-     assertThrows(IllegalArgumentException.class,()->reports.run("stock",java.time.LocalDate.now(),null,0,10));
-     assertThrows(NoSuchElementException.class,()->reports.run("arbitrary_table",null,null,0,10));return null;
-    });
-    assertEquals(0,jdbc.queryForObject("select count(*) from report_stock_v1",Integer.class));
-    TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->{assertTrue(reports.run("stock",null,null,0,10).rows().isEmpty());return null;});
+    assertThrows(AccessDeniedException.class, () -> reports.run("stock", null, null, 0, 1));
+    var context = SecurityContextHolder.createEmptyContext();
+    context.setAuthentication(UsernamePasswordAuthenticationToken.authenticated(
+        a, null, List.of(new SimpleGrantedAuthority("inventory:read"))));
+    SecurityContextHolder.setContext(context);
+    try {
+        assertThrows(AccessDeniedException.class, () -> reports.run("posted-sales", null, null, 0, 1));
+        TenantContext.call(new TenantScope(t,c,b,a),1,()->{
+         var page=reports.run("stock",null,null,0,1);assertEquals(1,page.rows().size());assertTrue(page.hasMore());assertEquals("10000000000000010",page.totals().get("value_xaf"));assertEquals(Set.of("value_xaf"),page.totals().keySet());assertTrue(reports.csv(page).contains("'=HYPERLINK"));
+         var last=reports.run("stock",null,null,1,1);assertFalse(last.hasMore());assertEquals(page.totals(),last.totals());assertNotEquals(page.rows(),last.rows());assertTrue(reports.run("stock",null,null,2,1).totals().isEmpty());
+         assertThrows(IllegalArgumentException.class,()->reports.run("stock",java.time.LocalDate.now(),null,0,10));
+         assertThrows(NoSuchElementException.class,()->reports.run("arbitrary_table",null,null,0,10));return null;
+        });
+        assertEquals(0,jdbc.queryForObject("select count(*) from report_stock_v1",Integer.class));
+        TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->{assertTrue(reports.run("stock",null,null,0,10).rows().isEmpty());return null;});
+    } finally {
+        SecurityContextHolder.clearContext();
+    }
    } finally {exec(admin,"DROP DATABASE "+db);exec(admin,"DROP ROLE "+role);}
   }
  }
