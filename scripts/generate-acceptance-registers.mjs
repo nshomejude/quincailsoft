@@ -15,7 +15,8 @@ const kind = name => records.filter(row => row.kind===name);
 const byScreen = (kindName,id) => kind(kindName).filter(row=>row.canonical.screenId===id).map(row=>row.id);
 const backendOwner = path => path.match(/^backend\/(?:business-modules\/)?([^/]+)\/src\//)?.[1];
 const write = (path, data) => writeFileSync(file(path),JSON.stringify(data,null,2)+'\n');
-const screenshotDirectory = 'datasets/business-history/generated/';
+const screenshotDirectory = 'docs/migration-evidence/issue-3-preview/';
+const responsiveEvidenceCommit = '09f093493506e3008b5b8884f1043324776e68c2';
 const salesEvidenceCommit = 'f35d258dfc9a6a7d1618f6c59e1954d9bc866c35';
 const narrowAcceptance = {
     M03: [{test:'IdentityWorkerPostgresTest', commit:salesEvidenceCommit, status:'PASS', scope:'Separate approval, epoch revocation and fenced replay on PostgreSQL 18.7'}],
@@ -46,7 +47,7 @@ const screens = kind('screen').map(row=>{
         captures:{
             original:row.id==='S01'?['previews/QuincaiSoft_Dashboard_v4.jpg','app.js']:[],
             desktop:sample?[{path:screenshotDirectory+sample.screenshot,commit:'831d2df',note:'Initial seeded preview capture'}, ...(row.id==='S01'?[{path:screenshotDirectory+'live-dashboard-sales-summary.jpg',commit:salesEvidenceCommit,note:'Posted sales amount verified as owner on the small preview seed'}]:[])]:[],
-            narrow:[], comparableBeforeAfter:false,
+            narrow:sample?[{path:screenshotDirectory+(row.id==='S01'?'narrow-dashboard.jpg':'narrow-product-detail.jpg'),commit:responsiveEvidenceCommit,viewportWidth:390}]:[], comparableBeforeAfter:false,
         },
         status:sample?'FAIL':'NOT_RUN',
     };
@@ -57,7 +58,7 @@ assert.equal(new Set(screens.map(screen=>screen.id)).size,screens.length);
 write('docs/migration/screen-fidelity-register.json',{
     schemaVersion:1, source:coveragePath, evidenceCommit:'831d2dfbeeaffa0df5d39e18433f0e6f7a1a10ae',
     method:'Canonical coverage supplies candidate mappings. Candidates and observed preview captures do not certify visual, behavioral or role parity.',
-    loginComparison:{original:'previews/QuincaiSoft_Login_v4.jpg', capture:screenshotDirectory+'live-login.jpg', status:'NOT_RUN', remaining:'Matched desktop/narrow capture and browser role-switch matrix.'},
+    loginComparison:{original:'previews/QuincaiSoft_Login_v4.jpg', capture:screenshotDirectory+'live-login.jpg', narrow:{path:screenshotDirectory+'narrow-login.jpg',commit:responsiveEvidenceCommit,viewportWidth:390}, status:'NOT_RUN', remaining:'Matched original comparison and browser role-switch matrix.'},
     screens,
 });
 
