@@ -342,7 +342,14 @@
       "integrationTestCandidates": [
         "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java"
       ],
-      "executedAcceptance": [],
+      "executedAcceptance": [
+        {
+          "test": "IdentityWorkerPostgresTest",
+          "commit": "f35d258dfc9a6a7d1618f6c59e1954d9bc866c35",
+          "status": "PASS",
+          "scope": "Separate approval, epoch revocation and fenced replay on PostgreSQL 18.7"
+        }
+      ],
       "remaining": [
         "Related source exists; canonical field/action invariants, complete workflow and end-to-end acceptance are not certified.",
         "Verify canonical workflows and fields including scoped denials, rollback, replay, invariants and actual browser behavior."
@@ -2907,7 +2914,20 @@
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
         "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java"
       ],
-      "executedAcceptance": [],
+      "executedAcceptance": [
+        {
+          "test": "PostgresSaleIntegrationTest",
+          "commit": "f35d258dfc9a6a7d1618f6c59e1954d9bc866c35",
+          "status": "PASS",
+          "scope": "Scoped exact posted amount, drafts excluded and custody/rollback on PostgreSQL 18.7"
+        },
+        {
+          "test": "FullApplicationPostgresTest",
+          "commit": "f35d258dfc9a6a7d1618f6c59e1954d9bc866c35",
+          "status": "PASS",
+          "scope": "Signed actor can read a date total; anonymous request denied"
+        }
+      ],
       "remaining": [
         "Related source exists; canonical field/action invariants, complete workflow and end-to-end acceptance are not certified.",
         "Verify canonical workflows and fields including scoped denials, rollback, replay, invariants and actual browser behavior."
@@ -4110,7 +4130,14 @@
       ],
       "legacyParityCandidates": [],
       "integrationTestCandidates": [],
-      "executedAcceptance": [],
+      "executedAcceptance": [
+        {
+          "test": "ReportingPostgresTest",
+          "commit": "831d2dfbeeaffa0df5d39e18433f0e6f7a1a10ae",
+          "status": "PASS",
+          "scope": "Scoped stock report, existing capability denials and exact CSV totals on PostgreSQL 18.7"
+        }
+      ],
       "remaining": [
         "Related source exists; canonical field/action invariants, complete workflow and end-to-end acceptance are not certified.",
         "Verify canonical workflows and fields including scoped denials, rollback, replay, invariants and actual browser behavior."

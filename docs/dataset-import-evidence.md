@@ -1,6 +1,6 @@
 # Issue #2 historical dataset integration evidence — 18 November 2026
 
-Desktop Codex owns Java ingestion, local integration and acceptance. The source package is `941f3ba87fb2361a95baff7a8673ff272b34d003`, cherry-picked as `5013e25` onto `handover/codex-computer-2026-11-18`. The local preview uses the application code at `831d2df`. No historical import mapping version has been accepted. Mobile and native desktop remain paused. The independent documents and reporting parity audit remains with the ChatGPT agent.
+Desktop Codex owns Java ingestion, local integration and acceptance. The source package is `941f3ba87fb2361a95baff7a8673ff272b34d003`, cherry-picked as `5013e25` onto `handover/codex-computer-2026-11-18`. The first local comparison used application code at `831d2df`. The scoped sales aggregate and acceptance registers are at `f35d258dfc9a6a7d1618f6c59e1954d9bc866c35`. No historical import mapping version has been accepted. Mobile and native desktop remain paused. The independent documents and reporting parity audit remains with the ChatGPT agent.
 
 ## Executed source checks
 
@@ -24,7 +24,7 @@ Published source totals in exact XAF are inventory 3,898,492,465, receivables 90
 | Gate from RELEASE_ACCEPTANCE.md | Status | Desktop evidence or blocker |
 | --- | --- | --- |
 | Canonical parity and UI action, field, report and template coverage | FAIL | The strict register still contains 735 unresolved behaviors. |
-| Full Java build, PostgreSQL 18 and Modulith | NOT_RUN | The current reactor rerun was started with `mvn -B -ntp -fae verify` against the distinct PostgreSQL 18.7 test container. Final result pending. The preview API health endpoint responded UP. |
+| Full Java build, PostgreSQL 18 and Modulith | FAIL | The full reactor initially hit a stale worker migration fixture. After the fixture correction, the worker, sales and full API/security tests passed against PostgreSQL 18.7. The targeted reactor stopped resolving the uncached Modulith test dependency in its disconnected test network. The pinned dependency was cached separately and a fresh full PostgreSQL 18.7 rerun was started. See the executed checks below. |
 | OIDC, membership, epoch, scoped RBAC/ABAC | NOT_RUN | Local cashier session rendered the seeded dashboard and product detail. Full adversarial, job, download and report matrix remains pending. |
 | Historical import, replay and exact reconciliation | BLOCKED | Java catalog lacks typed manufacturer, family/model, variant and supplier-offer identity. The chronological adapter, durable source mapping, HR/payroll and exact replay equivalence are unfinished. |
 | Responsive browser workflows and original branding | NOT_RUN | Actual login, dashboard and Electrical Cable detail captured on the local seeded preview. Sidebar computed color was rgb(21, 149, 230), and the white wordmark was visible. Historical screens and the full responsive browser matrix are pending. |
@@ -33,7 +33,15 @@ Published source totals in exact XAF are inventory 3,898,492,465, receivables 90
 | Dependency/security scans and SaaS capacity/recovery | NOT_RUN | No fresh release-scoped evidence for this build. |
 | Independent approval and exact economic behavior | NOT_RUN | Await reactor results and chronological import acceptance. |
 
-The preview at http://localhost:3100 uses the small synthetic application seed. Screenshots saved locally as `live-login.jpg`, `live-dashboard.jpg` and `live-product-detail.jpg` under the Git-ignored generated directory. The screenshots show the seeded preview only.
+The preview at http://localhost:3100 uses the small synthetic application seed. Screenshots saved locally as `live-login.jpg`, `live-dashboard.jpg` and `live-product-detail.jpg` under the Git-ignored generated directory. The screenshots show the seeded preview only. The owner-side dashboard after installing the new API package is saved as `live-dashboard-sales-summary.jpg`. Its real posted-sales total is 0 FCFA. The remaining three required metrics still show their missing connections.
+
+## Executed Java and web checks
+
+- Full PostgreSQL 18.7 reactor initially failed in `IdentityWorkerPostgresTest` because its migration allowlist omitted the identity revocation table. The fixture now applies all migrations in numeric order. Its separate-owner approval, epoch revocation and idempotent worker projection passed in the targeted rerun.
+- `PostgresSaleIntegrationTest` passed on the current sales code. It checks the exact scoped date total, exclusions for draft sales and wrong day, rejection of oversized ranges, empty cross-tenant/branch totals and immutable custody collection facts.
+- `FullApplicationPostgresTest` and four `SecurityBoundaryTest` cases passed. The signed test token can read the summary; an unauthenticated request cannot. This is narrower than the complete deployment RBAC/ABAC matrix.
+- The full rerun passed settlement, tender, return, provider, expense, reporting, sync and platform PostgreSQL tests before reaching the worker failure. The reporting case exercised permitted and denied source capabilities.
+- Nineteen web Node tests, Next.js TypeScript checks and the project rule gate passed. Strict parity still reports 735 unresolved entries. This checkpoint does not establish a release.
 
 ## Next implementation boundary
 

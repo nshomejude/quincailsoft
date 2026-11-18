@@ -16,6 +16,13 @@ const byScreen = (kindName,id) => kind(kindName).filter(row=>row.canonical.scree
 const backendOwner = path => path.match(/^backend\/(?:business-modules\/)?([^/]+)\/src\//)?.[1];
 const write = (path, data) => writeFileSync(file(path),JSON.stringify(data,null,2)+'\n');
 const screenshotDirectory = 'datasets/business-history/generated/';
+const salesEvidenceCommit = 'f35d258dfc9a6a7d1618f6c59e1954d9bc866c35';
+const narrowAcceptance = {
+    M03: [{test:'IdentityWorkerPostgresTest', commit:salesEvidenceCommit, status:'PASS', scope:'Separate approval, epoch revocation and fenced replay on PostgreSQL 18.7'}],
+    M17: [{test:'PostgresSaleIntegrationTest', commit:salesEvidenceCommit, status:'PASS', scope:'Scoped exact posted amount, drafts excluded and custody/rollback on PostgreSQL 18.7'},
+          {test:'FullApplicationPostgresTest', commit:salesEvidenceCommit, status:'PASS', scope:'Signed actor can read a date total; anonymous request denied'}],
+    M26: [{test:'ReportingPostgresTest', commit:'831d2dfbeeaffa0df5d39e18433f0e6f7a1a10ae', status:'PASS', scope:'Scoped stock report, existing capability denials and exact CSV totals on PostgreSQL 18.7'}],
+};
 const reviewed = {
     S01: {route:'/', component:'apps/web-admin/app/page.tsx', endpoints:['GET /api/v1/session','GET /api/v1/sales','GET /api/v1/sales/summary?from=&to='], screenshot:'live-dashboard.jpg', gaps:['Posted gross sales by business date are wired to the Java summary. Week/month controls, low-stock aggregate and order/collection queues remain unaccepted.','Open POS and priority drilldowns need canonical workflow comparison.']},
     S11: {route:'/catalog/[id]', component:'apps/web-admin/app/catalog/[id]/page.tsx', endpoints:['GET /api/v1/products/{id}','PUT /api/v1/products/{id}','GET /api/v1/catalog/categories'], screenshot:'live-product-detail.jpg', gaps:['History, product-scoped stock card, and label printing are pending.','Manufacturer, model, family and variant identity are pending.']},
@@ -38,7 +45,7 @@ const screens = kind('screen').map(row=>{
         gaps:sample?.gaps??[row.reason,'Compare actionable fields, dialogs and permissions against original workflow.'],
         captures:{
             original:row.id==='S01'?['previews/QuincaiSoft_Dashboard_v4.jpg','app.js']:[],
-            desktop:sample?[{path:screenshotDirectory+sample.screenshot,commit:'831d2df',note:'Seeded preview capture before dashboard aggregate change'}]:[],
+            desktop:sample?[{path:screenshotDirectory+sample.screenshot,commit:'831d2df',note:'Initial seeded preview capture'}, ...(row.id==='S01'?[{path:screenshotDirectory+'live-dashboard-sales-summary.jpg',commit:salesEvidenceCommit,note:'Posted sales amount verified as owner on the small preview seed'}]:[])]:[],
             narrow:[], comparableBeforeAfter:false,
         },
         status:sample?'FAIL':'NOT_RUN',
@@ -75,7 +82,7 @@ const modules=kind('module').map(row=>{
         apiEvidence:controllers, permissionCandidates:permissions,
         legacyParityCandidates:candidates.map(candidate=>candidate.id),
         integrationTestCandidates:[...new Set(candidates.flatMap(candidate=>candidate.candidateJavaTests??[]))].sort(),
-        executedAcceptance:[], remaining:[row.reason,'Verify canonical workflows and fields including scoped denials, rollback, replay, invariants and actual browser behavior.'],
+        executedAcceptance:narrowAcceptance[row.id]??[], remaining:[row.reason,'Verify canonical workflows and fields including scoped denials, rollback, replay, invariants and actual browser behavior.'],
         status:row.id==='M29'||row.id==='M30'?'BLOCKED':'NOT_RUN',
     };
 });
