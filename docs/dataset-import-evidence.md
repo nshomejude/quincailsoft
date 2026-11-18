@@ -67,3 +67,9 @@ The initial catalog and party pass processed 14,117 fixture records and produced
 Executed `QUINCAI_HISTORY_CATALOG_ACCEPTANCE=true mvn -B -ntp -pl api-server -am -Dtest=FullApplicationPostgresTest -Dsurefire.failIfNoSpecifiedTests=false verify` in the isolated test container. One expanded acceptance scenario passed, zero errors, failures or skips. The process rejected a non-loopback destination in a separate local check.
 
 This database was disposed of by the test. The running preview has zero historical records. The preflight report describes the state before this test; 231,397 candidate records were outside this pass. Restart after an actual interruption, authenticated export generation, chronological economic posting and normalized branch/party reconciliation remain pending. The imported quotes did not change stock valuation. The separately integrated export checker passed 29 local Node tests and still awaits actual Java financial exports.
+
+## Authenticated opening capital prefix
+
+Sequence 1 (`50568a8b-4ab9-5696-a1ab-c3f17692357d`) was posted through draft, submit and independent approval on the Spring Boot API. The disposable PostgreSQL 18.7 test observed one posted journal after two passes, with exact source net lines BANK 1,900,000,000 XAF, CASH 100,000,000 XAF, and EQUITY −2,000,000,000 XAF. The initial and replay mappings had the same SHA-256 `e6f254f54d95ac950331e50df0af93b76eee88c7477b370711420ccc4bb9b155`.
+
+Executed `QUINCAI_HISTORY_OPENING_ACCEPTANCE=true mvn -B -ntp -pl api-server -am -Dtest=FullApplicationPostgresTest -Dsurefire.failIfNoSpecifiedTests=false verify` on the isolated fixture. The expanded scenario passed without failures, errors or skips. This is one historical economic event, not full replay or financial reconciliation. Sequence 2 and later events, interruption coverage and deployment of historical data in the running preview remain pending.

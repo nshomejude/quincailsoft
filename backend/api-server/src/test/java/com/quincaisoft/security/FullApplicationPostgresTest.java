@@ -24,18 +24,23 @@ class FullApplicationPostgresTest {
   String adminUrl=System.getenv("QUINCAI_PG_TEST_URL"),user=System.getenv().getOrDefault("QUINCAI_PG_TEST_USER","agent"),db="boot_test_"+UUID.randomUUID().toString().replace("-",""),role="boot_role_"+UUID.randomUUID().toString().replace("-","");String url=adminUrl.substring(0,adminUrl.lastIndexOf('/')+1)+db;
   UUID tenant=UUID.randomUUID(),company=UUID.randomUUID(),branch=UUID.randomUUID(),actor=UUID.randomUUID();
   boolean runHistory = "true".equals(System.getenv("QUINCAI_HISTORY_CATALOG_ACCEPTANCE"));
-  if (runHistory) {
+  boolean runOpening = "true".equals(System.getenv("QUINCAI_HISTORY_OPENING_ACCEPTANCE"));
+  if (runHistory || runOpening) {
    tenant=UUID.fromString("0984ca97-010e-51fc-a6a0-7c33453e214e");
    company=UUID.fromString("f6b40fb6-3f23-5891-a908-2de13a773d7d");
    branch=UUID.fromString("fdbf6a74-83c1-5ef6-a69c-3ea119eb69f3");
   }
-  UUID product=UUID.randomUUID(), supplier=UUID.randomUUID();
+  UUID product=UUID.randomUUID(), supplier=UUID.randomUUID(), approver=UUID.randomUUID();
   try(var admin=DriverManager.getConnection(adminUrl,user,"")){
    sql(admin,"CREATE ROLE "+role+" LOGIN NOSUPERUSER NOBYPASSRLS INHERIT");sql(admin,"GRANT quincai_app TO "+role);sql(admin,"CREATE DATABASE "+db);
    try{
     try(var owner=DriverManager.getConnection(url,user,"")){
      try(var files=Files.list(Path.of("../db-migrations/src/main/resources/db/migration"))){for(var p:files.filter(p->p.toString().endsWith(".sql")).sorted(java.util.Comparator.comparingInt(migrationFile -> Integer.parseInt(migrationFile.getFileName().toString().split("__")[0].substring(1)))).toList())sql(owner,Files.readString(p));}
      sql(owner,"INSERT INTO tenant(id,name)VALUES('"+tenant+"','Synthetic');INSERT INTO company(tenant_id,id,name)VALUES('"+tenant+"','"+company+"','Synthetic');INSERT INTO branch(tenant_id,company_id,id,name)VALUES('"+tenant+"','"+company+"','"+branch+"','Synthetic');INSERT INTO tenant_memberships(tenant_id,actor_id,company_id,branch_id,role_code)VALUES('"+tenant+"','"+actor+"','"+company+"','"+branch+"','owner')");
+     if(runOpening){
+      sql(owner,"INSERT INTO tenant_memberships(tenant_id,company_id,branch_id,actor_id,role_code) VALUES ('"+tenant+"','"+company+"','"+branch+"','"+approver+"','owner')");
+      sql(owner,"INSERT INTO financial_period(tenant_id,company_id,id,start_date,end_date,status) VALUES ('"+tenant+"','"+company+"','"+UUID.randomUUID()+"','2024-01-01','2024-01-31','Open')");
+     }
      sql(owner,"INSERT INTO catalog_product(tenant_id,company_id,id,sku,name,base_unit,selling_price_xaf) VALUES ('"+tenant+"','"+company+"','"+product+"','TEST-SKU','Synthetic cable','piece',1000)");
      sql(owner,"INSERT INTO supplier(tenant_id,company_id,id,code,name) VALUES ('"+tenant+"','"+company+"','"+supplier+"','TEST-SUP','Synthetic supplier')");
 
@@ -60,6 +65,11 @@ class FullApplicationPostgresTest {
      assertTrue(offer.get("quotedCostXaf").isString());
      assertEquals("9007199254740993",offer.get("quotedCostXaf").asText());
 
+     if(runOpening){
+      var maker=token(key,issuer,"quincai-test",tenant,company,branch,actor,"journals:write");
+      var checker=token(key,issuer,"quincai-test",tenant,company,branch,approver,"journals:approve");
+      verifyHistoricalOpening(port,maker,checker,url,user);
+     }
      if(runHistory){
       var historyWriter=token(key,issuer,"quincai-test",tenant,company,branch,actor,"catalog:write purchasing:write customers:write");
       verifyHistoricalCatalog(port,historyWriter,url,user);
@@ -80,6 +90,34 @@ class FullApplicationPostgresTest {
  static String token(RSAKey key,String issuer,String audience,UUID t,UUID c,UUID b,UUID a,String scopes)throws Exception{
   var claims=new JWTClaimsSet.Builder().issuer(issuer).audience(audience).subject(a.toString()).issueTime(java.util.Date.from(Instant.now())).expirationTime(java.util.Date.from(Instant.now().plusSeconds(3600))).claim("tenant_id",t.toString()).claim("company_id",c.toString()).claim("branch_id",b.toString()).claim("authorization_epoch",1).claim("scope",scopes).build();var jwt=new SignedJWT(new JWSHeader.Builder(JWSAlgorithm.RS256).keyID(key.getKeyID()).build(),claims);jwt.sign(new RSASSASigner(key));return jwt.serialize();
  }
+ private static void verifyHistoricalOpening(int port,String maker,String approver,String url,String user)throws Exception{
+  Path output=Files.createTempDirectory(Path.of("target"),"opening-acceptance-").toAbsolutePath();
+  Path root=Path.of("../..").toAbsolutePath().normalize();
+  for(String pass:List.of("initial","replay")){
+   var process=new ProcessBuilder(Path.of(System.getProperty("java.home"),"bin","java").toString(),
+       "--class-path",System.getProperty("surefire.test.class.path",System.getProperty("java.class.path")),
+       root.resolve("backend/tools/history-import/src/main/java/com/quincaisoft/tools/CatalogHistoryImport.java").toString(),
+       "http://127.0.0.1:"+port,root.resolve("datasets/business-history/generated").toString(),
+       root.resolve("datasets/business-history/evidence/manifest.json").toString(),
+       output.resolve(pass+".ndjson").toString(),"--opening").inheritIO();
+   process.environment().put("QUINCAI_HISTORY_TOKEN",maker);
+   process.environment().put("QUINCAI_HISTORY_APPROVER_TOKEN",approver);
+   assertEquals(0,process.start().waitFor(),pass+" opening importer process");
+  }
+  assertEquals(-1,Files.mismatch(output.resolve("initial.ndjson"),output.resolve("replay.ndjson")));
+  try(var db=DriverManager.getConnection(url,user,"");var statement=db.createStatement()){
+   try(var rows=statement.executeQuery("select account_code, sum(debit_xaf-credit_xaf)::text from journal_line group by account_code")){
+    var balance=new HashMap<String,String>();
+    while(rows.next())balance.put(rows.getString(1),rows.getString(2));
+    assertEquals(Map.of("BANK","1900000000","CASH","100000000","EQUITY","-2000000000"),balance);
+   }
+   try(var rows=statement.executeQuery("select count(*) from journal_entry")){
+    assertTrue(rows.next());
+    assertEquals(1,rows.getInt(1));
+   }
+  }
+ }
+
  private static void verifyHistoricalCatalog(int port,String token,String url,String user)throws Exception{
   Path output=Files.createTempDirectory(Path.of("target"),"history-acceptance-").toAbsolutePath();
   Path root=Path.of("../..").toAbsolutePath().normalize();

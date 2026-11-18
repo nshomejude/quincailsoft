@@ -11,7 +11,8 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.time.Duration;
@@ -47,8 +48,9 @@ public final class CatalogHistoryImport {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 4) throw new IllegalArgumentException(
-            "Usage: <loopback-api-origin> <generated-directory> <reviewed-manifest> <new-mapping.ndjson>");
+        boolean opening = args.length == 5 && args[4].equals("--opening");
+        if (args.length != 4 && !opening) throw new IllegalArgumentException(
+            "Usage: <loopback-api-origin> <generated-directory> <reviewed-manifest> <new-mapping.ndjson> [--opening]");
         URI api = URI.create(args[0]);
         if (!"http".equals(api.getScheme()) || !"127.0.0.1".equals(api.getHost()) ||
             api.getPort() < 1 || api.getRawUserInfo() != null || api.getRawQuery() != null ||
@@ -59,9 +61,13 @@ public final class CatalogHistoryImport {
 
         Path dir = Path.of(args[1]);
         JsonNode manifest = JSON.readTree(Files.readString(Path.of(args[2])));
-        validateInputs(dir, manifest);
+        validateInputs(dir, manifest, opening ? List.of("branches", "events", "journals") : FILES);
         Path output = Path.of(args[3]).toAbsolutePath();
         if (Files.exists(output)) throw new IllegalArgumentException("Mapping output already exists");
+        if (opening) {
+            importOpening(api, token, dir, output);
+            return;
+        }
         Path staging = Files.createTempFile(output.getParent(), ".history-import-", ".ndjson");
         try {
             long mapped;
@@ -78,14 +84,14 @@ public final class CatalogHistoryImport {
         }
     }
 
-    private static void validateInputs(Path dir, JsonNode manifest) throws Exception {
+    private static void validateInputs(Path dir, JsonNode manifest, List<String> required) throws Exception {
         if (!DATASET.equals(manifest.path("datasetId").asText()) || !manifest.path("synthetic").asBoolean() ||
             !manifest.equals(JSON.readTree(Files.readString(dir.resolve("manifest.json")))))
             throw new IllegalArgumentException("Expected the reviewed synthetic fixture manifest");
         var verified = new HashSet<String>();
         for (JsonNode input : manifest.path("files")) {
             String name = input.path("file").asText();
-            if (!FILES.stream().anyMatch(file -> name.equals(file + ".ndjson"))) continue;
+            if (!required.stream().anyMatch(file -> name.equals(file + ".ndjson"))) continue;
             var digest = MessageDigest.getInstance("SHA-256");
             try (InputStream bytes = Files.newInputStream(dir.resolve(name));
                  var hashed = new DigestInputStream(bytes, digest)) {
@@ -94,10 +100,10 @@ public final class CatalogHistoryImport {
             if (!HexFormat.of().formatHex(digest.digest()).equals(input.path("sha256").asText()) || !verified.add(name))
                 throw new IllegalArgumentException("Invalid checksum or duplicate manifest entry for " + name);
         }
-        if (verified.size() != FILES.size()) throw new IllegalArgumentException("Missing catalog input files");
+        if (verified.size() != required.size()) throw new IllegalArgumentException("Missing required input files");
     }
 
-    private void requireSyntheticScope(Path dir) throws Exception {
+    private JsonNode requireSyntheticScope(Path dir) throws Exception {
         var response = send(HttpRequest.newBuilder(api.resolve("/api/v1/session")).GET(), "session");
         JsonNode scope = response.path("scope");
         if (!TENANT.equals(scope.path("tenantId").asText()) || !COMPANY.equals(scope.path("companyId").asText()))
@@ -108,6 +114,68 @@ public final class CatalogHistoryImport {
                 .anyMatch(row -> row.path("id").asText().equals(scope.path("branchId").asText()));
         }
         if (!knownBranch) throw new IllegalStateException("Target branch is not in the historical fixture");
+        return scope;
+    }
+
+    private static void importOpening(URI api, String token, Path dir, Path output) throws Exception {
+        String approverToken = System.getenv("QUINCAI_HISTORY_APPROVER_TOKEN");
+        if (approverToken == null || approverToken.isBlank())
+            throw new IllegalArgumentException("QUINCAI_HISTORY_APPROVER_TOKEN is required for opening capital");
+        var maker = new CatalogHistoryImport(api, token, null);
+        var approver = new CatalogHistoryImport(api, approverToken, null);
+        JsonNode makerScope = maker.requireSyntheticScope(dir);
+        JsonNode approverScope = approver.requireSyntheticScope(dir);
+        UUID branch = uuid(makerScope, "branchId");
+        if (!branch.equals(uuid(approverScope, "branchId")) ||
+            uuid(makerScope, "actorId").equals(uuid(approverScope, "actorId")))
+            throw new IllegalArgumentException("Opening capital requires independent actors in the same branch");
+
+        // Only the chronological prefix is supported. Later branches must wait for intervening events.
+        JsonNode event = first(dir.resolve("events.ndjson"));
+        JsonNode journal = first(dir.resolve("journals.ndjson"));
+        UUID source = uuid(event, "id");
+        if (event.path("sequence").asLong() != 1 || !event.path("synthetic").asBoolean() ||
+            !event.path("type").asText().equals("OPENING_CAPITAL") || !source.equals(uuid(event, "operationId")) ||
+            !TENANT.equals(event.path("tenantId").asText()) || !COMPANY.equals(event.path("companyId").asText()) ||
+            !source.equals(uuid(journal, "eventId")) || !branch.equals(uuid(event, "branchId")) ||
+            !branch.equals(uuid(journal, "branchId")) ||
+            !event.required("businessDate").equals(journal.required("businessDate")))
+            throw new IllegalArgumentException("Unexpected historical opening event or journal");
+
+        var lines = new ArrayList<Map<String, Object>>();
+        for (JsonNode line : journal.required("lines")) {
+            if (!line.path("partyId").isNull()) throw new IllegalArgumentException("Opening journal has an unexpected party");
+            lines.add(fields(line, "account", "debitXaf", "creditXaf"));
+        }
+        var draft = maker.post("/manual-journals", operation("opening-draft", source),
+            Map.of("businessDate", event.required("businessDate"), "lines", lines,
+                "reason", "Synthetic opening capital " + source));
+        if (!uuid(makerScope, "actorId").equals(uuid(draft, "createdBy")))
+            throw new IllegalStateException("Opening replay requires the original maker");
+        UUID manualId = uuid(draft, "id");
+        String path = "/manual-journals/" + manualId;
+        var submitted = maker.post(path + "/submit", operation("opening-submit", source),
+            Map.of("version", draft.required("version"), "reason", "Submit synthetic opening capital " + source));
+        var posted = approver.post(path + "/approve", operation("opening-approve", source),
+            Map.of("version", submitted.required("version"), "reason", "Approve synthetic opening capital " + source));
+        if (!posted.path("status").asText().equals("POSTED") ||
+            !uuid(approverScope, "actorId").equals(uuid(posted, "approvedBy")))
+            throw new IllegalStateException("Opening journal approval did not post");
+
+        var entry = new LinkedHashMap<String, Object>();
+        entry.put("sourceId", source);
+        entry.put("sourceJournalId", uuid(journal, "id"));
+        entry.put("manualJournalId", manualId);
+        entry.put("journalId", uuid(posted, "journalId"));
+        entry.put("postingOperationId", operation("opening-approve", source));
+        Files.writeString(output, JSON.writeValueAsString(entry) + "\n", StandardOpenOption.CREATE_NEW);
+        System.out.println("Historical opening capital mappings: 1");
+    }
+
+    private static JsonNode first(Path path) throws Exception {
+        try (var file = Files.newBufferedReader(path)) {
+            return JSON.readTree(file.readLine());
+        }
     }
 
     private void load(Path dir) throws Exception {
@@ -166,14 +234,10 @@ public final class CatalogHistoryImport {
     }
 
     private UUID save(String kind, UUID source, String path, Map<String, Object> fields, String idField) throws Exception {
-        UUID operation = UUID.nameUUIDFromBytes((DATASET + ":" + kind + ":" + source).getBytes(StandardCharsets.UTF_8));
+        UUID operation = operation(kind, source);
         fields.put("operationId", operation);
         fields.put("reason", "Historical synthetic fixture " + kind + "/" + source);
-        var response = send(HttpRequest.newBuilder(api.resolve("/api/v1" + path))
-            .header("Content-Type", "application/json")
-            .header("Idempotency-Key", operation.toString())
-            .header("X-Request-ID", UUID.randomUUID().toString())
-            .POST(HttpRequest.BodyPublishers.ofString(JSON.writeValueAsString(fields))), path);
+        var response = post(path, operation, fields);
         UUID target = uuid(response, idField);
         if (ids.computeIfAbsent(kind, ignored -> new HashMap<>()).putIfAbsent(source, target) != null)
             throw new IllegalStateException("Duplicate source mapping " + source);
@@ -187,6 +251,20 @@ public final class CatalogHistoryImport {
         mapping.newLine();
         mapped++;
         return target;
+    }
+
+    private static UUID operation(String kind, UUID source) {
+        return UUID.nameUUIDFromBytes((DATASET + ":" + kind + ":" + source).getBytes(StandardCharsets.UTF_8));
+    }
+
+    private JsonNode post(String path, UUID operation, Map<String, Object> fields) throws Exception {
+        var input = new LinkedHashMap<>(fields);
+        input.put("operationId", operation);
+        return send(HttpRequest.newBuilder(api.resolve("/api/v1" + path))
+            .header("Content-Type", "application/json")
+            .header("Idempotency-Key", operation.toString())
+            .header("X-Request-ID", UUID.randomUUID().toString())
+            .POST(HttpRequest.BodyPublishers.ofString(JSON.writeValueAsString(input))), path);
     }
 
     private JsonNode send(HttpRequest.Builder request, String path) throws Exception {
