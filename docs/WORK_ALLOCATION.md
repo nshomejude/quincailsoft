@@ -62,3 +62,20 @@ See [delivery control](DELIVERY_CONTROL.md), [screen fidelity](migration/screen-
 ### Current migration coordination
 
 Issue #4 now records Cloud's V24 platform-control, V25 subscriptions, and V26 workforce reservations. Desktop retains V23 and the historical importer. The opening-capital adapter reuses the current journal workflow and does not allocate a migration. Cloud contributions still require focused review and combined acceptance before release.
+
+## Combined integration on the handover branch
+
+Draft PR #11 source `9c1e13923b478ff41864f843613942e9ad3052da` was
+cherry-picked locally as `779ce12` above the verified receipt checkpoint
+`570515c`. V23 remains Desktop-owned and V24 through V26 are from PR #11.
+GitHub subsequently merged PRs #5 through #11 into handover at `831d2fa`.
+Desktop synchronized to that commit after confirming identical backend, web,
+and infrastructure paths against the local verification candidate.
+The 21 web consumer tests, TypeScript check and Windows Webpack production
+build passed. The one-click demo owner sign-in reached the live Java-backed
+dashboard. Order queue, low-stock and collection cards still require wiring.
+Combined PostgreSQL replay and broader consumer acceptance remain open.
+The local deployment environment validator passed 12 tests. Historical supplier
+payment needs authenticated bank evidence creation and approval before the
+settlement can consume it. The historical bank reference must be preserved in
+that evidence. Continue checking the actual payable and journal after replay.
