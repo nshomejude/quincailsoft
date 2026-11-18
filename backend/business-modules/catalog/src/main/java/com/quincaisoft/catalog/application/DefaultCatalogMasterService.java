@@ -41,6 +41,64 @@ public class DefaultCatalogMasterService implements CatalogMasterService {
    e.name=c.name();e.active=c.active();if(id==null)em.persist(e);em.flush();var result=view(e);receipt(c.operationId(),e.id,"UNIT",hash,result,c.reason());return result;
   });
  }
+ @Override
+ public Manufacturer createManufacturer(ManufacturerSave command) {
+  if (command == null) throw new IllegalArgumentException("Manufacturer required");
+  validate(command.operationId(), command.code(), command.name(), command.reason());
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   String hash = identityHash("MANUFACTURER", command);
+   var previous = replay(command.operationId(), hash, Manufacturer.class);
+   if (previous != null) return previous;
+   var entity = new CatalogManufacturer();
+   entity.tenantId = scope.tenantId();
+   entity.companyId = scope.companyId();
+   entity.id = UUID.randomUUID();
+   entity.code = command.code();
+   entity.name = command.name();
+   em.persist(entity);
+   em.flush();
+   var result = new Manufacturer(entity.id, entity.code, entity.name);
+   receipt(command.operationId(), entity.id, "MANUFACTURER", hash, result, command.reason());
+   return result;
+  });
+ }
+
+ @Override
+ public Family createFamily(FamilySave command) {
+  if (command == null || command.operationId() == null || command.manufacturerId() == null)
+   throw new IllegalArgumentException("Operation and manufacturer required");
+  text(command.productType(), 80, true);
+  text(command.modelNumber(), 80, true);
+  text(command.reason(), 2000, true);
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   String hash = identityHash("PRODUCT_FAMILY", command);
+   var previous = replay(command.operationId(), hash, Family.class);
+   if (previous != null) return previous;
+   var key = new CatalogManufacturer.Key(scope.tenantId(), scope.companyId(), command.manufacturerId());
+   if (em.find(CatalogManufacturer.class, key) == null) throw new NoSuchElementException("Manufacturer not found");
+   var entity = new CatalogProductFamily();
+   entity.tenantId = scope.tenantId();
+   entity.companyId = scope.companyId();
+   entity.id = UUID.randomUUID();
+   entity.manufacturerId = command.manufacturerId();
+   entity.productType = command.productType();
+   entity.modelNumber = command.modelNumber();
+   em.persist(entity);
+   em.flush();
+   var result = new Family(entity.id, entity.manufacturerId, entity.productType, entity.modelNumber);
+   receipt(command.operationId(), entity.id, "PRODUCT_FAMILY", hash, result, command.reason());
+   return result;
+  });
+ }
+
+ private String identityHash(String kind, Object command) {
+  var scope = TenantContext.current();
+  return digest(kind + "|" + scope.companyId() + "|" + scope.branchId() + "|" + scope.actorId()
+      + "|" + json.writeValueAsString(command));
+ }
+
  private CatalogCategory findCategory(UUID id,LockModeType lock){var s=TenantContext.current();var e=em.find(CatalogCategory.class,new CatalogCategory.Key(s.tenantId(),s.companyId(),id),lock);if(e==null)throw new NoSuchElementException("Category not found");return e;}
  private CatalogUnit findUnit(UUID id,LockModeType lock){var s=TenantContext.current();var e=em.find(CatalogUnit.class,new CatalogUnit.Key(s.tenantId(),s.companyId(),id),lock);if(e==null)throw new NoSuchElementException("Unit not found");return e;}
  private Category view(CatalogCategory e){return new Category(e.id,e.code,e.name,e.parentId,e.brand,e.description,e.active,Long.toString(e.version));}

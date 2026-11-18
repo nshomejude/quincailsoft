@@ -12518,7 +12518,7 @@
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/api/CatalogMasterService.java",
-        "sha256": "9924493fc595e098ff2fd301e776830dc226d5eaf7ef95d745504b4f245b4010"
+        "sha256": "2b1fd3c600cc0875862d1ca4cf5c9f5b0419b511f7753cce4a6fed30836303ae"
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/api/CatalogService.java",
@@ -12530,7 +12530,7 @@
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/application/DefaultCatalogMasterService.java",
-        "sha256": "bc1b3164d1654c0511addf50889a64e9c38b1612fb77df94b7f9598724959247"
+        "sha256": "b71be37222a10e74066048a8a9208e55161c7be09f8bd2a8414d969e45d3bba5"
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/application/DefaultCatalogService.java",
@@ -12541,8 +12541,16 @@
         "sha256": "e60da8914cef1bbc156fe09e23a43fc6f5e8983462dab4b89f512ba02e134a1c"
       },
       {
+        "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogManufacturer.java",
+        "sha256": "9bce9ed01edcdaee0b83a50b5c8d72c1e87b735ed51d99980afda33bacd0e209"
+      },
+      {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProduct.java",
         "sha256": "02f40a205fa9902fb9e41770b38b3ab559b18a901d4952e9252264e27176710f"
+      },
+      {
+        "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProductFamily.java",
+        "sha256": "8f07056a75f023685f546616b85f53a3322c3a0bac462f904de5433125c7aa1b"
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogUnit.java",
@@ -12554,7 +12562,7 @@
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
-        "sha256": "1cea68e377d84445b5d24f2d2f48db50fa1ac2f0026acf68a1195854b8e04373"
+        "sha256": "14f3c127d39f70292ce1ad7d1df117a8c20cf6d64dd2dc510bcd1b344eca020c"
       },
       {
         "path": "backend/business-modules/commerce/src/main/java/com/quincaisoft/commerce/api/CommerceService.java",
@@ -13471,11 +13479,11 @@
       },
       {
         "path": "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
-        "sha256": "f1abbb9bd3de01973bf5174804b7bb7e67b7c88b3118754e4b113e1d555617a1",
+        "sha256": "2ef9b6aab57dc81a3702d6e9086619413c744f388671aafb110bb19b0a1722c3",
         "testMethods": [
           "mastersPreserveScopeReplayMetadataAndVersionedUnitIdentity"
         ],
-        "assertionCount": 24
+        "assertionCount": 29
       },
       {
         "path": "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
@@ -26876,7 +26884,8 @@
       "status": "OPEN",
       "candidateJavaSources": [
         "backend/api-server/src/main/java/com/quincaisoft/security/ApiErrors.java",
-        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProduct.java"
+        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProduct.java",
+        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProductFamily.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [],
@@ -28309,7 +28318,7 @@
         "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/application/DefaultCatalogMasterService.java",
         "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/application/DefaultCatalogService.java",
         "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogCategory.java",
-        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProduct.java"
+        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogManufacturer.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
@@ -28697,10 +28706,10 @@
         "backend/business-modules/branch/src/main/java/com/quincaisoft/branch/web/BranchController.java",
         "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogCategory.java",
         "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProduct.java",
+        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProductFamily.java",
         "backend/business-modules/company/src/main/java/com/quincaisoft/company/api/CompanyService.java",
         "backend/business-modules/company/src/main/java/com/quincaisoft/company/api/package-info.java",
-        "backend/business-modules/company/src/main/java/com/quincaisoft/company/application/DefaultCompanyService.java",
-        "backend/business-modules/company/src/main/java/com/quincaisoft/company/infrastructure/CompanyEntity.java"
+        "backend/business-modules/company/src/main/java/com/quincaisoft/company/application/DefaultCompanyService.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
@@ -29119,7 +29128,8 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
-        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProduct.java"
+        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProduct.java",
+        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProductFamily.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [],
@@ -29201,7 +29211,7 @@
         "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/application/DefaultCatalogMasterService.java",
         "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/application/DefaultCatalogService.java",
         "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogCategory.java",
-        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProduct.java"
+        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogManufacturer.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
@@ -29264,7 +29274,8 @@
       "candidateJavaSources": [
         "backend/api-server/src/main/java/com/quincaisoft/security/PostgresScopedTransactions.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/TenantScopeFilter.java",
-        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProduct.java"
+        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProduct.java",
+        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProductFamily.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [],

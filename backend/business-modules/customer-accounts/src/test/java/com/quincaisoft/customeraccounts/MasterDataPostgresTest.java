@@ -52,6 +52,20 @@ class MasterDataPostgresTest {
      var changed=customers.update(stored.id(),update);assertTrue(changed.active());assertEquals("1",changed.version());assertEquals(stored,customers.create(original));
      assertThrows(RevisionConflict.class,()->customers.update(stored.id(),new CustomerDirectory.Save(UUID.randomUUID(),"Stale","Company","","","","","1000",0,false,true,"0","stale")));
      assertThrows(IllegalStateException.class,()->customers.create(new CustomerDirectory.Save(operation,"Other","Company","","","","","0",0,false,true,"0","changed")));
+     var manufacturerCommand = new CatalogMasterService.ManufacturerSave(UUID.randomUUID(), "MFR-1", "Maker One", "Historical import fixture");
+     var manufacturer = masters.createManufacturer(manufacturerCommand);
+     assertEquals(manufacturer, masters.createManufacturer(manufacturerCommand));
+     assertThrows(IllegalStateException.class, () -> masters.createManufacturer(
+         new CatalogMasterService.ManufacturerSave(manufacturerCommand.operationId(), "MFR-1", "Changed", "Historical import fixture")));
+     var other = masters.createManufacturer(new CatalogMasterService.ManufacturerSave(UUID.randomUUID(), "MFR-2", "Maker Two", "Historical import fixture"));
+     var familyCommand = new CatalogMasterService.FamilySave(UUID.randomUUID(), manufacturer.id(), "Cable", "M1", "Historical import fixture");
+     var firstFamily = masters.createFamily(familyCommand);
+     assertEquals(firstFamily, masters.createFamily(familyCommand));
+     var secondFamily = masters.createFamily(new CatalogMasterService.FamilySave(UUID.randomUUID(), other.id(), "Cable", "M1", "Historical import fixture"));
+     assertNotEquals(firstFamily.id(), secondFamily.id());
+     assertThrows(NoSuchElementException.class, () -> TenantContext.call(
+         new TenantScope(tenant, UUID.randomUUID(), branch, actor), 1, () -> masters.createFamily(
+             new CatalogMasterService.FamilySave(UUID.randomUUID(), manufacturer.id(), "Cable", "M1", "Historical import fixture"))));
      var parent=masters.saveCategory(null,new CatalogMasterService.CategorySave(UUID.randomUUID(),"PARENT","Parent",null,"","",true,"0","create"));
      var child=masters.saveCategory(null,new CatalogMasterService.CategorySave(UUID.randomUUID(),"CHILD","Child",parent.id(),"Brand","Description",true,"0","create"));
      assertThrows(IllegalArgumentException.class,()->masters.saveCategory(parent.id(),new CatalogMasterService.CategorySave(UUID.randomUUID(),parent.code(),parent.name(),child.id(),"","",true,parent.version(),"cycle")));
