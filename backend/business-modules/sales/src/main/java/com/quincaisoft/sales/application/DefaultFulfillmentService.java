@@ -41,7 +41,7 @@ import jakarta.persistence.*;import org.springframework.stereotype.Service;impor
    return em.createQuery("""
        select count(f) from FulfillmentEntity f
        where f.tenantId = :tenant and f.companyId = :company and f.branchId = :branch
-         and f.status = 'PENDING'
+         and f.status in ('PENDING', 'PARTIAL')
        """, Long.class)
        .setParameter("tenant", scope.tenantId())
        .setParameter("company", scope.companyId())

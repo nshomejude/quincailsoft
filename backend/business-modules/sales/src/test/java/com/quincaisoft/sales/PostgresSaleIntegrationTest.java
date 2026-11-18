@@ -124,6 +124,7 @@ class PostgresSaleIntegrationTest {
          List.of(new FulfillmentService.PickLine(p,"500")));
      var first=fulfillment.dispatchLines(task.id(),firstDispatch);
      assertEquals("PARTIAL",first.status());
+     assertEquals(1,fulfillment.pendingPreparationCount());
      assertEquals(List.of(new FulfillmentService.PickLine(p,"1500")),fulfillment.pickList(task.id()).lines());
      assertThrows(IllegalStateException.class,()->TenantContext.call(new TenantScope(t,c,b,UUID.randomUUID()),1,()->fulfillment.dispatchLines(task.id(),firstDispatch)));
      assertThrows(java.util.NoSuchElementException.class,()->TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->fulfillment.dispatchLines(task.id(),firstDispatch)));
@@ -143,6 +144,7 @@ class PostgresSaleIntegrationTest {
      var dispatched=fulfillment.dispatchLines(task.id(),new FulfillmentService.DispatchLines(
          UUID.randomUUID(),second.version(),"Final dispatch",List.of(new FulfillmentService.PickLine(p,"1000"))));
      assertEquals("DISPATCHED",dispatched.status());
+     assertEquals(0,fulfillment.pendingPreparationCount());
      assertTrue(fulfillment.pickList(task.id()).lines().isEmpty());
      assertEquals(3,count(owner,"select count(*) from fulfillment_dispatch_line"));
      var dispatchHistory=fulfillment.dispatchHistory(task.id());
