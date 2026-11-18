@@ -1,0 +1,8 @@
+FULL PARITY BLOCKED: 735/735 required behaviors unresolved.
+ - m10-documents-reports: 24
+ - root-identity-master-data: 267
+ - m03-finance: 234
+ - m08-inventory: 125
+ - m09-operations: 83
+ - m05-web: 2
+Exact IDs, legacy guards/assertions and candidate mappings: docs/migration/python-java-parity.json
