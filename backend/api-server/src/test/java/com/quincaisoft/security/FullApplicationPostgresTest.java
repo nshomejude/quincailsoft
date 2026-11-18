@@ -44,7 +44,7 @@ class FullApplicationPostgresTest {
       sql(owner,"INSERT INTO tenant_memberships(tenant_id,company_id,branch_id,actor_id,role_code) VALUES ('"+tenant+"','"+company+"','"+branch+"','"+approver+"','owner')");
       sql(owner,"INSERT INTO financial_period(tenant_id,company_id,id,start_date,end_date,status) VALUES ('"+tenant+"','"+company+"','"+UUID.randomUUID()+"','2024-01-01','2024-01-31','Open')");
      }
-     sql(owner,"INSERT INTO catalog_product(tenant_id,company_id,id,sku,name,base_unit,selling_price_xaf) VALUES ('"+tenant+"','"+company+"','"+product+"','TEST-SKU','Synthetic cable','piece',1000)");
+     sql(owner,"INSERT INTO catalog_product(tenant_id,company_id,id,sku,name,base_unit,selling_price_xaf,reorder_level_milli) VALUES ('"+tenant+"','"+company+"','"+product+"','TEST-SKU','Synthetic cable','piece',1000,1000)");
      sql(owner,"INSERT INTO supplier(tenant_id,company_id,id,code,name) VALUES ('"+tenant+"','"+company+"','"+supplier+"','TEST-SUP','Synthetic supplier')");
 
     }
@@ -59,6 +59,20 @@ class FullApplicationPostgresTest {
      assertEquals(200,summary.statusCode(),summary.body());
      assertTrue(summary.body().contains("\"totalXaf\":\"0\""),summary.body());
 
+     var dashboardReader=token(key,issuer,"quincai-test",tenant,company,branch,actor,
+         "sales:read inventory:read tenders:read");
+     var dashboardJson=tools.jackson.databind.json.JsonMapper.builder().build();
+     for(var metric:Map.of("fulfillments/preparation-summary",Map.entry("pendingCount",0),
+                           "inventory/low-stock/summary",Map.entry("productCount",1),
+                           "tenders/collections/summary",Map.entry("pendingCount",0)).entrySet()){
+      var uri=URI.create("http://127.0.0.1:"+port+"/api/v1/"+metric.getKey());
+      assertEquals(401,client.send(HttpRequest.newBuilder(uri).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());
+      var response=client.send(HttpRequest.newBuilder(uri).header("Authorization","Bearer "+dashboardReader).GET().build(),
+          HttpResponse.BodyHandlers.ofString());
+      assertEquals(200,response.statusCode(),response.body());
+      assertEquals(metric.getValue().getValue().intValue(),
+          dashboardJson.readTree(response.body()).required(metric.getValue().getKey()).intValue());
+     }
      var writer=token(key,issuer,"quincai-test",tenant,company,branch,actor,"catalog:read catalog:write sales:read");
      var manufacturer=catalogWrite(client,port,"manufacturers",token,writer,Map.of("code","TEST-MFR","name","Synthetic maker"));
      var family=catalogWrite(client,port,"families",token,writer,Map.of("manufacturerId",manufacturer.get("id").asText(),"productType","Cable","modelNumber","M1"));
