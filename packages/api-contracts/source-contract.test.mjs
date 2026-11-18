@@ -59,3 +59,20 @@ test('fulfillment canonical record components survive the legacy overload and ex
  assert.equal(api.paths['/api/v1/fulfillments/{id}/picklist'].get.responses['200'].content['application/json'].schema.$ref,'#/components/schemas/FulfillmentService_PickList');
  assert.equal(api.paths['/api/v1/fulfillments'].post.requestBody.content['application/json'].schema.$ref,'#/components/schemas/FulfillmentService_Draft');
 });
+test('partial fulfillment dispatch and history retain exact quantities and command identity',()=>{
+ const schemas=api.components.schemas;
+ const command=api.paths['/api/v1/fulfillments/{id}/dispatch-lines'].post;
+ assert.equal(command.requestBody.content['application/json'].schema.$ref,'#/components/schemas/FulfillmentService_DispatchLines');
+ assert.deepEqual(Object.keys(schemas.FulfillmentService_DispatchLines.properties),['operationId','version','reason','lines']);
+ assert.equal(schemas.FulfillmentService_DispatchLines.properties.lines.items.$ref,'#/components/schemas/FulfillmentService_PickLine');
+ assert.deepEqual(schemas.FulfillmentService_PickLine.properties.quantityMilli,{type:'string'});
+ for(const name of ['Idempotency-Key','X-Request-ID'])assert(command.parameters.some(p=>p.in==='header'&&p.name===name&&p.required));
+ assert.equal(command.responses['200'].content['application/json'].schema.$ref,'#/components/schemas/FulfillmentService_Fulfillment');
+ const history=api.paths['/api/v1/fulfillments/{id}/dispatches'].get.responses['200'].content['application/json'].schema;
+ assert.equal(history.type,'array');assert.equal(history.items.$ref,'#/components/schemas/FulfillmentService_DispatchEntry');
+ const entry=schemas.FulfillmentService_DispatchEntry.properties;
+ assert.deepEqual(Object.keys(entry),['operationId','productId','quantityMilli','dispatchedAt','dispatchedBy']);
+ assert.deepEqual(entry.quantityMilli,{type:'string'});
+ assert.deepEqual(entry.dispatchedAt,{type:'string',format:'date-time'});
+ assert.deepEqual(entry.dispatchedBy,{type:'string',format:'uuid'});
+});

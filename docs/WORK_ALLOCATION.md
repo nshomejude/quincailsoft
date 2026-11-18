@@ -108,6 +108,6 @@ Complete assigned platform workflows and acceptance before resuming historical
 import. The local historical sequence replay changes are preserved and their
 expanded acceptance test remains unverified.
 
-## Cloud V32–V38 continuation
+## Cloud V33–V39 continuation
 
-Cloud integrated Desktop handover `b0e7472`, preserving Java dashboard aggregates and historical importer work. V32–V38 add commercial terms/export cursors, authoritative quotas, leave/benefits, consented support and governance, durable notification delivery, fenced recovery receipt reviews and bounded metrics. Shared service annotations enforce suspension within the command transaction. Deployment and private-network whole-database recovery are included. See [executed evidence and precise remaining scope](migration-evidence/cloud-governance-recovery/README.md); successful tests do not close unaccepted parity or visual rows.
+Cloud integrated Desktop handover `9c1084b`, preserving Java dashboard aggregates and historical importer work. V33–V39 add commercial terms/export cursors, authoritative quotas, leave/benefits, consented support and governance, durable notification delivery, fenced recovery receipt reviews and bounded metrics. Shared service annotations enforce suspension within the command transaction. Deployment and private-network whole-database recovery are included. See [executed evidence and precise remaining scope](migration-evidence/cloud-governance-recovery/README.md); successful tests do not close unaccepted parity or visual rows.

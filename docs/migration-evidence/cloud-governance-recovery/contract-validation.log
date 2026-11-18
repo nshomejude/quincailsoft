@@ -1,6 +1,6 @@
 {
   "result": "PASS structural source contract",
-  "operations": 293,
+  "operations": 295,
   "unresolvedJavaTypes": [],
   "idempotencyHeaderReview": [
     "POST /api/v1/mobile-money/intents/{id}/reconcile",

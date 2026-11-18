@@ -30,6 +30,7 @@ public.document_settings	0
 public.document_snapshot	0
 public.finance_bootstrap_mapping	0
 public.financial_period	0
+public.fulfillment_dispatch_line	0
 public.idempotency_result	0
 public.identity_change	0
 public.identity_revocation	0

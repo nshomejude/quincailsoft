@@ -22,13 +22,14 @@ backend/db-migrations/src/main/resources/db/migration/V29__workforce_lifecycle.s
 backend/db-migrations/src/main/resources/db/migration/V2__isolation_and_immutable_journals.sql: OK
 backend/db-migrations/src/main/resources/db/migration/V30__custody_delivery_recall_document_projections.sql: OK
 backend/db-migrations/src/main/resources/db/migration/V31__fulfillment_delivery_details.sql: OK
-backend/db-migrations/src/main/resources/db/migration/V32__authoritative_subscription_quotas.sql: OK
+backend/db-migrations/src/main/resources/db/migration/V32__fulfillment_dispatch_lines.sql: OK
 backend/db-migrations/src/main/resources/db/migration/V33__workforce_leave_and_benefits.sql: OK
 backend/db-migrations/src/main/resources/db/migration/V34__support_consent_and_tenant_governance.sql: OK
 backend/db-migrations/src/main/resources/db/migration/V35__billing_notification_delivery.sql: OK
 backend/db-migrations/src/main/resources/db/migration/V36__scoped_recovery_receipt_review.sql: OK
 backend/db-migrations/src/main/resources/db/migration/V37__bounded_operational_metrics_indexes.sql: OK
 backend/db-migrations/src/main/resources/db/migration/V38__subscription_commercial_terms_and_cursor.sql: OK
+backend/db-migrations/src/main/resources/db/migration/V39__authoritative_subscription_quotas.sql: OK
 backend/db-migrations/src/main/resources/db/migration/V3__narrow_row_lock_privileges.sql: OK
 backend/db-migrations/src/main/resources/db/migration/V4__documents_and_commerce_workflows.sql: OK
 backend/db-migrations/src/main/resources/db/migration/V5__procurement_workflows.sql: OK

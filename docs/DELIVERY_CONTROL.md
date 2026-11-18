@@ -23,4 +23,4 @@ This is the navigation point for the delivery plan. Do not create competing comp
 
 ## Latest cloud integration evidence
 
-The V32–V38 integration, including reviewed governance, authoritative quotas, workforce benefits, notification delivery, deployment packaging and isolated whole-database recovery, is tracked in [cloud governance/recovery evidence](migration-evidence/cloud-governance-recovery/README.md). Its source-bound result manifest supersedes older cloud limitations only for checks actually executed. It does not change module, screen, parity or production release acceptance.
+The V33–V39 integration, including reviewed governance, authoritative quotas, workforce benefits, notification delivery, deployment packaging and isolated whole-database recovery, is tracked in [cloud governance/recovery evidence](migration-evidence/cloud-governance-recovery/README.md). Its source-bound result manifest supersedes older cloud limitations only for checks actually executed. It does not change module, screen, parity or production release acceptance.

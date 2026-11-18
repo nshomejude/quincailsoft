@@ -1,7 +1,7 @@
-✔ rule gate rejects protected-rule edits and production Python bridges without touching the workspace (608.086889ms)
-✔ parity gate stays red for unresolved behavior and refuses fabricated source-only acceptance (2755.959294ms)
-✔ rule gate tolerates CRLF checkouts and still rejects a Python executable in production scripts (318.504531ms)
-✔ rule gate rejects colliding Flyway versions including numeric aliases (177.751923ms)
+✔ rule gate rejects protected-rule edits and production Python bridges without touching the workspace (474.020199ms)
+✔ parity gate stays red for unresolved behavior and refuses fabricated source-only acceptance (3041.176531ms)
+✔ rule gate tolerates CRLF checkouts and still rejects a Python executable in production scripts (287.580902ms)
+✔ rule gate rejects colliding Flyway versions including numeric aliases (186.921881ms)
 ℹ tests 4
 ℹ suites 0
 ℹ pass 4
@@ -9,4 +9,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 3992.094995
+ℹ duration_ms 4103.209846

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "2941e101febb759bc6e36b513f6113c67a623ea9cb58bf4681fbc0f2711a2b19",
+  "sourceDigest": "4a1f73bfddeb5a80c3bb333b80b64b9859075e6cc0e67cef72334f5646c25e0e",
   "unresolvedJavaTypes": [],
   "endpoints": [
     {
@@ -1883,6 +1883,31 @@
       "path": "/api/v1/fulfillments",
       "controller": "FulfillmentController",
       "javaMethod": "draft",
+      "returnType": "FulfillmentService.Fulfillment",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:write','SCOPE_sales:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/fulfillments/{id}/dispatches",
+      "controller": "FulfillmentController",
+      "javaMethod": "dispatchHistory",
+      "returnType": "List<FulfillmentService.DispatchEntry>",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:read','SCOPE_sales:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/fulfillments/{id}/dispatch-lines",
+      "controller": "FulfillmentController",
+      "javaMethod": "dispatchLines",
       "returnType": "FulfillmentService.Fulfillment",
       "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
       "authorization": "hasAnyAuthority('sales:write','SCOPE_sales:write')",

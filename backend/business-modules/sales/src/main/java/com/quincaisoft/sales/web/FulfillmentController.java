@@ -17,6 +17,18 @@ import com.quincaisoft.sales.api.FulfillmentService;import org.springframework.w
  }
  @GetMapping("/{id}") @PreAuthorize("hasAnyAuthority('sales:read','SCOPE_sales:read')")public FulfillmentService.Fulfillment get(@PathVariable UUID id){return service.get(id);}
  @PostMapping @PreAuthorize("hasAnyAuthority('sales:write','SCOPE_sales:write')")public FulfillmentService.Fulfillment draft(@RequestHeader("Idempotency-Key")UUID key,@RequestBody FulfillmentService.Draft c){match(key,c.operationId());return service.draft(c);}
+ @GetMapping("/{id}/dispatches")
+ @PreAuthorize("hasAnyAuthority('sales:read','SCOPE_sales:read')")
+ public List<FulfillmentService.DispatchEntry> dispatchHistory(@PathVariable UUID id) {
+  return service.dispatchHistory(id);
+ }
+ @PostMapping("/{id}/dispatch-lines")
+ @PreAuthorize("hasAnyAuthority('sales:write','SCOPE_sales:write')")
+ public FulfillmentService.Fulfillment dispatchLines(@PathVariable UUID id,
+     @RequestHeader("Idempotency-Key") UUID key,@RequestBody FulfillmentService.DispatchLines command) {
+  match(key,command.operationId());
+  return service.dispatchLines(id,command);
+ }
  @PostMapping("/{id}/dispatch") @PreAuthorize("hasAnyAuthority('sales:write','SCOPE_sales:write')")public FulfillmentService.Fulfillment dispatch(@PathVariable UUID id,@RequestHeader("Idempotency-Key")UUID key,@RequestBody FulfillmentService.Action c){match(key,c.operationId());return service.dispatch(id,c);}
  @PostMapping("/{id}/complete") @PreAuthorize("hasAnyAuthority('sales:write','SCOPE_sales:write')")public FulfillmentService.Fulfillment complete(@PathVariable UUID id,@RequestHeader("Idempotency-Key")UUID key,@RequestBody FulfillmentService.Action c){match(key,c.operationId());return service.complete(id,c);}
  private static void match(UUID a,UUID b){if(!a.equals(b))throw new IllegalArgumentException("Operation ID mismatch");}
