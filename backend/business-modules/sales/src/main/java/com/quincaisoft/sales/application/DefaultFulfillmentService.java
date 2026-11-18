@@ -22,6 +22,17 @@ import jakarta.persistence.*;import org.springframework.stereotype.Service;impor
        .getSingleResult();
   });
  }
+ @Override
+ public PickList pickList(UUID fulfillmentId) {
+  return tx.execute(() -> {
+   var task = find(fulfillmentId);
+   var sale = sales.valuation(task.saleId);
+   var lines = sale.lines().stream()
+       .map(line -> new PickLine(line.productId(), Long.toString(line.quantityMilli())))
+       .toList();
+   return new PickList(task.id, task.saleId, sale.warehouseId(), task.status, lines);
+  });
+ }
  public Fulfillment get(UUID id){return tx.execute(()->view(find(id)));}
  public Fulfillment draft(Draft c){if(c.businessDate()==null||c.customerId()==null||c.saleId()==null)throw new IllegalArgumentException("Sale, customer and date required");text(c.reason());return tx.execute(()->once(c.operationId(),"DRAFT|"+c,()->{var sale=sales.get(c.saleId());if(!sale.status().equals("POSTED")||!sale.customerId().equals(c.customerId())||c.businessDate().isBefore(sale.businessDate()))throw new IllegalArgumentException("Completed sale for the same customer and valid date required");var s=TenantContext.current();var f=new FulfillmentEntity();f.tenantId=s.tenantId();f.companyId=s.companyId();f.branchId=s.branchId();f.id=UUID.randomUUID();f.saleId=c.saleId();f.customerId=c.customerId();f.businessDate=c.businessDate();f.createdBy=s.actorId();f.createdAt=Instant.now();f.status="PENDING";em.persist(f);em.flush();return f;}));}
  public Fulfillment dispatch(UUID id,Action c){return action(id,c,false);}

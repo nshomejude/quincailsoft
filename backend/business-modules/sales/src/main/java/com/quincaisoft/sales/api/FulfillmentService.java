@@ -4,6 +4,9 @@ public interface FulfillmentService {
  record Draft(UUID operationId,UUID saleId,UUID customerId,LocalDate businessDate,String reason){}
  record Action(UUID operationId,String version,String proofReference,String reason){}
  record Fulfillment(UUID id,UUID saleId,UUID customerId,String status,LocalDate businessDate,String proofReference,String version){}
+ record PickLine(UUID productId,String quantityMilli) {}
+ record PickList(UUID fulfillmentId,UUID saleId,UUID warehouseId,String status,List<PickLine> lines) {}
+ PickList pickList(UUID fulfillmentId);
  long pendingPreparationCount();
  List<Fulfillment> list();Fulfillment get(UUID id);Fulfillment draft(Draft c);Fulfillment dispatch(UUID id,Action c);Fulfillment complete(UUID id,Action c);
 }

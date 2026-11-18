@@ -80,6 +80,14 @@ class PostgresSaleIntegrationTest {
      var task=fulfillment.draft(new FulfillmentService.Draft(UUID.randomUUID(),heldSale.id(),customer,LocalDate.of(2026,11,18),"Prepare customer collection"));assertThrows(IllegalStateException.class,()->fulfillment.dispatch(task.id(),new FulfillmentService.Action(UUID.randomUUID(),task.version(),null,"Must collect custody first")));
      assertThrows(IllegalArgumentException.class,()->custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),position.version(),"1000"," ","Missing proof must reject")));
      assertEquals(1,fulfillment.pendingPreparationCount());
+     var pickList=fulfillment.pickList(task.id());
+     assertEquals(task.id(),pickList.fulfillmentId());
+     assertEquals(heldSale.id(),pickList.saleId());
+     assertEquals(w,pickList.warehouseId());
+     assertEquals("PENDING",pickList.status());
+     assertEquals(List.of(new FulfillmentService.PickLine(p,"2000")),pickList.lines());
+     assertThrows(NoSuchElementException.class,()->TenantContext.call(
+         new TenantScope(t,c,UUID.randomUUID(),a),1,()->fulfillment.pickList(task.id())));
      assertEquals(0,TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,fulfillment::pendingPreparationCount));
      var collection=new InventoryCustody.Collect(UUID.randomUUID(),position.version(),"1000","CUSTOMER-SIGNED-PICKUP-1","Partial collection");var partial=custody.collect(position.id(),collection);assertEquals("PARTIALLY_COLLECTED",partial.status());assertEquals(partial,custody.collect(position.id(),collection));
      assertThrows(IllegalArgumentException.class,()->custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),partial.version(),"2000","EXCESS","Excess collection")));

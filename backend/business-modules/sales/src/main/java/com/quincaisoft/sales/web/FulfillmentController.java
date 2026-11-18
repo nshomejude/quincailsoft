@@ -10,6 +10,11 @@ import com.quincaisoft.sales.api.FulfillmentService;import org.springframework.w
  public PreparationSummary preparationSummary() {
   return new PreparationSummary(service.pendingPreparationCount());
  }
+ @GetMapping("/{id}/picklist")
+ @PreAuthorize("hasAnyAuthority('sales:read','SCOPE_sales:read')")
+ public FulfillmentService.PickList pickList(@PathVariable UUID id) {
+  return service.pickList(id);
+ }
  @GetMapping("/{id}") @PreAuthorize("hasAnyAuthority('sales:read','SCOPE_sales:read')")public FulfillmentService.Fulfillment get(@PathVariable UUID id){return service.get(id);}
  @PostMapping @PreAuthorize("hasAnyAuthority('sales:write','SCOPE_sales:write')")public FulfillmentService.Fulfillment draft(@RequestHeader("Idempotency-Key")UUID key,@RequestBody FulfillmentService.Draft c){match(key,c.operationId());return service.draft(c);}
  @PostMapping("/{id}/dispatch") @PreAuthorize("hasAnyAuthority('sales:write','SCOPE_sales:write')")public FulfillmentService.Fulfillment dispatch(@PathVariable UUID id,@RequestHeader("Idempotency-Key")UUID key,@RequestBody FulfillmentService.Action c){match(key,c.operationId());return service.dispatch(id,c);}
