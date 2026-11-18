@@ -165,6 +165,22 @@ class PostgresSaleIntegrationTest {
      assertEquals(0,fulfillment.pendingPreparationCount());
      assertTrue(fulfillment.pickList(task.id()).lines().isEmpty());
      assertTrue(TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,custody::positions).isEmpty());assertTrue(TenantContext.call(new TenantScope(UUID.randomUUID(),c,b,a),1,fulfillment::list).isEmpty());assertThrows(SQLException.class,()->sql(owner,"update customer_custody set frozen_cost_xaf=0"));assertThrows(SQLException.class,()->sql(owner,"update custody_collection set quantity_milli=1"));
+     var wholeTask=fulfillment.draft(new FulfillmentService.Draft(UUID.randomUUID(),draft.id(),customer,
+         LocalDate.of(2026,11,18),"Prepare whole order"));
+     var wholeDispatch=new FulfillmentService.Action(UUID.randomUUID(),wholeTask.version(),null,"Dispatch whole order");
+     var wholeDispatched=fulfillment.dispatch(wholeTask.id(),wholeDispatch);
+     assertEquals("DISPATCHED",wholeDispatched.status());
+     assertEquals(wholeDispatched,fulfillment.dispatch(wholeTask.id(),wholeDispatch));
+     var wholeHistory=fulfillment.dispatchHistory(wholeTask.id());
+     assertEquals(1,wholeHistory.size());
+     assertEquals("2000",wholeHistory.getFirst().quantityMilli());
+     assertEquals(wholeDispatch.operationId(),wholeHistory.getFirst().operationId());
+     var wholeComplete=new FulfillmentService.Action(UUID.randomUUID(),wholeDispatched.version(),
+         "SIGNED-WHOLE-DELIVERY","Confirm whole order delivery");
+     fulfillment.complete(wholeTask.id(),wholeComplete);
+     assertEquals(1,fulfillment.dispatchHistory(wholeTask.id()).size());
+     assertEquals(journalCount,count(owner,"select count(*) from journal_entry"));
+     assertEquals(movementCount,count(owner,"select count(*) from stock_movement"));
      return null;
     });
    }finally{if(factory!=null)factory.destroy();sql(admin,"DROP DATABASE "+db);sql(admin,"DROP ROLE "+role);}

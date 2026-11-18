@@ -111,3 +111,22 @@ expanded acceptance test remains unverified.
 ## Cloud V33–V39 continuation
 
 Cloud integrated Desktop handover `9c1084b`, preserving Java dashboard aggregates and historical importer work. V33–V39 add commercial terms/export cursors, authoritative quotas, leave/benefits, consented support and governance, durable notification delivery, fenced recovery receipt reviews and bounded metrics. Shared service annotations enforce suspension within the command transaction. Deployment and private-network whole-database recovery are included. See [executed evidence and precise remaining scope](migration-evidence/cloud-governance-recovery/README.md); successful tests do not close unaccepted parity or visual rows.
+
+## Fulfillment continuation, 19 November 2026
+
+The continuation branch starts from handover 0bb0995. Historical import remains
+deferred until assigned platform behavior passes acceptance. The preserved
+unfinished source checkpoint is 25d2db8 on codex/preserved-local-checkpoint-2026-11-19.
+
+The preparation queue now includes PARTIAL tasks (5f6aedc). Whole-order dispatch
+and direct completion of a pending task record dispatch lines in the same
+transaction. Completing an already dispatched task preserves its existing
+dispatch history. Existing request fingerprints remain stable.
+
+Executed Java 25/PostgreSQL 18.7 PostgresSaleIntegrationTest on 19 November 2026.
+The scenario passed with zero failures, errors or skips. It verifies partial
+shipments, exact cumulative quantities, stale and excessive dispatch rejection,
+whole-order retry without duplicate history, and unchanged stock/journal counts.
+The project rules check also passed. Direct pending completion has source
+implementation but still needs its own regression assertion. Browser acceptance,
+original fulfillment screen integration and full platform parity remain open.
