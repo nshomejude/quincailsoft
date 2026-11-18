@@ -15,7 +15,7 @@ node datasets/business-history/verify-corruption.mjs datasets/business-history/g
 
 All four commands succeeded on Windows with Node.js 26. Published and generated manifests and validation summaries matched. The validator ran 2,226,314 assertions. Both corruption scenarios were rejected after their fixture checksums were recomputed.
 
-The generated package contains 767,945 rows across 33 files (295,929,133 bytes). Preflight enumerated 245,514 candidate source records with exact IDs, including event type and sequence for 137,984 economic events. All candidates are blocked before import. The other 522,431 rows are reference or acceptance fixtures. **Imported 0. Rejected by Java 0.** No historical database writes were attempted. The machine-readable record-level index is `datasets/business-history/generated/java-import-preflight.json`, which is locally reproducible and Git-ignored.
+The generated package contains 767,945 rows across 33 files (295,929,133 bytes). Preflight enumerated 245,514 candidate source records with exact IDs, including event type and sequence for 137,984 economic events. At the preflight checkpoint, all candidates were blocked before import. See the authenticated catalog acceptance below for later isolated execution. The other 522,431 rows are reference or acceptance fixtures. **At preflight, imported 0 and rejected by Java 0.** The preflight itself made no database writes. The machine-readable record-level index is `datasets/business-history/generated/java-import-preflight.json`, which is locally reproducible and Git-ignored.
 
 Published source totals in exact XAF are inventory 3,898,492,465, receivables 909,922,062, payables 765,942,251, net sales 3,373,340,314 and operating profit −68,334,076. Source debits and credits are each 45,749,568,268. Application reconciliation is blocked before import.
 
@@ -48,3 +48,22 @@ The preview at http://localhost:3100 uses the small synthetic application seed. 
 ## Next implementation boundary
 
 Start with typed company-scoped manufacturer and model/variant identity in catalog under architecture §§36 and 38. Preserve separate brand and supplier offer relationships, maintain stable idempotency and leave posted history immutable. Test identical model names across manufacturers, duplicate/conflicting identities, tenant/company isolation and scope denials. Then implement the isolated Java import adapter and resume/replay ledger under §§32, 37, 38, 41 and 44. Exact reconciliation must compare per-branch and party-level application values against the reference, with no raw inserts into economic tables.
+
+## Authenticated historical catalog acceptance
+
+The standalone Java 25 importer under `backend/tools/history-import` ran twice against a disposable PostgreSQL 18.7 database and the real Spring Boot API using a generated test issuer and a signed actor in the historical synthetic scope. The four V23 HTTP write endpoints each denied anonymous and read-only requests, rejected mismatched operation IDs, and returned the same response on authorized replay. The supplier quote retained its exact integer string beyond JavaScript's safe integer range.
+
+The initial catalog and party pass processed 14,117 fixture records and produced 17,117 mappings. A variant has both a stock-SKU creation and a variant-association command. The test asserted stored counts after replay and byte-identical mapping files with SHA-256 `091210a9d3d7d7d612a4d8d2e28a439a68043bb823e0ce24cac21de45495d227`. Historical counts exclude the pre-existing HTTP test rows.
+
+| Imported fixture | Records |
+| --- | ---: |
+| Manufacturers | 10 |
+| Categories and units | 27 |
+| Suppliers and customers | 1,080 |
+| Product families | 1,000 |
+| Sellable variants | 3,000 |
+| Supplier offers | 9,000 |
+
+Executed `QUINCAI_HISTORY_CATALOG_ACCEPTANCE=true mvn -B -ntp -pl api-server -am -Dtest=FullApplicationPostgresTest -Dsurefire.failIfNoSpecifiedTests=false verify` in the isolated test container. One expanded acceptance scenario passed, zero errors, failures or skips. The process rejected a non-loopback destination in a separate local check.
+
+This database was disposed of by the test. The running preview has zero historical records. The preflight report describes the state before this test; 231,397 candidate records were outside this pass. Restart after an actual interruption, authenticated export generation, chronological economic posting and normalized branch/party reconciliation remain pending. The imported quotes did not change stock valuation. The separately integrated export checker passed 29 local Node tests and still awaits actual Java financial exports.
