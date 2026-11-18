@@ -1,28 +1,40 @@
 import Link from 'next/link';
 import {session} from '@/lib/auth';
-import {api, Me, Product, Sale, permitted} from '@/lib/api';
+import {api, ApiError, Me, Sale, permitted, xaf} from '@/lib/api';
 import {Access} from '@/components/Access';
 
 export const dynamic = 'force-dynamic';
 
-export default async function Dashboard() {
+function dateInDouala() {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Africa/Douala', year: 'numeric', month: '2-digit', day: '2-digit'
+    }).formatToParts();
+    return ['year', 'month', 'day'].map(type => parts.find(part => part.type === type)?.value).join('-');
+}
+
+export default async function Dashboard({searchParams}: {searchParams: Promise<{date?: string}>}) {
     try {
         const auth = await session();
         if (!auth) return <section className="panel"><h1>Welcome to QuincaiSoft</h1><p>Sign in to access your authorised company and branch.</p><a className="button" href="/auth/login">Sign in securely</a></section>;
-        const me = await api<Me>('me');
-        const [sales, products, purchases, customers] = await Promise.all([
-            permitted(me, 'sales:read') ? api<Sale[]>('sales') : null,
-            permitted(me, 'catalog:read') ? api<Product[]>('products') : null,
-            permitted(me, 'purchasing:read') ? api<{id: string; status: string}[]>('purchases') : null,
-            permitted(me, 'customers:read') ? api<{items: {id: string; name: string; active: boolean}[]; total: number}>('customers/page?limit=5') : null,
+
+        const [me, query] = await Promise.all([api<Me>('me'), searchParams]);
+        const today = dateInDouala();
+        const selectedDate = query.date && /^\d{4}-\d{2}-\d{2}$/.test(query.date) ? query.date : today;
+        const mayReadSales = permitted(me,'sales:read');
+        const [summary, sales] = await Promise.all([
+            mayReadSales ? api<{totalXaf: string}>('sales/summary?'+new URLSearchParams({from:selectedDate,to:selectedDate})).catch((error:unknown) => {
+                if (error instanceof ApiError && (error.status === 404 || error.status === 400)) return null;
+                throw error;
+            }) : null,
+            mayReadSales ? api<Sale[]>('sales') : null,
         ]);
-        const activity = [
-            ...(sales ?? []).slice(0, 3).map(row => ({id:row.id, label:row.id.slice(0,8), workspace:'Sales', status:row.status, href:'/sales/'+row.id})),
-            ...(products ?? []).slice(0, 3).map(row => ({id:row.id, label:row.name, workspace:'Products', status:row.active?'Active':'Inactive', href:'/catalog/'+row.id})),
-            ...(purchases ?? []).slice(0, 2).map(row => ({id:row.id, label:row.id.slice(0,8), workspace:'Purchases', status:row.status, href:'/purchases/'+row.id})),
-            ...(customers?.items ?? []).slice(0, 2).map(row => ({id:row.id, label:row.name, workspace:'Customers', status:row.active?'Active':'Inactive', href:'/customers/'+row.id})),
+        const metrics = [
+            {label: selectedDate === today ? 'Sales today' : 'Sales on selected date', value: summary ? xaf(summary.totalXaf) : null, note: mayReadSales ? 'Posted gross sales · before returns' : 'Sales access required'},
+            {label:'Orders to prepare', value:null, note:'Order queue connection pending'},
+            {label:'Low-stock products', value:null, note:'Reorder aggregate connection pending'},
+            {label:'Collection pending', value:null, note:'Collection queue connection pending'},
         ];
-        const metrics = [['Sales',sales?.length],['Products',products?.length],['Purchases',purchases?.length],['Customers',customers?.total]] as const;
+
         return <>
             <p className="eyebrow">WORKSPACE / OVERVIEW</p>
             <div className="page-top"><div><h1>Your business, in focus.</h1><p className="lead">Company and branch workspace</p></div><span className="session-pill">● Session active</span></div>
@@ -34,12 +46,17 @@ export default async function Dashboard() {
                 {permitted(me,'reports:read') && <Link className="secondary" href="/reports">Reports</Link>}
                 {permitted(me,'documents:read') && <Link className="secondary" href="/documents">Documents</Link>}
             </div>
-            <section className="stats dashboard-stats" aria-label="Workspace records">{metrics.filter(([,count])=>count!==undefined).map(([label,count])=><article key={label}><span>{label}</span><strong>{count}</strong><p className="muted">Authorized records in view</p></article>)}</section>
+            {mayReadSales && <form className="dashboard-date"><label htmlFor="overview-date">Business date</label><input id="overview-date" name="date" type="date" defaultValue={selectedDate} required/><button className="secondary">Apply</button></form>}
+            <section className="stats dashboard-stats" aria-label="Workspace measures">{metrics.map(metric=><article key={metric.label}><span>{metric.label}</span><strong>{metric.value??'—'}</strong><p className="muted">{metric.value===null && metric.label.startsWith('Sales') && mayReadSales ? 'Sales aggregate unavailable' : metric.note}</p></article>)}</section>
             <div className="dashboard-split">
-                <section className="panel"><div className="page-top"><h2>Workspace activity</h2><span className="muted">Live integration data</span></div>
-                    {activity.length ? <div className="table-scroll"><table><thead><tr><th>Record</th><th>Workspace</th><th>Status</th><th>Open</th></tr></thead><tbody>{activity.map(row=><tr key={row.href}><td>{row.label}</td><td>{row.workspace}</td><td><span className="badge">{row.status}</span></td><td><Link href={row.href}>View record →</Link></td></tr>)}</tbody></table></div> : <p className="muted">No records in this branch.</p>}
+                <section className="panel"><div className="page-top"><h2>Recent sales</h2>{mayReadSales&&<Link className="muted" href="/sales">View all</Link>}</div>
+                    {sales?.length ? <div className="table-scroll"><table><thead><tr><th>Reference</th><th>Business date</th><th>Status</th><th>Amount</th></tr></thead><tbody>{sales.slice(0,8).map(row=><tr key={row.id}><td><Link href={'/sales/'+row.id}>{row.id.slice(0,8)}</Link></td><td>{row.businessDate}</td><td><span className="badge">{row.status}</span></td><td>{xaf(row.totalXaf)}</td></tr>)}</tbody></table></div> : <p className="muted">{mayReadSales?'No sales in this branch.':'Sales access required.'}</p>}
                 </section>
-                <section className="panel dashboard-access"><p className="eyebrow">YOUR ACCESS</p><h2>{auth.name}</h2><dl><dt>Company</dt><dd>{me.scope.companyId}</dd><dt>Branch</dt><dd>{me.scope.branchId}</dd><dt>Report export</dt><dd>{permitted(me,'reports:export')?'Enabled':'Unavailable'}</dd></dl></section>
+                <section className="panel dashboard-access"><h2>Today’s priorities</h2>
+                    {permitted(me,'inventory:read')&&<p><Link href="/inventory">Review stock</Link></p>}
+                    {permitted(me,'tenders:read')&&<p><Link href="/finance">Review collections and payments</Link></p>}
+                    <p className="muted">Live order, reorder and collection priorities are pending integration.</p>
+                </section>
             </div>
         </>;
     } catch (error) {

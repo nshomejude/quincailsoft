@@ -54,6 +54,14 @@ class PostgresSaleIntegrationTest {
      var excessive=sales.draft(new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"100000"))));
      assertThrows(IllegalArgumentException.class,()->sales.post(excessive.id(),new SalesService.Post(UUID.randomUUID(),excessive.version(),"Oversell must rollback")));
      assertEquals("DRAFT",sales.get(excessive.id()).status());assertEquals(8000,count(owner,"select quantity_milli from stock_balance"));
+     var day = LocalDate.of(2026, 11, 18);
+     assertEquals("2000", sales.postedSalesSummary(day, day).totalXaf());
+     assertEquals("0", sales.postedSalesSummary(day.minusDays(1), day.minusDays(1)).totalXaf());
+     assertThrows(IllegalArgumentException.class, () -> sales.postedSalesSummary(day, day.plusDays(366)));
+     assertEquals("0", TenantContext.call(new TenantScope(UUID.randomUUID(), c, b, a), 1,
+         () -> sales.postedSalesSummary(day, day).totalXaf()));
+     assertEquals("0", TenantContext.call(new TenantScope(t, c, UUID.randomUUID(), a), 1,
+         () -> sales.postedSalesSummary(day, day).totalXaf()));
      // Closed period fails after stock issue in memory; whole transaction rolls it back.
      var next=sales.draft(new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"1000"))));
      sql(owner,"update financial_period set status='Closed'");

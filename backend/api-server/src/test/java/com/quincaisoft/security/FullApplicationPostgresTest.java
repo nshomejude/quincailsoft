@@ -35,6 +35,12 @@ class FullApplicationPostgresTest {
      int port=((WebServerApplicationContext)app).getWebServer().getPort();var client=HttpClient.newHttpClient();URI endpoint=URI.create("http://127.0.0.1:"+port+"/api/v1/session");
      assertEquals(401,client.send(HttpRequest.newBuilder(endpoint).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());
      String token=token(key,issuer,"quincai-test",tenant,company,branch,actor);
+     URI salesSummary=URI.create("http://127.0.0.1:"+port+"/api/v1/sales/summary?from=2026-11-18&to=2026-11-18");
+     assertEquals(401,client.send(HttpRequest.newBuilder(salesSummary).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());
+     var summary=client.send(HttpRequest.newBuilder(salesSummary).header("Authorization","Bearer "+token).GET().build(),HttpResponse.BodyHandlers.ofString());
+     assertEquals(200,summary.statusCode(),summary.body());
+     assertTrue(summary.body().contains("\"totalXaf\":\"0\""),summary.body());
+
      var response=client.send(HttpRequest.newBuilder(endpoint).header("Authorization","Bearer "+token).header("X-Tenant-ID",UUID.randomUUID().toString()).GET().build(),HttpResponse.BodyHandlers.ofString());assertEquals(200,response.statusCode(),response.body());assertTrue(response.body().contains(tenant.toString()));
      assertEquals(403,client.send(HttpRequest.newBuilder(URI.create("http://127.0.0.1:"+port+"/admin/tenants")).header("Authorization","Bearer "+token).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());
      assertEquals(401,client.send(HttpRequest.newBuilder(endpoint).header("Authorization","Bearer "+token(key,issuer,"wrong-audience",tenant,company,branch,actor)).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());

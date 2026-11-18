@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {createReadStream} from 'node:fs';
 import {readFile, writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -33,7 +34,7 @@ const blockers = {
     quotations: 'Scoped quotation workflow and stable source mapping',
 };
 const results = [];
-for (const {file, rows} of generated.files) {
+for (const {file, rows, sha256} of generated.files) {
     const kind = file.replace(/\.ndjson$/, '');
     const blocker = blockers[kind];
     if (!blocker) {
@@ -41,12 +42,16 @@ for (const {file, rows} of generated.files) {
         continue;
     }
     const entries = [];
-    for await (const line of createInterface({input:createReadStream(resolve(directory,file)), crlfDelay:Infinity})) {
+    const digest = createHash('sha256');
+    const input = createReadStream(resolve(directory, file));
+    input.on('data', chunk => digest.update(chunk));
+    for await (const line of createInterface({input, crlfDelay:Infinity})) {
         if (!line) continue;
         const row = JSON.parse(line);
         assert.equal(typeof row.id, 'string', `Missing source ID in ${file}`);
         entries.push({id:row.id, ...(kind==='events'?{type:row.type, sequence:row.sequence}:{})});
     }
+    assert.equal(digest.digest('hex'), sha256, `Checksum mismatch in ${file}`);
     assert.equal(entries.length, rows, `Unexpected row count in ${file}`);
     results.push({file, rows, imported:0, rejected:0, status:'BLOCKED_PRE_IMPORT', blocker, entries});
 }

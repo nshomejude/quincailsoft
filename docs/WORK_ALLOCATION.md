@@ -43,3 +43,7 @@ Codex coordinates migrations, shared security and final integration. Submit an i
 ## Issue #2 historical dataset
 
 Desktop Codex has taken integration ownership and cherry-picked the synthetic fixture package. See [dataset import evidence](dataset-import-evidence.md) for the verified input, exact pre-import blocker index, live preview scope and release gate status. The cloud agent retains the independent documents/reporting parity audit. Mobile and native desktop remain paused.
+
+## Issue #3 design fidelity and module acceptance
+
+Desktop Codex integrated the policy audit from commit 4e9520c and owns the screen and module registers. Run `node scripts/generate-acceptance-registers.mjs` after updating the canonical coverage and parity sources. The generated registers distinguish source candidates from accepted evidence. S01 now has a scoped Java posted-sales summary with a business-date selector in Next.js. Additional date presets, preparation, low-stock and collection queues remain unaccepted. See the [fidelity audit](migration/SCREEN_FIDELITY_AUDIT.md) and [dataset evidence](dataset-import-evidence.md).

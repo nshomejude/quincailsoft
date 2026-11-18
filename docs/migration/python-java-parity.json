@@ -4,7 +4,7 @@
     "architecture": "ARCHITECTURE.md",
     "sha256": "b1fd55ab6cadf0c0fd0aa9e36af2e3b70679797dd8a7abede485198ee52b97c9",
     "rules": "AGENTS.md",
-    "rulesSha256": "eacbf512380392f89d8fbe3b566d398ac25ba0c79633d5aea51a5ed76b4bbf3f",
+    "rulesSha256": "6e8216b2229acc807c1c19fc9dda0449d85d07bfb3db86ff76a36453f345b1fa",
     "precedence": "ARCHITECTURE sections31–46 override earlier examples; legacy security defects require tested normative replacements, never literal reintroduction."
   },
   "method": "Deterministic lexical inventory preserves every Python function, every if/elif block, route literal, supported specialized command, generic transition, schema field and actual regression assertion. Branches retain original source to avoid inventing semantics. Candidate Java sources/tests are search aids only, never acceptance. ACCEPTED requires explicit reviewed assertion mapping plus executed test artifact bound to source hashes. Helper functions are inventoried, not assumed to require a one-to-one Java method.",
@@ -13194,7 +13194,7 @@
       },
       {
         "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/api/SalesService.java",
-        "sha256": "7a050c57503972708215eeb0d2294afa04472274a5a2b9e13fe48ce246346ed8"
+        "sha256": "d60ec275c2a8521323764b9dd1dce598876b4815fb7f9882cfe161118d068a5c"
       },
       {
         "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/application/DefaultFulfillmentService.java",
@@ -13202,7 +13202,7 @@
       },
       {
         "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/application/DefaultSalesService.java",
-        "sha256": "0635c9e915717ba34fb922f547bad5c65a9e850439a7830ce72e467274730825"
+        "sha256": "d34bb5eeb434a6ea085693753001a9039215abc0c36c42aab35bf8a8b48b6f5f"
       },
       {
         "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/domain/SaleRules.java",
@@ -13226,7 +13226,7 @@
       },
       {
         "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/SalesController.java",
-        "sha256": "058d0d86e9b2a646234dd41ab2c657df1f7ff9bbc1fcc4e7995f44fac79b28e8"
+        "sha256": "97a7c3a5edd11fd634bdeb41e22d83efa6694645665d0d4b771832c759a83949"
       },
       {
         "path": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/api/EntitlementService.java",
@@ -13436,11 +13436,11 @@
     "tests": [
       {
         "path": "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java",
-        "sha256": "95fafdeb368afccfc1347b1cee308a85e6bc33264a89ef32e1ce8e5af1eabdda",
+        "sha256": "e67bf479bb1e1d4a825e8f2b44060df72961fab5fcbf61121528448cc8481822",
         "testMethods": [
           "applicationStartsAndAuthenticatesAgainstRealScopedDatabase"
         ],
-        "assertionCount": 6
+        "assertionCount": 9
       },
       {
         "path": "backend/api-server/src/test/java/com/quincaisoft/security/SecurityBoundaryTest.java",
@@ -13604,11 +13604,11 @@
       },
       {
         "path": "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
-        "sha256": "428ed2889c5e7a579fec6ccd841ca0d6f13baf3ec48632b802a026cd06821536",
+        "sha256": "2ef7cf1ed3f95b90dcb5f295d1097d898edbbaf4f8de5e53a220e228ffd2a383",
         "testMethods": [
           "stockJournalsOutboxAndReplayCommitOrRollbackTogether"
         ],
-        "assertionCount": 65
+        "assertionCount": 70
       },
       {
         "path": "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java",
@@ -13687,7 +13687,7 @@
       },
       {
         "path": "backend/workers/src/test/java/com/quincaisoft/workers/IdentityWorkerPostgresTest.java",
-        "sha256": "9585823e37ff1a132ffc60b12f5137b1a966430dc37a44cf379c24aec0bc90bd",
+        "sha256": "ad00b5eeb18acf9dc936dfd0c260e891f9aa1c83d3cf9bc4d069e42ab97ffa70",
         "testMethods": [
           "separateOwnerApprovalRevokesEpochAndProjectionIsIdempotent"
         ],

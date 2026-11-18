@@ -12,7 +12,12 @@ UUID t=UUID.randomUUID(),c=UUID.randomUUID(),b=UUID.randomUUID(),a=UUID.randomUU
 try(var admin=DriverManager.getConnection(adminUrl,adminUser,"")){
 sql(admin,"DO $$ BEGIN IF NOT EXISTS(SELECT FROM pg_roles WHERE rolname='quincai_app') THEN CREATE ROLE quincai_app NOLOGIN NOSUPERUSER NOBYPASSRLS;END IF;END $$");sql(admin,"CREATE ROLE "+role+" LOGIN NOSUPERUSER NOBYPASSRLS INHERIT");sql(admin,"GRANT quincai_app TO "+role);sql(admin,"CREATE DATABASE "+db);LocalContainerEntityManagerFactoryBean factory=null;
 try(var owner=DriverManager.getConnection(url,adminUser,"")){
-for(var file:Files.list(Path.of("../db-migrations/src/main/resources/db/migration")).filter(p->p.getFileName().toString().matches("V(1|2|3|8)__.*\\.sql")).sorted().toList())sql(owner,Files.readString(file));
+try (var migrations = Files.list(Path.of("../db-migrations/src/main/resources/db/migration"))) {
+    var ordered = migrations.filter(file -> file.toString().endsWith(".sql"))
+        .sorted(Comparator.comparingInt(file -> Integer.parseInt(file.getFileName().toString().split("__")[0].substring(1))))
+        .toList();
+    for (var file : ordered) sql(owner, Files.readString(file));
+}
 sql(owner,"INSERT INTO tenant(id,name)VALUES('"+t+"','Synthetic');INSERT INTO company(tenant_id,id,name)VALUES('"+t+"','"+c+"','Synthetic');INSERT INTO branch(tenant_id,company_id,id,name)VALUES('"+t+"','"+c+"','"+b+"','Synthetic');INSERT INTO tenant_memberships(tenant_id,company_id,branch_id,actor_id,role_code)VALUES('"+t+"','"+c+"','"+b+"','"+a+"','owner'),('"+t+"','"+c+"','"+b+"','"+checker+"','owner'),('"+t+"','"+c+"','"+b+"','"+target+"','cashier')");
 var ds=new DriverManagerDataSource(url,role,"");factory=new LocalContainerEntityManagerFactoryBean();factory.setDataSource(ds);factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());factory.setPackagesToScan("com.quincaisoft.identity.infrastructure","com.quincaisoft.audit.infrastructure");factory.setJpaPropertyMap(Map.of("hibernate.hbm2ddl.auto","validate"));factory.afterPropertiesSet();var emf=factory.getObject();var em=SharedEntityManagerCreator.createSharedEntityManager(emf);var template=new TransactionTemplate(new JpaTransactionManager(emf));
 ScopedTransactions tx=new ScopedTransactions(){public <T>T execute(Supplier<T> action){return template.execute(status->{var s=TenantContext.current();em.createNativeQuery("select set_config('app.tenant_id',:t,true),set_config('app.company_id',:c,true),set_config('app.branch_id',:b,true),set_config('app.actor_id',:a,true)").setParameter("t",s.tenantId().toString()).setParameter("c",s.companyId().toString()).setParameter("b",s.branchId().toString()).setParameter("a",s.actorId().toString()).getSingleResult();return action.get();});}};

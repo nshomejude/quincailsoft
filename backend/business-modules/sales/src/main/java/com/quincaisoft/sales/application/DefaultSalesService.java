@@ -18,6 +18,24 @@ public class DefaultSalesService implements SalesService {
  public DefaultSalesService(EntityManager em,ScopedTransactions tx,StockService stock,CatalogService catalog,FinanceService finance,CustomerService customers,JsonMapper json,DocumentService documents){this.documents=documents;this.json=json;this.em=em;this.tx=tx;this.stock=stock;this.catalog=catalog;this.finance=finance;this.customers=customers;}
  public Valuation valuation(UUID id){return tx.execute(()->{var r=find(id,true);if(!"POSTED".equals(r.status))throw new IllegalStateException("Only posted sales have return valuation");return new Valuation(r.id,r.customerId,r.warehouseId,r.businessDate,lines(r).stream().map(l->new ValuationLine(l.productId,l.quantityMilli,l.lineTotalXaf,l.costXaf)).toList());});}
  public List<Sale> list(){return tx.execute(()->{var s=TenantContext.current();return em.createQuery("select s from SaleEntity s where s.tenantId=:t and s.companyId=:c and s.branchId=:b order by s.createdAt desc,s.id",SaleEntity.class).setParameter("t",s.tenantId()).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setMaxResults(100).getResultList().stream().map(this::view).toList();});}
+ @Override
+ public PostedSalesSummary postedSalesSummary(LocalDate from, LocalDate to) {
+  if (from == null || to == null || to.isBefore(from) || java.time.temporal.ChronoUnit.DAYS.between(from, to) > 365) {
+   throw new IllegalArgumentException("A date range of 1 to 366 days is required");
+  }
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   var total = (java.math.BigDecimal) em.createNativeQuery("""
+       select coalesce(sum(total_xaf), 0) from sale
+        where tenant_id = :tenant and company_id = :company and branch_id = :branch
+          and status = 'POSTED' and business_date between :from and :to
+       """)
+       .setParameter("tenant", scope.tenantId()).setParameter("company", scope.companyId())
+       .setParameter("branch", scope.branchId()).setParameter("from", from).setParameter("to", to)
+       .getSingleResult();
+   return new PostedSalesSummary(from, to, total.toBigIntegerExact().toString());
+  });
+ }
  public Sale get(UUID id){return tx.execute(()->view(find(id,false)));}
  private SaleEntity find(UUID id,boolean lock){var s=TenantContext.current();var row=em.find(SaleEntity.class,new SaleEntity.Key(s.tenantId(),s.companyId(),id),lock?LockModeType.PESSIMISTIC_WRITE:LockModeType.NONE);if(row==null||!row.branchId.equals(s.branchId()))throw new NoSuchElementException("Sale not found");return row;}
  private List<SaleLineEntity> lines(SaleEntity r){return em.createQuery("select l from SaleLineEntity l where l.tenantId=:t and l.companyId=:c and l.saleId=:s order by l.id",SaleLineEntity.class).setParameter("t",r.tenantId).setParameter("c",r.companyId).setParameter("s",r.id).getResultList();}

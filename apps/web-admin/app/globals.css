@@ -34,3 +34,4 @@ aside{background:var(--sidebar);color:var(--brand-navy);border-right-color:trans
 .aside-foot{border-top-color:var(--brand-navy)}
 nav a{color:var(--brand-navy)}
 nav a:hover,nav a[aria-current=page]{background:var(--sidebar-tint);color:var(--brand-navy)}
+.dashboard-date{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 18px}.dashboard-date input{padding:8px;border:1px solid var(--control-border);border-radius:5px;background:var(--canvas);color:var(--text)}
