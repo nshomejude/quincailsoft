@@ -13,17 +13,23 @@ public final class Csv {
   char sep=delimiter.charAt(0);List<List<String>> rows=new ArrayList<>();List<String> row=new ArrayList<>();StringBuilder cell=new StringBuilder();boolean quoted=false,closed=false;
   for(int i=0;i<source.length();i++) {
    char ch=source.charAt(i);
+   if(ch=='\0')throw new IllegalArgumentException("NUL is not a valid CSV character");
    if(quoted){if(ch=='"'){if(i+1<source.length()&&source.charAt(i+1)=='"'){cell.append('"');i++;}else{quoted=false;closed=true;}}else cell.append(ch);}
    else if(ch==sep){row.add(cell.toString());cell.setLength(0);closed=false;}
-   else if(ch=='\r'||ch=='\n'){if(ch=='\r'&&i+1<source.length()&&source.charAt(i+1)=='\n')i++;if(!row.isEmpty()||cell.length()>0||closed){row.add(cell.toString());rows.add(List.copyOf(row));}row.clear();cell.setLength(0);closed=false;}
+   else if(ch=='\r'||ch=='\n'){if(ch=='\r'&&i+1<source.length()&&source.charAt(i+1)=='\n')i++;if(!row.isEmpty()||cell.length()>0||closed){finishRow(rows,row,cell);}row.clear();cell.setLength(0);closed=false;}
    else if(ch=='"'){if(cell.length()!=0||closed)throw new IllegalArgumentException("Unexpected quote in CSV");quoted=true;}
-   else {if(closed)throw new IllegalArgumentException("Characters after closing CSV quote");if(ch=='\0')throw new IllegalArgumentException("NUL is not a valid CSV character");cell.append(ch);}
+   else {if(closed)throw new IllegalArgumentException("Characters after closing CSV quote");cell.append(ch);}
    if(cell.length()>10_000||row.size()>40||rows.size()>501)throw new IllegalArgumentException("CSV row, column or field limit exceeded");
   }
   if(quoted)throw new IllegalArgumentException("Unterminated CSV quote");
-  if(!row.isEmpty()||cell.length()>0||closed){row.add(cell.toString());rows.add(List.copyOf(row));}
+  if(!row.isEmpty()||cell.length()>0||closed){finishRow(rows,row,cell);}
   if(rows.size()<2||rows.size()>501)throw new IllegalArgumentException("CSV requires 1–500 data rows");
   return List.copyOf(rows);
+ }
+ private static void finishRow(List<List<String>> rows,List<String> row,StringBuilder cell){
+  // The pending final cell counts even when empty. Check before copying or clearing.
+  if(row.size()>=40)throw new IllegalArgumentException("CSV column limit exceeded");
+  row.add(cell.toString());rows.add(List.copyOf(row));
  }
  public static String row(List<?> values){return values.stream().map(Csv::cell).collect(java.util.stream.Collectors.joining(","))+"\r\n";}
  public static String cell(Object value){String s=value==null?"":value.toString();String stripped=s.stripLeading();if(s.startsWith("\t")||s.startsWith("\r")||!stripped.isEmpty()&&"=+-@".indexOf(stripped.charAt(0))>=0)s="'"+s;return "\""+s.replace("\"","\"\"")+"\"";}

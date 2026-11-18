@@ -1,0 +1,20 @@
+✔ accepts deployment contract without exposing secret (2.079579ms)
+✔ rejects unsafe QUINCAI_API_IMAGE: quincai (0.384217ms)
+✔ rejects unsafe QUINCAI_DATABASE_URL: jdbc (0.181427ms)
+✔ rejects unsafe QUINCAI_DATABASE_URL: jdbc (0.483173ms)
+✔ rejects unsafe QUINCAI_DATABASE_USER: postgres (0.193546ms)
+✔ rejects unsafe QUINCAI_OIDC_ISSUER: http (0.23731ms)
+✔ rejects unsafe QUINCAI_OIDC_ISSUER: https (0.180807ms)
+✔ rejects unsafe QUINCAI_MIGRATIONS_ENABLED: true (0.202499ms)
+✔ rejects unsafe QUINCAI_DATABASE_PASSWORD: not-allowed (0.215898ms)
+✔ rejects missing fields (0.402634ms)
+✔ rejects group-readable credentials (0.256028ms)
+✔ rejects unavailable secret (0.276769ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 164.115379
