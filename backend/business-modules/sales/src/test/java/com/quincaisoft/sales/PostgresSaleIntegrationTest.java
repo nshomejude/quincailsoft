@@ -77,7 +77,14 @@ class PostgresSaleIntegrationTest {
      long journalCount=count(owner,"select count(*) from journal_entry"),movementCount=count(owner,"select count(*) from stock_movement");
      var position=custody.positions().getFirst();assertEquals("1000",position.frozenCostXaf());assertThrows(IllegalStateException.class,()->stock.requireCustodyCollected(heldSale.id()));
      assertEquals(0,fulfillment.pendingPreparationCount());
-     var task=fulfillment.draft(new FulfillmentService.Draft(UUID.randomUUID(),heldSale.id(),customer,LocalDate.of(2026,11,18),"Prepare customer collection"));assertThrows(IllegalStateException.class,()->fulfillment.dispatch(task.id(),new FulfillmentService.Action(UUID.randomUUID(),task.version(),null,"Must collect custody first")));
+     var date=LocalDate.of(2026,11,18);
+     var delivery=new FulfillmentService.DeliveryDetails("DELIVERY",date.plusDays(1),
+         "Synthetic address","Synthetic recipient","+237000000000","Synthetic instructions");
+     var request=new FulfillmentService.Draft(UUID.randomUUID(),heldSale.id(),customer,date,"Prepare customer collection",delivery);
+     var task=fulfillment.draft(request);
+     assertEquals(delivery,fulfillment.get(task.id()).delivery());
+     assertEquals(task,fulfillment.draft(request));
+    assertThrows(IllegalStateException.class,()->fulfillment.dispatch(task.id(),new FulfillmentService.Action(UUID.randomUUID(),task.version(),null,"Must collect custody first")));
      assertThrows(IllegalArgumentException.class,()->custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),position.version(),"1000"," ","Missing proof must reject")));
      assertEquals(1,fulfillment.pendingPreparationCount());
      var pickList=fulfillment.pickList(task.id());
@@ -98,7 +105,7 @@ class PostgresSaleIntegrationTest {
      assertEquals(0,count(owner,"""
          select count(*) from outbox_event
          where event_type='FulfillmentChanged.v1' and
-           (payload ? 'command' or payload ? 'fulfillment' or payload::text like '%SIGNED-DELIVERY%')
+           (payload ? 'command' or payload ? 'fulfillment' or payload::text like '%SIGNED-DELIVERY%' or payload::text like '%Synthetic recipient%')
          """));
      assertEquals(0,fulfillment.pendingPreparationCount());
      assertTrue(TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,custody::positions).isEmpty());assertTrue(TenantContext.call(new TenantScope(UUID.randomUUID(),c,b,a),1,fulfillment::list).isEmpty());assertThrows(SQLException.class,()->sql(owner,"update customer_custody set frozen_cost_xaf=0"));assertThrows(SQLException.class,()->sql(owner,"update custody_collection set quantity_milli=1"));

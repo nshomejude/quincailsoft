@@ -4,7 +4,34 @@ import jakarta.persistence.*;import org.springframework.stereotype.Service;impor
 @Service public class DefaultFulfillmentService implements FulfillmentService {
  private final EntityManager em;private final ScopedTransactions tx;private final SalesService sales;private final StockService stock;private final FinanceService finance;private final JsonMapper json=JsonMapper.builder().build();
  public DefaultFulfillmentService(EntityManager em,ScopedTransactions tx,SalesService sales,StockService stock,FinanceService finance){this.em=em;this.tx=tx;this.sales=sales;this.stock=stock;this.finance=finance;}
- private Fulfillment view(FulfillmentEntity f){return new Fulfillment(f.id,f.saleId,f.customerId,f.status,f.businessDate,f.proofReference,""+f.version);}
+ private Fulfillment view(FulfillmentEntity f){return new Fulfillment(f.id,f.saleId,f.customerId,f.status,f.businessDate,f.proofReference,""+f.version,details(f));}
+ private static DeliveryDetails details(FulfillmentEntity task) {
+  if (task.method == null && task.scheduledDate == null && task.address == null &&
+      task.recipientName == null && task.recipientPhone == null && task.notes == null) return null;
+  return new DeliveryDetails(task.method,task.scheduledDate,task.address,
+      task.recipientName,task.recipientPhone,task.notes);
+ }
+
+ private static void applyDetails(FulfillmentEntity task, DeliveryDetails details) {
+  if (details == null) return;
+  if (details.method() != null && !Set.of("PICKUP","DELIVERY").contains(details.method()))
+   throw new IllegalArgumentException("Invalid fulfillment method");
+  if (details.scheduledDate() != null && details.scheduledDate().isBefore(task.businessDate))
+   throw new IllegalArgumentException("Scheduled date precedes fulfillment business date");
+  task.method = details.method();
+  task.scheduledDate = details.scheduledDate();
+  task.address = optionalText(details.address(),1000);
+  task.recipientName = optionalText(details.recipientName(),200);
+  task.recipientPhone = optionalText(details.recipientPhone(),50);
+  task.notes = optionalText(details.notes(),2000);
+ }
+
+ private static String optionalText(String value, int limit) {
+  if (value == null || value.isBlank()) return null;
+  if (value.length() > limit) throw new IllegalArgumentException("Fulfillment field exceeds "+limit+" characters");
+  return value.strip();
+ }
+
  private FulfillmentEntity find(UUID id,LockModeType lock){var s=TenantContext.current();var f=em.find(FulfillmentEntity.class,new FulfillmentEntity.Key(s.tenantId(),s.companyId(),id),lock);if(f==null||!f.branchId.equals(s.branchId()))throw new NoSuchElementException("Fulfillment not found");return f;}
  public List<Fulfillment> list(){return tx.execute(()->em.createQuery("select f from FulfillmentEntity f order by f.createdAt desc,f.id",FulfillmentEntity.class).setMaxResults(200).getResultList().stream().map(this::view).toList());}
  @Override
@@ -34,7 +61,7 @@ import jakarta.persistence.*;import org.springframework.stereotype.Service;impor
   });
  }
  public Fulfillment get(UUID id){return tx.execute(()->view(find(id, LockModeType.NONE)));}
- public Fulfillment draft(Draft c){if(c.businessDate()==null||c.customerId()==null||c.saleId()==null)throw new IllegalArgumentException("Sale, customer and date required");text(c.reason());return tx.execute(()->once(c.operationId(),"DRAFT|"+c,()->{var sale=sales.get(c.saleId());if(!sale.status().equals("POSTED")||!sale.customerId().equals(c.customerId())||c.businessDate().isBefore(sale.businessDate()))throw new IllegalArgumentException("Completed sale for the same customer and valid date required");var s=TenantContext.current();var f=new FulfillmentEntity();f.tenantId=s.tenantId();f.companyId=s.companyId();f.branchId=s.branchId();f.id=UUID.randomUUID();f.saleId=c.saleId();f.customerId=c.customerId();f.businessDate=c.businessDate();f.createdBy=s.actorId();f.createdAt=Instant.now();f.status="PENDING";em.persist(f);em.flush();return f;}));}
+ public Fulfillment draft(Draft c){if(c.businessDate()==null||c.customerId()==null||c.saleId()==null)throw new IllegalArgumentException("Sale, customer and date required");text(c.reason());return tx.execute(()->once(c.operationId(),"DRAFT|"+(c.delivery()==null?c.legacyFingerprintMaterial():json.writeValueAsString(c)),()->{var sale=sales.get(c.saleId());if(!sale.status().equals("POSTED")||!sale.customerId().equals(c.customerId())||c.businessDate().isBefore(sale.businessDate()))throw new IllegalArgumentException("Completed sale for the same customer and valid date required");var s=TenantContext.current();var f=new FulfillmentEntity();f.tenantId=s.tenantId();f.companyId=s.companyId();f.branchId=s.branchId();f.id=UUID.randomUUID();f.saleId=c.saleId();f.customerId=c.customerId();f.businessDate=c.businessDate();f.createdBy=s.actorId();f.createdAt=Instant.now();f.status="PENDING";applyDetails(f,c.delivery());em.persist(f);em.flush();return f;}));}
  public Fulfillment dispatch(UUID id,Action c){return action(id,c,false);}
  public Fulfillment complete(UUID id,Action c){return action(id,c,true);}
  private Fulfillment action(UUID id,Action c,boolean complete){text(c.reason());if(c.version()==null||!c.version().matches("0|[1-9][0-9]*"))throw new IllegalArgumentException("Version required");long version=Long.parseLong(c.version());if(complete)text(c.proofReference());return tx.execute(()->once(c.operationId(),(complete?"COMPLETE":"DISPATCH")+"|"+id+"|"+c,()->{var f=find(id, LockModeType.PESSIMISTIC_WRITE);if(f.version!=version)throw new RevisionConflict("Fulfillment changed");if(!(complete?Set.of("PENDING","DISPATCHED").contains(f.status):f.status.equals("PENDING")))throw new IllegalStateException("Invalid fulfillment state");finance.requireOpenPeriod(f.businessDate);stock.requireCustodyCollected(f.saleId);if(complete){f.proofReference=c.proofReference();f.status="COMPLETED";}else f.status="DISPATCHED";em.flush();return f;}));}
