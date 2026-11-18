@@ -93,3 +93,17 @@ returned HTTP 200 for the preview and Keycloak sign-in and UP for the Java API.
 All seven PRs were merged into `handover/codex-computer-2026-11-18`, culminating at `831d2faf55c65832182086be780f356cc3d3b0ad`. Main remains separate. The subsequent cloud implementation owns V27–V30, onboarding bootstrap APIs, subscription lifecycle, workforce lifecycle, operational documents/reports, platform-admin, new web workforce routes, and shared billing command enforcement. Existing Desktop historical importer/catalog flows are preserved.
 
 The new implementation and source-bound verification are recorded in `docs/migration-evidence/cloud-owned-completion/`. These results supersede the earlier cloud checkpoint only for the explicitly tested changes; the earlier evidence remains historical. Full module/screen/parity/release acceptance is not inferred from compilation or test counts.
+
+## Dashboard summary checkpoint
+
+Handover commits `6fe42f5`, `ef01ebe`, and `676f0da` connect the original
+collection, order preparation, and low stock cards to scoped Java APIs and
+retain the HTTP integration assertions. Java 25 with PostgreSQL 18.7 passed
+`TenderPostgresTest` (partial payment, full allocation, and branch scope) and
+`FullApplicationPostgresTest` (anonymous rejection and authorized dashboard
+counts with historical acceptance flags disabled). The web type check and
+21 web consumer tests passed. Browser acceptance remains open.
+
+Complete assigned platform workflows and acceptance before resuming historical
+import. The local historical sequence replay changes are preserved and their
+expanded acceptance test remains unverified.
