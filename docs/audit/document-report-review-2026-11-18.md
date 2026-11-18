@@ -37,7 +37,7 @@ A suspected stock pagination tie-break defect was rejected during review: order 
 - `backend/business-modules/reporting/src/test/java/com/quincaisoft/reporting/ReportPermissionMatrixTest.java`: iterates every current report against every registered source permission and general report/document/admin authorities, both raw and SCOPE-prefixed, plus missing/empty authentication. Denied capabilities must never enter ScopedTransactions; correct source authority must reach the mocked transaction boundary.
 - `backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java`: iterates every template with the same pairwise approach. Denied authorization, source listing and source reads must fail before EntityManager or original-document access. Correct source authority passes the permission gate only.
 
-These tests cover service capability gates, not current membership/epoch intersection, controller annotations, cross-tenant RLS, original snapshots, replay, print output or financial reconciliation. They use mocks solely to prove no data access occurs on denial, never as a database substitute. They are authored but NOT_RUN.
+These tests cover service capability gates, not current membership/epoch intersection, controller annotations, cross-tenant RLS, original snapshots, replay, print output or financial reconciliation. They use mocks solely to prove no data access occurs on denial, never as a database substitute. They were initially NOT_RUN; the focused Java25 execution below now passes.
 
 ## Executed checks and limitations
 
@@ -53,3 +53,11 @@ These tests cover service capability gates, not current membership/epoch interse
 Run the new tests in the serialized Java25 reactor, e.g. from `backend/`: `mvn -B -ntp -pl business-modules/reporting,business-modules/documents -am -Dtest=ReportPermissionMatrixTest,DocumentPermissionMatrixTest -Dsurefire.failIfNoSpecifiedTests=false test`. Then run the required full PostgreSQL18 verify suite and attach exact commit/results. The focused command intentionally omits unrelated tests; it is not a release gate. Review and fix the export proxy under Desktop ownership.
 
 Historical import remains 0 of 245,514 candidate source records, with no accepted mapping/replay or exact stock/AR/AP/financial reconciliation. Manufacturer, brand, variant and supplier identity must remain separate. Provisioning, billing, HR/payroll, complete reports/documents, full UI/security/provider acceptance, restore and deployment remain open. No authorized production destination exists. Verdict remains NO-GO.
+
+## Executed Java25 follow-up — 18 November 2026
+
+At tested source commit `ffaf2b4baf725e2dae1e98a1561f4c67ca484ff6`, CLOUD compiled the focused four-module dependency reactor with Java25 and executed both added permission matrices: **510 document + 476 report cases = 986 tests; zero failures, errors or skips**. See [structured evidence](../migration-evidence/cloud-permissions/result.json), [Maven log](../migration-evidence/cloud-permissions/maven.log) and the two Surefire summaries in that directory. This supersedes the earlier environment/NOT_RUN statements for these two suites only.
+
+Temurin 25.0.5+8 and Maven 3.9.11 were downloaded to a separate scratch toolchain and verified against published checksums. Maven used the existing runtime proxy and system Java trust store. Initial Mockito self-attachment failed; a command-line `-javaagent` pointing at the resolved Mockito 5.20.0 artifact enabled the successful rerun. No security checks, tests or repository build files were weakened. The evidence records the exact normalized command. Desktop should use its resolved Mockito artifact path if its runtime also requires explicit agent loading.
+
+This is not a full reactor/PostgreSQL18 run: `-Dtest` selects only the two service-boundary test factories. Membership/epoch freshness, HTTP authorization, RLS, captures/replay, financial reconciliation, complete UI and deployment/restore still require execution. No new Desktop pushes or acknowledgment of PR #5/#6 was observed. No merge or release certification.
