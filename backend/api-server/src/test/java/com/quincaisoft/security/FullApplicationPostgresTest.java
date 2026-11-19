@@ -86,6 +86,10 @@ class FullApplicationPostgresTest {
               "purchasing:write purchasing:receive purchasing:approve sales:write sales:post sales:read documents:configure documents:read documents:write documents:print"),
           token(key,issuer,"quincai-test",tenant,company,branch,approver,"purchasing:approve"),
           product,supplier,url,user);
+      QuotationHttpWorkflow.verify(client,port,product,
+          token(key,issuer,"quincai-test",tenant,company,branch,actor,"quotations:read quotations:write quotations:issue sales:read sales:write"),
+          token(key,issuer,"quincai-test",tenant,company,branch,approver,"quotations:read quotations:write quotations:issue sales:read sales:write"),
+          token(key,issuer,"quincai-test",tenant,company,branch,actor,"quotations:write"));
       FulfillmentHttpWorkflow.verifyRevocation(client,port,token,
           token(key,issuer,"quincai-test",tenant,company,branch,approver,"sales:read sales:write"),
           token(key,issuer,"quincai-test",tenant,company,branch,approver,"sales:read sales:write",2),

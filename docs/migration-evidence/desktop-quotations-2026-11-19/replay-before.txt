@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: com.quincaisoft.security.FullApplicationPostgresTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 28.56 s <<< FAILURE! -- in com.quincaisoft.security.FullApplicationPostgresTest
+com.quincaisoft.security.FullApplicationPostgresTest.applicationStartsAndAuthenticatesAgainstRealScopedDatabase -- Time elapsed: 28.48 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: quotations: {"id":"39a7de46-6c1c-45ea-9166-f87d40dc8785","status":"DRAFT","customerId":"a38d926e-5154-4149-a931-e48e4ce6d57a","warehouseId":"b10d7cb7-afc8-4f6f-87c7-845d1909416a","businessDate":"2026-11-19","validUntil":"2026-12-19","totalXaf":"2000","version":0,"convertedSaleId":null,"lines":[{"id":"8b77e71e-dc7b-4c60-885a-a710895a164f","productId":"80452c03-cf9b-410e-a05b-c54317a90982","quantityMilli":"2000","unitPriceXaf":"1000","lineTotalXaf":"2000"}]} ==> expected: <409> but was: <200>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:158)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:139)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:201)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:152)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:590)
+	at com.quincaisoft.security.QuotationHttpWorkflow.post(QuotationHttpWorkflow.java:52)
+	at com.quincaisoft.security.QuotationHttpWorkflow.verify(QuotationHttpWorkflow.java:23)
+	at com.quincaisoft.security.FullApplicationPostgresTest.applicationStartsAndAuthenticatesAgainstRealScopedDatabase(FullApplicationPostgresTest.java:89)
