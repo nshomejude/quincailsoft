@@ -1,0 +1,41 @@
+{
+  "sourceCommit": "bef166b168e127aff51d0539c7a58e28d8448f30",
+  "status": "PARTIAL_ACCEPTANCE",
+  "specification": [
+    "ARCHITECTURE.md Appendix A S74/S75",
+    "ARCHITECTURE.md §38 immutable captures and print attempts",
+    "ARCHITECTURE.md §39.1 screen actions and authorization"
+  ],
+  "checks": {
+    "typecheck": "PASS",
+    "consumerTests": {
+      "passed": 29,
+      "failed": 0,
+      "skipped": 0
+    },
+    "productionWebpackBuild": "PASS",
+    "compiledClientIncludesFinalOutcomeResponseValidation": true,
+    "projectRules": "PASS",
+    "actualChromeJavaBff": "PASS; owner/cashier missing source404, auditor command403, all roles invalid origin403"
+  },
+  "browserResult": "docs/migration-evidence/fulfillment-web-2026-11-19/document-bff-checks.json",
+  "earlierBrowserAttempt": "Timed out during sign-in while build was active; terminal failure, then rerun after build completion passed. No mocked responses.",
+  "implementation": [
+    "PENDING/PARTIAL detail: immutable PICK_TICKET capture and A4 print attempt",
+    "COMPLETED detail: DOC12 delivery note with inventory read capability",
+    "Stable operation IDs across request retries; every subsequent print dialog needs a new attempt",
+    "Sandboxed HTML preview; explicit operator-confirmed PRINTED/FAILED outcomes; no automatic physical-success claim"
+  ],
+  "notAccepted": [
+    "No stocked posted sale exists in preview for full browser capture/dialog/outcome sequence",
+    "Physical printer, screenshot/layout comparison and narrow-width acceptance remain NOT_RUN",
+    "Full migration acceptance and historical import; mobile/native desktop remain paused"
+  ],
+  "sourceHashes": {
+    "apps/web-admin/components/FulfillmentPrint.tsx": "d63113a7c866a8dc03cbe8347c2f3c4ebdc634c720841b94487594ac154a3e8e",
+    "apps/web-admin/app/fulfillments/[id]/page.tsx": "bcdbe0fcb935ba1d8cdc192348b009d52c8b8a663f90e51723b034cc6278babe",
+    "apps/web-admin/lib/business-paths.ts": "6d1ddfd5ba77d5fd517f630941ad0da7a6c179a5d934375f54b26c95a93f3d7e",
+    "apps/web-admin/tests/business-paths.test.ts": "9797b7c6de964d52930d0873bb6293067548df4d05372f53e05f2419102b6d5d",
+    "docs/migration-evidence/fulfillment-web-2026-11-19/document-bff-check.mjs": "7ec3188bf2509e2ba08fb6f393eb9dcf598f03ca9ad55999e59541f8b3d65d1e"
+  }
+}
