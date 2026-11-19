@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "f202dcdc783556ec70270cb3428d8511d829f0c55efab5b0248954fa09decd6b",
+  "sourceDigest": "1ac0c333e1fc3f7cd6cf5ee3541ba95c11dd1ae5f01cac134231351013825590",
   "unresolvedJavaTypes": [],
   "endpoints": [
     {
@@ -1968,6 +1968,17 @@
       "controller": "FulfillmentController",
       "javaMethod": "list",
       "returnType": "List<FulfillmentService.Fulfillment>",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:read','SCOPE_sales:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/fulfillments/page",
+      "controller": "FulfillmentController",
+      "javaMethod": "page",
+      "returnType": "FulfillmentService.QueuePage",
       "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
       "authorization": "hasAnyAuthority('sales:read','SCOPE_sales:read')",
       "requestHeaders": [],

@@ -72,6 +72,7 @@ export default async function Dashboard({searchParams}: {searchParams: Promise<{
                     {sales?.length ? <div className="table-scroll"><table><thead><tr><th>Reference</th><th>Business date</th><th>Status</th><th>Amount</th></tr></thead><tbody>{sales.slice(0,8).map(row=><tr key={row.id}><td><Link href={'/sales/'+row.id}>{row.id.slice(0,8)}</Link></td><td>{row.businessDate}</td><td><span className="badge">{row.status}</span></td><td>{xaf(row.totalXaf)}</td></tr>)}</tbody></table></div> : <p className="muted">{mayReadSales?'No sales in this branch.':'Sales access required.'}</p>}
                 </section>
                 <section className="panel dashboard-access"><h2>Today’s priorities</h2>
+                    {mayReadSales&&<p><Link href="/fulfillments">Review pickup and delivery</Link></p>}
                     {permitted(me,'inventory:read')&&<p><Link href="/inventory">Review stock</Link></p>}
                     {permitted(me,'tenders:read')&&<p><Link href="/finance">Review collections and payments</Link></p>}
 

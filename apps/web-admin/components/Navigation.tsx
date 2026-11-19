@@ -1,16 +1,16 @@
  'use client';import {useState} from 'react';import Link from 'next/link';import {usePathname} from 'next/navigation';import {useLocale} from './Locale';import {LayoutDashboard,Package,ShoppingCart,Truck,Wallet,FileText,Warehouse,Users,Settings,LifeBuoy} from 'lucide-react';
-const items=[['/','overview','',LayoutDashboard],['/catalog','catalog','catalog:read',Package],['/inventory','stock','inventory:read',Warehouse],['/sales','sales','sales:read',ShoppingCart],['/quotations','quotations','quotations:read',FileText],['/returns','returns','returns:read',ShoppingCart],['/purchases','purchasing','purchasing:read',Truck],['/customers','customers','customers:read',Users],['/suppliers','suppliers','purchasing:read',Users],['/finance','finance','tenders:read',Wallet],['/finance/bank','bank','bank:read',Wallet],['/finance/payables','payables','purchasing:read',Wallet],['/finance/bank-collections','settlements','tenders:read',Wallet],['/finance/journals','journals','finance:read',Wallet],['/finance/expenses','expenses','expenses:read',Wallet],['/finance/periods','periods','finance:read',Wallet],['/documents','documents','documents:read',FileText],['/reports','reports','reports:read',FileText],['/workforce','workforce','workforce:employees:read',Users],['/support','support','support:read',LifeBuoy],['/identity','identity','identity:manage',Users],['/audit','audit','audit:read',FileText],['/documents/settings','settings','documents:configure',Settings]] as const;
+const items=[['/','overview','',LayoutDashboard],['/catalog','catalog','catalog:read',Package],['/inventory','stock','inventory:read',Warehouse],['/sales','sales','sales:read',ShoppingCart],['/quotations','quotations','quotations:read',FileText],['/returns','returns','returns:read',ShoppingCart],['/purchases','purchasing','purchasing:read',Truck],['/customers','customers','customers:read',Users],['/suppliers','suppliers','purchasing:read',Users],['/fulfillments','fulfillment','sales:read',Truck],['/finance','finance','tenders:read',Wallet],['/finance/bank','bank','bank:read',Wallet],['/finance/payables','payables','purchasing:read',Wallet],['/finance/bank-collections','settlements','tenders:read',Wallet],['/finance/journals','journals','finance:read',Wallet],['/finance/expenses','expenses','expenses:read',Wallet],['/finance/periods','periods','finance:read',Wallet],['/documents','documents','documents:read',FileText],['/reports','reports','reports:read',FileText],['/workforce','workforce','workforce:employees:read',Users],['/support','support','support:read',LifeBuoy],['/identity','identity','identity:manage',Users],['/audit','audit','audit:read',FileText],['/documents/settings','settings','documents:configure',Settings]] as const;
 
 const groups = [
     ['Workspace', ['/', '/sales', '/quotations', '/customers', '/returns']],
-    ['Operations', ['/catalog', '/inventory', '/purchases', '/suppliers']],
+    ['Operations', ['/catalog', '/inventory', '/purchases', '/suppliers', '/fulfillments']],
     ['Management', ['/finance', '/finance/bank', '/finance/payables', '/finance/bank-collections', '/finance/journals', '/finance/expenses', '/finance/periods', '/reports', '/documents', '/workforce', '/support', '/identity', '/audit', '/documents/settings']],
 ] as const;
 
 export function Navigation({authorities,labels}:{authorities:string[];labels:Record<string,string>}) {
     const path = usePathname();
     const {locale}=useLocale();
-    const displayLabels={...labels,support:locale==='fr'?'Assistance':'Support'} as Record<string,string>;
+    const displayLabels={...labels,fulfillment:locale==='fr'?'Retraits et livraisons':'Pickup & delivery',support:locale==='fr'?'Assistance':'Support'} as Record<string,string>;
     const [query, setQuery] = useState('');
     const [menuOpen, setMenuOpen] = useState(false);
     const allowed = (permission:string) => authorities.includes(permission) || authorities.includes('SCOPE_' + permission);

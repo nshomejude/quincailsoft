@@ -76,3 +76,17 @@ test('partial fulfillment dispatch and history retain exact quantities and comma
  assert.deepEqual(entry.dispatchedAt,{type:'string',format:'date-time'});
  assert.deepEqual(entry.dispatchedBy,{type:'string',format:'uuid'});
 });
+
+test('fulfillment queue pagination is typed and preserves scope-bound cursor parameters',()=>{
+ const operation=api.paths['/api/v1/fulfillments/page'].get;
+ assert.equal(operation.responses['200'].content['application/json'].schema.$ref,'#/components/schemas/FulfillmentService_QueuePage');
+ assert.deepEqual(operation.parameters.filter(p=>p.in==='query').map(p=>p.name),['status','q','limit','cursor']);
+ assert.equal(operation.parameters.find(p=>p.name==='cursor').required,false);
+ const page=api.components.schemas.FulfillmentService_QueuePage.properties;
+ assert.equal(page.items.items.$ref,'#/components/schemas/FulfillmentService_QueueEntry');
+ assert.equal(page.nextCursor.type,'string');
+ assert.equal(api.components.schemas.FulfillmentService_QueueEntry.properties.fulfillment.$ref,
+  '#/components/schemas/FulfillmentService_Fulfillment');
+ assert(inventory.endpoints.length>0);
+ assert(inventory.endpoints.every(endpoint=>!endpoint.source.includes(String.fromCharCode(92))));
+});

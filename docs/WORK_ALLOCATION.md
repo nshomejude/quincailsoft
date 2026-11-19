@@ -165,3 +165,7 @@ The signing key stays in a private database table and is never returned.
 Acceptance includes ordered pages, exact next cursor, filter/scope/tamper/expiry
 rejection, and the unchanged legacy list contract. Original screen acceptance
 remains open until the Java-backed queue is rendered and exercised.
+
+## 19 November checkpoint before further migration
+
+Current branch: codex/platform-continuation-2026-11-19; preceding commit 52a8461. Active paths: apps/web-admin fulfillment routes/components/tests, packages/api-contracts, packages/generated-ts-sdk and scoped browser evidence. See migration-evidence/fulfillment-web-2026-11-19/README.md for executed checks and untested workflows. Historical import is last; mobile/native desktop remain paused. Independent documents/reporting parity audit remains reserved for the ChatGPT agent. Full platform migration and release acceptance remain incomplete.
