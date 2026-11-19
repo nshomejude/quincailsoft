@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-19",
+  "sourceCommit": "2b0232f288cd800d319576dff4ca13c4b1faedef",
+  "browser": "Installed Google Chrome in isolated Playwright contexts",
+  "playwright": "1.65.1",
+  "url": "http://localhost:3100",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "screenshots": {
+    "login.png": "75b1727b6556f5c258bfae493f40b16630a0e9d204fdbb8b68502bb7106a4e25",
+    "dashboard.png": "d553fd1cee033738e8fd1da123868410f44b84f1728dc8efffbbe8a559dd91de",
+    "product-detail.png": "06e5ec4d36114bb191fcd3d565cdd6696f03d50a9caf4bc0e3763d115cbfb6a4",
+    "cashier-dashboard.png": "f849621a177b3cf849eaf537da1257172b25b45c384009a4f69813153845b652",
+    "auditor-dashboard.png": "beba290a6468fd3d539176f57aa6d7cade6302efee4d9c36b9eaf9b52ba42302"
+  },
+  "owner": {
+    "demoLogin": "PASS",
+    "dashboard": "PASS",
+    "productDetail": "PASS",
+    "productSku": "PREVIEW-CABLE",
+    "preparationCount": 0,
+    "lowStockCount": 2,
+    "pendingCollectionCount": 0
+  },
+  "restrictedRoles": [
+    {
+      "role": "cashier",
+      "catalogRead": 200,
+      "identityRead": 403,
+      "productUpdate": 403
+    },
+    {
+      "role": "auditor",
+      "catalogRead": 200,
+      "identityRead": 403,
+      "productUpdate": 403
+    }
+  ],
+  "originalComparison": {
+    "sources": [
+      "previews/QuincaiSoft_Login_v4.jpg",
+      "previews/QuincaiSoft_Dashboard_v4.jpg",
+      "pages/S11.html",
+      "v3/contracts.json"
+    ],
+    "sidebar": "Sky-blue sidebar and white logo observed, matching the later explicit user branding instruction",
+    "remaining": [
+      "Login logo position/size and sign-in form differ from the v4 reference",
+      "Dashboard header lacks the original branch selector and account action",
+      "Dedicated original fulfillment routes remain unimplemented",
+      "Narrow viewport comparison remains unexecuted"
+    ]
+  },
+  "status": "PARTIAL_BROWSER_ACCEPTANCE",
+  "historicalImport": "DEFERRED",
+  "fullMigration": "INCOMPLETE"
+}

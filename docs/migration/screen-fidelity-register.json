@@ -5,14 +5,14 @@
   "method": "Canonical coverage supplies candidate mappings. Candidates and observed preview captures do not certify visual, behavioral or role parity.",
   "loginComparison": {
     "original": "previews/QuincaiSoft_Login_v4.jpg",
-    "capture": "docs/migration-evidence/issue-3-preview/live-login.jpg",
+    "capture": "docs/migration-evidence/local-browser-2026-11-19/login.png",
     "narrow": {
       "path": "docs/migration-evidence/issue-3-preview/narrow-login.jpg",
       "commit": "09f093493506e3008b5b8884f1043324776e68c2",
       "viewportWidth": 390
     },
     "status": "NOT_RUN",
-    "remaining": "Matched original comparison and browser role-switch matrix."
+    "remaining": "Recorded desktop owner/cashier/auditor checks. Original login layout differences and narrow screenshot comparison remain open."
   },
   "screens": [
     {
@@ -76,7 +76,8 @@
           "GET /api/v1/sales",
           "GET /api/v1/sales/summary?from=&to="
         ],
-        "controllerCandidates": []
+        "controllerCandidates": [],
+        "runtimeEvidence": "docs/migration-evidence/local-browser-2026-11-19/result.json"
       },
       "gaps": [
         "Day, week and month posted gross sales are wired to the scoped Java summary. Low-stock aggregate and order/collection queues remain unaccepted.",
@@ -102,7 +103,8 @@
             "path": "docs/migration-evidence/issue-3-preview/live-dashboard-month.jpg",
             "commit": "0dd97db07cafd5c14050fefb2de36469e80f01ee",
             "note": "Owner verified month range and the Java result"
-          }
+          },
+          "docs/migration-evidence/local-browser-2026-11-19/dashboard.png"
         ],
         "narrow": [
           {
@@ -972,7 +974,8 @@
             "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogController.java",
             "controllerPath": "/api/v1/products"
           }
-        ]
+        ],
+        "runtimeEvidence": "docs/migration-evidence/local-browser-2026-11-19/result.json"
       },
       "gaps": [
         "History, product-scoped stock card, and label printing are pending.",
@@ -985,7 +988,8 @@
             "path": "docs/migration-evidence/issue-3-preview/live-product-detail.jpg",
             "commit": "831d2df",
             "note": "Initial seeded preview capture"
-          }
+          },
+          "docs/migration-evidence/local-browser-2026-11-19/product-detail.png"
         ],
         "narrow": [
           {
