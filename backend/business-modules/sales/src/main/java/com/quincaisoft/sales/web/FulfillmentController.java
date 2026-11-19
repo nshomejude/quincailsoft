@@ -5,6 +5,14 @@ import com.quincaisoft.sales.api.FulfillmentService;import org.springframework.w
  @GetMapping @PreAuthorize("hasAnyAuthority('sales:read','SCOPE_sales:read')")public List<FulfillmentService.Fulfillment> list(){return service.list();}
  public record PreparationSummary(long pendingCount) {}
 
+ @GetMapping("/page")
+ @PreAuthorize("hasAnyAuthority('sales:read','SCOPE_sales:read')")
+ public FulfillmentService.QueuePage page(@RequestParam(defaultValue="PENDING") String status,
+     @RequestParam(defaultValue="") String q,@RequestParam(defaultValue="25") int limit,
+     @RequestParam(required=false) String cursor) {
+  return service.page(status,q,limit,cursor);
+ }
+
  @GetMapping("/preparation-summary")
  @PreAuthorize("hasAnyAuthority('sales:read','SCOPE_sales:read')")
  public PreparationSummary preparationSummary() {

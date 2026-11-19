@@ -25,6 +25,9 @@ public interface FulfillmentService {
  record PickList(UUID fulfillmentId,UUID saleId,UUID warehouseId,String status,List<PickLine> lines) {}
  PickList pickList(UUID fulfillmentId);
  long pendingPreparationCount();
+ record QueueEntry(Fulfillment fulfillment,String customerName,UUID warehouseId) {}
+ record QueuePage(List<QueueEntry> items,String nextCursor) {}
+ QueuePage page(String status,String query,int limit,String cursor);
  List<Fulfillment> list();Fulfillment get(UUID id);@com.quincaisoft.shared.TenantMutation Fulfillment draft(Draft c);@com.quincaisoft.shared.TenantMutation Fulfillment dispatch(UUID id,Action c);@com.quincaisoft.shared.TenantMutation Fulfillment complete(UUID id,Action c);
 
 }

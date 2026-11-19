@@ -256,10 +256,69 @@ class PostgresSaleIntegrationTest {
      assertTrue(fulfillment.pickList(raceTask.id()).lines().isEmpty());
      assertEquals(beforeRaceJournals,count(owner,"select count(*) from journal_entry"));
      assertEquals(beforeRaceMovements,count(owner,"select count(*) from stock_movement"));
+     var firstQueuePage=fulfillment.page("ALL","",2,null);
+     assertEquals(2,firstQueuePage.items().size());
+     assertNotNull(firstQueuePage.nextCursor());
+     var secondQueuePage=fulfillment.page("ALL","",2,firstQueuePage.nextCursor());
+     assertEquals(2,secondQueuePage.items().size());
+     assertNull(secondQueuePage.nextCursor());
+     var pagedIds=new HashSet<UUID>();
+     for(var entry:firstQueuePage.items())assertTrue(pagedIds.add(entry.fulfillment().id()));
+     for(var entry:secondQueuePage.items())assertTrue(pagedIds.add(entry.fulfillment().id()));
+     assertEquals(new HashSet<>(fulfillment.list().stream().map(FulfillmentService.Fulfillment::id).toList()),pagedIds);
+     var namedQueue=fulfillment.page("ALL","Synthetic recipient",25,null);
+     assertEquals(1,namedQueue.items().size());
+     assertEquals(task.id(),namedQueue.items().getFirst().fulfillment().id());
+     assertEquals("Synthetic",namedQueue.items().getFirst().customerName());
+     assertEquals(w,namedQueue.items().getFirst().warehouseId());
+     assertEquals(delivery,namedQueue.items().getFirst().fulfillment().delivery());
+     assertEquals(1,fulfillment.page("DISPATCHED","",25,null).items().size());
+     assertTrue(fulfillment.page("PENDING","",25,null).items().isEmpty());
+     assertTrue(fulfillment.page("ALL","%",25,null).items().isEmpty());
+     assertTrue(fulfillment.page("ALL","%' OR 1=1 --",25,null).items().isEmpty());
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("UNKNOWN","",25,null));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("ALL","",101,null));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("ALL","x".repeat(101),25,null));
+     String queueCursor=firstQueuePage.nextCursor();
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("DISPATCHED","",2,queueCursor));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("ALL","different",2,queueCursor));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("ALL","",3,queueCursor));
+     String tamperedCursor=(queueCursor.charAt(0)=='A'?"B":"A")+queueCursor.substring(1);
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("ALL","",2,tamperedCursor));
+     String expiredCursor=expiredQueueCursor(queueCursor,owner);
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("ALL","",2,expiredCursor));
+     assertThrows(IllegalArgumentException.class,()->TenantContext.call(
+         new TenantScope(t,c,UUID.randomUUID(),a),1,()->fulfillment.page("ALL","",2,queueCursor)));
+     assertThrows(IllegalArgumentException.class,()->TenantContext.call(
+         new TenantScope(UUID.randomUUID(),c,b,a),1,()->fulfillment.page("ALL","",2,queueCursor)));
+     assertThrows(IllegalArgumentException.class,()->TenantContext.call(
+         new TenantScope(t,c,b,UUID.randomUUID()),1,()->fulfillment.page("ALL","",2,queueCursor)));
+     assertThrows(IllegalArgumentException.class,()->TenantContext.call(scope,2,
+         ()->fulfillment.page("ALL","",2,queueCursor)));
+     assertTrue(TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,
+         ()->fulfillment.page("ALL","",25,null)).items().isEmpty());
      return null;
     });
    }finally{if(factory!=null)factory.destroy();sql(admin,"DROP DATABASE "+db);sql(admin,"DROP ROLE "+role);}
   }
+ }
+ private static String expiredQueueCursor(String token,Connection owner)throws Exception{
+  var json=JsonMapper.builder().build();
+  String payload=token.substring(0,token.indexOf('.'));
+  var body=(tools.jackson.databind.node.ObjectNode)json.readTree(
+      Base64.getUrlDecoder().decode(payload));
+  body.put("expiresAt",Instant.now().minusSeconds(1).toString());
+  String expired=Base64.getUrlEncoder().withoutPadding().encodeToString(
+      json.writeValueAsBytes(body));
+  byte[] key;
+  try(var statement=owner.createStatement();
+      var rows=statement.executeQuery("select secret from fulfillment_cursor_key where id=1")){
+   assertTrue(rows.next());key=rows.getBytes(1);
+  }
+  var mac=javax.crypto.Mac.getInstance("HmacSHA256");
+  mac.init(new javax.crypto.spec.SecretKeySpec(key,"HmacSHA256"));
+  return expired+"."+Base64.getUrlEncoder().withoutPadding().encodeToString(
+      mac.doFinal(expired.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
  }
  static void sql(Connection c,String query)throws SQLException {try(var s=c.createStatement()){s.execute(query);}}
  static long count(Connection c,String query)throws SQLException {try(var s=c.createStatement();var rs=s.executeQuery(query)){rs.next();return rs.getLong(1);}}

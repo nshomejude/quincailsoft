@@ -149,3 +149,19 @@ one receives RevisionConflict, and the remaining picklist contains exactly
 500 milli-units. Dispatching the final 500 completes the shipment. Stock
 movement and journal counts remain unchanged. Source hashes and the executed
 report are retained under desktop-fulfillment-2026-11-19/concurrency.json.
+
+## Fulfillment queue pagination assignment
+
+Desktop owns FulfillmentService, its sales application/controller, the S74/S75
+web consumer, and V50 for this increment. Architecture sections 7.4 (signed,
+scoped keyset pagination), 31–46 (typed/JPA authority and exact quantities),
+and original S74 filter/detail actions govern the change.
+
+The legacy list's 200-row bound must not become a complete queue. Add a
+separate paginated read with status/search filters, a 100-row limit and an
+expiring signed cursor bound to tenant/company/branch/actor/epoch and filter.
+Use a security-invoker read projection for customer labels and sale warehouse.
+The signing key stays in a private database table and is never returned.
+Acceptance includes ordered pages, exact next cursor, filter/scope/tamper/expiry
+rejection, and the unchanged legacy list contract. Original screen acceptance
+remains open until the Java-backed queue is rendered and exercised.

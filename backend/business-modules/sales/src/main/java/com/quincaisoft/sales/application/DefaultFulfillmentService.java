@@ -2,8 +2,9 @@ package com.quincaisoft.sales.application;
 import com.quincaisoft.sales.api.*;import com.quincaisoft.sales.infrastructure.*;import com.quincaisoft.inventory.api.StockService;import com.quincaisoft.finance.api.FinanceService;import com.quincaisoft.shared.*;
 import jakarta.persistence.*;import org.springframework.stereotype.Service;import tools.jackson.databind.json.JsonMapper;import java.util.*;import java.time.*;import java.util.function.*;
 @Service public class DefaultFulfillmentService implements FulfillmentService {
+ private final FulfillmentQueueReader queueReader;
  private final EntityManager em;private final ScopedTransactions tx;private final SalesService sales;private final StockService stock;private final FinanceService finance;private final JsonMapper json=JsonMapper.builder().build();
- public DefaultFulfillmentService(EntityManager em,ScopedTransactions tx,SalesService sales,StockService stock,FinanceService finance){this.em=em;this.tx=tx;this.sales=sales;this.stock=stock;this.finance=finance;}
+ public DefaultFulfillmentService(EntityManager em,ScopedTransactions tx,SalesService sales,StockService stock,FinanceService finance){this.em=em;this.tx=tx;this.sales=sales;this.stock=stock;this.finance=finance;this.queueReader=new FulfillmentQueueReader(em,tx,json);}
  private Fulfillment view(FulfillmentEntity f){return new Fulfillment(f.id,f.saleId,f.customerId,f.status,f.businessDate,f.proofReference,""+f.version,details(f));}
  private static DeliveryDetails details(FulfillmentEntity task) {
   if (task.method == null && task.scheduledDate == null && task.address == null &&
@@ -33,6 +34,9 @@ import jakarta.persistence.*;import org.springframework.stereotype.Service;impor
  }
 
  private FulfillmentEntity find(UUID id,LockModeType lock){var s=TenantContext.current();var f=em.find(FulfillmentEntity.class,new FulfillmentEntity.Key(s.tenantId(),s.companyId(),id),lock);if(f==null||!f.branchId.equals(s.branchId()))throw new NoSuchElementException("Fulfillment not found");return f;}
+ @Override public QueuePage page(String status,String query,int limit,String cursor){
+  return queueReader.page(status,query,limit,cursor);
+ }
  public List<Fulfillment> list(){return tx.execute(()->em.createQuery("select f from FulfillmentEntity f order by f.createdAt desc,f.id",FulfillmentEntity.class).setMaxResults(200).getResultList().stream().map(this::view).toList());}
  @Override
  public long pendingPreparationCount() {

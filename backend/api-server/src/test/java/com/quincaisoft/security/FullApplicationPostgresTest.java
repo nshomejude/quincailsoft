@@ -125,13 +125,13 @@ class FullApplicationPostgresTest {
      String unrelatedReader,String writer,UUID product)throws Exception{
   var missing=UUID.randomUUID();
   var root="http://127.0.0.1:"+port+"/api/v1/fulfillments";
-  for(var suffix:List.of("","/preparation-summary","/"+missing,"/"+missing+"/picklist","/"+missing+"/dispatches")){
+  for(var suffix:List.of("","/page","/preparation-summary","/"+missing,"/"+missing+"/picklist","/"+missing+"/dispatches")){
    var uri=URI.create(root+suffix);
    assertEquals(401,client.send(HttpRequest.newBuilder(uri).GET().build(),
        HttpResponse.BodyHandlers.ofString()).statusCode(),suffix);
    assertEquals(403,client.send(HttpRequest.newBuilder(uri).header("Authorization","Bearer "+unrelatedReader)
        .GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode(),suffix);
-   int expected=suffix.isEmpty()||suffix.equals("/preparation-summary")?200:404;
+   int expected=suffix.isEmpty()||suffix.equals("/page")||suffix.equals("/preparation-summary")?200:404;
    assertEquals(expected,client.send(HttpRequest.newBuilder(uri).header("Authorization","Bearer "+reader)
        .GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode(),suffix);
   }
