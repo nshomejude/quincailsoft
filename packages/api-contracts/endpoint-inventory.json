@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "1ac0c333e1fc3f7cd6cf5ee3541ba95c11dd1ae5f01cac134231351013825590",
+  "sourceDigest": "f571dd43124f0740f6691bf4fb891222a66b45c79551caa55363e753b1a91b21",
   "unresolvedJavaTypes": [],
   "endpoints": [
     {
@@ -1856,6 +1856,45 @@
       "path": "/api/v1/quotations/{id}/convert",
       "controller": "QuotationController",
       "javaMethod": "convert",
+      "returnType": "QuotationService.Quote",
+      "source": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/web/QuotationController.java",
+      "authorization": "hasAnyAuthority('quotations:write','SCOPE_quotations:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/quotations/{id}/decisions",
+      "controller": "QuotationController",
+      "javaMethod": "decisions",
+      "returnType": "List<QuotationService.CustomerDecision>",
+      "source": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/web/QuotationController.java",
+      "authorization": "hasAnyAuthority('quotations:read','SCOPE_quotations:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/quotations/{id}/accept",
+      "controller": "QuotationController",
+      "javaMethod": "accept",
+      "returnType": "QuotationService.Quote",
+      "source": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/web/QuotationController.java",
+      "authorization": "hasAnyAuthority('quotations:write','SCOPE_quotations:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/quotations/{id}/reject",
+      "controller": "QuotationController",
+      "javaMethod": "reject",
       "returnType": "QuotationService.Quote",
       "source": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/web/QuotationController.java",
       "authorization": "hasAnyAuthority('quotations:write','SCOPE_quotations:write')",

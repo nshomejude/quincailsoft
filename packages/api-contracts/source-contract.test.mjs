@@ -3,6 +3,16 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const api=JSON.parse(fs.readFileSync(new URL('./openapi.json',import.meta.url),'utf8'));
 const inventory=JSON.parse(fs.readFileSync(new URL('./endpoint-inventory.json',import.meta.url),'utf8'));
+test('quotation decisions expose explicit evidence and immutable actor history',()=>{
+ for(const action of ['accept','reject'])assert.equal(api.paths['/api/v1/quotations/{id}/'+action].post.requestBody.content['application/json'].schema.$ref,
+  '#/components/schemas/QuotationService_Decision');
+ const decision=api.components.schemas.QuotationService_Decision.properties;
+ assert.equal(decision.operationId.format,'uuid');assert.equal(decision.evidenceReference.type,'string');
+ const history=api.components.schemas.QuotationService_CustomerDecision.properties;
+ assert.equal(history.actorId.format,'uuid');assert.equal(history.recordedAt.format,'date-time');
+ assert.equal(api.paths['/api/v1/quotations/{id}/decisions'].get.responses['200'].content['application/json'].schema.items.$ref,
+  '#/components/schemas/QuotationService_CustomerDecision');
+});
 test('qualified ResponseEntity workforce exports retain declared media and string payload',()=>{
  for(const [path,media] of [['/api/v1/workforce/payroll/{id}/print','text/html'],['/api/v1/workforce/payroll/export.csv','text/csv']]){
   const content=api.paths[path].get.responses['200'].content;

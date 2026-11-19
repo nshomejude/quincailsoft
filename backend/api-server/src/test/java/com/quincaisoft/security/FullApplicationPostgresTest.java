@@ -89,7 +89,7 @@ class FullApplicationPostgresTest {
       QuotationHttpWorkflow.verify(client,port,product,
           token(key,issuer,"quincai-test",tenant,company,branch,actor,"quotations:read quotations:write quotations:issue sales:read sales:write"),
           token(key,issuer,"quincai-test",tenant,company,branch,approver,"quotations:read quotations:write quotations:issue sales:read sales:write"),
-          token(key,issuer,"quincai-test",tenant,company,branch,actor,"quotations:write"));
+          token(key,issuer,"quincai-test",tenant,company,branch,actor,"quotations:write"),url,user);
       FulfillmentHttpWorkflow.verifyRevocation(client,port,token,
           token(key,issuer,"quincai-test",tenant,company,branch,approver,"sales:read sales:write"),
           token(key,issuer,"quincai-test",tenant,company,branch,approver,"sales:read sales:write",2),

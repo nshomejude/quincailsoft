@@ -1,5 +1,14 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {allowedPath} from '../lib/business-paths.ts';
 const id='98aa4d01-6873-4bbe-8073-803e8985b6c8';
+test('quotation customer decisions expose only the implemented commands and read history',()=>{
+ for(const action of ['accept','reject']){
+  assert.equal(allowedPath(`quotations/${id}/${action}`,'POST'),true);
+  for(const method of ['GET','PUT','DELETE'])assert.equal(allowedPath(`quotations/${id}/${action}`,method),false);
+ }
+ assert.equal(allowedPath(`quotations/${id}/decisions`,'GET'),true);
+ assert.equal(allowedPath(`quotations/${id}/decisions`,'POST'),false);
+ assert.equal(allowedPath(`quotations/${id}/clone`,'POST'),false);
+});
 test('document commands are explicit and cannot be called through read or destructive methods',()=>{
  for(const path of ['documents/captures',`documents/captures/${id}/print-attempts`,`documents/print-attempts/${id}/outcomes`]){
   assert.equal(allowedPath(path,'POST'),true,path);
