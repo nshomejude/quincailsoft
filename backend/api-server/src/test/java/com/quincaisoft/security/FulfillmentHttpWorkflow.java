@@ -68,6 +68,38 @@ final class FulfillmentHttpWorkflow {
    assertEquals(before,economics(db),"Delivery must not issue stock or post financial recognition again");
   }
  }
+ static void verifyRevocation(HttpClient client,int port,String owner,String stale,String renewed,
+     UUID target,UUID product,String url,String user)throws Exception{
+  var task=get(client,port,stale,"fulfillments").get(0);
+  String path="fulfillments/"+task.required("id").asText();
+  var revoked=command(client,port,owner,"identity/sessions/revoke",Map.of("targetActor",target,
+      "expectedEpoch",1,"reason","Synthetic fulfillment session revocation"),200);
+  assertEquals(2,revoked.required("authorizationEpoch").longValue());
+  try(var db=DriverManager.getConnection(url,user,"")){
+   String before=effects(db);
+   for(String route:List.of("fulfillments","fulfillments/page","fulfillments/preparation-summary",path,path+"/picklist",path+"/dispatches")){
+    var response=client.send(HttpRequest.newBuilder(uri(port,route)).header("Authorization","Bearer "+stale).GET().build(),HttpResponse.BodyHandlers.ofString());
+    assertEquals(403,response.statusCode(),route+": "+response.body());
+    get(client,port,renewed,route);
+   }
+   command(client,port,stale,"fulfillments",Map.of("saleId",task.required("saleId").asText(),"customerId",CUSTOMER,
+       "businessDate",DATE,"reason","Stale session must not create"),403);
+   for(String action:List.of("dispatch","dispatch-lines","complete")){
+    var input=new HashMap<String,Object>(decision(task));
+    if(action.equals("dispatch-lines"))input.put("lines",List.of(Map.of("productId",product,"quantityMilli","1")));
+    else input.put("proofReference","SYNTHETIC-REVOKED-PROOF");
+    command(client,port,stale,path+"/"+action,input,403);
+   }
+   assertEquals(before,effects(db),"Rejected revoked-session requests must leave no durable effects");
+  }
+ }
+ private static String effects(Connection db)throws Exception{
+  try(var query=db.createStatement();var result=query.executeQuery("select (select count(*) from sale_fulfillment),"
+      +"(select count(*) from fulfillment_dispatch_line),(select count(*) from idempotency_result),"
+      +"(select count(*) from outbox_event)")){
+   assertTrue(result.next());return economics(db)+"/"+result.getLong(1)+"/"+result.getLong(2)+"/"+result.getLong(3)+"/"+result.getLong(4);
+  }
+ }
  private static Map<String,Object> decision(JsonNode record){return Map.of("version",record.required("version").asText(),"reason","Synthetic workflow acceptance");}
  private static Map<String,Object> dispatch(JsonNode record,UUID product,String quantity){
   return Map.of("version",record.required("version").asText(),"reason","Synthetic dispatch",

@@ -85,6 +85,10 @@ class FullApplicationPostgresTest {
               "purchasing:write purchasing:receive purchasing:approve sales:write sales:post sales:read documents:configure"),
           token(key,issuer,"quincai-test",tenant,company,branch,approver,"purchasing:approve"),
           product,supplier,url,user);
+      FulfillmentHttpWorkflow.verifyRevocation(client,port,token,
+          token(key,issuer,"quincai-test",tenant,company,branch,approver,"sales:read sales:write"),
+          token(key,issuer,"quincai-test",tenant,company,branch,approver,"sales:read sales:write",2),
+          approver,product,url,user);
      }
      var writer=token(key,issuer,"quincai-test",tenant,company,branch,actor,"catalog:read catalog:write sales:read");
      var manufacturer=catalogWrite(client,port,"manufacturers",token,writer,Map.of("code","TEST-MFR","name","Synthetic maker"));
@@ -129,7 +133,10 @@ class FullApplicationPostgresTest {
   return token(key,issuer,audience,t,c,b,a,"catalog:read sales:read");
  }
  static String token(RSAKey key,String issuer,String audience,UUID t,UUID c,UUID b,UUID a,String scopes)throws Exception{
-  var claims=new JWTClaimsSet.Builder().issuer(issuer).audience(audience).subject(a.toString()).issueTime(java.util.Date.from(Instant.now())).expirationTime(java.util.Date.from(Instant.now().plusSeconds(3600))).claim("tenant_id",t.toString()).claim("company_id",c.toString()).claim("branch_id",b.toString()).claim("authorization_epoch",1).claim("scope",scopes).build();var jwt=new SignedJWT(new JWSHeader.Builder(JWSAlgorithm.RS256).keyID(key.getKeyID()).build(),claims);jwt.sign(new RSASSASigner(key));return jwt.serialize();
+  return token(key,issuer,audience,t,c,b,a,scopes,1);
+ }
+ static String token(RSAKey key,String issuer,String audience,UUID t,UUID c,UUID b,UUID a,String scopes,long epoch)throws Exception{
+  var claims=new JWTClaimsSet.Builder().issuer(issuer).audience(audience).subject(a.toString()).issueTime(java.util.Date.from(Instant.now())).expirationTime(java.util.Date.from(Instant.now().plusSeconds(3600))).claim("tenant_id",t.toString()).claim("company_id",c.toString()).claim("branch_id",b.toString()).claim("authorization_epoch",epoch).claim("scope",scopes).build();var jwt=new SignedJWT(new JWSHeader.Builder(JWSAlgorithm.RS256).keyID(key.getKeyID()).build(),claims);jwt.sign(new RSASSASigner(key));return jwt.serialize();
  }
  private static void verifyFulfillmentPermissions(HttpClient client,int port,String reader,
      String unrelatedReader,String writer,UUID product)throws Exception{
