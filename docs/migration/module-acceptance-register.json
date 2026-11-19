@@ -3838,12 +3838,17 @@
           "sourceCommit": "d44c2be411b008d070a4ca88a5e22095093495eb",
           "scope": "Focused PostgreSQL fulfillment service acceptance",
           "status": "PASS"
+        },
+        {
+          "artifact": "docs/migration-evidence/desktop-fulfillment-2026-11-19/concurrency.json",
+          "sourceCommit": "a7ddb697b2659b7ef8a2209bdb59b3a873420467",
+          "scope": "Real PostgreSQL competing dispatch acceptance",
+          "status": "PASS"
         }
       ],
       "remaining": [
         "Original S74/S75 web screen integration and desktop/narrow screenshots",
         "Pick ticket and delivery note printing acceptance",
-        "Concurrent fulfillment dispatch acceptance",
         "OIDC role and lifecycle denial checks for new fulfillment endpoints",
         "Production deployment and full platform acceptance"
       ],

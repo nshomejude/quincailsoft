@@ -140,3 +140,12 @@ the sales aggregate. PostgreSQL 18.7 acceptance passed for partial, whole-order
 and direct-completion paths. A shipment with a valid first line and invalid
 second product rolls back all dispatch lines and preserves the task version.
 The project rules check passed. No new database migration was required.
+
+## Concurrent fulfillment acceptance
+
+PostgreSQL 18.7 acceptance at a7ddb69 races two 1500 milli-unit dispatches
+against a 2000 milli-unit sale and the same fulfillment version. One commits,
+one receives RevisionConflict, and the remaining picklist contains exactly
+500 milli-units. Dispatching the final 500 completes the shipment. Stock
+movement and journal counts remain unchanged. Source hashes and the executed
+report are retained under desktop-fulfillment-2026-11-19/concurrency.json.
