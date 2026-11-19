@@ -3823,8 +3823,13 @@
           ]
         }
       ],
-      "candidateScreens": [],
-      "candidateDetailPages": [],
+      "candidateScreens": [
+        "S74",
+        "S75"
+      ],
+      "candidateDetailPages": [
+        "S75"
+      ],
       "fieldIds": [],
       "candidateReports": [],
       "candidateTemplates": [],
@@ -3856,10 +3861,16 @@
           "sourceCommit": "33e5d715bbe9649ed55739337955eab20744dfd7",
           "scope": "Scoped signed fulfillment queue paging and filter acceptance",
           "status": "PASS"
+        },
+        {
+          "artifact": "docs/migration-evidence/desktop-fulfillment-2026-11-19/http-workflow.json",
+          "sourceCommit": "bbb210892233067062eeaf4e60c0036cc6bc1434",
+          "scope": "Authenticated ordinary purchase-to-sale-to-partial-delivery workflow with replay and economic conservation",
+          "status": "PASS"
         }
       ],
       "remaining": [
-        "Original S74/S75 web screen integration and desktop/narrow screenshots",
+        "S74/S75 complete original-screen comparison, browser mutation/detail and narrow-width acceptance; queue/creation/detail components now wired to Java at 9c89645",
         "Pick ticket and delivery note printing acceptance",
         "Tenant suspension and authorization-epoch revocation checks for fulfillment HTTP endpoints",
         "Production deployment and full platform acceptance"
