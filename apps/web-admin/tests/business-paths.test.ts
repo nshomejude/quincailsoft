@@ -1,5 +1,13 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {allowedPath} from '../lib/business-paths.ts';
 const id='98aa4d01-6873-4bbe-8073-803e8985b6c8';
+test('document commands are explicit and cannot be called through read or destructive methods',()=>{
+ for(const path of ['documents/captures',`documents/captures/${id}/print-attempts`,`documents/print-attempts/${id}/outcomes`]){
+  assert.equal(allowedPath(path,'POST'),true,path);
+  for(const method of ['GET','PUT','DELETE'])assert.equal(allowedPath(path,method),false,path);
+ }
+ for(const path of ['documents/captures/../../admin',`documents/captures/${id}/delete`,`documents/print-attempts/${id}/approve`])
+  assert.equal(allowedPath(path,'POST'),false,path);
+});
 test('BFF permits implemented routes and commands',()=>{for(const path of ['products','customers','warehouses','identity/members','documents/settings','purchases/invoices','expenses','periods','period-requests'])assert.equal(allowedPath(path,'GET'),true,path);for(const path of ['sales',`sales/${id}/post`,`purchases/${id}/receipts`,`mobile-money/intents/${id}/reconcile`,`inventory/jobs/${id}/capture`,`expenses/${id}/pay`,`periods/${id}/close`,`period-requests/${id}/approve`,`purchases/receipts/${id}/returns`])assert.equal(allowedPath(path,'POST'),true,path)});
 test('BFF rejects traversal, arbitrary services and destructive methods',()=>{for(const path of ['../admin','https://evil.example/','//evil.example','products/../../identity','operations/database/reset','users','server/server.py'])for(const method of ['GET','POST'])assert.equal(allowedPath(path,method),false,path);assert.equal(allowedPath('products','DELETE'),false);assert.equal(allowedPath('me','POST'),false)});
 

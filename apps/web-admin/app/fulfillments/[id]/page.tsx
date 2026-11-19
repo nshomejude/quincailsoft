@@ -4,6 +4,7 @@ import {DispatchEntry, Fulfillment, PickList} from '@/lib/fulfillment';
 import {Access} from '@/components/Access';
 import {CommandForm} from '@/components/CommandForm';
 import {FulfillmentDispatchForm} from '@/components/FulfillmentForms';
+import {FulfillmentPrint} from '@/components/FulfillmentPrint';
 
 export const dynamic = 'force-dynamic';
 
@@ -68,6 +69,11 @@ export default async function FulfillmentDetail({params}: {params: Promise<{id: 
                         fields={[{name: 'proofReference', label: 'Recipient proof reference', maxLength: 2000},
                             {name: 'reason', label: 'Confirmation reason', type: 'textarea'}]} title="Confirm completed delivery"/>}
             </section>
+            {['documents:read', 'documents:write', 'documents:print'].every(permission => permitted(me, permission)) &&
+                (['PENDING', 'PARTIAL'].includes(task.status) ?
+                    <FulfillmentPrint key={id + ':' + task.version} taskId={id} templateId="PICK_TICKET"/> :
+                    task.status === 'COMPLETED' && permitted(me, 'inventory:read') &&
+                    <FulfillmentPrint key={id + ':' + task.version} taskId={id} templateId="DOC12"/>)}
         </>;
     } catch (error) {return <Access error={error}/>;}
 }

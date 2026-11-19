@@ -6177,14 +6177,17 @@
           "GET /api/v1/fulfillments/{id}/dispatches",
           "POST /api/v1/fulfillments",
           "POST /api/v1/fulfillments/{id}/dispatch-lines",
-          "POST /api/v1/fulfillments/{id}/complete"
+          "POST /api/v1/fulfillments/{id}/complete",
+          "POST /api/v1/documents/captures",
+          "POST /api/v1/documents/captures/{id}/print-attempts",
+          "POST /api/v1/documents/print-attempts/{id}/outcomes"
         ],
         "controllerCandidates": []
       },
       "gaps": [
         "Dedicated Java-backed queue, creation and detail pages committed at 9c89645; browser queue tabs/filter and write denial verified for owner/auditor.",
         "Browser creation/partial dispatch/completion with a posted stocked sale remains NOT_RUN; detail rendering screenshot and narrow-width/original comparison remain pending.",
-        "Pick-ticket and delivery-note printing remain incomplete. No full visual or module acceptance."
+        "Delivery detail now wires pick-ticket and completed delivery-note capture, print request and explicit operator-confirmed outcome through FulfillmentPrint.tsx. Full browser dialog/physical-printer and original-layout acceptance remain NOT_RUN."
       ],
       "captures": {
         "original": [],
@@ -6272,14 +6275,17 @@
           "GET /api/v1/fulfillments/{id}/dispatches",
           "POST /api/v1/fulfillments",
           "POST /api/v1/fulfillments/{id}/dispatch-lines",
-          "POST /api/v1/fulfillments/{id}/complete"
+          "POST /api/v1/fulfillments/{id}/complete",
+          "POST /api/v1/documents/captures",
+          "POST /api/v1/documents/captures/{id}/print-attempts",
+          "POST /api/v1/documents/print-attempts/{id}/outcomes"
         ],
         "controllerCandidates": []
       },
       "gaps": [
         "Dedicated Java-backed queue, creation and detail pages committed at 9c89645; browser queue tabs/filter and write denial verified for owner/auditor.",
         "Browser creation/partial dispatch/completion with a posted stocked sale remains NOT_RUN; detail rendering screenshot and narrow-width/original comparison remain pending.",
-        "Pick-ticket and delivery-note printing remain incomplete. No full visual or module acceptance."
+        "Delivery detail now wires pick-ticket and completed delivery-note capture, print request and explicit operator-confirmed outcome through FulfillmentPrint.tsx. Full browser dialog/physical-printer and original-layout acceptance remain NOT_RUN."
       ],
       "captures": {
         "original": [],
