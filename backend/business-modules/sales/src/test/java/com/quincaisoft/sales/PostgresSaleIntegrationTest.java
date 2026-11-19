@@ -208,6 +208,54 @@ class PostgresSaleIntegrationTest {
      assertTrue(fulfillment.pickList(directTask.id()).lines().isEmpty());
      assertEquals(beforeDirectJournals,count(owner,"select count(*) from journal_entry"));
      assertEquals(beforeDirectMovements,count(owner,"select count(*) from stock_movement"));
+     var raceDraft=sales.draft(new SalesService.Draft(UUID.randomUUID(),w,customer,
+         LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"2000"))));
+     var raceSale=sales.post(raceDraft.id(),new SalesService.Post(UUID.randomUUID(),raceDraft.version(),
+         "Post sale for concurrent dispatch acceptance"));
+     var raceTask=fulfillment.draft(new FulfillmentService.Draft(UUID.randomUUID(),raceSale.id(),customer,
+         LocalDate.of(2026,11,18),"Prepare concurrent shipment"));
+     long beforeRaceJournals=count(owner,"select count(*) from journal_entry");
+     long beforeRaceMovements=count(owner,"select count(*) from stock_movement");
+     var ready=new java.util.concurrent.CountDownLatch(2);
+     var start=new java.util.concurrent.CountDownLatch(1);
+     var raceRequests=List.of(
+         new FulfillmentService.DispatchLines(UUID.randomUUID(),raceTask.version(),"First competing shipment",
+             List.of(new FulfillmentService.PickLine(p,"1500"))),
+         new FulfillmentService.DispatchLines(UUID.randomUUID(),raceTask.version(),"Second competing shipment",
+             List.of(new FulfillmentService.PickLine(p,"1500"))));
+     try(var pool=java.util.concurrent.Executors.newFixedThreadPool(2)){
+      var futures=new ArrayList<java.util.concurrent.Future<String>>();
+      for(var shipmentRequest:raceRequests){
+       futures.add(pool.submit(()->TenantContext.call(scope,1,()->{
+        ready.countDown();
+        if(!start.await(10,java.util.concurrent.TimeUnit.SECONDS))throw new IllegalStateException("Dispatch race did not start");
+        try{
+         fulfillment.dispatchLines(raceTask.id(),shipmentRequest);
+         return "ACCEPTED";
+        }catch(RevisionConflict expected){return "STALE";}
+       })));
+      }
+      try{assertTrue(ready.await(10,java.util.concurrent.TimeUnit.SECONDS));}
+      finally{start.countDown();}
+      var outcomes=new ArrayList<String>();
+      for(var future:futures)outcomes.add(future.get(20,java.util.concurrent.TimeUnit.SECONDS));
+      assertEquals(1,Collections.frequency(outcomes,"ACCEPTED"));
+      assertEquals(1,Collections.frequency(outcomes,"STALE"));
+     }
+     var raceHistory=fulfillment.dispatchHistory(raceTask.id());
+     assertEquals(1,raceHistory.size());
+     assertEquals("1500",raceHistory.getFirst().quantityMilli());
+     assertEquals(List.of(new FulfillmentService.PickLine(p,"500")),fulfillment.pickList(raceTask.id()).lines());
+     var afterRace=fulfillment.get(raceTask.id());
+     assertEquals("PARTIAL",afterRace.status());
+     var finalShipment=fulfillment.dispatchLines(raceTask.id(),new FulfillmentService.DispatchLines(
+         UUID.randomUUID(),afterRace.version(),"Ship the exact remaining quantity",
+         List.of(new FulfillmentService.PickLine(p,"500"))));
+     assertEquals("DISPATCHED",finalShipment.status());
+     assertEquals(2,fulfillment.dispatchHistory(raceTask.id()).size());
+     assertTrue(fulfillment.pickList(raceTask.id()).lines().isEmpty());
+     assertEquals(beforeRaceJournals,count(owner,"select count(*) from journal_entry"));
+     assertEquals(beforeRaceMovements,count(owner,"select count(*) from stock_movement"));
      return null;
     });
    }finally{if(factory!=null)factory.destroy();sql(admin,"DROP DATABASE "+db);sql(admin,"DROP ROLE "+role);}
