@@ -1,0 +1,34 @@
+{
+  "sourceCommit": "0ca0ee57a1a6097bed03f3a2b6b410d9855888ff",
+  "status": "PASS",
+  "specification": [
+    "ARCHITECTURE.md §5.3",
+    "ARCHITECTURE.md §5.5"
+  ],
+  "legacyReference": "server/inventory_workflows.py fulfillment branch; revocation is the mandatory OIDC/epoch security replacement, not a claim of literal legacy parity",
+  "java": "25.0.5.1",
+  "postgresql": "18.7",
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "command": "mvn -B -ntp -f backend/pom.xml -pl api-server -am -Dtest=FullApplicationPostgresTest -Dsurefire.failIfNoSpecifiedTests=false test",
+  "checks": [
+    "Authenticated owner revokes separate actor through identity/sessions/revoke; durable replay returns same epoch2 result",
+    "Epoch1 signed token denied403 for list/page/preparation-summary/detail/picklist/dispatch history",
+    "Epoch1 signed token denied403 for draft/dispatch/dispatch-lines/complete",
+    "Epoch2 newly signed token can read all six routes",
+    "Rejected stale commands leave stock, journals, snapshots, fulfillment tasks/dispatches, idempotency and outbox counts unchanged",
+    "Earlier ordinary purchase/sale/partial delivery workflow rerun in same test"
+  ],
+  "notAccepted": [
+    "Tenant suspension HTTP acceptance",
+    "Complete original-screen and printing acceptance",
+    "Full migration and release certification",
+    "Historical import"
+  ],
+  "sourceHashes": {
+    "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java": "cbb8566bc45230c5ed2bf8fdad6c3097fac655a5cbbe5197e32d90ecd106e4b1",
+    "backend/api-server/src/test/java/com/quincaisoft/security/FulfillmentHttpWorkflow.java": "e3be94eeaa5beaa1f63516257a984797a44fc7688c74817e5b504c088c585a69"
+  }
+}
