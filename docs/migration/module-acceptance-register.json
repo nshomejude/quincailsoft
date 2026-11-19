@@ -3832,12 +3832,22 @@
       "permissionCandidates": [],
       "legacyParityCandidates": [],
       "integrationTestCandidates": [],
-      "executedAcceptance": [],
-      "remaining": [
-        "No dedicated implementation evidence mapped for this canonical item.",
-        "Verify canonical workflows and fields including scoped denials, rollback, replay, invariants and actual browser behavior."
+      "executedAcceptance": [
+        {
+          "artifact": "docs/migration-evidence/desktop-fulfillment-2026-11-19/result.json",
+          "sourceCommit": "d44c2be411b008d070a4ca88a5e22095093495eb",
+          "scope": "Focused PostgreSQL fulfillment service acceptance",
+          "status": "PASS"
+        }
       ],
-      "status": "NOT_RUN"
+      "remaining": [
+        "Original S74/S75 web screen integration and desktop/narrow screenshots",
+        "Pick ticket and delivery note printing acceptance",
+        "Concurrent fulfillment dispatch acceptance",
+        "OIDC role and lifecycle denial checks for new fulfillment endpoints",
+        "Production deployment and full platform acceptance"
+      ],
+      "status": "PARTIAL_ACCEPTANCE"
     },
     {
       "id": "M24",

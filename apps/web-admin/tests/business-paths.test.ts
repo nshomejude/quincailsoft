@@ -4,3 +4,20 @@ test('BFF permits implemented routes and commands',()=>{for(const path of ['prod
 test('BFF rejects traversal, arbitrary services and destructive methods',()=>{for(const path of ['../admin','https://evil.example/','//evil.example','products/../../identity','operations/database/reset','users','server/server.py'])for(const method of ['GET','POST'])assert.equal(allowedPath(path,method),false,path);assert.equal(allowedPath('products','DELETE'),false);assert.equal(allowedPath('me','POST'),false)});
 
 test('BFF separates updates from commands',()=>{assert.equal(allowedPath('documents/settings','PUT'),true);assert.equal(allowedPath('documents/settings','POST'),false);assert.equal(allowedPath(`products/${id}`,'PUT'),true);assert.equal(allowedPath(`sales/${id}/post`,'PUT'),false)});
+
+test('fulfillment proxy permits only implemented read and command routes',()=>{
+ for(const path of ['fulfillments','fulfillments/preparation-summary',
+     'fulfillments/'+id,'fulfillments/'+id+'/picklist','fulfillments/'+id+'/dispatches'])
+  assert.equal(allowedPath(path,'GET'),true,path);
+ for(const path of ['fulfillments','fulfillments/'+id+'/dispatch',
+     'fulfillments/'+id+'/dispatch-lines','fulfillments/'+id+'/complete'])
+  assert.equal(allowedPath(path,'POST'),true,path);
+ for(const path of ['fulfillments/'+id+'/dispatch-lines','fulfillments/'+id+'/complete'])
+  assert.equal(allowedPath(path,'GET'),false,path);
+ for(const path of ['fulfillments/'+id+'/picklist','fulfillments/'+id+'/dispatches',
+     'fulfillments/preparation-summary','fulfillments/'+id+'/cancel',
+     'fulfillments/../../admin/dispatch'])
+  assert.equal(allowedPath(path,'POST'),false,path);
+ assert.equal(allowedPath('fulfillments/'+id,'PUT'),false);
+ assert.equal(allowedPath('fulfillments/'+id,'DELETE'),false);
+});
