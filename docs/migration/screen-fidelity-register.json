@@ -3362,9 +3362,9 @@
         ]
       },
       "next": {
-        "routeCandidate": "/quotations",
-        "component": "apps/web-admin/app/quotations/page.tsx",
-        "mappingReviewed": false
+        "routeCandidate": "/quotations/[id]",
+        "component": "apps/web-admin/app/quotations/[id]/page.tsx",
+        "mappingReviewed": true
       },
       "required": {
         "tabs": [
@@ -3391,9 +3391,16 @@
         "dialogAcceptance": "NOT_RUN",
         "details": true
       },
-      "roleBranchScope": "NOT_RUN per-screen capability and branch review",
+      "roleBranchScope": "Actual local preview owner flow verified on synthetic company/branch data; full per-screen role/narrow-width comparison remains open.",
       "java": {
-        "reviewedEndpoints": [],
+        "reviewedEndpoints": [
+          "GET /api/v1/quotations/{id}",
+          "GET /api/v1/quotations/{id}/decisions",
+          "POST /api/v1/quotations/{id}/issue",
+          "POST /api/v1/quotations/{id}/accept",
+          "POST /api/v1/quotations/{id}/reject",
+          "POST /api/v1/quotations/{id}/convert"
+        ],
         "controllerCandidates": [
           {
             "source": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/web/QuotationController.java",
@@ -3402,16 +3409,20 @@
         ]
       },
       "gaps": [
-        "Related source exists; canonical field/action invariants, complete workflow and end-to-end acceptance are not certified.",
-        "Compare actionable fields, dialogs and permissions against original workflow."
+        "Actual Java issue/accept/convert path verified in Chrome at cfeb8ce; rejection covered by real PostgreSQL HTTP test.",
+        "Original field/layout/tab fidelity, readable product/customer labels, clone/revision, discount/delivery/terms/notes and quotation printing require acceptance.",
+        "Original comparable and narrow-width captures remain NOT_RUN; no full screen parity claim."
       ],
       "captures": {
         "original": [],
-        "desktop": [],
+        "desktop": [
+          "docs/migration-evidence/desktop-quotations-2026-11-19/accepted-quotation.png",
+          "docs/migration-evidence/desktop-quotations-2026-11-19/converted-quotation.png"
+        ],
         "narrow": [],
         "comparableBeforeAfter": false
       },
-      "status": "NOT_RUN"
+      "status": "PARTIAL"
     },
     {
       "id": "S40",

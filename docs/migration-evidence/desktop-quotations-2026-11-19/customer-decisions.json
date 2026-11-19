@@ -1,0 +1,64 @@
+{
+  "sourceCommit": "cfeb8ce6c866ad7e9b79edb296fa82a449f3d9d1",
+  "status": "PARTIAL_ACCEPTANCE",
+  "specification": [
+    "ARCHITECTURE.md M21",
+    "ARCHITECTURE.md §5.3",
+    "ARCHITECTURE.md §7.2",
+    "ARCHITECTURE.md Appendix A S37/S38/S39"
+  ],
+  "replacement": "Legacy converts an Issued quotation directly. The canonical customer-acceptance workflow now requires ISSUED -> ACCEPTED -> CONVERTED. Existing converted records and immutable original documents remain untouched.",
+  "checks": {
+    "realPostgresHttp": "PASS",
+    "postgresql": "18.7",
+    "java": "25.0.5.1",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "webTypecheck": "PASS",
+    "webConsumerTests": 30,
+    "webProductionBuild": "PASS",
+    "sourceContractTests": 10,
+    "sdkTypecheck": "PASS"
+  },
+  "behaviors": [
+    "Typed immutable customer-decision fact records actor/reason/evidence/time and branch-aware quotation FK",
+    "Accept/reject require issued source and expected version, stable operation identity and write capability",
+    "Acceptance requires evidence and unexpired quotation; issued quotation cannot directly stage a sale",
+    "Accepted quote stages one draft sale preserving frozen quoted terms; rejected quote cannot convert",
+    "Replay equality and other-actor conflict; decision history exposes recorded evidence",
+    "Database rejects accepted-content edits, decision-evidence edits and a decision tied to another real branch"
+  ],
+  "browser": {
+    "status": "PASS",
+    "artifact": "docs/migration-evidence/desktop-quotations-2026-11-19/browser-workflow.json",
+    "role": "owner",
+    "quotationId": "45dfcac8-619d-428b-b6f9-7bd7cbcf8e77",
+    "saleId": "bbd4fa19-fe3e-4e20-ac59-c778742babf7",
+    "scope": "Actual Chrome existing form -> issue -> explicit customer acceptance -> Java DRAFT sale; exact total and one decision verified",
+    "screenshots": [
+      "docs/migration-evidence/desktop-quotations-2026-11-19/accepted-quotation.png",
+      "docs/migration-evidence/desktop-quotations-2026-11-19/converted-quotation.png"
+    ],
+    "earlierFailure": "Exact label selector failed before quotation creation; actual DOM inspected, selectors corrected and test rerun. browser-first-failure.json retained. Previously blank local document issuer configured as SYNTHETIC DEMO; no historical import."
+  },
+  "remaining": [
+    "Clone/revision and partial-order consumption",
+    "Delivery charge/discount/terms/notes and full price/tax contracts",
+    "Original comparable screenshot and narrow-width acceptance",
+    "Restricted tenant lifecycle replay acceptance for quotation commands",
+    "Full platform parity and release gates; historical import remains last; mobile/native desktop paused",
+    "Concurrent conflicting customer-decision race acceptance remains NOT_RUN"
+  ],
+  "sourceHashes": {
+    "backend/db-migrations/src/main/resources/db/migration/V52__quotation_customer_decisions.sql": "b65392fc605310ecacf0399bf443da140db05b0e115f5e7b62c5c491339af14b",
+    "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/api/QuotationService.java": "0ca170ee4dba98bcd44b5aceca779f3fa51188bbfdc217c990f08304169e5aa7",
+    "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/application/DefaultQuotationService.java": "48662713c0a0a3cf7d3a3b7f17ea356f18143e20687c1f38fe3786a914984f11",
+    "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/infrastructure/QuotationDecisionEntity.java": "5286c5c880bbd5b55a4c87693974aec8143cc4e96396ef3f7ed3ad6a07a5701b",
+    "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/web/QuotationController.java": "24dab41fa8e92d2bd90f4e14de4e1f9f28ca5687f41a998b89cb6d9e3a3e49d8",
+    "backend/api-server/src/test/java/com/quincaisoft/security/QuotationHttpWorkflow.java": "016144baba2ca9d702d6bd9eca0ce4131a8f0eb1b4be54ab42147b47cae8a599",
+    "apps/web-admin/app/quotations/[id]/page.tsx": "9362fe62a0adfbac90c4ffcf597fa02512b4430faeceb9d1c3adbd3bb1e6cd36",
+    "apps/web-admin/lib/business-paths.ts": "904e360ba4926d2ced5dcdb395827bbed559a6bed42fdb0b23edea2fd596a346"
+  }
+}

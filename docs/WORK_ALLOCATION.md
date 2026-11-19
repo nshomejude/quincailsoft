@@ -169,3 +169,9 @@ remains open until the Java-backed queue is rendered and exercised.
 ## 19 November checkpoint before further migration
 
 Current branch: codex/platform-continuation-2026-11-19; preceding commit 52a8461. Active paths: apps/web-admin fulfillment routes/components/tests, packages/api-contracts, packages/generated-ts-sdk and scoped browser evidence. See migration-evidence/fulfillment-web-2026-11-19/README.md for executed checks and untested workflows. Historical import is last; mobile/native desktop remain paused. Independent documents/reporting parity audit remains reserved for the ChatGPT agent. Full platform migration and release acceptance remain incomplete.
+
+## 19 November quotation and catalog continuation
+
+Branch codex/platform-continuation-2026-11-19; source checkpoint cfeb8ce6c866ad7e9b79edb296fa82a449f3d9d1. Desktop changed quotations API/service/entity, forward V52, original quotation web route, proxy, contracts/SDK and scoped evidence. PostgreSQL HTTP acceptance, 30 web tests, production build, ten contract tests, SDK typecheck and actual owner browser issue/accept/sale-staging workflow passed. Full M21 and platform acceptance remain incomplete.
+
+Parallel read-only catalog review found V23 typed manufacturer/family/variant/offer data lacks read APIs. Next Desktop scope: company-shared product identity readback and separately protected procurement-offer reads; preserve product/stock IDs and deny cashier cost disclosure. No migration required for readback. The independent documents/reporting parity audit remains reserved for the ChatGPT agent. Historical import stays last; mobile/native desktop stay paused.

@@ -3669,12 +3669,18 @@
           "sourceCommit": "5934c33f2688ff0664fae23572537f2e8524ca28",
           "scope": "Scoped authenticated quotation replay, conversion authorization, expiry and immutable terms",
           "status": "PASS"
+        },
+        {
+          "artifact": "docs/migration-evidence/desktop-quotations-2026-11-19/customer-decisions.json",
+          "sourceCommit": "cfeb8ce6c866ad7e9b79edb296fa82a449f3d9d1",
+          "scope": "Typed customer acceptance/rejection, immutable evidence, required accepted state and scoped PostgreSQL workflow",
+          "status": "PASS"
         }
       ],
       "remaining": [
         "Related source exists; canonical field/action invariants, complete workflow and end-to-end acceptance are not certified.",
         "Verify canonical workflows and fields including scoped denials, rollback, replay, invariants and actual browser behavior.",
-        "Complete M21 workflow: accept/reject/clone/revision and partial-order consumption remain open",
+        "Clone/revision and partial-order consumption remain open; typed acceptance/rejection verified separately",
         "Canonical delivery charge/discount/terms/notes and full price/tax contracts remain incomplete",
         "Original quotation screens/browser acceptance and complete Python parity"
       ],

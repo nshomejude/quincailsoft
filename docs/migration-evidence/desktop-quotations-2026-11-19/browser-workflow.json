@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "synthetic": true,
+  "steps": [
+    "Created actual Java quotation through the existing web form",
+    "Issued quotation; conversion action absent before customer acceptance",
+    "Recorded explicit customer acceptance through Java with evidence",
+    "Converted accepted quote to actual Java DRAFT sale; exact total and one decision verified"
+  ],
+  "quotationId": "45dfcac8-619d-428b-b6f9-7bd7cbcf8e77",
+  "saleId": "bbd4fa19-fe3e-4e20-ac59-c778742babf7"
+}

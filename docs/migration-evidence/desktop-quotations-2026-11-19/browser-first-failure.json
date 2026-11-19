@@ -1,0 +1,8 @@
+{
+  "status": "FAIL",
+  "synthetic": true,
+  "steps": [
+    "Configured previously blank local issuer as SYNTHETIC DEMO"
+  ],
+  "error": "locator.selectOption: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Customer', { exact: true })\u001b[22m\n"
+}
