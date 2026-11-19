@@ -181,6 +181,27 @@ class PostgresSaleIntegrationTest {
      assertEquals(1,fulfillment.dispatchHistory(wholeTask.id()).size());
      assertEquals(journalCount,count(owner,"select count(*) from journal_entry"));
      assertEquals(movementCount,count(owner,"select count(*) from stock_movement"));
+     var directSale=sales.post(next.id(),new SalesService.Post(UUID.randomUUID(),next.version(),
+         "Post sale for immediate delivery confirmation"));
+     long beforeDirectJournals=count(owner,"select count(*) from journal_entry");
+     long beforeDirectMovements=count(owner,"select count(*) from stock_movement");
+     var directTask=fulfillment.draft(new FulfillmentService.Draft(UUID.randomUUID(),directSale.id(),
+         customer,LocalDate.of(2026,11,18),"Prepare immediate delivery"));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.complete(directTask.id(),
+         new FulfillmentService.Action(UUID.randomUUID(),directTask.version()," ","Proof required")));
+     assertTrue(fulfillment.dispatchHistory(directTask.id()).isEmpty());
+     var directCommand=new FulfillmentService.Action(UUID.randomUUID(),directTask.version(),
+         "SIGNED-DIRECT-DELIVERY","Confirm immediate delivery");
+     var directCompleted=fulfillment.complete(directTask.id(),directCommand);
+     assertEquals("COMPLETED",directCompleted.status());
+     assertEquals(directCompleted,fulfillment.complete(directTask.id(),directCommand));
+     var directHistory=fulfillment.dispatchHistory(directTask.id());
+     assertEquals(1,directHistory.size());
+     assertEquals("1000",directHistory.getFirst().quantityMilli());
+     assertEquals(directCommand.operationId(),directHistory.getFirst().operationId());
+     assertTrue(fulfillment.pickList(directTask.id()).lines().isEmpty());
+     assertEquals(beforeDirectJournals,count(owner,"select count(*) from journal_entry"));
+     assertEquals(beforeDirectMovements,count(owner,"select count(*) from stock_movement"));
      return null;
     });
    }finally{if(factory!=null)factory.destroy();sql(admin,"DROP DATABASE "+db);sql(admin,"DROP ROLE "+role);}

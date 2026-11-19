@@ -130,3 +130,7 @@ whole-order retry without duplicate history, and unchanged stock/journal counts.
 The project rules check also passed. Direct pending completion has source
 implementation but still needs its own regression assertion. Browser acceptance,
 original fulfillment screen integration and full platform parity remain open.
+
+Direct pending completion regression passed on PostgreSQL 18.7 on 19 November.
+It verifies required proof, exact dispatch quantity, retry without duplicate history,
+empty remaining picklist, and unchanged stock movement and journal counts.
