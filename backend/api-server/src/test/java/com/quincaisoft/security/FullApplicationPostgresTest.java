@@ -79,8 +79,9 @@ class FullApplicationPostgresTest {
      verifyFulfillmentPermissions(client,port,dashboardReader,
          token(key,issuer,"quincai-test",tenant,company,branch,actor,"catalog:read"),
          token(key,issuer,"quincai-test",tenant,company,branch,actor,"sales:read sales:write"),product);
+     FulfillmentHttpWorkflow.DeliveryFixture deliveryFixture=null;
      if(!runReceipt && !runOpening){
-      FulfillmentHttpWorkflow.verify(client,port,
+      deliveryFixture=FulfillmentHttpWorkflow.verify(client,port,
           token(key,issuer,"quincai-test",tenant,company,branch,actor,
               "purchasing:write purchasing:receive purchasing:approve sales:write sales:post sales:read documents:configure"),
           token(key,issuer,"quincai-test",tenant,company,branch,approver,"purchasing:approve"),
@@ -120,6 +121,9 @@ class FullApplicationPostgresTest {
        verifyHistoricalSupplierSettlement(port,settlementMaker,settlementChecker,receiptMapping,url,user);
      }
 
+     if(deliveryFixture!=null)FulfillmentHttpWorkflow.verifySuspension(client,port,
+         token(key,issuer,"quincai-test",tenant,company,branch,actor,"sales:read sales:write"),
+         tenant,deliveryFixture,app.getBean(com.quincaisoft.platformcontrol.api.PlatformGovernanceService.class),url,user);
      var response=client.send(HttpRequest.newBuilder(endpoint).header("Authorization","Bearer "+token).header("X-Tenant-ID",UUID.randomUUID().toString()).GET().build(),HttpResponse.BodyHandlers.ofString());assertEquals(200,response.statusCode(),response.body());assertTrue(response.body().contains(tenant.toString()));
      assertEquals(403,client.send(HttpRequest.newBuilder(URI.create("http://127.0.0.1:"+port+"/admin/tenants")).header("Authorization","Bearer "+token).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());
      assertEquals(401,client.send(HttpRequest.newBuilder(endpoint).header("Authorization","Bearer "+token(key,issuer,"wrong-audience",tenant,company,branch,actor)).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());

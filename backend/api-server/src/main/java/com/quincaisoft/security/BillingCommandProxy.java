@@ -19,7 +19,13 @@ public final class BillingCommandProxy implements BeanPostProcessor {
     @Override public Object postProcessAfterInitialization(Object bean,String name) {
         Set<String> commands=new HashSet<>(),mutations=new HashSet<>(),replays=new HashSet<>();
         for(Class<?> api:ClassUtils.getAllInterfacesForClass(bean.getClass()))
-            for(Method method:api.getMethods()) {if(method.isAnnotationPresent(NewBusinessCommand.class)) {commands.add(key(method));if(commonReceipt(api,method))replays.add(key(method));}if(method.isAnnotationPresent(TenantMutation.class))mutations.add(key(method));}
+            for(Method method:api.getMethods()) {
+                boolean business=method.isAnnotationPresent(NewBusinessCommand.class);
+                boolean mutation=method.isAnnotationPresent(TenantMutation.class);
+                if(business)commands.add(key(method));
+                if(mutation)mutations.add(key(method));
+                if((business||mutation)&&commonReceipt(api,method))replays.add(key(method));
+            }
         if(commands.isEmpty()&&mutations.isEmpty())return bean;
         ProxyFactory factory=new ProxyFactory(bean);
         factory.addAdvice((MethodInterceptor) invocation -> {
@@ -37,7 +43,8 @@ public final class BillingCommandProxy implements BeanPostProcessor {
     // New annotations do not automatically gain a replay exemption.
     private static boolean commonReceipt(Class<?> api,Method method) {
         return (api.getName().equals("com.quincaisoft.sales.api.SalesService") && Set.of("draft","post").contains(method.getName()))
-            || (api.getName().equals("com.quincaisoft.purchasing.api.PurchasingService") && Set.of("draft","submit","approve").contains(method.getName()));
+            || (api.getName().equals("com.quincaisoft.purchasing.api.PurchasingService") && Set.of("draft","submit","approve").contains(method.getName()))
+            || (api.getName().equals("com.quincaisoft.sales.api.FulfillmentService") && Set.of("draft","dispatch","dispatchLines","complete").contains(method.getName()));
     }
     private static String key(Method method){return method.getName()+Arrays.toString(method.getParameterTypes());}
 }

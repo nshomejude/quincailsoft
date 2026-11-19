@@ -20,7 +20,8 @@ final class FulfillmentHttpWorkflow {
       +"INSERT INTO tenant_memberships(tenant_id,company_id,branch_id,actor_id,role_code) VALUES ('"+tenant+"','"+company+"','"+branch+"','"+checker+"','owner');"
       +"INSERT INTO financial_period(tenant_id,company_id,id,start_date,end_date,status) VALUES ('"+tenant+"','"+company+"',gen_random_uuid(),'2026-01-01','2026-12-31','Open')");
  }
- static void verify(HttpClient client,int port,String maker,String checker,UUID product,UUID supplier,String url,String user)throws Exception{
+ record DeliveryFixture(String path,Map<String,Object> completion,JsonNode completed){}
+ static DeliveryFixture verify(HttpClient client,int port,String maker,String checker,UUID product,UUID supplier,String url,String user)throws Exception{
   var purchase=command(client,port,maker,"purchases",Map.of("supplierId",supplier,"warehouseId",WAREHOUSE,
       "businessDate",DATE,"lines",List.of(Map.of("productId",product,"quantityMilli","10000","unitPriceXaf","500"))),200);
   String purchasePath="purchases/"+purchase.required("id").asText();
@@ -59,6 +60,7 @@ final class FulfillmentHttpWorkflow {
    assertEquals(0,get(client,port,maker,path+"/picklist").required("lines").size());
    var completion=new HashMap<String,Object>(decision(shipped));
    completion.put("proofReference","SYNTHETIC-SIGNED-PROOF");
+   completion.put("operationId",UUID.randomUUID());
    var completed=command(client,port,maker,path+"/complete",completion,200);
    assertEquals("COMPLETED",completed.required("status").asText());
    assertEquals("SYNTHETIC-SIGNED-PROOF",get(client,port,maker,path).required("proofReference").asText());
@@ -66,7 +68,49 @@ final class FulfillmentHttpWorkflow {
    var page=get(client,port,maker,"fulfillments/page?status=COMPLETED&q=Synthetic&limit=25");
    assertEquals(task.required("id"),page.required("items").get(0).required("fulfillment").required("id"));
    assertEquals(before,economics(db),"Delivery must not issue stock or post financial recognition again");
+   return new DeliveryFixture(path,completion,completed);
   }
+ }
+ static void verifySuspension(HttpClient client,int port,String merchant,UUID tenant,DeliveryFixture fixture,
+     com.quincaisoft.platformcontrol.api.PlatformGovernanceService governance,String url,String user)throws Exception{
+  UUID maker=UUID.randomUUID(),checker=UUID.randomUUID();
+  try(var db=DriverManager.getConnection(url,user,"")){
+   FullApplicationPostgresTest.sql(db,"INSERT INTO platform_operator VALUES ('"+maker+"',true),('"+checker+"',true)");
+  }
+  var context=org.springframework.security.core.context.SecurityContextHolder.getContext();var previous=context.getAuthentication();
+  try{
+   platformAuth(maker);
+   var review=governance.request(tenant,new com.quincaisoft.platformcontrol.api.PlatformGovernanceService.Request(
+       UUID.randomUUID(),com.quincaisoft.platformcontrol.api.PlatformGovernanceService.Kind.SUSPEND,0,null,"SYNTHETIC-CASE","Synthetic operational suspension"));
+   var approval=new com.quincaisoft.platformcontrol.api.PlatformGovernanceService.Command(UUID.randomUUID(),Long.parseLong(review.version()),"Independent suspension review");
+   assertThrows(org.springframework.security.access.AccessDeniedException.class,()->governance.approve(review.id(),approval));
+   platformAuth(checker);governance.approve(review.id(),approval);
+   assertEquals("SUSPENDED",governance.tenantState(tenant).status());
+  }finally{context.setAuthentication(previous);}
+  try(var db=DriverManager.getConnection(url,user,"")){
+   String before=effects(db);
+   for(String route:List.of("fulfillments","fulfillments/page","fulfillments/preparation-summary",fixture.path(),fixture.path()+"/picklist",fixture.path()+"/dispatches"))get(client,port,merchant,route);
+   // Retained operation results remain retrievable; the domain still validates actor and payload.
+   assertEquals(fixture.completed(),command(client,port,merchant,fixture.path()+"/complete",fixture.completion(),200));
+   var changed=new HashMap<String,Object>(fixture.completion());changed.put("reason","Changed retained operation request");
+   command(client,port,merchant,fixture.path()+"/complete",changed,409);
+   var fresh=new HashMap<String,Object>(fixture.completion());fresh.remove("operationId");
+   for(String action:List.of("dispatch","dispatch-lines","complete")){
+    var input=new HashMap<String,Object>(fresh);
+    if(action.equals("dispatch-lines"))input.put("lines",List.of(Map.of("productId",UUID.randomUUID(),"quantityMilli","1")));
+    command(client,port,merchant,fixture.path()+"/"+action,input,403);
+   }
+   command(client,port,merchant,"fulfillments",Map.of("saleId",fixture.completed().required("saleId").asText(),
+       "customerId",CUSTOMER,"businessDate",DATE,"reason","Suspended tenant must not create"),403);
+   assertEquals(before,effects(db),"Suspension reads, replay and denied writes must not add durable effects");
+  }
+ }
+ private static void platformAuth(UUID actor){
+  var jwt=org.springframework.security.oauth2.jwt.Jwt.withTokenValue("synthetic-platform-test").header("alg","RS256").subject(actor.toString()).build();
+  var authorities=List.of("platform:governance:write","platform:governance:approve","platform:governance:read").stream()
+      .map(scope->new org.springframework.security.core.authority.SimpleGrantedAuthority("SCOPE_"+scope)).toList();
+  org.springframework.security.core.context.SecurityContextHolder.getContext().setAuthentication(
+      new org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken(jwt,authorities));
  }
  static void verifyRevocation(HttpClient client,int port,String owner,String stale,String renewed,
      UUID target,UUID product,String url,String user)throws Exception{
@@ -111,7 +155,7 @@ final class FulfillmentHttpWorkflow {
   assertEquals(200,response.statusCode(),response.body());return JSON.readTree(response.body());
  }
  private static JsonNode command(HttpClient client,int port,String token,String path,Map<String,?> fields,int expected)throws Exception{
-  var operation=UUID.randomUUID();var body=new HashMap<String,Object>(fields);body.put("operationId",operation);
+  var operation=fields.containsKey("operationId")?UUID.fromString(fields.get("operationId").toString()):UUID.randomUUID();var body=new HashMap<String,Object>(fields);body.put("operationId",operation);
   var request=HttpRequest.newBuilder(uri(port,path)).header("Authorization","Bearer "+token).header("Content-Type","application/json")
       .header("Idempotency-Key",operation.toString()).header("X-Request-ID",UUID.randomUUID().toString())
       .POST(HttpRequest.BodyPublishers.ofString(JSON.writeValueAsString(body))).build();
