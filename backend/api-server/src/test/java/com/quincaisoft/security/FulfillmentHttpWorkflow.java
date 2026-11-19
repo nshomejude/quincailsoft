@@ -47,16 +47,27 @@ final class FulfillmentHttpWorkflow {
       "businessDate",DATE,"reason","Synthetic delivery","delivery",Map.of("method","DELIVERY","scheduledDate","2026-11-19",
           "address","Synthetic destination","recipientName","Synthetic recipient")),200);
   String path="fulfillments/"+task.required("id").asText();
+  var ticket=command(client,port,maker,"documents/captures",Map.of("templateId","PICK_TICKET","sourceId",task.required("id").asText()),200);
+  assertPickQuantity(ticket,"2000");
+  verifyPickIsolation(url,user,task.required("id").asText());
   try(var db=DriverManager.getConnection(url,user,"")){
    String before=economics(db);
    assertEquals("8000:4000/2/2/8000:8000/1",before,"One receipt and one recognized sale");
    var partial=command(client,port,maker,path+"/dispatch-lines",dispatch(task,product,"500"),200);
    assertEquals("PARTIAL",partial.required("status").asText());
+   var partialTicket=command(client,port,maker,"documents/captures",Map.of("templateId","PICK_TICKET","sourceId",task.required("id").asText()),200);
+   assertPickQuantity(partialTicket,"1500");
+   assertEquals(ticket,get(client,port,maker,"documents/captures/"+ticket.required("id").asText()),"Earlier pick ticket remains immutable after partial shipment");
+   var attempt=command(client,port,maker,"documents/captures/"+partialTicket.required("id").asText()+"/print-attempts",
+       Map.of("reason","Synthetic pick ticket print","paper","A4"),200);
+   assertEquals("REQUESTED",attempt.required("status").asText(),"Requesting HTML must not claim physical print success");
+   assertTrue(attempt.required("html").asText().contains("1500"));
    command(client,port,maker,path+"/dispatch-lines",dispatch(partial,product,"1501"),422);
    var pick=get(client,port,maker,path+"/picklist");
    assertEquals("1500",pick.required("lines").get(0).required("quantityMilli").asText());
    var shipped=command(client,port,maker,path+"/dispatch-lines",dispatch(partial,product,"1500"),200);
    assertEquals("DISPATCHED",shipped.required("status").asText());
+   command(client,port,maker,"documents/captures",Map.of("templateId","PICK_TICKET","sourceId",task.required("id").asText()),404);
    assertEquals(0,get(client,port,maker,path+"/picklist").required("lines").size());
    var completion=new HashMap<String,Object>(decision(shipped));
    completion.put("proofReference","SYNTHETIC-SIGNED-PROOF");
@@ -69,6 +80,36 @@ final class FulfillmentHttpWorkflow {
    assertEquals(task.required("id"),page.required("items").get(0).required("fulfillment").required("id"));
    assertEquals(before,economics(db),"Delivery must not issue stock or post financial recognition again");
    return new DeliveryFixture(path,completion,completed);
+  }
+ }
+ private static void assertPickQuantity(JsonNode ticket,String quantity){
+  var body=ticket.required("content").required("source");int column=-1;
+  for(int index=0;index<body.required("columns").size();index++)
+   if(body.required("columns").get(index).asText().equals("To pick milli|À préparer milli"))column=index;
+  assertTrue(column>=0);assertEquals(quantity,body.required("rows").get(0).get(column).asText());
+  assertEquals("",body.required("totalXaf").asText(),"Preparation must not claim a payment total");
+ }
+ private static void verifyPickIsolation(String url,String user,String task)throws Exception{
+  try(var db=DriverManager.getConnection(url,user,"")){
+   UUID tenant,company,branch,actor;
+   try(var query=db.prepareStatement("select tenant_id,company_id,branch_id,created_by from sale_fulfillment where id=?")){
+    query.setObject(1,UUID.fromString(task));try(var rows=query.executeQuery()){
+     assertTrue(rows.next());tenant=rows.getObject(1,UUID.class);company=rows.getObject(2,UUID.class);
+     branch=rows.getObject(3,UUID.class);actor=rows.getObject(4,UUID.class);
+    }
+   }
+   db.setAutoCommit(false);FullApplicationPostgresTest.sql(db,"SET LOCAL ROLE quincai_app");
+   for(int scope=0;scope<4;scope++){
+    try(var settings=db.prepareStatement("select set_config('app.tenant_id',?,true),set_config('app.company_id',?,true),set_config('app.branch_id',?,true),set_config('app.actor_id',?,true)")){
+     settings.setString(1,(scope==1?UUID.randomUUID():tenant).toString());
+     settings.setString(2,(scope==2?UUID.randomUUID():company).toString());
+     settings.setString(3,(scope==3?UUID.randomUUID():branch).toString());settings.setString(4,actor.toString());settings.execute();
+    }
+    try(var query=db.createStatement();var rows=query.executeQuery("select count(*) from document_pick_ticket_v1")){
+     assertTrue(rows.next());assertEquals(scope==0?1:0,rows.getInt(1),"Invoker projection must enforce tenant/company/branch RLS");
+    }
+   }
+   db.rollback();
   }
  }
  static void verifySuspension(HttpClient client,int port,String merchant,UUID tenant,DeliveryFixture fixture,

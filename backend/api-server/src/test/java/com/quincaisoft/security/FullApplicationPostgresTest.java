@@ -83,7 +83,7 @@ class FullApplicationPostgresTest {
      if(!runReceipt && !runOpening){
       deliveryFixture=FulfillmentHttpWorkflow.verify(client,port,
           token(key,issuer,"quincai-test",tenant,company,branch,actor,
-              "purchasing:write purchasing:receive purchasing:approve sales:write sales:post sales:read documents:configure"),
+              "purchasing:write purchasing:receive purchasing:approve sales:write sales:post sales:read documents:configure documents:read documents:write documents:print"),
           token(key,issuer,"quincai-test",tenant,company,branch,approver,"purchasing:approve"),
           product,supplier,url,user);
       FulfillmentHttpWorkflow.verifyRevocation(client,port,token,
