@@ -3850,6 +3850,12 @@
           "sourceCommit": "85fc1890add7b3b5bbace571958a3566b20faee3",
           "scope": "Spring Boot resource-server permission and concealment matrix",
           "status": "PASS"
+        },
+        {
+          "artifact": "docs/migration-evidence/desktop-fulfillment-2026-11-19/queue-pagination.json",
+          "sourceCommit": "33e5d715bbe9649ed55739337955eab20744dfd7",
+          "scope": "Scoped signed fulfillment queue paging and filter acceptance",
+          "status": "PASS"
         }
       ],
       "remaining": [

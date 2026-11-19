@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-19",
+  "sourceCommit": "33e5d715bbe9649ed55739337955eab20744dfd7",
+  "status": "PASS",
+  "java": "25.0.5.1",
+  "postgresql": "18.7",
+  "sourceSha256": {
+    "backend/db-migrations/src/main/resources/db/migration/V50__scoped_fulfillment_queue.sql": "b6f2d76099172f4e322510fabe984ef8da9034120a543ae4f0abc43cc5f1c4fd",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/application/FulfillmentQueueReader.java": "7ee1221942969c0acc55c317c2bf389ab0fb0360b143952f208fcb1aa8dd8d48",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/application/DefaultFulfillmentService.java": "1bbdbd9afb620e65bc2a37a25c117f6ec9b85c74e13100e4fe58d2736f1acd4c",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/api/FulfillmentService.java": "30bfb9be158a23c995eca7e62c40337d99ec76a79466bc76f46e3e779239ad31",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java": "39ab1ae8aa6444e0f82af9bc2bd75067a4141a57da887ca221553ff55a1387b9",
+    "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java": "55cf28fc962a099fc2b16e1e6594ddc65738e9206ebe09bd6c1431e8f29716e0",
+    "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java": "c0621efd3a7928987b271af2a56afc33a187d96059f3281ca3b41ef65d244d1b"
+  },
+  "commands": [
+    "mvn -B -ntp -f backend/pom.xml -pl business-modules/sales -am -Dtest=PostgresSaleIntegrationTest -Dsurefire.failIfNoSpecifiedTests=false test",
+    "mvn -B -ntp -f backend/pom.xml -pl api-server -am -Dtest=FullApplicationPostgresTest -Dsurefire.failIfNoSpecifiedTests=false test"
+  ],
+  "reports": [
+    "queue-service-test.txt",
+    "queue-http-test.txt"
+  ],
+  "migration": "V50",
+  "assertions": [
+    "Exact ordered keyset pages with no duplicate or missing tasks",
+    "Customer label, warehouse and delivery details come from the scoped read projection",
+    "Status and search filtering with literal wildcard escaping",
+    "Page bound 1–100 and search bound 100 characters",
+    "Signed 15-minute cursors bind tenant, company, branch, actor, epoch, status, query and page size",
+    "Tampered signatures and cryptographically valid expired cursors reject",
+    "Cross-tenant, branch, actor, epoch and filter cursor reuse rejects",
+    "Anonymous and unrelated scopes reject the HTTP page route",
+    "The original list contract remains available"
+  ],
+  "limits": [
+    "Queue screen consumer remains unfinished",
+    "The local preview still runs the preceding verified JAR until this feature is integrated",
+    "Signed-key rotation operations require deployment planning"
+  ]
+}
