@@ -130,8 +130,17 @@ switch ($Action) {
         Invoke-Docker @compose up -d database identity sessions web
     }
     'Start' {
-        Invoke-Docker @compose up -d database identity sessions web
+        Invoke-Docker @compose up -d --wait database identity sessions web
         if (!(Test-Path -LiteralPath (Join-Path $state 'app.jar'))) { Update-Jar }
+        # Existing development volumes predate the cross-tenant V35 backfill.
+        Invoke-Docker @compose exec -T database psql -U postgres -d quincaisoft -v ON_ERROR_STOP=1 -c @'
+DO $$ BEGIN
+ IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname='quincai_runtime' AND (rolsuper OR rolbypassrls)) THEN
+  RAISE EXCEPTION 'Preview runtime must remain NOSUPERUSER NOBYPASSRLS';
+ END IF;
+END $$;
+ALTER ROLE quincai_migrator BYPASSRLS;
+'@
         Wait-Http $issuerDiscovery
         Invoke-Docker @compose up -d api
         Wait-Http 'http://localhost:8080/actuator/health'
