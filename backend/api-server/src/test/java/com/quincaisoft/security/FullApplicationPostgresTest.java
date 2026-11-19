@@ -73,6 +73,9 @@ class FullApplicationPostgresTest {
       assertEquals(metric.getValue().getValue().intValue(),
           dashboardJson.readTree(response.body()).required(metric.getValue().getKey()).intValue());
      }
+     verifyFulfillmentPermissions(client,port,dashboardReader,
+         token(key,issuer,"quincai-test",tenant,company,branch,actor,"catalog:read"),
+         token(key,issuer,"quincai-test",tenant,company,branch,actor,"sales:read sales:write"),product);
      var writer=token(key,issuer,"quincai-test",tenant,company,branch,actor,"catalog:read catalog:write sales:read");
      var manufacturer=catalogWrite(client,port,"manufacturers",token,writer,Map.of("code","TEST-MFR","name","Synthetic maker"));
      var family=catalogWrite(client,port,"families",token,writer,Map.of("manufacturerId",manufacturer.get("id").asText(),"productType","Cable","modelNumber","M1"));
@@ -117,6 +120,49 @@ class FullApplicationPostgresTest {
  }
  static String token(RSAKey key,String issuer,String audience,UUID t,UUID c,UUID b,UUID a,String scopes)throws Exception{
   var claims=new JWTClaimsSet.Builder().issuer(issuer).audience(audience).subject(a.toString()).issueTime(java.util.Date.from(Instant.now())).expirationTime(java.util.Date.from(Instant.now().plusSeconds(3600))).claim("tenant_id",t.toString()).claim("company_id",c.toString()).claim("branch_id",b.toString()).claim("authorization_epoch",1).claim("scope",scopes).build();var jwt=new SignedJWT(new JWSHeader.Builder(JWSAlgorithm.RS256).keyID(key.getKeyID()).build(),claims);jwt.sign(new RSASSASigner(key));return jwt.serialize();
+ }
+ private static void verifyFulfillmentPermissions(HttpClient client,int port,String reader,
+     String unrelatedReader,String writer,UUID product)throws Exception{
+  var missing=UUID.randomUUID();
+  var root="http://127.0.0.1:"+port+"/api/v1/fulfillments";
+  for(var suffix:List.of("","/preparation-summary","/"+missing,"/"+missing+"/picklist","/"+missing+"/dispatches")){
+   var uri=URI.create(root+suffix);
+   assertEquals(401,client.send(HttpRequest.newBuilder(uri).GET().build(),
+       HttpResponse.BodyHandlers.ofString()).statusCode(),suffix);
+   assertEquals(403,client.send(HttpRequest.newBuilder(uri).header("Authorization","Bearer "+unrelatedReader)
+       .GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode(),suffix);
+   int expected=suffix.isEmpty()||suffix.equals("/preparation-summary")?200:404;
+   assertEquals(expected,client.send(HttpRequest.newBuilder(uri).header("Authorization","Bearer "+reader)
+       .GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode(),suffix);
+  }
+  var json=tools.jackson.databind.json.JsonMapper.builder().build();
+  for(var suffix:List.of("","/"+missing+"/dispatch","/"+missing+"/dispatch-lines","/"+missing+"/complete")){
+   var operation=UUID.randomUUID();
+   var body=new HashMap<String,Object>();
+   body.put("operationId",operation);
+   body.put("reason","Synthetic permission acceptance");
+   if(suffix.isEmpty()){
+    body.put("saleId",missing);
+    body.put("customerId",UUID.randomUUID());
+    body.put("businessDate","2026-11-18");
+   }else{
+    body.put("version","0");
+    if(suffix.endsWith("/dispatch-lines"))
+     body.put("lines",List.of(Map.of("productId",product,"quantityMilli","1000")));
+    else body.put("proofReference","SYNTHETIC-HTTP-PROOF");
+   }
+   var uri=URI.create(root+suffix);
+   String payload=json.writeValueAsString(body);
+   for(var credential:List.of("",reader,unrelatedReader,writer)){
+    var request=HttpRequest.newBuilder(uri).header("Content-Type","application/json")
+        .header("Idempotency-Key",operation.toString()).header("X-Request-ID",UUID.randomUUID().toString())
+        .POST(HttpRequest.BodyPublishers.ofString(payload));
+    if(!credential.isEmpty())request.header("Authorization","Bearer "+credential);
+    var response=client.send(request.build(),HttpResponse.BodyHandlers.ofString());
+    int expected=credential.isEmpty()?401:credential.equals(writer)?404:403;
+    assertEquals(expected,response.statusCode(),suffix+" "+response.body());
+   }
+  }
  }
  private static void verifyHistoricalOpening(int port,String maker,String approver,String url,String user)throws Exception{
   Path output=Files.createTempDirectory(Path.of("target"),"opening-acceptance-").toAbsolutePath();
