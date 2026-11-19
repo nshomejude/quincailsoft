@@ -3844,12 +3844,18 @@
           "sourceCommit": "a7ddb697b2659b7ef8a2209bdb59b3a873420467",
           "scope": "Real PostgreSQL competing dispatch acceptance",
           "status": "PASS"
+        },
+        {
+          "artifact": "docs/migration-evidence/desktop-fulfillment-2026-11-19/http-permissions.json",
+          "sourceCommit": "85fc1890add7b3b5bbace571958a3566b20faee3",
+          "scope": "Spring Boot resource-server permission and concealment matrix",
+          "status": "PASS"
         }
       ],
       "remaining": [
         "Original S74/S75 web screen integration and desktop/narrow screenshots",
         "Pick ticket and delivery note printing acceptance",
-        "OIDC role and lifecycle denial checks for new fulfillment endpoints",
+        "Tenant suspension and authorization-epoch revocation checks for fulfillment HTTP endpoints",
         "Production deployment and full platform acceptance"
       ],
       "status": "PARTIAL_ACCEPTANCE"

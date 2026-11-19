@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-19",
+  "sourceCommit": "85fc1890add7b3b5bbace571958a3566b20faee3",
+  "sourceSha256": {
+    "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java": "a51aac672879369ece693b27c83b39eb374856d86cafc95749e49d2f195f5656",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java": "ce2828ed26e1e1f75c91e2a54d65b6ea2af2f75320d52dcb243c6bf9d6ecf13f",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/api/FulfillmentService.java": "401745c10dae601a81fe93604ddf7c96990eea0edab91d9c57e8db550fad34fd"
+  },
+  "java": "25.0.5.1",
+  "postgresql": "18.7",
+  "status": "PASS",
+  "report": "http-permissions-test.txt",
+  "command": "mvn -B -ntp -f backend/pom.xml -pl api-server -am -Dtest=FullApplicationPostgresTest -Dsurefire.failIfNoSpecifiedTests=false test",
+  "historicalAcceptanceFlags": {
+    "catalog": false,
+    "opening": false,
+    "settlement": false
+  },
+  "readRoutes": [
+    "/fulfillments",
+    "/fulfillments/preparation-summary",
+    "/fulfillments/{id}",
+    "/fulfillments/{id}/picklist",
+    "/fulfillments/{id}/dispatches"
+  ],
+  "mutationRoutes": [
+    "POST /fulfillments",
+    "POST /fulfillments/{id}/dispatch",
+    "POST /fulfillments/{id}/dispatch-lines",
+    "POST /fulfillments/{id}/complete"
+  ],
+  "assertions": [
+    "Anonymous requests return 401",
+    "Authenticated users with unrelated scopes return 403",
+    "Read-only sales users cannot mutate",
+    "Authorized sales readers receive 200 for list/summary and 404 for nonexistent records",
+    "Authorized sales writers receive 404 for nonexistent command sources",
+    "Commands include stable Idempotency-Key and X-Request-ID correlation headers"
+  ],
+  "limits": [
+    "Tenant suspension/epoch revocation HTTP cases remain open",
+    "Normal successful fulfillment HTTP command workflow remains to be exercised with the original screens"
+  ]
+}
