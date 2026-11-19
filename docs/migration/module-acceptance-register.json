@@ -3663,12 +3663,22 @@
         "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/TenderPostgresTest.java",
         "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/TenderRulesTest.java"
       ],
-      "executedAcceptance": [],
+      "executedAcceptance": [
+        {
+          "artifact": "docs/migration-evidence/desktop-quotations-2026-11-19/result.json",
+          "sourceCommit": "5934c33f2688ff0664fae23572537f2e8524ca28",
+          "scope": "Scoped authenticated quotation replay, conversion authorization, expiry and immutable terms",
+          "status": "PASS"
+        }
+      ],
       "remaining": [
         "Related source exists; canonical field/action invariants, complete workflow and end-to-end acceptance are not certified.",
-        "Verify canonical workflows and fields including scoped denials, rollback, replay, invariants and actual browser behavior."
+        "Verify canonical workflows and fields including scoped denials, rollback, replay, invariants and actual browser behavior.",
+        "Complete M21 workflow: accept/reject/clone/revision and partial-order consumption remain open",
+        "Canonical delivery charge/discount/terms/notes and full price/tax contracts remain incomplete",
+        "Original quotation screens/browser acceptance and complete Python parity"
       ],
-      "status": "NOT_RUN"
+      "status": "PARTIAL_ACCEPTANCE"
     },
     {
       "id": "M22",
