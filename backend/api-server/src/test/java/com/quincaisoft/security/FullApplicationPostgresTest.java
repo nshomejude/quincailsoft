@@ -46,6 +46,9 @@ class FullApplicationPostgresTest {
      }
      sql(owner,"INSERT INTO catalog_product(tenant_id,company_id,id,sku,name,base_unit,selling_price_xaf,reorder_level_milli) VALUES ('"+tenant+"','"+company+"','"+product+"','TEST-SKU','Synthetic cable','piece',1000,1000)");
      sql(owner,"INSERT INTO supplier(tenant_id,company_id,id,code,name) VALUES ('"+tenant+"','"+company+"','"+supplier+"','TEST-SUP','Synthetic supplier')");
+     if(!runReceipt && !runOpening){
+      FulfillmentHttpWorkflow.bootstrap(owner,tenant,company,branch,approver);
+     }
 
     }
     var settings=new HashMap<String,Object>();settings.put("QUINCAI_DATABASE_URL",url);settings.put("QUINCAI_DATABASE_USER",role);settings.put("QUINCAI_DATABASE_PASSWORD","");settings.put("QUINCAI_OIDC_ISSUER",issuer);settings.put("QUINCAI_OIDC_AUDIENCE","quincai-test");settings.put("server.port","0");settings.put("server.address","127.0.0.1");settings.put("spring.flyway.enabled","false");
@@ -76,6 +79,13 @@ class FullApplicationPostgresTest {
      verifyFulfillmentPermissions(client,port,dashboardReader,
          token(key,issuer,"quincai-test",tenant,company,branch,actor,"catalog:read"),
          token(key,issuer,"quincai-test",tenant,company,branch,actor,"sales:read sales:write"),product);
+     if(!runReceipt && !runOpening){
+      FulfillmentHttpWorkflow.verify(client,port,
+          token(key,issuer,"quincai-test",tenant,company,branch,actor,
+              "purchasing:write purchasing:receive purchasing:approve sales:write sales:post sales:read documents:configure"),
+          token(key,issuer,"quincai-test",tenant,company,branch,approver,"purchasing:approve"),
+          product,supplier,url,user);
+     }
      var writer=token(key,issuer,"quincai-test",tenant,company,branch,actor,"catalog:read catalog:write sales:read");
      var manufacturer=catalogWrite(client,port,"manufacturers",token,writer,Map.of("code","TEST-MFR","name","Synthetic maker"));
      var family=catalogWrite(client,port,"families",token,writer,Map.of("manufacturerId",manufacturer.get("id").asText(),"productType","Cable","modelNumber","M1"));

@@ -6138,9 +6138,9 @@
         ]
       },
       "next": {
-        "routeCandidate": null,
-        "component": null,
-        "mappingReviewed": false
+        "routeCandidate": "/fulfillments",
+        "component": "apps/web-admin/app/fulfillments/page.tsx",
+        "mappingReviewed": true
       },
       "required": {
         "tabs": [
@@ -6168,22 +6168,34 @@
         "dialogAcceptance": "NOT_RUN",
         "details": false
       },
-      "roleBranchScope": "NOT_RUN per-screen capability and branch review",
+      "roleBranchScope": "Owner/auditor queue and creation access checked in actual Chrome; complete cross-branch browser workflow remains NOT_RUN.",
       "java": {
-        "reviewedEndpoints": ["GET /api/v1/fulfillments/{id}/picklist"],
+        "reviewedEndpoints": [
+          "GET /api/v1/fulfillments/page",
+          "GET /api/v1/fulfillments/{id}",
+          "GET /api/v1/fulfillments/{id}/picklist",
+          "GET /api/v1/fulfillments/{id}/dispatches",
+          "POST /api/v1/fulfillments",
+          "POST /api/v1/fulfillments/{id}/dispatch-lines",
+          "POST /api/v1/fulfillments/{id}/complete"
+        ],
         "controllerCandidates": []
       },
       "gaps": [
-        "Picklist read API verified at 1d54897. Original screen wiring, dispatch workflow and print acceptance remain open.",
-        "Compare actionable fields, dialogs and permissions against original workflow."
+        "Dedicated Java-backed queue, creation and detail pages committed at 9c89645; browser queue tabs/filter and write denial verified for owner/auditor.",
+        "Browser creation/partial dispatch/completion with a posted stocked sale remains NOT_RUN; detail rendering screenshot and narrow-width/original comparison remain pending.",
+        "Pick-ticket and delivery-note printing remain incomplete. No full visual or module acceptance."
       ],
       "captures": {
         "original": [],
-        "desktop": [],
+        "desktop": [
+          "docs/migration-evidence/fulfillment-web-2026-11-19/owner-queue.png",
+          "docs/migration-evidence/fulfillment-web-2026-11-19/auditor-queue.png"
+        ],
         "narrow": [],
         "comparableBeforeAfter": false
       },
-      "status": "NOT_RUN"
+      "status": "PARTIAL"
     },
     {
       "id": "S75",
@@ -6219,9 +6231,9 @@
         ]
       },
       "next": {
-        "routeCandidate": null,
-        "component": null,
-        "mappingReviewed": false
+        "routeCandidate": "/fulfillments/[id]",
+        "component": "apps/web-admin/app/fulfillments/[id]/page.tsx",
+        "mappingReviewed": true
       },
       "required": {
         "tabs": [
@@ -6251,14 +6263,23 @@
         "dialogAcceptance": "NOT_RUN",
         "details": true
       },
-      "roleBranchScope": "NOT_RUN per-screen capability and branch review",
+      "roleBranchScope": "Owner/auditor queue and creation access checked in actual Chrome; complete cross-branch browser workflow remains NOT_RUN.",
       "java": {
-        "reviewedEndpoints": ["GET /api/v1/fulfillments/{id}/picklist"],
+        "reviewedEndpoints": [
+          "GET /api/v1/fulfillments/page",
+          "GET /api/v1/fulfillments/{id}",
+          "GET /api/v1/fulfillments/{id}/picklist",
+          "GET /api/v1/fulfillments/{id}/dispatches",
+          "POST /api/v1/fulfillments",
+          "POST /api/v1/fulfillments/{id}/dispatch-lines",
+          "POST /api/v1/fulfillments/{id}/complete"
+        ],
         "controllerCandidates": []
       },
       "gaps": [
-        "Picklist read API verified at 1d54897. Original screen wiring, dispatch workflow and print acceptance remain open.",
-        "Compare actionable fields, dialogs and permissions against original workflow."
+        "Dedicated Java-backed queue, creation and detail pages committed at 9c89645; browser queue tabs/filter and write denial verified for owner/auditor.",
+        "Browser creation/partial dispatch/completion with a posted stocked sale remains NOT_RUN; detail rendering screenshot and narrow-width/original comparison remain pending.",
+        "Pick-ticket and delivery-note printing remain incomplete. No full visual or module acceptance."
       ],
       "captures": {
         "original": [],
@@ -6266,7 +6287,7 @@
         "narrow": [],
         "comparableBeforeAfter": false
       },
-      "status": "NOT_RUN"
+      "status": "PARTIAL"
     },
     {
       "id": "S76",
