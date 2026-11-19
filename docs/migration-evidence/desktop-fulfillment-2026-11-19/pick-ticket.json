@@ -1,0 +1,42 @@
+{
+  "sourceCommit": "6621146a5c690368ae73822f6264402e41b1b199",
+  "status": "PASS",
+  "specification": [
+    "ARCHITECTURE.md Appendix A S74 print pick ticket",
+    "ARCHITECTURE.md §38 aggregate ownership and immutable document snapshots"
+  ],
+  "legacyReference": "server/inventory_workflows.py fulfillment dispatch/completion; PICK_TICKET is the required operational preparation document, not a new claim of canonical DOC-family completion",
+  "ownership": "Desktop implementation of S74 action; independent documents/reporting parity audit remains reserved for ChatGPT agent",
+  "java": "25.0.5.1",
+  "postgresql": "18.7",
+  "command": "mvn -B -ntp -f backend/pom.xml -pl api-server -am -Dtest=FullApplicationPostgresTest,DocumentPermissionMatrixTest -Dsurefire.failIfNoSpecifiedTests=false test",
+  "tests": {
+    "httpWorkflow": 1,
+    "templatePermissionCases": 630,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "checks": [
+    "V51 security-invoker projection applied in isolated PostgreSQL",
+    "Actual authenticated capture has 2000 milli to pick before dispatch and 1500 after partial dispatch",
+    "Earlier capture remains immutable after partial dispatch",
+    "Print attempt returns REQUESTED and HTML containing remaining quantity; no fabricated physical success",
+    "Fully dispatched source cannot create a fresh preparation ticket (404)",
+    "Direct quincai_app role view returns own row and conceals other tenant/company/branch rows",
+    "All template source permission cases pass",
+    "Existing ordinary purchase/sale/fulfillment, revocation and suspension acceptance rerun"
+  ],
+  "remaining": [
+    "S74/S75 browser pick-ticket integration and original/narrow visual verification",
+    "Physical printer verification",
+    "Complete delivery-note browser workflow",
+    "Historical dataset import remains last; none executed"
+  ],
+  "sourceHashes": {
+    "backend/db-migrations/src/main/resources/db/migration/V51__remaining_fulfillment_pick_ticket.sql": "395ea0c924d236d9fbaa475f0b52f449b5f15237649c370804225991fc6a38f3",
+    "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/application/DocumentSourceReader.java": "59fd606aa9cee0c0cdabf77ffddd9c3e7f22b7b93f558bdece5769630e970acf",
+    "backend/api-server/src/test/java/com/quincaisoft/security/FulfillmentHttpWorkflow.java": "2274c00608a6a0d3c1ba86e46f762b2b9b568bf0e9d5c5e8edc93dfdf97844e3",
+    "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java": "6955bdbe45543b8be7c7481794fbc32cbae1d29b86c43b0e9bc8dc75eec67753"
+  }
+}

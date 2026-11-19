@@ -3879,11 +3879,17 @@
           "sourceCommit": "c444ca80fc92a38bee368f3d082a1b2dbf49bd69",
           "scope": "Operational tenant suspension: retained HTTP reads/retry, rejected new commands and conflicting retry payload; real independently approved governance service",
           "status": "PASS"
+        },
+        {
+          "artifact": "docs/migration-evidence/desktop-fulfillment-2026-11-19/pick-ticket.json",
+          "sourceCommit": "6621146a5c690368ae73822f6264402e41b1b199",
+          "scope": "Java-backed remaining-quantity pick-ticket capture, print request and projection isolation; browser and physical printing remain unaccepted",
+          "status": "PASS"
         }
       ],
       "remaining": [
         "S74/S75 complete original-screen comparison, browser mutation/detail and narrow-width acceptance; queue/creation/detail components now wired to Java at 9c89645",
-        "Pick ticket and delivery note printing acceptance",
+        "Pick ticket browser wiring and original-layout/physical printing acceptance; backend capture/print request verified separately; delivery-note browser workflow remains open",
         "Production deployment and full platform acceptance"
       ],
       "status": "PARTIAL_ACCEPTANCE"
