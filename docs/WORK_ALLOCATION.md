@@ -134,3 +134,9 @@ original fulfillment screen integration and full platform parity remain open.
 Direct pending completion regression passed on PostgreSQL 18.7 on 19 November.
 It verifies required proof, exact dispatch quantity, retry without duplicate history,
 empty remaining picklist, and unchanged stock movement and journal counts.
+
+Dispatch persistence now uses the typed FulfillmentDispatchLine JPA entity in
+the sales aggregate. PostgreSQL 18.7 acceptance passed for partial, whole-order
+and direct-completion paths. A shipment with a valid first line and invalid
+second product rolls back all dispatch lines and preserves the task version.
+The project rules check passed. No new database migration was required.

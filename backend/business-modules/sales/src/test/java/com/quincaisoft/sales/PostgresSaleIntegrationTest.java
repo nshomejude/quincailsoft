@@ -120,6 +120,12 @@ class PostgresSaleIntegrationTest {
      assertThrows(RevisionConflict.class,()->custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),position.version(),"1000","STALE","Stale collection")));
      assertEquals("COLLECTED",custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),partial.version(),"1000","CUSTOMER-SIGNED-PICKUP-2","Final collection")).status());assertEquals(2,custody.collections(position.id()).size());
      assertEquals(6000,count(owner,"select quantity_milli from stock_balance"));assertEquals(3000,count(owner,"select value_xaf from stock_balance"));assertEquals(journalCount,count(owner,"select count(*) from journal_entry"));assertEquals(movementCount,count(owner,"select count(*) from stock_movement"));assertEquals(0,count(owner,"select sum(quantity_milli-collected_milli) from customer_custody"));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.dispatchLines(task.id(),
+         new FulfillmentService.DispatchLines(UUID.randomUUID(),task.version(),"Rollback invalid shipment",
+             List.of(new FulfillmentService.PickLine(p,"500"),
+                 new FulfillmentService.PickLine(UUID.randomUUID(),"1000")))));
+     assertTrue(fulfillment.dispatchHistory(task.id()).isEmpty());
+     assertEquals(task.version(),fulfillment.get(task.id()).version());
      var firstDispatch=new FulfillmentService.DispatchLines(UUID.randomUUID(),task.version(),"First dispatch",
          List.of(new FulfillmentService.PickLine(p,"500")));
      var first=fulfillment.dispatchLines(task.id(),firstDispatch);

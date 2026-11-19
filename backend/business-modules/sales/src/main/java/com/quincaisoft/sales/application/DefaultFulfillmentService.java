@@ -174,15 +174,17 @@ import jakarta.persistence.*;import org.springframework.stereotype.Service;impor
  }
 
  private void recordDispatch(FulfillmentEntity task, UUID operationId, UUID productId, long quantity) {
-  em.createNativeQuery("""
-      insert into fulfillment_dispatch_line
-      (tenant_id,company_id,branch_id,fulfillment_id,operation_id,product_id,quantity_milli,dispatched_at,dispatched_by)
-      values (:tenant,:company,:branch,:id,:operation,:product,:quantity,:at,:actor)
-      """).setParameter("tenant",task.tenantId).setParameter("company",task.companyId)
-      .setParameter("branch",task.branchId).setParameter("id",task.id)
-      .setParameter("operation",operationId).setParameter("product",productId)
-      .setParameter("quantity",quantity).setParameter("at",Instant.now())
-      .setParameter("actor",TenantContext.current().actorId()).executeUpdate();
+  var line = new FulfillmentDispatchLine();
+  line.tenantId = task.tenantId;
+  line.companyId = task.companyId;
+  line.branchId = task.branchId;
+  line.fulfillmentId = task.id;
+  line.operationId = operationId;
+  line.productId = productId;
+  line.quantityMilli = quantity;
+  line.dispatchedAt = Instant.now();
+  line.dispatchedBy = TenantContext.current().actorId();
+  em.persist(line);
  }
  private Fulfillment once(UUID op,String material,Supplier<FulfillmentEntity> action){if(op==null)throw new IllegalArgumentException("Operation required");var s=TenantContext.current();String hash=DefaultSalesService.digest(material);em.createNativeQuery("select 1 from pg_advisory_xact_lock(hashtextextended(:key,0))").setParameter("key",s.tenantId()+":"+op).getSingleResult();var rows=em.createNativeQuery("select request_hash,response_json::text,company_id,branch_id,actor_id,source_type,status from idempotency_result where tenant_id=:t and operation_id=:o").setParameter("t",s.tenantId()).setParameter("o",op).getResultList();if(!rows.isEmpty()){Object[] row=(Object[])rows.getFirst();if(!hash.equals(row[0])||!s.companyId().equals(row[2])||!s.branchId().equals(row[3])||!s.actorId().equals(row[4])||!"FULFILLMENT".equals(row[5])||!"ACCEPTED".equals(row[6]))throw new IllegalStateException("Operation belongs to another request, actor, source or status");if(row[1]==null)throw new IllegalStateException("Committed result expired; reconcile original operation");return json.readValue((String)row[1],Fulfillment.class);}var f=action.get();var result=view(f);String body=json.writeValueAsString(result);em.createNativeQuery("insert into idempotency_result(tenant_id,operation_id,company_id,branch_id,request_hash,source_type,source_id,response_json)values(:t,:o,:c,:b,:h,'FULFILLMENT',:id,cast(:body as jsonb))").setParameter("t",s.tenantId()).setParameter("o",op).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setParameter("h",hash).setParameter("id",f.id).setParameter("body",body).executeUpdate();em.createNativeQuery("insert into outbox_event(tenant_id,id,company_id,branch_id,operation_id,event_type,aggregate_type,aggregate_id,payload)values(:t,:event,:c,:b,:o,'FulfillmentChanged.v1','sale_fulfillment',:id,cast(:body as jsonb))").setParameter("t",s.tenantId()).setParameter("event",UUID.randomUUID()).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setParameter("o",op).setParameter("id",f.id).setParameter("body",json.writeValueAsString(Map.of("fulfillmentId",result.id(),"saleId",result.saleId(),"status",result.status()))).executeUpdate();return result;}
  private static void text(String s){if(s==null||s.isBlank()||s.length()>2000)throw new IllegalArgumentException("Bounded reason/proof required");}
