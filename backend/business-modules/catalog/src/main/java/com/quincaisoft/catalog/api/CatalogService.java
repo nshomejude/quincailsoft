@@ -11,5 +11,7 @@ public interface CatalogService {
   public Save(UUID operationId,String sku,String name,String baseUnit,String sellingPriceXaf,int taxBasisPoints,String version,Boolean active,String reason){this(operationId,sku,name,baseUnit,sellingPriceXaf,taxBasisPoints,version,active,reason,null,null,null,null,null,null,null,null,null);}
  }
  @com.quincaisoft.shared.TenantMutation Product create(Save command); @com.quincaisoft.shared.TenantMutation Product update(UUID id,Save command);
+ record Page(List<Product> items,long total,int offset,int limit) {}
+ Page page(String query,int offset,int limit);
  List<Product> list(); Product get(UUID id);
 }
