@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/identity/sessions")
 @PreAuthorize("isAuthenticated()")
-public final class SessionRevocationController {
+public class SessionRevocationController {
     private final IdentityService identity;
 
     public SessionRevocationController(IdentityService identity) {
