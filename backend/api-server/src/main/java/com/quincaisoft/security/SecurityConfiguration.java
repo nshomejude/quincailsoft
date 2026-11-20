@@ -19,7 +19,7 @@ public class SecurityConfiguration {
   OAuth2TokenValidator<Jwt> aud=jwt -> jwt.getAudience().contains(audience)?OAuth2TokenValidatorResult.success():OAuth2TokenValidatorResult.failure(new OAuth2Error("invalid_token","API audience required",null));
   decoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(JwtValidators.createDefaultWithIssuer(issuer),aud));return decoder;
  }
- @Bean SecurityFilterChain security(HttpSecurity http) throws Exception {
+ @Bean SecurityFilterChain security(HttpSecurity http, com.quincaisoft.identity.api.IdentityService identities) throws Exception {
   var scopes=new JwtGrantedAuthoritiesConverter();
   var converter=new JwtAuthenticationConverter();
   converter.setJwtGrantedAuthoritiesConverter(jwt->{var authorities=new ArrayList<>(scopes.convert(jwt));var permissions=jwt.getClaimAsStringList("permissions");if(permissions!=null)permissions.forEach(p->authorities.add(new SimpleGrantedAuthority(p)));return authorities;});
@@ -28,6 +28,7 @@ public class SecurityConfiguration {
    .exceptionHandling(e->e.accessDeniedHandler((request,response,error)->ApiErrors.write(request,response,403,"ACCESS_DENIED","Access denied")))
    .oauth2ResourceServer(o->o.jwt(j->j.jwtAuthenticationConverter(converter)).authenticationEntryPoint((request,response,error)->ApiErrors.write(request,response,401,"UNAUTHENTICATED","Valid bearer token required")))
    .addFilterBefore(new RequestIdentityFilter(),BearerTokenAuthenticationFilter.class)
-   .addFilterAfter(new TenantScopeFilter(),BearerTokenAuthenticationFilter.class).build();
+   .addFilterAfter(new TenantScopeFilter(),BearerTokenAuthenticationFilter.class)
+   .addFilterAfter(new CurrentRoleAuthoritiesFilter(identities),TenantScopeFilter.class).build();
  }
 }
