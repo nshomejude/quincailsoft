@@ -131,6 +131,25 @@ class FullApplicationPostgresTest {
      var response=client.send(HttpRequest.newBuilder(endpoint).header("Authorization","Bearer "+token).header("X-Tenant-ID",UUID.randomUUID().toString()).GET().build(),HttpResponse.BodyHandlers.ofString());assertEquals(200,response.statusCode(),response.body());assertTrue(response.body().contains(tenant.toString()));
      assertEquals(403,client.send(HttpRequest.newBuilder(URI.create("http://127.0.0.1:"+port+"/admin/tenants")).header("Authorization","Bearer "+token).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());
      assertEquals(401,client.send(HttpRequest.newBuilder(endpoint).header("Authorization","Bearer "+token(key,issuer,"wrong-audience",tenant,company,branch,actor)).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());
+     // An unexpired token cannot restore finance or platform authority to a cashier.
+     UUID cashierActor=UUID.randomUUID();
+     try(var owner=DriverManager.getConnection(url,user,"")){
+       sql(owner,"INSERT INTO tenant_memberships(tenant_id,actor_id,company_id,branch_id,role_code) VALUES ('"+tenant+"','"+cashierActor+"','"+company+"','"+branch+"','cashier')");
+     }
+     String cashierSigned=token(key,issuer,"quincai-test",tenant,company,branch,cashierActor,
+         "sales:read sales:post finance:post platform:admin");
+     var effectiveResponse=client.send(HttpRequest.newBuilder(
+         URI.create("http://127.0.0.1:"+port+"/api/v1/access/effective"))
+         .header("Authorization","Bearer "+cashierSigned).GET().build(),
+         HttpResponse.BodyHandlers.ofString());
+     assertEquals(200,effectiveResponse.statusCode(),effectiveResponse.body());
+     var effectiveJson=tools.jackson.databind.json.JsonMapper.builder().build().readTree(effectiveResponse.body());
+     assertEquals("cashier",effectiveJson.required("role").asText());
+     assertEquals(1,effectiveJson.required("authorizationEpoch").asInt());
+     var effectivePermissions=effectiveJson.required("permissions").toString();
+     assertTrue(effectivePermissions.contains("sales:read"),effectivePermissions);
+     assertFalse(effectivePermissions.contains("finance:post"),effectivePermissions);
+     assertFalse(effectivePermissions.contains("platform:admin"),effectivePermissions);
      try(var owner=DriverManager.getConnection(url,user,"")){sql(owner,"DELETE FROM tenant_memberships WHERE actor_id='"+actor+"'");}
      assertEquals(403,client.send(HttpRequest.newBuilder(endpoint).header("Authorization","Bearer "+token).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());
     }
