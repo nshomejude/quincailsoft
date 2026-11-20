@@ -68,8 +68,8 @@ class CurrentRoleAuthoritiesFilterTest {
         var response = new MockHttpServletResponse();
         new CurrentRoleAuthoritiesFilter(service).doFilter(new MockHttpServletRequest(), response,
             (req,res) -> fail("Revoked actor cannot enter the application"));
-        assertEquals(403, response.getStatus());
-        assertTrue(response.getContentAsString().contains("MEMBERSHIP_REVOKED"));
+        assertEquals(401, response.getStatus());
+        assertTrue(response.getContentAsString().contains("SESSION_REVOKED"));
         assertThrows(AccessDeniedException.class, () -> EffectiveRolePolicy.intersect(
             "unrecognized", List.of(new SimpleGrantedAuthority("SCOPE_sales:read"))));
     }
