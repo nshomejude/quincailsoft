@@ -151,7 +151,7 @@ class FullApplicationPostgresTest {
      assertFalse(effectivePermissions.contains("finance:post"),effectivePermissions);
      assertFalse(effectivePermissions.contains("platform:admin"),effectivePermissions);
      try(var owner=DriverManager.getConnection(url,user,"")){sql(owner,"DELETE FROM tenant_memberships WHERE actor_id='"+actor+"'");}
-     assertEquals(403,client.send(HttpRequest.newBuilder(endpoint).header("Authorization","Bearer "+token).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());
+     assertEquals(401,client.send(HttpRequest.newBuilder(endpoint).header("Authorization","Bearer "+token).GET().build(),HttpResponse.BodyHandlers.ofString()).statusCode());
     }
    }finally{sql(admin,"DROP DATABASE "+db+" WITH (FORCE)");sql(admin,"DROP ROLE "+role);}
   }finally{issuerServer.stop(0);}
