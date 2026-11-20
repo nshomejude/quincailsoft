@@ -1,0 +1,36 @@
+name: Refresh migration source inventory (integration branch)
+
+on:
+  push:
+    branches:
+      - integration/java25-single-root-consolidation-2026-11-20
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Rebuild the source inventory with no acceptance overrides
+        run: node scripts/inventory-python-parity.mjs
+      - name: Preserve deterministic current-source inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add docs/migration/python-java-parity.json
+          if git diff --cached --quiet; then
+            echo "Source inventory already current"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(migration): refresh current Java parity inventory (no accepted flags)"
+          git push origin "HEAD:${{ github.ref_name }}"
