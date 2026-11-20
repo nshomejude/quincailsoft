@@ -32,15 +32,22 @@ public final class CurrentRoleAuthoritiesFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
             return;
         }
+        IdentityService.Member member;
         try {
-            var member = identities.current(); // validates active membership and epoch
+            member = identities.current(); // checks live membership and epoch
+        } catch (AccessDeniedException | java.util.NoSuchElementException revoked) {
+            ApiErrors.write(request, response, 401, "SESSION_REVOKED",
+                "Current session is no longer valid; authenticate again");
+            return;
+        }
+        try {
             var intersection = EffectiveRolePolicy.intersect(
                 member.role(), token.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(
                 new JwtAuthenticationToken(token.getToken(), intersection, token.getName()));
-        } catch (AccessDeniedException | java.util.NoSuchElementException denied) {
-            ApiErrors.write(request, response, 403, "MEMBERSHIP_REVOKED",
-                "An active scoped membership and effective role are required");
+        } catch (AccessDeniedException denied) {
+            ApiErrors.write(request, response, 403, "ROLE_NOT_PERMITTED",
+                "Current business role is not authorized");
             return;
         }
         chain.doFilter(request, response);
