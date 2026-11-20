@@ -1,0 +1,31 @@
+name: Refresh migration source and API inventories (integration only)
+
+on:
+  push:
+    branches: [integration/java25-single-root-consolidation-2026-11-20]
+permissions:
+  contents: write
+jobs:
+  refresh:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Regenerate strictly source-derived evidence
+        run: |
+          node scripts/inventory-python-parity.mjs
+          node packages/api-contracts/generate-source-contract.mjs
+          node packages/api-contracts/validate.mjs
+          node --test packages/api-contracts/*.test.mjs
+      - name: Publish updated source inventories (acceptance unchanged)
+        run: |
+          set -euo pipefail
+          git add docs/migration/python-java-parity.json packages/api-contracts/openapi.json packages/api-contracts/endpoint-inventory.json
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(migration): refresh verified source inventories"
+          git push origin "HEAD:${{ github.ref_name }}"
