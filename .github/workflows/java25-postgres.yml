@@ -1,0 +1,64 @@
+name: Java 25 and PostgreSQL 18 verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  java25-postgres18:
+    name: Full Spring Boot reactor (real isolated PostgreSQL)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    services:
+      postgres:
+        image: postgres:18.7-bookworm
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d postgres"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+    env:
+      QUINCAI_PG_TEST_URL: jdbc:postgresql://127.0.0.1:5432/postgres
+      QUINCAI_PG_TEST_USER: postgres
+      QUINCAI_HISTORY_CATALOG_ACCEPTANCE: "false"
+      QUINCAI_HISTORY_OPENING_ACCEPTANCE: "false"
+      QUINCAI_HISTORY_SETTLEMENT_ACCEPTANCE: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Prepare isolated CI PostgreSQL test roles
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client
+          psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 \
+            -c "CREATE ROLE quincai_app NOLOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOBYPASSRLS"
+      - name: Verify the complete Java backend with PostgreSQL enabled
+        run: |
+          cd backend
+          bash ./mvnw -B -ntp verify
+      - name: Reject silent PostgreSQL test skips and missing reports
+        if: success()
+        run: node scripts/check-surefire-results.mjs backend
+      - name: Retain JUnit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quincaisoft-java25-postgres18-junit
+          path: backend/**/target/surefire-reports/TEST-*.xml
+          retention-days: 14
+          if-no-files-found: warn
