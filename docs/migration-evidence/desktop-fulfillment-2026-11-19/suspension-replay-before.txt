@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: com.quincaisoft.security.FullApplicationPostgresTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 37.28 s <<< FAILURE! -- in com.quincaisoft.security.FullApplicationPostgresTest
+com.quincaisoft.security.FullApplicationPostgresTest.applicationStartsAndAuthenticatesAgainstRealScopedDatabase -- Time elapsed: 37.22 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: fulfillments/bb7dc6c2-f994-4aaf-9e46-ebcd58c4bdf6/complete: {"code":"ACCESS_DENIED","message":"This operation is not permitted in your current scope","correlationId":"5acde80f-5c7f-41cc-b4f4-a61323bf6204","fields":[],"retryable":false,"currentVersion":null,"helpKey":"access_denied"} ==> expected: <200> but was: <403>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:158)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:139)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:201)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:152)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:590)
+	at com.quincaisoft.security.FulfillmentHttpWorkflow.command(FulfillmentHttpWorkflow.java:156)
+	at com.quincaisoft.security.FulfillmentHttpWorkflow.verifySuspension(FulfillmentHttpWorkflow.java:94)
+	at com.quincaisoft.security.FullApplicationPostgresTest.applicationStartsAndAuthenticatesAgainstRealScopedDatabase(FullApplicationPostgresTest.java:124)

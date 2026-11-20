@@ -1,0 +1,187 @@
+package com.quincaisoft.catalog.application;
+import com.quincaisoft.catalog.api.CatalogMasterService;
+import com.quincaisoft.catalog.infrastructure.*;
+import com.quincaisoft.shared.*;
+import jakarta.persistence.*;import org.springframework.stereotype.Service;import tools.jackson.databind.json.JsonMapper;
+import java.util.*;import java.nio.charset.StandardCharsets;import java.security.*;
+
+@Service
+public class DefaultCatalogMasterService implements CatalogMasterService {
+ private final EntityManager em;private final ScopedTransactions tx;private final JsonMapper json=JsonMapper.builder().build();
+ public DefaultCatalogMasterService(EntityManager em,ScopedTransactions tx){this.em=em;this.tx=tx;}
+ public List<Category> categories(){return tx.execute(()->em.createQuery("select c from CatalogCategory c order by c.code",CatalogCategory.class).setMaxResults(1000).getResultList().stream().map(this::view).toList());}
+ public List<Unit> units(){return tx.execute(()->em.createQuery("select u from CatalogUnit u order by u.code",CatalogUnit.class).setMaxResults(1000).getResultList().stream().map(this::view).toList());}
+ public Category category(UUID id){return tx.execute(()->view(findCategory(id,LockModeType.NONE)));}
+ public Unit unit(UUID id){return tx.execute(()->view(findUnit(id,LockModeType.NONE)));}
+ public Category saveCategory(UUID id,CategorySave c){
+  if(c==null)throw new IllegalArgumentException("Category required");validate(c.operationId(),c.code(),c.name(),c.reason());text(c.brand(),120,false);text(c.description(),4000,false);
+  return tx.execute(()->{
+   var s=TenantContext.current();String hash=digest("CATEGORY|"+id+"|"+s.actorId()+"|"+json.writeValueAsString(c));var replay=replay(c.operationId(),hash,"CATEGORY",Category.class);if(replay!=null)return replay;
+   // Serialize parent changes so two concurrent moves cannot introduce a cycle.
+   em.createNativeQuery("select pg_advisory_xact_lock(hashtextextended(:k,0))").setParameter("k","category-tree:"+s.tenantId()+":"+s.companyId()).getSingleResult();
+   CatalogCategory e;
+   if(id==null){e=new CatalogCategory();e.tenantId=s.tenantId();e.companyId=s.companyId();e.id=UUID.randomUUID();newVersion(c.version());}
+   else {e=findCategory(id,LockModeType.PESSIMISTIC_WRITE);if(e.version!=number(c.version(),false))throw new RevisionConflict("Category changed");}
+   UUID cursor=c.parentId();Set<UUID> visited=new HashSet<>();
+   while(cursor!=null){if(cursor.equals(e.id)||!visited.add(cursor)||visited.size()>100)throw new IllegalArgumentException("Category parent cycle or excessive depth");var parent=findCategory(cursor,LockModeType.PESSIMISTIC_READ);if(!parent.active)throw new IllegalArgumentException("Parent category inactive");cursor=parent.parentId;}
+   e.code=c.code();e.name=c.name();e.parentId=c.parentId();e.brand=text(c.brand(),120,false);e.description=text(c.description(),4000,false);e.active=c.active();
+   if(id==null)em.persist(e);em.flush();var result=view(e);receipt(c.operationId(),e.id,"CATEGORY",hash,result,c.reason());return result;
+  });
+ }
+ public Unit saveUnit(UUID id,UnitSave c){
+  if(c==null)throw new IllegalArgumentException("Unit required");validate(c.operationId(),c.code(),c.name(),c.reason());text(c.baseUnit(),80,true);long numerator=number(c.factorNumerator(),true),denominator=number(c.factorDenominator(),true);
+  if(c.precision()<0||c.precision()>6)throw new IllegalArgumentException("Unit precision outside bounds");
+  return tx.execute(()->{
+   var s=TenantContext.current();String hash=digest("UNIT|"+id+"|"+s.actorId()+"|"+json.writeValueAsString(c));var replay=replay(c.operationId(),hash,"UNIT",Unit.class);if(replay!=null)return replay;
+   if(c.baseUnit().equals(c.code())){if(numerator!=1||denominator!=1)throw new IllegalArgumentException("Base unit factor must be one");}
+   else {var bases=em.createQuery("select u from CatalogUnit u where u.code=:code and u.active=true",CatalogUnit.class).setParameter("code",c.baseUnit()).setLockMode(LockModeType.PESSIMISTIC_READ).getResultList();if(bases.isEmpty()||!bases.getFirst().baseUnit.equals(bases.getFirst().code)||bases.getFirst().factorNumerator!=1||bases.getFirst().factorDenominator!=1)throw new IllegalArgumentException("Active base unit required");}
+   CatalogUnit e;
+   if(id==null){e=new CatalogUnit();e.tenantId=s.tenantId();e.companyId=s.companyId();e.id=UUID.randomUUID();e.code=c.code();e.baseUnit=c.baseUnit();e.factorNumerator=numerator;e.factorDenominator=denominator;e.precision=c.precision();newVersion(c.version());}
+   else {e=findUnit(id,LockModeType.PESSIMISTIC_WRITE);if(e.version!=number(c.version(),false))throw new RevisionConflict("Unit changed");if(!e.code.equals(c.code())||!e.baseUnit.equals(c.baseUnit())||e.factorNumerator!=numerator||e.factorDenominator!=denominator||e.precision!=c.precision())throw new IllegalArgumentException("Unit identity and scale are immutable; create a versioned unit");}
+   e.name=c.name();e.active=c.active();if(id==null)em.persist(e);em.flush();var result=view(e);receipt(c.operationId(),e.id,"UNIT",hash,result,c.reason());return result;
+  });
+ }
+ @Override
+ public Manufacturer createManufacturer(ManufacturerSave command) {
+  if (command == null) throw new IllegalArgumentException("Manufacturer required");
+  validate(command.operationId(), command.code(), command.name(), command.reason());
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   String hash = identityHash("MANUFACTURER", command);
+   var previous = replay(command.operationId(), hash, "MANUFACTURER", Manufacturer.class);
+   if (previous != null) return previous;
+   var entity = new CatalogManufacturer();
+   entity.tenantId = scope.tenantId();
+   entity.companyId = scope.companyId();
+   entity.id = UUID.randomUUID();
+   entity.code = command.code();
+   entity.name = command.name();
+   em.persist(entity);
+   em.flush();
+   var result = new Manufacturer(entity.id, entity.code, entity.name);
+   receipt(command.operationId(), entity.id, "MANUFACTURER", hash, result, command.reason());
+   return result;
+  });
+ }
+
+ @Override
+ public Family createFamily(FamilySave command) {
+  if (command == null || command.operationId() == null || command.manufacturerId() == null)
+   throw new IllegalArgumentException("Operation and manufacturer required");
+  text(command.productType(), 80, true);
+  text(command.modelNumber(), 80, true);
+  text(command.reason(), 2000, true);
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   String hash = identityHash("PRODUCT_FAMILY", command);
+   var previous = replay(command.operationId(), hash, "PRODUCT_FAMILY", Family.class);
+   if (previous != null) return previous;
+   var key = new CatalogManufacturer.Key(scope.tenantId(), scope.companyId(), command.manufacturerId());
+   if (em.find(CatalogManufacturer.class, key) == null) throw new NoSuchElementException("Manufacturer not found");
+   var entity = new CatalogProductFamily();
+   entity.tenantId = scope.tenantId();
+   entity.companyId = scope.companyId();
+   entity.id = UUID.randomUUID();
+   entity.manufacturerId = command.manufacturerId();
+   entity.productType = command.productType();
+   entity.modelNumber = command.modelNumber();
+   em.persist(entity);
+   em.flush();
+   var result = new Family(entity.id, entity.manufacturerId, entity.productType, entity.modelNumber);
+   receipt(command.operationId(), entity.id, "PRODUCT_FAMILY", hash, result, command.reason());
+   return result;
+  });
+ }
+
+ @Override
+ public Variant attachVariant(VariantSave command) {
+  if (command == null || command.operationId() == null || command.productId() == null || command.familyId() == null)
+   throw new IllegalArgumentException("Operation, product and family required");
+  text(command.colour(), 80, true);
+  text(command.size(), 80, true);
+  text(command.reason(), 2000, true);
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   var hash = identityHash("CATALOG_VARIANT", command);
+   var previous = replay(command.operationId(), hash, "CatalogVariant", Variant.class);
+   if (previous != null) return previous;
+   var product = em.find(CatalogProduct.class, new CatalogProduct.Key(scope.tenantId(), scope.companyId(), command.productId()));
+   var family = em.find(CatalogProductFamily.class, new CatalogProductFamily.Key(scope.tenantId(), scope.companyId(), command.familyId()));
+   if (product == null || family == null) throw new NoSuchElementException("Product or family not found");
+   var entity = new CatalogVariantIdentity();
+   entity.tenantId = scope.tenantId();
+   entity.companyId = scope.companyId();
+   entity.productId = command.productId();
+   entity.familyId = command.familyId();
+   entity.colour = command.colour();
+   entity.size = command.size();
+   em.persist(entity);
+   em.flush();
+   var result = new Variant(entity.productId, entity.familyId, entity.colour, entity.size);
+   receipt(command.operationId(), entity.productId, "CatalogVariant", hash, result, command.reason());
+   return result;
+  });
+ }
+
+ @Override
+ public Offer createOffer(OfferSave command) {
+  if (command == null || command.operationId() == null || command.productId() == null || command.supplierId() == null)
+   throw new IllegalArgumentException("Operation, product and supplier required");
+  text(command.supplierSku(), 120, true);
+  text(command.reason(), 2000, true);
+  long cost = number(command.quotedCostXaf(), false);
+  long minimum = number(command.minimumOrderMilli(), true);
+  if (command.leadTimeDays() < 0) throw new IllegalArgumentException("Lead time must be nonnegative");
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   var hash = identityHash("SUPPLIER_OFFER", command);
+   var previous = replay(command.operationId(), hash, "CatalogSupplierOffer", Offer.class);
+   if (previous != null) return previous;
+   var variant = em.find(CatalogVariantIdentity.class, new CatalogVariantIdentity.Key(scope.tenantId(), scope.companyId(), command.productId()));
+   if (variant == null) throw new NoSuchElementException("Variant not found");
+   var entity = new CatalogSupplierOffer();
+   entity.tenantId = scope.tenantId();
+   entity.companyId = scope.companyId();
+   entity.productId = command.productId();
+   entity.supplierId = command.supplierId();
+   entity.supplierSku = command.supplierSku();
+   entity.quotedCostXaf = cost;
+   entity.minimumOrderMilli = minimum;
+   entity.leadTimeDays = command.leadTimeDays();
+   entity.preferred = command.preferred();
+   em.persist(entity);
+   em.flush();
+   var result = new Offer(entity.productId, entity.supplierId, entity.supplierSku, Long.toString(cost),
+       entity.leadTimeDays, Long.toString(minimum), entity.preferred);
+   receipt(command.operationId(), entity.productId, "CatalogSupplierOffer", hash, result, command.reason());
+   return result;
+  });
+ }
+
+ private String identityHash(String kind, Object command) {
+  var scope = TenantContext.current();
+  return digest(kind + "|" + scope.companyId() + "|" + scope.branchId() + "|" + scope.actorId()
+      + "|" + json.writeValueAsString(command));
+ }
+
+ private CatalogCategory findCategory(UUID id,LockModeType lock){var s=TenantContext.current();var e=em.find(CatalogCategory.class,new CatalogCategory.Key(s.tenantId(),s.companyId(),id),lock);if(e==null)throw new NoSuchElementException("Category not found");return e;}
+ private CatalogUnit findUnit(UUID id,LockModeType lock){var s=TenantContext.current();var e=em.find(CatalogUnit.class,new CatalogUnit.Key(s.tenantId(),s.companyId(),id),lock);if(e==null)throw new NoSuchElementException("Unit not found");return e;}
+ private Category view(CatalogCategory e){return new Category(e.id,e.code,e.name,e.parentId,e.brand,e.description,e.active,Long.toString(e.version));}
+ private Unit view(CatalogUnit e){return new Unit(e.id,e.code,e.name,e.baseUnit,Long.toString(e.factorNumerator),Long.toString(e.factorDenominator),e.precision,e.active,Long.toString(e.version));}
+ private <T>T replay(UUID operation,String hash,String kind,Class<T> type){
+  var s=TenantContext.current();em.createNativeQuery("select pg_advisory_xact_lock(hashtextextended(:k,0))").setParameter("k",s.tenantId()+":"+operation).getSingleResult();
+  var rows=em.createNativeQuery("select request_hash,response_json::text,company_id,branch_id,actor_id,source_type,status from idempotency_result where tenant_id=:t and operation_id=:o").setParameter("t",s.tenantId()).setParameter("o",operation).getResultList();
+  if(rows.isEmpty())return null;Object[] r=(Object[])rows.getFirst();if(!hash.equals(r[0])||r[1]==null||!s.companyId().equals(r[2])||!s.branchId().equals(r[3])||!s.actorId().equals(r[4])||!kind.equals(r[5])||!"ACCEPTED".equals(r[6]))throw new IllegalStateException("Operation already used");return json.readValue((String)r[1],type);
+ }
+ private void receipt(UUID operation,UUID id,String kind,String hash,Object result,String reason){
+  var s=TenantContext.current();em.createNativeQuery("insert into idempotency_result(tenant_id,company_id,branch_id,operation_id,request_hash,source_type,source_id,response_json) values(:t,:c,:b,:o,:h,:kind,:id,cast(:r as jsonb))")
+   .setParameter("t",s.tenantId()).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setParameter("o",operation).setParameter("h",hash).setParameter("kind",kind).setParameter("id",id).setParameter("r",json.writeValueAsString(result)).executeUpdate();
+  em.createNativeQuery("insert into outbox_event(tenant_id,id,company_id,branch_id,operation_id,event_type,aggregate_type,aggregate_id,payload) values(:t,:event,:c,:b,:o,:kind,'catalog_master',:id,cast(:r as jsonb))")
+   .setParameter("t",s.tenantId()).setParameter("event",UUID.randomUUID()).setParameter("c",s.companyId()).setParameter("b",s.branchId()).setParameter("o",operation).setParameter("kind",kind+"Changed.v1").setParameter("id",id).setParameter("r",json.writeValueAsString(Map.of("id",id,"actorId",s.actorId(),"reason",reason))).executeUpdate();
+ }
+ private static void validate(UUID op,String code,String name,String reason){if(op==null)throw new IllegalArgumentException("Operation required");text(code,80,true);if(!code.matches("[A-Za-z0-9._/-]+"))throw new IllegalArgumentException("Invalid code");text(name,240,true);text(reason,2000,true);}
+ private static String text(String v,int max,boolean required){if(v==null)v="";if(v.length()>max||required&&(v.isBlank()||!v.equals(v.trim()))||v.indexOf('\0')>=0)throw new IllegalArgumentException("Invalid text");return v;}
+ private static long number(String v,boolean positive){if(v==null||!v.matches(positive?"[1-9][0-9]*":"0|[1-9][0-9]*"))throw new IllegalArgumentException("Integral value required");return Long.parseLong(v);}
+ private static void newVersion(String v){if(v!=null&&!v.equals("0"))throw new RevisionConflict("New record version must be zero");}
+ private static String digest(String v){try{return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(v.getBytes(StandardCharsets.UTF_8)));}catch(NoSuchAlgorithmException e){throw new IllegalStateException(e);}}
+}

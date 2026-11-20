@@ -1,0 +1,11 @@
+--- /tmp/quincai-restore.dFHuYF3L/expected.tsv	2026-11-18 21:01:28.974584223 +0100
++++ /tmp/quincai-recovery-test.KXEDhCVE/bad-reconciliation/restored-fingerprints.tsv	2026-11-18 21:01:32.029906894 +0100
+@@ -115,7 +115,7 @@
+ public.supplier_invoice	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+ public.sync_device	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+ public.sync_recovery_evidence	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+-public.tenant	2	774cb993adf75687bfbb721a3ba037f9952240980f27aee8eddf62cd1693d3af
++public.tenant	1	774cb993adf75687bfbb721a3ba037f9952240980f27aee8eddf62cd1693d3af
+ public.tenant_change_clock	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+ public.tenant_memberships	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+ public.tenant_subscription	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855

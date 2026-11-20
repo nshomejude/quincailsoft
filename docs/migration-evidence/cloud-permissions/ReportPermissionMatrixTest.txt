@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.quincaisoft.reporting.ReportPermissionMatrixTest
+-------------------------------------------------------------------------------
+Tests run: 476, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.958 s -- in com.quincaisoft.reporting.ReportPermissionMatrixTest

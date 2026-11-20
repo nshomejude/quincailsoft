@@ -1,0 +1,1800 @@
+{
+  "baseCommit": "6ec0fef643b1e53ba64c80f157783de17a084b34",
+  "date": "2026-11-18",
+  "java": "25.0.5",
+  "springBoot": "4.0.9",
+  "postgresql": "18.7",
+  "maven": "3.9.11",
+  "reactorModules": 30,
+  "command": "mvn -B -DargLine=-javaagent:<resolved mockito-core-5.20.0.jar> verify",
+  "environment": {
+    "QUINCAI_PG_TEST_URL": "jdbc:postgresql://127.0.0.1:55439/postgres",
+    "QUINCAI_PG_TEST_USER": "agent"
+  },
+  "result": "PASS",
+  "totals": {
+    "tests": 1129,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "name": "com.quincaisoft.commerce.PostgresCommerceIntegrationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.customeraccounts.MasterDataPostgresTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.documents.DocumentPermissionMatrixTest",
+      "tests": 510,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.documents.DocumentSettingsHttpTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.documents.PostgresDocumentSettingsTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.expenses.ExpensePeriodPostgresTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.finance.FinanceRulesTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.integrations.MtnAdapterTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.integrations.ProviderPostgresTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.inventory.PostgresInventoryWorkflowTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.inventory.StockBalanceTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.ModuleBoundaryTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.operations.CsvInputBoundaryTest",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.platformcontrol.application.OidcOnboardingIdentityVerifierTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.platformcontrol.PostgresOnboardingConcurrencyTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.platformcontrol.PostgresOnboardingConfigurationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.platformcontrol.PostgresPlatformIntegrationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.purchasing.PostgresPurchasingIntegrationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.purchasing.PurchaseRulesTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.reporting.ReportingPostgresTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.reporting.ReportPermissionMatrixTest",
+      "tests": 476,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.reporting.ReportRulesTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.returns.PostgresReturnIntegrationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.sales.PostgresSaleIntegrationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.sales.SaleRulesTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.security.DeploymentSafetyPostgresTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.security.FullApplicationPostgresTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.security.SecurityBoundaryTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.shared.ValueObjectsTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.subscriptions.PostgresSubscriptionBillingTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.subscriptions.SubscriptionRestrictionPolicyTest",
+      "tests": 55,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.sync.DeviceProofTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.sync.PostgresSyncTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.tenders.SettlementPostgresTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.tenders.TenderPostgresTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.tenders.TenderRulesTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.workers.IdentityWorkerPostgresTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.quincaisoft.workforce.WorkforcePostgresTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "sourceDigest": "3908854408cd85317a40a387e00baad278b061bfedad576036038705dbdd6af8",
+  "sources": [
+    {
+      "path": "backend/api-server/pom.xml",
+      "sha256": "3811d243cbf1a56bded25bad5cb1004d348a2f9e84ee8187252d0db38175d6bf"
+    },
+    {
+      "path": "backend/api-server/src/main/java/com/quincaisoft/QuincaiSoftApplication.java",
+      "sha256": "a98645421e717bde1b86886ab4e90f0437a0b158bc685753f1673e2bba8657b6"
+    },
+    {
+      "path": "backend/api-server/src/main/java/com/quincaisoft/security/ApiErrors.java",
+      "sha256": "b2da16c05344daf43b4c3889ab65a5013b2728cd717ca1a8a3f3a4f10e19fc12"
+    },
+    {
+      "path": "backend/api-server/src/main/java/com/quincaisoft/security/ApiExceptionHandler.java",
+      "sha256": "5edd6db37dba3993f9c86461db7cc8e9775170c8db8c02c8e6f4eaa0aa737415"
+    },
+    {
+      "path": "backend/api-server/src/main/java/com/quincaisoft/security/DatabaseSafetyVerifier.java",
+      "sha256": "669bbacf369dee30f7cdc2105d1f74e4207eaa561c1af7b934ea040a734ebbe0"
+    },
+    {
+      "path": "backend/api-server/src/main/java/com/quincaisoft/security/DeploymentSafetyVerifier.java",
+      "sha256": "bbc205d06feb2ef7e5975ef8b8d66b67609fc1ca1b7d3506cbad79eaf910b561"
+    },
+    {
+      "path": "backend/api-server/src/main/java/com/quincaisoft/security/PostgresScopedTransactions.java",
+      "sha256": "dc45f22f6bd536621587845001e8ae02d12e86a482bedff4b43471e162aeb9b3"
+    },
+    {
+      "path": "backend/api-server/src/main/java/com/quincaisoft/security/RequestIdentityFilter.java",
+      "sha256": "ea47d246606c9c8430f7de6821206b6a2f34e7840e618514476c221857329105"
+    },
+    {
+      "path": "backend/api-server/src/main/java/com/quincaisoft/security/SecurityConfiguration.java",
+      "sha256": "7478e415fb6383ff530fe96feec2d761c72d8031221436391e27bb4870d2895c"
+    },
+    {
+      "path": "backend/api-server/src/main/java/com/quincaisoft/security/SessionController.java",
+      "sha256": "2f09014482e6ea3163b171fbeba369c0b0372215579e6e64c50e956177e57858"
+    },
+    {
+      "path": "backend/api-server/src/main/java/com/quincaisoft/security/TenantScopeFilter.java",
+      "sha256": "297045e4794e5bc5d13adb20be011377f7390d0df633e5fc404c0898aba9fa5f"
+    },
+    {
+      "path": "backend/api-server/src/test/java/com/quincaisoft/security/DeploymentSafetyPostgresTest.java",
+      "sha256": "4fecaa7c76701e559d277cd49029ca52d4036f836081fdc51e517d8194e6520a"
+    },
+    {
+      "path": "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java",
+      "sha256": "59a4414789c4b9f9f1a51b11195635281d7d5debae15dcd135383bacc7560af6"
+    },
+    {
+      "path": "backend/api-server/src/test/java/com/quincaisoft/security/SecurityBoundaryTest.java",
+      "sha256": "369e53bb1f2cde675bfbc5ee56d6328f5d2a75cc483b9e0f0abe6cae13632c1f"
+    },
+    {
+      "path": "backend/architecture-tests/pom.xml",
+      "sha256": "79ed25bcaa5014f942e9eac348aafeac89133950df3fb3d3085a3376b2c1758f"
+    },
+    {
+      "path": "backend/architecture-tests/src/test/java/com/quincaisoft/ModuleBoundaryTest.java",
+      "sha256": "c848c8cd0a572c9d59c9b3e5a934bcd5fc3197f61ae7ccc3caf5c5ca37f9a811"
+    },
+    {
+      "path": "backend/business-modules/audit/pom.xml",
+      "sha256": "7575270d4a9a42275564a2699588967eae2e32725e7d604ba4e7881745daa25c"
+    },
+    {
+      "path": "backend/business-modules/audit/src/main/java/com/quincaisoft/audit/api/AuditService.java",
+      "sha256": "2632079640f8fd348c8755987eb0f8951d1a0e6d3d5b4cecf5d7c01b33846b31"
+    },
+    {
+      "path": "backend/business-modules/audit/src/main/java/com/quincaisoft/audit/api/package-info.java",
+      "sha256": "b5d8739ea51c98c3383f9ad14f0b3478f0d4ecba0f1539e35bb2cf60e8912fe6"
+    },
+    {
+      "path": "backend/business-modules/audit/src/main/java/com/quincaisoft/audit/application/DefaultAuditService.java",
+      "sha256": "4ec4d7ff13460cf1631442dcef705de42b10a63d8b5b450d73a8ee2c4dbf3747"
+    },
+    {
+      "path": "backend/business-modules/audit/src/main/java/com/quincaisoft/audit/infrastructure/AuditEvent.java",
+      "sha256": "bc5c8516db9b61e9baae354672aff29c536b15aae9a9acb27b47919dad267f25"
+    },
+    {
+      "path": "backend/business-modules/audit/src/main/java/com/quincaisoft/audit/web/AuditController.java",
+      "sha256": "40a1e510ac0088adfb07105623fb8cd5956a047aa01f144e360c5c9f96937e43"
+    },
+    {
+      "path": "backend/business-modules/branch/pom.xml",
+      "sha256": "7954abfb557bfc6b3d54b0fcd5a65e9d2af4c3e6af3898544976539c7123728d"
+    },
+    {
+      "path": "backend/business-modules/branch/src/main/java/com/quincaisoft/branch/api/BranchService.java",
+      "sha256": "35b69b52b599fd8e2cddfed20dac41f96b808bfd892d830380ff49e312482f23"
+    },
+    {
+      "path": "backend/business-modules/branch/src/main/java/com/quincaisoft/branch/api/package-info.java",
+      "sha256": "236c49010d15b79f5571729198b0d2f71789433bdd65b27947640afffad37911"
+    },
+    {
+      "path": "backend/business-modules/branch/src/main/java/com/quincaisoft/branch/application/DefaultBranchService.java",
+      "sha256": "7e067d4beb29dc46837866efefd963d1fdd299bf5e2e54029075b43d657bffbd"
+    },
+    {
+      "path": "backend/business-modules/branch/src/main/java/com/quincaisoft/branch/infrastructure/BranchEntity.java",
+      "sha256": "e984c699fb52674f4280e351cdeb34c0162eda27668c6df72e287bfccbc563ea"
+    },
+    {
+      "path": "backend/business-modules/branch/src/main/java/com/quincaisoft/branch/web/BranchController.java",
+      "sha256": "a2f2ca778fd04a3197f099ba5bdf47c558dc814191061a1f16499264c6a786d6"
+    },
+    {
+      "path": "backend/business-modules/catalog/pom.xml",
+      "sha256": "09105deea815633faf9f0135e6099bb0e4ac98042ff27626387a824151f3d514"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/api/CatalogMasterService.java",
+      "sha256": "98552dbbf3bf492ca46791f70a9cbd3b6ee92c537129edd5dbd95e80499dc5ef"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/api/CatalogService.java",
+      "sha256": "afeeea11be90182f0ef32467b20cd460a8bc8a438b5cbc4bf23d05830bbed9d9"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/api/package-info.java",
+      "sha256": "0f86d96ea98f4fd9b72c4ed01ea492a7fb533e26c8b0b24d5e41e2f86497400f"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/application/DefaultCatalogMasterService.java",
+      "sha256": "482f84c7cf71a30e3ffce1763022680c3b4ab5dda304e7fecb9414b5d4047c2c"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/application/DefaultCatalogService.java",
+      "sha256": "67a50b1e508a24b66d386e1a966f93831974b9539db65689a0cb9df9ae1661d3"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogCategory.java",
+      "sha256": "e60da8914cef1bbc156fe09e23a43fc6f5e8983462dab4b89f512ba02e134a1c"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogManufacturer.java",
+      "sha256": "9bce9ed01edcdaee0b83a50b5c8d72c1e87b735ed51d99980afda33bacd0e209"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProduct.java",
+      "sha256": "02f40a205fa9902fb9e41770b38b3ab559b18a901d4952e9252264e27176710f"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogProductFamily.java",
+      "sha256": "8f07056a75f023685f546616b85f53a3322c3a0bac462f904de5433125c7aa1b"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogSupplierOffer.java",
+      "sha256": "4bf6b7cb16335816d8cae27d6e186e6bd5831a0ab6cd79e3f500ee6b5c69b526"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogUnit.java",
+      "sha256": "47140e59af2ad10c01a1e1155533c0ef6576990af831d3e7c63f6b84f4e83a20"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogVariantIdentity.java",
+      "sha256": "9a8ee97309eda5930bb433729bc6fe406ed4f05390ee4aeaf41484d654bb917a"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogController.java",
+      "sha256": "556cd6286b83a2c0700e25f1c8e6155762a87226b674173123f1efd1568b9c00"
+    },
+    {
+      "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
+      "sha256": "23f531ac779dd1347ea9f61f92ed1d94242636b78160f6853a2c382055461a1f"
+    },
+    {
+      "path": "backend/business-modules/commerce/pom.xml",
+      "sha256": "661bc10f640335a41838277b942a07271b7149f32f1af32696966467a85d044a"
+    },
+    {
+      "path": "backend/business-modules/commerce/src/main/java/com/quincaisoft/commerce/api/CommerceService.java",
+      "sha256": "0cdb266ac3770df68127bbd16b2029ed02f22dbad4aefabd5692605d7ca9826e"
+    },
+    {
+      "path": "backend/business-modules/commerce/src/main/java/com/quincaisoft/commerce/api/package-info.java",
+      "sha256": "b544a0b995149442a20d8d8edae76385f177191f424f08f9dfee5bd888dea3d5"
+    },
+    {
+      "path": "backend/business-modules/commerce/src/main/java/com/quincaisoft/commerce/application/DefaultCommerceService.java",
+      "sha256": "33b6544d627b609405d6990de67113ff45f4df1ff190d8a58a59613727c22a96"
+    },
+    {
+      "path": "backend/business-modules/commerce/src/main/java/com/quincaisoft/commerce/infrastructure/Listing.java",
+      "sha256": "86e26ef64dce1adf80db3a84cec879955786db60b9bd1c9c7d38e9a402543eb5"
+    },
+    {
+      "path": "backend/business-modules/commerce/src/main/java/com/quincaisoft/commerce/infrastructure/Store.java",
+      "sha256": "4c03e2bdb9d22fae61bb87f93c23be7e344b54889478506795eb6bc129609b59"
+    },
+    {
+      "path": "backend/business-modules/commerce/src/main/java/com/quincaisoft/commerce/web/CommerceController.java",
+      "sha256": "be4a9a1cb7ba080b6cdb334074ce536a0978a2e0ab43038a6541b38fde74f0de"
+    },
+    {
+      "path": "backend/business-modules/commerce/src/main/java/com/quincaisoft/commerce/web/PublicStoreController.java",
+      "sha256": "271ffe6bbf00c9bbf3a06e9fa32d10adedf4b36483d640124ce03a526f08ee3d"
+    },
+    {
+      "path": "backend/business-modules/commerce/src/test/java/com/quincaisoft/commerce/PostgresCommerceIntegrationTest.java",
+      "sha256": "027bedcc0de21c24988ba40b947b49fbd52cc90c3d47ed731c787d1f6db3cb59"
+    },
+    {
+      "path": "backend/business-modules/company/pom.xml",
+      "sha256": "5fa178242d4c781513e857486ce68c59562eb8a39a0978fbfa88c88325d1fc8d"
+    },
+    {
+      "path": "backend/business-modules/company/src/main/java/com/quincaisoft/company/api/CompanyService.java",
+      "sha256": "8e80265222d56bb30593737293aadf7d9fe8e0829d66a219550e605761a074b7"
+    },
+    {
+      "path": "backend/business-modules/company/src/main/java/com/quincaisoft/company/api/package-info.java",
+      "sha256": "4d46fd35b23d962bf16fb54c34d43271be670173cb879bc67f4427b897a63d71"
+    },
+    {
+      "path": "backend/business-modules/company/src/main/java/com/quincaisoft/company/application/DefaultCompanyService.java",
+      "sha256": "4f930de738742b992873fdac6291c025e6b1a33b51752d4286a818a26e81ea0b"
+    },
+    {
+      "path": "backend/business-modules/company/src/main/java/com/quincaisoft/company/infrastructure/CompanyEntity.java",
+      "sha256": "e80498bf77af97c67f04f0034b7f1bdad7076e459158c33b230d87e87fbcc01f"
+    },
+    {
+      "path": "backend/business-modules/company/src/main/java/com/quincaisoft/company/web/CompanyController.java",
+      "sha256": "7eebde8e3d498edbbcd77dc1d33b55b10dff6a0cbd40c9546c42b66c1a5364d0"
+    },
+    {
+      "path": "backend/business-modules/customer-accounts/pom.xml",
+      "sha256": "e709095d1e35b469e59fa4aea7bdf4f9089d02a265cf588b432b6961cc905238"
+    },
+    {
+      "path": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/api/CustomerDirectory.java",
+      "sha256": "08755996c41e29cf0d2c076dcd347c6992156733eac92e77131f1bc94d4cdc0d"
+    },
+    {
+      "path": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/api/CustomerService.java",
+      "sha256": "c6986bb7ce0afc0bd42c7f7179ec71722772367f58a1a42ed7f12bd0c6b4e74b"
+    },
+    {
+      "path": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/api/package-info.java",
+      "sha256": "a15bd8f6f8188fab7651378b2a0c04b46d80fad2b458f2b3bbb90dd5ab4fc5f2"
+    },
+    {
+      "path": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/application/DefaultCustomerDirectory.java",
+      "sha256": "347c9bc11553db95a1c5c22c2c6bed1c306bc3c3c6748116501b30c9d8bc636c"
+    },
+    {
+      "path": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/application/DefaultCustomerService.java",
+      "sha256": "2186ed796cf63a73276da0a4d19ab9aab64e762d86114380a64444e397e42421"
+    },
+    {
+      "path": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/infrastructure/CustomerEntity.java",
+      "sha256": "64f358606247f53faa93f77dbdfb15ae0a6deb09eebee95b48136b37bcd138cb"
+    },
+    {
+      "path": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/web/CustomerController.java",
+      "sha256": "ecb0d44ee312f5f9344bcf45f19a7053b9a46383cec32e6530cab179cce02466"
+    },
+    {
+      "path": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/web/CustomerDirectoryController.java",
+      "sha256": "dd46fe1ab157da0a5ad81ef115232ebd0b92f33698c81056ac27d50faecf4275"
+    },
+    {
+      "path": "backend/business-modules/customer-accounts/src/test/java/com/quincaisoft/customeraccounts/MasterDataPostgresTest.java",
+      "sha256": "3c3317080dd705a186e8188ae0f2e94a24c07a73275c6f0e8cfe8686a2ee7c4a"
+    },
+    {
+      "path": "backend/business-modules/documents/pom.xml",
+      "sha256": "512c2ad24a71a85960ac6e1d96e00c927764749630c20e8520279a795908940b"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/api/DocumentService.java",
+      "sha256": "b3d576dc00daf04568e1cda65b2f96ff16a3f4b739cab48da35de1f419b680a6"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/api/DocumentWorkspace.java",
+      "sha256": "1d1d848085f38f0e5acca83b15233a9aade7a96323e8b216570d4377badcae79"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/api/package-info.java",
+      "sha256": "c2d5939d3e8747ba354e9a384f2dc077923fe9b335078b3264bc4e737a6cda1e"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/application/DefaultDocumentService.java",
+      "sha256": "0fc8d7cf130e15b850051a51de38c41bd6e5c1a3fa9e73deda95895f9d6e2968"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/application/DocumentHtml.java",
+      "sha256": "3d5fb092b5b5ee905d10a07a9a05b049e1918b477017496606014c35a618ef85"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/application/DocumentSourceReader.java",
+      "sha256": "b0bb229de12a8e7f00edf31355dd1f46eaae556d8f23e50a4283aeac2a3a3130"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/application/DocumentWorkspaceService.java",
+      "sha256": "b1f32d7b9fcef8e579910049bdad6ef6d5a9e23740f926c2088064f5c444adf2"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/infrastructure/CapturedDocument.java",
+      "sha256": "eabc1cc97589e659ac815f53bdb7e3b699dc097ef533183ba8122d0ee2ca31b1"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/infrastructure/DocumentPrintAttempt.java",
+      "sha256": "d78117575a8c74d43a37651ca1fcc0b7c7f06cdba3909fdf7005ee1146f2360d"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/infrastructure/DocumentPrintOutcome.java",
+      "sha256": "bd8f269f22720faf55107b331f550c1d0c39654979945347a9a3176f71fd7060"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/infrastructure/DocumentSeries.java",
+      "sha256": "824fb448c76dd34bf3ed584f4c9fcfacf8106db097a38601cc89734751a94e26"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/infrastructure/DocumentSettings.java",
+      "sha256": "7c24892b58ffe9a112324aa6cef8360fc7f49caa9063e0a93ca6498a2d634293"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/infrastructure/DocumentSnapshot.java",
+      "sha256": "672dc1fe61a66562bdaf6f29286aa4975f8efc886aff02e328b40b5a5c4ed381"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentController.java",
+      "sha256": "f4ecf930af09da321f595544006d19a297fe54c84457ac70f78e17b59ad9763c"
+    },
+    {
+      "path": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentWorkspaceController.java",
+      "sha256": "2df67e9e2eeb9bef7c5c71bcc5fa7a0ded5f93cdfb2184820fba47e2ff7b3485"
+    },
+    {
+      "path": "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentPermissionMatrixTest.java",
+      "sha256": "bdd1734e75c9680e3307f3c139d09a4a394b4c242062e042e6587a157ce3eccb"
+    },
+    {
+      "path": "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/DocumentSettingsHttpTest.java",
+      "sha256": "3c321db7f4a0e6627f48eb8bd3d0238f16beedd0eed4824ac255511ee7a29f48"
+    },
+    {
+      "path": "backend/business-modules/documents/src/test/java/com/quincaisoft/documents/PostgresDocumentSettingsTest.java",
+      "sha256": "a715bda0fb82aca728710d8380a5ac4ecff1a4aec0470839dcf3932eebccc17e"
+    },
+    {
+      "path": "backend/business-modules/expenses/pom.xml",
+      "sha256": "59a3ade753a11aa6af4bbb339bfe220f373e1565187077b58486f94335e00944"
+    },
+    {
+      "path": "backend/business-modules/expenses/src/main/java/com/quincaisoft/expenses/api/ExpenseService.java",
+      "sha256": "d189a7c6e895075c476311ad8be285edc0afea12b47f833195e31867783750e5"
+    },
+    {
+      "path": "backend/business-modules/expenses/src/main/java/com/quincaisoft/expenses/api/package-info.java",
+      "sha256": "e8af17806a6bd35c9ab8d15fa27990d9b46c50a9fccbdced55ae5ad44b60b289"
+    },
+    {
+      "path": "backend/business-modules/expenses/src/main/java/com/quincaisoft/expenses/application/DefaultExpenseService.java",
+      "sha256": "b1230af5eca803637caa21a0d3f2b7f6b3a91bb8dd8512ad2ea72d66a08ada08"
+    },
+    {
+      "path": "backend/business-modules/expenses/src/main/java/com/quincaisoft/expenses/application/ExpensePeriodGuard.java",
+      "sha256": "8d5c9c103017d837c49c98d2372ece3ceb4ba3e212e1347199e92b40ab29c851"
+    },
+    {
+      "path": "backend/business-modules/expenses/src/main/java/com/quincaisoft/expenses/infrastructure/ExpenseEntity.java",
+      "sha256": "565661377ebe24e6638b5957ca77ca1d1a212938254704525e58fb4fcd68803d"
+    },
+    {
+      "path": "backend/business-modules/expenses/src/main/java/com/quincaisoft/expenses/web/ExpenseController.java",
+      "sha256": "a9156cbbf5ebe5bcb1b70d1ab087c3b93bb74d4addb9a6626f6c105830974612"
+    },
+    {
+      "path": "backend/business-modules/expenses/src/test/java/com/quincaisoft/expenses/ExpensePeriodPostgresTest.java",
+      "sha256": "de6864c76a295b442faa3d5d35d44a5b4c60c98038a76bc2bbb4b00a0158d872"
+    },
+    {
+      "path": "backend/business-modules/finance/pom.xml",
+      "sha256": "9ce4ebf5884cfaab750ca59f26dadfd7866422c2eafedf3863db660b1ed69aef"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/FinanceService.java",
+      "sha256": "8a36ba9fbda2c43d4f7e27e1d06a37b6de9f7e3097c5e21ae83e36b42c8ec97d"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/ManualJournalService.java",
+      "sha256": "792539199d61e7f386f35c032d1bf04ee5a98685731303f9863565a5a42eb20f"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/PeriodCloseGuard.java",
+      "sha256": "6969454ece502e2dcf4d63291fe47384e9579ad7e239d60cf11e7006205973e3"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/PeriodService.java",
+      "sha256": "4a2c33627a73f0298b134d3bf89dbb2f67ced8c343e7c1a080a8001619689780"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/api/package-info.java",
+      "sha256": "b8d986750ca5174ec72254d1fa11d83d96942a666e0c452ea98a190174e30d32"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/DefaultFinanceService.java",
+      "sha256": "a91d2314d79ba2c2821705a3fa013381b8585d4ea8134969a3a84a97b368ce2e"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/DefaultManualJournalService.java",
+      "sha256": "db5ce6a2be82396006ef10ca12b4c4cc71c83ecc00ef90bf1c43ea0842ecb7a1"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/DefaultPeriodService.java",
+      "sha256": "134b0f5e6e066b3a00929d81a4ce76b4ea57c59fbc03b30135c2f52921980399"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/application/ManualJournalPeriodGuard.java",
+      "sha256": "81771aafc009585f328741802ebd33d592cfb09977c57c42d7b99e0142438925"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinanceOperations.java",
+      "sha256": "847d5e12b04d615afd40b47dbb705eaa26bbe50980b0017ca676752b5831188c"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/FinancialPeriodEntity.java",
+      "sha256": "5b2350b9aa8167eb9e5e219b4b9a321b6011db51a47b2f4d7f4f211d1d221b08"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/JournalEntryEntity.java",
+      "sha256": "b6a1cf6807ca29cc1189c64b704f4855880f290cc75d93b030fd32b2bb6e3f6b"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/JournalLineEntity.java",
+      "sha256": "4a197fb807bc36a38c2502c89b17242c539aeff046696aaf159aa7c84351540a"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/ManualJournal.java",
+      "sha256": "80c85a3b6d5b55f7d159399689e7f85b32bb7c74553a2395364507fc00a37f50"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/ManualJournalLine.java",
+      "sha256": "1e468b2575fdd23674454d8a5457283d700fdbfe6eb9d5c406865419952538e6"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/PeriodRequestEntity.java",
+      "sha256": "0acfd0a55fac1183ef3a0cf2a307c2810c1affe448a03f330a0134df28c757ea"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/infrastructure/ReceivableBalanceEntity.java",
+      "sha256": "2ea3f93a0301535e9bae3e8520d9d73e119ddbbc975f736de021e3cf1d13e2cd"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/web/ManualJournalController.java",
+      "sha256": "ba72f53c797ff453e067cabb4fd4f639ccd914f7e2f12c8e8ac3f33d25f7232e"
+    },
+    {
+      "path": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/web/PeriodController.java",
+      "sha256": "b428251290bd7296f45c9344098b925143f5750baa313ef47a4811a3ce30df5d"
+    },
+    {
+      "path": "backend/business-modules/finance/src/test/java/com/quincaisoft/finance/FinanceRulesTest.java",
+      "sha256": "665bcf9f8f97cb39a0191273c070cd9f5717c9205a6ef415aa70390f5eeea2e0"
+    },
+    {
+      "path": "backend/business-modules/identity/pom.xml",
+      "sha256": "d123c4535374c575e34eb2f3c21383ca9bff08983219355fe2202a87c4c4d939"
+    },
+    {
+      "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityService.java",
+      "sha256": "97f5e080bcf672ae8e796a646f98e7dc3d529dda9ce002acc0982d207ffce82c"
+    },
+    {
+      "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/package-info.java",
+      "sha256": "fde09701627f8a4e9e5228063315548735a88b7945c43d86c9e5ee20b7864eb7"
+    },
+    {
+      "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
+      "sha256": "51ee88c2ef66a4d85b758a258fe077daf592f1806d1c92deca0283f44c63e7be"
+    },
+    {
+      "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
+      "sha256": "27da85f40c2096d0df6b150fe933d56c95a144ba7fec5f893ba8c15cd2e88abe"
+    },
+    {
+      "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java",
+      "sha256": "4b0850e555e7c052179db38887e0f00afd03aa4a8b96996f85ee6f557013154a"
+    },
+    {
+      "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/RevocationRecord.java",
+      "sha256": "065fe6a6e0161f20a78f10f46c297223a49dac38fd1cc6f0330825a5da454cd5"
+    },
+    {
+      "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/IdentityController.java",
+      "sha256": "da8e4712fe88080d0393708fda46689935c60592e68dac540e093d4c6e927896"
+    },
+    {
+      "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/SessionRevocationController.java",
+      "sha256": "26f517cb1038a1e34217c8c0cbd83ae3f0c1e12dd50f1e0a778a09e1fd87d479"
+    },
+    {
+      "path": "backend/business-modules/integrations/pom.xml",
+      "sha256": "b92223b857ddd5ce54ce461a63f9025b8470203dd280d1134f5589298e2ad19e"
+    },
+    {
+      "path": "backend/business-modules/integrations/src/main/java/com/quincaisoft/integrations/api/CollectionProvider.java",
+      "sha256": "854b20c77b8b2a4e73cb22cbc491a9292c55141df6bfcb416e8db0a6ddf5aadd"
+    },
+    {
+      "path": "backend/business-modules/integrations/src/main/java/com/quincaisoft/integrations/api/MobileMoneyService.java",
+      "sha256": "0c764213ae21a0d8dd4613d44446331553e0cfb42cf31156a07d50b47dda97b9"
+    },
+    {
+      "path": "backend/business-modules/integrations/src/main/java/com/quincaisoft/integrations/api/ProviderRuntime.java",
+      "sha256": "089c42543da51dd4387a024f0d7a6db9d87ecb272e46d2131005bda9ec859fd5"
+    },
+    {
+      "path": "backend/business-modules/integrations/src/main/java/com/quincaisoft/integrations/api/package-info.java",
+      "sha256": "18d0efd8766c594b98baa83190c683649c88642a9ded98bda83d7e89be2d2976"
+    },
+    {
+      "path": "backend/business-modules/integrations/src/main/java/com/quincaisoft/integrations/application/DefaultMobileMoneyService.java",
+      "sha256": "fff722ff74f9aabc0a328bdda6321cbc41a738debac4593a7f7f2b055dc3147d"
+    },
+    {
+      "path": "backend/business-modules/integrations/src/main/java/com/quincaisoft/integrations/application/ProviderPeriodGuard.java",
+      "sha256": "f784ec78192e65dff7377fdb55085efb5806ba78c12be8c1d886bed60ad8deaf"
+    },
+    {
+      "path": "backend/business-modules/integrations/src/main/java/com/quincaisoft/integrations/infrastructure/MtnCollectionAdapter.java",
+      "sha256": "2f6761153d698d050895e185743b8f613ed101fbe30c7aee46e06929a8d71eca"
+    },
+    {
+      "path": "backend/business-modules/integrations/src/main/java/com/quincaisoft/integrations/infrastructure/ProviderConfiguration.java",
+      "sha256": "61e1e6aaa7216fca8836a55afb88b41a15198ad39d4da1cdfee464a5f1f17dd7"
+    },
+    {
+      "path": "backend/business-modules/integrations/src/main/java/com/quincaisoft/integrations/infrastructure/ProviderIntentEntity.java",
+      "sha256": "8ba9b972da2a1f0213274816d8cb0f9dbfa9e1561c872d44093e2f5b18f637db"
+    },
+    {
+      "path": "backend/business-modules/integrations/src/main/java/com/quincaisoft/integrations/web/ProviderController.java",
+      "sha256": "e920386444b0877d56997506af74ee08d97d76149eb8ed608fa77600faffd6f5"
+    },
+    {
+      "path": "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/MtnAdapterTest.java",
+      "sha256": "1dd3c2d5c8284a9ea725ce40d1f1b69856c900d98b1ca5e590888a28c0665e08"
+    },
+    {
+      "path": "backend/business-modules/integrations/src/test/java/com/quincaisoft/integrations/ProviderPostgresTest.java",
+      "sha256": "fe353b648ec499eb5624ecb407491e141916ee713041a81cf7362a418fb99f98"
+    },
+    {
+      "path": "backend/business-modules/inventory/pom.xml",
+      "sha256": "550a69b805473bade2c361e8fb685bf7b94ca01471192e9ec0a18e3edb20d6d8"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/api/InventoryCustody.java",
+      "sha256": "ddd47fceae9ea728cf8272595b575f46268a8d325fc62b2de240c1fca5038762"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/api/InventoryJobs.java",
+      "sha256": "da3b5f0758ea8254af4a02aa4162b8222a33bf3836bedbd2903d7fad453367ef"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/api/InventoryQuality.java",
+      "sha256": "299104ced1e3ba84206f252677d071d98f21d5e784d645ee79cff9521fbfa2e6"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/api/InventoryWorkflows.java",
+      "sha256": "dc57bb1925f7a7b1758e5968fdf87598f81bb91bc111edb527411bb2f54726e7"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/api/StockService.java",
+      "sha256": "0684048fca78e44bef2eabd40e169441ec937a4809845b65cbdb289d45cd77e3"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/api/package-info.java",
+      "sha256": "cb4da01831a1e0fb593c67c63c0846d4b84c9a30f557ba7a4001b89c65d826da"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/DefaultInventoryCustody.java",
+      "sha256": "4341e02b8e8ddeade88eed516025bb7495039fdadd3e97db134c95b7a836a15b"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/DefaultInventoryJobs.java",
+      "sha256": "0abc1c1f001872f387d250c1739591d31c0e07ae1d8099497e8f9b7e938be78b"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/DefaultInventoryQuality.java",
+      "sha256": "f2bbc06cd468216eab138110189840ffef3d1c755248225571148e26b3fca2a6"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/DefaultInventoryWorkflows.java",
+      "sha256": "0fdeb54ad9c72fb55c2dfd25d8466efbe7ab9a83b0fb2494261e9f62e765e9b0"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/DefaultStockService.java",
+      "sha256": "530e78d77a14808ea15c0887cb2476e83687758aeb2ffa5c0a9151e61ca92b95"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/application/InventoryCommands.java",
+      "sha256": "e161aac189680199e17478ef9c7accddc89fc7465d92a4a7dd86224a3cbcad6f"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/infrastructure/CustodyCollection.java",
+      "sha256": "f9294f9e00e0e1d81294bc9ea27ed596024698a4cc50f92ed1c3500ba78a9a17"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/infrastructure/CustomerCustody.java",
+      "sha256": "e9a94a04da0ad9773c31fa0905a43a757028c7136847f9a8cb61be5eccee5627"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/infrastructure/InventoryJob.java",
+      "sha256": "1a16c38b432c9045f72fcb9fc6938e2ec58468ae389b08410da151911a2a5f48"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/infrastructure/InventoryLot.java",
+      "sha256": "7fe4441cd67a25158813a67084ab9171dfbb5aa54de3856fc3a8e23fa7fc1eaa"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/infrastructure/InventoryRecall.java",
+      "sha256": "cd0c1de2b95a03138a1016245e0c4b17d0f13ec8fbe6a755c473dd0139719a00"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/infrastructure/InventoryRecognitionPolicy.java",
+      "sha256": "25821cb544a2e232cd0fe8c262d14730816f57a88e77afa404ec55b2b8890aa6"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/infrastructure/InventoryReservation.java",
+      "sha256": "d8e7802e52eb5850be943958c11fea425bb0e6916d22983842e6c4a70ced96d0"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/infrastructure/StockBalance.java",
+      "sha256": "494381e617e397b19086489e2354cbc99261dc51ef1cfe0cd754a83b5ffff5f9"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/infrastructure/StockCost.java",
+      "sha256": "c067464766427fd8389de5341212a65c77debbd8af7f239f41286403e0b50a56"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/infrastructure/StockMovement.java",
+      "sha256": "4e776f88377ffdba7e01db92f676c2f0e056a291ee9dde583c2aa29972f5ae4b"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/infrastructure/TransferEntity.java",
+      "sha256": "09d75de4094b182d81e8cdf149c78393e5e56254d65c40e09a660497da55ffbb"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryController.java",
+      "sha256": "4708659fb3cb9c6d994bbd4eb1e22fab6e51981f21790cb95c2629089db4ff94"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryCustodyController.java",
+      "sha256": "0e6c943b2fc5577d63cc6ac0f10a50a3ba65880c9840c45a866a7cc055f2b1b8"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryJobsController.java",
+      "sha256": "031aaeda0aa4975ea00630f7ff5ea9b7b2959eb7ecba311c613c568a6c80433f"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
+      "sha256": "1be031ed244a54fc3138c068970282e6539bdf8191c668eb4b973aafe611e966"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/test/java/com/quincaisoft/inventory/PostgresInventoryWorkflowTest.java",
+      "sha256": "846a9865a43b6b3177282b514d451bd626855b067394d43882078745e3df3118"
+    },
+    {
+      "path": "backend/business-modules/inventory/src/test/java/com/quincaisoft/inventory/StockBalanceTest.java",
+      "sha256": "8e1fd5521214030a04f66288c6c9e28c6ae0518e210e15ff7c3b7841c0b13dd4"
+    },
+    {
+      "path": "backend/business-modules/operations/pom.xml",
+      "sha256": "1d35d225d3efd3ff4eb31ee1af92f4569c1848e6c5bb6f1576ea87604e07aed2"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/api/OperationsService.java",
+      "sha256": "1b2d5fcbdeb3683f9de1a84b62272d078e41de54c2a1c8279946eeeba0fb7cfb"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/api/package-info.java",
+      "sha256": "e5687ee3c65ea0150f7d6b911c1a586a8fffcf7ac8765bb77115eff2917cfae3"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/Csv.java",
+      "sha256": "67993396ed54bd319fd22d76c244c7e49e89df86c4fb01c2d081f34fcac3d363"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/ImportRows.java",
+      "sha256": "83a0dc0b77c94f3315e277bb1a2b5660f1381e004824fa9713f8956751acb7f0"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/ImportValidation.java",
+      "sha256": "ec90f162022b00a3c3e052c1192d906fd0535c5b534ba061533dd16df61420c1"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/MasterImports.java",
+      "sha256": "1437d7e201f06b01f25f3536f1807a9e686f2f54778d48b1be4d56ac102baa4d"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/OperationalReads.java",
+      "sha256": "9b6848563074538c76dba17e594d34eb16f389cbcb0f8cc54592c1b812c732b7"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/BackupManifest.java",
+      "sha256": "85165920a265f2b7d368f640169d1f414c48d1febff5bb39a5da003da43bdfb2"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/ExportJob.java",
+      "sha256": "dd33c767681c60034a432b3026b03cabb0c0926c6fc53ccf42c7c3a74313c445"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/ImportPreview.java",
+      "sha256": "62efba306b451912fa5fe03f4dfcdecf86043178abc4c72a6d4f66e46ac05bb3"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/ImportRow.java",
+      "sha256": "ce9562559ae568254fa61d01e25347bab9edc5a6daddc5ad64977c4229e52808"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/ManifestSection.java",
+      "sha256": "4ebca9fe41e59548202320e11e6626ff4f361b1a8ffd3abd22492f5f115068b8"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/Notification.java",
+      "sha256": "14fc651157f71e53ca6504d8e1667b1ecf5ef009da8764fef97ec58c305cd179"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/OperationReceipts.java",
+      "sha256": "380c2c790ce535662e5147c0f426d77cd056a94e729e16b74f1b094ad3a5ae92"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/RecoveryRehearsal.java",
+      "sha256": "ee35c078cd2d3530031736a5afa901980483db632a1bb3b196fb2c5220351958"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/ScopeKey.java",
+      "sha256": "c2e196537889d19d5eb4e1ada95d552a1416bb1f21560724bf923fa64d9bc48d"
+    },
+    {
+      "path": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/ScopedRecord.java",
+      "sha256": "6db63d259f9a658f9148fb96f35c77c5e63cc1b339c8e2c9866777a5485727bc"
+    },
+    {
+      "path": "backend/business-modules/operations/src/test/java/com/quincaisoft/operations/CsvInputBoundaryTest.java",
+      "sha256": "78c12e6819b5c15ee67be8c57693ce85733266af71a1d083a692b6501a107378"
+    },
+    {
+      "path": "backend/business-modules/purchasing/pom.xml",
+      "sha256": "1b4b392ab585ae00da255d2314b5d4b634f40e43ec4717b03f528fa07b53ae9c"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/api/PayablesService.java",
+      "sha256": "b2779c6b4f646d616378684baf7063c6ae1f95dade2c48c12e649bb602c976d0"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/api/PurchasingService.java",
+      "sha256": "7c0e5b49074e02b433871442d771158f235c4a5077346fef01bb45f6051d89ae"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/api/package-info.java",
+      "sha256": "5d2ff82879dda038cb82eb20ae70f363b9c5864a0305c52eff4f32d1e65ea4e9"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/application/DefaultPayablesService.java",
+      "sha256": "1376b48ed6b2969045a2e4f6935961a36edc471e08ff4ae68b43d44880673f31"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/application/DefaultPurchasingService.java",
+      "sha256": "411c067485307cc05500ed93de3c635d04d2711d5ee0bebd78c9691901e81308"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/domain/PurchaseRules.java",
+      "sha256": "ef4a3ceb3536af2d31516b37b8e4052990b81158599a4f0933a9d21cf54c3b58"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/InvoiceEntity.java",
+      "sha256": "231666d65be0240d0367910da6a89d3da20a2af2906370ed2ddced205d5a977f"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/OperationJournal.java",
+      "sha256": "aecd52cbb9edf7ee7423337eb9cbb1d91dce4a65f3e9e761b481e588234effdb"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/PayableBalance.java",
+      "sha256": "0f240bb60c5ca33c855818f0e13b893d45105977b32c58f53fb46b846a02915b"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/PurchaseEntity.java",
+      "sha256": "75edec18b84a789965f17c1747e2a0bf1424a0c2f312bd9843190df560936165"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/PurchaseLineEntity.java",
+      "sha256": "f9334fd8a38d766dedbd6f902cfd524fb9485afb953492af5b2c001c761169f9"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/ReceiptEntity.java",
+      "sha256": "8ae96cd51c1f626da190afd9071b6231e53f5b366108dbea3ba4b17725c87313"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/ReceiptLineEntity.java",
+      "sha256": "c3c2d2e8771bcd45d9fef1f2cf5e0b2efe39d91ec62ee4dded3c2c0ef8ba9dce"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierAdvance.java",
+      "sha256": "b990561ff2cf4efb5a3621cb6af183d2cae6277237b4923ba98e6d660f4dfd41"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierReturnEntity.java",
+      "sha256": "fca3a6b0866415dd929ac26d3e40a545e326b4f45457d0e723feaaddff8c5415"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/infrastructure/SupplierReturnLineEntity.java",
+      "sha256": "47fbafddfb6afde8b8aeae49831646f5d9c19d314c8d8a4bb44b221ffb841855"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/main/java/com/quincaisoft/purchasing/web/PurchasingController.java",
+      "sha256": "ee39005023dbd8b0a0084ad8b7f7d862169bebbc7dae70787c1431a0015ad8a7"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PostgresPurchasingIntegrationTest.java",
+      "sha256": "7ccf7c3173e2a08e67979f5d2d8a5e86d654f30b37f81fbc917251f18cfeda7c"
+    },
+    {
+      "path": "backend/business-modules/purchasing/src/test/java/com/quincaisoft/purchasing/PurchaseRulesTest.java",
+      "sha256": "cc73ea04bed7d6393d91db82c0683a9702f260dacceec83dae6e365af45e6381"
+    },
+    {
+      "path": "backend/business-modules/quotations/pom.xml",
+      "sha256": "9e56ed2966b9b3d4946149050f8f9b9b83ddbe1c8cacd2369db696e3f64d6c0b"
+    },
+    {
+      "path": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/api/QuotationService.java",
+      "sha256": "b6d7f56cd569259c316857487de9872e610d071628e2ff636af34a280a49e172"
+    },
+    {
+      "path": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/api/package-info.java",
+      "sha256": "191b688f6c8bc6012f82a80cb005f15cad42136190246095da6bcb22565e00f3"
+    },
+    {
+      "path": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/application/DefaultQuotationService.java",
+      "sha256": "c31b2c2def90571a6a0b4e8b117c87ab1ea13787c6b8c16533f349ce1ed5945c"
+    },
+    {
+      "path": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/infrastructure/QuotationEntity.java",
+      "sha256": "ac3931390666e7e823cb1c755a372744223d89b43eee4e9f29482155cb1a2da7"
+    },
+    {
+      "path": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/infrastructure/QuotationLineEntity.java",
+      "sha256": "71cd06f09cbd75f6bd5bf8459e3af0b95198214aa4d88067281d41e4b7df8392"
+    },
+    {
+      "path": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/web/QuotationController.java",
+      "sha256": "99308fb5364798b48a5741c071cfb800f2dd1aadde570ee4aec5c2621147c4a5"
+    },
+    {
+      "path": "backend/business-modules/reporting/pom.xml",
+      "sha256": "6454122aa03b76ac1c7f782bb9737062f6cd7f5d281a7930ef67d2a00d0008c4"
+    },
+    {
+      "path": "backend/business-modules/reporting/src/main/java/com/quincaisoft/reporting/api/ReportingService.java",
+      "sha256": "5c5d05db4ebe656a0da480e7a3da29ca56d72a5ddfd29b24ef79fd7a10a4f3d5"
+    },
+    {
+      "path": "backend/business-modules/reporting/src/main/java/com/quincaisoft/reporting/api/package-info.java",
+      "sha256": "e124cdb1ea4f325fe697fc56a05d589183df8c2e2d51c25e3483b4495185be10"
+    },
+    {
+      "path": "backend/business-modules/reporting/src/main/java/com/quincaisoft/reporting/application/DefaultReportingService.java",
+      "sha256": "537eecc9bfcab87f3a9a50979b378187cc6299844f3db199530426b1595a87bf"
+    },
+    {
+      "path": "backend/business-modules/reporting/src/main/java/com/quincaisoft/reporting/domain/ReportRules.java",
+      "sha256": "6c487e0e72e59d834344fcc8d29e994cfaad811dfa43042523913fcca4c35169"
+    },
+    {
+      "path": "backend/business-modules/reporting/src/main/java/com/quincaisoft/reporting/web/ReportingController.java",
+      "sha256": "44cd0e100ea20ac799a30c1debbf703c76ac9dce1fcdd77ebc5153595be9f2c8"
+    },
+    {
+      "path": "backend/business-modules/reporting/src/test/java/com/quincaisoft/reporting/ReportPermissionMatrixTest.java",
+      "sha256": "ca18baf420ff49f75a2314d93dca0fd579eec1692b79987db9e9b6c54a6b0748"
+    },
+    {
+      "path": "backend/business-modules/reporting/src/test/java/com/quincaisoft/reporting/ReportRulesTest.java",
+      "sha256": "d43be084474bfb7a80be67a4e4d54cbeb881d2bbd868e94099ac754bae13ee47"
+    },
+    {
+      "path": "backend/business-modules/reporting/src/test/java/com/quincaisoft/reporting/ReportingPostgresTest.java",
+      "sha256": "8108817b38f85d3017d276ae5e5158a8330b33850470d0494795bbe5c73d4cc6"
+    },
+    {
+      "path": "backend/business-modules/returns/pom.xml",
+      "sha256": "c10421bf8836def75daba6e4e2c1a0d046e487778a237e381d851b0443c54162"
+    },
+    {
+      "path": "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/api/ReturnService.java",
+      "sha256": "c350bcecc10a21805c7c79d4bde58ae1dacf4dc1c0a7188ca04da317d786ef91"
+    },
+    {
+      "path": "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/api/package-info.java",
+      "sha256": "37bdf8e2a235985f58946b143490479ec96baeb2df8e42a6b3240f6fe563461b"
+    },
+    {
+      "path": "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/application/DefaultReturnService.java",
+      "sha256": "342a46256f9bd4d54dd5fa1b97278e41477608506af318cc7131f4aa3ee02ea9"
+    },
+    {
+      "path": "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/application/ReturnsPeriodGuard.java",
+      "sha256": "42be87d9e138bd48a1e82c314f7d5a4368dd54dc0269c77665a856e88046cdbc"
+    },
+    {
+      "path": "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/infrastructure/CustomerReturnEntity.java",
+      "sha256": "2d8a3b189bfa08a4ad8ac7c839d41920e03bd5f773a95272b86998c021a30a2f"
+    },
+    {
+      "path": "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/infrastructure/CustomerReturnLine.java",
+      "sha256": "c5db95e5ef5620017c534ddfaae6b7316dda98221236cf4dcf2a8dfcc8169bf6"
+    },
+    {
+      "path": "backend/business-modules/returns/src/main/java/com/quincaisoft/returns/web/ReturnController.java",
+      "sha256": "87e0788d45ab8df6f5af18aa5cf164b7e0a4e7b78861e76ccfb2be5561319d91"
+    },
+    {
+      "path": "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
+      "sha256": "72a53e22488d46c8d74a9124727334e1e9d98f715f0df398ef92087217b432c8"
+    },
+    {
+      "path": "backend/business-modules/sales/pom.xml",
+      "sha256": "9d43a89bdd61ec9aeaa8eacc2c900993524cf79b828411099886bc3ac729b0cd"
+    },
+    {
+      "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/api/FulfillmentService.java",
+      "sha256": "b32880380f7b673a7876e6b07c5adfdc28db32683ada8c3ae881e89d22211851"
+    },
+    {
+      "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/api/SalesService.java",
+      "sha256": "d60ec275c2a8521323764b9dd1dce598876b4815fb7f9882cfe161118d068a5c"
+    },
+    {
+      "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/api/package-info.java",
+      "sha256": "4b9d747b0619e27e972f7fc16a46700701c178c012f21af4abcf7526dd78d8d3"
+    },
+    {
+      "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/application/DefaultFulfillmentService.java",
+      "sha256": "fe1231f4aafe9abf2eebaf3f3445a65da1dea0405a58f6e5161c537ff5b2756b"
+    },
+    {
+      "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/application/DefaultSalesService.java",
+      "sha256": "d34bb5eeb434a6ea085693753001a9039215abc0c36c42aab35bf8a8b48b6f5f"
+    },
+    {
+      "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/domain/SaleRules.java",
+      "sha256": "34710c7c5b416f4694ccadca62ff64ea951961e465d1c74f028f58f07cead402"
+    },
+    {
+      "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/infrastructure/FulfillmentEntity.java",
+      "sha256": "63dc0c07453f33506fb28b36bbe340ed636ad392abaf84a337f60ce4dccf3b1b"
+    },
+    {
+      "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/infrastructure/SaleEntity.java",
+      "sha256": "f7681448eec3237198934e6392ae3054d61bc54aa86ef5b698d0f02453343b0a"
+    },
+    {
+      "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/infrastructure/SaleLineEntity.java",
+      "sha256": "a77d6aa523583b9960506f96e9a39fb51c6aedc7c6f709e31973b22508fd20ee"
+    },
+    {
+      "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "sha256": "91697576a41b5dde64071094c1c947579a991b5fab01a891bca0f1ad57a5aeb9"
+    },
+    {
+      "path": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/SalesController.java",
+      "sha256": "97a7c3a5edd11fd634bdeb41e22d83efa6694645665d0d4b771832c759a83949"
+    },
+    {
+      "path": "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
+      "sha256": "2ef7cf1ed3f95b90dcb5f295d1097d898edbbaf4f8de5e53a220e228ffd2a383"
+    },
+    {
+      "path": "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/SaleRulesTest.java",
+      "sha256": "cd5615aae2db6c801913d4c7239ac580c8d707afb5422661c3a0e1bd2c58f753"
+    },
+    {
+      "path": "backend/business-modules/subscriptions/pom.xml",
+      "sha256": "eb9333a69c86fa76f656549b8b960fa84ec5ab22b86412fbf9b63173ae7cebc2"
+    },
+    {
+      "path": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/api/EntitlementService.java",
+      "sha256": "398c4fef1c9e1f8fd3108cc7df4d6462087b3eff5101c6c70511d49938d41729"
+    },
+    {
+      "path": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/api/SubscriptionBillingService.java",
+      "sha256": "24d7618e962bcdc2678a47d6a6fda3d0c022ac733a90b4efe0a8ff62fa581c9d"
+    },
+    {
+      "path": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/api/package-info.java",
+      "sha256": "68762e006cced16750811aa709b74e75144720f58cbbda32e229b2527edaea5f"
+    },
+    {
+      "path": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/application/DefaultEntitlementService.java",
+      "sha256": "be809bdb8e20b888a296437ba3d02396d12bb70480f478e2a6e6427e971a5a42"
+    },
+    {
+      "path": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/application/DefaultSubscriptionBillingService.java",
+      "sha256": "edf22ea73b278684d973de8ca59d906c80f58a14b170dd024c6360c21ae20e59"
+    },
+    {
+      "path": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/domain/SubscriptionRestrictionPolicy.java",
+      "sha256": "1f228bd7920c9eac23a1676a3198a70879943e70a9872c3fa32b90e4e36976ea"
+    },
+    {
+      "path": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/infrastructure/SubscriptionBillingEvent.java",
+      "sha256": "82e53952e531e7e7c77411adcbd64678cba95e15c27da5832c1f82fe36c5c724"
+    },
+    {
+      "path": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/infrastructure/SubscriptionInvoice.java",
+      "sha256": "2989985821e0f0f14393a2f0ae3d496d2fbea6dd66c897c5b564f77c1f3f4fad"
+    },
+    {
+      "path": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionBillingController.java",
+      "sha256": "3862432d8c96de095bc751515a5d8d7972a65141de76f6cc9d79c90dcff56b80"
+    },
+    {
+      "path": "backend/business-modules/subscriptions/src/test/java/com/quincaisoft/subscriptions/PostgresSubscriptionBillingTest.java",
+      "sha256": "68f89e48cca4ec53c1e11c168cb99c4921d6a56cdf42cb8b9a2ea57d9d116090"
+    },
+    {
+      "path": "backend/business-modules/subscriptions/src/test/java/com/quincaisoft/subscriptions/SubscriptionRestrictionPolicyTest.java",
+      "sha256": "06bf9b9483419d59559c253addbff79feb1d4334fd13f90c05f50ff54a5226f8"
+    },
+    {
+      "path": "backend/business-modules/suppliers/pom.xml",
+      "sha256": "b6f2955e4e259e1888a13891311323b6724407c1ab1612c97119452652e3c3ab"
+    },
+    {
+      "path": "backend/business-modules/suppliers/src/main/java/com/quincaisoft/suppliers/api/SupplierService.java",
+      "sha256": "4dd94065d272ec81ebd4de0aa3fc31ea26cb34df4a03c530d4f97e5e280ddc2c"
+    },
+    {
+      "path": "backend/business-modules/suppliers/src/main/java/com/quincaisoft/suppliers/api/package-info.java",
+      "sha256": "fab6dddebd88405af17af157d04dc208084e4d41f81622e7ccbefc981e06be2e"
+    },
+    {
+      "path": "backend/business-modules/suppliers/src/main/java/com/quincaisoft/suppliers/application/DefaultSupplierService.java",
+      "sha256": "110b08e1df89099df96777faef42fecc84078a506d95ef429e0f8fe00d8e0ac9"
+    },
+    {
+      "path": "backend/business-modules/suppliers/src/main/java/com/quincaisoft/suppliers/infrastructure/OperationJournal.java",
+      "sha256": "807f292277e6de26d052c524a890d7c8e9dbd80c1b322015278e765c71b43ae3"
+    },
+    {
+      "path": "backend/business-modules/suppliers/src/main/java/com/quincaisoft/suppliers/infrastructure/SupplierEntity.java",
+      "sha256": "fc1e23bf7b21de5751e4939744d312f4d83c207dfac3caa49ef3aa47e97a2cd2"
+    },
+    {
+      "path": "backend/business-modules/suppliers/src/main/java/com/quincaisoft/suppliers/web/SupplierController.java",
+      "sha256": "58c2b995a074cffec6fec98138ed0ea2c9c0fa3f202a98d88f9115619af2e6fc"
+    },
+    {
+      "path": "backend/business-modules/sync/pom.xml",
+      "sha256": "6448e258ac4ac1c47418bb892b947b1e90bd97e3eae9c63e4cda837b37aa5aca"
+    },
+    {
+      "path": "backend/business-modules/sync/src/main/java/com/quincaisoft/sync/api/SyncService.java",
+      "sha256": "52e60ee52ed00016b28381e30036fceefc2ca78e7da3a1e15ecf34fcaa74c89c"
+    },
+    {
+      "path": "backend/business-modules/sync/src/main/java/com/quincaisoft/sync/api/package-info.java",
+      "sha256": "4563cbe176c93905cea829e5f5c1c469d93c1ef2de52aed56f6bb1d5d01ca5aa"
+    },
+    {
+      "path": "backend/business-modules/sync/src/main/java/com/quincaisoft/sync/application/DefaultSyncService.java",
+      "sha256": "43a763e30e4cfca7c7ad219f2b279612132b7eadbeb0132652c8721404804a58"
+    },
+    {
+      "path": "backend/business-modules/sync/src/main/java/com/quincaisoft/sync/domain/DeviceProof.java",
+      "sha256": "2fde4961d084bc8e7d3960433d726e44516f5af0fbdeeecee759b95049fbff1d"
+    },
+    {
+      "path": "backend/business-modules/sync/src/main/java/com/quincaisoft/sync/infrastructure/RecoveryEvidence.java",
+      "sha256": "26f3fed3ab3ae5f3408563ce7876922a7d489aae129a246abc21dbd3b06678c0"
+    },
+    {
+      "path": "backend/business-modules/sync/src/main/java/com/quincaisoft/sync/infrastructure/SyncDevice.java",
+      "sha256": "4df2c7c7dee113036cba8e2cfd0253cb762c56491d232a2c880d34d174ae4261"
+    },
+    {
+      "path": "backend/business-modules/sync/src/main/java/com/quincaisoft/sync/web/SyncController.java",
+      "sha256": "82e0e513be16d839cd11ef1f410fa0e0a6edb9e7d05b4d426a7ad9bb9c182b6f"
+    },
+    {
+      "path": "backend/business-modules/sync/src/test/java/com/quincaisoft/sync/DeviceProofTest.java",
+      "sha256": "db783a5a9ac68d9d81faf89977debaa849ea605ab2628a42f81c5b2e85e1ed08"
+    },
+    {
+      "path": "backend/business-modules/sync/src/test/java/com/quincaisoft/sync/PostgresSyncTest.java",
+      "sha256": "cf728e7e501be983c175c812fdb14c04bbd737923630e1fe3422e01ceeb17af4"
+    },
+    {
+      "path": "backend/business-modules/tenders/pom.xml",
+      "sha256": "546a22228b43455f88a03c4051b40e02d0daf3f9c74d68ab671b922041bd4c08"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/api/BankService.java",
+      "sha256": "0d9f6c083ffc4c48bb9336972b2f4d16d046ba39e27aed8ad75c9b6520713e7e"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/api/SettlementService.java",
+      "sha256": "a12a704397174ef938564852ab08b2940db615eae6bbd526f1677ad985958150"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/api/TenderService.java",
+      "sha256": "b721ce9dff079f8aeff1688ab4aafbfd036e75e29cced3fe42f7498de0eb032c"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/api/package-info.java",
+      "sha256": "e19cb6c587f1829dc9a11422d9611146b40ea83ad9375649656bcf1fd9db65df"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/application/CashPeriodGuard.java",
+      "sha256": "d87486f52daf1db94cc697d9d6ec18fd44d68dd5412abb7611ce7e454209687c"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/application/DefaultBankService.java",
+      "sha256": "86257157518ead6ad3b9518db8510ee25c0d1474b23d3a176aa1fcc231959529"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/application/DefaultSettlementService.java",
+      "sha256": "3ef0dc4996f3e29a84ea8f16072fbf5447051031da35f731d404b2818d6587aa"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/application/DefaultTenderService.java",
+      "sha256": "4891356c06995460d6e4732e5749f0e3b1e6cc63a9e0b3d874e5d77936403234"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/domain/TenderRules.java",
+      "sha256": "0e39969a6a72579972dd6667b56a110de0f5dc77a0c668043432eda375295432"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/BankEvidence.java",
+      "sha256": "1af763d73d4f0e1c7e89f09af7b484c6a52c7689faaf4996f81ae15facd98d6e"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/BankMatch.java",
+      "sha256": "0d4ba5b24a2965e548b46104b1f4391ec6a540662c8e901591861cfda279dd10"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/CashSessionEntity.java",
+      "sha256": "b590575f0d41ca4f8a7c376fa5879678082a1dc66cc1928ee77ebc3d7711e8b3"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/DepositBalanceEntity.java",
+      "sha256": "2d322465c6a905eba55a0f6a8cae2089e6c4547ff803ecd442621fef2fdc32ed"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/SettlementEntity.java",
+      "sha256": "043170eb6f94aafd09d5721a66e92cb0d4ae6a456692f04f803d3f10926d1915"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/TenderFactEntity.java",
+      "sha256": "89da0c97fc75ec47aa121a7b969a01aef378a1cc38b3f5cf75db083745761046"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/infrastructure/TenderOperations.java",
+      "sha256": "6fb9dbcd4c153fc1d320c1737d232b850220cd503d27a0991592d1563797a8d6"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/BankController.java",
+      "sha256": "be10af0bcaa541ea34751b97035e7e7c5788b48457e1404023574e871ee3c6d4"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/SettlementController.java",
+      "sha256": "6888996cc762e8267b49d423be0a2d4b80ce6f2c0c5186424399b75b9943cb01"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/TenderController.java",
+      "sha256": "bc836095d5bbe906f792eab65e2166efe5d8cc1f263781d8fcfa63256197a3c3"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/SettlementPostgresTest.java",
+      "sha256": "2a4fed59b4366cd52db89f5637c237e1333fc0310e9652826737e0146d4d442b"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/TenderPostgresTest.java",
+      "sha256": "80e850ca1664c58594c440b7c285d3209aac9f8b79a723b60a22d9abb79ebcef"
+    },
+    {
+      "path": "backend/business-modules/tenders/src/test/java/com/quincaisoft/tenders/TenderRulesTest.java",
+      "sha256": "ec19c4a023d61e060458c092c918b8de22209dfb9c4dcf0f52d0d3300dadf488"
+    },
+    {
+      "path": "backend/business-modules/workforce/pom.xml",
+      "sha256": "501855186590e4dd19d7cd702dcf6e419de9d08cdf37d5010d81ccfafd230545"
+    },
+    {
+      "path": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/api/WorkforceService.java",
+      "sha256": "fdcd8cbbb9007d80721bea47c4b1f1b572061c8ff7eb55e3e81c42f98af41832"
+    },
+    {
+      "path": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/api/package-info.java",
+      "sha256": "b5aa7ff26c10b6bc98e69eec2ed9b129547c1595681f9e213410992fe35e04bb"
+    },
+    {
+      "path": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/application/DefaultWorkforceService.java",
+      "sha256": "772ed4ff410cb2ea18a92a4192bfd730c72b4f94a6da297b15ecf3c47123e606"
+    },
+    {
+      "path": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/infrastructure/WorkforceAttendance.java",
+      "sha256": "3c858b9254df716bd18de2a8fd8820b379faa88436fe2c24b34be8933ab4b176"
+    },
+    {
+      "path": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/infrastructure/WorkforceEmployee.java",
+      "sha256": "06bf33f81a74f9e6575ea6780fd30d4a4d59ed3a76038a8c532a2ccc16e9cfbf"
+    },
+    {
+      "path": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/infrastructure/WorkforceKey.java",
+      "sha256": "1b4d343d9ff999a80e691418f24f5d79cec218a9634afb647da1a8a4d68bff75"
+    },
+    {
+      "path": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/infrastructure/WorkforcePayroll.java",
+      "sha256": "026d8469d98f4fdfdb06a661741622cba4006a232eed7611ffe8ba9125a022da"
+    },
+    {
+      "path": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "sha256": "ede0a0a9998d9d0dd63191bd80c4cfcbb875daf2d2270830c1ba7bda67d97ba6"
+    },
+    {
+      "path": "backend/business-modules/workforce/src/test/java/com/quincaisoft/workforce/WorkforcePostgresTest.java",
+      "sha256": "d391a566a23bb74b8eb05f3e55b8645b66ea7d1686182601ab5c712189ab05eb"
+    },
+    {
+      "path": "backend/db-migrations/pom.xml",
+      "sha256": "6b7807c2c146da25cee50aaa861083415290820269d1974bb85f475eb77d43c0"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V10__versioned_reporting_projections.sql",
+      "sha256": "dfd516dab3b60d1f81d23dbeab2a7cb543bd82dc4ed9d83c74bef1c91395f206"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V11__device_enrollment_and_recovery.sql",
+      "sha256": "93bde13ba1e086a418e9a1dc57cdbdd0681a6ce4d000102a2c7334da83997b53"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V12__company_branch_count_guard.sql",
+      "sha256": "ca914b4b86b21e9cc246658e62201866986a18faf5d7eaf00f1105257f10f03e"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V13__payables_bank_settlements.sql",
+      "sha256": "75e4c87c0418f7ec1b791d71c9537a3405401b16a1efad734dd5561f70f707f0"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V14__manual_journal_controls.sql",
+      "sha256": "fbd0842ae43fc91d839c8cf7f5c2a99e588b186b243018f049921c5d1636137f"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V15__inventory_quality_and_reservations.sql",
+      "sha256": "538eeb1a9bcc63d27277b1107292756e8e51f815bac52dde93bd0dfb78875e56"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V16__customer_custody_recognition_and_fulfillment.sql",
+      "sha256": "f06d6cff264e244cad7fbdb650a59268f3adf6288fd2ac7ad8ffadc2529d7af9"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V17__typed_operational_controls.sql",
+      "sha256": "b6589ee78035acfb987bfa674af2a13e6af0b5a57f7134fed5e172621a457b57"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V18__scoped_authorization_revocation.sql",
+      "sha256": "f55596bbcaa45c206a60c3f76bdd314d79e08d7a4b8736020c6b92ed4049fe68"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V19__document_captures_print_evidence.sql",
+      "sha256": "4d670287be1d5da7d7f3bb9a7442e873cc22312b802cf0d2bef69c4488075d96"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V1__typed_business_foundation.sql",
+      "sha256": "84f4dffdb857d76b53605f6954fad301658a04d14404e933279fd502fe10b0fa"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V20__ledger_reporting_projections.sql",
+      "sha256": "a71e7032401155b7e1ac211b27f70ef86832554777860e2e4f3980bcac40b388"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V21__customer_and_catalog_master_data.sql",
+      "sha256": "ba34ad6f7fe3d9e400dc0dcd86bb88574a1a791f08cb2ebcf26a459dca4ab3f6"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V22__immutable_custody_collection.sql",
+      "sha256": "6aa702fa6e3ad32e8de50e588d10b6f00736ef887fb4ffa756f6356f62595b0c"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V23__typed_catalog_identity.sql",
+      "sha256": "b80b16688a2c9fb13fc1cf169febdc948cbe1e889a57b2f24a1d897bf23c33a1"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V24__onboarding_configuration.sql",
+      "sha256": "102c00490c1170b3ecf93c5245c78828675c0cf8dcf253283089949733f2b831"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V25__platform_subscription_invoices.sql",
+      "sha256": "79cf8085416285e4c44a6c2807e3f18dd5d25ef0989af1a8c73a04db49c5014f"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V26__workforce_payroll.sql",
+      "sha256": "7503dc7fdf1fbc6e89c1b9f1af0319b0dc1c17e88478203e4222e907f9e14aac"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V2__isolation_and_immutable_journals.sql",
+      "sha256": "0345253aeb6568399e2e270ea1de46893c3e900fbd1eee238032666b1d8a38dd"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V3__narrow_row_lock_privileges.sql",
+      "sha256": "9918ef56b1016c81455674f3651ca4d37c248581626a7a558a0c2847d4c5e75f"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V4__documents_and_commerce_workflows.sql",
+      "sha256": "8d4359c8105da99dfb1e70449e362cc08c999a9abf7c78ce3853e8e41e363c8a"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V5__procurement_workflows.sql",
+      "sha256": "c3b07bf3ae2dbd0318cf4905602d77b0200de98a66ee6ed5fb63fc21b3ad5c8c"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V6__tender_cash_and_receivable.sql",
+      "sha256": "5db0eeffe43246fcde20ae207544877a91b07bcbbb36fc0d77ebc5728418156a"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V7__catalog_inventory_transfers.sql",
+      "sha256": "6ee1770f2cb6015df7ffcf7057fdd7aaf1a4f3a991ac360f78b239beaae49d07"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V8__identity_audit_operations.sql",
+      "sha256": "41c682f2c5e8b534bc21bceefa779678d9902120b04bf3ac72fa72636463eafc"
+    },
+    {
+      "path": "backend/db-migrations/src/main/resources/db/migration/V9__commerce_publication_and_platform_review.sql",
+      "sha256": "ea33005d39a91864dfa670f4e5ae1eae22de2c37e708ca860dd34875a835911a"
+    },
+    {
+      "path": "backend/db-migrations/tests/IntegrationFixture.java",
+      "sha256": "ffb6ae3b67c569fdc056130a1f83eff7f7ba67072df7bb853846246a9f8fa0c9"
+    },
+    {
+      "path": "backend/db-migrations/tests/MigrationAcceptance.java",
+      "sha256": "5a07e58047ed7704b87f2e941381c1bad4780e960e656735af1fc8ce0dd4a7f5"
+    },
+    {
+      "path": "backend/platform-control/pom.xml",
+      "sha256": "bcc8dfef2b9a75eba723fdf411f1c1d45e62ad02b16000e3be6259575cc19d74"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/api/OnboardingConfigurationService.java",
+      "sha256": "3d6c4c5501cdf86365a1fa53d218d53adf7e5a76f499a5d791e20a8a0af92092"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/api/OnboardingIdentityVerifier.java",
+      "sha256": "787c0b7b56da1cb8953ea52807f5b82081ed659d9b8dbb3f816dcc41516983b8"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/api/PlatformService.java",
+      "sha256": "83a22994660d345b59af182879182b4b8089ccd85d74c3ccd488089fa273ac37"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/api/package-info.java",
+      "sha256": "8e02d8048b5980fdd641b3899e66be0e18ffb9b91e545968b71166f86c7f2e03"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/application/DefaultOnboardingConfigurationService.java",
+      "sha256": "f6a9a8a0e5ad5c74a0dc51b8f44354dcd7316c089f860cbf83af50662d617c48"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/application/DefaultPlatformService.java",
+      "sha256": "8d59d1ccb5a84e50592915717f61705847830c772868affa3b5cae7228981766"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/application/OidcOnboardingIdentityVerifier.java",
+      "sha256": "e9366dc3884ac60efb76062a6d4b1bfc5a429e947eb4a92a196d8376bcbf47bf"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/infrastructure/OnboardingCommand.java",
+      "sha256": "f9754656e1b9b6ace62d909459156bdab7b87db3cd82f47701134c3d20ef6b47"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/infrastructure/OnboardingConfiguration.java",
+      "sha256": "33a17178347880c9a48a4d94751b9203936f5af09b462e05ac54779ad6e853a7"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/infrastructure/OnboardingEvent.java",
+      "sha256": "9ccc058dec6ff3b9ac9c1672f5fb8c2af083c9ac5694592fd1d87c2b71917405"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/infrastructure/OnboardingRequest.java",
+      "sha256": "fc6c880857bbfac574ac0f2f81b77ccf4478d1433f6791a74e41c9db64911713"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/security/PlatformSecurity.java",
+      "sha256": "2d4c78164d61bc42ae1bcffb6b9ec365cc595ece8f665dff5ae94d5fa297532d"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/OnboardingConfigurationController.java",
+      "sha256": "7ecfb8bbd3a4712ecaf459592f7a270e552c7debeca035860f7da0cd7a9c2630"
+    },
+    {
+      "path": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformController.java",
+      "sha256": "ff4c473c3632a600f32bc96c45dfe664cc8d950c053a125dfdf125f916f78333"
+    },
+    {
+      "path": "backend/platform-control/src/test/java/com/quincaisoft/platformcontrol/PostgresOnboardingConcurrencyTest.java",
+      "sha256": "99f56e216d48c5e36f43f5febde275dfa0016adbf6a2c75908b632a93b1c0d05"
+    },
+    {
+      "path": "backend/platform-control/src/test/java/com/quincaisoft/platformcontrol/PostgresOnboardingConfigurationTest.java",
+      "sha256": "83bbe00ede431cceb288b73047ab815f76c89144f43d0deabc2564916199cd0d"
+    },
+    {
+      "path": "backend/platform-control/src/test/java/com/quincaisoft/platformcontrol/PostgresPlatformIntegrationTest.java",
+      "sha256": "f049e043329dd95ea8358c36fa7262f2b4a8d251e35779ba53b9c36ead4f57b3"
+    },
+    {
+      "path": "backend/platform-control/src/test/java/com/quincaisoft/platformcontrol/application/OidcOnboardingIdentityVerifierTest.java",
+      "sha256": "89503fd594f6242b4eb534727c32291232a6b92bc89acc237023a67e32276ab5"
+    },
+    {
+      "path": "backend/pom.xml",
+      "sha256": "6019348191d5db4b3942eaaea8a9d0bf857cccbe4e5f1200ec78e2e2a98c94cd"
+    },
+    {
+      "path": "backend/shared-kernel/pom.xml",
+      "sha256": "794df1bd6c220a26d15cd34205d8f0af3614b5755d0d0595b7ee3a2ba029c098"
+    },
+    {
+      "path": "backend/shared-kernel/src/main/java/com/quincaisoft/shared/Money.java",
+      "sha256": "beaa4af08c7c3de74a212bd18741872736a73f37f71050691bf995d2561a3856"
+    },
+    {
+      "path": "backend/shared-kernel/src/main/java/com/quincaisoft/shared/Quantity.java",
+      "sha256": "9c0e4f4611305328f4a7d1f76d16b4c0111fa8d8847f43a7d57523c7f6514c49"
+    },
+    {
+      "path": "backend/shared-kernel/src/main/java/com/quincaisoft/shared/RevisionConflict.java",
+      "sha256": "434bd4e0d160367c679858e6289730a01f59bb10828c50f3c1b02d821519751e"
+    },
+    {
+      "path": "backend/shared-kernel/src/main/java/com/quincaisoft/shared/ScopedTransactions.java",
+      "sha256": "beac93a1138ccc1e3a3fdd40c52f6f1c63bf7c7a47b6b8e1eed51ba7bd3a6cc0"
+    },
+    {
+      "path": "backend/shared-kernel/src/main/java/com/quincaisoft/shared/TenantContext.java",
+      "sha256": "3c8da6adece0f3fd76aee55f7999598355e6fb52938ceb0ba825a444846bbe67"
+    },
+    {
+      "path": "backend/shared-kernel/src/main/java/com/quincaisoft/shared/TenantScope.java",
+      "sha256": "c2d6876fbc5e4cd48852c0ea42ef76df91be24110da7ac606fda55ae7e613821"
+    },
+    {
+      "path": "backend/shared-kernel/src/test/java/com/quincaisoft/shared/ValueObjectsTest.java",
+      "sha256": "479211744efd9198d3feeecb4e18607acd844d9d66d2c36c6baa1df962242a9d"
+    },
+    {
+      "path": "backend/tools/history-import/pom.xml",
+      "sha256": "2aea5ff4582a97deb71d15313192b45bdbe5605fcf87c23a35b5e4127ee86a1a"
+    },
+    {
+      "path": "backend/tools/history-import/src/main/java/com/quincaisoft/tools/CatalogHistoryImport.java",
+      "sha256": "1ed0174893bb8b8a519ed91aa11934fa5e3815530d7a7c77614b22ed30435b35"
+    },
+    {
+      "path": "backend/workers/pom.xml",
+      "sha256": "4059515cb1fed82ab4db985b75693fa2050ee379d87d4c226092950e09ac1107"
+    },
+    {
+      "path": "backend/workers/src/main/java/com/quincaisoft/workers/api/OutboxWorker.java",
+      "sha256": "28b920013b66973efb6d109c5150cdeb0a9b7137568e9fb03efae70de1110443"
+    },
+    {
+      "path": "backend/workers/src/main/java/com/quincaisoft/workers/api/package-info.java",
+      "sha256": "6fa8f227b22a2f08400722002e320e7fc8d876064a8d28f03097439e26d61e78"
+    },
+    {
+      "path": "backend/workers/src/main/java/com/quincaisoft/workers/application/DefaultOutboxWorker.java",
+      "sha256": "8a425592d2aa8fef1bfb8450b9b78e1e6be41d74abe6efccdcb78a258d557103"
+    },
+    {
+      "path": "backend/workers/src/main/java/com/quincaisoft/workers/web/OperationsController.java",
+      "sha256": "189face3ffccac19ca2595657a55c616ab8e0d208fe37e1cb9a3baeea2497967"
+    },
+    {
+      "path": "backend/workers/src/test/java/com/quincaisoft/workers/IdentityWorkerPostgresTest.java",
+      "sha256": "ad00b5eeb18acf9dc936dfd0c260e891f9aa1c83d3cf9bc4d069e42ab97ffa70"
+    }
+  ],
+  "jarSha256": "49cf1e7987a5d9ed8f886a27c3cf139f67bbaeb32984a1a54bfdcef51eb19d61",
+  "nodeEnvironmentTests": {
+    "tests": 12,
+    "failures": 0,
+    "skipped": 0
+  },
+  "rules": "PASS",
+  "ownershipStructure": "PASS",
+  "parityInventory": "PASS_CURRENT",
+  "fullParity": "BLOCKED_735_REQUIRED_BEHAVIORS_UNACCEPTED",
+  "restoreRehearsal": "BLOCKED_EXECUTOR_UNIX_SOCKET_PERMISSION",
+  "containerBuild": "NOT_RUN_DOCKER_UNAVAILABLE",
+  "productionDeployment": "NOT_RUN_NO_TARGET_AND_RELEASE_GATES_OPEN",
+  "releaseReady": false,
+  "cloudImplementationParent": "9c1e13923b478ff41864f843613942e9ad3052da",
+  "historicalAcceptanceFlags": "NOT_SET_IN_THIS_RUN; Desktop-specific historical dataset scenarios not re-certified"
+}

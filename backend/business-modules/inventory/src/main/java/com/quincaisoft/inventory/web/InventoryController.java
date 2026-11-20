@@ -4,6 +4,13 @@ import com.quincaisoft.inventory.api.InventoryWorkflows;import org.springframewo
 public class InventoryController {
  private final InventoryWorkflows service;public InventoryController(InventoryWorkflows service){this.service=service;}
  @GetMapping("/warehouses") @PreAuthorize("hasAnyAuthority('inventory:read','SCOPE_inventory:read','sales:write','SCOPE_sales:write','purchasing:write','SCOPE_purchasing:write','purchasing:receive','SCOPE_purchasing:receive')") public List<InventoryWorkflows.Warehouse> warehouses(){return service.warehouses();}
+ public record LowStockSummary(long productCount) {}
+
+ @GetMapping("/inventory/low-stock/summary")
+ @PreAuthorize("hasAnyAuthority('inventory:read','SCOPE_inventory:read')")
+ public LowStockSummary lowStockSummary() {
+  return new LowStockSummary(service.lowStockCount());
+ }
  @GetMapping("/inventory/balances") @PreAuthorize("hasAnyAuthority('inventory:read','SCOPE_inventory:read')") public List<InventoryWorkflows.Balance> balances(@RequestParam UUID warehouseId){return service.balances(warehouseId);}
  @GetMapping("/inventory/transfers") @PreAuthorize("hasAnyAuthority('inventory:read','SCOPE_inventory:read')") public List<InventoryWorkflows.Transfer> transfers(){return service.transfers();}
  @GetMapping("/inventory/transfers/{id}") @PreAuthorize("hasAnyAuthority('inventory:read','SCOPE_inventory:read')") public InventoryWorkflows.Transfer transfer(@PathVariable UUID id){return service.get(id);}

@@ -17,6 +17,9 @@ import com.quincaisoft.customeraccounts.api.CustomerService;
 import jakarta.persistence.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.*;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -45,6 +48,11 @@ class PostgresReturnIntegrationTest {
     ScopedTransactions tx=new ScopedTransactions(){public <T>T execute(Supplier<T> action){return template.execute(status->{var scope=TenantContext.current();em.createNativeQuery("select set_config('app.tenant_id',:t,true),set_config('app.company_id',:c,true),set_config('app.branch_id',:b,true),set_config('app.actor_id',:a,true)").setParameter("t",scope.tenantId().toString()).setParameter("c",scope.companyId().toString()).setParameter("b",scope.branchId().toString()).setParameter("a",scope.actorId().toString()).getSingleResult();return action.get();});}};
     var catalog=new DefaultCatalogService(em,tx);var stock=new DefaultStockService(em,tx,catalog);var finance=new DefaultFinanceService(em,tx);var customers=new DefaultCustomerService(em,tx);var documents=new DefaultDocumentService(em,tx,JsonMapper.builder().build());var sales=new DefaultSalesService(em,tx,stock,catalog,finance,customers,JsonMapper.builder().build(),documents);
     var returns=new DefaultReturnService(em,tx,sales,finance,stock,catalog,documents,JsonMapper.builder().build());var quotes=new DefaultQuotationService(em,tx,sales,catalog,customers,stock,documents,JsonMapper.builder().build());var scope=new TenantScope(t,c,b,a);
+    SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+        "synthetic-return-workflow-actor", "not-used",
+        List.of("quotations:read", "quotations:write", "quotations:issue", "sales:write").stream()
+            .map(SimpleGrantedAuthority::new).toList()));
+    try {
     TenantContext.call(scope,1,()->{
      documents.configure(new DocumentService.Settings("Synthetic merchant","Synthetic address","TEST-REG","TEST","en",0));
      var draftRequest=new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"2000")));
@@ -54,17 +62,29 @@ class PostgresReturnIntegrationTest {
      assertThrows(IllegalStateException.class,()->sales.post(draft.id(),new SalesService.Post(postRequest.operationId(),draft.version(),"Different request must conflict")));
      var quote=quotes.draft(new QuotationService.Draft(UUID.randomUUID(),customer,w,LocalDate.now(),LocalDate.now().plusDays(10),List.of(new SalesService.RequestedLine(p,"1000"))));
      quote=quotes.issue(quote.id(),new QuotationService.Command(UUID.randomUUID(),quote.version(),"Issue synthetic quote"));assertEquals("ISSUED",quote.status());
+     quote=quotes.accept(quote.id(),new QuotationService.Decision(UUID.randomUUID(),quote.version(),"Customer accepted quotation","synthetic-acceptance-1"));assertEquals("ACCEPTED",quote.status());
      var convert=new QuotationService.Command(UUID.randomUUID(),quote.version(),"Accept synthetic quote");var converted=quotes.convert(quote.id(),convert);assertEquals("CONVERTED",converted.status());assertEquals(converted,quotes.convert(quote.id(),convert));assertNotNull(converted.convertedSaleId());
-     var ret=returns.draft(new ReturnService.Draft(UUID.randomUUID(),posted.id(),LocalDate.of(2026,11,18),"SELLABLE","inspection-1",List.of(new ReturnService.RequestedLine(p,"1000"))));
+     var returnDraft=new ReturnService.Draft(UUID.randomUUID(),posted.id(),LocalDate.of(2026,11,18),"SELLABLE","inspection-1",List.of(new ReturnService.RequestedLine(p,"1000")));
+     var ret=returns.draft(returnDraft);assertEquals(ret,returns.draft(returnDraft));
+     var reviewerScope=new TenantScope(t,c,b,UUID.randomUUID());
+     TenantContext.call(reviewerScope,1,()->{assertThrows(IllegalStateException.class,()->returns.draft(returnDraft));return null;});
+     TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->{assertEquals("Sale not found",assertThrows(NoSuchElementException.class,()->returns.draft(returnDraft)).getMessage());return null;});
+     TenantContext.call(new TenantScope(t,UUID.randomUUID(),b,a),1,()->{assertEquals("Sale not found",assertThrows(NoSuchElementException.class,()->returns.draft(returnDraft)).getMessage());return null;});
+     assertThrows(IllegalStateException.class,()->returns.draft(new ReturnService.Draft(returnDraft.operationId(),posted.id(),returnDraft.businessDate(),"SELLABLE","Changed evidence",returnDraft.lines())));
+     assertEquals(1,count(owner,"select count(*) from customer_return"));
      var approval=new ReturnService.Command(UUID.randomUUID(),ret.version(),"Independent inspection approval");assertThrows(IllegalStateException.class,()->returns.approve(ret.id(),approval));
-     var approved=TenantContext.call(new TenantScope(t,c,b,UUID.randomUUID()),1,()->returns.approve(ret.id(),approval));
+     var approved=TenantContext.call(reviewerScope,1,()->{var result=returns.approve(ret.id(),approval);assertEquals(result,returns.approve(ret.id(),approval));return result;});
+     assertThrows(IllegalStateException.class,()->returns.approve(ret.id(),approval));
      var postReturn=new ReturnService.Command(UUID.randomUUID(),approved.version(),"Accept returned goods and credit");var credited=returns.post(approved.id(),postReturn);assertEquals("POSTED",credited.status());assertEquals("1000",credited.creditXaf());assertEquals(credited,returns.post(approved.id(),postReturn));
+     TenantContext.call(reviewerScope,1,()->{assertThrows(IllegalStateException.class,()->returns.post(approved.id(),postReturn));return null;});
+     TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->{assertEquals("Return not found",assertThrows(NoSuchElementException.class,()->returns.post(approved.id(),postReturn)).getMessage());return null;});
      assertEquals(9000,count(owner,"select quantity_milli from stock_balance"));assertEquals(4500,count(owner,"select value_xaf from stock_balance"));assertEquals(2,count(owner,"select count(*) from journal_entry"));assertEquals(3,count(owner,"select count(*) from document_snapshot"));assertEquals(1000,finance.outstandingSale(posted.id()));
      var excess=returns.draft(new ReturnService.Draft(UUID.randomUUID(),posted.id(),LocalDate.of(2026,11,18),"SELLABLE","inspection-2",List.of(new ReturnService.RequestedLine(p,"2000"))));
      var excessApproved=TenantContext.call(new TenantScope(t,c,b,UUID.randomUUID()),1,()->returns.approve(excess.id(),new ReturnService.Command(UUID.randomUUID(),excess.version(),"Independent approval")));
      assertThrows(IllegalStateException.class,()->returns.post(excessApproved.id(),new ReturnService.Command(UUID.randomUUID(),excessApproved.version(),"Must reject excess")));assertEquals(9000,count(owner,"select quantity_milli from stock_balance"));
      return null;
     });
+    } finally { SecurityContextHolder.clearContext(); }
    }finally{if(factory!=null)factory.destroy();sql(admin,"DROP DATABASE "+db);sql(admin,"DROP ROLE "+role);}
   }
  }

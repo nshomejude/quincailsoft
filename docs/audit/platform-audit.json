@@ -1,0 +1,1128 @@
+{
+  "date": "2026-11-18",
+  "reviewedCommit": "adcc7e115bc7f42236fac041aed1898bb456adb8",
+  "method": "Read-only source/document audit and complete canonical inventory reconciliation. 765 local files copied only after matching Git blob SHA, plus targeted changed source fetched from the pinned GitHub commit. No independent current full runtime/penetration/load test.",
+  "readiness": "NO_GO",
+  "canonicalInventoryCounts": {
+    "module": {
+      "total": 40,
+      "statuses": {
+        "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING": 32,
+        "NOT_MIGRATED_OR_NOT_EVIDENCED": 8
+      }
+    },
+    "screen": {
+      "total": 152,
+      "statuses": {
+        "NOT_MIGRATED_OR_NOT_EVIDENCED": 60,
+        "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING": 92
+      }
+    },
+    "action": {
+      "total": 656,
+      "statuses": {
+        "NOT_INDIVIDUALLY_ACCEPTED": 656
+      }
+    },
+    "tab": {
+      "total": 445,
+      "statuses": {
+        "NOT_INDIVIDUALLY_ACCEPTED": 445
+      }
+    },
+    "screen_field": {
+      "total": 1140,
+      "statuses": {
+        "NOT_INDIVIDUALLY_ACCEPTED": 1140
+      }
+    },
+    "entity_field": {
+      "total": 523,
+      "statuses": {
+        "NOT_INDIVIDUALLY_ACCEPTED": 523
+      }
+    },
+    "report": {
+      "total": 76,
+      "statuses": {
+        "CANONICAL_METRIC_NOT_ACCEPTED": 76
+      }
+    },
+    "document": {
+      "total": 26,
+      "statuses": {
+        "PARTIAL_SNAPSHOT_RENDERING_ACCEPTANCE_PENDING": 4,
+        "NOT_MIGRATED_OR_NOT_EVIDENCED": 22
+      }
+    },
+    "document_field": {
+      "total": 190,
+      "statuses": {
+        "NOT_INDIVIDUALLY_ACCEPTED": 190
+      }
+    }
+  },
+  "modules": [
+    {
+      "id": "M01",
+      "name": "Tenant & provisioning",
+      "requiredScope": "Tenant lifecycle, plan region, isolation tier, data ownership, migrations",
+      "requiredOutputs": "Create/verify/suspend/restore tenant; `TenantProvisioned`",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 8,
+      "javaProductionFiles": 6,
+      "testFiles": 1,
+      "relatedAreas": [
+        "backend/platform-control"
+      ],
+      "openFindings": [
+        "A01",
+        "A06",
+        "A13"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Tenant onboarding/provisioning lifecycle, isolation and rollback; existing review flow is only partial."
+    },
+    {
+      "id": "M02",
+      "name": "Organization & branches",
+      "requiredScope": "Legal entity, business registration, branches, locations, store hours, business dates",
+      "requiredOutputs": "Company/branch CRUD, active policy checks, `BranchCreated`",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 12,
+      "javaProductionFiles": 10,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/company",
+        "backend/business-modules/branch"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Legal company and branch configuration, warehouse/date scope and approval controls."
+    },
+    {
+      "id": "M03",
+      "name": "Identity & staff",
+      "requiredScope": "Invitations, staff, memberships, MFA, session/device revocation",
+      "requiredOutputs": "OIDC integration, invites, session validation, `MembershipChanged`",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 9,
+      "javaProductionFiles": 8,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/identity"
+      ],
+      "openFindings": [
+        "A04",
+        "A05",
+        "A16"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "OIDC invitations, active membership/epoch, staff access; HR/payroll extension is separately assigned to CLOUD."
+    },
+    {
+      "id": "M04",
+      "name": "RBAC / ABAC policy",
+      "requiredScope": "Roles, permission bundles, branch scoping, maker-checker, separation of duties",
+      "requiredOutputs": "Effective capabilities API, authorization decisions, audit",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 22,
+      "javaProductionFiles": 17,
+      "testFiles": 2,
+      "relatedAreas": [
+        "backend/api-server",
+        "backend/business-modules/identity"
+      ],
+      "openFindings": [
+        "A05",
+        "A16"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Effective role/capability intersection, ABAC and independent approvals."
+    },
+    {
+      "id": "M05",
+      "name": "Subscriptions & billing",
+      "requiredScope": "Plan, features, seats, branch allowances, invoices to merchant, payment collection",
+      "requiredOutputs": "Billing portal/webhooks, grace/suspension, `EntitlementChanged`",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 4,
+      "javaProductionFiles": 3,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/subscriptions"
+      ],
+      "openFindings": [
+        "A02"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Plans, entitlements, seats/branches, subscription lifecycle, billing and enforcement."
+    },
+    {
+      "id": "M06",
+      "name": "Catalog / PIM",
+      "requiredScope": "SKU, product variants, brand, category, barcodes, media, lifecycle",
+      "requiredOutputs": "Products, variants, search, imports, `ProductChanged`",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 12,
+      "javaProductionFiles": 10,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/catalog"
+      ],
+      "openFindings": [
+        "A03"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Typed manufacturer/family/model/variant/supplier-offer identity; preserve source stock pools."
+    },
+    {
+      "id": "M07",
+      "name": "Units & measurement",
+      "requiredScope": "Base UoM, conversion ratios, pack definitions, tare, precision",
+      "requiredOutputs": "Conversion tests and preview, UoM APIs",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 12,
+      "javaProductionFiles": 10,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/catalog"
+      ],
+      "openFindings": [
+        "A14"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Exact rational conversion and pack/precision rules."
+    },
+    {
+      "id": "M08",
+      "name": "Pricing & promotions",
+      "requiredScope": "Retail/wholesale tiers, effective dates, customer/branch prices, discounts",
+      "requiredOutputs": "Price quote API, price approval, `PricePublished`",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 12,
+      "javaProductionFiles": 10,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/catalog"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Effective-dated pricing/discount approvals and frozen price/tax snapshots."
+    },
+    {
+      "id": "M09",
+      "name": "Inventory authority",
+      "requiredScope": "Custody, ownership/valuation positions, immutable movements, central reservations, exclusive offline stock grants",
+      "requiredOutputs": "Sole inventory writer; physical/owned/available balances and §32/§33 contracts",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 31,
+      "javaProductionFiles": 27,
+      "testFiles": 2,
+      "relatedAreas": [
+        "backend/business-modules/inventory"
+      ],
+      "openFindings": [
+        "A14"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Sole stock writer, custody/ownership, reservations and authoritative valuation."
+    },
+    {
+      "id": "M10",
+      "name": "Stock count & replenishment",
+      "requiredScope": "Cycle count, blind counts, approval, reorder points, transfer suggestions",
+      "requiredOutputs": "Count sessions, discrepancies, reorder reports",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 31,
+      "javaProductionFiles": 27,
+      "testFiles": 2,
+      "relatedAreas": [
+        "backend/business-modules/inventory"
+      ],
+      "openFindings": [
+        "A14"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Blind count, approved variances, reorder and replenishment."
+    },
+    {
+      "id": "M11",
+      "name": "Warehousing & transfers",
+      "requiredScope": "Bins, receiving, dispatch, in-transit, cross-branch transfer acknowledgements",
+      "requiredOutputs": "Transfer commands, scans, delivery and loss records",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 31,
+      "javaProductionFiles": 27,
+      "testFiles": 2,
+      "relatedAreas": [
+        "backend/business-modules/inventory"
+      ],
+      "openFindings": [
+        "A14"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Transfer dispatch/receipt/loss and value conservation."
+    },
+    {
+      "id": "M12",
+      "name": "Supplier master",
+      "requiredScope": "Supplier identity, purchasing terms, contact, documents, tax data",
+      "requiredOutputs": "Supplier APIs, statement, duplicate screening",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 8,
+      "javaProductionFiles": 6,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/suppliers"
+      ],
+      "openFindings": [
+        "A03"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Supplier identities, terms, duplicate handling and safe bank changes."
+    },
+    {
+      "id": "M13",
+      "name": "Procurement",
+      "requiredScope": "Requisitions, RFQ, purchase orders, approvals, partial receipt, returns",
+      "requiredOutputs": "PO/GRN APIs, `GoodsReceived`, landed costs",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 21,
+      "javaProductionFiles": 17,
+      "testFiles": 2,
+      "relatedAreas": [
+        "backend/business-modules/purchasing"
+      ],
+      "openFindings": [
+        "A14"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "PO/receipt/match exceptions, partials/returns and landed-cost provenance."
+    },
+    {
+      "id": "M14",
+      "name": "Supplier accounts",
+      "requiredScope": "Payables, credit notes, deposits, payment allocation, ageing",
+      "requiredOutputs": "AP ledger, statements, `SupplierPaymentConfirmed`",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 45,
+      "javaProductionFiles": 36,
+      "testFiles": 5,
+      "relatedAreas": [
+        "backend/business-modules/purchasing",
+        "backend/business-modules/tenders"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "AP, supplier credits/advances, payments/ageing and control reconciliation."
+    },
+    {
+      "id": "M15",
+      "name": "Customer master",
+      "requiredScope": "Customer identity, optional business KYC, consent, terms, contacts",
+      "requiredOutputs": "Directory, merge with audit, branch visibility",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 11,
+      "javaProductionFiles": 8,
+      "testFiles": 1,
+      "relatedAreas": [
+        "backend/business-modules/customer-accounts"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Customer directory, consent, scoped merges and terms."
+    },
+    {
+      "id": "M16",
+      "name": "Customer credit/deposits",
+      "requiredScope": "AR ledger, credit limits, deposit liability, invoice allocations, refunds",
+      "requiredOutputs": "Statements, allocations, overdue reports",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 35,
+      "javaProductionFiles": 27,
+      "testFiles": 4,
+      "relatedAreas": [
+        "backend/business-modules/customer-accounts",
+        "backend/business-modules/tenders"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Credit enforcement, deposits, AR allocations/refunds and exact balances."
+    },
+    {
+      "id": "M17",
+      "name": "POS & sales",
+      "requiredScope": "Cart/held sale, price and tax snapshot, receipt, sale approval, stock issue",
+      "requiredOutputs": "Sale POST API, `SalePosted`, sales register",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 15,
+      "javaProductionFiles": 11,
+      "testFiles": 2,
+      "relatedAreas": [
+        "backend/business-modules/sales"
+      ],
+      "openFindings": [
+        "A07"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "POS posting, held/draft sales, prices/taxes, atomic original document and stock issue."
+    },
+    {
+      "id": "M18",
+      "name": "Payments and settlement",
+      "requiredScope": "Tender types, provider adapters, settlement events, refunds, chargebacks",
+      "requiredOutputs": "Payment intent, webhooks, reconciliation",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 38,
+      "javaProductionFiles": 29,
+      "testFiles": 5,
+      "relatedAreas": [
+        "backend/business-modules/tenders",
+        "backend/business-modules/integrations"
+      ],
+      "openFindings": [
+        "A08"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "MTN/Orange intents, ambiguity, callbacks, settlements/refunds/chargebacks; live acceptance external."
+    },
+    {
+      "id": "M19",
+      "name": "Cash management",
+      "requiredScope": "Cash registers, shifts, movements, count, closing and differences",
+      "requiredOutputs": "Till APIs, daily close, `CashShiftClosed`",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 24,
+      "javaProductionFiles": 19,
+      "testFiles": 3,
+      "relatedAreas": [
+        "backend/business-modules/tenders"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Till sessions, independent close, denominations and differences."
+    },
+    {
+      "id": "M20",
+      "name": "Expenses",
+      "requiredScope": "Expense categories, payees, receipts, approvals, posted cash/bank impact",
+      "requiredOutputs": "Expense API, voucher, expense analysis",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 8,
+      "javaProductionFiles": 6,
+      "testFiles": 1,
+      "relatedAreas": [
+        "backend/business-modules/expenses"
+      ],
+      "openFindings": [
+        "A04",
+        "A15"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Expense approvals, cash/bank impact and vouchers."
+    },
+    {
+      "id": "M21",
+      "name": "Quotations & offers",
+      "requiredScope": "Draft/issued quotes, expiry, revisions, approval, customer acceptance",
+      "requiredOutputs": "Quote APIs, document and POS staging",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 7,
+      "javaProductionFiles": 6,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/quotations"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Quote revisions, expiry, acceptance and safe sale conversion."
+    },
+    {
+      "id": "M22",
+      "name": "Returns & credit notes",
+      "requiredScope": "Original sale eligibility, inspection, restocking, credits, customer refund",
+      "requiredOutputs": "Return API, credit note, refund voucher",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 9,
+      "javaProductionFiles": 7,
+      "testFiles": 1,
+      "relatedAreas": [
+        "backend/business-modules/returns"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Original-line return limits, frozen cost, credit and approved refund."
+    },
+    {
+      "id": "M23",
+      "name": "Fulfillment & delivery",
+      "requiredScope": "Pickup, packing, shipping, drivers, proof of delivery, partial fulfillment",
+      "requiredOutputs": "Handover API, delivery note, `OrderDelivered`",
+      "baselineRegisterStatus": "NOT_MIGRATED_OR_NOT_EVIDENCED",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 46,
+      "javaProductionFiles": 38,
+      "testFiles": 4,
+      "relatedAreas": [
+        "backend/business-modules/inventory",
+        "backend/business-modules/sales"
+      ],
+      "openFindings": [
+        "A14"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Customer custody and partial pickup/delivery without second stock deduction."
+    },
+    {
+      "id": "M24",
+      "name": "Document & print engine",
+      "requiredScope": "Atomic document issuance, number series, immutable economic snapshots, template versions and print attempts",
+      "requiredOutputs": "issueSnapshot in source transaction; rendering/download/print after commit (§38)",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 18,
+      "javaProductionFiles": 15,
+      "testFiles": 2,
+      "relatedAreas": [
+        "backend/business-modules/documents"
+      ],
+      "openFindings": [
+        "A10"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Atomic immutable snapshots, numbering, templates, print attempts and all canonical fields. CLOUD performs independent parity audit."
+    },
+    {
+      "id": "M25",
+      "name": "Fiscal configuration & operational journal",
+      "requiredScope": "Balanced control journal, company account mappings, periods, tax rules, finance export and fiscal adapter policy",
+      "requiredOutputs": "postBatch, reversal, control reconciliation, tax preview and accountant exports (§37)",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 22,
+      "javaProductionFiles": 19,
+      "testFiles": 1,
+      "relatedAreas": [
+        "backend/business-modules/finance"
+      ],
+      "openFindings": [
+        "A04",
+        "A15"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Exact balanced journal, reversal, periods, fiscal policy and operational account mappings."
+    },
+    {
+      "id": "M26",
+      "name": "Operational reporting",
+      "requiredScope": "Sales KPIs, margin estimates, stock, AR/AP, expenses, cash, audit",
+      "requiredOutputs": "Bounded aggregate views, exports, report jobs",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 8,
+      "javaProductionFiles": 5,
+      "testFiles": 2,
+      "relatedAreas": [
+        "backend/business-modules/reporting"
+      ],
+      "openFindings": [
+        "A07",
+        "A10",
+        "A15"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Scoped real aggregates, all canonical reports, analytics and exports. CLOUD performs independent parity audit."
+    },
+    {
+      "id": "M27",
+      "name": "Commerce storefront",
+      "requiredScope": "Storefront products, prices, checkout, customer cart and delivery choices",
+      "requiredOutputs": "SEO catalogue, cart/order/payment API",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 21,
+      "javaProductionFiles": 7,
+      "testFiles": 1,
+      "relatedAreas": [
+        "backend/business-modules/commerce",
+        "apps/merchant-storefront"
+      ],
+      "openFindings": [
+        "A09"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Storefront publication, entitlement, cart/checkout and customer ownership."
+    },
+    {
+      "id": "M28",
+      "name": "Orders & reservation orchestration",
+      "requiredScope": "Multi-channel orders and reservation workflow; M09 alone owns reservation quantities/tables",
+      "requiredOutputs": "Order API; invoke inventory reserve/release/consume; order expiry and compensation coordination",
+      "baselineRegisterStatus": "NOT_MIGRATED_OR_NOT_EVIDENCED",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 40,
+      "javaProductionFiles": 34,
+      "testFiles": 3,
+      "relatedAreas": [
+        "backend/business-modules/commerce",
+        "backend/business-modules/inventory"
+      ],
+      "openFindings": [
+        "A09"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Order orchestration; M09 alone owns reservations."
+    },
+    {
+      "id": "M29",
+      "name": "Offline mobile/sync",
+      "requiredScope": "Device grant, local outbox, batch push, deltas, conflicts, high-watermarks",
+      "requiredOutputs": "`/sync/*`, sync logs, quota allocation",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 26,
+      "javaProductionFiles": 7,
+      "testFiles": 2,
+      "relatedAreas": [
+        "backend/business-modules/sync",
+        "apps/mobile"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "PAUSED_BY_USER",
+      "nextVerification": "PAUSED: native mobile feature work; inventory/offline authority must still fail closed in backend."
+    },
+    {
+      "id": "M30",
+      "name": "Windows bridge & standalone companion",
+      "requiredScope": "WPF adapter, source mappings, encrypted companion snapshots/drafts and native reconciliation",
+      "requiredOutputs": "Reuse M29 sync protocol; no alternate cloud sync engine or direct DB copying (§35/§38)",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 14,
+      "javaProductionFiles": 0,
+      "testFiles": 0,
+      "relatedAreas": [
+        "desktop-integration"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "PAUSED_BY_USER",
+      "nextVerification": "PAUSED: standalone WPF and bridge feature work; preserve existing standalone behavior."
+    },
+    {
+      "id": "M31",
+      "name": "Notifications & alerts",
+      "requiredScope": "Event-driven email/SMS/push/WhatsApp templates, preferences, delivery receipts",
+      "requiredOutputs": "Notification queue, receipts, user opt-outs",
+      "baselineRegisterStatus": "NOT_MIGRATED_OR_NOT_EVIDENCED",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 18,
+      "javaProductionFiles": 17,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/operations"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Event-driven notifications, user preferences and delivery retry receipts."
+    },
+    {
+      "id": "M32",
+      "name": "Integrations & webhooks",
+      "requiredScope": "Provider configuration, secrets, signed webhooks, retries, sandbox/test mode",
+      "requiredOutputs": "Connectors and integration health",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 14,
+      "javaProductionFiles": 10,
+      "testFiles": 2,
+      "relatedAreas": [
+        "backend/business-modules/integrations"
+      ],
+      "openFindings": [
+        "A08"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Signed integration callbacks, secrets boundary, replay and retries."
+    },
+    {
+      "id": "M33",
+      "name": "Import / export / migration",
+      "requiredScope": "CSV/XLSX templates, dry-run diff, duplicate handling, mapping, job audit",
+      "requiredOutputs": "Import jobs, scoped exports, failure manifest",
+      "baselineRegisterStatus": "NOT_MIGRATED_OR_NOT_EVIDENCED",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 18,
+      "javaProductionFiles": 17,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/operations"
+      ],
+      "openFindings": [
+        "A03",
+        "A11"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Historical Java importer/durable mapping, scoped master imports/exports and recovery-safe replay."
+    },
+    {
+      "id": "M34",
+      "name": "Audit & compliance",
+      "requiredScope": "Immutable event trail, retention policy, access logs, legal hold, export",
+      "requiredOutputs": "Audits, access review, retention execution",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 6,
+      "javaProductionFiles": 5,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/audit"
+      ],
+      "openFindings": [
+        "A16"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Append-only audit, delivery workers, access/retention and legal hold."
+    },
+    {
+      "id": "M35",
+      "name": "Platform administration",
+      "requiredScope": "Tenant support, service health, billing support, capacity, feature rollout",
+      "requiredOutputs": "Separate admin API/control plane, break-glass",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 23,
+      "javaProductionFiles": 6,
+      "testFiles": 1,
+      "relatedAreas": [
+        "backend/platform-control",
+        "apps/platform-admin"
+      ],
+      "openFindings": [
+        "A01",
+        "A12",
+        "A16"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Separate platform administration, tenant support and consented narrow access; no global merchant bypass."
+    },
+    {
+      "id": "M36",
+      "name": "Industry capabilities",
+      "requiredScope": "Per-vertical attributes, templates, sector rules and optional module packages",
+      "requiredOutputs": "Feature and schema configuration, not tenant code forks",
+      "baselineRegisterStatus": "NOT_MIGRATED_OR_NOT_EVIDENCED",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 16,
+      "javaProductionFiles": 13,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/catalog",
+        "backend/business-modules/subscriptions"
+      ],
+      "openFindings": [
+        "A14"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Industry attributes/capabilities without tenant code forks."
+    },
+    {
+      "id": "M37",
+      "name": "Device and print management",
+      "requiredScope": "Registered printers/scanners, locale/templates, device status and troubleshooting",
+      "requiredOutputs": "Printer profile and capability checks",
+      "baselineRegisterStatus": "PARTIAL_SOURCE_PRESENT_ACCEPTANCE_PENDING",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 18,
+      "javaProductionFiles": 15,
+      "testFiles": 2,
+      "relatedAreas": [
+        "backend/business-modules/documents"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Server-side device/print profiles; native hardware acceptance paused with clients."
+    },
+    {
+      "id": "M38",
+      "name": "Data lifecycle & backup",
+      "requiredScope": "Tenant export, deletion workflows, PITR runbooks, restore verification",
+      "requiredOutputs": "Export/restore evidence and retention jobs",
+      "baselineRegisterStatus": "NOT_MIGRATED_OR_NOT_EVIDENCED",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 30,
+      "javaProductionFiles": 17,
+      "testFiles": 0,
+      "relatedAreas": [
+        "backend/business-modules/operations",
+        "infrastructure"
+      ],
+      "openFindings": [
+        "A11",
+        "A12",
+        "A16"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Backup/restore/PITR, deletion/export and retention. Shared operations implementation requires path-level reservation."
+    },
+    {
+      "id": "M39",
+      "name": "Search and indexing",
+      "requiredScope": "Product/customer/supplier search, autocomplete, bounded reindexing",
+      "requiredOutputs": "PostgreSQL full text initially; external index only if needed",
+      "baselineRegisterStatus": "NOT_MIGRATED_OR_NOT_EVIDENCED",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 31,
+      "javaProductionFiles": 24,
+      "testFiles": 1,
+      "relatedAreas": [
+        "backend/business-modules/catalog",
+        "backend/business-modules/customer-accounts",
+        "backend/business-modules/suppliers"
+      ],
+      "openFindings": [],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Bounded scoped PostgreSQL search and reindexing."
+    },
+    {
+      "id": "M40",
+      "name": "Support & diagnostics",
+      "requiredScope": "Ticket, diagnostic bundle, consented remote support session, incident linking",
+      "requiredOutputs": "Support UI and auditable access grant",
+      "baselineRegisterStatus": "NOT_MIGRATED_OR_NOT_EVIDENCED",
+      "baselineCaveat": "Existing register is historical; source counts are not runtime acceptance.",
+      "relatedSourceFiles": 23,
+      "javaProductionFiles": 6,
+      "testFiles": 1,
+      "relatedAreas": [
+        "backend/platform-control",
+        "apps/platform-admin"
+      ],
+      "openFindings": [
+        "A06",
+        "A13"
+      ],
+      "acceptanceStatus": "NOT_CERTIFIED",
+      "nextVerification": "Support diagnostics, consent and expiring audited access grants."
+    }
+  ],
+  "findings": [
+    {
+      "id": "A01",
+      "severity": "BLOCKER",
+      "title": "Onboarding approval is not tenant provisioning",
+      "modules": [
+        "M01",
+        "M35"
+      ],
+      "evidence": [
+        "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/application/DefaultPlatformService.java: approve sets APPROVED_FOR_PROVISIONING; no tenant creation in this service"
+      ],
+      "exit": "Verified create company/branch/owner/entitlements transaction, outbox and retry; fail/rollback/retry without duplicate tenant; lifecycle suspend/restore.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A02",
+      "severity": "BLOCKER",
+      "title": "Subscription billing lifecycle is incomplete",
+      "modules": [
+        "M05"
+      ],
+      "evidence": [
+        "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/application/DefaultEntitlementService.java: only requireCommerce query"
+      ],
+      "exit": "Trial/active/grace/past-due/suspended/cancelled transitions, plan/seat/branch limits, billing records and independently verified payments; no data destruction on expiry.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A03",
+      "severity": "BLOCKER",
+      "title": "Manufacturer/family/variant and supplier offers block dataset ingestion",
+      "modules": [
+        "M06",
+        "M12",
+        "M33"
+      ],
+      "evidence": [
+        "docs/dataset-import-evidence.md: all 245514 candidate records blocked; zero imported",
+        "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/api/CatalogService.java"
+      ],
+      "exit": "Typed identity with 10 manufacturers per type, independent supplier offerings, scoped uniqueness and exact per-SKU stock; chronological importer/replay, all required source IDs accounted for.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A04",
+      "severity": "BLOCKER",
+      "title": "HR/payroll history is not an implemented business workflow",
+      "modules": [
+        "M03",
+        "M20",
+        "M25"
+      ],
+      "evidence": [
+        "docs/dataset-import-evidence.md: HR/payroll unfinished"
+      ],
+      "exit": "Define extension contract, employees/attendance/contracts/payroll approval and journals, payslips and role restrictions. Synthetic rates cannot become statutory defaults.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A05",
+      "severity": "BLOCKER",
+      "title": "Current-role authorization acceptance remains unresolved",
+      "modules": [
+        "M03",
+        "M04"
+      ],
+      "evidence": [
+        "backend/api-server/src/main/java/com/quincaisoft/security/TenantScopeFilter.java: token scope/epoch context; no effective capability intersection here",
+        "docs/WORK_ALLOCATION.md: role/capability intersection unresolved"
+      ],
+      "exit": "Inspect complete security path and test old roles/new epoch, revoked membership, cross-tenant/company/branch, report/download/job capabilities and own-customer access; source inspection alone is not an exploit proof.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A06",
+      "severity": "BLOCKER",
+      "title": "Full migration acceptance is unresolved",
+      "modules": [
+        "M01",
+        "M40"
+      ],
+      "evidence": [
+        "docs/WORK_ALLOCATION.md: 735 unresolved behaviors reported",
+        "docs/migration-evidence/summary.json: earlier 60-test baseline, full_migration INCOMPLETE"
+      ],
+      "exit": "Fresh current-commit full reactor/PostgreSQL and module acceptance; resolve required parity cases individually. Historical tests cannot certify new code.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A07",
+      "severity": "BLOCKER",
+      "title": "Original dashboard meaning and complete screen parity are not preserved",
+      "modules": [
+        "M17",
+        "M26"
+      ],
+      "evidence": [
+        "apps/web-admin/app/page.tsx: record counts and mixed activity list replace original operational metrics",
+        "previews/QuincaiSoft_Dashboard_v4.jpg",
+        "docs/WORK_ALLOCATION.md: final visual and narrow-width verification pending"
+      ],
+      "exit": "Original layouts/actions/tabs and authorized live Java aggregates for sales, low stock, collection and profit. Before/after visual and behavior acceptance for every canonical screen.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A08",
+      "severity": "BLOCKER",
+      "title": "Live mobile-money acceptance and Orange implementation are incomplete",
+      "modules": [
+        "M18",
+        "M32"
+      ],
+      "evidence": [
+        "backend/business-modules/integrations/web/ProviderController.java: Orange unavailable",
+        "docs/dataset-import-evidence.md: live providers BLOCKED"
+      ],
+      "exit": "Implement authorized contracts, signature/replay/ambiguity and reconciliation safeguards; execute provider sandbox and approved live acceptance. Never mark simulated payment verified.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A09",
+      "severity": "BLOCKER",
+      "title": "Storefront checkout/order lifecycle is not exposed by reviewed API",
+      "modules": [
+        "M27",
+        "M28"
+      ],
+      "evidence": [
+        "backend/business-modules/commerce/src/main/java/com/quincaisoft/commerce/api/CommerceService.java: store/listing/public catalogue only"
+      ],
+      "exit": "Cart/order state machine, inventory reservations through M09, payment outcome reconciliation, own-order access, delivery/returns and compensations.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A10",
+      "severity": "BLOCKER",
+      "title": "Reports and document families are partial and require semantic mapping",
+      "modules": [
+        "M24",
+        "M26"
+      ],
+      "evidence": [
+        "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/application/DocumentSourceReader.java",
+        "backend/business-modules/reporting/src/main/java/com/quincaisoft/reporting/application/DefaultReportingService.java",
+        "docs/migration/canonical-migration-coverage.json: 76 reports, 26 document families, 190 document fields in register"
+      ],
+      "exit": "Map all canonical IDs/fields to fixed sources/templates/metrics; test original snapshots, permissions, date basis, pagination totals, EN/FR, A4/58/80mm and reprint audit. 17 definitions are not 17 accepted canonical workflows.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A11",
+      "severity": "BLOCKER",
+      "title": "Backups and restore have not been demonstrated",
+      "modules": [
+        "M38",
+        "M33"
+      ],
+      "evidence": [
+        "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/api/OperationsService.java: manifest/integrity/rehearsal APIs; not a database backup proof",
+        "docs/dataset-import-evidence.md: production restore NOT_RUN"
+      ],
+      "exit": "Encrypted off-host backup, WAL/PITR retention and actual restore rehearsal; RPO/RTO measured; rekey/revoke credentials/grants and reconcile tenant/ledger after recovery.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A12",
+      "severity": "BLOCKER",
+      "title": "Production deployment target and environment acceptance are absent",
+      "modules": [
+        "M35",
+        "M38"
+      ],
+      "evidence": [
+        "infrastructure/compose.yaml: expressly local development database only",
+        "docs/dataset-import-evidence.md: local preview only, deployment/TLS/monitoring NOT_RUN"
+      ],
+      "exit": "Established authorized host/account/domain, immutable build, runtime secrets, TLS, migrations, health/readiness, least-privilege network, monitored deploy/rollback and load checks.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A13",
+      "severity": "HIGH",
+      "title": "Ownership and evidence are fragmented and partially stale",
+      "modules": [
+        "M01",
+        "M40"
+      ],
+      "evidence": [
+        "docs/WORK_ALLOCATION.md contains older pending statements and later follow-up",
+        "docs/migration-evidence/summary.json refers to old baseline"
+      ],
+      "exit": "One control index, exact module/file owners, acknowledged handoffs, canonical inventory and current commit-bound test results. Never equate assignment with execution.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A14",
+      "severity": "HIGH",
+      "title": "Specialized materials workflows need complete acceptance",
+      "modules": [
+        "M07",
+        "M09",
+        "M10",
+        "M11",
+        "M13",
+        "M23",
+        "M36"
+      ],
+      "evidence": [
+        "ARCHITECTURE.md §§32,37,40",
+        "datasets/business-history/COVERAGE.md: lots, packs, CUT/REPACK, reservations, custody and late costs not fully covered by fixture"
+      ],
+      "exit": "Prove length/area/volume/weight conversions, lot/serial/expiry, cut remnants/waste, pack split, damaged custody, partial deliveries and late-cost/final-unit conservation.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A15",
+      "severity": "HIGH",
+      "title": "Company-wide financial and corporate features need explicit scope decisions",
+      "modules": [
+        "M20",
+        "M25",
+        "M26"
+      ],
+      "evidence": [
+        "ARCHITECTURE.md §37: operational journal, not statutory accounting claim",
+        "datasets/business-history/COVERAGE.md"
+      ],
+      "exit": "Complete required operational AR/AP/cash/bank/periods/taxes/reconciliation. Explicitly classify fixed assets, depreciation, statutory payroll/accounts, budgeting, CRM/projects as required extension or out-of-scope; no hidden claim of a complete general-purpose ERP.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    },
+    {
+      "id": "A16",
+      "severity": "BLOCKER",
+      "title": "Production security/performance/recovery evidence is missing",
+      "modules": [
+        "M03",
+        "M04",
+        "M34",
+        "M35",
+        "M38"
+      ],
+      "evidence": [
+        "docs/dataset-import-evidence.md: scans/capacity/recovery NOT_RUN"
+      ],
+      "exit": "Risk-appropriate OWASP ASVS test mapping, dependency findings resolved, tenant isolation under concurrent load, agreed latency/capacity targets, alert/failure and recovery evidence.",
+      "status": "OPEN",
+      "acceptedTestEvidence": []
+    }
+  ],
+  "limits": [
+    "Not a completed exhaustive runtime audit: every required workflow still needs executed acceptance.",
+    "External product documentation is a representative capability benchmark, not a universal hardware-store certification standard.",
+    "Canonical 76 reports/26 documents are contract items, not certified generated outputs.",
+    "Sources that share directories overlap; do not add source-file counts across modules."
+  ],
+  "references": [
+    {
+      "topic": "Variant-level SKU/stock identity",
+      "url": "https://www.odoo.com/documentation/19.0/applications/sales/sales/products_prices/products/variants.html"
+    },
+    {
+      "topic": "Purchase/sale/stock units and conversions",
+      "url": "https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/inventory/product_management/configure/uom.html"
+    },
+    {
+      "topic": "Replenishment example",
+      "url": "https://www.odoo.com/documentation/master/applications/inventory_and_mrp/inventory/warehouses_storage/replenishment/reordering_rules.html"
+    },
+    {
+      "topic": "Application security verification",
+      "url": "https://owasp.org/projects/asvs"
+    },
+    {
+      "topic": "Backup and recovery approaches",
+      "url": "https://www.postgresql.org/docs/18/backup.html"
+    },
+    {
+      "topic": "Database row security",
+      "url": "https://www.postgresql.org/docs/18/ddl-rowsecurity.html"
+    }
+  ]
+}

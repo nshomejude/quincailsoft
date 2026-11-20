@@ -1,0 +1,126 @@
+# Application deployment candidate. PostgreSQL18, TLS Redis and two OIDC realms are external.
+x-runtime: &runtime
+  restart: unless-stopped
+  init: true
+  user: "10001:10001"
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  tmpfs: ["/tmp:rw,noexec,nosuid,size=256m,mode=1777"]
+  pids_limit: 256
+  stop_grace_period: 40s
+  logging:
+    driver: json-file
+    options: {max-size: 20m, max-file: "5"}
+services:
+  api:
+    <<: *runtime
+    image: ${QUINCAI_API_IMAGE:?Approved immutable image required}
+    expose: ["8080"]
+    mem_limit: 2g
+    cpus: 2
+    environment:
+      SPRING_CONFIG_IMPORT: configtree:/run/secrets/
+      QUINCAI_DATABASE_URL: ${QUINCAI_DATABASE_URL:?Required}
+      QUINCAI_DATABASE_USER: ${QUINCAI_DATABASE_USER:?Required}
+      QUINCAI_OIDC_ISSUER: ${QUINCAI_OIDC_ISSUER:?Required}
+      QUINCAI_OIDC_AUDIENCE: ${QUINCAI_OIDC_AUDIENCE:?Required}
+      QUINCAI_PLATFORM_ENABLED: "true"
+      QUINCAI_PLATFORM_ISSUER: ${PLATFORM_OIDC_ISSUER:?Required}
+      QUINCAI_PLATFORM_AUDIENCE: ${QUINCAI_PLATFORM_AUDIENCE:?Required}
+      QUINCAI_MIGRATIONS_ENABLED: "false"
+      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "15"
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT: "5000"
+      SERVER_SHUTDOWN: graceful
+      SPRING_LIFECYCLE_TIMEOUT_PER_SHUTDOWN_PHASE: 30s
+    secrets: [QUINCAI_DATABASE_PASSWORD, database_ca.pem]
+    networks: [backend]
+  merchant:
+    <<: *runtime
+    image: ${QUINCAI_MERCHANT_IMAGE:?Approved immutable image required}
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=128m,mode=1777", "/opt/quincaisoft/apps/web-admin/.next/cache:rw,noexec,nosuid,size=128m,uid=10001,gid=10001,mode=0700"]
+    mem_limit: 1g
+    cpus: 1
+    expose: ["3000"]
+    environment:
+      WEB_APP: web-admin
+      APP_URL: ${APP_URL:?Required HTTPS public origin}
+      JAVA_API_URL: http://api:8080
+      OIDC_ISSUER: ${QUINCAI_OIDC_ISSUER:?Required}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:?Required}
+      OIDC_CLIENT_SECRET_FILE: /run/secrets/merchant_oidc_secret
+      OIDC_SCOPES: ${OIDC_SCOPES:?Required explicit scopes}
+      OIDC_ALLOW_HTTP: "false"
+      REDIS_URL_FILE: /run/secrets/merchant_redis_url
+    secrets: [merchant_oidc_secret, merchant_redis_url]
+    networks: [backend, frontend]
+  platform:
+    <<: *runtime
+    image: ${QUINCAI_PLATFORM_IMAGE:?Approved immutable image required}
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=128m,mode=1777", "/opt/quincaisoft/apps/platform-admin/.next/cache:rw,noexec,nosuid,size=128m,uid=10001,gid=10001,mode=0700"]
+    mem_limit: 1g
+    cpus: 1
+    expose: ["3000"]
+    environment:
+      WEB_APP: platform-admin
+      PLATFORM_APP_URL: ${PLATFORM_APP_URL:?Required HTTPS platform origin}
+      PLATFORM_API_URL: http://api:8080
+      PLATFORM_OIDC_ISSUER: ${PLATFORM_OIDC_ISSUER:?Required}
+      PLATFORM_OIDC_CLIENT_ID: ${PLATFORM_OIDC_CLIENT_ID:?Required}
+      PLATFORM_OIDC_CLIENT_SECRET_FILE: /run/secrets/platform_oidc_secret
+      PLATFORM_OIDC_SCOPES: ${PLATFORM_OIDC_SCOPES:?Required explicit scopes}
+      PLATFORM_OIDC_ALLOW_HTTP: "false"
+      REDIS_URL_FILE: /run/secrets/platform_redis_url
+    secrets: [platform_oidc_secret, platform_redis_url]
+    networks: [backend, frontend]
+  ingress:
+    <<: *runtime
+    image: ${QUINCAI_INGRESS_IMAGE:?Approved unprivileged nginx image required}
+    # Template uses unprivileged port 8443 and writable PID/temp paths under /tmp.
+    entrypoint: ["nginx"]
+    command: ["-c", "/etc/nginx/nginx.conf", "-g", "daemon off;"]
+    ports: ["127.0.0.1:8443:8443"]
+    mem_limit: 256m
+    cpus: 1
+    volumes:
+      - ${QUINCAI_INGRESS_CONFIG_FILE:?Rendered config required}:/etc/nginx/nginx.conf:ro
+    secrets: [ingress_certificate.pem, ingress_private_key.pem]
+    networks: [frontend]
+  migrate:
+    <<: *runtime
+    image: ${QUINCAI_MIGRATION_IMAGE:?Approved migration image required}
+    profiles: [tools]
+    restart: "no"
+    mem_limit: 1g
+    cpus: 1
+    command: [validate]
+    environment:
+      QUINCAI_MIGRATION_URL: ${QUINCAI_DATABASE_URL:?Required}
+      QUINCAI_MIGRATION_USER: ${QUINCAI_MIGRATION_USER:?Required}
+      QUINCAI_DATABASE_USER: ${QUINCAI_DATABASE_USER:?Required}
+      QUINCAI_MIGRATION_PASSWORD_FILE: /run/secrets/migration_password
+    secrets: [migration_password, database_ca.pem]
+    networks: [backend]
+networks:
+  # Backend needs outbound database/OIDC access; neither API nor app ports bind the host.
+  backend: {}
+  frontend: {internal: true}
+secrets:
+  QUINCAI_DATABASE_PASSWORD:
+    file: ${QUINCAI_DATABASE_PASSWORD_FILE:?Required}
+  migration_password:
+    file: ${QUINCAI_MIGRATION_PASSWORD_FILE:?Required}
+  database_ca.pem:
+    file: ${QUINCAI_DATABASE_CA_FILE:?Required}
+  merchant_oidc_secret:
+    file: ${OIDC_CLIENT_SECRET_FILE:?Required}
+  platform_oidc_secret:
+    file: ${PLATFORM_OIDC_CLIENT_SECRET_FILE:?Required}
+  merchant_redis_url:
+    file: ${MERCHANT_REDIS_URL_FILE:?Required}
+  platform_redis_url:
+    file: ${PLATFORM_REDIS_URL_FILE:?Required}
+  ingress_certificate.pem:
+    file: ${QUINCAI_TLS_CERT_FILE:?Required}
+  ingress_private_key.pem:
+    file: ${QUINCAI_TLS_KEY_FILE:?Required}

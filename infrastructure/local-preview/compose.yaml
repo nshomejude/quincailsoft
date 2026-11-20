@@ -1,0 +1,79 @@
+services:
+  database:
+    image: postgres:18.7-bookworm
+    environment:
+      POSTGRES_DB: quincaisoft
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${PREVIEW_DB_ADMIN_PASSWORD:?}
+      QUINCAI_MIGRATOR_PASSWORD: ${PREVIEW_DB_MIGRATOR_PASSWORD:?}
+      QUINCAI_RUNTIME_PASSWORD: ${PREVIEW_DB_RUNTIME_PASSWORD:?}
+    volumes:
+      - database:/var/lib/postgresql
+      - ./.state/010-roles.sh:/docker-entrypoint-initdb.d/010-roles.sh:ro
+      - ./seed.sql:/preview/seed.sql:ro
+    healthcheck:
+      test: [CMD, pg_isready, -U, postgres, -d, quincaisoft, -h, localhost]
+      interval: 3s
+      timeout: 3s
+      retries: 40
+  identity:
+    image: quay.io/keycloak/keycloak:26.8.2
+    command: [start-dev, --import-realm, --http-port=8180, --hostname=http://localhost:8180]
+    ports:
+      - "127.0.0.1:8180:8180"
+      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:3100:3100"
+    volumes:
+      - ./.state/theme:/opt/keycloak/themes/quincai-preview:ro
+      - ./.state/quincaisoft-realm.json:/opt/keycloak/data/import/quincaisoft-realm.json:ro
+  sessions:
+    image: redis:8-alpine
+  api:
+    image: eclipse-temurin:25-jre-noble
+    network_mode: service:identity
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      QUINCAI_DATABASE_URL: jdbc:postgresql://database:5432/quincaisoft
+      QUINCAI_DATABASE_USER: quincai_runtime
+      QUINCAI_DATABASE_PASSWORD: ${PREVIEW_DB_RUNTIME_PASSWORD:?}
+      QUINCAI_MIGRATIONS_ENABLED: "true"
+      QUINCAI_MIGRATION_USER: quincai_migrator
+      QUINCAI_MIGRATION_PASSWORD: ${PREVIEW_DB_MIGRATOR_PASSWORD:?}
+      QUINCAI_OIDC_ISSUER: http://localhost:8180/realms/quincaisoft
+      QUINCAI_OIDC_AUDIENCE: quincai-api
+    volumes:
+      - ./.state/app.jar:/preview/app.jar:ro
+    command: [java, -jar, /preview/app.jar]
+  web:
+    image: node:26-bookworm
+    network_mode: service:identity
+    working_dir: /workspace
+    environment:
+      APP_URL: http://localhost:3100
+      JAVA_API_URL: http://127.0.0.1:8080
+      OIDC_ISSUER: http://localhost:8180/realms/quincaisoft
+      OIDC_CLIENT_ID: quincaisoft-web
+      OIDC_CLIENT_SECRET: ${QUINCAI_PREVIEW_WEB_SECRET:?}
+      OIDC_SCOPES: openid profile
+      OIDC_ALLOW_HTTP: "true"
+      QUINCAI_PREVIEW_DEMO: "true"
+      REDIS_URL: redis://sessions:6379
+      WATCHPACK_POLLING: "true"
+    volumes:
+      - ../..:/workspace
+      - web_root_modules:/workspace/node_modules
+      - web_app_modules:/workspace/apps/web-admin/node_modules
+      - web_pnpm_store:/opt/pnpm/store
+    command:
+      - sh
+      - -ec
+      - |
+        npx --yes pnpm@11.25.0 --filter @quincaisoft/web-admin... install --frozen-lockfile --fetch-timeout=600000 --store-dir=/opt/pnpm/store
+        exec npx --yes pnpm@11.25.0 --filter @quincaisoft/web-admin exec next dev --webpack --hostname 0.0.0.0 --port 3100
+volumes:
+  database:
+  web_root_modules:
+  web_app_modules:
+  web_pnpm_store:

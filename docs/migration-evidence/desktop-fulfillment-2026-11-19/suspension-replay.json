@@ -1,0 +1,36 @@
+{
+  "sourceCommit": "c444ca80fc92a38bee368f3d082a1b2dbf49bd69",
+  "status": "PASS",
+  "specification": [
+    "ARCHITECTURE.md §5.4",
+    "ARCHITECTURE.md §7 command idempotency"
+  ],
+  "java": "25.0.5.1",
+  "postgresql": "18.7",
+  "command": "mvn -B -ntp -f backend/pom.xml -pl api-server -am -Dtest=FullApplicationPostgresTest,BillingCommandGatePostgresTest -Dsurefire.failIfNoSpecifiedTests=false test",
+  "tests": 2,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "scope": [
+    "Regression reproduced before fix: retained completion replay returned403 after operational suspension",
+    "Real platform governance service creates and independently approves suspension against PostgreSQL; platform HTTP authentication is not under test",
+    "Actual authenticated merchant HTTP reads remain200 for six fulfillment routes",
+    "Retained identical completion and its repeat return200 with original response",
+    "Changed payload with retained key returns409",
+    "New fulfillment draft/dispatch/dispatch-lines/complete return403",
+    "Stock/accounting/document/fulfillment/dispatch/receipt/outbox state unchanged after reads/retry/rejections",
+    "Existing billing private-receipt safeguards and rollback tests pass"
+  ],
+  "notAccepted": [
+    "Full platform parity",
+    "Original-screen, browser mutation and printing acceptance",
+    "Historical import",
+    "Production control-plane deployment certification"
+  ],
+  "sourceHashes": {
+    "backend/api-server/src/main/java/com/quincaisoft/security/BillingCommandProxy.java": "ca500acef70c97c372db61bbabf9030096d861969a7766c50da9a86df2d213e8",
+    "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java": "8838ec9669db081bff96a07bc85b93c284d9e13e24bf21c46ee11646d330bcd0",
+    "backend/api-server/src/test/java/com/quincaisoft/security/FulfillmentHttpWorkflow.java": "5e35e80bac399d2245ebb6c708e8fec63b5fab2fe6ffbb5109e3f951d6ee44ce"
+  }
+}

@@ -1,0 +1,8 @@
+**
+!backend/
+!backend/api-server/
+!backend/api-server/target/
+!backend/api-server/target/api-server-0.1.0-SNAPSHOT-exec.jar
+!infrastructure/
+!infrastructure/deployment/
+!infrastructure/deployment/MigrationRunner.java

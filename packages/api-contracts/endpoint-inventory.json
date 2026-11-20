@@ -1,16 +1,36 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "43c2661d2757c84f92e6a35c4ab8cbfa6ec2183e716eb21018686500d864d201",
-  "unresolvedJavaTypes": [
-    "Object"
-  ],
+  "sourceDigest": "98ff4b137c5b704536c14daa0a4a0ca90d661c6f17f8d26dc04d5ce2f01e950e",
+  "unresolvedJavaTypes": [],
   "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/observability/metrics",
+      "controller": "ScopedOperationalMetrics",
+      "javaMethod": "metrics",
+      "returnType": "ResponseEntity<String>",
+      "source": "backend/api-server/src/main/java/com/quincaisoft/observability/ScopedOperationalMetrics.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/access/effective",
+      "controller": "EffectiveAccessController",
+      "javaMethod": "effective",
+      "returnType": "Access",
+      "source": "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
     {
       "method": "GET",
       "path": "/api/v1/session",
       "controller": "SessionController",
       "javaMethod": "session",
-      "returnType": "Map<String,Object>",
+      "returnType": "SessionView",
       "source": "backend/api-server/src/main/java/com/quincaisoft/security/SessionController.java",
       "authorization": "HTTP security configuration",
       "requestHeaders": [],
@@ -21,7 +41,7 @@
       "path": "/api/v1/me",
       "controller": "SessionController",
       "javaMethod": "session",
-      "returnType": "Map<String,Object>",
+      "returnType": "SessionView",
       "source": "backend/api-server/src/main/java/com/quincaisoft/security/SessionController.java",
       "authorization": "HTTP security configuration",
       "requestHeaders": [],
@@ -62,6 +82,17 @@
     },
     {
       "method": "GET",
+      "path": "/api/v1/products/page",
+      "controller": "CatalogController",
+      "javaMethod": "page",
+      "returnType": "CatalogService.Page",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogController.java",
+      "authorization": "hasAnyAuthority('catalog:read','SCOPE_catalog:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
       "path": "/api/v1/products/{id}",
       "controller": "CatalogController",
       "javaMethod": "get",
@@ -92,6 +123,162 @@
       "javaMethod": "update",
       "returnType": "CatalogService.Product",
       "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogController.java",
+      "authorization": "hasAnyAuthority('catalog:write','SCOPE_catalog:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/catalog/categories",
+      "controller": "CatalogMasterController",
+      "javaMethod": "categories",
+      "returnType": "List<CatalogMasterService.Category>",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
+      "authorization": "hasAnyAuthority('catalog:read','SCOPE_catalog:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/catalog/categories/{id}",
+      "controller": "CatalogMasterController",
+      "javaMethod": "category",
+      "returnType": "CatalogMasterService.Category",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
+      "authorization": "hasAnyAuthority('catalog:read','SCOPE_catalog:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/catalog/categories",
+      "controller": "CatalogMasterController",
+      "javaMethod": "createCategory",
+      "returnType": "CatalogMasterService.Category",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
+      "authorization": "hasAnyAuthority('catalog:write','SCOPE_catalog:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/catalog/categories/{id}",
+      "controller": "CatalogMasterController",
+      "javaMethod": "updateCategory",
+      "returnType": "CatalogMasterService.Category",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
+      "authorization": "hasAnyAuthority('catalog:write','SCOPE_catalog:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/catalog/units",
+      "controller": "CatalogMasterController",
+      "javaMethod": "units",
+      "returnType": "List<CatalogMasterService.Unit>",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
+      "authorization": "hasAnyAuthority('catalog:read','SCOPE_catalog:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/catalog/units/{id}",
+      "controller": "CatalogMasterController",
+      "javaMethod": "unit",
+      "returnType": "CatalogMasterService.Unit",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
+      "authorization": "hasAnyAuthority('catalog:read','SCOPE_catalog:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/catalog/units",
+      "controller": "CatalogMasterController",
+      "javaMethod": "createUnit",
+      "returnType": "CatalogMasterService.Unit",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
+      "authorization": "hasAnyAuthority('catalog:write','SCOPE_catalog:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/catalog/units/{id}",
+      "controller": "CatalogMasterController",
+      "javaMethod": "updateUnit",
+      "returnType": "CatalogMasterService.Unit",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
+      "authorization": "hasAnyAuthority('catalog:write','SCOPE_catalog:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/catalog/manufacturers",
+      "controller": "CatalogMasterController",
+      "javaMethod": "createManufacturer",
+      "returnType": "CatalogMasterService.Manufacturer",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
+      "authorization": "hasAnyAuthority('catalog:write','SCOPE_catalog:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/catalog/families",
+      "controller": "CatalogMasterController",
+      "javaMethod": "createFamily",
+      "returnType": "CatalogMasterService.Family",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
+      "authorization": "hasAnyAuthority('catalog:write','SCOPE_catalog:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/catalog/variants",
+      "controller": "CatalogMasterController",
+      "javaMethod": "attachVariant",
+      "returnType": "CatalogMasterService.Variant",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
+      "authorization": "hasAnyAuthority('catalog:write','SCOPE_catalog:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/catalog/supplier-offers",
+      "controller": "CatalogMasterController",
+      "javaMethod": "createOffer",
+      "returnType": "CatalogMasterService.Offer",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
       "authorization": "hasAnyAuthority('catalog:write','SCOPE_catalog:write')",
       "requestHeaders": [
         "Idempotency-Key",
@@ -184,6 +371,56 @@
     },
     {
       "method": "GET",
+      "path": "/api/v1/customers/page",
+      "controller": "CustomerDirectoryController",
+      "javaMethod": "page",
+      "returnType": "CustomerDirectory.Page",
+      "source": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/web/CustomerDirectoryController.java",
+      "authorization": "hasAnyAuthority('customers:read','SCOPE_customers:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/customers/{id}",
+      "controller": "CustomerDirectoryController",
+      "javaMethod": "get",
+      "returnType": "CustomerDirectory.Entry",
+      "source": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/web/CustomerDirectoryController.java",
+      "authorization": "hasAnyAuthority('customers:read','SCOPE_customers:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/customers",
+      "controller": "CustomerDirectoryController",
+      "javaMethod": "create",
+      "returnType": "CustomerDirectory.Entry",
+      "source": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/web/CustomerDirectoryController.java",
+      "authorization": "hasAnyAuthority('customers:write','SCOPE_customers:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/customers/{id}",
+      "controller": "CustomerDirectoryController",
+      "javaMethod": "update",
+      "returnType": "CustomerDirectory.Entry",
+      "source": "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/web/CustomerDirectoryController.java",
+      "authorization": "hasAnyAuthority('customers:write','SCOPE_customers:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
       "path": "/api/v1/documents",
       "controller": "DocumentController",
       "javaMethod": "list",
@@ -234,6 +471,128 @@
       "returnType": "DocumentService.Settings",
       "source": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentController.java",
       "authorization": "hasAnyAuthority('documents:configure','SCOPE_documents:configure')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/documents/templates",
+      "controller": "DocumentWorkspaceController",
+      "javaMethod": "templates",
+      "returnType": "List<DocumentWorkspace.Template>",
+      "source": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentWorkspaceController.java",
+      "authorization": "hasAnyAuthority('documents:read','SCOPE_documents:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/documents/templates/{templateId}/sources",
+      "controller": "DocumentWorkspaceController",
+      "javaMethod": "sources",
+      "returnType": "List<DocumentWorkspace.SourceCandidate>",
+      "source": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentWorkspaceController.java",
+      "authorization": "hasAnyAuthority('documents:read','SCOPE_documents:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/documents/captures",
+      "controller": "DocumentWorkspaceController",
+      "javaMethod": "list",
+      "returnType": "List<DocumentWorkspace.Capture>",
+      "source": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentWorkspaceController.java",
+      "authorization": "hasAnyAuthority('documents:read','SCOPE_documents:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/documents/captures/{id}",
+      "controller": "DocumentWorkspaceController",
+      "javaMethod": "get",
+      "returnType": "DocumentWorkspace.Capture",
+      "source": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentWorkspaceController.java",
+      "authorization": "hasAnyAuthority('documents:read','SCOPE_documents:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/documents/captures",
+      "controller": "DocumentWorkspaceController",
+      "javaMethod": "capture",
+      "returnType": "DocumentWorkspace.Capture",
+      "source": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentWorkspaceController.java",
+      "authorization": "hasAnyAuthority('documents:write','SCOPE_documents:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/documents/captures/{id}/preview",
+      "controller": "DocumentWorkspaceController",
+      "javaMethod": "preview",
+      "returnType": "String",
+      "source": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentWorkspaceController.java",
+      "authorization": "hasAnyAuthority('documents:read','SCOPE_documents:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/documents/captures/{id}/print-attempts",
+      "controller": "DocumentWorkspaceController",
+      "javaMethod": "printCapture",
+      "returnType": "DocumentWorkspace.PrintResult",
+      "source": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentWorkspaceController.java",
+      "authorization": "hasAnyAuthority('documents:print','SCOPE_documents:print')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/documents/{id}/print-attempts",
+      "controller": "DocumentWorkspaceController",
+      "javaMethod": "printOriginal",
+      "returnType": "DocumentWorkspace.PrintResult",
+      "source": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentWorkspaceController.java",
+      "authorization": "hasAnyAuthority('documents:print','SCOPE_documents:print')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/documents/print-attempts",
+      "controller": "DocumentWorkspaceController",
+      "javaMethod": "attempts",
+      "returnType": "List<DocumentWorkspace.PrintResult>",
+      "source": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentWorkspaceController.java",
+      "authorization": "hasAnyAuthority('documents:read','SCOPE_documents:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/documents/print-attempts/{id}/outcomes",
+      "controller": "DocumentWorkspaceController",
+      "javaMethod": "outcome",
+      "returnType": "DocumentWorkspace.Outcome",
+      "source": "backend/business-modules/documents/src/main/java/com/quincaisoft/documents/web/DocumentWorkspaceController.java",
+      "authorization": "hasAnyAuthority('documents:print','SCOPE_documents:print')",
       "requestHeaders": [
         "Idempotency-Key",
         "X-Request-ID"
@@ -333,6 +692,112 @@
         "Idempotency-Key",
         "X-Request-ID"
       ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/expenses/{id}/pay-bank",
+      "controller": "ExpenseController",
+      "javaMethod": "payBank",
+      "returnType": "ExpenseService.Expense",
+      "source": "backend/business-modules/expenses/src/main/java/com/quincaisoft/expenses/web/ExpenseController.java",
+      "authorization": "hasAnyAuthority('expenses:pay','SCOPE_expenses:pay')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/manual-journals",
+      "controller": "ManualJournalController",
+      "javaMethod": "list",
+      "returnType": "List<ManualJournalService.Journal>",
+      "source": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/web/ManualJournalController.java",
+      "authorization": "hasAnyAuthority('finance:read','SCOPE_finance:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/manual-journals",
+      "controller": "ManualJournalController",
+      "javaMethod": "create",
+      "returnType": "ManualJournalService.Journal",
+      "source": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/web/ManualJournalController.java",
+      "authorization": "hasAnyAuthority('journals:write','SCOPE_journals:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/manual-journals/{id}/submit",
+      "controller": "ManualJournalController",
+      "javaMethod": "submit",
+      "returnType": "ManualJournalService.Journal",
+      "source": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/web/ManualJournalController.java",
+      "authorization": "hasAnyAuthority('journals:write','SCOPE_journals:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/manual-journals/{id}/approve",
+      "controller": "ManualJournalController",
+      "javaMethod": "approve",
+      "returnType": "ManualJournalService.Journal",
+      "source": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/web/ManualJournalController.java",
+      "authorization": "hasAnyAuthority('journals:approve','SCOPE_journals:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/manual-journals/{id}/reject",
+      "controller": "ManualJournalController",
+      "javaMethod": "approve",
+      "returnType": "ManualJournalService.Journal",
+      "source": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/web/ManualJournalController.java",
+      "authorization": "hasAnyAuthority('journals:approve','SCOPE_journals:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/manual-journals/{id}/reversals",
+      "controller": "ManualJournalController",
+      "javaMethod": "reversal",
+      "returnType": "ManualJournalService.Journal",
+      "source": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/web/ManualJournalController.java",
+      "authorization": "hasAnyAuthority('journals:write','SCOPE_journals:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/manual-journals/{id}",
+      "controller": "ManualJournalController",
+      "javaMethod": "get",
+      "returnType": "ManualJournalService.Journal",
+      "source": "backend/business-modules/finance/src/main/java/com/quincaisoft/finance/web/ManualJournalController.java",
+      "authorization": "hasAnyAuthority('finance:read','SCOPE_finance:read')",
+      "requestHeaders": [],
       "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
     },
     {
@@ -478,6 +943,20 @@
       "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
     },
     {
+      "method": "POST",
+      "path": "/api/v1/identity/sessions/revoke",
+      "controller": "SessionRevocationController",
+      "javaMethod": "revoke",
+      "returnType": "IdentityService.Revocation",
+      "source": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/SessionRevocationController.java",
+      "authorization": "isAuthenticated()",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
       "method": "GET",
       "path": "/api/v1/mobile-money/providers",
       "controller": "ProviderController",
@@ -534,6 +1013,17 @@
       "returnType": "List<InventoryWorkflows.Warehouse>",
       "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryController.java",
       "authorization": "hasAnyAuthority('inventory:read','SCOPE_inventory:read','sales:write','SCOPE_sales:write','purchasing:write','SCOPE_purchasing:write','purchasing:receive','SCOPE_purchasing:receive')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory/low-stock/summary",
+      "controller": "InventoryController",
+      "javaMethod": "lowStockSummary",
+      "returnType": "LowStockSummary",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryController.java",
+      "authorization": "hasAnyAuthority('inventory:read','SCOPE_inventory:read')",
       "requestHeaders": [],
       "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
     },
@@ -628,6 +1118,81 @@
     },
     {
       "method": "GET",
+      "path": "/api/v1/inventory/custody",
+      "controller": "InventoryCustodyController",
+      "javaMethod": "positions",
+      "returnType": "List<InventoryCustody.Position>",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryCustodyController.java",
+      "authorization": "hasAnyAuthority('inventory:read','SCOPE_inventory:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory/custody/{id}/collections",
+      "controller": "InventoryCustodyController",
+      "javaMethod": "collections",
+      "returnType": "List<InventoryCustody.Collection>",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryCustodyController.java",
+      "authorization": "hasAnyAuthority('inventory:read','SCOPE_inventory:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/inventory/custody/{id}/collect",
+      "controller": "InventoryCustodyController",
+      "javaMethod": "collect",
+      "returnType": "InventoryCustody.Position",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryCustodyController.java",
+      "authorization": "hasAnyAuthority('inventory:write','SCOPE_inventory:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory/recognition-policies",
+      "controller": "InventoryCustodyController",
+      "javaMethod": "policies",
+      "returnType": "List<InventoryCustody.Policy>",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryCustodyController.java",
+      "authorization": "hasAnyAuthority('inventory:read','SCOPE_inventory:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/inventory/recognition-policies",
+      "controller": "InventoryCustodyController",
+      "javaMethod": "request",
+      "returnType": "InventoryCustody.Policy",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryCustodyController.java",
+      "authorization": "hasAnyAuthority('finance:write','SCOPE_finance:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/inventory/recognition-policies/{id}/approve",
+      "controller": "InventoryCustodyController",
+      "javaMethod": "approve",
+      "returnType": "InventoryCustody.Policy",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryCustodyController.java",
+      "authorization": "hasAnyAuthority('finance:approve','SCOPE_finance:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
       "path": "/api/v1/inventory/jobs",
       "controller": "InventoryJobsController",
       "javaMethod": "list",
@@ -712,6 +1277,407 @@
       "returnType": "InventoryJobs.Job",
       "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryJobsController.java",
       "authorization": "hasAnyAuthority('inventory:approve','SCOPE_inventory:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory/lots",
+      "controller": "InventoryQualityController",
+      "javaMethod": "lots",
+      "returnType": "List<InventoryQuality.Lot>",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
+      "authorization": "hasAnyAuthority('inventory:read','SCOPE_inventory:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory/recalls",
+      "controller": "InventoryQualityController",
+      "javaMethod": "recalls",
+      "returnType": "List<InventoryQuality.Recall>",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
+      "authorization": "hasAnyAuthority('inventory:read','SCOPE_inventory:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory/reservations",
+      "controller": "InventoryQualityController",
+      "javaMethod": "reservations",
+      "returnType": "List<InventoryQuality.Reservation>",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
+      "authorization": "hasAnyAuthority('inventory:read','SCOPE_inventory:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/inventory/lots",
+      "controller": "InventoryQualityController",
+      "javaMethod": "registerLot",
+      "returnType": "InventoryQuality.Lot",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
+      "authorization": "hasAnyAuthority('inventory:approve','SCOPE_inventory:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/inventory/recalls",
+      "controller": "InventoryQualityController",
+      "javaMethod": "draftRecall",
+      "returnType": "InventoryQuality.Recall",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
+      "authorization": "hasAnyAuthority('inventory:write','SCOPE_inventory:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/inventory/reservations",
+      "controller": "InventoryQualityController",
+      "javaMethod": "reserve",
+      "returnType": "InventoryQuality.Reservation",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
+      "authorization": "hasAnyAuthority('inventory:write','SCOPE_inventory:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/inventory/recalls/{id}/approve",
+      "controller": "InventoryQualityController",
+      "javaMethod": "approve",
+      "returnType": "InventoryQuality.Recall",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
+      "authorization": "hasAnyAuthority('inventory:approve','SCOPE_inventory:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/inventory/recalls/{id}/block",
+      "controller": "InventoryQualityController",
+      "javaMethod": "block",
+      "returnType": "InventoryQuality.Recall",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
+      "authorization": "hasAnyAuthority('inventory:approve','SCOPE_inventory:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/inventory/recalls/{id}/recover",
+      "controller": "InventoryQualityController",
+      "javaMethod": "recover",
+      "returnType": "InventoryQuality.Recall",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
+      "authorization": "hasAnyAuthority('inventory:approve','SCOPE_inventory:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/inventory/recalls/{id}/dispose",
+      "controller": "InventoryQualityController",
+      "javaMethod": "dispose",
+      "returnType": "InventoryQuality.Recall",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
+      "authorization": "hasAnyAuthority('inventory:approve','SCOPE_inventory:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/inventory/reservations/{id}/release",
+      "controller": "InventoryQualityController",
+      "javaMethod": "release",
+      "returnType": "InventoryQuality.Reservation",
+      "source": "backend/business-modules/inventory/src/main/java/com/quincaisoft/inventory/web/InventoryQualityController.java",
+      "authorization": "hasAnyAuthority('inventory:write','SCOPE_inventory:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/exports",
+      "controller": "ExportController",
+      "javaMethod": "list",
+      "returnType": "List<OperationsService.Export>",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/exports/{id}",
+      "controller": "ExportController",
+      "javaMethod": "get",
+      "returnType": "OperationsService.Export",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/exports",
+      "controller": "ExportController",
+      "javaMethod": "request",
+      "returnType": "OperationsService.Export",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/exports/{id}/run",
+      "controller": "ExportController",
+      "javaMethod": "run",
+      "returnType": "OperationsService.Export",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/exports/{id}/cancel",
+      "controller": "ExportController",
+      "javaMethod": "cancel",
+      "returnType": "OperationsService.Export",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/exports/{id}/content",
+      "controller": "ExportController",
+      "javaMethod": "download",
+      "returnType": "ResponseEntity<String>",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/retention/exports/{id}",
+      "controller": "ExportRetentionController",
+      "javaMethod": "get",
+      "returnType": "ExportRetentionService.Decision",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportRetentionController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/retention/exports",
+      "controller": "ExportRetentionController",
+      "javaMethod": "request",
+      "returnType": "ExportRetentionService.Decision",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportRetentionController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/retention/exports/{id}/approve",
+      "controller": "ExportRetentionController",
+      "javaMethod": "approve",
+      "returnType": "ExportRetentionService.Decision",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportRetentionController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/retention/exports/{id}/execute",
+      "controller": "ExportRetentionController",
+      "javaMethod": "execute",
+      "returnType": "ExportRetentionService.Decision",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportRetentionController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/recovery/plans",
+      "controller": "RecoveryController",
+      "javaMethod": "list",
+      "returnType": "List<RecoveryService.Plan>",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/RecoveryController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/recovery/plans/{id}",
+      "controller": "RecoveryController",
+      "javaMethod": "get",
+      "returnType": "RecoveryService.Plan",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/RecoveryController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/recovery/plans",
+      "controller": "RecoveryController",
+      "javaMethod": "request",
+      "returnType": "RecoveryService.Plan",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/RecoveryController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/recovery/plans/{id}/approve-scope",
+      "controller": "RecoveryController",
+      "javaMethod": "approveScope",
+      "returnType": "RecoveryService.Plan",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/RecoveryController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/recovery/retained-receipts",
+      "controller": "RecoveryController",
+      "javaMethod": "receipts",
+      "returnType": "ResponseEntity<RecoveryService.ReceiptPage>",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/RecoveryController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/recovery/plans/{id}/candidate-batches",
+      "controller": "RecoveryController",
+      "javaMethod": "batch",
+      "returnType": "RecoveryService.Plan",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/RecoveryController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/recovery/plans/{id}/compare",
+      "controller": "RecoveryController",
+      "javaMethod": "compare",
+      "returnType": "RecoveryService.Plan",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/RecoveryController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/recovery/plans/{id}/differences",
+      "controller": "RecoveryController",
+      "javaMethod": "differences",
+      "returnType": "List<RecoveryService.Difference>",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/RecoveryController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/recovery/plans/{id}/approve-receipt-review",
+      "controller": "RecoveryController",
+      "javaMethod": "approve",
+      "returnType": "RecoveryService.Plan",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/RecoveryController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/recovery/plans/{id}/cancel",
+      "controller": "RecoveryController",
+      "javaMethod": "cancel",
+      "returnType": "RecoveryService.Plan",
+      "source": "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/RecoveryController.java",
+      "authorization": "HTTP security configuration",
       "requestHeaders": [
         "Idempotency-Key",
         "X-Request-ID"
@@ -923,6 +1889,45 @@
     },
     {
       "method": "GET",
+      "path": "/api/v1/quotations/{id}/decisions",
+      "controller": "QuotationController",
+      "javaMethod": "decisions",
+      "returnType": "List<QuotationService.CustomerDecision>",
+      "source": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/web/QuotationController.java",
+      "authorization": "hasAnyAuthority('quotations:read','SCOPE_quotations:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/quotations/{id}/accept",
+      "controller": "QuotationController",
+      "javaMethod": "accept",
+      "returnType": "QuotationService.Quote",
+      "source": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/web/QuotationController.java",
+      "authorization": "hasAnyAuthority('quotations:write','SCOPE_quotations:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/quotations/{id}/reject",
+      "controller": "QuotationController",
+      "javaMethod": "reject",
+      "returnType": "QuotationService.Quote",
+      "source": "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/web/QuotationController.java",
+      "authorization": "hasAnyAuthority('quotations:write','SCOPE_quotations:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
       "path": "/api/v1/reports/catalog",
       "controller": "ReportingController",
       "javaMethod": "catalog",
@@ -1020,10 +2025,143 @@
     },
     {
       "method": "GET",
+      "path": "/api/v1/fulfillments",
+      "controller": "FulfillmentController",
+      "javaMethod": "list",
+      "returnType": "List<FulfillmentService.Fulfillment>",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:read','SCOPE_sales:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/fulfillments/page",
+      "controller": "FulfillmentController",
+      "javaMethod": "page",
+      "returnType": "FulfillmentService.QueuePage",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:read','SCOPE_sales:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/fulfillments/preparation-summary",
+      "controller": "FulfillmentController",
+      "javaMethod": "preparationSummary",
+      "returnType": "PreparationSummary",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:read','SCOPE_sales:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/fulfillments/{id}/picklist",
+      "controller": "FulfillmentController",
+      "javaMethod": "pickList",
+      "returnType": "FulfillmentService.PickList",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:read','SCOPE_sales:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/fulfillments/{id}",
+      "controller": "FulfillmentController",
+      "javaMethod": "get",
+      "returnType": "FulfillmentService.Fulfillment",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:read','SCOPE_sales:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/fulfillments",
+      "controller": "FulfillmentController",
+      "javaMethod": "draft",
+      "returnType": "FulfillmentService.Fulfillment",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:write','SCOPE_sales:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/fulfillments/{id}/dispatches",
+      "controller": "FulfillmentController",
+      "javaMethod": "dispatchHistory",
+      "returnType": "List<FulfillmentService.DispatchEntry>",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:read','SCOPE_sales:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/fulfillments/{id}/dispatch-lines",
+      "controller": "FulfillmentController",
+      "javaMethod": "dispatchLines",
+      "returnType": "FulfillmentService.Fulfillment",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:write','SCOPE_sales:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/fulfillments/{id}/dispatch",
+      "controller": "FulfillmentController",
+      "javaMethod": "dispatch",
+      "returnType": "FulfillmentService.Fulfillment",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:write','SCOPE_sales:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/fulfillments/{id}/complete",
+      "controller": "FulfillmentController",
+      "javaMethod": "complete",
+      "returnType": "FulfillmentService.Fulfillment",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java",
+      "authorization": "hasAnyAuthority('sales:write','SCOPE_sales:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
       "path": "/api/v1/sales",
       "controller": "SalesController",
       "javaMethod": "list",
       "returnType": "List<SalesService.Sale>",
+      "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/SalesController.java",
+      "authorization": "hasAnyAuthority('sales:read','SCOPE_sales:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/sales/summary",
+      "controller": "SalesController",
+      "javaMethod": "summary",
+      "returnType": "SalesService.PostedSalesSummary",
       "source": "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/SalesController.java",
       "authorization": "hasAnyAuthority('sales:read','SCOPE_sales:read')",
       "requestHeaders": [],
@@ -1070,6 +2208,422 @@
     },
     {
       "method": "GET",
+      "path": "/admin/billing/notifications",
+      "controller": "BillingNotificationController",
+      "javaMethod": "list",
+      "returnType": "List<BillingNotificationDispatcher.Delivery>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/BillingNotificationController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/billing/notifications/{id}/attempts",
+      "controller": "BillingNotificationController",
+      "javaMethod": "attempts",
+      "returnType": "List<BillingNotificationDispatcher.Attempt>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/BillingNotificationController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/billing/notifications/{id}/redrive",
+      "controller": "BillingNotificationController",
+      "javaMethod": "redrive",
+      "returnType": "BillingNotificationDispatcher.Delivery",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/BillingNotificationController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:dispatch')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/billing/invoices",
+      "controller": "SubscriptionBillingController",
+      "javaMethod": "issue",
+      "returnType": "SubscriptionBillingService.Invoice",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionBillingController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/billing/invoices",
+      "controller": "SubscriptionBillingController",
+      "javaMethod": "platform",
+      "returnType": "List<SubscriptionBillingService.Invoice>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionBillingController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/billing/invoices",
+      "controller": "SubscriptionBillingController",
+      "javaMethod": "merchant",
+      "returnType": "List<SubscriptionBillingService.Invoice>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionBillingController.java",
+      "authorization": "hasAnyAuthority('billing:read','SCOPE_billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/subscriptions/commercial-terms",
+      "controller": "SubscriptionCommercialTermsController",
+      "javaMethod": "request",
+      "returnType": "SubscriptionCommercialTermsService.TermView",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionCommercialTermsController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/subscriptions/commercial-terms/{id}/approve",
+      "controller": "SubscriptionCommercialTermsController",
+      "javaMethod": "approve",
+      "returnType": "SubscriptionCommercialTermsService.TermView",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionCommercialTermsController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/subscriptions/{tenantId}/commercial-terms",
+      "controller": "SubscriptionCommercialTermsController",
+      "javaMethod": "list",
+      "returnType": "List<SubscriptionCommercialTermsService.TermView>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionCommercialTermsController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/billing/invoices/page",
+      "controller": "SubscriptionExportController",
+      "javaMethod": "platformPage",
+      "returnType": "SubscriptionBillingService.InvoicePage",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionExportController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/billing/invoices/page",
+      "controller": "SubscriptionExportController",
+      "javaMethod": "merchantPage",
+      "returnType": "SubscriptionBillingService.InvoicePage",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionExportController.java",
+      "authorization": "hasAnyAuthority('billing:read','SCOPE_billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/billing/invoices/export.csv",
+      "controller": "SubscriptionExportController",
+      "javaMethod": "platformExport",
+      "returnType": "ResponseEntity<String>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionExportController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/billing/invoices/export.csv",
+      "controller": "SubscriptionExportController",
+      "javaMethod": "merchantExport",
+      "returnType": "ResponseEntity<String>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionExportController.java",
+      "authorization": "hasAnyAuthority('billing:read','SCOPE_billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/subscriptions/plans",
+      "controller": "SubscriptionLifecycleController",
+      "javaMethod": "plans",
+      "returnType": "List<SubscriptionLifecycleService.Plan>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionLifecycleController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/subscriptions/plans",
+      "controller": "SubscriptionLifecycleController",
+      "javaMethod": "create",
+      "returnType": "SubscriptionLifecycleService.Plan",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionLifecycleController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/subscriptions/{tenantId}",
+      "controller": "SubscriptionLifecycleController",
+      "javaMethod": "get",
+      "returnType": "SubscriptionLifecycleService.Snapshot",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionLifecycleController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/subscriptions/{tenantId}/expire",
+      "controller": "SubscriptionLifecycleController",
+      "javaMethod": "expire",
+      "returnType": "SubscriptionLifecycleService.Snapshot",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionLifecycleController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/subscriptions/{tenantId}/cancel",
+      "controller": "SubscriptionLifecycleController",
+      "javaMethod": "cancel",
+      "returnType": "SubscriptionLifecycleService.Snapshot",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionLifecycleController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/subscriptions/notices",
+      "controller": "SubscriptionLifecycleController",
+      "javaMethod": "notice",
+      "returnType": "SubscriptionLifecycleService.NoticeView",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionLifecycleController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/subscriptions/notices/{id}/approve",
+      "controller": "SubscriptionLifecycleController",
+      "javaMethod": "approve",
+      "returnType": "SubscriptionLifecycleService.NoticeView",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionLifecycleController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/subscriptions/{tenantId}/notices",
+      "controller": "SubscriptionLifecycleController",
+      "javaMethod": "notices",
+      "returnType": "List<SubscriptionLifecycleService.NoticeView>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionLifecycleController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/subscriptions/{tenantId}/payments",
+      "controller": "SubscriptionLifecycleController",
+      "javaMethod": "payments",
+      "returnType": "List<SubscriptionLifecycleService.PaymentView>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionLifecycleController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/subscriptions/payments",
+      "controller": "SubscriptionLifecycleController",
+      "javaMethod": "payment",
+      "returnType": "SubscriptionLifecycleService.PaymentView",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionLifecycleController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/subscriptions/payments/{id}/approve",
+      "controller": "SubscriptionLifecycleController",
+      "javaMethod": "approvePayment",
+      "returnType": "SubscriptionLifecycleService.PaymentView",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionLifecycleController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/subscriptions/payments/{id}/activate",
+      "controller": "SubscriptionLifecycleController",
+      "javaMethod": "activate",
+      "returnType": "SubscriptionLifecycleService.Snapshot",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionLifecycleController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/billing/invoices/{id}/print",
+      "controller": "SubscriptionPrintController",
+      "javaMethod": "platformInvoice",
+      "returnType": "ResponseEntity<String>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionPrintController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/billing/invoices/{id}/print",
+      "controller": "SubscriptionPrintController",
+      "javaMethod": "merchantInvoice",
+      "returnType": "ResponseEntity<String>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionPrintController.java",
+      "authorization": "hasAnyAuthority('billing:read','SCOPE_billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/subscriptions/payments/{id}/print",
+      "controller": "SubscriptionPrintController",
+      "javaMethod": "platformReceipt",
+      "returnType": "ResponseEntity<String>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionPrintController.java",
+      "authorization": "hasAuthority('SCOPE_platform:billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/billing/payments/{id}/print",
+      "controller": "SubscriptionPrintController",
+      "javaMethod": "merchantReceipt",
+      "returnType": "ResponseEntity<String>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionPrintController.java",
+      "authorization": "hasAnyAuthority('billing:read','SCOPE_billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/billing/capacity",
+      "controller": "SubscriptionQuotaController",
+      "javaMethod": "usage",
+      "returnType": "List<SubscriptionQuotaService.Usage>",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionQuotaController.java",
+      "authorization": "hasAnyAuthority('billing:read','SCOPE_billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/billing/capacity/reservations",
+      "controller": "SubscriptionQuotaController",
+      "javaMethod": "reserve",
+      "returnType": "SubscriptionQuotaService.Reservation",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionQuotaController.java",
+      "authorization": "hasAnyAuthority('billing:write','SCOPE_billing:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/billing/capacity/reservations/{id}",
+      "controller": "SubscriptionQuotaController",
+      "javaMethod": "get",
+      "returnType": "SubscriptionQuotaService.Reservation",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionQuotaController.java",
+      "authorization": "hasAnyAuthority('billing:read','SCOPE_billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/billing/capacity/reservations/{id}/release",
+      "controller": "SubscriptionQuotaController",
+      "javaMethod": "release",
+      "returnType": "SubscriptionQuotaService.Reservation",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionQuotaController.java",
+      "authorization": "hasAnyAuthority('billing:write','SCOPE_billing:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/billing/capacity/reservations/{id}/committed",
+      "controller": "SubscriptionQuotaController",
+      "javaMethod": "committed",
+      "returnType": "SubscriptionQuotaService.Reservation",
+      "source": "backend/business-modules/subscriptions/src/main/java/com/quincaisoft/subscriptions/web/SubscriptionQuotaController.java",
+      "authorization": "hasAnyAuthority('billing:read','SCOPE_billing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
       "path": "/api/v1/suppliers",
       "controller": "SupplierController",
       "javaMethod": "list",
@@ -1095,6 +2649,45 @@
       "path": "/api/v1/suppliers",
       "controller": "SupplierController",
       "javaMethod": "create",
+      "returnType": "SupplierService.Supplier",
+      "source": "backend/business-modules/suppliers/src/main/java/com/quincaisoft/suppliers/web/SupplierController.java",
+      "authorization": "hasAnyAuthority('purchasing:write','SCOPE_purchasing:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/suppliers/page",
+      "controller": "SupplierController",
+      "javaMethod": "page",
+      "returnType": "SupplierService.Page",
+      "source": "backend/business-modules/suppliers/src/main/java/com/quincaisoft/suppliers/web/SupplierController.java",
+      "authorization": "hasAnyAuthority('purchasing:read','SCOPE_purchasing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/suppliers/directory",
+      "controller": "SupplierController",
+      "javaMethod": "createDirectory",
+      "returnType": "SupplierService.Supplier",
+      "source": "backend/business-modules/suppliers/src/main/java/com/quincaisoft/suppliers/web/SupplierController.java",
+      "authorization": "hasAnyAuthority('purchasing:write','SCOPE_purchasing:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/suppliers/{id}",
+      "controller": "SupplierController",
+      "javaMethod": "update",
       "returnType": "SupplierService.Supplier",
       "source": "backend/business-modules/suppliers/src/main/java/com/quincaisoft/suppliers/web/SupplierController.java",
       "authorization": "hasAnyAuthority('purchasing:write','SCOPE_purchasing:write')",
@@ -1190,6 +2783,206 @@
       "returnType": "SyncService.Operation",
       "source": "backend/business-modules/sync/src/main/java/com/quincaisoft/sync/web/SyncController.java",
       "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/bank-evidence",
+      "controller": "BankController",
+      "javaMethod": "list",
+      "returnType": "List<BankService.Evidence>",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/BankController.java",
+      "authorization": "hasAnyAuthority('bank:read','SCOPE_bank:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/bank-evidence",
+      "controller": "BankController",
+      "javaMethod": "request",
+      "returnType": "BankService.Evidence",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/BankController.java",
+      "authorization": "hasAnyAuthority('bank:write','SCOPE_bank:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/bank-evidence/{id}/approve",
+      "controller": "BankController",
+      "javaMethod": "approve",
+      "returnType": "BankService.Evidence",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/BankController.java",
+      "authorization": "hasAnyAuthority('bank:approve','SCOPE_bank:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/bank-matches",
+      "controller": "BankController",
+      "javaMethod": "matches",
+      "returnType": "List<BankService.Match>",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/BankController.java",
+      "authorization": "hasAnyAuthority('bank:read','SCOPE_bank:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/bank-matches",
+      "controller": "BankController",
+      "javaMethod": "match",
+      "returnType": "BankService.Match",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/BankController.java",
+      "authorization": "hasAnyAuthority('bank:approve','SCOPE_bank:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/bank-evidence/{id}",
+      "controller": "BankController",
+      "javaMethod": "get",
+      "returnType": "BankService.Evidence",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/BankController.java",
+      "authorization": "hasAnyAuthority('bank:read','SCOPE_bank:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/settlements",
+      "controller": "SettlementController",
+      "javaMethod": "list",
+      "returnType": "List<SettlementService.Settlement>",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/SettlementController.java",
+      "authorization": "hasAnyAuthority('tenders:read','SCOPE_tenders:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/payables",
+      "controller": "SettlementController",
+      "javaMethod": "balances",
+      "returnType": "List<PayablesService.Balance>",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/SettlementController.java",
+      "authorization": "hasAnyAuthority('purchasing:read','SCOPE_purchasing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/supplier-advances",
+      "controller": "SettlementController",
+      "javaMethod": "advances",
+      "returnType": "List<PayablesService.Advance>",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/SettlementController.java",
+      "authorization": "hasAnyAuthority('purchasing:read','SCOPE_purchasing:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/settlements/supplier-payment",
+      "controller": "SettlementController",
+      "javaMethod": "supplierPayment",
+      "returnType": "SettlementService.Settlement",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/SettlementController.java",
+      "authorization": "hasAnyAuthority('tenders:supplier-pay','SCOPE_tenders:supplier-pay')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/supplier-advances",
+      "controller": "SettlementController",
+      "javaMethod": "advance",
+      "returnType": "SettlementService.Settlement",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/SettlementController.java",
+      "authorization": "hasAnyAuthority('tenders:supplier-pay','SCOPE_tenders:supplier-pay')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/supplier-advances/allocate",
+      "controller": "SettlementController",
+      "javaMethod": "allocate",
+      "returnType": "SettlementService.Settlement",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/SettlementController.java",
+      "authorization": "hasAnyAuthority('tenders:supplier-pay','SCOPE_tenders:supplier-pay')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/settlements/bank-receipt",
+      "controller": "SettlementController",
+      "javaMethod": "receipt",
+      "returnType": "SettlementService.Settlement",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/SettlementController.java",
+      "authorization": "hasAnyAuthority('tenders:write','SCOPE_tenders:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/settlements/bank-deposit",
+      "controller": "SettlementController",
+      "javaMethod": "deposit",
+      "returnType": "SettlementService.Settlement",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/SettlementController.java",
+      "authorization": "hasAnyAuthority('tenders:write','SCOPE_tenders:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/settlements/{id}",
+      "controller": "SettlementController",
+      "javaMethod": "get",
+      "returnType": "SettlementService.Settlement",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/SettlementController.java",
+      "authorization": "hasAnyAuthority('tenders:read','SCOPE_tenders:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tenders/collections/summary",
+      "controller": "TenderController",
+      "javaMethod": "collectionSummary",
+      "returnType": "CollectionSummary",
+      "source": "backend/business-modules/tenders/src/main/java/com/quincaisoft/tenders/web/TenderController.java",
+      "authorization": "hasAnyAuthority('tenders:read','SCOPE_tenders:read')",
       "requestHeaders": [],
       "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
     },
@@ -1312,10 +3105,602 @@
     },
     {
       "method": "GET",
+      "path": "/api/v1/workforce/employees",
+      "controller": "WorkforceController",
+      "javaMethod": "employees",
+      "returnType": "List<WorkforceService.Employee>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/employees/{id}",
+      "controller": "WorkforceController",
+      "javaMethod": "employee",
+      "returnType": "WorkforceService.Employee",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/employees",
+      "controller": "WorkforceController",
+      "javaMethod": "create",
+      "returnType": "WorkforceService.Employee",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/workforce/employees/{id}",
+      "controller": "WorkforceController",
+      "javaMethod": "update",
+      "returnType": "WorkforceService.Employee",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/attendance",
+      "controller": "WorkforceController",
+      "javaMethod": "record",
+      "returnType": "WorkforceService.Attendance",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/employees/{id}/attendance",
+      "controller": "WorkforceController",
+      "javaMethod": "attendance",
+      "returnType": "List<WorkforceService.Attendance>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/payroll",
+      "controller": "WorkforceController",
+      "javaMethod": "draft",
+      "returnType": "WorkforceService.Payslip",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/payroll/{id}/approve",
+      "controller": "WorkforceController",
+      "javaMethod": "approve",
+      "returnType": "WorkforceService.Payslip",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/payroll/{id}",
+      "controller": "WorkforceController",
+      "javaMethod": "get",
+      "returnType": "WorkforceService.Payslip",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/payroll",
+      "controller": "WorkforceController",
+      "javaMethod": "payroll",
+      "returnType": "List<WorkforceService.Payslip>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/employees/{id}/contracts",
+      "controller": "WorkforceController",
+      "javaMethod": "changeContract",
+      "returnType": "WorkforceService.Contract",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/employees/{id}/contracts",
+      "controller": "WorkforceController",
+      "javaMethod": "contracts",
+      "returnType": "List<WorkforceService.Contract>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/employees/{id}/contract-at",
+      "controller": "WorkforceController",
+      "javaMethod": "contractAt",
+      "returnType": "WorkforceService.Contract",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/payroll/detailed",
+      "controller": "WorkforceController",
+      "javaMethod": "detailed",
+      "returnType": "WorkforceService.Payslip",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/payroll/{id}/deductions",
+      "controller": "WorkforceController",
+      "javaMethod": "deductions",
+      "returnType": "List<WorkforceService.Deduction>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/payroll/{id}/cancel",
+      "controller": "WorkforceController",
+      "javaMethod": "cancel",
+      "returnType": "WorkforceService.Payslip",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/payroll/{id}/reversals",
+      "controller": "WorkforceController",
+      "javaMethod": "requestReversal",
+      "returnType": "WorkforceService.Reversal",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/payroll/reversals/{id}/approve",
+      "controller": "WorkforceController",
+      "javaMethod": "approveReversal",
+      "returnType": "WorkforceService.Reversal",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/payroll/{id}/bank-payment",
+      "controller": "WorkforceController",
+      "javaMethod": "payBank",
+      "returnType": "WorkforceService.Payment",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/payroll/{id}/print",
+      "controller": "WorkforceController",
+      "javaMethod": "print",
+      "returnType": "ResponseEntity<String>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/payroll/export.csv",
+      "controller": "WorkforceController",
+      "javaMethod": "export",
+      "returnType": "ResponseEntity<String>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/payroll/{id}/reversals",
+      "controller": "WorkforceController",
+      "javaMethod": "reversals",
+      "returnType": "List<WorkforceService.Reversal>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/payroll/{id}/payments",
+      "controller": "WorkforceController",
+      "javaMethod": "payments",
+      "returnType": "List<WorkforceService.Payment>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/leave",
+      "controller": "WorkforceController",
+      "javaMethod": "leaves",
+      "returnType": "List<WorkforceService.Leave>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/leave/{id}",
+      "controller": "WorkforceController",
+      "javaMethod": "leave",
+      "returnType": "WorkforceService.Leave",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/leave",
+      "controller": "WorkforceController",
+      "javaMethod": "requestLeave",
+      "returnType": "WorkforceService.Leave",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/leave/{id}/approve",
+      "controller": "WorkforceController",
+      "javaMethod": "decideLeave",
+      "returnType": "WorkforceService.Leave",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/leave/{id}/reject",
+      "controller": "WorkforceController",
+      "javaMethod": "decideLeave",
+      "returnType": "WorkforceService.Leave",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/leave/{id}/cancel",
+      "controller": "WorkforceController",
+      "javaMethod": "decideLeave",
+      "returnType": "WorkforceService.Leave",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/benefit-policies",
+      "controller": "WorkforceController",
+      "javaMethod": "policies",
+      "returnType": "List<WorkforceService.BenefitPolicy>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/benefit-policies/{id}",
+      "controller": "WorkforceController",
+      "javaMethod": "policy",
+      "returnType": "WorkforceService.BenefitPolicy",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/benefit-policies",
+      "controller": "WorkforceController",
+      "javaMethod": "requestPolicy",
+      "returnType": "WorkforceService.BenefitPolicy",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/benefit-policies/{id}/approve",
+      "controller": "WorkforceController",
+      "javaMethod": "decidePolicy",
+      "returnType": "WorkforceService.BenefitPolicy",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/benefit-policies/{id}/reject",
+      "controller": "WorkforceController",
+      "javaMethod": "decidePolicy",
+      "returnType": "WorkforceService.BenefitPolicy",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/benefit-elections",
+      "controller": "WorkforceController",
+      "javaMethod": "elections",
+      "returnType": "List<WorkforceService.BenefitElection>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/benefit-elections/{id}",
+      "controller": "WorkforceController",
+      "javaMethod": "election",
+      "returnType": "WorkforceService.BenefitElection",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/benefit-elections",
+      "controller": "WorkforceController",
+      "javaMethod": "requestElection",
+      "returnType": "WorkforceService.BenefitElection",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/benefit-elections/{id}/approve",
+      "controller": "WorkforceController",
+      "javaMethod": "decideElection",
+      "returnType": "WorkforceService.BenefitElection",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/benefit-elections/{id}/reject",
+      "controller": "WorkforceController",
+      "javaMethod": "decideElection",
+      "returnType": "WorkforceService.BenefitElection",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workforce/benefit-elections/{id}/cancel",
+      "controller": "WorkforceController",
+      "javaMethod": "decideElection",
+      "returnType": "WorkforceService.BenefitElection",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/employees/{id}/benefit-preview",
+      "controller": "WorkforceController",
+      "javaMethod": "benefitPreview",
+      "returnType": "List<WorkforceService.Benefit>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workforce/payroll/{id}/benefits",
+      "controller": "WorkforceController",
+      "javaMethod": "benefits",
+      "returnType": "List<WorkforceService.Benefit>",
+      "source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/onboarding/{id}/configuration",
+      "controller": "OnboardingConfigurationController",
+      "javaMethod": "get",
+      "returnType": "OnboardingConfigurationService.Configuration",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/OnboardingConfigurationController.java",
+      "authorization": "hasAuthority('SCOPE_platform:tenants:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/onboarding/{id}/configuration",
+      "controller": "OnboardingConfigurationController",
+      "javaMethod": "configure",
+      "returnType": "OnboardingConfigurationService.Configuration",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/OnboardingConfigurationController.java",
+      "authorization": "hasAuthority('SCOPE_platform:tenants:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/onboarding/{id}/configuration/verify-owner",
+      "controller": "OnboardingConfigurationController",
+      "javaMethod": "verify",
+      "returnType": "OnboardingConfigurationService.Configuration",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/OnboardingConfigurationController.java",
+      "authorization": "hasAuthority('SCOPE_platform:tenants:verify')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/onboarding/{id}/configuration/approve",
+      "controller": "OnboardingConfigurationController",
+      "javaMethod": "approve",
+      "returnType": "OnboardingConfigurationService.Configuration",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/OnboardingConfigurationController.java",
+      "authorization": "hasAuthority('SCOPE_platform:tenants:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
       "path": "/admin/onboarding",
       "controller": "PlatformController",
       "javaMethod": "list",
       "returnType": "List<PlatformService.Item>",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformController.java",
+      "authorization": "hasAuthority('SCOPE_platform:tenants:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/onboarding/{id}",
+      "controller": "PlatformController",
+      "javaMethod": "get",
+      "returnType": "PlatformService.Item",
       "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformController.java",
       "authorization": "hasAuthority('SCOPE_platform:tenants:read')",
       "requestHeaders": [],
@@ -1343,6 +3728,169 @@
       "returnType": "PlatformService.Item",
       "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformController.java",
       "authorization": "hasAuthority('SCOPE_platform:tenants:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/support/grants",
+      "controller": "PlatformGovernanceController",
+      "javaMethod": "merchantGrants",
+      "returnType": "List<PlatformGovernanceService.Grant>",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformGovernanceController.java",
+      "authorization": "hasAnyAuthority('support:read','SCOPE_support:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/support/grants",
+      "controller": "PlatformGovernanceController",
+      "javaMethod": "consent",
+      "returnType": "PlatformGovernanceService.Grant",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformGovernanceController.java",
+      "authorization": "hasAnyAuthority('support:write','SCOPE_support:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/support/grants/{id}/revoke",
+      "controller": "PlatformGovernanceController",
+      "javaMethod": "revoke",
+      "returnType": "PlatformGovernanceService.Grant",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformGovernanceController.java",
+      "authorization": "hasAnyAuthority('support:write','SCOPE_support:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/governance/support-grants",
+      "controller": "PlatformGovernanceController",
+      "javaMethod": "platformGrants",
+      "returnType": "List<PlatformGovernanceService.Grant>",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformGovernanceController.java",
+      "authorization": "hasAuthority('SCOPE_platform:support:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/governance/support-grants/{id}/approve",
+      "controller": "PlatformGovernanceController",
+      "javaMethod": "approveGrant",
+      "returnType": "PlatformGovernanceService.Grant",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformGovernanceController.java",
+      "authorization": "hasAuthority('SCOPE_platform:support:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/governance/support-grants/{id}/diagnostics",
+      "controller": "PlatformGovernanceController",
+      "javaMethod": "diagnostics",
+      "returnType": "PlatformGovernanceService.Diagnostics",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformGovernanceController.java",
+      "authorization": "hasAuthority('SCOPE_platform:support:read')",
+      "requestHeaders": [
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/governance/tenants/{tenantId}/status",
+      "controller": "PlatformGovernanceController",
+      "javaMethod": "status",
+      "returnType": "TenantLifecyclePolicy.State",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformGovernanceController.java",
+      "authorization": "hasAuthority('SCOPE_platform:governance:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/governance/tenants/{tenantId}/legal-holds",
+      "controller": "PlatformGovernanceController",
+      "javaMethod": "holds",
+      "returnType": "List<PlatformGovernanceService.Hold>",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformGovernanceController.java",
+      "authorization": "hasAuthority('SCOPE_platform:governance:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/governance/requests",
+      "controller": "PlatformGovernanceController",
+      "javaMethod": "requests",
+      "returnType": "List<PlatformGovernanceService.Review>",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformGovernanceController.java",
+      "authorization": "hasAuthority('SCOPE_platform:governance:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/governance/tenants/{tenantId}/requests",
+      "controller": "PlatformGovernanceController",
+      "javaMethod": "request",
+      "returnType": "PlatformGovernanceService.Review",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformGovernanceController.java",
+      "authorization": "hasAuthority('SCOPE_platform:governance:write')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/governance/requests/{id}/approve",
+      "controller": "PlatformGovernanceController",
+      "javaMethod": "approve",
+      "returnType": "PlatformGovernanceService.Review",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/PlatformGovernanceController.java",
+      "authorization": "hasAuthority('SCOPE_platform:governance:approve')",
+      "requestHeaders": [
+        "Idempotency-Key",
+        "X-Request-ID"
+      ],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/onboarding/{id}/provision-trial",
+      "controller": "TenantProvisioningController",
+      "javaMethod": "get",
+      "returnType": "TenantProvisioningService.Result",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/TenantProvisioningController.java",
+      "authorization": "hasAuthority('SCOPE_platform:tenants:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/onboarding/{id}/provision-trial",
+      "controller": "TenantProvisioningController",
+      "javaMethod": "provision",
+      "returnType": "TenantProvisioningService.Result",
+      "source": "backend/platform-control/src/main/java/com/quincaisoft/platformcontrol/web/TenantProvisioningController.java",
+      "authorization": "hasAuthority('SCOPE_platform:tenants:provision')",
       "requestHeaders": [
         "Idempotency-Key",
         "X-Request-ID"

@@ -1,0 +1,9 @@
+network_namespace=net:[4026532399]
+listen_addresses=isolated-loopback-only
+application_workers=not_started
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	0000000000000000
+CapAmb:	0000000000000000
+NoNewPrivs:	1

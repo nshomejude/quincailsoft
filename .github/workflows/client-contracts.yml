@@ -1,0 +1,55 @@
+name: Client TypeScript and contract verification
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  clients:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      CI: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - name: Install exact lockfile dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Verify canonical project and migration rules
+        run: |
+          node scripts/check-project-rules.mjs
+          node --test scripts/project-gates.test.mjs
+      - name: Check Java-derived OpenAPI and consumer contract consistency
+        run: |
+          node packages/api-contracts/generate-source-contract.mjs
+          git diff --exit-code -- packages/api-contracts/openapi.json packages/api-contracts/endpoint-inventory.json
+          node packages/api-contracts/validate.mjs
+          node --test packages/api-contracts/*.test.mjs
+      - name: Compile all TypeScript client surfaces
+        run: |
+          pnpm --filter @quincaisoft/web-admin typecheck
+          pnpm --filter @quincaisoft/platform-admin typecheck
+          pnpm --filter @quincaisoft/merchant-storefront typecheck
+          pnpm --filter @quincaisoft/mobile typecheck
+      - name: Execute web and mobile client regression tests
+        run: |
+          pnpm --filter @quincaisoft/web-admin test
+          pnpm --filter @quincaisoft/mobile test
+      - name: Build independent web clients
+        run: |
+          pnpm --filter @quincaisoft/web-admin build
+          pnpm --filter @quincaisoft/platform-admin build
+          pnpm --filter @quincaisoft/merchant-storefront build

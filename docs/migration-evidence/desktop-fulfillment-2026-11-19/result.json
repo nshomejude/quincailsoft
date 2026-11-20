@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-19",
+  "sourceCommit": "d44c2be411b008d070a4ca88a5e22095093495eb",
+  "module": "M23",
+  "java": "25.0.5.1",
+  "postgresql": "18.7",
+  "status": "PARTIAL_ACCEPTANCE",
+  "command": "mvn -B -ntp -f backend/pom.xml -pl business-modules/sales -am -Dtest=PostgresSaleIntegrationTest -Dsurefire.failIfNoSpecifiedTests=false test",
+  "environment": {
+    "QUINCAI_PG_TEST_URL": "jdbc:postgresql://127.0.0.1:55487/postgres",
+    "QUINCAI_PG_TEST_USER": "agent"
+  },
+  "report": "sales-postgres-test.txt",
+  "sourceSha256": {
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/api/FulfillmentService.java": "401745c10dae601a81fe93604ddf7c96990eea0edab91d9c57e8db550fad34fd",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/application/DefaultFulfillmentService.java": "827182f5e722106f3fff2d79784d1965c8639338e719db97a9c60dee7ec1860c",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/infrastructure/FulfillmentDispatchLine.java": "1bbf146f93bf33c9448891176b4c3c9ba4c11af9231787508f7f7106ca698fcb",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/infrastructure/FulfillmentEntity.java": "acd98b1e2739349479d483aa6b5d12cd19d0783d6ff2d12a4291f97d24402d5c",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java": "ce2828ed26e1e1f75c91e2a54d65b6ea2af2f75320d52dcb243c6bf9d6ecf13f",
+    "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java": "46a32b5b04e96965f44cb1d3f7b23aec1cb525c8eb554348e728e446a7154462",
+    "backend/db-migrations/src/main/resources/db/migration/V31__fulfillment_delivery_details.sql": "f53cbb24ea29988dd128a6b5ebd9b6430753883386bac86227bb46fa3aa3a929",
+    "backend/db-migrations/src/main/resources/db/migration/V32__fulfillment_dispatch_lines.sql": "71d0d505e29ab900294268a2c5d7001f8beca7638ca19930027f706f2166c62f"
+  },
+  "verified": [
+    "Scoped picklists and dispatch history",
+    "Delivery details persistence and replay",
+    "Partial, whole-order and direct-completion dispatch quantities",
+    "Stale versions and excess dispatch rejection",
+    "Idempotent retry without duplicate dispatch lines",
+    "Invalid second dispatch product rolls back all lines and task version",
+    "Unchanged stock movements and financial journals during fulfillment",
+    "Outbox omits recipient details, command text and delivery proof",
+    "Partial shipments remain in the preparation queue"
+  ],
+  "remaining": [
+    "Original S74/S75 web screen integration and desktop/narrow screenshots",
+    "Pick ticket and delivery note printing acceptance",
+    "Concurrent fulfillment dispatch acceptance",
+    "OIDC role and lifecycle denial checks for new fulfillment endpoints",
+    "Production deployment and full platform acceptance"
+  ]
+}

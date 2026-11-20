@@ -1,0 +1,62 @@
+[
+  {
+    "role": "owner",
+    "outcomes": [
+      {
+        "path": "documents/captures",
+        "status": 404,
+        "originDenied": 403
+      },
+      {
+        "path": "documents/captures/02543e7e-7030-48fd-86ac-b1a4a8026648/print-attempts",
+        "status": 404,
+        "originDenied": 403
+      },
+      {
+        "path": "documents/print-attempts/02543e7e-7030-48fd-86ac-b1a4a8026648/outcomes",
+        "status": 404,
+        "originDenied": 403
+      }
+    ]
+  },
+  {
+    "role": "cashier",
+    "outcomes": [
+      {
+        "path": "documents/captures",
+        "status": 404,
+        "originDenied": 403
+      },
+      {
+        "path": "documents/captures/1b771525-5a8e-4bd3-b249-15adc913c619/print-attempts",
+        "status": 404,
+        "originDenied": 403
+      },
+      {
+        "path": "documents/print-attempts/1b771525-5a8e-4bd3-b249-15adc913c619/outcomes",
+        "status": 404,
+        "originDenied": 403
+      }
+    ]
+  },
+  {
+    "role": "auditor",
+    "outcomes": [
+      {
+        "path": "documents/captures",
+        "status": 403,
+        "originDenied": 403
+      },
+      {
+        "path": "documents/captures/8c99f3db-bcd0-4b91-88f0-09d3b7ac1bea/print-attempts",
+        "status": 403,
+        "originDenied": 403
+      },
+      {
+        "path": "documents/print-attempts/8c99f3db-bcd0-4b91-88f0-09d3b7ac1bea/outcomes",
+        "status": 403,
+        "originDenied": 403
+      }
+    ]
+  }
+]

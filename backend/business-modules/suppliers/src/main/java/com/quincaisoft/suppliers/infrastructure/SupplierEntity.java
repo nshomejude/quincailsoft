@@ -9,7 +9,12 @@ import jakarta.persistence.*;import java.util.*;import java.time.*;import java.i
  @Column(name="phone") public String phone;
  @Column(name="email") public String email;
  @Column(name="active") public boolean active;
- @Column(name="version") public long version;
+ @Version @Column(name="version") public long version;
+ @Column(name="contact_person")public String contactPerson;
+ public String address;
+ @Column(name="tax_reference")public String taxReference;
+ @Column(name="payment_terms_days")public int paymentTermsDays;
+ @Column(name="bank_reference")public String bankReference;
  public SupplierEntity(){}
  public static class Key implements Serializable{public UUID tenantId,companyId,id;public Key(){}public Key(UUID t,UUID c,UUID i){tenantId=t;companyId=c;id=i;}public boolean equals(Object o){return o instanceof Key k&&Objects.equals(tenantId,k.tenantId)&&Objects.equals(companyId,k.companyId)&&Objects.equals(id,k.id);}public int hashCode(){return Objects.hash(tenantId,companyId,id);}}
 }

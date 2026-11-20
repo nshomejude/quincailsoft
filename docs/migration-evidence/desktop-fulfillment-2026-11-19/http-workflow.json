@@ -1,0 +1,30 @@
+{
+  "sourceCommit": "bbb210892233067062eeaf4e60c0036cc6bc1434",
+  "status": "PASS",
+  "java": "25.0.5.1",
+  "postgresql": "18.7",
+  "command": "mvn -B -ntp -f backend/pom.xml -pl api-server -am -Dtest=FullApplicationPostgresTest -Dsurefire.failIfNoSpecifiedTests=false test",
+  "historicalAcceptanceFlags": false,
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "scope": [
+    "Full Spring Boot resource server with generated signed test issuer; NOBYPASSRLS application role",
+    "Ordinary purchase draft/submit, maker approval rejected409, independent checker approval, receipt",
+    "Document settings, sale draft/post, invoice snapshot and durable replay",
+    "Fulfillment delivery details, partial dispatch, overship rejection422, final dispatch, proof and completion",
+    "Exact economics unchanged by delivery: 8000 milli stock, 4000 XAF value, two stock movements, two journals with 8000 XAF balanced totals, one snapshot",
+    "Completed queue lookup and dispatch history"
+  ],
+  "notAccepted": [
+    "Full platform migration",
+    "Browser mutation/detail/printing acceptance",
+    "External provider or physical hardware acceptance",
+    "Historical dataset ingestion"
+  ],
+  "sourceHashes": {
+    "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java": "a1bc5ad4e85e0753017d12270b4ddd561917748df4139047b0b61ca1f47a5461",
+    "backend/api-server/src/test/java/com/quincaisoft/security/FulfillmentHttpWorkflow.java": "e94c930a3df5c8aa21818d906a135f9547dc5237724f6f6da30a2d89b1f0ae46"
+  }
+}

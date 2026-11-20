@@ -1,0 +1,33 @@
+# Copy outside the repository; placeholders are intentionally invalid until approved.
+# All deployed images must be immutable registry/name@sha256:<64 lowercase hex>.
+QUINCAI_API_IMAGE=
+QUINCAI_MERCHANT_IMAGE=
+QUINCAI_PLATFORM_IMAGE=
+QUINCAI_MIGRATION_IMAGE=
+QUINCAI_INGRESS_IMAGE=
+QUINCAI_DATABASE_URL=jdbc:postgresql://database.example.invalid:5432/quincaisoft?sslmode=verify-full&sslrootcert=/run/secrets/database_ca.pem
+QUINCAI_DATABASE_USER=quincai_app
+QUINCAI_DATABASE_PASSWORD_FILE=/srv/quincai/secrets/runtime-password
+QUINCAI_DATABASE_CA_FILE=/srv/quincai/secrets/database-ca.pem
+QUINCAI_MIGRATION_USER=quincai_migrator
+QUINCAI_MIGRATION_PASSWORD_FILE=/srv/quincai/secrets/migration-password
+QUINCAI_OIDC_ISSUER=https://identity.example.invalid/realms/merchant
+QUINCAI_OIDC_AUDIENCE=quincai-api
+APP_URL=https://merchant.example.invalid
+OIDC_CLIENT_ID=quincai-merchant-web
+OIDC_CLIENT_SECRET_FILE=/srv/quincai/secrets/merchant-oidc
+# Operator supplies the approved explicit role capability set; never a guessed wildcard.
+OIDC_SCOPES=openid profile
+PLATFORM_OIDC_ISSUER=https://identity.example.invalid/realms/platform
+QUINCAI_PLATFORM_AUDIENCE=quincai-platform-api
+PLATFORM_APP_URL=https://platform.example.invalid
+PLATFORM_OIDC_CLIENT_ID=quincai-platform-web
+PLATFORM_OIDC_CLIENT_SECRET_FILE=/srv/quincai/secrets/platform-oidc
+PLATFORM_OIDC_SCOPES=openid profile
+# Each file contains a rediss://ACL_USER:PASSWORD@host:port/database URL.
+# Configure separate ACL users restricted to quincai:web:* / quincai:platform:*.
+MERCHANT_REDIS_URL_FILE=/srv/quincai/secrets/merchant-redis-url
+PLATFORM_REDIS_URL_FILE=/srv/quincai/secrets/platform-redis-url
+QUINCAI_INGRESS_CONFIG_FILE=/srv/quincai/nginx.conf
+QUINCAI_TLS_CERT_FILE=/srv/quincai/secrets/tls-certificate.pem
+QUINCAI_TLS_KEY_FILE=/srv/quincai/secrets/tls-private-key.pem

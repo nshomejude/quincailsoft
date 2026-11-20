@@ -1,5 +1,5 @@
 import 'server-only';import {session} from './auth';
-export type Product={id:string;sku:string;name:string;baseUnit:string;sellingPriceXaf:string;taxBasisPoints:number;version:string;active:boolean};
+export type Product={id:string;sku:string;name:string;baseUnit:string;sellingPriceXaf:string;taxBasisPoints:number;version:string;active:boolean;categoryId:string|null;brand:string;barcode:string;packSizeMilli:string;reorderLevelMilli:string;trackStock:boolean;trackSerial:boolean;trackExpiry:boolean;description:string};
 export type Named={id:string;name:string;active?:boolean;version?:string};
 export type Sale={id:string;status:string;businessDate:string;totalXaf:string;version:number;warehouseId:string;customerId:string;lines:{id:string;productId:string;quantityMilli:string;unitPriceXaf:string;lineTotalXaf:string}[]};
 export type Me={scope:{tenantId:string;companyId:string;branchId:string;actorId:string};authorities:string[]};
@@ -10,7 +10,9 @@ export async function api<T>(path:string,init?:RequestInit):Promise<T>{
  const response=await fetch(new URL('/api/v1/'+path,base),{...init,cache:'no-store',headers:{'Content-Type':'application/json','Authorization':'Bearer '+auth.accessToken,...init?.headers}});
  if(!response.ok){const data=await response.json().catch(()=>({}));throw new ApiError(response.status,typeof data.message==='string'?data.message:undefined,data.code,data.correlationId)}return response.json() as Promise<T>;
 }
+export type ProductPage={items:Product[];total:number;offset:number;limit:number};
+export const pagedProducts=(query:string,offset=0,limit=50)=>api<ProductPage>(
+  'products/page?query='+encodeURIComponent(query)+'&offset='+offset+'&limit='+limit);
 export const products=()=>api<Product[]>('products');export const sales=()=>api<Sale[]>('sales');
 export const permitted=(me:Me,permission:string)=>me.authorities.some(a=>a===permission||a==='SCOPE_'+permission);
-export function xaf(value:string){try{return new Intl.NumberFormat('fr-CM',{style:'currency',currency:'XAF',maximumFractionDigits:0}).format(BigInt(value))}catch{return '—'}}
-export function units(value:string){const n=BigInt(value);return (n/1000n).toString()+((n%1000n)?'.'+(n%1000n).toString().padStart(3,'0').replace(/0+$/,''):'')}
+export {xaf,units} from './format';

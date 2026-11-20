@@ -1,0 +1,1834 @@
+{
+  "schemaVersion": 1,
+  "reviewedCommit": "adcc7e115bc7f42236fac041aed1898bb456adb8",
+  "date": "2026-11-18",
+  "timezone": "Africa/Douala",
+  "authority": "ARCHITECTURE.md §4 with §§31–46 overriding; latest user scope controls priority.",
+  "stack": {
+    "backend": "Java 25 / Spring Boot 4 / Spring Modulith",
+    "database": "PostgreSQL 18 / Flyway",
+    "productionPython": "PROHIBITED"
+  },
+  "owners": {
+    "CLOUD": "ChatGPT cloud Codex: author of this register; accepts listed CLOUD work.",
+    "DESKTOP": "Local Codex: existing integration lead; new explicit module allocations require acknowledgement, not assumed active work."
+  },
+  "modules": [
+    {
+      "id": "M01",
+      "name": "Tenant & provisioning",
+      "scope": "Tenant lifecycle, plan region, isolation tier, data ownership, migrations",
+      "outputs": "Create/verify/suspend/restore tenant; `TenantProvisioned`",
+      "owner": "CLOUD",
+      "reviewer": "DESKTOP",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "CLOUD",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/platform-control"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M02",
+        "M03",
+        "M04",
+        "M05"
+      ],
+      "nextAction": "Tenant onboarding/provisioning lifecycle, isolation and rollback; existing review flow is only partial.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M02",
+      "name": "Organization & branches",
+      "scope": "Legal entity, business registration, branches, locations, store hours, business dates",
+      "outputs": "Company/branch CRUD, active policy checks, `BranchCreated`",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/company",
+        "backend/business-modules/branch"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M01",
+        "M04"
+      ],
+      "nextAction": "Legal company and branch configuration, warehouse/date scope and approval controls.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M03",
+      "name": "Identity & staff",
+      "scope": "Invitations, staff, memberships, MFA, session/device revocation",
+      "outputs": "OIDC integration, invites, session validation, `MembershipChanged`",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/identity"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M01",
+        "M02",
+        "M04"
+      ],
+      "nextAction": "OIDC invitations, active membership/epoch, staff access; HR/payroll extension is separately assigned to CLOUD.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M04",
+      "name": "RBAC / ABAC policy",
+      "scope": "Roles, permission bundles, branch scoping, maker-checker, separation of duties",
+      "outputs": "Effective capabilities API, authorization decisions, audit",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/api-server",
+        "backend/business-modules/identity"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M02",
+        "M03"
+      ],
+      "nextAction": "Effective role/capability intersection, ABAC and independent approvals.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M05",
+      "name": "Subscriptions & billing",
+      "scope": "Plan, features, seats, branch allowances, invoices to merchant, payment collection",
+      "outputs": "Billing portal/webhooks, grace/suspension, `EntitlementChanged`",
+      "owner": "CLOUD",
+      "reviewer": "DESKTOP",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "CLOUD",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/subscriptions"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M01",
+        "M18",
+        "M25"
+      ],
+      "nextAction": "Plans, entitlements, seats/branches, subscription lifecycle, billing and enforcement.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M06",
+      "name": "Catalog / PIM",
+      "scope": "SKU, product variants, brand, category, barcodes, media, lifecycle",
+      "outputs": "Products, variants, search, imports, `ProductChanged`",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/catalog"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M02",
+        "M04",
+        "M07",
+        "M08",
+        "M12"
+      ],
+      "nextAction": "Typed manufacturer/family/model/variant/supplier-offer identity; preserve source stock pools.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M07",
+      "name": "Units & measurement",
+      "scope": "Base UoM, conversion ratios, pack definitions, tare, precision",
+      "outputs": "Conversion tests and preview, UoM APIs",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/catalog"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M06"
+      ],
+      "nextAction": "Exact rational conversion and pack/precision rules.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M08",
+      "name": "Pricing & promotions",
+      "scope": "Retail/wholesale tiers, effective dates, customer/branch prices, discounts",
+      "outputs": "Price quote API, price approval, `PricePublished`",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/catalog"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M04",
+        "M06",
+        "M07",
+        "M25"
+      ],
+      "nextAction": "Effective-dated pricing/discount approvals and frozen price/tax snapshots.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M09",
+      "name": "Inventory authority",
+      "scope": "Custody, ownership/valuation positions, immutable movements, central reservations, exclusive offline stock grants",
+      "outputs": "Sole inventory writer; physical/owned/available balances and §32/§33 contracts",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/inventory"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M02",
+        "M04",
+        "M06",
+        "M07",
+        "M25"
+      ],
+      "nextAction": "Sole stock writer, custody/ownership, reservations and authoritative valuation.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M10",
+      "name": "Stock count & replenishment",
+      "scope": "Cycle count, blind counts, approval, reorder points, transfer suggestions",
+      "outputs": "Count sessions, discrepancies, reorder reports",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/inventory"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M09",
+        "M04"
+      ],
+      "nextAction": "Blind count, approved variances, reorder and replenishment.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M11",
+      "name": "Warehousing & transfers",
+      "scope": "Bins, receiving, dispatch, in-transit, cross-branch transfer acknowledgements",
+      "outputs": "Transfer commands, scans, delivery and loss records",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/inventory"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M09",
+        "M02"
+      ],
+      "nextAction": "Transfer dispatch/receipt/loss and value conservation.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M12",
+      "name": "Supplier master",
+      "scope": "Supplier identity, purchasing terms, contact, documents, tax data",
+      "outputs": "Supplier APIs, statement, duplicate screening",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/suppliers"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M02",
+        "M04"
+      ],
+      "nextAction": "Supplier identities, terms, duplicate handling and safe bank changes.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M13",
+      "name": "Procurement",
+      "scope": "Requisitions, RFQ, purchase orders, approvals, partial receipt, returns",
+      "outputs": "PO/GRN APIs, `GoodsReceived`, landed costs",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/purchasing"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M12",
+        "M09",
+        "M14",
+        "M25"
+      ],
+      "nextAction": "PO/receipt/match exceptions, partials/returns and landed-cost provenance.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M14",
+      "name": "Supplier accounts",
+      "scope": "Payables, credit notes, deposits, payment allocation, ageing",
+      "outputs": "AP ledger, statements, `SupplierPaymentConfirmed`",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/purchasing",
+        "backend/business-modules/tenders"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M12",
+        "M13",
+        "M18",
+        "M25"
+      ],
+      "nextAction": "AP, supplier credits/advances, payments/ageing and control reconciliation.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M15",
+      "name": "Customer master",
+      "scope": "Customer identity, optional business KYC, consent, terms, contacts",
+      "outputs": "Directory, merge with audit, branch visibility",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/customer-accounts"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M02",
+        "M04"
+      ],
+      "nextAction": "Customer directory, consent, scoped merges and terms.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M16",
+      "name": "Customer credit/deposits",
+      "scope": "AR ledger, credit limits, deposit liability, invoice allocations, refunds",
+      "outputs": "Statements, allocations, overdue reports",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/customer-accounts",
+        "backend/business-modules/tenders"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M15",
+        "M17",
+        "M18",
+        "M25"
+      ],
+      "nextAction": "Credit enforcement, deposits, AR allocations/refunds and exact balances.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M17",
+      "name": "POS & sales",
+      "scope": "Cart/held sale, price and tax snapshot, receipt, sale approval, stock issue",
+      "outputs": "Sale POST API, `SalePosted`, sales register",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/sales"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M06",
+        "M08",
+        "M09",
+        "M16",
+        "M18",
+        "M24",
+        "M25"
+      ],
+      "nextAction": "POS posting, held/draft sales, prices/taxes, atomic original document and stock issue.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M18",
+      "name": "Payments and settlement",
+      "scope": "Tender types, provider adapters, settlement events, refunds, chargebacks",
+      "outputs": "Payment intent, webhooks, reconciliation",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/tenders",
+        "backend/business-modules/integrations"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M04",
+        "M16",
+        "M25"
+      ],
+      "nextAction": "MTN/Orange intents, ambiguity, callbacks, settlements/refunds/chargebacks; live acceptance external.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M19",
+      "name": "Cash management",
+      "scope": "Cash registers, shifts, movements, count, closing and differences",
+      "outputs": "Till APIs, daily close, `CashShiftClosed`",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/tenders"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M18",
+        "M25"
+      ],
+      "nextAction": "Till sessions, independent close, denominations and differences.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M20",
+      "name": "Expenses",
+      "scope": "Expense categories, payees, receipts, approvals, posted cash/bank impact",
+      "outputs": "Expense API, voucher, expense analysis",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/expenses"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M04",
+        "M18",
+        "M19",
+        "M25"
+      ],
+      "nextAction": "Expense approvals, cash/bank impact and vouchers.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M21",
+      "name": "Quotations & offers",
+      "scope": "Draft/issued quotes, expiry, revisions, approval, customer acceptance",
+      "outputs": "Quote APIs, document and POS staging",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/quotations"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M06",
+        "M08",
+        "M15",
+        "M17",
+        "M24"
+      ],
+      "nextAction": "Quote revisions, expiry, acceptance and safe sale conversion.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M22",
+      "name": "Returns & credit notes",
+      "scope": "Original sale eligibility, inspection, restocking, credits, customer refund",
+      "outputs": "Return API, credit note, refund voucher",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/returns"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M17",
+        "M09",
+        "M16",
+        "M18",
+        "M24",
+        "M25"
+      ],
+      "nextAction": "Original-line return limits, frozen cost, credit and approved refund.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M23",
+      "name": "Fulfillment & delivery",
+      "scope": "Pickup, packing, shipping, drivers, proof of delivery, partial fulfillment",
+      "outputs": "Handover API, delivery note, `OrderDelivered`",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/inventory",
+        "backend/business-modules/sales"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M09",
+        "M17",
+        "M28"
+      ],
+      "nextAction": "Customer custody and partial pickup/delivery without second stock deduction.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M24",
+      "name": "Document & print engine",
+      "scope": "Atomic document issuance, number series, immutable economic snapshots, template versions and print attempts",
+      "outputs": "issueSnapshot in source transaction; rendering/download/print after commit (§38)",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/documents"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M04",
+        "M17",
+        "M21",
+        "M22",
+        "M25"
+      ],
+      "nextAction": "Atomic immutable snapshots, numbering, templates, print attempts and all canonical fields. CLOUD performs independent parity audit.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M25",
+      "name": "Fiscal configuration & operational journal",
+      "scope": "Balanced control journal, company account mappings, periods, tax rules, finance export and fiscal adapter policy",
+      "outputs": "postBatch, reversal, control reconciliation, tax preview and accountant exports (§37)",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/finance"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M02",
+        "M04"
+      ],
+      "nextAction": "Exact balanced journal, reversal, periods, fiscal policy and operational account mappings.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M26",
+      "name": "Operational reporting",
+      "scope": "Sales KPIs, margin estimates, stock, AR/AP, expenses, cash, audit",
+      "outputs": "Bounded aggregate views, exports, report jobs",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/reporting"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M04",
+        "M09",
+        "M14",
+        "M16",
+        "M17",
+        "M25"
+      ],
+      "nextAction": "Scoped real aggregates, all canonical reports, analytics and exports. CLOUD performs independent parity audit.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M27",
+      "name": "Commerce storefront",
+      "scope": "Storefront products, prices, checkout, customer cart and delivery choices",
+      "outputs": "SEO catalogue, cart/order/payment API",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/commerce",
+        "apps/merchant-storefront"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M05",
+        "M06",
+        "M08",
+        "M18",
+        "M28"
+      ],
+      "nextAction": "Storefront publication, entitlement, cart/checkout and customer ownership.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M28",
+      "name": "Orders & reservation orchestration",
+      "scope": "Multi-channel orders and reservation workflow; M09 alone owns reservation quantities/tables",
+      "outputs": "Order API; invoke inventory reserve/release/consume; order expiry and compensation coordination",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/commerce",
+        "backend/business-modules/inventory"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M09",
+        "M17",
+        "M23"
+      ],
+      "nextAction": "Order orchestration; M09 alone owns reservations.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M29",
+      "name": "Offline mobile/sync",
+      "scope": "Device grant, local outbox, batch push, deltas, conflicts, high-watermarks",
+      "outputs": "`/sync/*`, sync logs, quota allocation",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "PAUSED_BY_USER",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/sync",
+        "apps/mobile"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M03",
+        "M04",
+        "M09"
+      ],
+      "nextAction": "PAUSED: native mobile feature work; inventory/offline authority must still fail closed in backend.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M30",
+      "name": "Windows bridge & standalone companion",
+      "scope": "WPF adapter, source mappings, encrypted companion snapshots/drafts and native reconciliation",
+      "outputs": "Reuse M29 sync protocol; no alternate cloud sync engine or direct DB copying (§35/§38)",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "PAUSED_BY_USER",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "desktop-integration"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M29"
+      ],
+      "nextAction": "PAUSED: standalone WPF and bridge feature work; preserve existing standalone behavior.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M31",
+      "name": "Notifications & alerts",
+      "scope": "Event-driven email/SMS/push/WhatsApp templates, preferences, delivery receipts",
+      "outputs": "Notification queue, receipts, user opt-outs",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/operations"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M03",
+        "M04",
+        "M34"
+      ],
+      "nextAction": "Event-driven notifications, user preferences and delivery retry receipts.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M32",
+      "name": "Integrations & webhooks",
+      "scope": "Provider configuration, secrets, signed webhooks, retries, sandbox/test mode",
+      "outputs": "Connectors and integration health",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/integrations"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M04",
+        "M18",
+        "M34"
+      ],
+      "nextAction": "Signed integration callbacks, secrets boundary, replay and retries.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M33",
+      "name": "Import / export / migration",
+      "scope": "CSV/XLSX templates, dry-run diff, duplicate handling, mapping, job audit",
+      "outputs": "Import jobs, scoped exports, failure manifest",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/operations"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M04",
+        "M06",
+        "M12",
+        "M15",
+        "M25",
+        "M38"
+      ],
+      "nextAction": "Historical Java importer/durable mapping, scoped master imports/exports and recovery-safe replay.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M34",
+      "name": "Audit & compliance",
+      "scope": "Immutable event trail, retention policy, access logs, legal hold, export",
+      "outputs": "Audits, access review, retention execution",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/audit"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M03",
+        "M04"
+      ],
+      "nextAction": "Append-only audit, delivery workers, access/retention and legal hold.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M35",
+      "name": "Platform administration",
+      "scope": "Tenant support, service health, billing support, capacity, feature rollout",
+      "outputs": "Separate admin API/control plane, break-glass",
+      "owner": "CLOUD",
+      "reviewer": "DESKTOP",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "CLOUD",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/platform-control",
+        "apps/platform-admin"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M01",
+        "M04",
+        "M05",
+        "M34",
+        "M40"
+      ],
+      "nextAction": "Separate platform administration, tenant support and consented narrow access; no global merchant bypass.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M36",
+      "name": "Industry capabilities",
+      "scope": "Per-vertical attributes, templates, sector rules and optional module packages",
+      "outputs": "Feature and schema configuration, not tenant code forks",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/catalog",
+        "backend/business-modules/subscriptions"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M05",
+        "M06",
+        "M07"
+      ],
+      "nextAction": "Industry attributes/capabilities without tenant code forks.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M37",
+      "name": "Device and print management",
+      "scope": "Registered printers/scanners, locale/templates, device status and troubleshooting",
+      "outputs": "Printer profile and capability checks",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/documents"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M24",
+        "M29",
+        "M30"
+      ],
+      "nextAction": "Server-side device/print profiles; native hardware acceptance paused with clients.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M38",
+      "name": "Data lifecycle & backup",
+      "scope": "Tenant export, deletion workflows, PITR runbooks, restore verification",
+      "outputs": "Export/restore evidence and retention jobs",
+      "owner": "CLOUD",
+      "reviewer": "DESKTOP",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "CLOUD",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/operations",
+        "infrastructure"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M04",
+        "M33",
+        "M34"
+      ],
+      "nextAction": "Backup/restore/PITR, deletion/export and retention. Shared operations implementation requires path-level reservation.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M39",
+      "name": "Search and indexing",
+      "scope": "Product/customer/supplier search, autocomplete, bounded reindexing",
+      "outputs": "PostgreSQL full text initially; external index only if needed",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "DESKTOP",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/business-modules/catalog",
+        "backend/business-modules/customer-accounts",
+        "backend/business-modules/suppliers"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M04",
+        "M06",
+        "M12",
+        "M15"
+      ],
+      "nextAction": "Bounded scoped PostgreSQL search and reindexing.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    },
+    {
+      "id": "M40",
+      "name": "Support & diagnostics",
+      "scope": "Ticket, diagnostic bundle, consented remote support session, incident linking",
+      "outputs": "Support UI and auditable access grant",
+      "owner": "CLOUD",
+      "reviewer": "DESKTOP",
+      "integrationOwner": "DESKTOP",
+      "focusedTestOwner": "CLOUD",
+      "acceptanceOwner": "DESKTOP",
+      "assignmentStatus": "PROPOSED_PENDING_AUDIT_RECONCILIATION",
+      "deliveryStatus": "GAP_AUDIT_AND_IMPLEMENTATION_REQUIRED",
+      "releaseStatus": "NOT_ACCEPTED",
+      "sourceAreas": [
+        "backend/platform-control",
+        "apps/platform-admin"
+      ],
+      "pathPolicy": "Related existing areas, not an exclusive directory lock. Shared paths require a file-level reservation before edits.",
+      "dependsOn": [
+        "M03",
+        "M04",
+        "M34",
+        "M35"
+      ],
+      "nextAction": "Support diagnostics, consent and expiring audited access grants.",
+      "acceptanceRequirements": [
+        "canonical workflow/state transitions",
+        "screen/detail/tab/action/field parity",
+        "report/template/print-field coverage",
+        "Java API and PostgreSQL migration acceptance",
+        "tenant/company/branch and role denials",
+        "replay/concurrency/rollback where applicable",
+        "original UI fidelity and EN/FR",
+        "commit-bound executed evidence"
+      ],
+      "acceptedEvidence": [],
+      "sourceStatus": "Directory mapping is not implementation completeness evidence."
+    }
+  ],
+  "workstreams": [
+    {
+      "id": "W01",
+      "name": "HR and payroll extension",
+      "owner": "CLOUD",
+      "reviewer": "DESKTOP",
+      "dependsOn": [
+        "M03",
+        "M20",
+        "M25"
+      ],
+      "boundary": "New typed personnel/payroll boundary; coordinate identity and finance public APIs.",
+      "deliverable": "Employee/contract/attendance/payroll source mapping, immutable money posting, approval and tests. Do not invent statutory payroll rules.",
+      "assignmentStatus": "ACCEPTED_BY_CLOUD",
+      "deliveryStatus": "NOT_ACCEPTED",
+      "acceptedEvidence": []
+    },
+    {
+      "id": "W02",
+      "name": "Deployment, runtime and monitoring",
+      "owner": "CLOUD",
+      "reviewer": "DESKTOP",
+      "dependsOn": [
+        "M01",
+        "M35",
+        "M38"
+      ],
+      "boundary": "New infrastructure/deployment paths; Desktop retains infrastructure/local-preview.",
+      "deliverable": "Container/configuration/health/observability/deploy and rollback artifacts; deployment destination still not established.",
+      "assignmentStatus": "ACCEPTED_BY_CLOUD",
+      "deliveryStatus": "NOT_ACCEPTED",
+      "acceptedEvidence": []
+    },
+    {
+      "id": "W03",
+      "name": "Security release assurance",
+      "owner": "CLOUD",
+      "reviewer": "DESKTOP",
+      "dependsOn": [
+        "M03",
+        "M04",
+        "M18",
+        "M32",
+        "M34",
+        "M35"
+      ],
+      "boundary": "Isolated security acceptance tests and evidence; shared auth implementation remains Desktop.",
+      "deliverable": "Review OIDC/RBAC/ABAC, tenant isolation, dependency findings, secrets and external exposure; no blanket certificate.",
+      "assignmentStatus": "ACCEPTED_BY_CLOUD",
+      "deliveryStatus": "NOT_ACCEPTED",
+      "acceptedEvidence": []
+    },
+    {
+      "id": "W04",
+      "name": "Performance and recovery testing",
+      "owner": "CLOUD",
+      "reviewer": "DESKTOP",
+      "dependsOn": [
+        "M09",
+        "M17",
+        "M25",
+        "M38"
+      ],
+      "boundary": "Isolated test harnesses/restore rehearsal artifacts; coordinate environment before load.",
+      "deliverable": "Real PostgreSQL load, latency/capacity evidence, failure/recovery and restore verification.",
+      "assignmentStatus": "ACCEPTED_BY_CLOUD",
+      "deliveryStatus": "NOT_ACCEPTED",
+      "acceptedEvidence": []
+    },
+    {
+      "id": "W05",
+      "name": "Historical source dataset",
+      "owner": "CLOUD",
+      "reviewer": "DESKTOP",
+      "dependsOn": [
+        "M06",
+        "M12",
+        "M15",
+        "M25",
+        "M33"
+      ],
+      "boundary": "datasets/business-history/generate.mjs; validate.mjs; source reference fixtures.",
+      "deliverable": "Maintain deterministic manufacturer-aware fixtures and independent financial/stock reference validation.",
+      "assignmentStatus": "ACCEPTED_BY_CLOUD",
+      "deliveryStatus": "SOURCE_FIXTURE_VALIDATED_APPLICATION_IMPORT_PENDING",
+      "acceptedEvidence": [
+        "datasets/business-history/evidence/validation.json",
+        "docs/dataset-import-evidence.md"
+      ]
+    },
+    {
+      "id": "W06",
+      "name": "Historical Java ingestion and reconciliation",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "dependsOn": [
+        "M06",
+        "M09",
+        "M14",
+        "M16",
+        "M17",
+        "M25",
+        "M33"
+      ],
+      "boundary": "Java adapter and durable mapping; java-import-preflight and import evidence.",
+      "deliverable": "Resolve missing typed schema, replay chronological events, retry without duplication, reconcile every branch/party.",
+      "assignmentStatus": "ASSIGNED_PENDING_DESKTOP_ACK",
+      "deliveryStatus": "NOT_ACCEPTED",
+      "acceptedEvidence": []
+    },
+    {
+      "id": "W07",
+      "name": "Original screen fidelity and web wiring",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "dependsOn": [
+        "M17",
+        "M24",
+        "M26",
+        "M35"
+      ],
+      "boundary": "apps/web-admin; apps/platform-admin shared with CLOUD by page; original previews.",
+      "deliverable": "Restore original composition and analytics meaning with real Java data; no generic substitutes.",
+      "assignmentStatus": "ASSIGNED_PENDING_DESKTOP_ACK",
+      "deliveryStatus": "NOT_ACCEPTED",
+      "acceptedEvidence": []
+    },
+    {
+      "id": "W08",
+      "name": "Documents/reporting independent audit",
+      "owner": "CLOUD",
+      "reviewer": "DESKTOP",
+      "dependsOn": [
+        "M24",
+        "M26"
+      ],
+      "boundary": "Audit evidence and isolated regression tests; implementation fixes reserved separately with Desktop.",
+      "deliverable": "Map every template/report/field and Python assertion to Java behavior and identify exact missing implementation.",
+      "assignmentStatus": "ACCEPTED_BY_CLOUD",
+      "deliveryStatus": "NOT_ACCEPTED",
+      "acceptedEvidence": []
+    },
+    {
+      "id": "W09",
+      "name": "Shared reactor, schema numbering, SDK and integration",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "dependsOn": [
+        "M01",
+        "M04",
+        "M25",
+        "M33"
+      ],
+      "boundary": "backend/pom.xml; backend/api-server/pom.xml; db-migrations sequencing; shared locks/contracts.",
+      "deliverable": "Integrate focused changes; allocate unique migrations; run full reactor and consumer verification.",
+      "assignmentStatus": "ASSIGNED_PENDING_DESKTOP_ACK",
+      "deliveryStatus": "NOT_ACCEPTED",
+      "acceptedEvidence": []
+    },
+    {
+      "id": "W10",
+      "name": "Release acceptance and main merge",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "dependsOn": [
+        "M01",
+        "M04",
+        "M17",
+        "M18",
+        "M24",
+        "M25",
+        "M26",
+        "M38"
+      ],
+      "boundary": "Commit-bound release dossier and PR integration.",
+      "deliverable": "Assemble pass/fail/blocked/not-run gates, independent CLOUD review; merge only accepted scope.",
+      "assignmentStatus": "ASSIGNED_PENDING_DESKTOP_ACK",
+      "deliveryStatus": "NOT_ACCEPTED",
+      "acceptedEvidence": []
+    },
+    {
+      "id": "W11",
+      "name": "Runtime and business configuration",
+      "owner": "DESKTOP",
+      "reviewer": "CLOUD",
+      "dependsOn": [
+        "M02",
+        "M04",
+        "M06",
+        "M07",
+        "M08",
+        "M25"
+      ],
+      "boundary": "Merchant company/branch/UoM/pricing/fiscal settings and config validation.",
+      "deliverable": "Desktop owns merchant business settings; CLOUD owns tenant onboarding/plan/platform/deployment settings.",
+      "assignmentStatus": "ASSIGNED_PENDING_DESKTOP_ACK",
+      "deliveryStatus": "NOT_ACCEPTED",
+      "acceptedEvidence": []
+    }
+  ],
+  "desktopAssignments": [
+    {
+      "id": "D01",
+      "title": "Acknowledge register and reserve active paths",
+      "owner": "DESKTOP",
+      "scope": "W09",
+      "acknowledged": false,
+      "implementationStatus": "PENDING",
+      "verificationStatus": "NOT_VERIFIED",
+      "completionCriteria": "Publish current active files, branch and planned migrations; no duplicate owners.",
+      "evidence": []
+    },
+    {
+      "id": "D02",
+      "title": "Implement manufacturer/family/variant/supplier-offer model",
+      "owner": "DESKTOP",
+      "scope": "M06",
+      "acknowledged": false,
+      "implementationStatus": "PENDING",
+      "verificationStatus": "NOT_VERIFIED",
+      "completionCriteria": "Typed identity, scoped uniqueness and negative tests; preserve historical stock identities.",
+      "evidence": []
+    },
+    {
+      "id": "D03",
+      "title": "Implement historical Java importer",
+      "owner": "DESKTOP",
+      "scope": "W06",
+      "acknowledged": false,
+      "implementationStatus": "PENDING",
+      "verificationStatus": "NOT_VERIFIED",
+      "completionCriteria": "Durable source mapping and ordered domain commands; zero raw ledger bypasses.",
+      "evidence": []
+    },
+    {
+      "id": "D04",
+      "title": "Ingest and reconcile full historical dataset",
+      "owner": "DESKTOP",
+      "scope": "W06",
+      "acknowledged": false,
+      "implementationStatus": "PENDING",
+      "verificationStatus": "NOT_VERIFIED",
+      "completionCriteria": "Counts read/imported/rejected/blocked by source ID; exact stock, AR/AP, cash/bank, tax and P&L reconciliation.",
+      "evidence": []
+    },
+    {
+      "id": "D05",
+      "title": "Verify import replay and interruption recovery",
+      "owner": "DESKTOP",
+      "scope": "W06",
+      "acknowledged": false,
+      "implementationStatus": "PENDING",
+      "verificationStatus": "NOT_VERIFIED",
+      "completionCriteria": "Second pass and resumed pass produce no duplicate economic effects.",
+      "evidence": []
+    },
+    {
+      "id": "D06",
+      "title": "Restore original screens and analytics",
+      "owner": "DESKTOP",
+      "scope": "W07",
+      "acknowledged": false,
+      "implementationStatus": "PENDING",
+      "verificationStatus": "NOT_VERIFIED",
+      "completionCriteria": "Before/after actual screenshots, screen register and Java-backed KPI evidence.",
+      "evidence": []
+    },
+    {
+      "id": "D07",
+      "title": "Complete Java parity and module acceptance",
+      "owner": "DESKTOP",
+      "scope": "W09",
+      "acknowledged": false,
+      "implementationStatus": "PENDING",
+      "verificationStatus": "NOT_VERIFIED",
+      "completionCriteria": "All required acceptance rows resolved with executed current-build evidence; retain explicit external blockers.",
+      "evidence": []
+    },
+    {
+      "id": "D08",
+      "title": "Integrate CLOUD-owned modules",
+      "owner": "DESKTOP",
+      "scope": "W09",
+      "acknowledged": false,
+      "implementationStatus": "PENDING",
+      "verificationStatus": "NOT_VERIFIED",
+      "completionCriteria": "Review/cherry-pick tested PRs, resolve shared boundaries, run combined acceptance without overwriting local work.",
+      "evidence": []
+    },
+    {
+      "id": "D09",
+      "title": "Full application/browser/database test run",
+      "owner": "DESKTOP",
+      "scope": "W10",
+      "acknowledged": false,
+      "implementationStatus": "PENDING",
+      "verificationStatus": "NOT_VERIFIED",
+      "completionCriteria": "Current reactor, PostgreSQL, auth/role, web workflows and report/document tests with failure counts.",
+      "evidence": []
+    },
+    {
+      "id": "D10",
+      "title": "Release dossier and merge",
+      "owner": "DESKTOP",
+      "scope": "W10",
+      "acknowledged": false,
+      "implementationStatus": "PENDING",
+      "verificationStatus": "NOT_VERIFIED",
+      "completionCriteria": "Exact commit, gate statuses, reviewer result, rollback/restore and environment evidence.",
+      "evidence": []
+    }
+  ],
+  "releaseDecision": {
+    "integrationAndMerge": "DESKTOP",
+    "independentTechnicalReview": "CLOUD",
+    "focusedTests": "Each implementation owner",
+    "combinedAcceptance": "DESKTOP",
+    "certificate": "Commit-specific technical acceptance report only; never external legal/security certification.",
+    "productionDeployment": "CLOUD prepares artifacts and executes only against an established authorized destination; Desktop validates integrated runtime.",
+    "targetStatus": "NOT_ESTABLISHED",
+    "readiness": "NOT_CERTIFIED"
+  },
+  "coordination": {
+    "trackingIssues": [
+      2,
+      3
+    ],
+    "requireAcknowledgement": true,
+    "pollingIsNotExecution": true,
+    "sharedFileAuthority": "DESKTOP",
+    "noAutomaticCompletion": true
+  },
+  "notes": [
+    "40 canonical module IDs, not 45: revised duplicate rows are not extra modules.",
+    "HR/payroll is an explicit user-requested extension linked to M03/M20/M25, not invented M41.",
+    "All module owners assigned; unacknowledged assignments are not proof Desktop is working on them.",
+    "Historical dataset is source-validated but published imported count is zero at reviewed commit.",
+    "No module is marked accepted merely because source files exist.",
+    "Latest user instruction: audit before finalizing allocations. Proposed responsibility coverage is complete but activation must reconcile actual Desktop work first."
+  ],
+  "status": "PROVISIONAL_PENDING_AUDIT_RECONCILIATION_AND_DESKTOP_ACK"
+}

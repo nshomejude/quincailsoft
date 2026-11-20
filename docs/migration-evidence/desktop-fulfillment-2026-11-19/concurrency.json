@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-19",
+  "sourceCommit": "a7ddb697b2659b7ef8a2209bdb59b3a873420467",
+  "sourceSha256": {
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/api/FulfillmentService.java": "401745c10dae601a81fe93604ddf7c96990eea0edab91d9c57e8db550fad34fd",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/application/DefaultFulfillmentService.java": "827182f5e722106f3fff2d79784d1965c8639338e719db97a9c60dee7ec1860c",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/infrastructure/FulfillmentDispatchLine.java": "1bbf146f93bf33c9448891176b4c3c9ba4c11af9231787508f7f7106ca698fcb",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/infrastructure/FulfillmentEntity.java": "acd98b1e2739349479d483aa6b5d12cd19d0783d6ff2d12a4291f97d24402d5c",
+    "backend/business-modules/sales/src/main/java/com/quincaisoft/sales/web/FulfillmentController.java": "ce2828ed26e1e1f75c91e2a54d65b6ea2af2f75320d52dcb243c6bf9d6ecf13f",
+    "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java": "3bc3213560b7ad66a74ac30b78aea9494761a6e9b17a498965821215c5c9eb1e",
+    "backend/db-migrations/src/main/resources/db/migration/V31__fulfillment_delivery_details.sql": "f53cbb24ea29988dd128a6b5ebd9b6430753883386bac86227bb46fa3aa3a929",
+    "backend/db-migrations/src/main/resources/db/migration/V32__fulfillment_dispatch_lines.sql": "71d0d505e29ab900294268a2c5d7001f8beca7638ca19930027f706f2166c62f"
+  },
+  "java": "25.0.5.1",
+  "postgresql": "18.7",
+  "status": "PASS",
+  "report": "concurrency-test.txt",
+  "command": "mvn -B -ntp -f backend/pom.xml -pl business-modules/sales -am -Dtest=PostgresSaleIntegrationTest -Dsurefire.failIfNoSpecifiedTests=false test",
+  "assertions": [
+    "Two independent operations race using the same original fulfillment version",
+    "One dispatch succeeds and one receives RevisionConflict",
+    "One 1500 milli-unit dispatch is committed",
+    "The remaining picklist is exactly 500 milli-units",
+    "The final 500 milli-unit dispatch reaches DISPATCHED",
+    "Stock movement and journal counts remain unchanged"
+  ]
+}

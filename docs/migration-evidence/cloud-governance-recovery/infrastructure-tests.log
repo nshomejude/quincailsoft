@@ -1,0 +1,39 @@
+✔ complete service configuration passes without credentials in output (2.574989ms)
+✔ rejects unsafe complete configuration QUINCAI_MERCHANT_IMAGE (0.357007ms)
+✔ rejects unsafe complete configuration PLATFORM_OIDC_ISSUER (0.299032ms)
+✔ rejects unsafe complete configuration QUINCAI_PLATFORM_AUDIENCE (0.301926ms)
+✔ rejects unsafe complete configuration APP_URL (0.257991ms)
+✔ rejects unsafe complete configuration QUINCAI_MIGRATION_USER (0.221517ms)
+✔ rejects unsafe complete configuration OIDC_ALLOW_HTTP (0.202358ms)
+✔ rejects unsafe complete configuration QUINCAI_PREVIEW_DEMO (0.88758ms)
+✔ rejects unsafe complete configuration MERCHANT_REDIS_URL_FILE (0.269577ms)
+✔ rejects unsafe complete configuration OIDC_CLIENT_SECRET (0.332871ms)
+✔ TLS Redis and CA trust cannot be omitted (1.969707ms)
+✔ runtime loads only its own OIDC secret and Redis, never secret file paths into child environment (0.449653ms)
+✔ ingress rendering prevents directive injection and preserves proxy runtime variables (0.35235ms)
+✔ migration runner cannot start Spring or invoke destructive Flyway commands (0.224882ms)
+✔ accepts deployment contract without exposing secret (1.884792ms)
+✔ rejects unsafe QUINCAI_API_IMAGE: quincai (0.266283ms)
+✔ rejects unsafe QUINCAI_DATABASE_URL: jdbc (0.127458ms)
+✔ rejects unsafe QUINCAI_DATABASE_URL: jdbc (0.103773ms)
+✔ rejects unsafe QUINCAI_DATABASE_USER: postgres (0.143342ms)
+✔ rejects unsafe QUINCAI_OIDC_ISSUER: http (0.117643ms)
+✔ rejects unsafe QUINCAI_OIDC_ISSUER: https (0.12883ms)
+✔ rejects unsafe QUINCAI_MIGRATIONS_ENABLED: true (0.10897ms)
+✔ rejects unsafe QUINCAI_DATABASE_PASSWORD: not-allowed (0.122701ms)
+✔ rejects missing fields (0.373831ms)
+✔ rejects group-readable credentials (0.158293ms)
+✔ rejects unavailable secret (0.122922ms)
+✔ requires explicit synthetic target and credentials (1.851843ms)
+✔ rejects insecure remote and credential-bearing base URLs (0.274986ms)
+✔ rejects cross origin paths, failed-status acceptance and unapproved writes (0.396064ms)
+✔ bounds execution and requires complete thresholds (0.439609ms)
+✔ percentiles use nearest rank and preserve input (2.207998ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 227.367285

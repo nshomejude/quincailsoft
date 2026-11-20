@@ -1,5 +1,9 @@
 package com.quincaisoft.sales;
 import com.quincaisoft.sales.api.SalesService;
+import com.quincaisoft.sales.api.FulfillmentService;
+import com.quincaisoft.sales.application.DefaultFulfillmentService;
+import com.quincaisoft.inventory.api.InventoryCustody;
+import com.quincaisoft.inventory.application.DefaultInventoryCustody;
 import com.quincaisoft.documents.application.DefaultDocumentService;
 import com.quincaisoft.documents.api.DocumentService;
 import com.quincaisoft.sales.application.DefaultSalesService;
@@ -42,6 +46,15 @@ class PostgresSaleIntegrationTest {
     var catalog=new DefaultCatalogService(em,tx);var stock=new DefaultStockService(em,tx,catalog);var finance=new DefaultFinanceService(em,tx);var customers=new DefaultCustomerService(em,tx);var documents=new DefaultDocumentService(em,tx,JsonMapper.builder().build());var sales=new DefaultSalesService(em,tx,stock,catalog,finance,customers,JsonMapper.builder().build(),documents);
     var scope=new TenantScope(t,c,b,a);
     TenantContext.call(scope,1,()->{
+     // Even a matching request hash cannot turn an unrelated/foreign/rejected receipt into replay.
+     for(int invalid=0;invalid<3;invalid++){
+      var forged=new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"2000")));
+      String hash=HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(("DRAFT|"+forged).getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+      try(var insert=owner.prepareStatement("insert into idempotency_result(tenant_id,company_id,branch_id,operation_id,request_hash,source_type,actor_id,status,response_json)values(?,?,?,?,?,?,?,?,cast('{}' as jsonb))")){
+       insert.setObject(1,t);insert.setObject(2,c);insert.setObject(3,b);insert.setObject(4,forged.operationId());insert.setString(5,hash);insert.setString(6,invalid==0?"CATALOG":"SALE");insert.setObject(7,invalid==1?UUID.randomUUID():a);insert.setString(8,invalid==2?"REJECTED":"ACCEPTED");insert.executeUpdate();
+      }
+      assertThrows(IllegalStateException.class,()->sales.draft(forged));assertEquals(0,count(owner,"select count(*) from sale"));
+     }
      var draftRequest=new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"2000")));
      var draft=sales.draft(draftRequest);assertEquals("DRAFT",draft.status());assertEquals("2000",draft.totalXaf());
      var postRequest=new SalesService.Post(UUID.randomUUID(),draft.version(),"Synthetic acceptance posting");assertThrows(IllegalStateException.class,()->sales.post(draft.id(),postRequest));assertEquals(10000,count(owner,"select quantity_milli from stock_balance"));assertEquals(0,count(owner,"select count(*) from journal_entry"));assertEquals(0,count(owner,"select count(*) from document_series"));documents.configure(new DocumentService.Settings("Synthetic merchant","Synthetic address","TEST-REG","TEST","en",0));var posted=sales.post(draft.id(),postRequest);assertEquals("POSTED",posted.status());assertEquals(posted,sales.post(draft.id(),postRequest));assertEquals(1,documents.list(draft.id()).size());assertTrue(documents.render(documents.list(draft.id()).getFirst().id(),true).contains("COPY"));var original=documents.list(draft.id()).getFirst();documents.configure(new DocumentService.Settings("Changed issuer","Changed address","REG-NEW","NEW","fr",1));assertEquals(original,documents.get(original.id()));assertTrue(documents.render(original.id(),false).contains("Synthetic merchant"));assertThrows(SQLException.class,()->sql(owner,"update document_snapshot set content='tampered'"));assertThrows(NoSuchElementException.class,()->TenantContext.call(new TenantScope(UUID.randomUUID(),c,b,a),1,()->documents.get(original.id())));assertEquals(draft,sales.draft(draftRequest));
@@ -50,14 +63,262 @@ class PostgresSaleIntegrationTest {
      var excessive=sales.draft(new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"100000"))));
      assertThrows(IllegalArgumentException.class,()->sales.post(excessive.id(),new SalesService.Post(UUID.randomUUID(),excessive.version(),"Oversell must rollback")));
      assertEquals("DRAFT",sales.get(excessive.id()).status());assertEquals(8000,count(owner,"select quantity_milli from stock_balance"));
+     var day = LocalDate.of(2026, 11, 18);
+     assertEquals("2000", sales.postedSalesSummary(day, day).totalXaf());
+     assertEquals("0", sales.postedSalesSummary(day.minusDays(1), day.minusDays(1)).totalXaf());
+     assertThrows(IllegalArgumentException.class, () -> sales.postedSalesSummary(day, day.plusDays(366)));
+     assertEquals("0", TenantContext.call(new TenantScope(UUID.randomUUID(), c, b, a), 1,
+         () -> sales.postedSalesSummary(day, day).totalXaf()));
+     assertEquals("0", TenantContext.call(new TenantScope(t, c, UUID.randomUUID(), a), 1,
+         () -> sales.postedSalesSummary(day, day).totalXaf()));
      // Closed period fails after stock issue in memory; whole transaction rolls it back.
      var next=sales.draft(new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"1000"))));
      sql(owner,"update financial_period set status='Closed'");
      assertThrows(IllegalStateException.class,()->sales.post(next.id(),new SalesService.Post(UUID.randomUUID(),next.version(),"Closed period must rollback")));
-     assertEquals("DRAFT",sales.get(next.id()).status());assertEquals(8000,count(owner,"select quantity_milli from stock_balance"));assertEquals(1,count(owner,"select count(*) from stock_movement"));assertEquals(1,count(owner,"select count(*) from journal_entry"));assertEquals(1,count(owner,"select count(*) from outbox_event"));assertEquals(1,count(owner,"select count(*) from document_snapshot"));return null;
+     assertEquals("DRAFT",sales.get(next.id()).status());assertEquals(8000,count(owner,"select quantity_milli from stock_balance"));assertEquals(1,count(owner,"select count(*) from stock_movement"));assertEquals(1,count(owner,"select count(*) from journal_entry"));assertEquals(1,count(owner,"select count(*) from outbox_event"));assertEquals(1,count(owner,"select count(*) from document_snapshot"));
+     sql(owner,"update financial_period set status='Open'");var custody=new DefaultInventoryCustody(em,tx);var fulfillment=new DefaultFulfillmentService(em,tx,sales,stock,finance);
+     var heldDraft=sales.draft(new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"2000"))));
+     var heldPost=new SalesService.Post(UUID.randomUUID(),heldDraft.version(),"Recognize title while customer goods stay here","SALE_WITH_CUSTOMER_CUSTODY");
+     assertThrows(IllegalStateException.class,()->sales.post(heldDraft.id(),heldPost));assertEquals(8000,count(owner,"select quantity_milli from stock_balance"));assertEquals(0,count(owner,"select count(*) from customer_custody"));
+     var policy=custody.requestPolicy(new InventoryCustody.PolicyRequest(UUID.randomUUID(),"SALE_WITH_CUSTOMER_CUSTODY",LocalDate.of(2026,11,18),"FINANCE-CONTRACT-ACCEPTANCE","Enable approved issuing contract"));var policyApproval=new InventoryCustody.Approve(UUID.randomUUID(),policy.version(),"Finance independently reviewed contract");assertThrows(IllegalStateException.class,()->custody.approvePolicy(policy.id(),policyApproval));
+     var approvedPolicy=TenantContext.call(new TenantScope(t,c,b,UUID.randomUUID()),1,()->custody.approvePolicy(policy.id(),policyApproval));assertEquals("APPROVED",approvedPolicy.status());
+     var heldSale=sales.post(heldDraft.id(),heldPost);assertEquals("SALE_WITH_CUSTOMER_CUSTODY",heldSale.recognitionPolicy());assertEquals(heldSale,sales.post(heldDraft.id(),heldPost));assertEquals(6000,count(owner,"select quantity_milli from stock_balance"));assertEquals(3000,count(owner,"select value_xaf from stock_balance"));assertEquals(2000,count(owner,"select sum(quantity_milli-collected_milli) from customer_custody"));assertEquals(8000,count(owner,"select (select sum(quantity_milli) from stock_balance)+(select sum(quantity_milli-collected_milli) from customer_custody)"));
+     long journalCount=count(owner,"select count(*) from journal_entry"),movementCount=count(owner,"select count(*) from stock_movement");
+     var position=custody.positions().getFirst();assertEquals("1000",position.frozenCostXaf());assertThrows(IllegalStateException.class,()->stock.requireCustodyCollected(heldSale.id()));
+     assertEquals(0,fulfillment.pendingPreparationCount());
+     var date=LocalDate.of(2026,11,18);
+     var delivery=new FulfillmentService.DeliveryDetails("DELIVERY",date.plusDays(1),
+         "Synthetic address","Synthetic recipient","+237000000000","Synthetic instructions");
+     var request=new FulfillmentService.Draft(UUID.randomUUID(),heldSale.id(),customer,date,"Prepare customer collection",delivery);
+     for (int invalid=0;invalid<2;invalid++) {
+      var forged=new FulfillmentService.Draft(UUID.randomUUID(),heldSale.id(),customer,date,"Forged fulfillment replay");
+      String material="DRAFT|"+forged.legacyFingerprintMaterial();
+      String hash=HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(material.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+      try(var insert=owner.prepareStatement("insert into idempotency_result(tenant_id,company_id,branch_id,operation_id,request_hash,source_type,actor_id,status,response_json)values(?,?,?,?,?,?,?,?,cast('{}' as jsonb))")) {
+       insert.setObject(1,t);insert.setObject(2,c);insert.setObject(3,b);insert.setObject(4,forged.operationId());insert.setString(5,hash);insert.setString(6,invalid==0?"SALE":"FULFILLMENT");insert.setObject(7,a);insert.setString(8,invalid==1?"REJECTED":"ACCEPTED");insert.executeUpdate();
+      }
+      assertThrows(IllegalStateException.class,()->fulfillment.draft(forged));
+      assertEquals(0,fulfillment.pendingPreparationCount());
+     }
+     var task=fulfillment.draft(request);
+     assertEquals(delivery,fulfillment.get(task.id()).delivery());
+     assertEquals(task,fulfillment.draft(request));
+    assertThrows(IllegalStateException.class,()->fulfillment.dispatch(task.id(),new FulfillmentService.Action(UUID.randomUUID(),task.version(),null,"Must collect custody first")));
+     assertThrows(IllegalArgumentException.class,()->custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),position.version(),"1000"," ","Missing proof must reject")));
+     assertEquals(1,fulfillment.pendingPreparationCount());
+     var pickList=fulfillment.pickList(task.id());
+     assertEquals(task.id(),pickList.fulfillmentId());
+     assertEquals(heldSale.id(),pickList.saleId());
+     assertEquals(w,pickList.warehouseId());
+     assertEquals("PENDING",pickList.status());
+     assertEquals(List.of(new FulfillmentService.PickLine(p,"2000")),pickList.lines());
+     assertThrows(NoSuchElementException.class,()->TenantContext.call(
+         new TenantScope(t,c,UUID.randomUUID(),a),1,()->fulfillment.pickList(task.id())));
+     assertEquals(0,TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,fulfillment::pendingPreparationCount));
+     var collection=new InventoryCustody.Collect(UUID.randomUUID(),position.version(),"1000","CUSTOMER-SIGNED-PICKUP-1","Partial collection");var partial=custody.collect(position.id(),collection);assertEquals("PARTIALLY_COLLECTED",partial.status());assertEquals(partial,custody.collect(position.id(),collection));
+     assertThrows(IllegalArgumentException.class,()->custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),partial.version(),"2000","EXCESS","Excess collection")));
+     assertThrows(RevisionConflict.class,()->custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),position.version(),"1000","STALE","Stale collection")));
+     assertEquals("COLLECTED",custody.collect(position.id(),new InventoryCustody.Collect(UUID.randomUUID(),partial.version(),"1000","CUSTOMER-SIGNED-PICKUP-2","Final collection")).status());assertEquals(2,custody.collections(position.id()).size());
+     assertEquals(6000,count(owner,"select quantity_milli from stock_balance"));assertEquals(3000,count(owner,"select value_xaf from stock_balance"));assertEquals(journalCount,count(owner,"select count(*) from journal_entry"));assertEquals(movementCount,count(owner,"select count(*) from stock_movement"));assertEquals(0,count(owner,"select sum(quantity_milli-collected_milli) from customer_custody"));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.dispatchLines(task.id(),
+         new FulfillmentService.DispatchLines(UUID.randomUUID(),task.version(),"Rollback invalid shipment",
+             List.of(new FulfillmentService.PickLine(p,"500"),
+                 new FulfillmentService.PickLine(UUID.randomUUID(),"1000")))));
+     assertTrue(fulfillment.dispatchHistory(task.id()).isEmpty());
+     assertEquals(task.version(),fulfillment.get(task.id()).version());
+     var firstDispatch=new FulfillmentService.DispatchLines(UUID.randomUUID(),task.version(),"First dispatch",
+         List.of(new FulfillmentService.PickLine(p,"500")));
+     var first=fulfillment.dispatchLines(task.id(),firstDispatch);
+     assertEquals("PARTIAL",first.status());
+     assertEquals(1,fulfillment.pendingPreparationCount());
+     assertEquals(List.of(new FulfillmentService.PickLine(p,"1500")),fulfillment.pickList(task.id()).lines());
+     assertThrows(IllegalStateException.class,()->TenantContext.call(new TenantScope(t,c,b,UUID.randomUUID()),1,()->fulfillment.dispatchLines(task.id(),firstDispatch)));
+     assertThrows(java.util.NoSuchElementException.class,()->TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,()->fulfillment.dispatchLines(task.id(),firstDispatch)));
+     assertEquals(first,fulfillment.dispatchLines(task.id(),firstDispatch));
+     assertThrows(RevisionConflict.class,()->fulfillment.dispatchLines(task.id(),
+         new FulfillmentService.DispatchLines(UUID.randomUUID(),task.version(),"Stale dispatch",firstDispatch.lines())));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.dispatchLines(task.id(),
+         new FulfillmentService.DispatchLines(UUID.randomUUID(),first.version(),"Excess dispatch",
+             List.of(new FulfillmentService.PickLine(p,"1501")))));
+     assertEquals(1,count(owner,"select count(*) from fulfillment_dispatch_line"));
+     assertEquals(List.of(new FulfillmentService.PickLine(p,"1500")),fulfillment.pickList(task.id()).lines());
+     var second=fulfillment.dispatchLines(task.id(),new FulfillmentService.DispatchLines(
+         UUID.randomUUID(),first.version(),"Second dispatch",firstDispatch.lines()));
+     assertEquals("PARTIAL",second.status());
+     assertNotEquals(first.version(),second.version());
+     assertEquals(List.of(new FulfillmentService.PickLine(p,"1000")),fulfillment.pickList(task.id()).lines());
+     var dispatched=fulfillment.dispatchLines(task.id(),new FulfillmentService.DispatchLines(
+         UUID.randomUUID(),second.version(),"Final dispatch",List.of(new FulfillmentService.PickLine(p,"1000"))));
+     assertEquals("DISPATCHED",dispatched.status());
+     assertEquals(0,fulfillment.pendingPreparationCount());
+     assertTrue(fulfillment.pickList(task.id()).lines().isEmpty());
+     assertEquals(3,count(owner,"select count(*) from fulfillment_dispatch_line"));
+     var dispatchHistory=fulfillment.dispatchHistory(task.id());
+     assertEquals(List.of("500","500","1000"),dispatchHistory.stream().map(FulfillmentService.DispatchEntry::quantityMilli).toList());
+     assertEquals(firstDispatch.operationId(),dispatchHistory.getFirst().operationId());
+     assertTrue(dispatchHistory.stream().allMatch(entry->entry.productId().equals(p) && entry.dispatchedBy().equals(a)));
+     assertThrows(NoSuchElementException.class,()->TenantContext.call(
+         new TenantScope(t,c,UUID.randomUUID(),a),1,()->fulfillment.dispatchHistory(task.id())));
+     assertEquals(2000,count(owner,"select sum(quantity_milli) from fulfillment_dispatch_line"));
+     assertEquals(journalCount,count(owner,"select count(*) from journal_entry"));
+     assertEquals(movementCount,count(owner,"select count(*) from stock_movement"));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.complete(task.id(),new FulfillmentService.Action(UUID.randomUUID(),dispatched.version()," ","Missing proof")));var completion=new FulfillmentService.Action(UUID.randomUUID(),dispatched.version(),"SIGNED-DELIVERY","Complete delivery");var completed=fulfillment.complete(task.id(),completion);assertEquals("COMPLETED",completed.status());assertEquals(completed,fulfillment.complete(task.id(),completion));
+     assertEquals(0,count(owner,"""
+         select count(*) from outbox_event
+         where event_type='FulfillmentChanged.v1' and
+           (payload ? 'command' or payload ? 'fulfillment' or payload::text like '%SIGNED-DELIVERY%' or payload::text like '%Synthetic recipient%')
+         """));
+     assertEquals(0,fulfillment.pendingPreparationCount());
+     assertTrue(fulfillment.pickList(task.id()).lines().isEmpty());
+     assertTrue(TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,custody::positions).isEmpty());assertTrue(TenantContext.call(new TenantScope(UUID.randomUUID(),c,b,a),1,fulfillment::list).isEmpty());assertThrows(SQLException.class,()->sql(owner,"update customer_custody set frozen_cost_xaf=0"));assertThrows(SQLException.class,()->sql(owner,"update custody_collection set quantity_milli=1"));
+     var wholeTask=fulfillment.draft(new FulfillmentService.Draft(UUID.randomUUID(),draft.id(),customer,
+         LocalDate.of(2026,11,18),"Prepare whole order"));
+     var wholeDispatch=new FulfillmentService.Action(UUID.randomUUID(),wholeTask.version(),null,"Dispatch whole order");
+     var wholeDispatched=fulfillment.dispatch(wholeTask.id(),wholeDispatch);
+     assertEquals("DISPATCHED",wholeDispatched.status());
+     assertEquals(wholeDispatched,fulfillment.dispatch(wholeTask.id(),wholeDispatch));
+     var wholeHistory=fulfillment.dispatchHistory(wholeTask.id());
+     assertEquals(1,wholeHistory.size());
+     assertEquals("2000",wholeHistory.getFirst().quantityMilli());
+     assertEquals(wholeDispatch.operationId(),wholeHistory.getFirst().operationId());
+     var wholeComplete=new FulfillmentService.Action(UUID.randomUUID(),wholeDispatched.version(),
+         "SIGNED-WHOLE-DELIVERY","Confirm whole order delivery");
+     fulfillment.complete(wholeTask.id(),wholeComplete);
+     assertEquals(1,fulfillment.dispatchHistory(wholeTask.id()).size());
+     assertEquals(journalCount,count(owner,"select count(*) from journal_entry"));
+     assertEquals(movementCount,count(owner,"select count(*) from stock_movement"));
+     var directSale=sales.post(next.id(),new SalesService.Post(UUID.randomUUID(),next.version(),
+         "Post sale for immediate delivery confirmation"));
+     long beforeDirectJournals=count(owner,"select count(*) from journal_entry");
+     long beforeDirectMovements=count(owner,"select count(*) from stock_movement");
+     var directTask=fulfillment.draft(new FulfillmentService.Draft(UUID.randomUUID(),directSale.id(),
+         customer,LocalDate.of(2026,11,18),"Prepare immediate delivery"));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.complete(directTask.id(),
+         new FulfillmentService.Action(UUID.randomUUID(),directTask.version()," ","Proof required")));
+     assertTrue(fulfillment.dispatchHistory(directTask.id()).isEmpty());
+     var directCommand=new FulfillmentService.Action(UUID.randomUUID(),directTask.version(),
+         "SIGNED-DIRECT-DELIVERY","Confirm immediate delivery");
+     var directCompleted=fulfillment.complete(directTask.id(),directCommand);
+     assertEquals("COMPLETED",directCompleted.status());
+     assertEquals(directCompleted,fulfillment.complete(directTask.id(),directCommand));
+     var directHistory=fulfillment.dispatchHistory(directTask.id());
+     assertEquals(1,directHistory.size());
+     assertEquals("1000",directHistory.getFirst().quantityMilli());
+     assertEquals(directCommand.operationId(),directHistory.getFirst().operationId());
+     assertTrue(fulfillment.pickList(directTask.id()).lines().isEmpty());
+     assertEquals(beforeDirectJournals,count(owner,"select count(*) from journal_entry"));
+     assertEquals(beforeDirectMovements,count(owner,"select count(*) from stock_movement"));
+     var raceDraft=sales.draft(new SalesService.Draft(UUID.randomUUID(),w,customer,
+         LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"2000"))));
+     var raceSale=sales.post(raceDraft.id(),new SalesService.Post(UUID.randomUUID(),raceDraft.version(),
+         "Post sale for concurrent dispatch acceptance"));
+     var raceTask=fulfillment.draft(new FulfillmentService.Draft(UUID.randomUUID(),raceSale.id(),customer,
+         LocalDate.of(2026,11,18),"Prepare concurrent shipment"));
+     long beforeRaceJournals=count(owner,"select count(*) from journal_entry");
+     long beforeRaceMovements=count(owner,"select count(*) from stock_movement");
+     var ready=new java.util.concurrent.CountDownLatch(2);
+     var start=new java.util.concurrent.CountDownLatch(1);
+     var raceRequests=List.of(
+         new FulfillmentService.DispatchLines(UUID.randomUUID(),raceTask.version(),"First competing shipment",
+             List.of(new FulfillmentService.PickLine(p,"1500"))),
+         new FulfillmentService.DispatchLines(UUID.randomUUID(),raceTask.version(),"Second competing shipment",
+             List.of(new FulfillmentService.PickLine(p,"1500"))));
+     try(var pool=java.util.concurrent.Executors.newFixedThreadPool(2)){
+      var futures=new ArrayList<java.util.concurrent.Future<String>>();
+      for(var shipmentRequest:raceRequests){
+       futures.add(pool.submit(()->TenantContext.call(scope,1,()->{
+        ready.countDown();
+        if(!start.await(10,java.util.concurrent.TimeUnit.SECONDS))throw new IllegalStateException("Dispatch race did not start");
+        try{
+         fulfillment.dispatchLines(raceTask.id(),shipmentRequest);
+         return "ACCEPTED";
+        }catch(RevisionConflict expected){return "STALE";}
+       })));
+      }
+      try{assertTrue(ready.await(10,java.util.concurrent.TimeUnit.SECONDS));}
+      finally{start.countDown();}
+      var outcomes=new ArrayList<String>();
+      for(var future:futures)outcomes.add(future.get(20,java.util.concurrent.TimeUnit.SECONDS));
+      assertEquals(1,Collections.frequency(outcomes,"ACCEPTED"));
+      assertEquals(1,Collections.frequency(outcomes,"STALE"));
+     }
+     var raceHistory=fulfillment.dispatchHistory(raceTask.id());
+     assertEquals(1,raceHistory.size());
+     assertEquals("1500",raceHistory.getFirst().quantityMilli());
+     assertEquals(List.of(new FulfillmentService.PickLine(p,"500")),fulfillment.pickList(raceTask.id()).lines());
+     var afterRace=fulfillment.get(raceTask.id());
+     assertEquals("PARTIAL",afterRace.status());
+     var finalShipment=fulfillment.dispatchLines(raceTask.id(),new FulfillmentService.DispatchLines(
+         UUID.randomUUID(),afterRace.version(),"Ship the exact remaining quantity",
+         List.of(new FulfillmentService.PickLine(p,"500"))));
+     assertEquals("DISPATCHED",finalShipment.status());
+     assertEquals(2,fulfillment.dispatchHistory(raceTask.id()).size());
+     assertTrue(fulfillment.pickList(raceTask.id()).lines().isEmpty());
+     assertEquals(beforeRaceJournals,count(owner,"select count(*) from journal_entry"));
+     assertEquals(beforeRaceMovements,count(owner,"select count(*) from stock_movement"));
+     var firstQueuePage=fulfillment.page("ALL","",2,null);
+     assertEquals(2,firstQueuePage.items().size());
+     assertNotNull(firstQueuePage.nextCursor());
+     var secondQueuePage=fulfillment.page("ALL","",2,firstQueuePage.nextCursor());
+     assertEquals(2,secondQueuePage.items().size());
+     assertNull(secondQueuePage.nextCursor());
+     var pagedIds=new HashSet<UUID>();
+     for(var entry:firstQueuePage.items())assertTrue(pagedIds.add(entry.fulfillment().id()));
+     for(var entry:secondQueuePage.items())assertTrue(pagedIds.add(entry.fulfillment().id()));
+     assertEquals(new HashSet<>(fulfillment.list().stream().map(FulfillmentService.Fulfillment::id).toList()),pagedIds);
+     var namedQueue=fulfillment.page("ALL","Synthetic recipient",25,null);
+     assertEquals(1,namedQueue.items().size());
+     assertEquals(task.id(),namedQueue.items().getFirst().fulfillment().id());
+     assertEquals("Synthetic",namedQueue.items().getFirst().customerName());
+     assertEquals(w,namedQueue.items().getFirst().warehouseId());
+     assertEquals(delivery,namedQueue.items().getFirst().fulfillment().delivery());
+     assertEquals(1,fulfillment.page("DISPATCHED","",25,null).items().size());
+     assertTrue(fulfillment.page("PENDING","",25,null).items().isEmpty());
+     assertTrue(fulfillment.page("ALL","%",25,null).items().isEmpty());
+     assertTrue(fulfillment.page("ALL","%' OR 1=1 --",25,null).items().isEmpty());
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("UNKNOWN","",25,null));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("ALL","",101,null));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("ALL","x".repeat(101),25,null));
+     String queueCursor=firstQueuePage.nextCursor();
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("DISPATCHED","",2,queueCursor));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("ALL","different",2,queueCursor));
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("ALL","",3,queueCursor));
+     String tamperedCursor=(queueCursor.charAt(0)=='A'?"B":"A")+queueCursor.substring(1);
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("ALL","",2,tamperedCursor));
+     String expiredCursor=expiredQueueCursor(queueCursor,owner);
+     assertThrows(IllegalArgumentException.class,()->fulfillment.page("ALL","",2,expiredCursor));
+     assertThrows(IllegalArgumentException.class,()->TenantContext.call(
+         new TenantScope(t,c,UUID.randomUUID(),a),1,()->fulfillment.page("ALL","",2,queueCursor)));
+     assertThrows(IllegalArgumentException.class,()->TenantContext.call(
+         new TenantScope(UUID.randomUUID(),c,b,a),1,()->fulfillment.page("ALL","",2,queueCursor)));
+     assertThrows(IllegalArgumentException.class,()->TenantContext.call(
+         new TenantScope(t,c,b,UUID.randomUUID()),1,()->fulfillment.page("ALL","",2,queueCursor)));
+     assertThrows(IllegalArgumentException.class,()->TenantContext.call(scope,2,
+         ()->fulfillment.page("ALL","",2,queueCursor)));
+     assertTrue(TenantContext.call(new TenantScope(t,c,UUID.randomUUID(),a),1,
+         ()->fulfillment.page("ALL","",25,null)).items().isEmpty());
+     return null;
     });
    }finally{if(factory!=null)factory.destroy();sql(admin,"DROP DATABASE "+db);sql(admin,"DROP ROLE "+role);}
   }
+ }
+ private static String expiredQueueCursor(String token,Connection owner)throws Exception{
+  var json=JsonMapper.builder().build();
+  String payload=token.substring(0,token.indexOf('.'));
+  var body=(tools.jackson.databind.node.ObjectNode)json.readTree(
+      Base64.getUrlDecoder().decode(payload));
+  body.put("expiresAt",Instant.now().minusSeconds(1).toString());
+  String expired=Base64.getUrlEncoder().withoutPadding().encodeToString(
+      json.writeValueAsBytes(body));
+  byte[] key;
+  try(var statement=owner.createStatement();
+      var rows=statement.executeQuery("select secret from fulfillment_cursor_key where id=1")){
+   assertTrue(rows.next());key=rows.getBytes(1);
+  }
+  var mac=javax.crypto.Mac.getInstance("HmacSHA256");
+  mac.init(new javax.crypto.spec.SecretKeySpec(key,"HmacSHA256"));
+  return expired+"."+Base64.getUrlEncoder().withoutPadding().encodeToString(
+      mac.doFinal(expired.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
  }
  static void sql(Connection c,String query)throws SQLException {try(var s=c.createStatement()){s.execute(query);}}
  static long count(Connection c,String query)throws SQLException {try(var s=c.createStatement();var rs=s.executeQuery(query)){rs.next();return rs.getLong(1);}}

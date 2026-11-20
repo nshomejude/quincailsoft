@@ -1,0 +1,37 @@
+{
+  "baseCommit": "9f4da3c15ecc5f3df2b47aa3b763e27919e47580",
+  "sourceSha256": {
+    "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/api/ExportRetentionService.java": "2156ae17d60f49154c511f09cf70ab68177748b0522b88aab7622531477316cd",
+    "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/application/DefaultExportRetentionService.java": "f12774482f4225073d109a53b0c5551d940f6b15ea1f865f9d8251900beb49cd",
+    "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/infrastructure/ExportRetention.java": "472f96f2f8675e60b07410404895f8f6ed0d68700201408c65e77dbdf6413fe1",
+    "backend/business-modules/operations/src/main/java/com/quincaisoft/operations/web/ExportRetentionController.java": "62ab532c64a1d3d4bd001b5ba55323f876a58baa42ee418f9187ddf6e72b4fb2",
+    "backend/business-modules/operations/src/test/java/com/quincaisoft/operations/ExportRetentionPostgresTest.java": "8b4d9695099e7a0eeb0e925c9a23f9db8b52d4770e0b069b53f2a1e2fbd551cd",
+    "backend/db-migrations/src/main/resources/db/migration/V40__reviewed_export_retention.sql": "44f63c7be9f4c6f9c610f4076ca9ffca1a4627dee744ef49afc0fab22251d669",
+    "packages/api-contracts/export-retention.test.mjs": "e650b0875bb63fa64727d3a88ca2941d9a29b67afd100fd98c4dc1d0e2207dde",
+    "packages/api-contracts/endpoint-inventory.json": "4450e66fc6db218865a8af1e1689d859055244d013ea2bb0461e0d9944312e31",
+    "packages/api-contracts/openapi.json": "780c12484986141ffc67e8cfb638b7baf8af7806a44d10b234b7d1f81624f7de",
+    "packages/generated-ts-sdk/schema.d.ts": "800525e5927b4bbb3fe79b600d925f1f32ca212ccfc93123317b60132754ac24"
+  },
+  "runtime": {
+    "java": "25.0.5",
+    "postgresql": "18.7"
+  },
+  "backend": {
+    "tests": 1320,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "backendStatus": "PASS full reactor; extended retention test rerun after test-only changes",
+  "contractTests": {
+    "tests": 12,
+    "failures": 0,
+    "status": "PASS"
+  },
+  "sdkTypecheck": "PASS",
+  "projectRules": "PASS",
+  "productionAcceptance": "NOT_RUN",
+  "selectiveTenantRecovery": "UNFINISHED",
+  "generalRetention": "UNFINISHED",
+  "webVisualAcceptance": "NOT_RUN"
+}

@@ -1,7 +1,22 @@
 package com.quincaisoft.tenders.web;
+import com.quincaisoft.finance.api.FinanceService;
 import com.quincaisoft.tenders.api.TenderService;import org.springframework.web.bind.annotation.*;import org.springframework.security.access.prepost.PreAuthorize;import java.util.*;
 @RestController @RequestMapping("/api/v1") public class TenderController {
- private final TenderService service;public TenderController(TenderService service){this.service=service;}
+ private final TenderService service;
+ private final FinanceService finance;
+
+ public TenderController(TenderService service, FinanceService finance) {
+  this.service = service;
+  this.finance = finance;
+ }
+
+ public record CollectionSummary(long pendingCount) {}
+
+ @GetMapping("/tenders/collections/summary")
+ @PreAuthorize("hasAnyAuthority('tenders:read','SCOPE_tenders:read')")
+ public CollectionSummary collectionSummary() {
+  return new CollectionSummary(finance.pendingCollectionCount());
+ }
  private void key(String key,UUID op){if(op==null||!op.equals(UUID.fromString(key)))throw new IllegalArgumentException("Idempotency-Key must match operationId");}
  @GetMapping("/cash-sessions") @PreAuthorize("hasAnyAuthority('cash:read','SCOPE_cash:read')") public List<TenderService.Session> sessions(){return service.sessions();}
  @PostMapping("/cash-sessions/open") @PreAuthorize("hasAnyAuthority('cash:manage','SCOPE_cash:manage')") public TenderService.Session open(@RequestHeader("Idempotency-Key")String k,@RequestBody TenderService.Open p){key(k,p.operationId());return service.open(p);}

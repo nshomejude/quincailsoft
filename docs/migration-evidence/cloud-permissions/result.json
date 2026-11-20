@@ -1,0 +1,51 @@
+{
+  "reviewDate": "2026-11-18",
+  "testedCommit": "ffaf2b4baf725e2dae1e98a1561f4c67ca484ff6",
+  "desktopBase": "e993fd6054a3b73fa034be6bf4f5a0e406582fee",
+  "result": "PASS_FOCUSED_SERVICE_PERMISSION_TESTS",
+  "runtime": {
+    "java": "Temurin 25.0.5+8",
+    "maven": "3.9.11",
+    "springBoot": "4.0.9",
+    "mockito": "5.20.0"
+  },
+  "distributionChecksums": {
+    "jdkSha256": "68982529869257d0ee6b824ec5aa270ff8b118bb438670da0b97ebdab178d7fb",
+    "mavenSha512": "bcfe4fe305c962ace56ac7b5fc7a08b87d5abd8b7e89027ab251069faebee516b0ded8961445d6d91ec1985dfe30f8153268843c89aa392733d1a3ec956c9978"
+  },
+  "command": "mvn -s <scratch>/toolchain/settings.xml -B -ntp -Dmaven.repo.local=<scratch>/toolchain/m2 -DargLine=-javaagent:<scratch>/toolchain/m2/org/mockito/mockito-core/5.20.0/mockito-core-5.20.0.jar -pl business-modules/reporting,business-modules/documents -am -Dtest=ReportPermissionMatrixTest,DocumentPermissionMatrixTest -Dsurefire.failIfNoSpecifiedTests=false test",
+  "workingDirectory": "backend",
+  "jvmOptions": "MAVEN_OPTS=-Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts; JAVA_HOME=<scratch>/toolchain/jdk-25.0.5+8",
+  "summaries": [
+    {
+      "className": "DocumentPermissionMatrixTest",
+      "tests": 510,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reportSha256": "cec0d64ea81f9074de92eae4c2bee9987feb1455a59f8c43e5f8b5888f9a68d9"
+    },
+    {
+      "className": "ReportPermissionMatrixTest",
+      "tests": 476,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reportSha256": "689312e9ba27e8b457da97441eb99d8b23d71f5612acc74949491936bf83af36"
+    }
+  ],
+  "totalTests": 986,
+  "logSha256": "71764dd03a6ae1f00c96ef0102efd92517c9b19d5cca87e2522843a141300189",
+  "databaseTestsRun": false,
+  "fullReactorRun": false,
+  "httpTestsRun": false,
+  "releaseCertified": false,
+  "limitations": [
+    "Mocked service permission boundaries only; no database or HTTP authorization acceptance.",
+    "General report/document/admin authority cannot replace required source capability.",
+    "Targeted -Dtest excludes other tests; zero skips describes only selected tests.",
+    "Earlier attempt failed because Mockito self-attachment was unavailable; rerun loaded Mockito via -javaagent without changing repository code.",
+    "Maven used the workspace proxy and system trust store; TLS checks were not disabled.",
+    "No Desktop database, shared reactor file, migration, UI or production code was changed."
+  ]
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "role": "owner",
+    "tabs": [
+      "Partial",
+      "Dispatched",
+      "Completed",
+      "All",
+      "Awaiting pickup"
+    ],
+    "filter": "PASS",
+    "createAction": "VISIBLE",
+    "draftPreparation": "UNPOSTED_SALE_REJECTED"
+  },
+  {
+    "role": "auditor",
+    "tabs": [
+      "Partial",
+      "Dispatched",
+      "Completed",
+      "All",
+      "Awaiting pickup"
+    ],
+    "filter": "PASS",
+    "createAction": "HIDDEN",
+    "draftPreparation": "WRITE_PERMISSION_REQUIRED"
+  }
+]

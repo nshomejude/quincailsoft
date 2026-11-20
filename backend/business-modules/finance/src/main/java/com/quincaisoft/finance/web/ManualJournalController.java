@@ -1,0 +1,10 @@
+package com.quincaisoft.finance.web;import com.quincaisoft.finance.api.*;import org.springframework.web.bind.annotation.*;import org.springframework.security.access.prepost.PreAuthorize;import java.util.*;
+@RestController @RequestMapping("/api/v1/manual-journals")public class ManualJournalController{
+ private final ManualJournalService service;public ManualJournalController(ManualJournalService service){this.service=service;}private void key(String k,UUID op){if(!UUID.fromString(k).equals(op))throw new IllegalArgumentException("Idempotency-Key mismatch");}
+ @GetMapping @PreAuthorize("hasAnyAuthority('finance:read','SCOPE_finance:read')")public List<ManualJournalService.Journal> list(){return service.list();}
+ @PostMapping @PreAuthorize("hasAnyAuthority('journals:write','SCOPE_journals:write')")public ManualJournalService.Journal create(@RequestHeader("Idempotency-Key")String k,@RequestBody ManualJournalService.Draft p){key(k,p.operationId());return service.draft(p);}
+ @PostMapping("/{id}/submit")@PreAuthorize("hasAnyAuthority('journals:write','SCOPE_journals:write')")public ManualJournalService.Journal submit(@PathVariable UUID id,@RequestHeader("Idempotency-Key")String k,@RequestBody ManualJournalService.Command p){key(k,p.operationId());return service.command(id,"submit",p);}
+ @PostMapping("/{id}/{action:approve|reject}")@PreAuthorize("hasAnyAuthority('journals:approve','SCOPE_journals:approve')")public ManualJournalService.Journal approve(@PathVariable UUID id,@PathVariable String action,@RequestHeader("Idempotency-Key")String k,@RequestBody ManualJournalService.Command p){key(k,p.operationId());return service.command(id,action,p);}
+ @PostMapping("/{id}/reversals")@PreAuthorize("hasAnyAuthority('journals:write','SCOPE_journals:write')")public ManualJournalService.Journal reversal(@PathVariable UUID id,@RequestHeader("Idempotency-Key")String k,@RequestBody ManualJournalService.Reversal p){key(k,p.operationId());return service.reversal(id,p);}
+ @GetMapping("/{id}")@PreAuthorize("hasAnyAuthority('finance:read','SCOPE_finance:read')")public ManualJournalService.Journal get(@PathVariable UUID id){return service.get(id);}
+}

@@ -10,8 +10,8 @@ public class DefaultFinanceService implements FinanceService {
  private final EntityManager em; private final ScopedTransactions tx;
  public DefaultFinanceService(EntityManager em,ScopedTransactions tx){this.em=em;this.tx=tx;}
  public void recognizeSale(UUID saleId,UUID operationId,LocalDate date,long revenue,long cost){
-  if(revenue<=0||cost<=0)throw new IllegalArgumentException("Positive sale revenue and cost required");
-  var entries=List.of(new Entry("ACCOUNTS_RECEIVABLE",revenue,0),new Entry("SALES_REVENUE",0,revenue),new Entry("COST_OF_GOODS_SOLD",cost,0),new Entry("MERCHANT_INVENTORY",0,cost));FinanceService.balanced(entries);
+  if(revenue<=0||cost<0)throw new IllegalArgumentException("Positive sale revenue and nonnegative allocated cost required");
+  var entries=new ArrayList<Entry>();entries.add(new Entry("ACCOUNTS_RECEIVABLE",revenue,0));entries.add(new Entry("SALES_REVENUE",0,revenue));if(cost>0){entries.add(new Entry("COST_OF_GOODS_SOLD",cost,0));entries.add(new Entry("MERCHANT_INVENTORY",0,cost));}FinanceService.balanced(entries);
   tx.execute(()->{post(saleId,operationId,date,"SALE",entries);var s=TenantContext.current();var balance=new ReceivableBalanceEntity();balance.tenantId=s.tenantId();balance.companyId=s.companyId();balance.branchId=s.branchId();balance.saleId=saleId;balance.outstandingXaf=revenue;em.persist(balance);em.flush();return null;});
  }
  public void requireOpenPeriod(LocalDate date){
@@ -26,6 +26,21 @@ public class DefaultFinanceService implements FinanceService {
    for(var e:entries){var l=new JournalLineEntity();l.tenantId=s.tenantId();l.companyId=s.companyId();l.entryId=j.id;l.id=UUID.randomUUID();l.accountCode=e.account();l.debitXaf=e.debit();l.creditXaf=e.credit();em.persist(l);}em.flush();return j.id;});
  }
  private ReceivableBalanceEntity balance(UUID id){var s=TenantContext.current();var r=em.find(ReceivableBalanceEntity.class,new ReceivableBalanceEntity.Key(s.tenantId(),s.companyId(),id),jakarta.persistence.LockModeType.PESSIMISTIC_WRITE);if(r==null||!r.branchId.equals(s.branchId()))throw new NoSuchElementException("Scoped receivable not found");return r;}
+ @Override
+ public long pendingCollectionCount() {
+  return tx.execute(() -> {
+   var scope = TenantContext.current();
+   return em.createQuery("""
+       select count(r) from ReceivableBalanceEntity r
+       where r.tenantId = :tenant and r.companyId = :company and r.branchId = :branch
+         and r.outstandingXaf > 0
+       """, Long.class)
+       .setParameter("tenant", scope.tenantId())
+       .setParameter("company", scope.companyId())
+       .setParameter("branch", scope.branchId())
+       .getSingleResult();
+  });
+ }
  public long outstandingSale(UUID id){return tx.execute(()->balance(id).outstandingXaf);}
  public void applyReceipt(UUID id,long amount){if(amount<=0)throw new IllegalArgumentException("Positive receipt required");tx.execute(()->{var r=balance(id);if(amount>r.outstandingXaf)throw new IllegalArgumentException("Payment exceeds outstanding debt; record surplus as a deposit");r.outstandingXaf=Math.subtractExact(r.outstandingXaf,amount);em.flush();return null;});}
  public CreditSplit applyCredit(UUID id,long amount){if(amount<=0)throw new IllegalArgumentException("Positive credit required");return tx.execute(()->{var r=balance(id);long applied=Math.min(amount,r.outstandingXaf);r.outstandingXaf=Math.subtractExact(r.outstandingXaf,applied);em.flush();return new CreditSplit(applied,Math.subtractExact(amount,applied));});}

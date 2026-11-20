@@ -1,0 +1,19 @@
+✔ same-named enum fields bind to their lexical declaration owner (1.883117ms)
+✔ top-level records resolve through actual imports without inventing Object structure (0.23046ms)
+✔ custom or annotated enum serialization remains explicitly unsupported (0.220606ms)
+✔ qualified ResponseEntity workforce exports retain declared media and string payload (1.310913ms)
+✔ billing printable records retain HTML content type (0.13533ms)
+✔ detailed payroll exposes nested payroll and explicit deduction line shapes (0.204582ms)
+✔ report route enum includes actual expanded source catalog (0.561808ms)
+✔ governance and quota enum schemas preserve their declaration owners and exact values (0.161628ms)
+✔ both session aliases expose the exact typed scope and authority list (0.370497ms)
+✔ fulfillment canonical record components survive the legacy overload and expose delivery and pick-list detail (0.161168ms)
+✔ partial fulfillment dispatch and history retain exact quantities and command identity (0.33911ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 128.691163

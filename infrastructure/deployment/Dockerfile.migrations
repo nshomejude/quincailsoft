@@ -1,0 +1,16 @@
+# Extract the verified application artifact to reuse its exact Flyway/JDBC versions.
+ARG JAVA_BUILD_IMAGE
+ARG JAVA_RUNTIME_IMAGE
+FROM ${JAVA_BUILD_IMAGE} AS build
+WORKDIR /build
+COPY backend/api-server/target/api-server-0.1.0-SNAPSHOT-exec.jar app.jar
+RUN jar -xf app.jar BOOT-INF/lib
+COPY infrastructure/deployment/MigrationRunner.java ./
+RUN javac --release 25 -cp 'BOOT-INF/lib/*' -d classes MigrationRunner.java
+FROM ${JAVA_RUNTIME_IMAGE}
+WORKDIR /opt/quincaisoft
+COPY --from=build --chown=10001:10001 /build/BOOT-INF/lib ./lib
+COPY --from=build --chown=10001:10001 /build/classes ./classes
+USER 10001:10001
+ENTRYPOINT ["java", "-XX:MaxRAMPercentage=70", "-cp", "/opt/quincaisoft/classes:/opt/quincaisoft/lib/*", "MigrationRunner"]
+CMD ["validate"]

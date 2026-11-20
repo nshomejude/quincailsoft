@@ -1,0 +1,14 @@
+[
+  {
+    "role": "cashier",
+    "catalogRead": 200,
+    "identityRead": 403,
+    "productUpdate": 403
+  },
+  {
+    "role": "auditor",
+    "catalogRead": 200,
+    "identityRead": 403,
+    "productUpdate": 403
+  }
+]

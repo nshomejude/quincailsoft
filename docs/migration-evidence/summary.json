@@ -47,5 +47,13 @@
   "live_oidc_browser_and_providers": "NOT_VERIFIED",
   "mtn": "JAVA_DURABLE_INTENT_ADAPTER_WITH_SIMULATED_TRANSPORT_TESTS",
   "orange": "UNAVAILABLE_PENDING_CONTRACT_IMPLEMENTATION",
-  "main_branch_release": "NOT_APPROVED_OR_MERGED"
+  "main_branch_release": "NOT_APPROVED_OR_MERGED",
+  "latestVerification": {
+    "date": "2026-11-19",
+    "artifact": "docs/migration-evidence/desktop-platform-2026-11-19/result.json",
+    "backend": "Java 25 / PostgreSQL 18.7 complete Maven verify PASS",
+    "historicalImport": "DEFERRED",
+    "browserAcceptance": "INCOMPLETE",
+    "fullMigrationAcceptance": "INCOMPLETE"
+  }
 }

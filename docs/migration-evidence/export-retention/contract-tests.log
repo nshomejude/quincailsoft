@@ -1,0 +1,20 @@
+✔ retention approval and purge preserve command identity and evidence schema (0.828308ms)
+✔ same-named enum fields bind to their lexical declaration owner (1.855454ms)
+✔ top-level records resolve through actual imports without inventing Object structure (0.213799ms)
+✔ custom or annotated enum serialization remains explicitly unsupported (0.234942ms)
+✔ qualified ResponseEntity workforce exports retain declared media and string payload (1.105672ms)
+✔ billing printable records retain HTML content type (0.159498ms)
+✔ detailed payroll exposes nested payroll and explicit deduction line shapes (0.205277ms)
+✔ report route enum includes actual expanded source catalog (0.614808ms)
+✔ governance and quota enum schemas preserve their declaration owners and exact values (0.199959ms)
+✔ both session aliases expose the exact typed scope and authority list (0.206248ms)
+✔ fulfillment canonical record components survive the legacy overload and expose delivery and pick-list detail (0.104937ms)
+✔ partial fulfillment dispatch and history retain exact quantities and command identity (0.123285ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 88.102133

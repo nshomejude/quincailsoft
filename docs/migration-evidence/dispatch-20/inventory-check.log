@@ -1,0 +1,2 @@
+Wrote docs/migration/python-java-parity.json: 735 requirements, no automatic acceptance.
+PASS parity inventory matches current source; this is not acceptance.

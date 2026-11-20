@@ -1,0 +1,43 @@
+{
+  "sourceCommit": "5934c33f2688ff0664fae23572537f2e8524ca28",
+  "status": "PASS",
+  "specification": [
+    "ARCHITECTURE.md §5.3 RBAC/ABAC",
+    "ARCHITECTURE.md §7.2 command idempotency",
+    "ARCHITECTURE.md Appendix A S37/S38/S39"
+  ],
+  "legacyReference": [
+    "server/finance_workflows.py quotation issue/convert branch",
+    "tests/test_finance_workflows.py test_quote_conversion_immutable_source_and_expiry"
+  ],
+  "java": "25.0.5.1",
+  "postgresql": "18.7",
+  "command": "mvn -B -ntp -f backend/pom.xml -pl api-server -am -Dtest=FullApplicationPostgresTest -Dsurefire.failIfNoSpecifiedTests=false test",
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "reproducedBeforeFix": "Another active branch owner replayed the original operation and received200 with the original quotation. replay-before.txt preserves the failing assertion.",
+  "checks": [
+    "Original draft/issue/conversion replay returns original response",
+    "Different actor cannot replay draft or conversion (409)",
+    "Changed payload with retained operation is rejected409",
+    "Quotation-only capability cannot create sale through conversion (403); source remains ISSUED",
+    "Valid conversion produces one DRAFT sale preserving quantity and exact XAF total; original quote lines unchanged",
+    "Second conversion and expired conversion rejected409",
+    "Null line quantity rejected422 instead of internal error",
+    "Service entry points now enforce read/write/issue and sale-write capabilities; receipt validation includes actor/company/branch/source/status",
+    "Existing authenticated purchasing, fulfillment, print-capture, epoch revocation and suspension regressions rerun"
+  ],
+  "notAccepted": [
+    "Complete M21 workflow: accept/reject/clone/revision and partial-order consumption remain open",
+    "Canonical delivery charge/discount/terms/notes and full price/tax contracts remain incomplete",
+    "Original quotation screens/browser acceptance and complete Python parity",
+    "Historical dataset import; mobile/native desktop remain paused"
+  ],
+  "sourceHashes": {
+    "backend/business-modules/quotations/src/main/java/com/quincaisoft/quotations/application/DefaultQuotationService.java": "953958cabdd00e069a674239732daf2e1ef4e26b33d5d6306bfc0e82daeb6b33",
+    "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java": "faab1128c1e4c080682bee3b57f099c2b148015ab1b30d36109bf9c889faf07c",
+    "backend/api-server/src/test/java/com/quincaisoft/security/QuotationHttpWorkflow.java": "af751a56935e7f15995b003e81da520236b8d7507bf5806a6285a4b76511da79"
+  }
+}
