@@ -14,6 +14,39 @@ public class DefaultCatalogService implements CatalogService {
  private final EntityManager em; private final ScopedTransactions transactions;
  public DefaultCatalogService(EntityManager em, ScopedTransactions transactions){this.em=em;this.transactions=transactions;}
  public List<Product> list(){return transactions.execute(()->{var s=TenantContext.current();return em.createQuery("select p from CatalogProduct p where p.tenantId=:t and p.companyId=:c order by p.sku",CatalogProduct.class).setParameter("t",s.tenantId()).setParameter("c",s.companyId()).setMaxResults(200).getResultList().stream().map(CatalogProduct::view).toList();});}
+ /**
+  * Bounded directory search. Tenant/company restrictions are explicit in both
+  * queries and enforced again by PostgreSQL FORCE RLS through ScopedTransactions.
+  * Escape LIKE wildcards so a literal SKU containing '_' or '%' cannot turn
+  * the requested search into an unbounded wildcard query.
+  */
+ public Page page(String query,int offset,int limit) {
+  if(query==null)query="";
+  if(query.length()>120||query.chars().anyMatch(Character::isISOControl)
+      ||offset<0||offset>1000000||limit<1||limit>100)
+   throw new IllegalArgumentException("Query length, offset or page limit outside bounds");
+  String term=query.strip().toLowerCase(Locale.ROOT)
+      .replace("!","!!").replace("%","!%").replace("_","!_");
+  String pattern="%"+term+"%";
+  return transactions.execute(()->{
+   var scope=TenantContext.current();
+   String predicate="p.tenantId=:tenant and p.companyId=:company and ("
+       +"lower(p.sku) like :term escape '!' or lower(p.name) like :term escape '!'"
+       +" or lower(coalesce(p.barcode,'')) like :term escape '!'"
+       +" or lower(coalesce(p.brand,'')) like :term escape '!')";
+   var count=em.createQuery("select count(p) from CatalogProduct p where "+predicate,Long.class)
+       .setParameter("tenant",scope.tenantId())
+       .setParameter("company",scope.companyId()).setParameter("term",pattern)
+       .getSingleResult();
+   var products=em.createQuery("select p from CatalogProduct p where "+predicate
+       +" order by p.sku,p.id",CatalogProduct.class)
+       .setParameter("tenant",scope.tenantId())
+       .setParameter("company",scope.companyId()).setParameter("term",pattern)
+       .setFirstResult(offset).setMaxResults(limit).getResultList().stream()
+       .map(CatalogProduct::view).toList();
+   return new Page(products,count,offset,limit);
+  });
+ }
  public Product get(UUID id){return transactions.execute(()->{var s=TenantContext.current();return em.createQuery("select p from CatalogProduct p where p.tenantId=:t and p.companyId=:c and p.id=:id",CatalogProduct.class).setParameter("t",s.tenantId()).setParameter("c",s.companyId()).setParameter("id",Objects.requireNonNull(id)).getResultStream().findFirst().orElseThrow(()->new NoSuchElementException("Product not found in company scope")).view();});}
  public Product create(Save command){return save(null,command);}
  public Product update(UUID id,Save command){return save(Objects.requireNonNull(id),command);}
