@@ -17,6 +17,9 @@ import com.quincaisoft.customeraccounts.api.CustomerService;
 import jakarta.persistence.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.*;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -45,6 +48,11 @@ class PostgresReturnIntegrationTest {
     ScopedTransactions tx=new ScopedTransactions(){public <T>T execute(Supplier<T> action){return template.execute(status->{var scope=TenantContext.current();em.createNativeQuery("select set_config('app.tenant_id',:t,true),set_config('app.company_id',:c,true),set_config('app.branch_id',:b,true),set_config('app.actor_id',:a,true)").setParameter("t",scope.tenantId().toString()).setParameter("c",scope.companyId().toString()).setParameter("b",scope.branchId().toString()).setParameter("a",scope.actorId().toString()).getSingleResult();return action.get();});}};
     var catalog=new DefaultCatalogService(em,tx);var stock=new DefaultStockService(em,tx,catalog);var finance=new DefaultFinanceService(em,tx);var customers=new DefaultCustomerService(em,tx);var documents=new DefaultDocumentService(em,tx,JsonMapper.builder().build());var sales=new DefaultSalesService(em,tx,stock,catalog,finance,customers,JsonMapper.builder().build(),documents);
     var returns=new DefaultReturnService(em,tx,sales,finance,stock,catalog,documents,JsonMapper.builder().build());var quotes=new DefaultQuotationService(em,tx,sales,catalog,customers,stock,documents,JsonMapper.builder().build());var scope=new TenantScope(t,c,b,a);
+    SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+        "synthetic-return-workflow-actor", "not-used",
+        List.of("quotations:read", "quotations:write", "quotations:issue", "sales:write").stream()
+            .map(SimpleGrantedAuthority::new).toList()));
+    try {
     TenantContext.call(scope,1,()->{
      documents.configure(new DocumentService.Settings("Synthetic merchant","Synthetic address","TEST-REG","TEST","en",0));
      var draftRequest=new SalesService.Draft(UUID.randomUUID(),w,customer,LocalDate.of(2026,11,18),List.of(new SalesService.RequestedLine(p,"2000")));
@@ -54,6 +62,7 @@ class PostgresReturnIntegrationTest {
      assertThrows(IllegalStateException.class,()->sales.post(draft.id(),new SalesService.Post(postRequest.operationId(),draft.version(),"Different request must conflict")));
      var quote=quotes.draft(new QuotationService.Draft(UUID.randomUUID(),customer,w,LocalDate.now(),LocalDate.now().plusDays(10),List.of(new SalesService.RequestedLine(p,"1000"))));
      quote=quotes.issue(quote.id(),new QuotationService.Command(UUID.randomUUID(),quote.version(),"Issue synthetic quote"));assertEquals("ISSUED",quote.status());
+     quote=quotes.accept(quote.id(),new QuotationService.Decision(UUID.randomUUID(),quote.version(),"Customer accepted quotation","synthetic-acceptance-1"));assertEquals("ACCEPTED",quote.status());
      var convert=new QuotationService.Command(UUID.randomUUID(),quote.version(),"Accept synthetic quote");var converted=quotes.convert(quote.id(),convert);assertEquals("CONVERTED",converted.status());assertEquals(converted,quotes.convert(quote.id(),convert));assertNotNull(converted.convertedSaleId());
      var returnDraft=new ReturnService.Draft(UUID.randomUUID(),posted.id(),LocalDate.of(2026,11,18),"SELLABLE","inspection-1",List.of(new ReturnService.RequestedLine(p,"1000")));
      var ret=returns.draft(returnDraft);assertEquals(ret,returns.draft(returnDraft));
@@ -75,6 +84,7 @@ class PostgresReturnIntegrationTest {
      assertThrows(IllegalStateException.class,()->returns.post(excessApproved.id(),new ReturnService.Command(UUID.randomUUID(),excessApproved.version(),"Must reject excess")));assertEquals(9000,count(owner,"select quantity_milli from stock_balance"));
      return null;
     });
+    } finally { SecurityContextHolder.clearContext(); }
    }finally{if(factory!=null)factory.destroy();sql(admin,"DROP DATABASE "+db);sql(admin,"DROP ROLE "+role);}
   }
  }
