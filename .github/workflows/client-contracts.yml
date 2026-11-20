@@ -32,6 +32,12 @@ jobs:
         run: |
           node scripts/check-project-rules.mjs
           node --test scripts/project-gates.test.mjs
+      - name: Check Java-derived OpenAPI and consumer contract consistency
+        run: |
+          node packages/api-contracts/generate-source-contract.mjs
+          git diff --exit-code -- packages/api-contracts/openapi.json packages/api-contracts/endpoint-inventory.json
+          node packages/api-contracts/validate.mjs
+          node --test packages/api-contracts/*.test.mjs
       - name: Compile all TypeScript client surfaces
         run: |
           pnpm --filter @quincaisoft/web-admin typecheck
