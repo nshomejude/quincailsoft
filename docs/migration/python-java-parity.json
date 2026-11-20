@@ -12922,7 +12922,7 @@
       },
       {
         "path": "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/web/SessionRevocationController.java",
-        "sha256": "34e6982ee8e87b70a2b6bda201248eaf83a15e31ba43dfd79c863893467d6ca5"
+        "sha256": "9aedd1352e2414addb782af1adbaa1b596a35d712ab19b7f07d2665c8b4e7f32"
       },
       {
         "path": "backend/business-modules/integrations/src/main/java/com/quincaisoft/integrations/api/CollectionProvider.java",
