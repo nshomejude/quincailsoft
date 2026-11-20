@@ -12466,7 +12466,7 @@
       },
       {
         "path": "backend/api-server/src/main/java/com/quincaisoft/security/CurrentRoleAuthoritiesFilter.java",
-        "sha256": "3388adbab6a5ee19b7f4f97ae8473e5b626d9feca48912366af86bddd8c7565c"
+        "sha256": "3aca8f2f41be5b742241458e7a9a0125aeb1aa025db424f624176dc0abb33581"
       },
       {
         "path": "backend/api-server/src/main/java/com/quincaisoft/security/DatabaseSafetyVerifier.java",
@@ -13985,7 +13985,7 @@
       },
       {
         "path": "backend/api-server/src/test/java/com/quincaisoft/security/CurrentRoleAuthoritiesFilterTest.java",
-        "sha256": "3def619f67988f639479f847188da8f55407f5b4a0a96d9ec1cadfa53e125f3e",
+        "sha256": "100c4464f5b31e26d3f5b9007b9638ab3e45a65fc54cc9bf583fdcfe1813269a",
         "testMethods": [
           "cashierCannotReuseOwnerPermissionsFromUnexpiredToken",
           "auditorNeverInheritsSignedWriteOrExportPermissions",
@@ -14019,7 +14019,7 @@
       },
       {
         "path": "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java",
-        "sha256": "3acf68c4f83610a8b66698eb9819c7f2cbf66bcafcc368c5b92611473d1b050a",
+        "sha256": "890dace6c1e46ec8ba4955ba188eb2fd5384b8b754bbdbb67c22d8899f405d2e",
         "testMethods": [
           "applicationStartsAndAuthenticatesAgainstRealScopedDatabase"
         ],
