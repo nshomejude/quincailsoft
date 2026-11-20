@@ -54,6 +54,20 @@ class CatalogReplayPostgresTest {
     TenantContext.call(scope,1,()->{
      assertEquals(category,masters.saveCategory(null,categoryCommand));assertEquals(unit,masters.saveUnit(null,unitCommand));assertEquals(product,catalog.create(productCommand));
      assertEquals(9007199254740993L,product.sellingPriceXaf());
+     // The paginated search cannot truncate the catalogue to the first 200 rows
+     // or turn a literal wildcard into an unrestricted query.
+     var matching=catalog.page("pRo",0,50);
+     assertEquals(1,matching.total());
+     assertEquals(product.id(),matching.items().getFirst().id());
+     assertEquals(1,catalog.page("sku",0,1).total());
+     assertEquals(0,catalog.page("%",0,50).total());
+     assertEquals(0,catalog.page("_",0,50).total());
+     assertEquals(1,catalog.page("",0,1).items().size());
+     assertTrue(catalog.page("pRo",1,50).items().isEmpty());
+     assertThrows(IllegalArgumentException.class,()->catalog.page("x",-1,10));
+     assertThrows(IllegalArgumentException.class,()->catalog.page("x",0,101));
+     assertThrows(IllegalArgumentException.class,()->catalog.page("x\\u0000",0,10));
+
      assertThrows(IllegalArgumentException.class,()->masters.saveUnit(unit.id(),new CatalogMasterService.UnitSave(UUID.randomUUID(),"piece","Piece","piece","2","1",0,true,unit.version(),"rescale")));
      assertThrows(IllegalArgumentException.class,()->catalog.update(product.id(),new CatalogService.Save(UUID.randomUUID(),"SKU","Product","box","1",0,Long.toString(product.version()),true,"rescale")));
      return null;
@@ -69,7 +83,7 @@ class CatalogReplayPostgresTest {
      });
     }
     TenantContext.call(new TenantScope(tenant,company,branch,UUID.randomUUID()),1,()->{assertThrows(IllegalStateException.class,()->masters.saveCategory(null,categoryCommand));assertThrows(IllegalStateException.class,()->masters.saveUnit(null,unitCommand));assertThrows(IllegalStateException.class,()->catalog.create(productCommand));return null;});
-    TenantContext.call(new TenantScope(tenant,otherCompany,companyBranch,actor),1,()->{assertTrue(masters.categories().isEmpty());assertTrue(masters.units().isEmpty());assertTrue(catalog.list().isEmpty());return null;});
+    TenantContext.call(new TenantScope(tenant,otherCompany,companyBranch,actor),1,()->{assertTrue(masters.categories().isEmpty());assertTrue(masters.units().isEmpty());assertTrue(catalog.list().isEmpty());assertEquals(0,catalog.page("sku",0,50).total());return null;});
     // A corrupt/rejected receipt with matching bytes must not masquerade as a committed category.
     var json=JsonMapper.builder().build();
     for(String outcome:List.of("REJECTED","WRONG_SOURCE")){
