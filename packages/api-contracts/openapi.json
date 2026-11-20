@@ -37,28 +37,28 @@
         "parameters": []
       }
     },
-    "/api/v1/session": {
+    "/api/v1/access/effective": {
       "get": {
-        "operationId": "SessionController_session_1",
-        "summary": "Session session",
+        "operationId": "EffectiveAccessController_effective_1",
+        "summary": "EffectiveAccess effective",
         "responses": {
           "200": {
             "description": "Source-declared result.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SessionController_SessionView"
+                  "$ref": "#/components/schemas/EffectiveAccessController_Access"
                 }
               }
             }
           }
         },
-        "x-source": "backend/api-server/src/main/java/com/quincaisoft/security/SessionController.java",
-        "x-source-method": "session",
+        "x-source": "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java",
+        "x-source-method": "effective",
         "parameters": []
       }
     },
-    "/api/v1/me": {
+    "/api/v1/session": {
       "get": {
         "operationId": "SessionController_session_2",
         "summary": "Session session",
@@ -79,9 +79,30 @@
         "parameters": []
       }
     },
+    "/api/v1/me": {
+      "get": {
+        "operationId": "SessionController_session_3",
+        "summary": "Session session",
+        "responses": {
+          "200": {
+            "description": "Source-declared result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionController_SessionView"
+                }
+              }
+            }
+          }
+        },
+        "x-source": "backend/api-server/src/main/java/com/quincaisoft/security/SessionController.java",
+        "x-source-method": "session",
+        "parameters": []
+      }
+    },
     "/api/v1/audit": {
       "get": {
-        "operationId": "AuditController_list_3",
+        "operationId": "AuditController_list_4",
         "summary": "Audit list",
         "responses": {
           "200": {
@@ -106,7 +127,7 @@
     },
     "/api/v1/branches": {
       "get": {
-        "operationId": "BranchController_list_4",
+        "operationId": "BranchController_list_5",
         "summary": "Branch list",
         "responses": {
           "200": {
@@ -131,7 +152,7 @@
     },
     "/api/v1/products": {
       "get": {
-        "operationId": "CatalogController_list_5",
+        "operationId": "CatalogController_list_6",
         "summary": "Catalog list",
         "responses": {
           "200": {
@@ -154,7 +175,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "CatalogController_create_7",
+        "operationId": "CatalogController_create_9",
         "summary": "Catalog create",
         "responses": {
           "200": {
@@ -204,9 +225,60 @@
         ]
       }
     },
+    "/api/v1/products/page": {
+      "get": {
+        "operationId": "CatalogController_page_7",
+        "summary": "Catalog page",
+        "responses": {
+          "200": {
+            "description": "Source-declared result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogService_Page"
+                }
+              }
+            }
+          }
+        },
+        "x-source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogController.java",
+        "x-source-method": "page",
+        "x-authorization-expression": "hasAnyAuthority('catalog:read','SCOPE_catalog:read')",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          }
+        ]
+      }
+    },
     "/api/v1/products/{id}": {
       "get": {
-        "operationId": "CatalogController_get_6",
+        "operationId": "CatalogController_get_8",
         "summary": "Catalog get",
         "responses": {
           "200": {
@@ -236,7 +308,7 @@
         ]
       },
       "put": {
-        "operationId": "CatalogController_update_8",
+        "operationId": "CatalogController_update_10",
         "summary": "Catalog update",
         "responses": {
           "200": {
@@ -297,7 +369,7 @@
     },
     "/api/v1/catalog/categories": {
       "get": {
-        "operationId": "CatalogMasterController_categories_9",
+        "operationId": "CatalogMasterController_categories_11",
         "summary": "CatalogMaster categories",
         "responses": {
           "200": {
@@ -320,7 +392,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "CatalogMasterController_createCategory_11",
+        "operationId": "CatalogMasterController_createCategory_13",
         "summary": "CatalogMaster createCategory",
         "responses": {
           "200": {
@@ -372,7 +444,7 @@
     },
     "/api/v1/catalog/categories/{id}": {
       "get": {
-        "operationId": "CatalogMasterController_category_10",
+        "operationId": "CatalogMasterController_category_12",
         "summary": "CatalogMaster category",
         "responses": {
           "200": {
@@ -402,7 +474,7 @@
         ]
       },
       "put": {
-        "operationId": "CatalogMasterController_updateCategory_12",
+        "operationId": "CatalogMasterController_updateCategory_14",
         "summary": "CatalogMaster updateCategory",
         "responses": {
           "200": {
@@ -463,7 +535,7 @@
     },
     "/api/v1/catalog/units": {
       "get": {
-        "operationId": "CatalogMasterController_units_13",
+        "operationId": "CatalogMasterController_units_15",
         "summary": "CatalogMaster units",
         "responses": {
           "200": {
@@ -486,7 +558,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "CatalogMasterController_createUnit_15",
+        "operationId": "CatalogMasterController_createUnit_17",
         "summary": "CatalogMaster createUnit",
         "responses": {
           "200": {
@@ -538,7 +610,7 @@
     },
     "/api/v1/catalog/units/{id}": {
       "get": {
-        "operationId": "CatalogMasterController_unit_14",
+        "operationId": "CatalogMasterController_unit_16",
         "summary": "CatalogMaster unit",
         "responses": {
           "200": {
@@ -568,7 +640,7 @@
         ]
       },
       "put": {
-        "operationId": "CatalogMasterController_updateUnit_16",
+        "operationId": "CatalogMasterController_updateUnit_18",
         "summary": "CatalogMaster updateUnit",
         "responses": {
           "200": {
@@ -629,7 +701,7 @@
     },
     "/api/v1/catalog/manufacturers": {
       "post": {
-        "operationId": "CatalogMasterController_createManufacturer_17",
+        "operationId": "CatalogMasterController_createManufacturer_19",
         "summary": "CatalogMaster createManufacturer",
         "responses": {
           "200": {
@@ -681,7 +753,7 @@
     },
     "/api/v1/catalog/families": {
       "post": {
-        "operationId": "CatalogMasterController_createFamily_18",
+        "operationId": "CatalogMasterController_createFamily_20",
         "summary": "CatalogMaster createFamily",
         "responses": {
           "200": {
@@ -733,7 +805,7 @@
     },
     "/api/v1/catalog/variants": {
       "post": {
-        "operationId": "CatalogMasterController_attachVariant_19",
+        "operationId": "CatalogMasterController_attachVariant_21",
         "summary": "CatalogMaster attachVariant",
         "responses": {
           "200": {
@@ -785,7 +857,7 @@
     },
     "/api/v1/catalog/supplier-offers": {
       "post": {
-        "operationId": "CatalogMasterController_createOffer_20",
+        "operationId": "CatalogMasterController_createOffer_22",
         "summary": "CatalogMaster createOffer",
         "responses": {
           "200": {
@@ -837,7 +909,7 @@
     },
     "/api/v1/commerce/store": {
       "get": {
-        "operationId": "CommerceController_store_21",
+        "operationId": "CommerceController_store_23",
         "summary": "Commerce store",
         "responses": {
           "200": {
@@ -857,7 +929,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "CommerceController_configure_22",
+        "operationId": "CommerceController_configure_24",
         "summary": "Commerce configure",
         "responses": {
           "200": {
@@ -909,7 +981,7 @@
     },
     "/api/v1/commerce/listings": {
       "get": {
-        "operationId": "CommerceController_listings_23",
+        "operationId": "CommerceController_listings_25",
         "summary": "Commerce listings",
         "responses": {
           "200": {
@@ -932,7 +1004,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "CommerceController_publish_24",
+        "operationId": "CommerceController_publish_26",
         "summary": "Commerce publish",
         "responses": {
           "200": {
@@ -984,7 +1056,7 @@
     },
     "/api/public/stores/{slug}": {
       "get": {
-        "operationId": "PublicStoreController_store_25",
+        "operationId": "PublicStoreController_store_27",
         "summary": "PublicStore store",
         "responses": {
           "200": {
@@ -1015,7 +1087,7 @@
     },
     "/api/v1/companies": {
       "get": {
-        "operationId": "CompanyController_list_26",
+        "operationId": "CompanyController_list_28",
         "summary": "Company list",
         "responses": {
           "200": {
@@ -1040,7 +1112,7 @@
     },
     "/api/v1/customers": {
       "get": {
-        "operationId": "CustomerController_list_27",
+        "operationId": "CustomerController_list_29",
         "summary": "Customer list",
         "responses": {
           "200": {
@@ -1063,7 +1135,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "CustomerDirectoryController_create_30",
+        "operationId": "CustomerDirectoryController_create_32",
         "summary": "CustomerDirectory create",
         "responses": {
           "200": {
@@ -1115,7 +1187,7 @@
     },
     "/api/v1/customers/page": {
       "get": {
-        "operationId": "CustomerDirectoryController_page_28",
+        "operationId": "CustomerDirectoryController_page_30",
         "summary": "CustomerDirectory page",
         "responses": {
           "200": {
@@ -1166,7 +1238,7 @@
     },
     "/api/v1/customers/{id}": {
       "get": {
-        "operationId": "CustomerDirectoryController_get_29",
+        "operationId": "CustomerDirectoryController_get_31",
         "summary": "CustomerDirectory get",
         "responses": {
           "200": {
@@ -1196,7 +1268,7 @@
         ]
       },
       "put": {
-        "operationId": "CustomerDirectoryController_update_31",
+        "operationId": "CustomerDirectoryController_update_33",
         "summary": "CustomerDirectory update",
         "responses": {
           "200": {
@@ -1257,7 +1329,7 @@
     },
     "/api/v1/documents": {
       "get": {
-        "operationId": "DocumentController_list_32",
+        "operationId": "DocumentController_list_34",
         "summary": "Document list",
         "responses": {
           "200": {
@@ -1292,7 +1364,7 @@
     },
     "/api/v1/documents/{id}": {
       "get": {
-        "operationId": "DocumentController_get_33",
+        "operationId": "DocumentController_get_35",
         "summary": "Document get",
         "responses": {
           "200": {
@@ -1324,7 +1396,7 @@
     },
     "/api/v1/documents/{id}/print": {
       "get": {
-        "operationId": "DocumentController_print_34",
+        "operationId": "DocumentController_print_36",
         "summary": "Document print",
         "responses": {
           "200": {
@@ -1365,7 +1437,7 @@
     },
     "/api/v1/documents/settings": {
       "get": {
-        "operationId": "DocumentController_settings_35",
+        "operationId": "DocumentController_settings_37",
         "summary": "Document settings",
         "responses": {
           "200": {
@@ -1385,7 +1457,7 @@
         "parameters": []
       },
       "put": {
-        "operationId": "DocumentController_configure_36",
+        "operationId": "DocumentController_configure_38",
         "summary": "Document configure",
         "responses": {
           "200": {
@@ -1437,7 +1509,7 @@
     },
     "/api/v1/documents/templates": {
       "get": {
-        "operationId": "DocumentWorkspaceController_templates_37",
+        "operationId": "DocumentWorkspaceController_templates_39",
         "summary": "DocumentWorkspace templates",
         "responses": {
           "200": {
@@ -1462,7 +1534,7 @@
     },
     "/api/v1/documents/templates/{templateId}/sources": {
       "get": {
-        "operationId": "DocumentWorkspaceController_sources_38",
+        "operationId": "DocumentWorkspaceController_sources_40",
         "summary": "DocumentWorkspace sources",
         "responses": {
           "200": {
@@ -1496,7 +1568,7 @@
     },
     "/api/v1/documents/captures": {
       "get": {
-        "operationId": "DocumentWorkspaceController_list_39",
+        "operationId": "DocumentWorkspaceController_list_41",
         "summary": "DocumentWorkspace list",
         "responses": {
           "200": {
@@ -1519,7 +1591,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "DocumentWorkspaceController_capture_41",
+        "operationId": "DocumentWorkspaceController_capture_43",
         "summary": "DocumentWorkspace capture",
         "responses": {
           "200": {
@@ -1571,7 +1643,7 @@
     },
     "/api/v1/documents/captures/{id}": {
       "get": {
-        "operationId": "DocumentWorkspaceController_get_40",
+        "operationId": "DocumentWorkspaceController_get_42",
         "summary": "DocumentWorkspace get",
         "responses": {
           "200": {
@@ -1603,7 +1675,7 @@
     },
     "/api/v1/documents/captures/{id}/preview": {
       "get": {
-        "operationId": "DocumentWorkspaceController_preview_42",
+        "operationId": "DocumentWorkspaceController_preview_44",
         "summary": "DocumentWorkspace preview",
         "responses": {
           "200": {
@@ -1644,7 +1716,7 @@
     },
     "/api/v1/documents/captures/{id}/print-attempts": {
       "post": {
-        "operationId": "DocumentWorkspaceController_printCapture_43",
+        "operationId": "DocumentWorkspaceController_printCapture_45",
         "summary": "DocumentWorkspace printCapture",
         "responses": {
           "200": {
@@ -1705,7 +1777,7 @@
     },
     "/api/v1/documents/{id}/print-attempts": {
       "post": {
-        "operationId": "DocumentWorkspaceController_printOriginal_44",
+        "operationId": "DocumentWorkspaceController_printOriginal_46",
         "summary": "DocumentWorkspace printOriginal",
         "responses": {
           "200": {
@@ -1766,7 +1838,7 @@
     },
     "/api/v1/documents/print-attempts": {
       "get": {
-        "operationId": "DocumentWorkspaceController_attempts_45",
+        "operationId": "DocumentWorkspaceController_attempts_47",
         "summary": "DocumentWorkspace attempts",
         "responses": {
           "200": {
@@ -1791,7 +1863,7 @@
     },
     "/api/v1/documents/print-attempts/{id}/outcomes": {
       "post": {
-        "operationId": "DocumentWorkspaceController_outcome_46",
+        "operationId": "DocumentWorkspaceController_outcome_48",
         "summary": "DocumentWorkspace outcome",
         "responses": {
           "200": {
@@ -1852,7 +1924,7 @@
     },
     "/api/v1/expenses": {
       "get": {
-        "operationId": "ExpenseController_list_47",
+        "operationId": "ExpenseController_list_49",
         "summary": "Expense list",
         "responses": {
           "200": {
@@ -1875,7 +1947,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "ExpenseController_create_48",
+        "operationId": "ExpenseController_create_50",
         "summary": "Expense create",
         "responses": {
           "200": {
@@ -1926,7 +1998,7 @@
     },
     "/api/v1/expenses/{id}/submit": {
       "post": {
-        "operationId": "ExpenseController_submit_49",
+        "operationId": "ExpenseController_submit_51",
         "summary": "Expense submit",
         "responses": {
           "200": {
@@ -1986,7 +2058,7 @@
     },
     "/api/v1/expenses/{id}/cancel": {
       "post": {
-        "operationId": "ExpenseController_submit_50",
+        "operationId": "ExpenseController_submit_52",
         "summary": "Expense submit",
         "responses": {
           "200": {
@@ -2046,7 +2118,7 @@
     },
     "/api/v1/expenses/{id}/approve": {
       "post": {
-        "operationId": "ExpenseController_approve_51",
+        "operationId": "ExpenseController_approve_53",
         "summary": "Expense approve",
         "responses": {
           "200": {
@@ -2106,7 +2178,7 @@
     },
     "/api/v1/expenses/{id}/reject": {
       "post": {
-        "operationId": "ExpenseController_approve_52",
+        "operationId": "ExpenseController_approve_54",
         "summary": "Expense approve",
         "responses": {
           "200": {
@@ -2166,7 +2238,7 @@
     },
     "/api/v1/expenses/{id}/pay": {
       "post": {
-        "operationId": "ExpenseController_pay_53",
+        "operationId": "ExpenseController_pay_55",
         "summary": "Expense pay",
         "responses": {
           "200": {
@@ -2226,7 +2298,7 @@
     },
     "/api/v1/expenses/{id}/pay-bank": {
       "post": {
-        "operationId": "ExpenseController_payBank_54",
+        "operationId": "ExpenseController_payBank_56",
         "summary": "Expense payBank",
         "responses": {
           "200": {
@@ -2286,7 +2358,7 @@
     },
     "/api/v1/manual-journals": {
       "get": {
-        "operationId": "ManualJournalController_list_55",
+        "operationId": "ManualJournalController_list_57",
         "summary": "ManualJournal list",
         "responses": {
           "200": {
@@ -2309,7 +2381,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "ManualJournalController_create_56",
+        "operationId": "ManualJournalController_create_58",
         "summary": "ManualJournal create",
         "responses": {
           "200": {
@@ -2360,7 +2432,7 @@
     },
     "/api/v1/manual-journals/{id}/submit": {
       "post": {
-        "operationId": "ManualJournalController_submit_57",
+        "operationId": "ManualJournalController_submit_59",
         "summary": "ManualJournal submit",
         "responses": {
           "200": {
@@ -2420,7 +2492,7 @@
     },
     "/api/v1/manual-journals/{id}/approve": {
       "post": {
-        "operationId": "ManualJournalController_approve_58",
+        "operationId": "ManualJournalController_approve_60",
         "summary": "ManualJournal approve",
         "responses": {
           "200": {
@@ -2480,7 +2552,7 @@
     },
     "/api/v1/manual-journals/{id}/reject": {
       "post": {
-        "operationId": "ManualJournalController_approve_59",
+        "operationId": "ManualJournalController_approve_61",
         "summary": "ManualJournal approve",
         "responses": {
           "200": {
@@ -2540,7 +2612,7 @@
     },
     "/api/v1/manual-journals/{id}/reversals": {
       "post": {
-        "operationId": "ManualJournalController_reversal_60",
+        "operationId": "ManualJournalController_reversal_62",
         "summary": "ManualJournal reversal",
         "responses": {
           "200": {
@@ -2600,7 +2672,7 @@
     },
     "/api/v1/manual-journals/{id}": {
       "get": {
-        "operationId": "ManualJournalController_get_61",
+        "operationId": "ManualJournalController_get_63",
         "summary": "ManualJournal get",
         "responses": {
           "200": {
@@ -2632,7 +2704,7 @@
     },
     "/api/v1/periods": {
       "get": {
-        "operationId": "PeriodController_list_62",
+        "operationId": "PeriodController_list_64",
         "summary": "Period list",
         "responses": {
           "200": {
@@ -2655,7 +2727,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "PeriodController_create_64",
+        "operationId": "PeriodController_create_66",
         "summary": "Period create",
         "responses": {
           "200": {
@@ -2706,7 +2778,7 @@
     },
     "/api/v1/period-requests": {
       "get": {
-        "operationId": "PeriodController_requests_63",
+        "operationId": "PeriodController_requests_65",
         "summary": "Period requests",
         "responses": {
           "200": {
@@ -2731,7 +2803,7 @@
     },
     "/api/v1/periods/{id}/close": {
       "post": {
-        "operationId": "PeriodController_request_65",
+        "operationId": "PeriodController_request_67",
         "summary": "Period request",
         "responses": {
           "200": {
@@ -2791,7 +2863,7 @@
     },
     "/api/v1/periods/{id}/reopen": {
       "post": {
-        "operationId": "PeriodController_request_66",
+        "operationId": "PeriodController_request_68",
         "summary": "Period request",
         "responses": {
           "200": {
@@ -2851,7 +2923,7 @@
     },
     "/api/v1/period-requests/{id}/approve": {
       "post": {
-        "operationId": "PeriodController_decide_67",
+        "operationId": "PeriodController_decide_69",
         "summary": "Period decide",
         "responses": {
           "200": {
@@ -2911,7 +2983,7 @@
     },
     "/api/v1/period-requests/{id}/reject": {
       "post": {
-        "operationId": "PeriodController_decide_68",
+        "operationId": "PeriodController_decide_70",
         "summary": "Period decide",
         "responses": {
           "200": {
@@ -2971,7 +3043,7 @@
     },
     "/api/v1/identity/members": {
       "get": {
-        "operationId": "IdentityController_members_69",
+        "operationId": "IdentityController_members_71",
         "summary": "Identity members",
         "responses": {
           "200": {
@@ -2996,7 +3068,7 @@
     },
     "/api/v1/identity/changes": {
       "get": {
-        "operationId": "IdentityController_changes_70",
+        "operationId": "IdentityController_changes_72",
         "summary": "Identity changes",
         "responses": {
           "200": {
@@ -3019,7 +3091,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "IdentityController_request_71",
+        "operationId": "IdentityController_request_73",
         "summary": "Identity request",
         "responses": {
           "200": {
@@ -3071,7 +3143,7 @@
     },
     "/api/v1/identity/changes/{id}/approve": {
       "post": {
-        "operationId": "IdentityController_approve_72",
+        "operationId": "IdentityController_approve_74",
         "summary": "Identity approve",
         "responses": {
           "200": {
@@ -3132,7 +3204,7 @@
     },
     "/api/v1/identity/sessions/revoke": {
       "post": {
-        "operationId": "SessionRevocationController_revoke_73",
+        "operationId": "SessionRevocationController_revoke_75",
         "summary": "SessionRevocation revoke",
         "responses": {
           "200": {
@@ -3183,7 +3255,7 @@
     },
     "/api/v1/mobile-money/providers": {
       "get": {
-        "operationId": "ProviderController_status_74",
+        "operationId": "ProviderController_status_76",
         "summary": "Provider status",
         "responses": {
           "200": {
@@ -3208,7 +3280,7 @@
     },
     "/api/v1/mobile-money/intents": {
       "get": {
-        "operationId": "ProviderController_intents_75",
+        "operationId": "ProviderController_intents_77",
         "summary": "Provider intents",
         "responses": {
           "200": {
@@ -3231,7 +3303,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "ProviderController_prepare_76",
+        "operationId": "ProviderController_prepare_78",
         "summary": "Provider prepare",
         "responses": {
           "200": {
@@ -3282,7 +3354,7 @@
     },
     "/api/v1/mobile-money/intents/{id}/reconcile": {
       "post": {
-        "operationId": "ProviderController_query_77",
+        "operationId": "ProviderController_query_79",
         "summary": "Provider query",
         "responses": {
           "200": {
@@ -3325,7 +3397,7 @@
     },
     "/api/v1/warehouses": {
       "get": {
-        "operationId": "InventoryController_warehouses_78",
+        "operationId": "InventoryController_warehouses_80",
         "summary": "Inventory warehouses",
         "responses": {
           "200": {
@@ -3350,7 +3422,7 @@
     },
     "/api/v1/inventory/low-stock/summary": {
       "get": {
-        "operationId": "InventoryController_lowStockSummary_79",
+        "operationId": "InventoryController_lowStockSummary_81",
         "summary": "Inventory lowStockSummary",
         "responses": {
           "200": {
@@ -3372,7 +3444,7 @@
     },
     "/api/v1/inventory/balances": {
       "get": {
-        "operationId": "InventoryController_balances_80",
+        "operationId": "InventoryController_balances_82",
         "summary": "Inventory balances",
         "responses": {
           "200": {
@@ -3407,7 +3479,7 @@
     },
     "/api/v1/inventory/transfers": {
       "get": {
-        "operationId": "InventoryController_transfers_81",
+        "operationId": "InventoryController_transfers_83",
         "summary": "Inventory transfers",
         "responses": {
           "200": {
@@ -3430,7 +3502,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "InventoryController_draft_83",
+        "operationId": "InventoryController_draft_85",
         "summary": "Inventory draft",
         "responses": {
           "200": {
@@ -3482,7 +3554,7 @@
     },
     "/api/v1/inventory/transfers/{id}": {
       "get": {
-        "operationId": "InventoryController_transfer_82",
+        "operationId": "InventoryController_transfer_84",
         "summary": "Inventory transfer",
         "responses": {
           "200": {
@@ -3514,7 +3586,7 @@
     },
     "/api/v1/inventory/transfers/{id}/approve": {
       "post": {
-        "operationId": "InventoryController_approve_84",
+        "operationId": "InventoryController_approve_86",
         "summary": "Inventory approve",
         "responses": {
           "200": {
@@ -3575,7 +3647,7 @@
     },
     "/api/v1/inventory/transfers/{id}/dispatch": {
       "post": {
-        "operationId": "InventoryController_dispatch_85",
+        "operationId": "InventoryController_dispatch_87",
         "summary": "Inventory dispatch",
         "responses": {
           "200": {
@@ -3636,7 +3708,7 @@
     },
     "/api/v1/inventory/transfers/{id}/receive": {
       "post": {
-        "operationId": "InventoryController_receive_86",
+        "operationId": "InventoryController_receive_88",
         "summary": "Inventory receive",
         "responses": {
           "200": {
@@ -3697,7 +3769,7 @@
     },
     "/api/v1/inventory/custody": {
       "get": {
-        "operationId": "InventoryCustodyController_positions_87",
+        "operationId": "InventoryCustodyController_positions_89",
         "summary": "InventoryCustody positions",
         "responses": {
           "200": {
@@ -3722,7 +3794,7 @@
     },
     "/api/v1/inventory/custody/{id}/collections": {
       "get": {
-        "operationId": "InventoryCustodyController_collections_88",
+        "operationId": "InventoryCustodyController_collections_90",
         "summary": "InventoryCustody collections",
         "responses": {
           "200": {
@@ -3757,7 +3829,7 @@
     },
     "/api/v1/inventory/custody/{id}/collect": {
       "post": {
-        "operationId": "InventoryCustodyController_collect_89",
+        "operationId": "InventoryCustodyController_collect_91",
         "summary": "InventoryCustody collect",
         "responses": {
           "200": {
@@ -3818,7 +3890,7 @@
     },
     "/api/v1/inventory/recognition-policies": {
       "get": {
-        "operationId": "InventoryCustodyController_policies_90",
+        "operationId": "InventoryCustodyController_policies_92",
         "summary": "InventoryCustody policies",
         "responses": {
           "200": {
@@ -3841,7 +3913,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "InventoryCustodyController_request_91",
+        "operationId": "InventoryCustodyController_request_93",
         "summary": "InventoryCustody request",
         "responses": {
           "200": {
@@ -3893,7 +3965,7 @@
     },
     "/api/v1/inventory/recognition-policies/{id}/approve": {
       "post": {
-        "operationId": "InventoryCustodyController_approve_92",
+        "operationId": "InventoryCustodyController_approve_94",
         "summary": "InventoryCustody approve",
         "responses": {
           "200": {
@@ -3954,7 +4026,7 @@
     },
     "/api/v1/inventory/jobs": {
       "get": {
-        "operationId": "InventoryJobsController_list_93",
+        "operationId": "InventoryJobsController_list_95",
         "summary": "InventoryJobs list",
         "responses": {
           "200": {
@@ -3988,7 +4060,7 @@
     },
     "/api/v1/inventory/jobs/{id}": {
       "get": {
-        "operationId": "InventoryJobsController_get_94",
+        "operationId": "InventoryJobsController_get_96",
         "summary": "InventoryJobs get",
         "responses": {
           "200": {
@@ -4020,7 +4092,7 @@
     },
     "/api/v1/inventory/jobs/counts": {
       "post": {
-        "operationId": "InventoryJobsController_start_95",
+        "operationId": "InventoryJobsController_start_97",
         "summary": "InventoryJobs start",
         "responses": {
           "200": {
@@ -4072,7 +4144,7 @@
     },
     "/api/v1/inventory/jobs/transforms/{kind}": {
       "post": {
-        "operationId": "InventoryJobsController_draft_96",
+        "operationId": "InventoryJobsController_draft_98",
         "summary": "InventoryJobs draft",
         "responses": {
           "200": {
@@ -4132,7 +4204,7 @@
     },
     "/api/v1/inventory/jobs/{id}/capture": {
       "post": {
-        "operationId": "InventoryJobsController_capture_97",
+        "operationId": "InventoryJobsController_capture_99",
         "summary": "InventoryJobs capture",
         "responses": {
           "200": {
@@ -4193,7 +4265,7 @@
     },
     "/api/v1/inventory/jobs/{id}/approve": {
       "post": {
-        "operationId": "InventoryJobsController_approve_98",
+        "operationId": "InventoryJobsController_approve_100",
         "summary": "InventoryJobs approve",
         "responses": {
           "200": {
@@ -4254,7 +4326,7 @@
     },
     "/api/v1/inventory/jobs/{id}/post": {
       "post": {
-        "operationId": "InventoryJobsController_post_99",
+        "operationId": "InventoryJobsController_post_101",
         "summary": "InventoryJobs post",
         "responses": {
           "200": {
@@ -4315,7 +4387,7 @@
     },
     "/api/v1/inventory/lots": {
       "get": {
-        "operationId": "InventoryQualityController_lots_100",
+        "operationId": "InventoryQualityController_lots_102",
         "summary": "InventoryQuality lots",
         "responses": {
           "200": {
@@ -4338,7 +4410,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "InventoryQualityController_registerLot_103",
+        "operationId": "InventoryQualityController_registerLot_105",
         "summary": "InventoryQuality registerLot",
         "responses": {
           "200": {
@@ -4390,7 +4462,7 @@
     },
     "/api/v1/inventory/recalls": {
       "get": {
-        "operationId": "InventoryQualityController_recalls_101",
+        "operationId": "InventoryQualityController_recalls_103",
         "summary": "InventoryQuality recalls",
         "responses": {
           "200": {
@@ -4413,7 +4485,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "InventoryQualityController_draftRecall_104",
+        "operationId": "InventoryQualityController_draftRecall_106",
         "summary": "InventoryQuality draftRecall",
         "responses": {
           "200": {
@@ -4465,7 +4537,7 @@
     },
     "/api/v1/inventory/reservations": {
       "get": {
-        "operationId": "InventoryQualityController_reservations_102",
+        "operationId": "InventoryQualityController_reservations_104",
         "summary": "InventoryQuality reservations",
         "responses": {
           "200": {
@@ -4488,7 +4560,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "InventoryQualityController_reserve_105",
+        "operationId": "InventoryQualityController_reserve_107",
         "summary": "InventoryQuality reserve",
         "responses": {
           "200": {
@@ -4540,7 +4612,7 @@
     },
     "/api/v1/inventory/recalls/{id}/approve": {
       "post": {
-        "operationId": "InventoryQualityController_approve_106",
+        "operationId": "InventoryQualityController_approve_108",
         "summary": "InventoryQuality approve",
         "responses": {
           "200": {
@@ -4601,7 +4673,7 @@
     },
     "/api/v1/inventory/recalls/{id}/block": {
       "post": {
-        "operationId": "InventoryQualityController_block_107",
+        "operationId": "InventoryQualityController_block_109",
         "summary": "InventoryQuality block",
         "responses": {
           "200": {
@@ -4662,7 +4734,7 @@
     },
     "/api/v1/inventory/recalls/{id}/recover": {
       "post": {
-        "operationId": "InventoryQualityController_recover_108",
+        "operationId": "InventoryQualityController_recover_110",
         "summary": "InventoryQuality recover",
         "responses": {
           "200": {
@@ -4723,7 +4795,7 @@
     },
     "/api/v1/inventory/recalls/{id}/dispose": {
       "post": {
-        "operationId": "InventoryQualityController_dispose_109",
+        "operationId": "InventoryQualityController_dispose_111",
         "summary": "InventoryQuality dispose",
         "responses": {
           "200": {
@@ -4784,7 +4856,7 @@
     },
     "/api/v1/inventory/reservations/{id}/release": {
       "post": {
-        "operationId": "InventoryQualityController_release_110",
+        "operationId": "InventoryQualityController_release_112",
         "summary": "InventoryQuality release",
         "responses": {
           "200": {
@@ -4845,7 +4917,7 @@
     },
     "/api/v1/operations/exports": {
       "get": {
-        "operationId": "ExportController_list_111",
+        "operationId": "ExportController_list_113",
         "summary": "Export list",
         "responses": {
           "200": {
@@ -4867,7 +4939,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "ExportController_request_113",
+        "operationId": "ExportController_request_115",
         "summary": "Export request",
         "responses": {
           "200": {
@@ -4917,7 +4989,7 @@
     },
     "/api/v1/operations/exports/{id}": {
       "get": {
-        "operationId": "ExportController_get_112",
+        "operationId": "ExportController_get_114",
         "summary": "Export get",
         "responses": {
           "200": {
@@ -4948,7 +5020,7 @@
     },
     "/api/v1/operations/exports/{id}/run": {
       "post": {
-        "operationId": "ExportController_run_114",
+        "operationId": "ExportController_run_116",
         "summary": "Export run",
         "responses": {
           "200": {
@@ -5007,7 +5079,7 @@
     },
     "/api/v1/operations/exports/{id}/cancel": {
       "post": {
-        "operationId": "ExportController_cancel_115",
+        "operationId": "ExportController_cancel_117",
         "summary": "Export cancel",
         "responses": {
           "200": {
@@ -5066,7 +5138,7 @@
     },
     "/api/v1/operations/exports/{id}/content": {
       "get": {
-        "operationId": "ExportController_download_116",
+        "operationId": "ExportController_download_118",
         "summary": "Export download",
         "responses": {
           "200": {
@@ -5097,7 +5169,7 @@
     },
     "/api/v1/operations/retention/exports/{id}": {
       "get": {
-        "operationId": "ExportRetentionController_get_117",
+        "operationId": "ExportRetentionController_get_119",
         "summary": "ExportRetention get",
         "responses": {
           "200": {
@@ -5128,7 +5200,7 @@
     },
     "/api/v1/operations/retention/exports": {
       "post": {
-        "operationId": "ExportRetentionController_request_118",
+        "operationId": "ExportRetentionController_request_120",
         "summary": "ExportRetention request",
         "responses": {
           "200": {
@@ -5178,7 +5250,7 @@
     },
     "/api/v1/operations/retention/exports/{id}/approve": {
       "post": {
-        "operationId": "ExportRetentionController_approve_119",
+        "operationId": "ExportRetentionController_approve_121",
         "summary": "ExportRetention approve",
         "responses": {
           "200": {
@@ -5237,7 +5309,7 @@
     },
     "/api/v1/operations/retention/exports/{id}/execute": {
       "post": {
-        "operationId": "ExportRetentionController_execute_120",
+        "operationId": "ExportRetentionController_execute_122",
         "summary": "ExportRetention execute",
         "responses": {
           "200": {
@@ -5296,7 +5368,7 @@
     },
     "/api/v1/operations/recovery/plans": {
       "get": {
-        "operationId": "RecoveryController_list_121",
+        "operationId": "RecoveryController_list_123",
         "summary": "Recovery list",
         "responses": {
           "200": {
@@ -5339,7 +5411,7 @@
         ]
       },
       "post": {
-        "operationId": "RecoveryController_request_123",
+        "operationId": "RecoveryController_request_125",
         "summary": "Recovery request",
         "responses": {
           "200": {
@@ -5389,7 +5461,7 @@
     },
     "/api/v1/operations/recovery/plans/{id}": {
       "get": {
-        "operationId": "RecoveryController_get_122",
+        "operationId": "RecoveryController_get_124",
         "summary": "Recovery get",
         "responses": {
           "200": {
@@ -5420,7 +5492,7 @@
     },
     "/api/v1/operations/recovery/plans/{id}/approve-scope": {
       "post": {
-        "operationId": "RecoveryController_approveScope_124",
+        "operationId": "RecoveryController_approveScope_126",
         "summary": "Recovery approveScope",
         "responses": {
           "200": {
@@ -5479,7 +5551,7 @@
     },
     "/api/v1/operations/recovery/retained-receipts": {
       "get": {
-        "operationId": "RecoveryController_receipts_125",
+        "operationId": "RecoveryController_receipts_127",
         "summary": "Recovery receipts",
         "responses": {
           "200": {
@@ -5529,7 +5601,7 @@
     },
     "/api/v1/operations/recovery/plans/{id}/candidate-batches": {
       "post": {
-        "operationId": "RecoveryController_batch_126",
+        "operationId": "RecoveryController_batch_128",
         "summary": "Recovery batch",
         "responses": {
           "200": {
@@ -5588,7 +5660,7 @@
     },
     "/api/v1/operations/recovery/plans/{id}/compare": {
       "post": {
-        "operationId": "RecoveryController_compare_127",
+        "operationId": "RecoveryController_compare_129",
         "summary": "Recovery compare",
         "responses": {
           "200": {
@@ -5647,7 +5719,7 @@
     },
     "/api/v1/operations/recovery/plans/{id}/differences": {
       "get": {
-        "operationId": "RecoveryController_differences_128",
+        "operationId": "RecoveryController_differences_130",
         "summary": "Recovery differences",
         "responses": {
           "200": {
@@ -5700,7 +5772,7 @@
     },
     "/api/v1/operations/recovery/plans/{id}/approve-receipt-review": {
       "post": {
-        "operationId": "RecoveryController_approve_129",
+        "operationId": "RecoveryController_approve_131",
         "summary": "Recovery approve",
         "responses": {
           "200": {
@@ -5759,7 +5831,7 @@
     },
     "/api/v1/operations/recovery/plans/{id}/cancel": {
       "post": {
-        "operationId": "RecoveryController_cancel_130",
+        "operationId": "RecoveryController_cancel_132",
         "summary": "Recovery cancel",
         "responses": {
           "200": {
@@ -5818,7 +5890,7 @@
     },
     "/api/v1/purchases": {
       "get": {
-        "operationId": "PurchasingController_list_131",
+        "operationId": "PurchasingController_list_133",
         "summary": "Purchasing list",
         "responses": {
           "200": {
@@ -5841,7 +5913,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "PurchasingController_draft_133",
+        "operationId": "PurchasingController_draft_135",
         "summary": "Purchasing draft",
         "responses": {
           "200": {
@@ -5892,7 +5964,7 @@
     },
     "/api/v1/purchases/{id}": {
       "get": {
-        "operationId": "PurchasingController_get_132",
+        "operationId": "PurchasingController_get_134",
         "summary": "Purchasing get",
         "responses": {
           "200": {
@@ -5924,7 +5996,7 @@
     },
     "/api/v1/purchases/{id}/submit": {
       "post": {
-        "operationId": "PurchasingController_submit_134",
+        "operationId": "PurchasingController_submit_136",
         "summary": "Purchasing submit",
         "responses": {
           "200": {
@@ -5984,7 +6056,7 @@
     },
     "/api/v1/purchases/{id}/approve": {
       "post": {
-        "operationId": "PurchasingController_approve_135",
+        "operationId": "PurchasingController_approve_137",
         "summary": "Purchasing approve",
         "responses": {
           "200": {
@@ -6044,7 +6116,7 @@
     },
     "/api/v1/purchases/{id}/receipts": {
       "post": {
-        "operationId": "PurchasingController_receive_136",
+        "operationId": "PurchasingController_receive_138",
         "summary": "Purchasing receive",
         "responses": {
           "200": {
@@ -6102,7 +6174,7 @@
         ]
       },
       "get": {
-        "operationId": "PurchasingController_receipts_137",
+        "operationId": "PurchasingController_receipts_139",
         "summary": "Purchasing receipts",
         "responses": {
           "200": {
@@ -6137,7 +6209,7 @@
     },
     "/api/v1/purchases/receipts/{id}/invoice": {
       "post": {
-        "operationId": "PurchasingController_invoice_138",
+        "operationId": "PurchasingController_invoice_140",
         "summary": "Purchasing invoice",
         "responses": {
           "200": {
@@ -6197,7 +6269,7 @@
     },
     "/api/v1/purchases/invoices": {
       "get": {
-        "operationId": "PurchasingController_invoices_139",
+        "operationId": "PurchasingController_invoices_141",
         "summary": "Purchasing invoices",
         "responses": {
           "200": {
@@ -6222,7 +6294,7 @@
     },
     "/api/v1/purchases/receipts/{id}/returns": {
       "post": {
-        "operationId": "PurchasingController_returnToSupplier_140",
+        "operationId": "PurchasingController_returnToSupplier_142",
         "summary": "Purchasing returnToSupplier",
         "responses": {
           "200": {
@@ -6280,7 +6352,7 @@
         ]
       },
       "get": {
-        "operationId": "PurchasingController_supplierReturns_141",
+        "operationId": "PurchasingController_supplierReturns_143",
         "summary": "Purchasing supplierReturns",
         "responses": {
           "200": {
@@ -6315,7 +6387,7 @@
     },
     "/api/v1/quotations": {
       "get": {
-        "operationId": "QuotationController_list_142",
+        "operationId": "QuotationController_list_144",
         "summary": "Quotation list",
         "responses": {
           "200": {
@@ -6338,7 +6410,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "QuotationController_draft_144",
+        "operationId": "QuotationController_draft_146",
         "summary": "Quotation draft",
         "responses": {
           "200": {
@@ -6390,7 +6462,7 @@
     },
     "/api/v1/quotations/{id}": {
       "get": {
-        "operationId": "QuotationController_get_143",
+        "operationId": "QuotationController_get_145",
         "summary": "Quotation get",
         "responses": {
           "200": {
@@ -6422,7 +6494,7 @@
     },
     "/api/v1/quotations/{id}/issue": {
       "post": {
-        "operationId": "QuotationController_issue_145",
+        "operationId": "QuotationController_issue_147",
         "summary": "Quotation issue",
         "responses": {
           "200": {
@@ -6483,7 +6555,7 @@
     },
     "/api/v1/quotations/{id}/convert": {
       "post": {
-        "operationId": "QuotationController_convert_146",
+        "operationId": "QuotationController_convert_148",
         "summary": "Quotation convert",
         "responses": {
           "200": {
@@ -6544,7 +6616,7 @@
     },
     "/api/v1/quotations/{id}/decisions": {
       "get": {
-        "operationId": "QuotationController_decisions_147",
+        "operationId": "QuotationController_decisions_149",
         "summary": "Quotation decisions",
         "responses": {
           "200": {
@@ -6579,7 +6651,7 @@
     },
     "/api/v1/quotations/{id}/accept": {
       "post": {
-        "operationId": "QuotationController_accept_148",
+        "operationId": "QuotationController_accept_150",
         "summary": "Quotation accept",
         "responses": {
           "200": {
@@ -6640,7 +6712,7 @@
     },
     "/api/v1/quotations/{id}/reject": {
       "post": {
-        "operationId": "QuotationController_reject_149",
+        "operationId": "QuotationController_reject_151",
         "summary": "Quotation reject",
         "responses": {
           "200": {
@@ -6701,7 +6773,7 @@
     },
     "/api/v1/reports/catalog": {
       "get": {
-        "operationId": "ReportingController_catalog_150",
+        "operationId": "ReportingController_catalog_152",
         "summary": "Reporting catalog",
         "responses": {
           "200": {
@@ -6727,7 +6799,7 @@
     },
     "/api/v1/reports/{code}": {
       "get": {
-        "operationId": "ReportingController_run_151",
+        "operationId": "ReportingController_run_153",
         "summary": "Reporting run",
         "responses": {
           "200": {
@@ -6823,7 +6895,7 @@
     },
     "/api/v1/reports/{code}/export": {
       "get": {
-        "operationId": "ReportingController_export_152",
+        "operationId": "ReportingController_export_154",
         "summary": "Reporting export",
         "responses": {
           "200": {
@@ -6930,7 +7002,7 @@
     },
     "/api/v1/returns": {
       "get": {
-        "operationId": "ReturnController_list_153",
+        "operationId": "ReturnController_list_155",
         "summary": "Return list",
         "responses": {
           "200": {
@@ -6953,7 +7025,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "ReturnController_draft_155",
+        "operationId": "ReturnController_draft_157",
         "summary": "Return draft",
         "responses": {
           "200": {
@@ -7005,7 +7077,7 @@
     },
     "/api/v1/returns/{id}": {
       "get": {
-        "operationId": "ReturnController_get_154",
+        "operationId": "ReturnController_get_156",
         "summary": "Return get",
         "responses": {
           "200": {
@@ -7037,7 +7109,7 @@
     },
     "/api/v1/returns/{id}/approve": {
       "post": {
-        "operationId": "ReturnController_approve_156",
+        "operationId": "ReturnController_approve_158",
         "summary": "Return approve",
         "responses": {
           "200": {
@@ -7098,7 +7170,7 @@
     },
     "/api/v1/returns/{id}/post": {
       "post": {
-        "operationId": "ReturnController_post_157",
+        "operationId": "ReturnController_post_159",
         "summary": "Return post",
         "responses": {
           "200": {
@@ -7159,7 +7231,7 @@
     },
     "/api/v1/fulfillments": {
       "get": {
-        "operationId": "FulfillmentController_list_158",
+        "operationId": "FulfillmentController_list_160",
         "summary": "Fulfillment list",
         "responses": {
           "200": {
@@ -7182,7 +7254,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "FulfillmentController_draft_163",
+        "operationId": "FulfillmentController_draft_165",
         "summary": "Fulfillment draft",
         "responses": {
           "200": {
@@ -7234,7 +7306,7 @@
     },
     "/api/v1/fulfillments/page": {
       "get": {
-        "operationId": "FulfillmentController_page_159",
+        "operationId": "FulfillmentController_page_161",
         "summary": "Fulfillment page",
         "responses": {
           "200": {
@@ -7292,7 +7364,7 @@
     },
     "/api/v1/fulfillments/preparation-summary": {
       "get": {
-        "operationId": "FulfillmentController_preparationSummary_160",
+        "operationId": "FulfillmentController_preparationSummary_162",
         "summary": "Fulfillment preparationSummary",
         "responses": {
           "200": {
@@ -7314,7 +7386,7 @@
     },
     "/api/v1/fulfillments/{id}/picklist": {
       "get": {
-        "operationId": "FulfillmentController_pickList_161",
+        "operationId": "FulfillmentController_pickList_163",
         "summary": "Fulfillment pickList",
         "responses": {
           "200": {
@@ -7346,7 +7418,7 @@
     },
     "/api/v1/fulfillments/{id}": {
       "get": {
-        "operationId": "FulfillmentController_get_162",
+        "operationId": "FulfillmentController_get_164",
         "summary": "Fulfillment get",
         "responses": {
           "200": {
@@ -7378,7 +7450,7 @@
     },
     "/api/v1/fulfillments/{id}/dispatches": {
       "get": {
-        "operationId": "FulfillmentController_dispatchHistory_164",
+        "operationId": "FulfillmentController_dispatchHistory_166",
         "summary": "Fulfillment dispatchHistory",
         "responses": {
           "200": {
@@ -7413,7 +7485,7 @@
     },
     "/api/v1/fulfillments/{id}/dispatch-lines": {
       "post": {
-        "operationId": "FulfillmentController_dispatchLines_165",
+        "operationId": "FulfillmentController_dispatchLines_167",
         "summary": "Fulfillment dispatchLines",
         "responses": {
           "200": {
@@ -7474,7 +7546,7 @@
     },
     "/api/v1/fulfillments/{id}/dispatch": {
       "post": {
-        "operationId": "FulfillmentController_dispatch_166",
+        "operationId": "FulfillmentController_dispatch_168",
         "summary": "Fulfillment dispatch",
         "responses": {
           "200": {
@@ -7535,7 +7607,7 @@
     },
     "/api/v1/fulfillments/{id}/complete": {
       "post": {
-        "operationId": "FulfillmentController_complete_167",
+        "operationId": "FulfillmentController_complete_169",
         "summary": "Fulfillment complete",
         "responses": {
           "200": {
@@ -7596,7 +7668,7 @@
     },
     "/api/v1/sales": {
       "get": {
-        "operationId": "SalesController_list_168",
+        "operationId": "SalesController_list_170",
         "summary": "Sales list",
         "responses": {
           "200": {
@@ -7619,7 +7691,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "SalesController_draft_171",
+        "operationId": "SalesController_draft_173",
         "summary": "Sales draft",
         "responses": {
           "200": {
@@ -7670,7 +7742,7 @@
     },
     "/api/v1/sales/summary": {
       "get": {
-        "operationId": "SalesController_summary_169",
+        "operationId": "SalesController_summary_171",
         "summary": "Sales summary",
         "responses": {
           "200": {
@@ -7711,7 +7783,7 @@
     },
     "/api/v1/sales/{id}": {
       "get": {
-        "operationId": "SalesController_get_170",
+        "operationId": "SalesController_get_172",
         "summary": "Sales get",
         "responses": {
           "200": {
@@ -7743,7 +7815,7 @@
     },
     "/api/v1/sales/{id}/post": {
       "post": {
-        "operationId": "SalesController_post_172",
+        "operationId": "SalesController_post_174",
         "summary": "Sales post",
         "responses": {
           "201": {
@@ -7803,7 +7875,7 @@
     },
     "/admin/billing/notifications": {
       "get": {
-        "operationId": "BillingNotificationController_list_173",
+        "operationId": "BillingNotificationController_list_175",
         "summary": "BillingNotification list",
         "responses": {
           "200": {
@@ -7838,7 +7910,7 @@
     },
     "/admin/billing/notifications/{id}/attempts": {
       "get": {
-        "operationId": "BillingNotificationController_attempts_174",
+        "operationId": "BillingNotificationController_attempts_176",
         "summary": "BillingNotification attempts",
         "responses": {
           "200": {
@@ -7874,7 +7946,7 @@
     },
     "/admin/billing/notifications/{id}/redrive": {
       "post": {
-        "operationId": "BillingNotificationController_redrive_175",
+        "operationId": "BillingNotificationController_redrive_177",
         "summary": "BillingNotification redrive",
         "responses": {
           "200": {
@@ -7935,7 +8007,7 @@
     },
     "/admin/billing/invoices": {
       "post": {
-        "operationId": "SubscriptionBillingController_issue_176",
+        "operationId": "SubscriptionBillingController_issue_178",
         "summary": "SubscriptionBilling issue",
         "responses": {
           "200": {
@@ -7985,7 +8057,7 @@
         "x-deployment": "platform-control isolated API; separate bearer issuer/audience"
       },
       "get": {
-        "operationId": "SubscriptionBillingController_platform_177",
+        "operationId": "SubscriptionBillingController_platform_179",
         "summary": "SubscriptionBilling platform",
         "responses": {
           "200": {
@@ -8021,7 +8093,7 @@
     },
     "/api/v1/billing/invoices": {
       "get": {
-        "operationId": "SubscriptionBillingController_merchant_178",
+        "operationId": "SubscriptionBillingController_merchant_180",
         "summary": "SubscriptionBilling merchant",
         "responses": {
           "200": {
@@ -8046,7 +8118,7 @@
     },
     "/admin/subscriptions/commercial-terms": {
       "post": {
-        "operationId": "SubscriptionCommercialTermsController_request_179",
+        "operationId": "SubscriptionCommercialTermsController_request_181",
         "summary": "SubscriptionCommercialTerms request",
         "responses": {
           "200": {
@@ -8098,7 +8170,7 @@
     },
     "/admin/subscriptions/commercial-terms/{id}/approve": {
       "post": {
-        "operationId": "SubscriptionCommercialTermsController_approve_180",
+        "operationId": "SubscriptionCommercialTermsController_approve_182",
         "summary": "SubscriptionCommercialTerms approve",
         "responses": {
           "200": {
@@ -8159,7 +8231,7 @@
     },
     "/admin/subscriptions/{tenantId}/commercial-terms": {
       "get": {
-        "operationId": "SubscriptionCommercialTermsController_list_181",
+        "operationId": "SubscriptionCommercialTermsController_list_183",
         "summary": "SubscriptionCommercialTerms list",
         "responses": {
           "200": {
@@ -8195,7 +8267,7 @@
     },
     "/admin/billing/invoices/page": {
       "get": {
-        "operationId": "SubscriptionExportController_platformPage_182",
+        "operationId": "SubscriptionExportController_platformPage_184",
         "summary": "SubscriptionExport platformPage",
         "responses": {
           "200": {
@@ -8246,7 +8318,7 @@
     },
     "/api/v1/billing/invoices/page": {
       "get": {
-        "operationId": "SubscriptionExportController_merchantPage_183",
+        "operationId": "SubscriptionExportController_merchantPage_185",
         "summary": "SubscriptionExport merchantPage",
         "responses": {
           "200": {
@@ -8287,7 +8359,7 @@
     },
     "/admin/billing/invoices/export.csv": {
       "get": {
-        "operationId": "SubscriptionExportController_platformExport_184",
+        "operationId": "SubscriptionExportController_platformExport_186",
         "summary": "SubscriptionExport platformExport",
         "responses": {
           "200": {
@@ -8338,7 +8410,7 @@
     },
     "/api/v1/billing/invoices/export.csv": {
       "get": {
-        "operationId": "SubscriptionExportController_merchantExport_185",
+        "operationId": "SubscriptionExportController_merchantExport_187",
         "summary": "SubscriptionExport merchantExport",
         "responses": {
           "200": {
@@ -8379,7 +8451,7 @@
     },
     "/admin/subscriptions/plans": {
       "get": {
-        "operationId": "SubscriptionLifecycleController_plans_186",
+        "operationId": "SubscriptionLifecycleController_plans_188",
         "summary": "SubscriptionLifecycle plans",
         "responses": {
           "200": {
@@ -8403,7 +8475,7 @@
         "x-deployment": "platform-control isolated API; separate bearer issuer/audience"
       },
       "post": {
-        "operationId": "SubscriptionLifecycleController_create_187",
+        "operationId": "SubscriptionLifecycleController_create_189",
         "summary": "SubscriptionLifecycle create",
         "responses": {
           "200": {
@@ -8455,7 +8527,7 @@
     },
     "/admin/subscriptions/{tenantId}": {
       "get": {
-        "operationId": "SubscriptionLifecycleController_get_188",
+        "operationId": "SubscriptionLifecycleController_get_190",
         "summary": "SubscriptionLifecycle get",
         "responses": {
           "200": {
@@ -8488,7 +8560,7 @@
     },
     "/admin/subscriptions/{tenantId}/expire": {
       "post": {
-        "operationId": "SubscriptionLifecycleController_expire_189",
+        "operationId": "SubscriptionLifecycleController_expire_191",
         "summary": "SubscriptionLifecycle expire",
         "responses": {
           "200": {
@@ -8549,7 +8621,7 @@
     },
     "/admin/subscriptions/{tenantId}/cancel": {
       "post": {
-        "operationId": "SubscriptionLifecycleController_cancel_190",
+        "operationId": "SubscriptionLifecycleController_cancel_192",
         "summary": "SubscriptionLifecycle cancel",
         "responses": {
           "200": {
@@ -8610,7 +8682,7 @@
     },
     "/admin/subscriptions/notices": {
       "post": {
-        "operationId": "SubscriptionLifecycleController_notice_191",
+        "operationId": "SubscriptionLifecycleController_notice_193",
         "summary": "SubscriptionLifecycle notice",
         "responses": {
           "200": {
@@ -8662,7 +8734,7 @@
     },
     "/admin/subscriptions/notices/{id}/approve": {
       "post": {
-        "operationId": "SubscriptionLifecycleController_approve_192",
+        "operationId": "SubscriptionLifecycleController_approve_194",
         "summary": "SubscriptionLifecycle approve",
         "responses": {
           "200": {
@@ -8723,7 +8795,7 @@
     },
     "/admin/subscriptions/{tenantId}/notices": {
       "get": {
-        "operationId": "SubscriptionLifecycleController_notices_193",
+        "operationId": "SubscriptionLifecycleController_notices_195",
         "summary": "SubscriptionLifecycle notices",
         "responses": {
           "200": {
@@ -8759,7 +8831,7 @@
     },
     "/admin/subscriptions/{tenantId}/payments": {
       "get": {
-        "operationId": "SubscriptionLifecycleController_payments_194",
+        "operationId": "SubscriptionLifecycleController_payments_196",
         "summary": "SubscriptionLifecycle payments",
         "responses": {
           "200": {
@@ -8795,7 +8867,7 @@
     },
     "/admin/subscriptions/payments": {
       "post": {
-        "operationId": "SubscriptionLifecycleController_payment_195",
+        "operationId": "SubscriptionLifecycleController_payment_197",
         "summary": "SubscriptionLifecycle payment",
         "responses": {
           "200": {
@@ -8847,7 +8919,7 @@
     },
     "/admin/subscriptions/payments/{id}/approve": {
       "post": {
-        "operationId": "SubscriptionLifecycleController_approvePayment_196",
+        "operationId": "SubscriptionLifecycleController_approvePayment_198",
         "summary": "SubscriptionLifecycle approvePayment",
         "responses": {
           "200": {
@@ -8908,7 +8980,7 @@
     },
     "/admin/subscriptions/payments/{id}/activate": {
       "post": {
-        "operationId": "SubscriptionLifecycleController_activate_197",
+        "operationId": "SubscriptionLifecycleController_activate_199",
         "summary": "SubscriptionLifecycle activate",
         "responses": {
           "200": {
@@ -8969,7 +9041,7 @@
     },
     "/admin/billing/invoices/{id}/print": {
       "get": {
-        "operationId": "SubscriptionPrintController_platformInvoice_198",
+        "operationId": "SubscriptionPrintController_platformInvoice_200",
         "summary": "SubscriptionPrint platformInvoice",
         "responses": {
           "200": {
@@ -9011,7 +9083,7 @@
     },
     "/api/v1/billing/invoices/{id}/print": {
       "get": {
-        "operationId": "SubscriptionPrintController_merchantInvoice_199",
+        "operationId": "SubscriptionPrintController_merchantInvoice_201",
         "summary": "SubscriptionPrint merchantInvoice",
         "responses": {
           "200": {
@@ -9052,7 +9124,7 @@
     },
     "/admin/subscriptions/payments/{id}/print": {
       "get": {
-        "operationId": "SubscriptionPrintController_platformReceipt_200",
+        "operationId": "SubscriptionPrintController_platformReceipt_202",
         "summary": "SubscriptionPrint platformReceipt",
         "responses": {
           "200": {
@@ -9094,7 +9166,7 @@
     },
     "/api/v1/billing/payments/{id}/print": {
       "get": {
-        "operationId": "SubscriptionPrintController_merchantReceipt_201",
+        "operationId": "SubscriptionPrintController_merchantReceipt_203",
         "summary": "SubscriptionPrint merchantReceipt",
         "responses": {
           "200": {
@@ -9135,7 +9207,7 @@
     },
     "/api/v1/billing/capacity": {
       "get": {
-        "operationId": "SubscriptionQuotaController_usage_202",
+        "operationId": "SubscriptionQuotaController_usage_204",
         "summary": "SubscriptionQuota usage",
         "responses": {
           "200": {
@@ -9160,7 +9232,7 @@
     },
     "/api/v1/billing/capacity/reservations": {
       "post": {
-        "operationId": "SubscriptionQuotaController_reserve_203",
+        "operationId": "SubscriptionQuotaController_reserve_205",
         "summary": "SubscriptionQuota reserve",
         "responses": {
           "200": {
@@ -9211,7 +9283,7 @@
     },
     "/api/v1/billing/capacity/reservations/{id}": {
       "get": {
-        "operationId": "SubscriptionQuotaController_get_204",
+        "operationId": "SubscriptionQuotaController_get_206",
         "summary": "SubscriptionQuota get",
         "responses": {
           "200": {
@@ -9243,7 +9315,7 @@
     },
     "/api/v1/billing/capacity/reservations/{id}/release": {
       "post": {
-        "operationId": "SubscriptionQuotaController_release_205",
+        "operationId": "SubscriptionQuotaController_release_207",
         "summary": "SubscriptionQuota release",
         "responses": {
           "200": {
@@ -9303,7 +9375,7 @@
     },
     "/api/v1/billing/capacity/reservations/{id}/committed": {
       "get": {
-        "operationId": "SubscriptionQuotaController_committed_206",
+        "operationId": "SubscriptionQuotaController_committed_208",
         "summary": "SubscriptionQuota committed",
         "responses": {
           "200": {
@@ -9335,7 +9407,7 @@
     },
     "/api/v1/suppliers": {
       "get": {
-        "operationId": "SupplierController_list_207",
+        "operationId": "SupplierController_list_209",
         "summary": "Supplier list",
         "responses": {
           "200": {
@@ -9358,7 +9430,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "SupplierController_create_209",
+        "operationId": "SupplierController_create_211",
         "summary": "Supplier create",
         "responses": {
           "200": {
@@ -9409,7 +9481,7 @@
     },
     "/api/v1/suppliers/{id}": {
       "get": {
-        "operationId": "SupplierController_get_208",
+        "operationId": "SupplierController_get_210",
         "summary": "Supplier get",
         "responses": {
           "200": {
@@ -9439,7 +9511,7 @@
         ]
       },
       "put": {
-        "operationId": "SupplierController_update_212",
+        "operationId": "SupplierController_update_214",
         "summary": "Supplier update",
         "responses": {
           "200": {
@@ -9499,7 +9571,7 @@
     },
     "/api/v1/suppliers/page": {
       "get": {
-        "operationId": "SupplierController_page_210",
+        "operationId": "SupplierController_page_212",
         "summary": "Supplier page",
         "responses": {
           "200": {
@@ -9550,7 +9622,7 @@
     },
     "/api/v1/suppliers/directory": {
       "post": {
-        "operationId": "SupplierController_createDirectory_211",
+        "operationId": "SupplierController_createDirectory_213",
         "summary": "Supplier createDirectory",
         "responses": {
           "200": {
@@ -9601,7 +9673,7 @@
     },
     "/api/v1/sync/devices": {
       "get": {
-        "operationId": "SyncController_devices_213",
+        "operationId": "SyncController_devices_215",
         "summary": "Sync devices",
         "responses": {
           "200": {
@@ -9626,7 +9698,7 @@
     },
     "/api/v1/sync/devices/challenges": {
       "post": {
-        "operationId": "SyncController_challenge_214",
+        "operationId": "SyncController_challenge_216",
         "summary": "Sync challenge",
         "responses": {
           "200": {
@@ -9678,7 +9750,7 @@
     },
     "/api/v1/sync/devices/{id}/prove": {
       "post": {
-        "operationId": "SyncController_prove_215",
+        "operationId": "SyncController_prove_217",
         "summary": "Sync prove",
         "responses": {
           "200": {
@@ -9739,7 +9811,7 @@
     },
     "/api/v1/sync/devices/{id}/approve": {
       "post": {
-        "operationId": "SyncController_approve_216",
+        "operationId": "SyncController_approve_218",
         "summary": "Sync approve",
         "responses": {
           "200": {
@@ -9800,7 +9872,7 @@
     },
     "/api/v1/sync/recovery-submissions": {
       "post": {
-        "operationId": "SyncController_recover_217",
+        "operationId": "SyncController_recover_219",
         "summary": "Sync recover",
         "responses": {
           "200": {
@@ -9850,7 +9922,7 @@
         ]
       },
       "get": {
-        "operationId": "SyncController_recovery_218",
+        "operationId": "SyncController_recovery_220",
         "summary": "Sync recovery",
         "responses": {
           "200": {
@@ -9875,7 +9947,7 @@
     },
     "/api/v1/sync/operations/{id}": {
       "get": {
-        "operationId": "SyncController_status_219",
+        "operationId": "SyncController_status_221",
         "summary": "Sync status",
         "responses": {
           "200": {
@@ -9906,7 +9978,7 @@
     },
     "/api/v1/bank-evidence": {
       "get": {
-        "operationId": "BankController_list_220",
+        "operationId": "BankController_list_222",
         "summary": "Bank list",
         "responses": {
           "200": {
@@ -9929,7 +10001,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "BankController_request_221",
+        "operationId": "BankController_request_223",
         "summary": "Bank request",
         "responses": {
           "200": {
@@ -9980,7 +10052,7 @@
     },
     "/api/v1/bank-evidence/{id}/approve": {
       "post": {
-        "operationId": "BankController_approve_222",
+        "operationId": "BankController_approve_224",
         "summary": "Bank approve",
         "responses": {
           "200": {
@@ -10040,7 +10112,7 @@
     },
     "/api/v1/bank-matches": {
       "get": {
-        "operationId": "BankController_matches_223",
+        "operationId": "BankController_matches_225",
         "summary": "Bank matches",
         "responses": {
           "200": {
@@ -10063,7 +10135,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "BankController_match_224",
+        "operationId": "BankController_match_226",
         "summary": "Bank match",
         "responses": {
           "200": {
@@ -10114,7 +10186,7 @@
     },
     "/api/v1/bank-evidence/{id}": {
       "get": {
-        "operationId": "BankController_get_225",
+        "operationId": "BankController_get_227",
         "summary": "Bank get",
         "responses": {
           "200": {
@@ -10146,7 +10218,7 @@
     },
     "/api/v1/settlements": {
       "get": {
-        "operationId": "SettlementController_list_226",
+        "operationId": "SettlementController_list_228",
         "summary": "Settlement list",
         "responses": {
           "200": {
@@ -10171,7 +10243,7 @@
     },
     "/api/v1/payables": {
       "get": {
-        "operationId": "SettlementController_balances_227",
+        "operationId": "SettlementController_balances_229",
         "summary": "Settlement balances",
         "responses": {
           "200": {
@@ -10196,7 +10268,7 @@
     },
     "/api/v1/supplier-advances": {
       "get": {
-        "operationId": "SettlementController_advances_228",
+        "operationId": "SettlementController_advances_230",
         "summary": "Settlement advances",
         "responses": {
           "200": {
@@ -10219,7 +10291,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "SettlementController_advance_230",
+        "operationId": "SettlementController_advance_232",
         "summary": "Settlement advance",
         "responses": {
           "200": {
@@ -10270,7 +10342,7 @@
     },
     "/api/v1/settlements/supplier-payment": {
       "post": {
-        "operationId": "SettlementController_supplierPayment_229",
+        "operationId": "SettlementController_supplierPayment_231",
         "summary": "Settlement supplierPayment",
         "responses": {
           "200": {
@@ -10321,7 +10393,7 @@
     },
     "/api/v1/supplier-advances/allocate": {
       "post": {
-        "operationId": "SettlementController_allocate_231",
+        "operationId": "SettlementController_allocate_233",
         "summary": "Settlement allocate",
         "responses": {
           "200": {
@@ -10372,7 +10444,7 @@
     },
     "/api/v1/settlements/bank-receipt": {
       "post": {
-        "operationId": "SettlementController_receipt_232",
+        "operationId": "SettlementController_receipt_234",
         "summary": "Settlement receipt",
         "responses": {
           "200": {
@@ -10423,7 +10495,7 @@
     },
     "/api/v1/settlements/bank-deposit": {
       "post": {
-        "operationId": "SettlementController_deposit_233",
+        "operationId": "SettlementController_deposit_235",
         "summary": "Settlement deposit",
         "responses": {
           "200": {
@@ -10474,7 +10546,7 @@
     },
     "/api/v1/settlements/{id}": {
       "get": {
-        "operationId": "SettlementController_get_234",
+        "operationId": "SettlementController_get_236",
         "summary": "Settlement get",
         "responses": {
           "200": {
@@ -10506,7 +10578,7 @@
     },
     "/api/v1/tenders/collections/summary": {
       "get": {
-        "operationId": "TenderController_collectionSummary_235",
+        "operationId": "TenderController_collectionSummary_237",
         "summary": "Tender collectionSummary",
         "responses": {
           "200": {
@@ -10528,7 +10600,7 @@
     },
     "/api/v1/cash-sessions": {
       "get": {
-        "operationId": "TenderController_sessions_236",
+        "operationId": "TenderController_sessions_238",
         "summary": "Tender sessions",
         "responses": {
           "200": {
@@ -10553,7 +10625,7 @@
     },
     "/api/v1/cash-sessions/open": {
       "post": {
-        "operationId": "TenderController_open_237",
+        "operationId": "TenderController_open_239",
         "summary": "Tender open",
         "responses": {
           "200": {
@@ -10604,7 +10676,7 @@
     },
     "/api/v1/cash-sessions/{id}/close": {
       "post": {
-        "operationId": "TenderController_close_238",
+        "operationId": "TenderController_close_240",
         "summary": "Tender close",
         "responses": {
           "200": {
@@ -10664,7 +10736,7 @@
     },
     "/api/v1/tenders": {
       "get": {
-        "operationId": "TenderController_facts_239",
+        "operationId": "TenderController_facts_241",
         "summary": "Tender facts",
         "responses": {
           "200": {
@@ -10689,7 +10761,7 @@
     },
     "/api/v1/deposits": {
       "get": {
-        "operationId": "TenderController_deposits_240",
+        "operationId": "TenderController_deposits_242",
         "summary": "Tender deposits",
         "responses": {
           "200": {
@@ -10712,7 +10784,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "TenderController_deposit_242",
+        "operationId": "TenderController_deposit_244",
         "summary": "Tender deposit",
         "responses": {
           "200": {
@@ -10763,7 +10835,7 @@
     },
     "/api/v1/tenders/receipts": {
       "post": {
-        "operationId": "TenderController_receipt_241",
+        "operationId": "TenderController_receipt_243",
         "summary": "Tender receipt",
         "responses": {
           "200": {
@@ -10814,7 +10886,7 @@
     },
     "/api/v1/deposits/{id}/allocate": {
       "post": {
-        "operationId": "TenderController_allocate_243",
+        "operationId": "TenderController_allocate_245",
         "summary": "Tender allocate",
         "responses": {
           "200": {
@@ -10874,7 +10946,7 @@
     },
     "/api/v1/deposits/{id}/refund": {
       "post": {
-        "operationId": "TenderController_refund_244",
+        "operationId": "TenderController_refund_246",
         "summary": "Tender refund",
         "responses": {
           "200": {
@@ -10934,7 +11006,7 @@
     },
     "/api/v1/workforce/employees": {
       "get": {
-        "operationId": "WorkforceController_employees_245",
+        "operationId": "WorkforceController_employees_247",
         "summary": "Workforce employees",
         "responses": {
           "200": {
@@ -10977,7 +11049,7 @@
         ]
       },
       "post": {
-        "operationId": "WorkforceController_create_247",
+        "operationId": "WorkforceController_create_249",
         "summary": "Workforce create",
         "responses": {
           "200": {
@@ -11027,7 +11099,7 @@
     },
     "/api/v1/workforce/employees/{id}": {
       "get": {
-        "operationId": "WorkforceController_employee_246",
+        "operationId": "WorkforceController_employee_248",
         "summary": "Workforce employee",
         "responses": {
           "200": {
@@ -11056,7 +11128,7 @@
         ]
       },
       "put": {
-        "operationId": "WorkforceController_update_248",
+        "operationId": "WorkforceController_update_250",
         "summary": "Workforce update",
         "responses": {
           "200": {
@@ -11115,7 +11187,7 @@
     },
     "/api/v1/workforce/attendance": {
       "post": {
-        "operationId": "WorkforceController_record_249",
+        "operationId": "WorkforceController_record_251",
         "summary": "Workforce record",
         "responses": {
           "200": {
@@ -11165,7 +11237,7 @@
     },
     "/api/v1/workforce/employees/{id}/attendance": {
       "get": {
-        "operationId": "WorkforceController_attendance_250",
+        "operationId": "WorkforceController_attendance_252",
         "summary": "Workforce attendance",
         "responses": {
           "200": {
@@ -11217,7 +11289,7 @@
     },
     "/api/v1/workforce/payroll": {
       "post": {
-        "operationId": "WorkforceController_draft_251",
+        "operationId": "WorkforceController_draft_253",
         "summary": "Workforce draft",
         "responses": {
           "200": {
@@ -11265,7 +11337,7 @@
         ]
       },
       "get": {
-        "operationId": "WorkforceController_payroll_254",
+        "operationId": "WorkforceController_payroll_256",
         "summary": "Workforce payroll",
         "responses": {
           "200": {
@@ -11328,7 +11400,7 @@
     },
     "/api/v1/workforce/payroll/{id}/approve": {
       "post": {
-        "operationId": "WorkforceController_approve_252",
+        "operationId": "WorkforceController_approve_254",
         "summary": "Workforce approve",
         "responses": {
           "200": {
@@ -11387,7 +11459,7 @@
     },
     "/api/v1/workforce/payroll/{id}": {
       "get": {
-        "operationId": "WorkforceController_get_253",
+        "operationId": "WorkforceController_get_255",
         "summary": "Workforce get",
         "responses": {
           "200": {
@@ -11418,7 +11490,7 @@
     },
     "/api/v1/workforce/employees/{id}/contracts": {
       "post": {
-        "operationId": "WorkforceController_changeContract_255",
+        "operationId": "WorkforceController_changeContract_257",
         "summary": "Workforce changeContract",
         "responses": {
           "200": {
@@ -11475,7 +11547,7 @@
         ]
       },
       "get": {
-        "operationId": "WorkforceController_contracts_256",
+        "operationId": "WorkforceController_contracts_258",
         "summary": "Workforce contracts",
         "responses": {
           "200": {
@@ -11529,7 +11601,7 @@
     },
     "/api/v1/workforce/employees/{id}/contract-at": {
       "get": {
-        "operationId": "WorkforceController_contractAt_257",
+        "operationId": "WorkforceController_contractAt_259",
         "summary": "Workforce contractAt",
         "responses": {
           "200": {
@@ -11569,7 +11641,7 @@
     },
     "/api/v1/workforce/payroll/detailed": {
       "post": {
-        "operationId": "WorkforceController_detailed_258",
+        "operationId": "WorkforceController_detailed_260",
         "summary": "Workforce detailed",
         "responses": {
           "200": {
@@ -11619,7 +11691,7 @@
     },
     "/api/v1/workforce/payroll/{id}/deductions": {
       "get": {
-        "operationId": "WorkforceController_deductions_259",
+        "operationId": "WorkforceController_deductions_261",
         "summary": "Workforce deductions",
         "responses": {
           "200": {
@@ -11653,7 +11725,7 @@
     },
     "/api/v1/workforce/payroll/{id}/cancel": {
       "post": {
-        "operationId": "WorkforceController_cancel_260",
+        "operationId": "WorkforceController_cancel_262",
         "summary": "Workforce cancel",
         "responses": {
           "200": {
@@ -11712,7 +11784,7 @@
     },
     "/api/v1/workforce/payroll/{id}/reversals": {
       "post": {
-        "operationId": "WorkforceController_requestReversal_261",
+        "operationId": "WorkforceController_requestReversal_263",
         "summary": "Workforce requestReversal",
         "responses": {
           "200": {
@@ -11769,7 +11841,7 @@
         ]
       },
       "get": {
-        "operationId": "WorkforceController_reversals_266",
+        "operationId": "WorkforceController_reversals_268",
         "summary": "Workforce reversals",
         "responses": {
           "200": {
@@ -11803,7 +11875,7 @@
     },
     "/api/v1/workforce/payroll/reversals/{id}/approve": {
       "post": {
-        "operationId": "WorkforceController_approveReversal_262",
+        "operationId": "WorkforceController_approveReversal_264",
         "summary": "Workforce approveReversal",
         "responses": {
           "200": {
@@ -11862,7 +11934,7 @@
     },
     "/api/v1/workforce/payroll/{id}/bank-payment": {
       "post": {
-        "operationId": "WorkforceController_payBank_263",
+        "operationId": "WorkforceController_payBank_265",
         "summary": "Workforce payBank",
         "responses": {
           "200": {
@@ -11921,7 +11993,7 @@
     },
     "/api/v1/workforce/payroll/{id}/print": {
       "get": {
-        "operationId": "WorkforceController_print_264",
+        "operationId": "WorkforceController_print_266",
         "summary": "Workforce print",
         "responses": {
           "200": {
@@ -11952,7 +12024,7 @@
     },
     "/api/v1/workforce/payroll/export.csv": {
       "get": {
-        "operationId": "WorkforceController_export_265",
+        "operationId": "WorkforceController_export_267",
         "summary": "Workforce export",
         "responses": {
           "200": {
@@ -12012,7 +12084,7 @@
     },
     "/api/v1/workforce/payroll/{id}/payments": {
       "get": {
-        "operationId": "WorkforceController_payments_267",
+        "operationId": "WorkforceController_payments_269",
         "summary": "Workforce payments",
         "responses": {
           "200": {
@@ -12046,7 +12118,7 @@
     },
     "/api/v1/workforce/leave": {
       "get": {
-        "operationId": "WorkforceController_leaves_268",
+        "operationId": "WorkforceController_leaves_270",
         "summary": "Workforce leaves",
         "responses": {
           "200": {
@@ -12124,7 +12196,7 @@
         ]
       },
       "post": {
-        "operationId": "WorkforceController_requestLeave_270",
+        "operationId": "WorkforceController_requestLeave_272",
         "summary": "Workforce requestLeave",
         "responses": {
           "200": {
@@ -12174,7 +12246,7 @@
     },
     "/api/v1/workforce/leave/{id}": {
       "get": {
-        "operationId": "WorkforceController_leave_269",
+        "operationId": "WorkforceController_leave_271",
         "summary": "Workforce leave",
         "responses": {
           "200": {
@@ -12204,124 +12276,6 @@
       }
     },
     "/api/v1/workforce/leave/{id}/approve": {
-      "post": {
-        "operationId": "WorkforceController_decideLeave_271",
-        "summary": "Workforce decideLeave",
-        "responses": {
-          "200": {
-            "description": "Source-declared result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WorkforceService_Leave"
-                }
-              }
-            }
-          }
-        },
-        "x-source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
-        "x-source-method": "decideLeave",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WorkforceService_Approval"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "X-Request-ID",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ]
-      }
-    },
-    "/api/v1/workforce/leave/{id}/reject": {
-      "post": {
-        "operationId": "WorkforceController_decideLeave_272",
-        "summary": "Workforce decideLeave",
-        "responses": {
-          "200": {
-            "description": "Source-declared result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WorkforceService_Leave"
-                }
-              }
-            }
-          }
-        },
-        "x-source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
-        "x-source-method": "decideLeave",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WorkforceService_Approval"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "X-Request-ID",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ]
-      }
-    },
-    "/api/v1/workforce/leave/{id}/cancel": {
       "post": {
         "operationId": "WorkforceController_decideLeave_273",
         "summary": "Workforce decideLeave",
@@ -12380,9 +12334,127 @@
         ]
       }
     },
+    "/api/v1/workforce/leave/{id}/reject": {
+      "post": {
+        "operationId": "WorkforceController_decideLeave_274",
+        "summary": "Workforce decideLeave",
+        "responses": {
+          "200": {
+            "description": "Source-declared result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkforceService_Leave"
+                }
+              }
+            }
+          }
+        },
+        "x-source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+        "x-source-method": "decideLeave",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkforceService_Approval"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/workforce/leave/{id}/cancel": {
+      "post": {
+        "operationId": "WorkforceController_decideLeave_275",
+        "summary": "Workforce decideLeave",
+        "responses": {
+          "200": {
+            "description": "Source-declared result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkforceService_Leave"
+                }
+              }
+            }
+          }
+        },
+        "x-source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+        "x-source-method": "decideLeave",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkforceService_Approval"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
     "/api/v1/workforce/benefit-policies": {
       "get": {
-        "operationId": "WorkforceController_policies_274",
+        "operationId": "WorkforceController_policies_276",
         "summary": "Workforce policies",
         "responses": {
           "200": {
@@ -12433,7 +12505,7 @@
         ]
       },
       "post": {
-        "operationId": "WorkforceController_requestPolicy_276",
+        "operationId": "WorkforceController_requestPolicy_278",
         "summary": "Workforce requestPolicy",
         "responses": {
           "200": {
@@ -12483,7 +12555,7 @@
     },
     "/api/v1/workforce/benefit-policies/{id}": {
       "get": {
-        "operationId": "WorkforceController_policy_275",
+        "operationId": "WorkforceController_policy_277",
         "summary": "Workforce policy",
         "responses": {
           "200": {
@@ -12514,7 +12586,7 @@
     },
     "/api/v1/workforce/benefit-policies/{id}/approve": {
       "post": {
-        "operationId": "WorkforceController_decidePolicy_277",
+        "operationId": "WorkforceController_decidePolicy_279",
         "summary": "Workforce decidePolicy",
         "responses": {
           "200": {
@@ -12573,7 +12645,7 @@
     },
     "/api/v1/workforce/benefit-policies/{id}/reject": {
       "post": {
-        "operationId": "WorkforceController_decidePolicy_278",
+        "operationId": "WorkforceController_decidePolicy_280",
         "summary": "Workforce decidePolicy",
         "responses": {
           "200": {
@@ -12632,7 +12704,7 @@
     },
     "/api/v1/workforce/benefit-elections": {
       "get": {
-        "operationId": "WorkforceController_elections_279",
+        "operationId": "WorkforceController_elections_281",
         "summary": "Workforce elections",
         "responses": {
           "200": {
@@ -12692,7 +12764,7 @@
         ]
       },
       "post": {
-        "operationId": "WorkforceController_requestElection_281",
+        "operationId": "WorkforceController_requestElection_283",
         "summary": "Workforce requestElection",
         "responses": {
           "200": {
@@ -12742,7 +12814,7 @@
     },
     "/api/v1/workforce/benefit-elections/{id}": {
       "get": {
-        "operationId": "WorkforceController_election_280",
+        "operationId": "WorkforceController_election_282",
         "summary": "Workforce election",
         "responses": {
           "200": {
@@ -12772,124 +12844,6 @@
       }
     },
     "/api/v1/workforce/benefit-elections/{id}/approve": {
-      "post": {
-        "operationId": "WorkforceController_decideElection_282",
-        "summary": "Workforce decideElection",
-        "responses": {
-          "200": {
-            "description": "Source-declared result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WorkforceService_BenefitElection"
-                }
-              }
-            }
-          }
-        },
-        "x-source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
-        "x-source-method": "decideElection",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WorkforceService_Approval"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "X-Request-ID",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ]
-      }
-    },
-    "/api/v1/workforce/benefit-elections/{id}/reject": {
-      "post": {
-        "operationId": "WorkforceController_decideElection_283",
-        "summary": "Workforce decideElection",
-        "responses": {
-          "200": {
-            "description": "Source-declared result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WorkforceService_BenefitElection"
-                }
-              }
-            }
-          }
-        },
-        "x-source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
-        "x-source-method": "decideElection",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WorkforceService_Approval"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "X-Request-ID",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ]
-      }
-    },
-    "/api/v1/workforce/benefit-elections/{id}/cancel": {
       "post": {
         "operationId": "WorkforceController_decideElection_284",
         "summary": "Workforce decideElection",
@@ -12948,9 +12902,127 @@
         ]
       }
     },
+    "/api/v1/workforce/benefit-elections/{id}/reject": {
+      "post": {
+        "operationId": "WorkforceController_decideElection_285",
+        "summary": "Workforce decideElection",
+        "responses": {
+          "200": {
+            "description": "Source-declared result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkforceService_BenefitElection"
+                }
+              }
+            }
+          }
+        },
+        "x-source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+        "x-source-method": "decideElection",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkforceService_Approval"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/workforce/benefit-elections/{id}/cancel": {
+      "post": {
+        "operationId": "WorkforceController_decideElection_286",
+        "summary": "Workforce decideElection",
+        "responses": {
+          "200": {
+            "description": "Source-declared result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkforceService_BenefitElection"
+                }
+              }
+            }
+          }
+        },
+        "x-source": "backend/business-modules/workforce/src/main/java/com/quincaisoft/workforce/web/WorkforceController.java",
+        "x-source-method": "decideElection",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkforceService_Approval"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
     "/api/v1/workforce/employees/{id}/benefit-preview": {
       "get": {
-        "operationId": "WorkforceController_benefitPreview_285",
+        "operationId": "WorkforceController_benefitPreview_287",
         "summary": "Workforce benefitPreview",
         "responses": {
           "200": {
@@ -13002,7 +13074,7 @@
     },
     "/api/v1/workforce/payroll/{id}/benefits": {
       "get": {
-        "operationId": "WorkforceController_benefits_286",
+        "operationId": "WorkforceController_benefits_288",
         "summary": "Workforce benefits",
         "responses": {
           "200": {
@@ -13036,7 +13108,7 @@
     },
     "/admin/onboarding/{id}/configuration": {
       "get": {
-        "operationId": "OnboardingConfigurationController_get_287",
+        "operationId": "OnboardingConfigurationController_get_289",
         "summary": "OnboardingConfiguration get",
         "responses": {
           "200": {
@@ -13067,7 +13139,7 @@
         "x-deployment": "platform-control isolated API; separate bearer issuer/audience"
       },
       "post": {
-        "operationId": "OnboardingConfigurationController_configure_288",
+        "operationId": "OnboardingConfigurationController_configure_290",
         "summary": "OnboardingConfiguration configure",
         "responses": {
           "200": {
@@ -13128,7 +13200,7 @@
     },
     "/admin/onboarding/{id}/configuration/verify-owner": {
       "post": {
-        "operationId": "OnboardingConfigurationController_verify_289",
+        "operationId": "OnboardingConfigurationController_verify_291",
         "summary": "OnboardingConfiguration verify",
         "responses": {
           "200": {
@@ -13189,7 +13261,7 @@
     },
     "/admin/onboarding/{id}/configuration/approve": {
       "post": {
-        "operationId": "OnboardingConfigurationController_approve_290",
+        "operationId": "OnboardingConfigurationController_approve_292",
         "summary": "OnboardingConfiguration approve",
         "responses": {
           "200": {
@@ -13250,7 +13322,7 @@
     },
     "/admin/onboarding": {
       "get": {
-        "operationId": "PlatformController_list_291",
+        "operationId": "PlatformController_list_293",
         "summary": "Platform list",
         "responses": {
           "200": {
@@ -13274,7 +13346,7 @@
         "x-deployment": "platform-control isolated API; separate bearer issuer/audience"
       },
       "post": {
-        "operationId": "PlatformController_request_293",
+        "operationId": "PlatformController_request_295",
         "summary": "Platform request",
         "responses": {
           "200": {
@@ -13326,7 +13398,7 @@
     },
     "/admin/onboarding/{id}": {
       "get": {
-        "operationId": "PlatformController_get_292",
+        "operationId": "PlatformController_get_294",
         "summary": "Platform get",
         "responses": {
           "200": {
@@ -13359,7 +13431,7 @@
     },
     "/admin/onboarding/{id}/approve": {
       "post": {
-        "operationId": "PlatformController_approve_294",
+        "operationId": "PlatformController_approve_296",
         "summary": "Platform approve",
         "responses": {
           "200": {
@@ -13420,7 +13492,7 @@
     },
     "/api/v1/support/grants": {
       "get": {
-        "operationId": "PlatformGovernanceController_merchantGrants_295",
+        "operationId": "PlatformGovernanceController_merchantGrants_297",
         "summary": "PlatformGovernance merchantGrants",
         "responses": {
           "200": {
@@ -13443,7 +13515,7 @@
         "parameters": []
       },
       "post": {
-        "operationId": "PlatformGovernanceController_consent_296",
+        "operationId": "PlatformGovernanceController_consent_298",
         "summary": "PlatformGovernance consent",
         "responses": {
           "200": {
@@ -13494,7 +13566,7 @@
     },
     "/api/v1/support/grants/{id}/revoke": {
       "post": {
-        "operationId": "PlatformGovernanceController_revoke_297",
+        "operationId": "PlatformGovernanceController_revoke_299",
         "summary": "PlatformGovernance revoke",
         "responses": {
           "200": {
@@ -13554,7 +13626,7 @@
     },
     "/admin/governance/support-grants": {
       "get": {
-        "operationId": "PlatformGovernanceController_platformGrants_298",
+        "operationId": "PlatformGovernanceController_platformGrants_300",
         "summary": "PlatformGovernance platformGrants",
         "responses": {
           "200": {
@@ -13580,7 +13652,7 @@
     },
     "/admin/governance/support-grants/{id}/approve": {
       "post": {
-        "operationId": "PlatformGovernanceController_approveGrant_299",
+        "operationId": "PlatformGovernanceController_approveGrant_301",
         "summary": "PlatformGovernance approveGrant",
         "responses": {
           "200": {
@@ -13641,7 +13713,7 @@
     },
     "/admin/governance/support-grants/{id}/diagnostics": {
       "get": {
-        "operationId": "PlatformGovernanceController_diagnostics_300",
+        "operationId": "PlatformGovernanceController_diagnostics_302",
         "summary": "PlatformGovernance diagnostics",
         "responses": {
           "200": {
@@ -13683,7 +13755,7 @@
     },
     "/admin/governance/tenants/{tenantId}/status": {
       "get": {
-        "operationId": "PlatformGovernanceController_status_301",
+        "operationId": "PlatformGovernanceController_status_303",
         "summary": "PlatformGovernance status",
         "responses": {
           "200": {
@@ -13716,7 +13788,7 @@
     },
     "/admin/governance/tenants/{tenantId}/legal-holds": {
       "get": {
-        "operationId": "PlatformGovernanceController_holds_302",
+        "operationId": "PlatformGovernanceController_holds_304",
         "summary": "PlatformGovernance holds",
         "responses": {
           "200": {
@@ -13752,7 +13824,7 @@
     },
     "/admin/governance/requests": {
       "get": {
-        "operationId": "PlatformGovernanceController_requests_303",
+        "operationId": "PlatformGovernanceController_requests_305",
         "summary": "PlatformGovernance requests",
         "responses": {
           "200": {
@@ -13788,7 +13860,7 @@
     },
     "/admin/governance/tenants/{tenantId}/requests": {
       "post": {
-        "operationId": "PlatformGovernanceController_request_304",
+        "operationId": "PlatformGovernanceController_request_306",
         "summary": "PlatformGovernance request",
         "responses": {
           "200": {
@@ -13849,7 +13921,7 @@
     },
     "/admin/governance/requests/{id}/approve": {
       "post": {
-        "operationId": "PlatformGovernanceController_approve_305",
+        "operationId": "PlatformGovernanceController_approve_307",
         "summary": "PlatformGovernance approve",
         "responses": {
           "200": {
@@ -13910,7 +13982,7 @@
     },
     "/admin/onboarding/{id}/provision-trial": {
       "get": {
-        "operationId": "TenantProvisioningController_get_306",
+        "operationId": "TenantProvisioningController_get_308",
         "summary": "TenantProvisioning get",
         "responses": {
           "200": {
@@ -13941,7 +14013,7 @@
         "x-deployment": "platform-control isolated API; separate bearer issuer/audience"
       },
       "post": {
-        "operationId": "TenantProvisioningController_provision_307",
+        "operationId": "TenantProvisioningController_provision_309",
         "summary": "TenantProvisioning provision",
         "responses": {
           "200": {
@@ -14002,7 +14074,7 @@
     },
     "/api/v1/operations/outbox/project-audit": {
       "post": {
-        "operationId": "OperationsController_process_308",
+        "operationId": "OperationsController_process_310",
         "summary": "Operations process",
         "responses": {
           "200": {
@@ -14053,20 +14125,27 @@
       }
     },
     "schemas": {
-      "SessionController_SessionView": {
+      "EffectiveAccessController_Access": {
         "type": "object",
         "properties": {
           "scope": {
             "$ref": "#/components/schemas/TenantScope"
           },
-          "authorities": {
+          "role": {
+            "type": "string"
+          },
+          "authorizationEpoch": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "permissions": {
             "type": "array",
             "items": {
               "type": "string"
             }
           }
         },
-        "x-source": "backend/api-server/src/main/java/com/quincaisoft/security/SessionController.java"
+        "x-source": "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java"
       },
       "TenantScope": {
         "type": "object",
@@ -14089,6 +14168,21 @@
           }
         },
         "x-source": "backend/shared-kernel/src/main/java/com/quincaisoft/shared/TenantScope.java"
+      },
+      "SessionController_SessionView": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "$ref": "#/components/schemas/TenantScope"
+          },
+          "authorities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "x-source": "backend/api-server/src/main/java/com/quincaisoft/security/SessionController.java"
       },
       "AuditService_Event": {
         "type": "object",
@@ -14199,6 +14293,30 @@
           },
           "description": {
             "type": "string"
+          }
+        },
+        "x-source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/api/CatalogService.java"
+      },
+      "CatalogService_Page": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CatalogService_Product"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "x-source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/api/CatalogService.java"

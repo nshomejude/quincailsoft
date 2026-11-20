@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDigest": "f571dd43124f0740f6691bf4fb891222a66b45c79551caa55363e753b1a91b21",
+  "sourceDigest": "4421472ea6e8db31ebbe6f30165d85b29aa025cfef298c95a45a2fd41ddb3bdf",
   "unresolvedJavaTypes": [],
   "endpoints": [
     {
@@ -10,6 +10,17 @@
       "javaMethod": "metrics",
       "returnType": "ResponseEntity<String>",
       "source": "backend/api-server/src/main/java/com/quincaisoft/observability/ScopedOperationalMetrics.java",
+      "authorization": "HTTP security configuration",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/access/effective",
+      "controller": "EffectiveAccessController",
+      "javaMethod": "effective",
+      "returnType": "Access",
+      "source": "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java",
       "authorization": "HTTP security configuration",
       "requestHeaders": [],
       "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
@@ -64,6 +75,17 @@
       "controller": "CatalogController",
       "javaMethod": "list",
       "returnType": "List<CatalogService.Product>",
+      "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogController.java",
+      "authorization": "hasAnyAuthority('catalog:read','SCOPE_catalog:read')",
+      "requestHeaders": [],
+      "contractStatus": "SOURCE_SHAPE_REQUIRES_RUNTIME_ACCEPTANCE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products/page",
+      "controller": "CatalogController",
+      "javaMethod": "page",
+      "returnType": "CatalogService.Page",
       "source": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogController.java",
       "authorization": "hasAnyAuthority('catalog:read','SCOPE_catalog:read')",
       "requestHeaders": [],
