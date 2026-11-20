@@ -1,0 +1,57 @@
+name: Restore reviewed checkpoint objects
+on:
+  push:
+    branches: [codex/checkpoint-transport-2026-11-20-a7a14ca]
+    paths: ['.ci/checkpoint-a7a14ca/**']
+permissions:
+  contents: write
+jobs:
+  restore-reviewed-refs:
+    if: github.repository == 'nshomejude/quincailsoft' && github.ref == 'refs/heads/codex/checkpoint-transport-2026-11-20-a7a14ca'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CHECKPOINT_BUNDLE: ${{ runner.temp }}/quincai-checkpoint.bundle
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate and assemble immutable bundle parts
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+          const directory='.ci/checkpoint-a7a14ca/',manifest=JSON.parse(fs.readFileSync(directory+'manifest.json','utf8'));
+          const expected='58b5d6b51d0546dba1a4ffaf63156971a861fb79bd88d70a4a74129a9d8cf85a';
+          assert.equal(manifest.bundleSha256,expected);assert.equal(manifest.bundleBytes,2437882);assert.equal(manifest.parts.length,55);
+          const buffers=manifest.parts.map((part,index)=>{
+            assert.equal(part.index,index);assert.equal(part.name,String(index).padStart(3,'0')+'.b64');
+            const text=fs.readFileSync(directory+part.name);assert.equal(text.length,part.textBytes);
+            assert.equal(crypto.createHash('sha256').update(text).digest('hex'),part.sha256);
+            const decoded=Buffer.from(text.toString('ascii'),'base64');assert.equal(decoded.length,part.rawBytes);
+            assert.equal(decoded.toString('base64'),text.toString('ascii'));return decoded;
+          });
+          const bundle=Buffer.concat(buffers);assert.equal(bundle.length,manifest.bundleBytes);
+          assert.equal(crypto.createHash('sha256').update(bundle).digest('hex'),expected);
+          fs.writeFileSync(process.env.CHECKPOINT_BUNDLE,bundle);
+          console.log('Validated bounded transport parts and exact bundle digest.');
+          NODE
+      - name: Verify original commits and create only absent review refs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git bundle verify "$CHECKPOINT_BUNDLE"
+          git -c core.hooksPath=/dev/null fetch "$CHECKPOINT_BUNDLE" refs/heads/codex/platform-continuation-2026-11-19
+          test "$(git rev-parse a7a14ca2441ad105c54ef1d2fea0b72a97c4ad6d^{tree})" = 4ad1e5a29d7d288c994b55fc43ef4a31295dde29
+          test "$(git rev-parse 37e964c0bf37dcc65dd3b3a911fc1afb8bcde920^{tree})" = 036929b814ba759b54b80608213523d4c7f7ee5e
+          while read -r commit target; do
+            existing="$(git ls-remote --heads origin "$target" | cut -f1)"
+            if [ -n "$existing" ]; then
+              test "$existing" = "$commit" || { echo 'Ref already exists at a different commit; refusing update.'; exit 1; }
+            else
+              # Empty expected lease means the ref MUST be absent; never overwrite an existing branch.
+              git -c core.hooksPath=/dev/null push --force-with-lease="$target:" origin "$commit:$target"
+            fi
+          done <<'REFS'
+          a7a14ca2441ad105c54ef1d2fea0b72a97c4ad6d refs/heads/codex/review-checkpoint-2026-11-20-a7a14ca
+          37e964c0bf37dcc65dd3b3a911fc1afb8bcde920 refs/heads/codex/review-checkpoint-2026-11-20-37e964c
+          REFS
