@@ -10,6 +10,9 @@ export async function api<T>(path:string,init?:RequestInit):Promise<T>{
  const response=await fetch(new URL('/api/v1/'+path,base),{...init,cache:'no-store',headers:{'Content-Type':'application/json','Authorization':'Bearer '+auth.accessToken,...init?.headers}});
  if(!response.ok){const data=await response.json().catch(()=>({}));throw new ApiError(response.status,typeof data.message==='string'?data.message:undefined,data.code,data.correlationId)}return response.json() as Promise<T>;
 }
+export type ProductPage={items:Product[];total:number;offset:number;limit:number};
+export const pagedProducts=(query:string,offset=0,limit=50)=>api<ProductPage>(
+  'products/page?query='+encodeURIComponent(query)+'&offset='+offset+'&limit='+limit);
 export const products=()=>api<Product[]>('products');export const sales=()=>api<Sale[]>('sales');
 export const permitted=(me:Me,permission:string)=>me.authorities.some(a=>a===permission||a==='SCOPE_'+permission);
 export {xaf,units} from './format';
