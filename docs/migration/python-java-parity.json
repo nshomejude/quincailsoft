@@ -14288,11 +14288,11 @@
       },
       {
         "path": "backend/business-modules/returns/src/test/java/com/quincaisoft/returns/PostgresReturnIntegrationTest.java",
-        "sha256": "8ae93a94164ab03cb14d432631caaea0f0c51066010768777c2eedacca97d0df",
+        "sha256": "ab08d4af10ae00c1bc2e56b538eba2951def864141bad40cb6d6ebbd6f61bd6a",
         "testMethods": [
           "stockJournalsOutboxAndReplayCommitOrRollbackTogether"
         ],
-        "assertionCount": 42
+        "assertionCount": 43
       },
       {
         "path": "backend/business-modules/sales/src/test/java/com/quincaisoft/sales/PostgresSaleIntegrationTest.java",
