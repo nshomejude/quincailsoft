@@ -12465,12 +12465,24 @@
         "sha256": "9962ae8f0e59d5abd1ac3f0fd038ece9bfa62473ebc4804c290aa78dbcf2c318"
       },
       {
+        "path": "backend/api-server/src/main/java/com/quincaisoft/security/CurrentRoleAuthoritiesFilter.java",
+        "sha256": "3388adbab6a5ee19b7f4f97ae8473e5b626d9feca48912366af86bddd8c7565c"
+      },
+      {
         "path": "backend/api-server/src/main/java/com/quincaisoft/security/DatabaseSafetyVerifier.java",
         "sha256": "669bbacf369dee30f7cdc2105d1f74e4207eaa561c1af7b934ea040a734ebbe0"
       },
       {
         "path": "backend/api-server/src/main/java/com/quincaisoft/security/DeploymentSafetyVerifier.java",
         "sha256": "bbc205d06feb2ef7e5975ef8b8d66b67609fc1ca1b7d3506cbad79eaf910b561"
+      },
+      {
+        "path": "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java",
+        "sha256": "cd04e777b547986433a2a1e9b809bd83b53cdc9672a22d23ae3b166c4f92f50d"
+      },
+      {
+        "path": "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveRolePolicy.java",
+        "sha256": "38665635aab54ae6e74365f2f981efc415292f1a984607b3a2214dc6d0dd744a"
       },
       {
         "path": "backend/api-server/src/main/java/com/quincaisoft/security/PostgresScopedTransactions.java",
@@ -12482,7 +12494,7 @@
       },
       {
         "path": "backend/api-server/src/main/java/com/quincaisoft/security/SecurityConfiguration.java",
-        "sha256": "7478e415fb6383ff530fe96feec2d761c72d8031221436391e27bb4870d2895c"
+        "sha256": "315b7dd7398eae3585b22a62243833a048da0e619f88989da68f2e250e920f83"
       },
       {
         "path": "backend/api-server/src/main/java/com/quincaisoft/security/SessionController.java",
@@ -12546,7 +12558,7 @@
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/api/CatalogService.java",
-        "sha256": "39969ec7c94d12d6272b952c831c25ebc690c052eae3b219282c9529e3730c6e"
+        "sha256": "02d28947852404936ff7609d76c9a936f903bda36d995cf3a06ebd535118edc3"
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/api/package-info.java",
@@ -12558,7 +12570,7 @@
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/application/DefaultCatalogService.java",
-        "sha256": "b8dbca88bbde65720b61c9ab8143dbdbed031456ea879933dd046f354f6bbf1b"
+        "sha256": "3398b1f7b2c7f4ddd7be2703939c73632cb43ba8515ddcd80a0f8b56774614aa"
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogCategory.java",
@@ -12590,7 +12602,7 @@
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogController.java",
-        "sha256": "556cd6286b83a2c0700e25f1c8e6155762a87226b674173123f1efd1568b9c00"
+        "sha256": "eee94f2af39794284cb60fe22f0c4622e8cab85a9a52da41e02104cb9d47e7c9"
       },
       {
         "path": "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/web/CatalogMasterController.java",
@@ -13972,12 +13984,32 @@
         "assertionCount": 15
       },
       {
+        "path": "backend/api-server/src/test/java/com/quincaisoft/security/CurrentRoleAuthoritiesFilterTest.java",
+        "sha256": "3def619f67988f639479f847188da8f55407f5b4a0a96d9ec1cadfa53e125f3e",
+        "testMethods": [
+          "cashierCannotReuseOwnerPermissionsFromUnexpiredToken",
+          "auditorNeverInheritsSignedWriteOrExportPermissions",
+          "ownerCannotInheritControlPlanePermission",
+          "revokedOrUnknownMembershipDoesNotReachController",
+          "anonymousPublicRequestBypassesMembershipLookup"
+        ],
+        "assertionCount": 7
+      },
+      {
         "path": "backend/api-server/src/test/java/com/quincaisoft/security/DeploymentSafetyPostgresTest.java",
         "sha256": "4fecaa7c76701e559d277cd49029ca52d4036f836081fdc51e517d8194e6520a",
         "testMethods": [
           "rejectsOwnershipDdlAndUnprotectedTenantTables"
         ],
         "assertionCount": 6
+      },
+      {
+        "path": "backend/api-server/src/test/java/com/quincaisoft/security/EffectiveAccessControllerTest.java",
+        "sha256": "224ed248f74ebfddfeaed1a7d32537a325e7a01ad363a135d3bc5cfe8aed90be",
+        "testMethods": [
+          "returnsOnlyAlreadyFilteredEffectiveAuthoritiesAndLiveMembershipEpoch"
+        ],
+        "assertionCount": 4
       },
       {
         "path": "backend/api-server/src/test/java/com/quincaisoft/security/FulfillmentHttpWorkflow.java",
@@ -13987,11 +14019,11 @@
       },
       {
         "path": "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java",
-        "sha256": "870c987ac39665176de763eb87b6d8278d4cee404d8c8308c4a89cba706d35a1",
+        "sha256": "3acf68c4f83610a8b66698eb9819c7f2cbf66bcafcc368c5b92611473d1b050a",
         "testMethods": [
           "applicationStartsAndAuthenticatesAgainstRealScopedDatabase"
         ],
-        "assertionCount": 66
+        "assertionCount": 72
       },
       {
         "path": "backend/api-server/src/test/java/com/quincaisoft/security/QuotationHttpWorkflow.java",
@@ -14028,11 +14060,11 @@
       },
       {
         "path": "backend/business-modules/catalog/src/test/java/com/quincaisoft/catalog/CatalogReplayPostgresTest.java",
-        "sha256": "d9db6f2d37373407c3890ad7a526bb4c509f779859deb598c2b0bdd521cb9b9b",
+        "sha256": "d2ba542b1e02b778f3f22997d805673ed508298b5b34c0345b3da3dcd07e8cbc",
         "testMethods": [
           "catalogReplayCannotCrossScopeOrChangeReceiptMeaning"
         ],
-        "assertionCount": 19
+        "assertionCount": 30
       },
       {
         "path": "backend/business-modules/commerce/src/test/java/com/quincaisoft/commerce/PostgresCommerceIntegrationTest.java",
@@ -16827,10 +16859,13 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java"
       ],
       "candidateGroup": "root-identity-master-data",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/EffectiveAccessControllerTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -29276,25 +29311,25 @@
         "backend/api-server/src/main/java/com/quincaisoft/security/ApiExceptionHandler.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/BillingCommandGate.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/BillingCommandProxy.java",
+        "backend/api-server/src/main/java/com/quincaisoft/security/CurrentRoleAuthoritiesFilter.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/DatabaseSafetyVerifier.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/DeploymentSafetyVerifier.java",
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java",
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveRolePolicy.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/PostgresScopedTransactions.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/RequestIdentityFilter.java",
-        "backend/api-server/src/main/java/com/quincaisoft/security/SecurityConfiguration.java",
-        "backend/api-server/src/main/java/com/quincaisoft/security/SessionController.java",
-        "backend/api-server/src/main/java/com/quincaisoft/security/TenantScopeFilter.java",
-        "backend/business-modules/branch/src/main/java/com/quincaisoft/branch/api/BranchBootstrapService.java"
+        "backend/api-server/src/main/java/com/quincaisoft/security/SecurityConfiguration.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
         "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/security/CurrentRoleAuthoritiesFilterTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/DeploymentSafetyPostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/security/EffectiveAccessControllerTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/FulfillmentHttpWorkflow.java",
-        "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java",
-        "backend/api-server/src/test/java/com/quincaisoft/security/QuotationHttpWorkflow.java",
-        "backend/api-server/src/test/java/com/quincaisoft/security/SecurityBoundaryTest.java"
+        "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -29619,6 +29654,7 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveRolePolicy.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/SessionController.java",
         "backend/business-modules/branch/src/main/java/com/quincaisoft/branch/api/BranchBootstrapService.java",
         "backend/business-modules/branch/src/main/java/com/quincaisoft/branch/api/BranchService.java",
@@ -29629,8 +29665,7 @@
         "backend/business-modules/branch/src/main/java/com/quincaisoft/branch/web/BranchController.java",
         "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/api/CustomerDirectory.java",
         "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/api/CustomerService.java",
-        "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/api/package-info.java",
-        "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/application/DefaultCustomerDirectory.java"
+        "backend/business-modules/customer-accounts/src/main/java/com/quincaisoft/customeraccounts/api/package-info.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
@@ -29811,10 +29846,13 @@
       "status": "OPEN",
       "candidateJavaSources": [
         "backend/api-server/src/main/java/com/quincaisoft/security/ApiErrors.java",
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java"
       ],
       "candidateGroup": "root-identity-master-data",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/EffectiveAccessControllerTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -29884,10 +29922,13 @@
       "status": "OPEN",
       "candidateJavaSources": [
         "backend/api-server/src/main/java/com/quincaisoft/security/ApiErrors.java",
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java"
       ],
       "candidateGroup": "root-identity-master-data",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/EffectiveAccessControllerTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -29940,10 +29981,13 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
-        "backend/api-server/src/main/java/com/quincaisoft/security/ApiErrors.java"
+        "backend/api-server/src/main/java/com/quincaisoft/security/ApiErrors.java",
+        "backend/api-server/src/main/java/com/quincaisoft/security/CurrentRoleAuthoritiesFilter.java"
       ],
       "candidateGroup": "root-identity-master-data",
-      "candidateJavaTests": [],
+      "candidateJavaTests": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/CurrentRoleAuthoritiesFilterTest.java"
+      ],
       "acceptance": null
     },
     {
@@ -30647,25 +30691,25 @@
         "backend/api-server/src/main/java/com/quincaisoft/security/ApiExceptionHandler.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/BillingCommandGate.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/BillingCommandProxy.java",
+        "backend/api-server/src/main/java/com/quincaisoft/security/CurrentRoleAuthoritiesFilter.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/DatabaseSafetyVerifier.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/DeploymentSafetyVerifier.java",
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java",
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveRolePolicy.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/PostgresScopedTransactions.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/RequestIdentityFilter.java",
-        "backend/api-server/src/main/java/com/quincaisoft/security/SecurityConfiguration.java",
-        "backend/api-server/src/main/java/com/quincaisoft/security/SessionController.java",
-        "backend/api-server/src/main/java/com/quincaisoft/security/TenantScopeFilter.java",
-        "backend/business-modules/branch/src/main/java/com/quincaisoft/branch/api/BranchBootstrapService.java"
+        "backend/api-server/src/main/java/com/quincaisoft/security/SecurityConfiguration.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
         "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsPostgresTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/observability/ScopedOperationalMetricsTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/BillingCommandGatePostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/security/CurrentRoleAuthoritiesFilterTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/DeploymentSafetyPostgresTest.java",
+        "backend/api-server/src/test/java/com/quincaisoft/security/EffectiveAccessControllerTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/FulfillmentHttpWorkflow.java",
-        "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java",
-        "backend/api-server/src/test/java/com/quincaisoft/security/QuotationHttpWorkflow.java",
-        "backend/api-server/src/test/java/com/quincaisoft/security/SecurityBoundaryTest.java"
+        "backend/api-server/src/test/java/com/quincaisoft/security/FullApplicationPostgresTest.java"
       ],
       "acceptance": null
     },
@@ -31293,9 +31337,12 @@
         "condition": null
       },
       "status": "OPEN",
-      "candidateJavaSources": [],
+      "candidateJavaSources": [
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java"
+      ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/EffectiveAccessControllerTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/FulfillmentHttpWorkflow.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/QuotationHttpWorkflow.java"
       ],
@@ -31314,9 +31361,12 @@
         "condition": null
       },
       "status": "OPEN",
-      "candidateJavaSources": [],
+      "candidateJavaSources": [
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java"
+      ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/EffectiveAccessControllerTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/FulfillmentHttpWorkflow.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/QuotationHttpWorkflow.java"
       ],
@@ -31336,6 +31386,7 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/RequestIdentityFilter.java",
         "backend/business-modules/catalog/src/main/java/com/quincaisoft/catalog/infrastructure/CatalogVariantIdentity.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/api/IdentityBootstrapService.java",
@@ -31346,11 +31397,11 @@
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityBootstrapService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultIdentityService.java",
         "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/application/DefaultStepUpService.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java",
-        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/MembershipChange.java"
+        "backend/business-modules/identity/src/main/java/com/quincaisoft/identity/infrastructure/Membership.java"
       ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/EffectiveAccessControllerTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/FulfillmentHttpWorkflow.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/QuotationHttpWorkflow.java",
         "backend/business-modules/identity/src/test/java/com/quincaisoft/identity/IdentityAuthorizationPostgresTest.java",
@@ -31492,9 +31543,12 @@
         "condition": null
       },
       "status": "OPEN",
-      "candidateJavaSources": [],
+      "candidateJavaSources": [
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java"
+      ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/EffectiveAccessControllerTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/FulfillmentHttpWorkflow.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/QuotationHttpWorkflow.java"
       ],
@@ -31514,6 +31568,7 @@
       },
       "status": "OPEN",
       "candidateJavaSources": [
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveRolePolicy.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/PostgresScopedTransactions.java",
         "backend/api-server/src/main/java/com/quincaisoft/security/TenantScopeFilter.java"
       ],
@@ -32124,9 +32179,12 @@
         "condition": null
       },
       "status": "OPEN",
-      "candidateJavaSources": [],
+      "candidateJavaSources": [
+        "backend/api-server/src/main/java/com/quincaisoft/security/EffectiveAccessController.java"
+      ],
       "candidateGroup": "root-identity-master-data",
       "candidateJavaTests": [
+        "backend/api-server/src/test/java/com/quincaisoft/security/EffectiveAccessControllerTest.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/FulfillmentHttpWorkflow.java",
         "backend/api-server/src/test/java/com/quincaisoft/security/QuotationHttpWorkflow.java"
       ],
