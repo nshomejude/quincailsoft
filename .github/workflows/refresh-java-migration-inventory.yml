@@ -19,13 +19,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Rebuild the source inventory with no acceptance overrides
-        run: node scripts/inventory-python-parity.mjs
+      - name: Rebuild source inventory and source-derived OpenAPI without acceptance overrides
+        run: |
+          node scripts/inventory-python-parity.mjs
+          node packages/api-contracts/generate-source-contract.mjs
+          node packages/api-contracts/validate.mjs
+          node --test packages/api-contracts/*.test.mjs
       - name: Preserve deterministic current-source inventory
         shell: bash
         run: |
           set -euo pipefail
-          git add docs/migration/python-java-parity.json
+          git add docs/migration/python-java-parity.json packages/api-contracts/openapi.json packages/api-contracts/endpoint-inventory.json
           if git diff --cached --quiet; then
             echo "Source inventory already current"
             exit 0
