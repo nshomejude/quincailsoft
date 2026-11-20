@@ -66,7 +66,7 @@ class CatalogReplayPostgresTest {
      assertTrue(catalog.page("pRo",1,50).items().isEmpty());
      assertThrows(IllegalArgumentException.class,()->catalog.page("x",-1,10));
      assertThrows(IllegalArgumentException.class,()->catalog.page("x",0,101));
-     assertThrows(IllegalArgumentException.class,()->catalog.page("x\\u0000",0,10));
+     assertThrows(IllegalArgumentException.class,()->catalog.page("x"+(char)0,0,10));
 
      assertThrows(IllegalArgumentException.class,()->masters.saveUnit(unit.id(),new CatalogMasterService.UnitSave(UUID.randomUUID(),"piece","Piece","piece","2","1",0,true,unit.version(),"rescale")));
      assertThrows(IllegalArgumentException.class,()->catalog.update(product.id(),new CatalogService.Save(UUID.randomUUID(),"SKU","Product","box","1",0,Long.toString(product.version()),true,"rescale")));
