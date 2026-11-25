@@ -26,3 +26,26 @@ Key limitations (stated honestly):
 
 ## Optional
 - [Full facts](https://quincaisoft.com/llms-full.txt)
+
+<!-- BEGIN product-pages section (appended by the product-pages branch) -->
+## Product pages and guides (English)
+- [Mobile app](https://quincaisoft.com/en/mobile-app): included in every plan; offline sale drafts; offline posting disabled
+- [Payments](https://quincaisoft.com/en/payments): cash, credit, deposits, MTN adapter status, Orange Money not integrated, no custody of funds
+- [Online store](https://quincaisoft.com/en/online-store): optional published catalogue; no checkout yet
+- [Security](https://quincaisoft.com/en/security): row-level tenant isolation, audit trail, idempotency, roles, OIDC; no certifications claimed
+- [Windows desktop](https://quincaisoft.com/en/desktop): existing software stays standalone; sync adapter integration pending
+- [Migration and onboarding](https://quincaisoft.com/en/migration-and-onboarding): planned onboarding path
+- [Choosing retail software in CEMAC](https://quincaisoft.com/en/compare): neutral checklist
+- [Resources](https://quincaisoft.com/en/resources): six practical guides (bulk materials in FCFA, customer credit, supplier receiving, contractor quotations, multiple branches, mobile money reconciliation)
+
+## Pages produits et guides (Français)
+- [Application mobile](https://quincaisoft.com/fr/mobile-app)
+- [Paiements](https://quincaisoft.com/fr/payments)
+- [Boutique en ligne](https://quincaisoft.com/fr/online-store)
+- [Sécurité](https://quincaisoft.com/fr/security)
+- [Logiciel Windows](https://quincaisoft.com/fr/desktop)
+- [Migration et mise en route](https://quincaisoft.com/fr/migration-and-onboarding)
+- [Choisir un logiciel de commerce en zone CEMAC](https://quincaisoft.com/fr/compare)
+- [Ressources et guides](https://quincaisoft.com/fr/resources)
+<!-- END product-pages section -->
+

@@ -41,3 +41,34 @@ https://quincaisoft.com/en/contact (English), https://quincaisoft.com/fr/contact
 
 ## Resume en francais
 QuincaiSoft (Opesware Technologies) est un ERP et point de vente bilingue en FCFA pour quincailleries, vendeurs de materiaux de construction et grossistes au Cameroun et en zone CEMAC. En developpement actif. Aucun agrement DGI ni certification n'est revendique. MTN Mobile Money : adaptateur present, identifiants reels et validation requis. Orange Money : pas encore integre. Vente hors ligne sur mobile : desactivee pour l'instant. Tarifs : nous contacter.
+
+<!-- BEGIN product-pages section (appended by the product-pages branch) -->
+## Product pages, guides and module status (facts)
+Developer: Opesware Technologies (https://opesware.com). All pages exist in English (/en/...) and French (/fr/...) at https://quincaisoft.com.
+
+### Module status (https://quincaisoft.com/en/features)
+Available in the current migration slice (not a claim of full coverage or certification): sales and point of sale (immediate zero-tax sales with numbered invoice), stock and units (one base unit per product, exact quantities, transfers with transit, approved counts, zero-loss cutting and repacking jobs), purchasing (orders with independent approval, partial receipts, supplier invoices, uninvoiced returns), customer credit and deposits, quotations (draft, issue, convert to a linked sale), customer returns with credit notes, cash sessions and expenses with approval.
+Partly available: documents (A4 print views EN/FR, COPY reprints; thermal printers not claimed), reports (five reports with CSV page export), multi-branch and permissions, audit trail (identity changes and projected events).
+Planned: alternate pack units such as bag and tonne with exact conversion, kerf and offcut accounting, lots and serials, price lists by customer group, customer credit limits and ageing, supplier payments and ageing, tax-bearing sales and fiscal invoicing, delivery handover, project credit limits.
+
+### Product pages
+- Mobile app (/en/mobile-app): native Expo app included in every plan. Works today: OIDC sign-in with PKCE, catalogue search, sales views, encrypted offline sale drafts. Offline posting of completed sales is disabled until signed quotas and native-device evidence exist. Mobile money cannot be verified offline.
+- Payments (/en/payments): cash sessions, credit, deposits and receipts are available. MTN Mobile Money adapter built and tested against simulated responses; live credentials and provider acceptance required. Orange Money not integrated. QuincaiSoft and Opesware do not hold merchant funds.
+- Online store (/en/online-store): optional storefront publishing a chosen catalogue snapshot. No checkout, online payment or customer accounts yet.
+- Security (/en/security): PostgreSQL row-level security with a non-owner runtime role, append-only audit (partial coverage), idempotent commands, server-side permissions with independent approvals, OIDC sign-in. No ISO 27001, SOC 2, PCI DSS, OHADA or DGI approval claimed.
+- Windows desktop (/en/desktop): existing Windows software stays standalone with no cloud dependency. An optional .NET 10 sync adapter exists as a tested library; integration into the original Windows application is pending.
+- Migration and onboarding (/en/migration-and-onboarding): planned supervised path (set-up, import with dry run, reconciliation, training, pilot of at least 10 trading days). Automated import tooling is not complete.
+- Pricing (/en/pricing): plan structure (Starter, Growth, Enterprise/Dedicated, optional online store), mobile app included in every package, deployment modes. No prices published; contact the company.
+- Compare (/en/compare): vendor-neutral checklist for choosing retail software in CEMAC.
+
+### Guides (/en/resources), by Opesware Technologies, published 2026-11-25
+- /en/resources/track-cement-and-bulk-materials-fcfa
+- /en/resources/manage-customer-credit-hardware-shop
+- /en/resources/buy-and-receive-stock-from-suppliers
+- /en/resources/quotations-for-contractors
+- /en/resources/run-multiple-branches
+- /en/resources/mobile-money-reconciliation-basics
+
+### Resume (francais)
+Pages produit : application mobile (brouillons hors ligne, comptabilisation hors ligne desactivee), paiements (MTN adaptateur en attente d'identifiants reels, Orange Money non integre, aucune garde des fonds), boutique en ligne (catalogue publie, pas de paiement), securite (isolation par ligne, audit, idempotence, aucune certification), logiciel Windows (reste autonome, adaptateur optionnel en attente d'integration), migration et mise en route (prevue), tarifs (structure sans prix), comparatif neutre et six guides pratiques sous /fr/resources.
+<!-- END product-pages section -->
