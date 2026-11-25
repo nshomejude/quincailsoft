@@ -20,7 +20,7 @@
 .home-btn.is-invert { background: #fff; border-color: #fff; color: var(--brand-dark); }
 .home-btn.is-invert:hover { background: var(--bg-alt); border-color: var(--bg-alt); color: var(--brand-dark); }
 .home-btn.is-ghost { background: transparent; border-color: #fff; color: #fff; }
-.home-btn.is-ghost:hover { background: rgba(255, 255, 255, .12); color: #fff; }
+.home-btn.is-ghost:hover { background: var(--brand-dark); border-color: #fff; color: #fff; }
 .home-btn:focus-visible { outline-color: var(--focus); outline-offset: 3px; }
 
 /* Icon in a flat square */
