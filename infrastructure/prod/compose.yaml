@@ -163,6 +163,14 @@ services:
     image: quincaisoft/marketing:${TAG:-latest}
     environment:
       PORT: "3300"
+      NEXT_PUBLIC_SITE_URL: https://${DOMAIN:-quincaisoft.com}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      CONTACT_FROM: ${CONTACT_FROM:-}
+      CONTACT_TO: ${CONTACT_TO:-}
     networks: [internal]
 
   caddy:
