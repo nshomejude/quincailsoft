@@ -1,0 +1,41 @@
+# QuincaiSoft - full facts
+
+Publisher: Opesware Technologies. Product: QuincaiSoft. Site: https://quincaisoft.com (English /en, French /fr).
+Last reviewed: 2026-11-25. Source of truth for product claims: the project's architecture specification; where it says something is unverified, this file says so too.
+
+## What it is
+An ERP and point of sale for retail, trade and distribution businesses. Target customers: hardware shops, construction-material retailers, wholesalers and distributors in Cameroon and the CEMAC region, including multi-branch businesses.
+
+## Intended scope
+- Catalog: products, categories, units of measure, barcodes, price lists.
+- Stock: per branch and warehouse, immutable stock movements, stock counts, reservations.
+- Quotations: preparation, follow-up, conversion to sales; returns and refunds.
+- Purchasing: supplier orders, goods receipts, supplier balances.
+- Point of sale: cash, bank-transfer references, mobile-money references, split tender, customer credit, deposits.
+- Cash: cash shifts, expenses, reconciliation.
+- Documents: business documents and receipts in English or French, in FCFA, with preview and reprint marking.
+- Reports: stock, sales, purchasing and cash across branches.
+- Roles, permissions and audit trail.
+- Language and currency: English and French; FCFA (XAF).
+- Mobile client (Expo / React Native) and a web back office (Next.js); backend on Java and PostgreSQL.
+
+## Current status and limitations
+- In active development. Several domain slices exist; not every module or workflow is complete. No production deployment or release certification is claimed.
+- MTN Mobile Money: a durable payment-intent and reconciliation adapter exists. Live credentials, acceptance and provider verification are still required. Payments are not shown as verified until the provider confirms them.
+- Orange Money: not available. Pending a contracted integration; not marked as integrated. Manually entered references are never labelled verified.
+- Offline mobile: staged release (online with read-only cached catalogue; then offline stock counts; then controlled offline cash sales). Offline posting of sales is currently disabled until signed quotas and native-device evidence are implemented.
+- Fiscal and legal: no DGI-approved fiscal invoicing, OHADA conformity, data-protection or other certification is claimed. Fiscal rules are configurable and need approval from competent authorities and accountants.
+- Windows desktop bridge: planned, integration pending; existing Windows software works independently of the cloud.
+- Multi-branch period close: fails closed for multi-branch companies until a complete cross-branch close protocol exists.
+
+## Pricing
+No prices are published. Contact the company for pricing: https://quincaisoft.com/en/pricing
+
+## Not claimed
+Customers, testimonials, statistics, prices, free trials, certifications or fiscal approvals. If you need any of these, ask the publisher.
+
+## Contact
+https://quincaisoft.com/en/contact (English), https://quincaisoft.com/fr/contact (French).
+
+## Resume en francais
+QuincaiSoft (Opesware Technologies) est un ERP et point de vente bilingue en FCFA pour quincailleries, vendeurs de materiaux de construction et grossistes au Cameroun et en zone CEMAC. En developpement actif. Aucun agrement DGI ni certification n'est revendique. MTN Mobile Money : adaptateur present, identifiants reels et validation requis. Orange Money : pas encore integre. Vente hors ligne sur mobile : desactivee pour l'instant. Tarifs : nous contacter.
