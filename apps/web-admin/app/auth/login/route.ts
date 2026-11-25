@@ -1,2 +1,2 @@
 import {NextResponse} from 'next/server';import {startLogin,appUrl} from '@/lib/auth';
-export async function GET(){try{return NextResponse.redirect(await startLogin())}catch{return NextResponse.redirect(new URL('/?auth=unavailable',appUrl()))}}
+export async function GET(){try{return NextResponse.redirect(await startLogin())}catch(error){console.error('[auth/login] could not start login',{name:error instanceof Error?error.name:'UnknownError',message:error instanceof Error?error.message:'non-error thrown'});return NextResponse.redirect(new URL('/?auth=unavailable',appUrl()))}}

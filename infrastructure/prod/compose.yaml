@@ -1,0 +1,195 @@
+# QuincaiSoft production stack (single Linux server).
+# Run from this directory:  docker compose --env-file .env.prod up -d --build
+# Only Caddy publishes ports (80/443). Everything else is reachable on the internal network only.
+name: quincaisoft
+
+x-restart: &restart
+  restart: unless-stopped
+
+x-logging: &logging
+  logging:
+    driver: json-file
+    options: { max-size: "10m", max-file: "5" }
+
+services:
+  postgres:
+    <<: [*restart, *logging]
+    image: postgres:18.7-bookworm
+    environment:
+      POSTGRES_DB: quincaisoft
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD:?Set POSTGRES_ADMIN_PASSWORD}
+      QUINCAI_MIGRATOR_PASSWORD: ${QUINCAI_MIGRATOR_PASSWORD:?Set QUINCAI_MIGRATOR_PASSWORD}
+      QUINCAI_RUNTIME_PASSWORD: ${QUINCAI_RUNTIME_PASSWORD:?Set QUINCAI_RUNTIME_PASSWORD}
+      KEYCLOAK_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD:?Set KEYCLOAK_DB_PASSWORD}
+    volumes:
+      - pg18:/var/lib/postgresql
+      # Same roles script as local dev (infrastructure/postgres); init scripts run only on first start.
+      - ../postgres/010-roles.sh:/docker-entrypoint-initdb.d/010-roles.sh:ro
+      - ./postgres/020-keycloak-db.sh:/docker-entrypoint-initdb.d/020-keycloak-db.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d quincaisoft"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks: [internal]
+
+  redis:
+    <<: [*restart, *logging]
+    image: redis:8-alpine
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD:?Set REDIS_PASSWORD}", "--appendonly", "yes", "--save", "300", "10"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" --no-auth-warning ping | grep -q PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    networks: [internal]
+
+  keycloak:
+    <<: [*restart, *logging]
+    image: quay.io/keycloak/keycloak:26.4.0
+    command: ["start", "--import-realm"]
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+      KC_HOSTNAME: https://auth.${DOMAIN:-quincaisoft.com}
+      KC_HTTP_ENABLED: "true"
+      KC_PROXY_HEADERS: xforwarded
+      KC_HEALTH_ENABLED: "true"
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN_USER:-quincai-admin}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:?Set KEYCLOAK_ADMIN_PASSWORD}
+      # Substituted into realm-quincaisoft.json at import time.
+      QUINCAI_WEB_CLIENT_SECRET: ${QUINCAI_WEB_CLIENT_SECRET:?Set QUINCAI_WEB_CLIENT_SECRET}
+      QUINCAI_PLATFORM_CLIENT_SECRET: ${QUINCAI_PLATFORM_CLIENT_SECRET:?Set QUINCAI_PLATFORM_CLIENT_SECRET}
+    volumes:
+      - ./keycloak/realm-quincaisoft.json:/opt/keycloak/data/import/realm-quincaisoft.json:ro
+    depends_on:
+      postgres: { condition: service_healthy }
+    healthcheck:
+      # Keycloak image has no curl; probe the management port with bash.
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000 && printf 'GET /health/ready HTTP/1.0\\r\\n\\r\\n' >&3 && grep -q '\"UP\"' <&3"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+    networks: [internal]
+
+  api:
+    <<: [*restart, *logging]
+    build: { context: ../../backend, dockerfile: Dockerfile }
+    image: quincaisoft/api:${TAG:-latest}
+    environment:
+      QUINCAI_DATABASE_URL: jdbc:postgresql://postgres:5432/quincaisoft
+      QUINCAI_DATABASE_USER: quincai_runtime
+      QUINCAI_DATABASE_PASSWORD: ${QUINCAI_RUNTIME_PASSWORD}
+      # Flyway runs at start-up with the migrator role (owner of the database).
+      QUINCAI_MIGRATIONS_ENABLED: "true"
+      QUINCAI_MIGRATION_URL: jdbc:postgresql://postgres:5432/quincaisoft
+      QUINCAI_MIGRATION_USER: quincai_migrator
+      QUINCAI_MIGRATION_PASSWORD: ${QUINCAI_MIGRATOR_PASSWORD}
+      QUINCAI_OIDC_ISSUER: https://auth.${DOMAIN:-quincaisoft.com}/realms/quincaisoft
+      QUINCAI_OIDC_AUDIENCE: quincaisoft-api
+    depends_on:
+      postgres: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/8080 && printf 'GET /actuator/health HTTP/1.0\\r\\n\\r\\n' >&3 && grep -q UP <&3"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 90s
+    # The API fetches signing keys from https://auth.<domain>; Caddy carries a network alias for that
+    # name, so the call stays inside the stack. If the API starts before Keycloak it restarts until it answers.
+    networks: [internal]
+
+  web-admin:
+    <<: [*restart, *logging]
+    build: { context: ../.., dockerfile: apps/web-admin/Dockerfile }
+    image: quincaisoft/web-admin:${TAG:-latest}
+    environment:
+      APP_URL: https://app.${DOMAIN:-quincaisoft.com}
+      JAVA_API_URL: http://api:8080
+      OIDC_ISSUER: https://auth.${DOMAIN:-quincaisoft.com}/realms/quincaisoft
+      OIDC_CLIENT_ID: quincaisoft-web
+      OIDC_CLIENT_SECRET: ${QUINCAI_WEB_CLIENT_SECRET}
+      OIDC_SCOPES: openid profile catalog:read sales:read sales:write sales:post
+      OIDC_ALLOW_HTTP: "false"
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+    depends_on:
+      redis: { condition: service_healthy }
+      api: { condition: service_healthy }
+    networks: [internal]
+
+  platform-admin:
+    <<: [*restart, *logging]
+    build: { context: ../.., dockerfile: apps/platform-admin/Dockerfile }
+    image: quincaisoft/platform-admin:${TAG:-latest}
+    environment:
+      PLATFORM_APP_URL: https://platform.${DOMAIN:-quincaisoft.com}
+      PLATFORM_API_URL: http://api:8080
+      PLATFORM_OIDC_ISSUER: https://auth.${DOMAIN:-quincaisoft.com}/realms/quincaisoft
+      PLATFORM_OIDC_CLIENT_ID: platform
+      PLATFORM_OIDC_CLIENT_SECRET: ${QUINCAI_PLATFORM_CLIENT_SECRET}
+      PLATFORM_OIDC_SCOPES: openid profile platform:tenants:read platform:tenants:write platform:tenants:approve
+      PLATFORM_OIDC_ALLOW_HTTP: "false"
+      # Separate Redis logical DB so operator and tenant sessions never share a keyspace.
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/1
+    depends_on:
+      redis: { condition: service_healthy }
+      api: { condition: service_healthy }
+    networks: [internal]
+
+  storefront:
+    <<: [*restart, *logging]
+    build: { context: ../.., dockerfile: apps/merchant-storefront/Dockerfile }
+    image: quincaisoft/storefront:${TAG:-latest}
+    environment:
+      PUBLIC_CATALOG_API_URL: http://api:8080
+    depends_on:
+      api: { condition: service_healthy }
+    networks: [internal]
+
+  # Public marketing site (quincaisoft.com + www). Built by a separate workstream:
+  # expects apps/marketing/Dockerfile with the same repo-root build context, listening on port 3300.
+  marketing:
+    <<: [*restart, *logging]
+    build: { context: ../.., dockerfile: apps/marketing/Dockerfile }
+    image: quincaisoft/marketing:${TAG:-latest}
+    environment:
+      PORT: "3300"
+    networks: [internal]
+
+  caddy:
+    <<: [*restart, *logging]
+    image: caddy:2.10-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL}
+      DOMAIN: ${DOMAIN:-quincaisoft.com}
+      ADMIN_IPS: ${ADMIN_IPS:?Set ADMIN_IPS}
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on: [marketing, web-admin, platform-admin, storefront, keycloak]
+    networks:
+      internal:
+        aliases:
+          - auth.${DOMAIN:-quincaisoft.com}
+
+networks:
+  internal:
+
+volumes:
+  pg18:
+  redis-data:
+  caddy-data:
+  caddy-config:
