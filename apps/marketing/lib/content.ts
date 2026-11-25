@@ -35,6 +35,11 @@ export type Dict = {
   terms: { title: string; description: string; h1: string; draftNotice: string; sections: Feature[] };
   notFound: { title: string; body: string; back: string };
   softwareDescription: string;
+  shell: {
+    requestDemo: string; mainNav: string; mobileNav: string; closeMenu: string; allIndustries: string; langGroup: string;
+    footerNav: string; colProduct: string; colIndustries: string; colCompany: string; colLegal: string; colContact: string;
+    contactBlurb: string; status: string; notes: string; rights: string; langsLabel: string; navHome: string;
+  };
 };
 
 const en: Dict = {
@@ -229,6 +234,13 @@ const en: Dict = {
   },
   notFound: { title: "Page not found", body: "The page you are looking for does not exist or has moved.", back: "Go to the home page" },
   softwareDescription: "ERP and point of sale for hardware shops, construction-material retailers and wholesalers in Cameroon and CEMAC: multi-branch stock, quotations, purchasing, cash and bilingual documents in FCFA.",
+  shell: {
+    requestDemo: "Request a demo", mainNav: "Main", mobileNav: "Main (mobile)", closeMenu: "Close menu", allIndustries: "All industries", langGroup: "Language",
+    footerNav: "Footer", colProduct: "Product", colIndustries: "Industries", colCompany: "Company", colLegal: "Legal", colContact: "Contact",
+    contactBlurb: "Write to us and we will reply by email.",
+    status: "Early stage: we are talking with shops and distributors about pilots.",
+    notes: "No DGI fiscal approval or certification is claimed.", rights: "All rights reserved.", langsLabel: "Languages", navHome: "QuincaiSoft home",
+  },
 };
 
 const fr: Dict = {
@@ -423,6 +435,13 @@ const fr: Dict = {
   },
   notFound: { title: "Page introuvable", body: "La page que vous cherchez n'existe pas ou a été déplacée.", back: "Retour à l'accueil" },
   softwareDescription: "ERP et point de vente pour quincailleries, vendeurs de matériaux de construction et grossistes au Cameroun et en zone CEMAC : stock multi-succursales, devis, achats, caisse et documents bilingues en FCFA.",
+  shell: {
+    requestDemo: "Demander une démo", mainNav: "Principale", mobileNav: "Principale (mobile)", closeMenu: "Fermer le menu", allIndustries: "Tous les secteurs", langGroup: "Langue",
+    footerNav: "Pied de page", colProduct: "Produit", colIndustries: "Secteurs", colCompany: "Entreprise", colLegal: "Mentions légales", colContact: "Contact",
+    contactBlurb: "Écrivez-nous et nous vous répondrons par e-mail.",
+    status: "Phase de démarrage : nous échangeons avec des commerces et distributeurs sur des pilotes.",
+    notes: "Aucun agrément fiscal de la DGI ni certification n'est revendiqué.", rights: "Tous droits réservés.", langsLabel: "Langues", navHome: "Accueil QuincaiSoft",
+  },
 };
 
 export const DICT: Record<Lang, Dict> = { en, fr };

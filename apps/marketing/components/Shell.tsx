@@ -2,6 +2,9 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { t } from "@/lib/content";
 import { INDUSTRY_SLUGS, breadcrumbLd, organizationLd, pagePath, websiteLd, type Lang } from "@/lib/site";
+import { Footer } from "./footer/Footer";
+import { Header } from "./header/Header";
+import { navigationLd } from "./header/navLd";
 import { JsonLd } from "./JsonLd";
 
 export function Shell({
@@ -21,41 +24,38 @@ export function Shell({
 }) {
   const d = t(lang);
   const other: Lang = lang === "en" ? "fr" : "en";
-  const nav: [string, string][] = [
-    ["features", d.nav.features],
-    ["industries", d.nav.industries],
-    ["pricing", d.nav.pricing],
-    ["about", d.nav.about],
-    ["faq", d.nav.faq],
-    ["contact", d.nav.contact],
-  ];
+  const navItems = [
+    { key: "features", label: d.nav.features },
+    { key: "industries", label: d.nav.industries },
+    { key: "pricing", label: d.nav.pricing },
+    { key: "faq", label: d.nav.faq },
+    { key: "about", label: d.nav.about },
+    { key: "contact", label: d.nav.contact },
+  ].map((n) => ({ ...n, href: pagePath(lang, n.key) }));
   const trail = [{ name: d.ui.home, path: pagePath(lang, "") }, ...crumbs.map((c) => ({ name: c.name, path: pagePath(lang, c.path) }))];
-  const links = (
-    <ul>
-      {nav.map(([p, label]) => (
-        <li key={p}><Link href={pagePath(lang, p)}>{label}</Link></li>
-      ))}
-    </ul>
-  );
-
   return (
     <>
       <a className="skip" href="#main">{d.ui.skip}</a>
       <header className="site-header">
-        <div className="wrap bar">
-          <Link href={pagePath(lang, "")} className="brand" aria-label="QuincaiSoft">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="QuincaiSoft" width={120} height={40} />
-          </Link>
-          <nav className="desktop-nav" aria-label="Main">{links}</nav>
-          <Link className="lang" href={pagePath(other, path)} hrefLang={other} lang={other} aria-label={`${d.ui.language}: ${d.ui.switchTo}`}>
-            {d.ui.switchTo}
-          </Link>
-          <details className="menu">
-            <summary>{d.ui.menu}</summary>
-            <nav aria-label="Main">{links}</nav>
-          </details>
-        </div>
+        <Header
+          path={path}
+          homeHref={pagePath(lang, "")}
+          homeLabel={d.shell.navHome}
+          items={navItems}
+          industriesKey="industries"
+          industriesLabel={d.nav.industries}
+          industries={INDUSTRY_SLUGS.map((slug) => ({
+            slug,
+            href: pagePath(lang, `industries/${slug}`),
+            name: d.industries.items[slug].name,
+            summary: d.industries.items[slug].summary,
+            current: path === `industries/${slug}`,
+          }))}
+          industriesIndex={{ href: pagePath(lang, "industries"), label: d.shell.allIndustries, current: path === "industries" }}
+          cta={{ href: pagePath(lang, "contact"), label: d.shell.requestDemo }}
+          lang={{ current: lang, other, otherHref: pagePath(other, path), otherName: d.ui.switchTo, group: d.shell.langGroup }}
+          labels={{ menu: d.ui.menu, closeMenu: d.shell.closeMenu, main: d.shell.mainNav, mobile: d.shell.mobileNav }}
+        />
       </header>
       {crumbs.length > 0 && (
         <nav className="wrap crumbs" aria-label={d.ui.breadcrumb}>
@@ -69,22 +69,10 @@ export function Shell({
         </nav>
       )}
       <main id="main" tabIndex={-1}>{children}</main>
-      <footer className="site-footer">
-        <div className="wrap">
-          <p>{d.ui.footerTagline}</p>
-          <ul>
-            {(["features", "pricing", "about", "faq", "contact", "privacy", "terms"] as const).map((p) => (
-              <li key={p}><Link href={pagePath(lang, p)}>{d.nav[p]}</Link></li>
-            ))}
-            {INDUSTRY_SLUGS.map((s) => (
-              <li key={s}><Link href={pagePath(lang, `industries/${s}`)}>{d.industries.items[s].name}</Link></li>
-            ))}
-          </ul>
-          <p className="small">{d.ui.footerLegal}</p>
-        </div>
-      </footer>
+      <Footer lang={lang} path={path} />
       <JsonLd data={organizationLd()} />
       <JsonLd data={websiteLd(lang)} />
+      <JsonLd data={navigationLd(navItems.map((n) => ({ name: n.label, path: n.href })))} />
       {crumbs.length > 0 && <JsonLd data={breadcrumbLd(trail)} />}
       {schemas.map((s, i) => (
         <JsonLd key={i} data={s} />
