@@ -1,0 +1,28 @@
+# QuincaiSoft
+
+> QuincaiSoft, by Opesware Technologies, is an ERP and point-of-sale product for retail, trade and distribution businesses (hardware shops, construction-material retailers, wholesalers and distributors) in Cameroon and the CEMAC region. It is bilingual (English and French), works in FCFA (XAF) and supports several branches. It is in active development and is not claimed to be production-certified.
+
+Key limitations (stated honestly):
+- No DGI fiscal approval, OHADA conformity or other certification is claimed.
+- MTN Mobile Money: adapter exists; live credentials and provider acceptance still required. Orange Money: not integrated (pending contracted integration).
+- Offline posting of sales on mobile is currently disabled until stock-quota and device evidence are complete.
+- No public prices: contact the company for pricing.
+
+## English
+- [Home](https://quincaisoft.com/en): overview
+- [Features](https://quincaisoft.com/en/features): scope and current status
+- [Industries](https://quincaisoft.com/en/industries): hardware shops, construction materials, wholesale and distribution
+- [Pricing](https://quincaisoft.com/en/pricing): contact us for pricing
+- [FAQ](https://quincaisoft.com/en/faq): direct answers
+- [Contact](https://quincaisoft.com/en/contact)
+
+## Français
+- [Accueil](https://quincaisoft.com/fr)
+- [Fonctionnalités](https://quincaisoft.com/fr/features)
+- [Secteurs](https://quincaisoft.com/fr/industries)
+- [Tarifs](https://quincaisoft.com/fr/pricing)
+- [FAQ](https://quincaisoft.com/fr/faq)
+- [Contact](https://quincaisoft.com/fr/contact)
+
+## Optional
+- [Full facts](https://quincaisoft.com/llms-full.txt)
