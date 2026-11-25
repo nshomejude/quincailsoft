@@ -1,0 +1,50 @@
+/* Company pages. Every class is prefixed co-. Uses the tokens from globals.css only. */
+.co-hero .co-hero-actions { margin-top: 24px; }
+.co-section { padding: 48px 0; }
+.co-section h2 { margin-bottom: 12px; }
+.co-intro { color: var(--muted); max-width: 46rem; margin: 0 0 24px; }
+.co-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.co-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; display: flex; flex-direction: column; gap: 8px; }
+.co-card h3 { margin: 0; }
+.co-card p { margin: 0; color: var(--muted); }
+.co-icon { color: var(--brand); flex: none; display: block; }
+.co-link { margin-top: auto; padding-top: 8px; font-weight: 600; display: inline-block; min-height: 44px; line-height: 28px; overflow-wrap: anywhere; }
+.co-steps { list-style: none; counter-reset: co-step; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); }
+.co-steps li { counter-increment: co-step; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.co-steps li::before { content: counter(co-step); display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; border: 1.75px solid var(--brand); color: var(--brand); font-weight: 600; margin-bottom: 10px; }
+.co-steps h3 { margin: 0 0 6px; }
+.co-steps p { margin: 0; color: var(--muted); }
+.co-list { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.co-two { display: grid; gap: 32px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 900px) { .co-two { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 48px; } .co-two.even { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.co-panel { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; }
+.co-panel h2, .co-panel h3 { margin-top: 0; }
+.co-panel > :last-child { margin-bottom: 0; }
+.co-panel.todo-panel { border-color: var(--accent-border); background: var(--accent-bg); }
+.co-prose { max-width: 46rem; }
+.co-prose section { margin-bottom: 28px; }
+.co-prose h2 { margin-bottom: 8px; }
+.co-prose p { margin: 0 0 12px; }
+.co-draft { margin: 16px 0 0; max-width: 46rem; }
+.co-faq { max-width: 46rem; }
+.co-mail { overflow-wrap: anywhere; }
+/* form */
+.co-form { display: grid; gap: 16px; }
+.co-form .co-row { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .co-form .co-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.co-form label { display: block; font-weight: 600; margin-bottom: 4px; }
+.co-form .co-opt { font-weight: 400; color: var(--muted); }
+.co-form input:not([type="checkbox"]), .co-form select, .co-form textarea { width: 100%; min-height: 44px; padding: 10px 12px; font: inherit; border: 1px solid #667085; border-radius: 8px; background: #fff; color: var(--text); }
+.co-form [aria-invalid="true"] { border-color: var(--accent-border); border-width: 2px; }
+.co-err { color: var(--accent-border); font-weight: 600; font-size: .9rem; margin: 4px 0 0; }
+.co-hint { color: var(--muted); font-size: .9rem; margin: 4px 0 0; }
+.co-consent { display: flex; gap: 12px; align-items: flex-start; }
+.co-consent input { width: 24px; height: 24px; margin: 2px 0 0; flex: none; accent-color: var(--brand); }
+.co-consent label { font-weight: 400; margin: 0; }
+.co-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.co-status > p { margin: 0; }
+.co-summary { border: 2px solid var(--accent-border); border-radius: 10px; padding: 12px 16px; background: var(--accent-bg); }
+.co-summary ul { margin: 6px 0 0; padding-left: 20px; }
+.co-sent { border: 1px solid var(--brand); border-radius: 10px; padding: 12px 16px; }
+.co-sent p { margin: 0; }
+@media (min-width: 1000px) { .co-grid:has(> li:nth-child(4):last-child) { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
