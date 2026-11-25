@@ -1,0 +1,17 @@
+**/node_modules
+**/.next
+**/target
+.git
+.claude
+runtime
+**/.env
+**/.env.*
+!**/.env.example
+docs
+previews
+pages
+v3
+v4
+server
+tests
+desktop-integration

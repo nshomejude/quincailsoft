@@ -150,6 +150,7 @@ services:
     image: quincaisoft/storefront:${TAG:-latest}
     environment:
       PUBLIC_CATALOG_API_URL: http://api:8080
+      SITE_URL: https://shop.${DOMAIN:-quincaisoft.com}
     depends_on:
       api: { condition: service_healthy }
     networks: [internal]

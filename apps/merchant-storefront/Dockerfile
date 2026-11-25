@@ -21,6 +21,7 @@ WORKDIR /srv
 # Standalone output keeps the monorepo layout: server.js lives in apps/merchant-storefront/.
 COPY --from=build --chown=node:node /repo/apps/merchant-storefront/.next/standalone ./
 COPY --from=build --chown=node:node /repo/apps/merchant-storefront/.next/static ./apps/merchant-storefront/.next/static
+COPY --from=build --chown=node:node /repo/apps/merchant-storefront/public ./apps/merchant-storefront/public
 USER node
 EXPOSE 3300
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
