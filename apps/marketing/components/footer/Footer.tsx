@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Languages, Mail } from "lucide-react";
 import { t } from "@/lib/content";
+import { FOOTER_COLUMNS, title } from "@/lib/nav";
 import { CONTACT_EMAIL, INDUSTRY_SLUGS, pagePath, type Lang } from "@/lib/site";
 
 const ICON = { size: 18, strokeWidth: 1.75, "aria-hidden": true, focusable: false } as const;
@@ -34,7 +35,7 @@ export function Footer({ lang, path }: { lang: Lang; path: string }) {
           <nav className="f-nav" aria-label={s.footerNav}>
             <div className="f-col">
               <h2>{s.colProduct}</h2>
-              <ul>{(["features", "pricing", "faq"] as const).map((p) => link(p, d.nav[p]))}</ul>
+              <ul>{FOOTER_COLUMNS.product.map((p) => link(p, title(p, lang)))}</ul>
             </div>
             <div className="f-col">
               <h2>{s.colIndustries}</h2>
@@ -44,12 +45,16 @@ export function Footer({ lang, path }: { lang: Lang; path: string }) {
               </ul>
             </div>
             <div className="f-col">
+              <h2>{lang === "en" ? "Resources" : "Ressources"}</h2>
+              <ul>{FOOTER_COLUMNS.resources.map((p) => link(p, title(p, lang)))}</ul>
+            </div>
+            <div className="f-col">
               <h2>{s.colCompany}</h2>
-              <ul>{(["about", "contact"] as const).map((p) => link(p, d.nav[p]))}</ul>
+              <ul>{FOOTER_COLUMNS.company.map((p) => link(p, title(p, lang)))}</ul>
             </div>
             <div className="f-col">
               <h2>{s.colLegal}</h2>
-              <ul>{(["privacy", "terms"] as const).map((p) => link(p, d.nav[p]))}</ul>
+              <ul>{FOOTER_COLUMNS.legal.map((p) => link(p, title(p, lang)))}</ul>
             </div>
           </nav>
         </div>

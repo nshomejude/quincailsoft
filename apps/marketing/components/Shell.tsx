@@ -1,3 +1,4 @@
+import { HEADER_ITEMS } from "@/lib/nav";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { t } from "@/lib/content";
@@ -24,14 +25,11 @@ export function Shell({
 }) {
   const d = t(lang);
   const other: Lang = lang === "en" ? "fr" : "en";
-  const navItems = [
-    { key: "features", label: d.nav.features },
-    { key: "industries", label: d.nav.industries },
-    { key: "pricing", label: d.nav.pricing },
-    { key: "faq", label: d.nav.faq },
-    { key: "about", label: d.nav.about },
-    { key: "contact", label: d.nav.contact },
-  ].map((n) => ({ ...n, href: pagePath(lang, n.key) }));
+  const navItems = HEADER_ITEMS.map((key) => ({
+    key,
+    label: key === "industries" ? d.nav.industries : key === "features" ? d.nav.features : key === "pricing" ? d.nav.pricing : key === "about" ? d.nav.about : key === "contact" ? d.nav.contact : lang === "en" ? "Resources" : "Ressources",
+    href: pagePath(lang, key),
+  }));
   const trail = [{ name: d.ui.home, path: pagePath(lang, "") }, ...crumbs.map((c) => ({ name: c.name, path: pagePath(lang, c.path) }))];
   return (
     <>
@@ -52,7 +50,7 @@ export function Shell({
             current: path === `industries/${slug}`,
           }))}
           industriesIndex={{ href: pagePath(lang, "industries"), label: d.shell.allIndustries, current: path === "industries" }}
-          cta={{ href: pagePath(lang, "contact"), label: d.shell.requestDemo }}
+          cta={{ href: pagePath(lang, "request-a-demo"), label: d.shell.requestDemo }}
           lang={{ current: lang, other, otherHref: pagePath(other, path), otherName: d.ui.switchTo, group: d.shell.langGroup }}
           labels={{ menu: d.ui.menu, closeMenu: d.shell.closeMenu, main: d.shell.mainNav, mobile: d.shell.mobileNav }}
         />

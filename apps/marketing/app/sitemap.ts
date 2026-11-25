@@ -4,7 +4,7 @@ import { LANGS, abs, allPaths, pagePath } from "@/lib/site";
 export const dynamic = "force-static";
 
 // Draft legal pages are noindex and left out of the sitemap until reviewed.
-const EXCLUDED = new Set(["privacy", "terms"]);
+const EXCLUDED = new Set(["privacy", "terms", "accessibility", "cookies"]);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return allPaths()

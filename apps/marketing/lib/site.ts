@@ -24,8 +24,19 @@ export function pagePath(lang: Lang, path: string): string {
 }
 
 /** Every public path (without language) for sitemap and llms. */
+export const EXTRA_PAGES = [
+  "request-a-demo", "support", "partners", "opesware",
+  "mobile-app", "payments", "online-store", "security", "desktop", "migration-and-onboarding", "compare",
+  "resources",
+  "resources/track-cement-and-bulk-materials-fcfa", "resources/manage-customer-credit-hardware-shop",
+  "resources/buy-and-receive-stock-from-suppliers", "resources/quotations-for-contractors",
+  "resources/run-multiple-branches", "resources/mobile-money-reconciliation-basics",
+  // Draft pages: reachable, noindex, excluded from the sitemap.
+  "accessibility", "cookies",
+] as const;
+
 export function allPaths(): string[] {
-  return [...PAGES, ...INDUSTRY_SLUGS.map((s) => `industries/${s}`)];
+  return [...PAGES, ...INDUSTRY_SLUGS.map((s) => `industries/${s}`), ...EXTRA_PAGES];
 }
 
 export function buildMetadata(lang: Lang, path: string, title: string, description: string): Metadata {
