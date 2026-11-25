@@ -16,6 +16,8 @@ An ERP and point of sale for retail, trade and distribution businesses. Target c
 - Documents: business documents and receipts in English or French, in FCFA, with preview and reprint marking.
 - Reports: stock, sales, purchasing and cash across branches.
 - Roles, permissions and audit trail.
+- Mobile app: included in every commercial package; what each user can do is set by permissions.
+- Design rules (not certifications): tenant isolation enforced in the database (tenant ID with row-level security), idempotent postings, immutable stock movements, fail-closed behaviour when a rule cannot be applied safely.
 - Language and currency: English and French; FCFA (XAF).
 - Mobile client (Expo / React Native) and a web back office (Next.js); backend on Java and PostgreSQL.
 
