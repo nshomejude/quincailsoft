@@ -3,3 +3,21 @@
 nav a{display:flex;align-items:center;gap:10px}nav a[aria-current=page]{background:#284654;color:white}.form.wide{max-width:none}.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}fieldset{border:1px solid var(--line);padding:18px;border-radius:6px}.line-row{display:grid;grid-template-columns:2fr 1fr auto;gap:12px;align-items:end;margin-bottom:16px}.purchase-row{grid-template-columns:2fr 1fr 1fr auto}.field-error{color:#9a3326;font-weight:400;font-size:12px}.form input[type=checkbox]{width:auto;justify-self:start}details summary{cursor:pointer;font-weight:600}details[open] summary{margin-bottom:20px}.document-preview{width:100%;min-height:850px;border:1px solid var(--line);background:white}.secondary svg{vertical-align:middle}.form-grid select{min-width:0}@media(max-width:600px){.line-row,.purchase-row{grid-template-columns:1fr}.document-preview{min-height:600px}}
 
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Navigation sections and mobile collapse */
+nav{overflow-y:auto;margin-top:28px;gap:14px;align-content:start}
+.nav-section{display:grid;gap:4px}
+.nav-section .nav-label{margin:6px 0 2px;padding:0 12px}
+.nav-toggle{display:none;align-items:center;gap:8px;margin-top:14px;padding:10px 14px;border:1px solid #47606d;border-radius:5px;background:transparent;color:#fff}
+.stats.four{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.timeline{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-wrap:wrap}
+.timeline li{flex:1 1 140px;padding:10px 12px;border-top:4px solid var(--line);color:var(--muted);font-size:13px}
+.timeline li[data-state=done]{border-top-color:var(--steel);color:var(--ink)}
+.timeline li[data-state=current]{border-top-color:var(--sand);color:var(--ink);font-weight:700}
+.timeline li[data-state=stopped]{border-top-color:#9a3326;color:#9a3326;font-weight:700}
+@media(max-width:800px){
+  .nav-toggle{display:inline-flex}
+  nav{display:none;margin-top:12px;max-height:70vh}
+  nav[data-open=true]{display:grid}
+  nav a{padding:12px}
+}
