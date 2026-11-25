@@ -1,0 +1,62 @@
+name: Deploy (manual)
+
+# Manual only. Needs these repository secrets (Settings > Secrets and variables > Actions),
+# ideally attached to a protected "production" environment with required reviewers:
+#   DEPLOY_HOST      server IP or hostname
+#   DEPLOY_USER      SSH user that may run docker (e.g. "deploy")
+#   DEPLOY_SSH_KEY   private key (the matching public key is in that user's authorized_keys)
+#   DEPLOY_KNOWN_HOSTS  output of:  ssh-keyscan -t ed25519 <server>
+#   DEPLOY_PATH      checkout directory on the server, e.g. /opt/quincaisoft
+# The server keeps infrastructure/prod/.env.prod itself; secrets are never stored in the repo.
+# See docs/DEPLOY.md.
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref (branch, tag or commit) to deploy
+        required: true
+        default: main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 40
+    steps:
+      - name: Install SSH key
+        env:
+          KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+      - name: Build and restart on the server
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+          USER_NAME: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          REF: ${{ inputs.ref }}
+        run: |
+          ssh -i ~/.ssh/id_deploy "$USER_NAME@$HOST" bash -s -- "$DEPLOY_PATH" "$REF" <<'REMOTE'
+          set -euo pipefail
+          cd "$1"
+          git fetch --all --tags --prune
+          git checkout --detach "$2"
+          cd infrastructure/prod
+          # Remember what was running so it can be rolled back (see docs/DEPLOY.md).
+          git rev-parse HEAD > .last-deployed-ref.new
+          [ -f .last-deployed-ref ] && cp .last-deployed-ref .previous-deployed-ref || true
+          mv .last-deployed-ref.new .last-deployed-ref
+          docker compose --env-file .env.prod up -d --build --remove-orphans
+          docker compose --env-file .env.prod ps
+          REMOTE

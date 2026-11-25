@@ -1,0 +1,76 @@
+# Caddy obtains and renews Let's Encrypt certificates automatically.
+# DOMAIN, ACME_EMAIL and ADMIN_IPS come from .env.prod via compose.
+{
+	email {$ACME_EMAIL}
+}
+
+(security_headers) {
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "same-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+		-Server
+	}
+}
+
+(compress) {
+	encode zstd gzip
+}
+
+# www redirects to the bare domain.
+www.{$DOMAIN} {
+	redir https://{$DOMAIN}{uri} permanent
+}
+
+# Public marketing site
+{$DOMAIN} {
+	import security_headers
+	import compress
+	reverse_proxy marketing:3300
+}
+
+# Tenant web application
+app.{$DOMAIN} {
+	import security_headers
+	import compress
+	reverse_proxy web-admin:3100
+}
+
+# Platform operators
+platform.{$DOMAIN} {
+	import security_headers
+	import compress
+	header X-Robots-Tag "noindex, nofollow"
+	reverse_proxy platform-admin:3200
+}
+
+# Merchant storefronts. The only API surface exposed publicly is the read-only store catalogue.
+shop.{$DOMAIN} {
+	import security_headers
+	import compress
+	@publicCatalogue {
+		method GET HEAD
+		path /api/public/stores/*
+	}
+	handle @publicCatalogue {
+		reverse_proxy api:8080
+	}
+	handle {
+		reverse_proxy storefront:3300
+	}
+}
+
+# Identity provider (Keycloak). The admin console and master realm are only reachable
+# from the office/home IPs listed in ADMIN_IPS; everyone else can only use the login pages.
+auth.{$DOMAIN} {
+	import security_headers
+	import compress
+	@adminConsole {
+		path /admin /admin/* /realms/master /realms/master/*
+		not remote_ip {$ADMIN_IPS}
+	}
+	respond @adminConsole "Forbidden" 403
+	reverse_proxy keycloak:8080
+}

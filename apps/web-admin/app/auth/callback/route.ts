@@ -1,2 +1,2 @@
 import {NextRequest,NextResponse} from 'next/server';import {completeLogin,appUrl} from '@/lib/auth';
-export async function GET(request:NextRequest){try{await completeLogin(new URL(request.url));return NextResponse.redirect(appUrl())}catch{return NextResponse.redirect(new URL('/?auth=failed',appUrl()))}}
+export async function GET(request:NextRequest){try{await completeLogin(new URL(request.url));return NextResponse.redirect(appUrl())}catch(error){console.error('[auth/callback] login failed',{name:error instanceof Error?error.name:'UnknownError',message:error instanceof Error?error.message:'non-error thrown'});return NextResponse.redirect(new URL('/?auth=failed',appUrl()))}}
